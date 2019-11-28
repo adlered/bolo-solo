@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Solo - A small and beautiful blogging system written in Java.
+    Copyright (c) 2010-present, b3log.org
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+-->
+<!--
+    Description: Static resources definition.
+    Version: 2.8.0.61, Mar 17, 2019
+    Author: Liang Ding
+    Author: Liyuan Li
+-->
+<static-files>
+    <!-- Uses the STANDARD Ant Path Pattern to configure these paths!  -->
+
+    <include path="/robots.txt"/>
+    <include path="/sw.js"/>
+    <include path="/manifest.json"/>
+
+    <include path="/js/**.js"/>
+    <include path="/js/**/*.js"/>
+    <include path="/js/**.css"/>
+    <include path="/js/**/*.css"/>
+    <include path="/js/**.htm"/>
+    <include path="/js/**/*.htm"/>
+    <include path="/js/**.html"/>
+    <include path="/js/**/*.html"/>
+    <include path="/js/**.gif"/>
+    <include path="/js/**/*.gif"/>
+    <include path="/js/**.png"/>
+    <include path="/js/**/*.png"/>
+    <include path="/js/**.jpg"/>
+    <include path="/js/**/*.jpg"/>
+    <include path="/js/**/*.swf"/>
+    <include path="/js/**/*.eot"/>
+    <include path="/js/**/*.svg"/>
+    <include path="/js/**/*.ttf"/>
+    <include path="/js/**/*.woff"/>
+
+    <include path="/skins/**.css"/>
+    <include path="/skins/**/*.css"/>
+    <include path="/skins/**.js"/>
+    <include path="/skins/**/*.js"/>
+    <include path="/skins/**.png"/>
+    <include path="/skins/**/*.png"/>
+    <include path="/skins/**.jpg"/>
+    <include path="/skins/**/*.jpg"/>
+    <include path="/skins/**.swf"/>
+    <include path="/skins/**/*.swf"/>
+    <include path="/skins/**.gif"/>
+    <include path="/skins/**/*.gif"/>
+    <include path="/skins/**/*.eot"/>
+    <include path="/skins/**/*.svg"/>
+    <include path="/skins/**/*.ttf"/>
+    <include path="/skins/**/*.woff"/>
+    <include path="/skins/**/*.cur"/>
+
+    <include path="/scss/**.css"/>
+    <include path="/scss/**/*.css"/>
+    <include path="/scss/fonts/*.eot"/>
+    <include path="/scss/fonts/*.svg"/>
+    <include path="/scss/fonts/*.ttf"/>
+    <include path="/scss/fonts/*.woff"/>
+
+    <include path="/images/**.png"/>
+    <include path="/images/**/*.png"/>
+    <include path="/images/**.jpg"/>
+    <include path="/images/**/*.jpg"/>
+    <include path="/images/**.gif"/>
+    <include path="/images/**/*.gif"/>
+
+    <include path="/plugins/**.css"/>
+    <include path="/plugins/**/*.css"/>
+    <include path="/plugins/**.js"/>
+    <include path="/plugins/**/*.js"/>
+    <include path="/plugins/**.png"/>
+    <include path="/plugins/**/*.png"/>
+    <include path="/plugins/**.jpg"/>
+    <include path="/plugins/**/*.jpg"/>
+    <include path="/plugins/**.swf"/>
+    <include path="/plugins/**/*.swf"/>
+    <include path="/plugins/**.gif"/>
+    <include path="/plugins/**/*.gif"/>
+    <include path="/plugins/**.html"/>
+    <include path="/plugins/**/*.html"/>
+    <include path="/plugins/**.htm"/>
+    <include path="/plugins/**/*.htm"/>
+    <include path="/plugins/**/*.json"/>
+    <include path="/plugins/**/*.moc"/>
+    <include path="/plugins/**/*.mtn"/>
+    <include path="/plugins/**/*.ogg"/>
+
+    <include path="/CHANGE_LOGS.html"/>
+    <include path="/LICENSE.txt"/>
+
+</static-files>

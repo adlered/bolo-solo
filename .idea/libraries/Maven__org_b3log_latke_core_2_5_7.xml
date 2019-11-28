@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.b3log:latke-core:2.5.7">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/b3log/latke-core/2.5.7/latke-core-2.5.7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/b3log/latke-core/2.5.7/latke-core-2.5.7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/b3log/latke-core/2.5.7/latke-core-2.5.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

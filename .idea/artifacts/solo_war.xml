@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="solo:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>solo</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="solo.war">
+      <element id="artifact" artifact-name="solo:war exploded" />
+    </root>
+  </artifact>
+</component>

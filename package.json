@@ -1,0 +1,41 @@
+{
+  "name": "Solo",
+  "version": "3.6.5",
+  "description": " 一款小而美的博客系统，专为程序员设计。",
+  "homepage": "https://github.com/b3log/solo",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/b3log/solo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/b3log/solo/issues"
+  },
+  "license": "AGPLv3",
+  "private": true,
+  "scripts": {
+    "dev": "gulp watch",
+    "build": "gulp"
+  },
+  "author": "Daniel <dl882509@gmail.com> (http://88250.b3log.org) & Vanessa <v@b3log.org> (http://vanessa.b3log.org)",
+  "maintainers": [
+    {
+      "name": "Daniel",
+      "email": "d@b3log.org"
+    },
+    {
+      "name": "Vanessa",
+      "email": "v@b3log.org"
+    }
+  ],
+  "devDependencies": {
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2"
+  },
+  "dependencies": {
+    "vditor": "^1.8.9"
+  }
+}

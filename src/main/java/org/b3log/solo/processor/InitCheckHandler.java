@@ -77,7 +77,7 @@ public class InitCheckHandler implements Handler {
         }
 
         if (!initReported) {
-            LOGGER.log(Level.DEBUG, "Solo has not been initialized, so redirects to /start");
+            LOGGER.log(Level.DEBUG, "Bolo has not been initialized, so redirects to /start");
             initReported = true;
         }
 

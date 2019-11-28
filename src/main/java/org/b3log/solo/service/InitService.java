@@ -158,7 +158,7 @@ public class InitService {
         try {
             inited = null != optionRepository.get(Option.ID_C_VERSION);
             if (!inited && !printedInitMsg) {
-                LOGGER.log(Level.WARN, "Solo has not been initialized, please open your browser to init Solo");
+                LOGGER.log(Level.WARN, "Bolo has not been initialized, please open your browser to init Bolo");
                 printedInitMsg = true;
             }
 

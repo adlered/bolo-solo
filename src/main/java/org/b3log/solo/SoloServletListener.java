@@ -96,7 +96,7 @@ public final class SoloServletListener extends AbstractServletListener {
         final String jdbcURL = Latkes.getLocalProperty("jdbc.URL");
         final boolean luteAvailable = Markdowns.LUTE_AVAILABLE;
 
-        LOGGER.log(Level.INFO, "Solo is booting [ver=" + VERSION + ", servletContainer=" + Latkes.getServletInfo(servletContextEvent.getServletContext())
+        LOGGER.log(Level.INFO, "Bolo is booting [Solo source ver=" + VERSION + ", servletContainer=" + Latkes.getServletInfo(servletContextEvent.getServletContext())
                 + ", os=" + Latkes.getOperatingSystemName() + ", isDocker=" + Latkes.isDocker() + ", luteAvailable=" + luteAvailable + ", pid=" + Latkes.currentPID()
                 + ", runtimeDatabase=" + runtimeDatabase + ", runtimeMode=" + runtimeMode + ", jdbc.username=" + jdbcUsername + ", jdbc.URL=" + jdbcURL + "]");
 

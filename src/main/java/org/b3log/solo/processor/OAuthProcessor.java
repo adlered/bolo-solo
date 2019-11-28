@@ -126,6 +126,17 @@ public class OAuthProcessor {
                 initReq.put(UserExt.USER_AVATAR, "");
                 initReq.put(UserExt.USER_GITHUB_ID, "");
                 initService.init(initReq);
+                context.sendRedirect("/");
+            } else {
+                JSONObject user = userQueryService.getUserByName(username);
+                String cUser = user.optString(User.USER_NAME);
+                String cPass = user.optString(UserExt.USER_B3_KEY);
+                System.out.println("User login: " + cUser + " --- " + cPass);
+                if (username.equals(cUser) && password.equals(cPass)) {
+                    System.out.println("Login successful!");
+                    Solos.login(user, context.getResponse());
+                }
+                context.sendRedirect("/");
             }
         } catch (final Exception e) {
             LOGGER.log(Level.WARN, "Can not write cookie", e);

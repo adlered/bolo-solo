@@ -135,7 +135,7 @@ public final class SoloServletListener extends AbstractServletListener {
         pluginManager.load();
 
         if (initService.isInited()) {
-            LOGGER.info("Solo is running");
+            LOGGER.info("Bolo is running");
         }
 
         Stopwatchs.end();

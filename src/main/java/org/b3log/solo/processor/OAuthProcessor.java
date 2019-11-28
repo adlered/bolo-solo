@@ -131,10 +131,9 @@ public class OAuthProcessor {
                 JSONObject user = userQueryService.getUserByName(username);
                 String cUser = user.optString(User.USER_NAME);
                 String cPass = user.optString(UserExt.USER_B3_KEY);
-                System.out.println("User login: " + cUser + " --- " + cPass);
                 if (username.equals(cUser) && password.equals(cPass)) {
-                    System.out.println("Login successful!");
                     Solos.login(user, context.getResponse());
+                    LOGGER.log(Level.INFO, "Logged in [name={0}, remoteAddr={1}] with bolo auth", username, Requests.getRemoteAddr(request));
                 }
                 context.sendRedirect("/");
             }

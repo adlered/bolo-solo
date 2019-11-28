@@ -188,7 +188,7 @@ public class InitService {
             System.exit(-1);
         }
 
-        LOGGER.info("It's your first time setup Solo, initialize tables in database [" + Latkes.getRuntimeDatabase() + "]");
+        LOGGER.info("It's your first time setup Bolo, initialize tables in database [" + Latkes.getRuntimeDatabase() + "]");
 
         if (Latkes.RuntimeDatabase.H2 == Latkes.getRuntimeDatabase()) {
             String dataDir = Latkes.getLocalProperty("jdbc.URL");

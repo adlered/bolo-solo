@@ -162,6 +162,7 @@ public final class Solos {
                 return null;
             }
 
+            // TODO Guide
             final String userName = currentUser.optString(User.USER_NAME);
             final String userB3Key = currentUser.optString(UserExt.USER_B3_KEY);
             if (StringUtils.isBlank(userB3Key)) {

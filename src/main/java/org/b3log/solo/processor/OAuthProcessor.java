@@ -128,35 +128,22 @@ public class OAuthProcessor {
                 initService.init(initReq);
                 context.sendRedirect("/");
             } else {
-                JSONObject user = userQueryService.getUserByName(username);
-                String cUser = user.optString(User.USER_NAME);
-                String cPass = user.optString(UserExt.USER_B3_KEY);
-                if (username.equals(cUser) && password.equals(cPass)) {
-                    Solos.login(user, context.getResponse());
-                    LOGGER.log(Level.INFO, "Logged in [name={0}, remoteAddr={1}] with bolo auth", username, Requests.getRemoteAddr(request));
+                try {
+                    JSONObject user = userQueryService.getUserByName(username);
+                    String cUser = user.optString(User.USER_NAME);
+                    String cPass = user.optString(UserExt.USER_B3_KEY);
+                    if (username.equals(cUser) && password.equals(cPass)) {
+                        Solos.login(user, context.getResponse());
+                        LOGGER.log(Level.INFO, "Logged in [name={0}, remoteAddr={1}] with bolo auth", username, Requests.getRemoteAddr(request));
+                    }
+                    context.sendRedirect("/");
+                } catch (NullPointerException NPE) {
+                    context.sendRedirect("/");
                 }
-                context.sendRedirect("/");
             }
         } catch (final Exception e) {
             LOGGER.log(Level.WARN, "Can not write cookie", e);
         }
-
-        /* try {
-            final String userId = user.optString(Keys.OBJECT_ID);
-            final JSONObject cookieJSONObject = new JSONObject();
-            cookieJSONObject.put(Keys.OBJECT_ID, userId);
-            final String b3Key = user.optString(UserExt.USER_B3_KEY);
-            final String random = RandomStringUtils.randomAlphanumeric(8);
-            cookieJSONObject.put(Keys.TOKEN, b3Key + ":" + random);
-            final String cookieValue = Crypts.encryptByAES(cookieJSONObject.toString(), COOKIE_SECRET);
-            final Cookie cookie = new Cookie(COOKIE_NAME, cookieValue);
-            cookie.setPath("/");
-            cookie.setMaxAge(COOKIE_EXPIRY);
-            cookie.setHttpOnly(COOKIE_HTTP_ONLY);
-            response.addCookie(cookie);
-        } catch (final Exception e) {
-            LOGGER.log(Level.WARN, "Can not write cookie", e);
-        } */
     }
 
     /**

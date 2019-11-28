@@ -20,38 +20,42 @@
 <#include "macro-common_page.ftl">
 
 <@commonPage "${welcomeToSoloLabel}!">
-<h2>
-    <span>请使用</span>
-    <span class="error">Github账号</span>
-	<span>登入我的博客，参与互动！</span>
-</h2>
+    <h2>
+        <span>Bolo - </span><span class="error">管理员登录</span>
 
-<div id="github">
-    <div class="github__icon startAction">
-        <img src="${staticServePath}/images/github.png"/>
+    </h2>
+
+    <div id="github">
+        <br>
+        <h5>如果你是第一次部署博客，在下方输入你想设定的用户名和没密码，点击管理登录即可注册！</h5>
+        <br>
+        <form action="${servePath}/oauth/bolo/login" method="post">
+            <input type="text" name="username" id="username" placeholder="用户名" style="width: 60%"/>
+            <input type="password" name="password" id="password" placeholder="密码" style="width: 60%"/>
+            <br>
+            <button class="startAction" style="margin-top: 16px">管理登录</button>
+        </form>
+        <a class="github__link" href="javascript:$('ul').slideToggle()">查看 Bolo - Solo 修改版使用说明</a>
+        <div class="github__text">
+            <ul>
+                <li>Bolo 取消了普通用户的登录功能</li>
+                <li>你可以直接填写信息评论</li>
+                <li>管理员请通过此页面登录</li>
+            </ul>
+        </div>
     </div>
-    <button class="startAction">点一下，玩一年，评论不花一分钱</button><br>
-    <a class="github__link" href="javascript:$('ul').slideToggle()">查看 GitHub 数据使用说明</a>
-    <div class="github__text">
-        <ul>
-            <li>获取用户名、头像等用于初始化</li>
-            <li>获取公开仓库信息用于展示</li>
-            <li>不会对你的已有数据进行写入</li>
-        </ul>
-    </div>
-</div>
-<script type="text/javascript" src="${staticServePath}/js/lib/jquery/jquery.min.js" charset="utf-8"></script>
-<script type="text/javascript">
-    (function () {
-        try {
-            $('.startAction').click(function () {
-                var isAgreen = $('#isAgreenCheck').prop('checked') ? '0' : '1'
-                window.location.href = '${servePath}/oauth/github/redirect?referer=${referer}__' + isAgreen
-                $('#github').addClass('github--loading')
-            })
-        } catch (e) {
-            document.querySelector('.main').innerHTML = "${staticErrorLabel}"
-        }
-    })()
-</script>
+    <script type="text/javascript" src="${staticServePath}/js/lib/jquery/jquery.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        (function () {
+            try {
+                $('.startAction').click(function () {
+                    // var isAgreen = $('#isAgreenCheck').prop('checked') ? '0' : '1';
+                    // window.location.href = '${servePath}/oauth/github/redirect?referer=${referer}__' + isAgreen;
+                    $('#github').addClass('github--loading')
+                })
+            } catch (e) {
+                document.querySelector('.main').innerHTML = "${staticErrorLabel}"
+            }
+        })()
+    </script>
 </@commonPage>

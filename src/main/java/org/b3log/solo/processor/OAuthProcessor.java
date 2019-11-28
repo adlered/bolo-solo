@@ -41,8 +41,10 @@ import org.b3log.solo.util.GitHubs;
 import org.b3log.solo.util.Solos;
 import org.json.JSONObject;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStreamWriter;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -105,6 +107,47 @@ public class OAuthProcessor {
      */
     @Inject
     private LangPropsService langPropsService;
+
+    /**
+     * Bolo 管理登录通道
+     */
+    @RequestProcessing(value = "/oauth/bolo/login", method = HttpMethod.POST)
+    public void adminLogin(final RequestContext context) {
+        HttpServletResponse response = context.getResponse();
+        HttpServletRequest request = context.getRequest();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        try {
+            if (!initService.isInited()) {
+                LOGGER.log(Level.INFO, "Bolo initializing...");
+                final JSONObject initReq = new JSONObject();
+                initReq.put(User.USER_NAME, username);
+                initReq.put(UserExt.USER_B3_KEY, password);
+                initReq.put(UserExt.USER_AVATAR, "");
+                initReq.put(UserExt.USER_GITHUB_ID, "");
+                initService.init(initReq);
+            }
+        } catch (final Exception e) {
+            LOGGER.log(Level.WARN, "Can not write cookie", e);
+        }
+
+        /* try {
+            final String userId = user.optString(Keys.OBJECT_ID);
+            final JSONObject cookieJSONObject = new JSONObject();
+            cookieJSONObject.put(Keys.OBJECT_ID, userId);
+            final String b3Key = user.optString(UserExt.USER_B3_KEY);
+            final String random = RandomStringUtils.randomAlphanumeric(8);
+            cookieJSONObject.put(Keys.TOKEN, b3Key + ":" + random);
+            final String cookieValue = Crypts.encryptByAES(cookieJSONObject.toString(), COOKIE_SECRET);
+            final Cookie cookie = new Cookie(COOKIE_NAME, cookieValue);
+            cookie.setPath("/");
+            cookie.setMaxAge(COOKIE_EXPIRY);
+            cookie.setHttpOnly(COOKIE_HTTP_ONLY);
+            response.addCookie(cookie);
+        } catch (final Exception e) {
+            LOGGER.log(Level.WARN, "Can not write cookie", e);
+        } */
+    }
 
     /**
      * Redirects to auth page.

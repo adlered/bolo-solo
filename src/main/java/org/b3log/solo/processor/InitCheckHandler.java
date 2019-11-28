@@ -69,7 +69,7 @@ public class InitCheckHandler implements Handler {
             return;
         }
 
-        if (StringUtils.startsWith(requestURI, Latkes.getContextPath() + "/oauth/github")) {
+        if (StringUtils.startsWith(requestURI, Latkes.getContextPath() + "/oauth/bolo")) {
             // Do initialization
             context.handle();
 

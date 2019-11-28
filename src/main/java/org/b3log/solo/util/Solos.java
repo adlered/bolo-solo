@@ -194,7 +194,8 @@ public final class Solos {
             final JSONObject result = new JSONObject(res.bodyText());
             if (0 != result.optInt(Keys.CODE)) {
                 uploadMsg = result.optString(Keys.MSG);
-                LOGGER.log(Level.ERROR, uploadMsg);
+                // 去除后台 B3 Key 提示
+                // LOGGER.log(Level.ERROR, uploadMsg);
 
                 return null;
             }

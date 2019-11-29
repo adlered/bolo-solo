@@ -16,6 +16,16 @@ Bolo 的后台编辑器仍然使用HacPai的图床，但步骤不同。由于我
 * 支持本地登录的同时，也支持通过[黑客派](https://hacpai.com)取得默认编辑器的图床权限
 * 支持与[黑客派](https://hacpai.com)社区进行文章/评论同步（支持手动开启/关闭） 
 
+### 关于 Solo V4
+
+[Solo V4](https://hacpai.com/article/1571544590916) 版本将会有很大的变动，其将主要支持静态化页面。
+
+届时 Bolo 不会同 Solo 一起更新到 V4 版本，Bolo 会**始终保持旧版本 Bolo 用户的平滑更新升级**。
+
+Bolo 在 Solo V4 版本之后仍会跟随 Solo 的版本号同步更新，同时引入 Solo V4 的新功能与特性，但为了维持大家的使用习惯，Bolo 的更新内容将不会激进。
+
+至于 Bolo 如何进行版本更新，我们稍后会单独写出一份说明供大家参阅。
+
 # 特别鸣谢
 
 |:construction_worker:|:construction_worker:|:construction_worker:|

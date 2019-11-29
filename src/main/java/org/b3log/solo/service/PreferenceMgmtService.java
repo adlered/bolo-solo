@@ -222,6 +222,14 @@ public class PreferenceMgmtService {
             customVarsOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_CUSTOM_VARS));
             optionRepository.update(Option.ID_C_CUSTOM_VARS, customVarsOpt);
 
+            final JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
+            hacpaiUserOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_HACPAI_USER));
+            optionRepository.update(Option.ID_C_HACPAI_USER, hacpaiUserOpt);
+
+            final JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+            b3logKeyOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_B3LOG_KEY));
+            optionRepository.update(Option.ID_C_B3LOG_KEY, b3logKeyOpt);
+
             transaction.commit();
         } catch (final Exception e) {
             if (transaction.isActive()) {

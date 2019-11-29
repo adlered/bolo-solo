@@ -302,7 +302,15 @@ public final class Option {
      */
     public static final String CATEGORY_C_HAIPAI_USER = "preference";
 
+    /**
+     * Key of B3log key.
+     */
+    public static final String ID_C_B3LOG_KEY = "b3logKey";
 
+    /**
+     * Category - B3log key.
+     */
+    public static final String CATEGORY_C_B3LOG_KEY = "preference";
 
     /**
      * Private constructor.
@@ -486,7 +494,12 @@ public final class Option {
         /**
          * Default HacPai username.
          */
-        public static final String DEFAULT_HACPAI_USER = "None";
+        public static final String DEFAULT_HACPAI_USER = "none";
+
+        /**
+         * Default B3log key.
+         */
+        public static final String DEFAULT_B3LOG_KEY = "000000";
 
         static {
             final JSONArray signs = new JSONArray();

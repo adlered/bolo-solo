@@ -45,6 +45,8 @@ admin.preference = {
 
         var preference = result.preference
 
+        $('#hacpaiUser').val(preference.hacpaiUser)
+        $('#b3logKey').val(preference.b3logKey)
         $('#metaKeywords').val(preference.metaKeywords)
         $('#metaDescription').val(preference.metaDescription)
         $('#blogTitle').val(preference.blogTitle)
@@ -192,6 +194,8 @@ admin.preference = {
 
     var requestJSONObject = {
       'preference': {
+        'hacpaiUser': $('#hacpaiUser').val(),
+        'b3logKey': $('#b3logKey').val(),
         'metaKeywords': $('#metaKeywords').val(),
         'metaDescription': $('#metaDescription').val(),
         'blogTitle': $('#blogTitle').val(),

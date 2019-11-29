@@ -43,6 +43,16 @@
             <button onclick="admin.preference.update()" class="fn__right">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
+        <label for="hacpaiUser">${hacpaiUser1Label}</label>
+        <input id="hacpaiUser" type="text"/>
+        <label for="b3logKey">${b3logKey1Label}</label>
+        <input id="b3logKey" type="text">
+        <div>
+            设置黑客派用户名和 B3log Key ，就可以使用 Bolo 的编辑器图床，并可与黑客派社区同步发送的文章和评论。<br>
+            如需停用此功能，将 B3log Key 设定为 000000 即可。<br>
+            1) <a href="https://hacpai.com/register?r=AdlerED" target="_blank">在这里</a>注册一个黑客派用户（在<a href="https://hacpai.com/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>
+            2) <a href="https://hacpai.com/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key
+        </div>
         <label for="blogTitle">${blogTitle1Label}</label>
         <input id="blogTitle" type="text"/>
         <label for="blogSubtitle">${blogSubtitle1Label}</label>

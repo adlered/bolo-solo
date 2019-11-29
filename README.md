@@ -1,6 +1,12 @@
 <p align = "center">
 <img alt="Bolo" src="bolo-logo-256.png">
 <br><br>
+基于 Solo 的离线多功能版 Bolo 博客，专为程序员设计
+<br><br>
+<a title="Code Size" target="_blank" href="https://github.com/AdlerED/bolo-solo"><img src="https://img.shields.io/github/languages/code-size/AdlerED/bolo-solo.svg?style=flat-square&color=6699FF"></a>
+<a title="AGPLv3" target="_blank" href="https://www.gnu.org/licenses/agpl-3.0.txt"><img src="http://img.shields.io/badge/license-AGPLv3-orange.svg?style=flat-square"></a>
+<a title="Last Commit" target="_blank" href="https://github.com/AdlerED/bolo-solo/commits/master"><img src="https://img.shields.io/github/last-commit/AdlerED/bolo-solo.svg?style=flat-square&color=FF9900"></a>
+<a title="GitHub Pull Requests" target="_blank" href="https://github.com/AdlerED/bolo-solo/pulls"><img src="https://img.shields.io/github/issues-pr-closed/AdlerED/bolo-solo.svg?style=flat-square&color=FF9966"></a>
 </p>
 
 :construction: Bolo 菠萝 博客系统仍未完成，点击右上方的 Star 和 Watch 来追踪本项目的进展，第一个 Release 版本很快就会发布 :)

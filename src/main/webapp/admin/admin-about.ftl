@@ -28,11 +28,11 @@
             </a>
         </div>
         <div class="about__panel">
-            <div id="aboutLatest" class="about-margin fn__left">
-                ${checkingVersionLabel}
+            <div class="about-margin fn__left">
+                你正在使用 bolo - solo 修改版
             </div>
 
-            <iframe src="https://ghbtns.com/github-btn.html?user=b3log&repo=solo&type=star&count=true&size=large"
+            <iframe src="https://ghbtns.com/github-btn.html?user=AdlerED&repo=bolo-solo&type=star&count=true&size=large"
                     frameborder="0" scrolling="0" width="160px" height="30px" class="about__iframe"
                     style="margin: 21px 0 0 20px;border: 0"
                     class="fn__left"></iframe>
@@ -41,9 +41,7 @@
             ${aboutContentLabel}
             <br/>
             <ul class="about-list">
-                <li><a target="_blank" href="https://hacpai.com/article/1492881378588">用户指南</a></li>
-                <li><a target="_blank" href="https://hacpai.com/article/1537690756242">Solo 从设计到实现</a></li>
-                <li><a target="_blank" href="https://hacpai.com/article/1493814851007">皮肤开发指南</a></li>
+                <li><a target="_blank" href="https://github.com/AdlerED/bolo-solo">Bolo 源代码</a></li>
             </ul>
         </div>
         <span class="fn__clear" /> <br/><br/>
@@ -55,6 +53,7 @@
         <h2>❤️ 欢迎成为我们的赞助者</h2>
     </div>
     <div class="module-body padding12">
+        <h3>Bolo 项目基于 Solo 修改而成，如果你觉得 Bolo 好用，一定要先感谢 Solo 的作者。通过下方指引可以捐助 Solo 的作者：</h3>
         <a href="https://b3log.org">B3log 开源组织</a>旗下包含
         <a href="https://sym.b3log.org/">Symphony</a>、
         <a href="https://solo.b3log.org/">Solo</a>、

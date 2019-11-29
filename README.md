@@ -1,3 +1,8 @@
+<p align = "center">
+<img alt="Bolo" src="bolo-logo.png">
+<br><br>
+</p>
+
 :construction: Bolo 菠萝 博客系统仍未完成，点击右上方的 Star 和 Watch 来追踪本项目的进展，第一个 Release 版本很快就会发布 :)
 
 # 声明

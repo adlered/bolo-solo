@@ -22,6 +22,7 @@ import jodd.http.HttpResponse;
 import org.apache.commons.lang.StringUtils;
 import org.b3log.latke.Keys;
 import org.b3log.latke.Latkes;
+import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
@@ -36,6 +37,7 @@ import org.b3log.latke.util.Strings;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.model.UserExt;
+import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.util.Solos;
 import org.json.JSONObject;
@@ -111,9 +113,15 @@ public class UserMgmtService {
 
         JSONObject usite;
         try {
+            BeanManager beanManager = BeanManager.getInstance();
+            OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+            JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
+            String userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
+            JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+            String userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
             final JSONObject requestJSON = new JSONObject().
-                    put(User.USER_NAME, admin.optString(User.USER_NAME)).
-                    put(UserExt.USER_B3_KEY, admin.optString(UserExt.USER_B3_KEY));
+                    put(User.USER_NAME, userName).
+                    put(UserExt.USER_B3_KEY, userB3Key);
             final HttpResponse res = HttpRequest.post("https://hacpai.com/user/usite").trustAllCerts(true).
                     connectionTimeout(3000).timeout(7000).header("User-Agent", Solos.USER_AGENT).
                     body(requestJSON.toString()).send();

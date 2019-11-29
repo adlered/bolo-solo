@@ -1,5 +1,5 @@
 <p align = "center">
-<img alt="Bolo" src="bolo-logo_168x168.png">
+<img alt="Bolo" src="bolo-logo-256.png">
 <br><br>
 </p>
 

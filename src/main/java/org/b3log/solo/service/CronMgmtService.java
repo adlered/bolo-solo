@@ -96,7 +96,8 @@ public class CronMgmtService {
 
         SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
             try {
-                articleMgmtService.refreshGitHub();
+                // 关闭 GitHub 项目同步拉取
+                // articleMgmtService.refreshGitHub();
                 userMgmtService.refreshUSite();
             } catch (final Exception e) {
                 LOGGER.log(Level.ERROR, "Executes cron failed", e);
@@ -108,7 +109,8 @@ public class CronMgmtService {
 
         SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
             try {
-                exportService.exportGitHubRepo();
+                // 废除与 GitHub 同步功能
+                // exportService.exportGitHubRepo();
             } catch (final Exception e) {
                 LOGGER.log(Level.ERROR, "Executes cron failed", e);
             } finally {

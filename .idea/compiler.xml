@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="solo" />
+        <module name="bolo-solo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="solo" target="1.8" />
+      <module name="bolo-solo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

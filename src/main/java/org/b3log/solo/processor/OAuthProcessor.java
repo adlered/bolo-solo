@@ -110,6 +110,8 @@ public class OAuthProcessor {
 
     /**
      * Bolo 管理登录通道
+     *
+     * @param context
      */
     @RequestProcessing(value = "/oauth/bolo/login", method = HttpMethod.POST)
     public void adminLogin(final RequestContext context) {

@@ -22,6 +22,7 @@ import org.b3log.latke.Keys;
 import org.b3log.latke.Latkes;
 import org.b3log.latke.event.AbstractEventListener;
 import org.b3log.latke.event.Event;
+import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.ioc.Singleton;
 import org.b3log.latke.logging.Level;
@@ -34,6 +35,7 @@ import org.b3log.solo.model.Comment;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.model.UserExt;
 import org.b3log.solo.repository.ArticleRepository;
+import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.service.OptionQueryService;
 import org.b3log.solo.util.Solos;
@@ -91,7 +93,7 @@ public class B3CommentSender extends AbstractEventListener<JSONObject> {
             if (Latkes.getServePath().contains("localhost") || Strings.isIPv4(Latkes.getServerHost())) {
                 LOGGER.log(Level.TRACE, "Solo runs on local server, so should not send this comment[id={0}] to Symphony",
                         originalComment.getString(Keys.OBJECT_ID));
-                return;
+                //return;
             }
 
             final String articleId = originalComment.getString(Comment.COMMENT_ON_ID);
@@ -104,13 +106,21 @@ public class B3CommentSender extends AbstractEventListener<JSONObject> {
                     put("articleId", articleId).
                     put("content", originalComment.getString(Comment.COMMENT_CONTENT)).
                     put("authorName", originalComment.optString(Comment.COMMENT_NAME));
+
+            BeanManager beanManager = BeanManager.getInstance();
+            OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+            JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
+            String userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
+            JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+            String userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+
             final JSONObject client = new JSONObject().
                     put("title", preference.getString(Option.ID_C_BLOG_TITLE)).
                     put("host", Latkes.getServePath()).
                     put("name", "Solo").
                     put("ver", SoloServletListener.VERSION).
-                    put("userName", articleAuthor.optString(User.USER_NAME)).
-                    put("userB3Key", articleAuthor.optString(UserExt.USER_B3_KEY));
+                    put("userName", userName).
+                    put("userB3Key", userB3Key);
             final JSONObject requestJSONObject = new JSONObject().
                     put("comment", comment).
                     put("client", client);

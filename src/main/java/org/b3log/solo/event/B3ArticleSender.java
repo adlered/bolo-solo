@@ -35,6 +35,7 @@ import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.model.UserExt;
+import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.service.ArticleQueryService;
 import org.b3log.solo.service.OptionQueryService;
 import org.b3log.solo.util.Solos;
@@ -113,13 +114,20 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
                     put("tags", originalArticle.getString(Article.ARTICLE_TAGS_REF)).
                     put("content", originalArticle.getString(Article.ARTICLE_CONTENT));
             final JSONObject author = articleQueryService.getAuthor(originalArticle);
+
+            OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+            JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
+            String userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
+            JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+            String userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+
             final JSONObject client = new JSONObject().
                     put("title", preference.getString(Option.ID_C_BLOG_TITLE)).
                     put("host", Latkes.getServePath()).
                     put("name", "Solo").
                     put("ver", SoloServletListener.VERSION).
-                    put("userName", author.optString(User.USER_NAME)).
-                    put("userB3Key", author.optString(UserExt.USER_B3_KEY));
+                    put("userName", userName).
+                    put("userB3Key", userB3Key);
             final JSONObject requestJSONObject = new JSONObject().
                     put("article", article).
                     put("client", client);

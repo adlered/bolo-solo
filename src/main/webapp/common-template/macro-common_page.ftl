@@ -23,7 +23,7 @@
 <html>
 <head>
     <#if !blogTitle??>
-    <#assign blogTitle = "Solo">
+    <#assign blogTitle = "Bolo">
     </#if>
     <@head title="${title} - ${blogTitle}">
         <link type="text/css" rel="stylesheet"

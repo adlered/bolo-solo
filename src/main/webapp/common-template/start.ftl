@@ -27,7 +27,7 @@
 
     <div id="github">
         <br>
-        <h5>如果你是第一次部署博客，在下方输入你想设定的用户名和没密码，点击管理登录即可注册！</h5>
+        <h5>如果你是第一次部署博客，在下方输入你想设定的用户名和密码，点击管理登录即可注册！</h5>
         <br>
         <form action="${servePath}/oauth/bolo/login" method="post">
             <input type="text" name="username" id="username" placeholder="用户名" style="width: 60%"/>

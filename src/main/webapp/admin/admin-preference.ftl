@@ -39,7 +39,6 @@
 <div id="tabPreferencePanel" class="sub-tabs-main">
     <div id="tabPreferencePanel_config" class="form">
         <div class="fn__clear">
-            <a style="line-height: 32px" href="https://hacpai.com/settings" target="_blank">前往配置 GitHub，Twitter 等站点链接</a>
             <button onclick="admin.preference.update()" class="fn__right">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
@@ -48,7 +47,7 @@
         <label for="b3logKey">${b3logKey1Label}</label>
         <input id="b3logKey" type="text">
         <div>
-            设置黑客派用户名和 B3log Key ，就可以：
+            设置黑客派用户名和 B3log Key 后，你可以：<br>
             1. 使用 Bolo 的编辑器图床<br>
             2. 与黑客派社区同步发送的文章和评论<br>
             3. 同步你在黑客派中的GitHub、QQ等链接（<a href="https://hacpai.com/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719">功能详情</a><br>
@@ -73,7 +72,6 @@
         <label for="footerContent">${footerContent1Label}</label>
         <textarea rows="2" id="footerContent"></textarea><br><br>
         <div class="fn__clear">
-            <a style="line-height: 32px" href="https://hacpai.com/settings" target="_blank">前往配置 GitHub，Twitter 等站点链接</a>
             <button onclick="admin.preference.update()" class="fn__right">${updateLabel}</button>
         </div>
     </div>

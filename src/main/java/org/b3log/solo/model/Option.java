@@ -290,6 +290,20 @@ public final class Option {
      */
     public static final String ID_T_STATISTIC_PUBLISHED_BLOG_COMMENT_COUNT = "statisticPublishedBlogCommentCount";
 
+    // Bolo
+
+    /**
+     * Key of hacpai username.
+     */
+    public static final String ID_C_HACPAI_USER = "hacpaiUser";
+
+    /**
+     * Category - HacPai username.
+     */
+    public static final String CATEGORY_C_HAIPAI_USER = "preference";
+
+
+
     /**
      * Private constructor.
      */
@@ -466,6 +480,13 @@ public final class Option {
          * Default feed output entry count.
          */
         public static final int DEFAULT_FEED_OUTPUT_CNT = 10;
+
+        // Bolo
+
+        /**
+         * Default HacPai username.
+         */
+        public static final String DEFAULT_HACPAI_USER = "None";
 
         static {
             final JSONArray signs = new JSONArray();

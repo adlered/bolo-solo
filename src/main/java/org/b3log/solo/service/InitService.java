@@ -674,6 +674,13 @@ public class InitService {
         mobileSkinDirNameOpt.put(Option.OPTION_VALUE, DefaultPreference.DEFAULT_MOBILE_SKIN_DIR_NAME);
         optionRepository.add(mobileSkinDirNameOpt);
 
+        // Bolo Options
+        final JSONObject hacpaiUserOpt = new JSONObject();
+        hacpaiUserOpt.put(Keys.OBJECT_ID, Option.ID_C_HACPAI_USER);
+        hacpaiUserOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_HAIPAI_USER);
+        hacpaiUserOpt.put(Option.OPTION_VALUE, DefaultPreference.DEFAULT_HACPAI_USER);
+        optionRepository.add(hacpaiUserOpt);
+
         LOGGER.info("Initialized preference");
     }
 }

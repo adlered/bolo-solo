@@ -16,4 +16,4 @@ Bolo 的后台编辑器仍然使用HacPai的图床，但步骤不同。由于我
 
 目前本地登录功能已经做好了，我录了一段 Demo 视频以代表我真的在写，而不是骗Star。在项目的根目录就有`demoX.mp4`文件，你可以下载后查看，下面是在线预览（不稳定）：
 
-[![Watch the video](https://pic.stackoverflow.wiki/uploadImages/42/2/191/50/2019/11/29/09/19/b6e4a019-99c4-464c-ac53-2f0c10550d68.png)](demo1.mp4)
+[![Watch the video]()](demo1.mp4)

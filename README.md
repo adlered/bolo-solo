@@ -6,6 +6,18 @@ Bolo 的后台编辑器仍然使用HacPai的图床，但步骤不同。由于我
 
 感谢 [@88250](https://github.com/88250) 、 [@csfwff](https://github.com/csfwff) 与 [@InkDP](https://github.com/InkDP) 的大力支持！
 
+# 迁移
+
+如果你之前使用了官方版本的Solo：
+
+1. 请先**备份**原来的数据库
+2. 清空数据库
+3. 初始化Bolo
+4. 将b3_solo_user表中的一行数据备份
+5. 再次清空数据库
+6. 将原来的数据库恢复回去
+7. 将备份b3_solo_user表中的一行数据**插入（保留原有数据）**回去即可
+
 # 当前进度
 
 - [x] 本地登录

@@ -42,6 +42,7 @@
             <button onclick="admin.preference.update()" class="fn__right">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
+        <h3>B3log 生态设置</h3>
         <label for="hacpaiUser">${hacpaiUser1Label}</label>
         <input id="hacpaiUser" type="text"/>
         <label for="b3logKey">${b3logKey1Label}</label>
@@ -53,8 +54,11 @@
             3. 同步你在黑客派中的GitHub、QQ等链接（<a href="https://hacpai.com/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719">功能详情</a><br>
             如需停用此功能，将 B3log Key 设定为 000000 即可。<br>
             1) <a href="https://hacpai.com/register?r=AdlerED" target="_blank">在这里</a>注册一个黑客派用户（在<a href="https://hacpai.com/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>
-            2) <a href="https://hacpai.com/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key
+            2) <a href="https://hacpai.com/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key<br>
+            修改并更新后，刷新页面生效。
         </div>
+        <br>
+        <h3>本地博客设置</h3>
         <label for="blogTitle">${blogTitle1Label}</label>
         <input id="blogTitle" type="text"/>
         <label for="blogSubtitle">${blogSubtitle1Label}</label>

@@ -48,7 +48,7 @@ import java.util.*;
  * Skin utilities.
  *
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 1.1.6.6, Mar 29, 2019
+ * @version 1.1.6.7, Nov 5, 2019
  * @since 0.3.1
  */
 public final class Skins {

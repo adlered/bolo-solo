@@ -43,7 +43,7 @@
     <orderEntry type="library" name="Maven: com.google.errorprone:error_prone_annotations:2.3.3" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:3.4.1" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
-    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.16" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.18" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.b3log:latke-repository-mysql:2.5.8" level="project" />
     <orderEntry type="library" name="Maven: org.b3log:latke-repository-h2:2.5.8" level="project" />

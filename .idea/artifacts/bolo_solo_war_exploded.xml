@@ -28,7 +28,7 @@
           <element id="library" level="project" name="Maven: com.google.errorprone:error_prone_annotations:2.3.3" />
           <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:3.4.1" />
           <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
-          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.16" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.18" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
           <element id="library" level="project" name="Maven: org.b3log:latke-repository-mysql:2.5.8" />
           <element id="library" level="project" name="Maven: org.b3log:latke-repository-h2:2.5.8" />

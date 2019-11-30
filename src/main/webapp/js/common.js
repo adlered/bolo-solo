@@ -155,7 +155,10 @@ var Util = {
   * @description 解析语法高亮
   */
   parseLanguage: function () {
-    Vditor.highlightRender(Label.hljsStyle, !Label.luteAvailable, document)
+    Vditor.highlightRender({
+      style: Label.hljsStyle,
+      enable: !Label.luteAvailable,
+    }, document)
   },
   /**
    * 按需加载数学公式、流程图、代码复制、五线谱、多媒体、图表
@@ -165,8 +168,8 @@ var Util = {
 
     if (typeof Vditor === 'undefined') {
       Util.addScript(
-        'https://cdn.jsdelivr.net/npm/vditor@1.8.13/dist/method.min.js',
-        'vditorPreviewScript')
+          'https://cdn.jsdelivr.net/npm/vditor@1.9.1/dist/method.min.js',
+          'vditorPreviewScript')
     }
 
     Vditor.codeRender(document.body, Label.langLabel)

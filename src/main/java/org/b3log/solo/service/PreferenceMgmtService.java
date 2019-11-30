@@ -17,6 +17,7 @@
  */
 package org.b3log.solo.service;
 
+import org.b3log.latke.Keys;
 import org.b3log.latke.Latkes;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
@@ -222,13 +223,35 @@ public class PreferenceMgmtService {
             customVarsOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_CUSTOM_VARS));
             optionRepository.update(Option.ID_C_CUSTOM_VARS, customVarsOpt);
 
-            final JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
-            hacpaiUserOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_HACPAI_USER));
-            optionRepository.update(Option.ID_C_HACPAI_USER, hacpaiUserOpt);
+            try {
+                final JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
+                hacpaiUserOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_HACPAI_USER));
+                optionRepository.update(Option.ID_C_HACPAI_USER, hacpaiUserOpt);
+            } catch (NullPointerException NPE) {
+                JSONObject hacpaiUserOpt = new JSONObject();
+                hacpaiUserOpt.put(Keys.OBJECT_ID, Option.ID_C_HACPAI_USER);
+                hacpaiUserOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_HAIPAI_USER);
+                hacpaiUserOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_HACPAI_USER);
+                optionRepository.add(hacpaiUserOpt);
+                hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);;
+                hacpaiUserOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_HACPAI_USER));
+                optionRepository.update(Option.ID_C_HACPAI_USER, hacpaiUserOpt);
+            }
 
-            final JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
-            b3logKeyOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_B3LOG_KEY));
-            optionRepository.update(Option.ID_C_B3LOG_KEY, b3logKeyOpt);
+            try {
+                final JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+                b3logKeyOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_B3LOG_KEY));
+                optionRepository.update(Option.ID_C_B3LOG_KEY, b3logKeyOpt);
+            } catch (NullPointerException NPE) {
+                JSONObject b3logKeyOpt = new JSONObject();
+                b3logKeyOpt.put(Keys.OBJECT_ID, Option.ID_C_B3LOG_KEY);
+                b3logKeyOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_B3LOG_KEY);
+                b3logKeyOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_B3LOG_KEY);
+                optionRepository.add(b3logKeyOpt);
+                b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+                b3logKeyOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_B3LOG_KEY));
+                optionRepository.update(Option.ID_C_B3LOG_KEY, b3logKeyOpt);
+            }
 
             transaction.commit();
         } catch (final Exception e) {

@@ -64,7 +64,7 @@ public final class Skins {
     public static final Configuration TEMPLATE_CFG;
 
     static {
-        TEMPLATE_CFG = new Configuration(Configuration.VERSION_2_3_28);
+        TEMPLATE_CFG = new Configuration(Configuration.VERSION_2_3_29);
         TEMPLATE_CFG.setDefaultEncoding("UTF-8");
         final ServletContext servletContext = SoloServletListener.getServletContext();
         TEMPLATE_CFG.setServletContextForTemplateLoading(servletContext, "");

@@ -223,6 +223,8 @@ public class PreferenceMgmtService {
             customVarsOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_CUSTOM_VARS));
             optionRepository.update(Option.ID_C_CUSTOM_VARS, customVarsOpt);
 
+            // Bolo
+
             try {
                 final JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
                 hacpaiUserOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_HACPAI_USER));

@@ -37,7 +37,7 @@
             <script>
                 status = '${data}';
                 if (status === '0') {
-                    document.getElementById('status').innerHTML = '<font color="red"><b>🔐 用户名或密码错误</b></font><br>';
+                    document.getElementById('status').innerHTML = '<br><font color="red"><b>🔐 用户名或密码错误</b></font><br>';
                 }
             </script>
             <button class="startAction" style="margin-top: 16px">管理登录</button>

@@ -19,8 +19,7 @@
 -->
 <div class="module-panel">
     <div class="module-header">
-        <a href="https://github.com/b3log/solo/issues/12449" target="_blank">新皮肤推荐</a> •
-        <a href="https://hacpai.com/article/1493814851007" target="_blank">皮肤开发指南</a>
+        Bolo 主题由 Solo 主题移植而来，获取更多主题请关注 <a href="https://github.com/AdlerED/bolo-solo" target="_blank">bolo-solo 项目主页</a>
     </div>
     <div class="module-body padding12"><div id="skinMain"></div></div>
 </div>

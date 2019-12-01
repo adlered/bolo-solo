@@ -390,12 +390,12 @@ public final class Option {
         /**
          * Default skin directory name.
          */
-        public static final String DEFAULT_SKIN_DIR_NAME = "solo-nexmoe";
+        public static final String DEFAULT_SKIN_DIR_NAME = "bolo-solo-nexmoe";
 
         /**
          * Default mobile skin directory name.
          */
-        public static final String DEFAULT_MOBILE_SKIN_DIR_NAME = "solo-nexmoe";
+        public static final String DEFAULT_MOBILE_SKIN_DIR_NAME = "bolo-solo-nexmoe";
 
         /**
          * Default language.

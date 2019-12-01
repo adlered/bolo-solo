@@ -257,8 +257,8 @@ public class InitService {
         article.put(Article.ARTICLE_ABSTRACT_TEXT, Article.getAbstractText(content));
         article.put(Article.ARTICLE_ABSTRACT, content);
         article.put(Article.ARTICLE_CONTENT, content);
-        article.put(Article.ARTICLE_TAGS_REF, "Solo");
-        article.put(Article.ARTICLE_PERMALINK, "/hello-solo");
+        article.put(Article.ARTICLE_TAGS_REF, "Bolo");
+        article.put(Article.ARTICLE_PERMALINK, "/hello-bolo");
         article.put(Article.ARTICLE_STATUS, Article.ARTICLE_STATUS_C_PUBLISHED);
         article.put(Article.ARTICLE_SIGN_ID, "1");
         article.put(Article.ARTICLE_COMMENT_COUNT, 1);
@@ -279,12 +279,12 @@ public class InitService {
 
         final JSONObject comment = new JSONObject();
         comment.put(Keys.OBJECT_ID, articleId);
-        comment.put(Comment.COMMENT_NAME, "88250");
-        comment.put(Comment.COMMENT_URL, "https://hacpai.com/member/88250");
+        comment.put(Comment.COMMENT_NAME, "AdlerED");
+        comment.put(Comment.COMMENT_URL, "https://github.com/AdlerED");
         comment.put(Comment.COMMENT_CONTENT, langPropsService.get("helloWorld.comment.content"));
         comment.put(Comment.COMMENT_ORIGINAL_COMMENT_ID, "");
         comment.put(Comment.COMMENT_ORIGINAL_COMMENT_NAME, "");
-        comment.put(Comment.COMMENT_THUMBNAIL_URL, "https://img.hacpai.com/avatar/1353745196354_1535379434567.png?imageView2/1/w/64/h/64/q/100");
+        comment.put(Comment.COMMENT_THUMBNAIL_URL, "https://avatars1.githubusercontent.com/u/6754458?s=400&u=a8d4a1321a2f140d66a7c229ecd510c5560f1148&v=4");
         comment.put(Comment.COMMENT_CREATED, now);
         comment.put(Comment.COMMENT_ON_ID, articleId);
         final String commentId = Ids.genTimeMillisId();

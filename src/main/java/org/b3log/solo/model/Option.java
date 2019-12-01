@@ -350,7 +350,7 @@ public final class Option {
         /**
          * Default custom vars.
          */
-        public static final String DEFAULT_CUSTOM_VARS = "key0=val0|key1=val1|key2=val2";
+        public static final String DEFAULT_CUSTOM_VARS = "key0=val0|key1=list|key2=val2";
 
         /**
          * Default recent article display count.

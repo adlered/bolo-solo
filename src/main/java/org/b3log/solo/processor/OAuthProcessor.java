@@ -109,7 +109,7 @@ public class OAuthProcessor {
     private LangPropsService langPropsService;
 
     /**
-     * Bolo 管理登录通道
+     * Bolo admin login.
      *
      * @param context
      */
@@ -128,7 +128,7 @@ public class OAuthProcessor {
                 initReq.put(UserExt.USER_AVATAR, "");
                 initReq.put(UserExt.USER_GITHUB_ID, "");
                 initService.init(initReq);
-                context.sendRedirect("/");
+                context.sendRedirect(Latkes.getServePath() + "/");
             } else {
                 try {
                     JSONObject user = userQueryService.getUserByName(username);
@@ -137,10 +137,12 @@ public class OAuthProcessor {
                     if (username.equals(cUser) && password.equals(cPass)) {
                         Solos.login(user, context.getResponse());
                         LOGGER.log(Level.INFO, "Logged in [name={0}, remoteAddr={1}] with bolo auth", username, Requests.getRemoteAddr(request));
+                        context.sendRedirect(Latkes.getServePath() + "/admin-index.do#main");
+                    } else {
+                        context.sendRedirect(Latkes.getServePath() + "/start?status=error");
                     }
-                    context.sendRedirect("/");
                 } catch (NullPointerException NPE) {
-                    context.sendRedirect("/");
+                    context.sendRedirect("/start?status=error");
                 }
             }
         } catch (final Exception e) {

@@ -181,6 +181,13 @@ public class IndexProcessor {
         final HttpServletRequest request = context.getRequest();
         final Map<String, String> langs = langPropsService.getAll(Locales.getLocale(request));
         dataModel.putAll(langs);
+        // 登录失败提示
+        String status = context.getRequest().getParameter("status");
+        if (status != null && status.equals("error")) {
+            dataModel.put(Common.DATA, 0);
+        } else {
+            dataModel.put(Common.DATA, 1);
+        }
         dataModel.put(Common.VERSION, SoloServletListener.VERSION);
         dataModel.put(Common.STATIC_RESOURCE_VERSION, Latkes.getStaticResourceVersion());
         dataModel.put(Common.YEAR, String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));

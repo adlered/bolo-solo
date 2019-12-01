@@ -24,6 +24,7 @@
 <img class="img-error" src="${staticServePath}/images/403.png" alt="403" title="403 Forbidden!" />
 <div class="a-error">
     ${msg!}
-    Return to <a href="${servePath}">Index</a>.
+    您的账号没有后台管理权限<br>
+    请返回 <a href="${servePath}">主页</a>.
 </div>
 </@commonPage>

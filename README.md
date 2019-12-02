@@ -3,10 +3,24 @@
 <br><br>
 基于 Solo 的离线多功能版 Bolo 博客，专为程序员设计
 <br><br>
-<a title="Code Size" target="_blank" href="https://github.com/AdlerED/bolo-solo"><img src="https://img.shields.io/github/languages/code-size/AdlerED/bolo-solo.svg?style=flat-square&color=6699FF"></a>
-<a title="AGPLv3" target="_blank" href="https://www.gnu.org/licenses/agpl-3.0.txt"><img src="http://img.shields.io/badge/license-AGPLv3-orange.svg?style=flat-square"></a>
-<a title="Last Commit" target="_blank" href="https://github.com/AdlerED/bolo-solo/commits/master"><img src="https://img.shields.io/github/last-commit/AdlerED/bolo-solo.svg?style=flat-square&color=FF9900"></a>
-<a title="GitHub Pull Requests" target="_blank" href="https://github.com/AdlerED/bolo-solo/pulls"><img src="https://img.shields.io/github/issues-pr-closed/AdlerED/bolo-solo.svg?style=flat-square&color=FF9966"></a>
+<img src="http://img.shields.io/badge/license-AGPLv3-orange.svg?style=flat-square">
+<img src="https://img.shields.io/github/last-commit/AdlerED/bolo-solo.svg?style=flat-square">
+<img src="https://img.shields.io/github/issues-pr-closed/AdlerED/bolo-solo.svg?style=flat-square">
+<img src="https://img.shields.io/github/downloads/AdlerED/bolo-solo/total?style=flat-square">
+<img src="https://img.shields.io/github/v/release/AdlerED/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/commit-activity/y/AdlerED/bolo-solo?style=flat-square">
+<br>
+<img src="https://img.shields.io/github/languages/code-size/AdlerED/bolo-solo.svg?style=flat-square">
+<img src="https://img.shields.io/github/repo-size/AdlerED/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/languages/count/AdlerED/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/languages/top/AdlerED/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/issues/AdlerED/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/issues-closed-raw/AdlerED/bolo-solo?style=flat-square">
+<br>
+<img src="https://img.shields.io/github/followers/AdlerED?style=social">
+<img src="https://img.shields.io/github/forks/AdlerED/bolo-solo?style=social">
+<img src="https://img.shields.io/github/stars/AdlerED/bolo-solo?style=social">
+<img src="https://img.shields.io/github/watchers/AdlerED/bolo-solo?style=social">
 </p>
 
 :construction: Bolo 菠萝 博客系统仍未完成，点击右上方的 Star 和 Watch 来追踪本项目的进展，第一个 Release 版本很快就会发布 :)
@@ -19,7 +33,7 @@ Bolo 的后台编辑器仍然使用HacPai的图床，但步骤不同。由于我
 
 ### 特性
 
-* 持续支持WAR包部署，支持Tomcat/Jetty，使用Servlet作为底层（Solo V3.6.7 及以上已更新至 Latke 框架，不再支持 Tomcat/Jetty）
+* 持续支持WAR包部署，支持Tomcat/Jetty，使用Servlet作为底层（Solo v3.6.7 及以上已更新至 Latke 框架，不再支持 Tomcat/Jetty）
 * 与官方保持更新，兼容原版 Solo 数据库（需要与 Bolo 同版本号或更低的版本，Solo 版本高于 Bolo 需手动修改数据库中版本号，稍后会出教程）
 * 倾听：与官方保持更新的同时，更新人性化、简洁、实用的小功能，欢迎提出建议
 * 持续保留H2本地数据库

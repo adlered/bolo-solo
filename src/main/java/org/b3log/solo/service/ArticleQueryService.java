@@ -184,6 +184,7 @@ public class ArticleQueryService {
         pagination.put(Pagination.PAGINATION_PAGE_NUMS, (Object) Collections.emptyList());
 
         try {
+            // 重点！找标签
             final JSONArray categoryTags = categoryTagRepository.getByCategoryId(categoryId, 1, Integer.MAX_VALUE).optJSONArray(Keys.RESULTS);
             if (categoryTags.length() <= 0) {
                 return ret;
@@ -191,6 +192,7 @@ public class ArticleQueryService {
 
             final List<String> tagIds = new ArrayList<>();
             for (int i = 0; i < categoryTags.length(); i++) {
+                // 拼接为tag_oId
                 tagIds.add(categoryTags.optJSONObject(i).optString(Tag.TAG + "_" + Keys.OBJECT_ID));
             }
 
@@ -209,9 +211,12 @@ public class ArticleQueryService {
             }
             queryStr.append(") ORDER BY `C` DESC");
 
+            // !!! 文章总数
             final List<JSONObject> tagArticlesCountResult = articleRepository.
                     select(queryCount.append(queryStr.toString()).toString(), Article.ARTICLE_STATUS_C_PUBLISHED);
+            // 页数限制
             queryStr.append(" LIMIT ").append((currentPageNum - 1) * pageSize).append(",").append(pageSize);
+            // !!! 执行语句 获取标签对应文章号输出数组
             final List<JSONObject> tagArticles = articleRepository.
                     select(queryList.append(queryStr.toString()).toString(), Article.ARTICLE_STATUS_C_PUBLISHED);
             if (tagArticles.size() <= 0) {
@@ -229,6 +234,7 @@ public class ArticleQueryService {
 
             final Set<String> articleIds = new HashSet<>();
             for (int i = 0; i < tagArticles.size(); i++) {
+                // 这里放文章oId
                 articleIds.add(tagArticles.get(i).optString("C"));
             }
             final Query query = new Query().setFilter(new PropertyFilter(Keys.OBJECT_ID, FilterOperator.IN, articleIds)).

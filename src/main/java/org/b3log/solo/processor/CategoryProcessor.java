@@ -171,6 +171,7 @@ public class CategoryProcessor {
             categoryURI = URLs.encode(categoryURI);
             final int currentPageNum = Paginator.getPage(request);
             LOGGER.log(Level.DEBUG, "Category [URI={0}, currentPageNum={1}]", categoryURI, currentPageNum);
+            // 读取category表，无关键操作
             final JSONObject category = categoryQueryService.getByURI(categoryURI);
             if (null == category) {
                 context.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -181,9 +182,11 @@ public class CategoryProcessor {
             dataModel.put(Category.CATEGORY, category);
 
             final JSONObject preference = optionQueryService.getPreference();
+            // 获取每页显示多少个
             final int pageSize = preference.getInt(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT);
             final String categoryId = category.optString(Keys.OBJECT_ID);
 
+            // 关键方法！
             final JSONObject result = articleQueryService.getCategoryArticles(categoryId, currentPageNum, pageSize);
             final List<JSONObject> articles = (List<JSONObject>) result.opt(Keys.RESULTS);
 

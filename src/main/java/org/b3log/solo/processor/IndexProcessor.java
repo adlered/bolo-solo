@@ -20,6 +20,7 @@ package org.b3log.solo.processor;
 import org.apache.commons.lang.StringUtils;
 import org.b3log.latke.Keys;
 import org.b3log.latke.Latkes;
+import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
@@ -182,9 +183,13 @@ public class IndexProcessor {
         final Map<String, String> langs = langPropsService.getAll(Locales.getLocale(request));
         dataModel.putAll(langs);
         // 登录失败提示
+        final BeanManager beanManager = BeanManager.getInstance();
+        final InitService initService = beanManager.getReference(InitService.class);
         String status = context.getRequest().getParameter("status");
         if (status != null && status.equals("error")) {
             dataModel.put(Common.DATA, 0);
+        } else if (!initService.isInited()) {
+            dataModel.put(Common.DATA, -1);
         } else {
             dataModel.put(Common.DATA, 1);
         }

@@ -96,7 +96,7 @@ Bolo 在 Solo V4 版本之后仍会跟随 Solo 的版本号同步更新，同时
 
 ### 本地用户登录
 
-<a href="https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/6c0e2f0e-1baf-4fac-8a7a-1052be272ead.png" target="_blank">https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/6c0e2f0e-1baf-4fac-8a7a-1052be272ead.png</a>
+[https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/6c0e2f0e-1baf-4fac-8a7a-1052be272ead.png](https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/6c0e2f0e-1baf-4fac-8a7a-1052be272ead.png)
 
 ### 默认皮肤 bolo-solo-nexmoe 主页
 

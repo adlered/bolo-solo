@@ -41,6 +41,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -190,13 +191,14 @@ public class ArticleQueryService {
                 return ret;
             }
 
+            // Bolo 修改：此处为分类对应文章号列表
             final List<String> tagIds = new ArrayList<>();
             for (int i = 0; i < categoryTags.length(); i++) {
                 // 拼接为tag_oId
                 tagIds.add(categoryTags.optJSONObject(i).optString(Tag.TAG + "_" + Keys.OBJECT_ID));
             }
 
-            final StringBuilder queryCount = new StringBuilder("SELECT count(DISTINCT(article.oId)) as `C` FROM ");
+            /* final StringBuilder queryCount = new StringBuilder("SELECT count(DISTINCT(article.oId)) as `C` FROM ");
             final StringBuilder queryList = new StringBuilder("SELECT DISTINCT(article.oId) as `C` FROM ");
             final StringBuilder queryStr = new StringBuilder(articleRepository.getName() + " AS article,").
                     append(tagArticleRepository.getName() + " AS tag_article").
@@ -209,16 +211,30 @@ public class ArticleQueryService {
                     queryStr.append(",");
                 }
             }
-            queryStr.append(") ORDER BY `C` DESC");
+            queryStr.append(") ORDER BY `C` DESC"); */
 
             // !!! 文章总数
-            final List<JSONObject> tagArticlesCountResult = articleRepository.
-                    select(queryCount.append(queryStr.toString()).toString(), Article.ARTICLE_STATUS_C_PUBLISHED);
+            /* final List<JSONObject> tagArticlesCountResult = articleRepository.
+                    select(queryCount.append(queryStr.toString()).toString(), Article.ARTICLE_STATUS_C_PUBLISHED); */
+            // Bolo
+            final List<JSONObject> tagArticlesCountResult = new ArrayList<>();
+            tagArticlesCountResult.add(new JSONObject().put("C", tagIds.size()));
             // 页数限制
-            queryStr.append(" LIMIT ").append((currentPageNum - 1) * pageSize).append(",").append(pageSize);
+            /* queryStr.append(" LIMIT ").append((currentPageNum - 1) * pageSize).append(",").append(pageSize); */
             // !!! 执行语句 获取标签对应文章号输出数组
-            final List<JSONObject> tagArticles = articleRepository.
-                    select(queryList.append(queryStr.toString()).toString(), Article.ARTICLE_STATUS_C_PUBLISHED);
+            /* final List<JSONObject> tagArticles = articleRepository.
+                    select(queryList.append(queryStr.toString()).toString(), Article.ARTICLE_STATUS_C_PUBLISHED); */
+            // Bolo                                    // Page 1   2   3
+            int offset = ((currentPageNum - 1) * pageSize); // 0   15  30
+            int pause = ((offset + pageSize) - 1); //          14  29  44
+            final List<JSONObject> tagArticles = new ArrayList<>();
+            for (int i = offset; i <= pause; i++) {
+                if (i >= tagIds.size()) {
+                    break;
+                }
+                tagArticles.add(new JSONObject().put("C", String.valueOf(tagIds.get(i))));
+            }
+
             if (tagArticles.size() <= 0) {
                 return ret;
             }

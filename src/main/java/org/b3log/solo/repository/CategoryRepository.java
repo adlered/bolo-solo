@@ -183,7 +183,8 @@ public class CategoryRepository extends AbstractRepository {
 
         for (final JSONObject category : ret) {
             final String categoryId = category.optString(Keys.OBJECT_ID);
-            final StringBuilder queryCount = new StringBuilder("SELECT count(DISTINCT(b3_solo_article.oId)) as C FROM ");
+            final JSONArray categoryTags = categoryTagRepository.getByCategoryId(categoryId, 1, Integer.MAX_VALUE).optJSONArray(Keys.RESULTS);
+            /* final StringBuilder queryCount = new StringBuilder("SELECT count(DISTINCT(b3_solo_article.oId)) as C FROM ");
             final StringBuilder queryStr = new StringBuilder(articleRepository.getName() + " AS b3_solo_article,").
                     append(tagArticleRepository.getName() + " AS b3_solo_tag_article").
                     append(" WHERE b3_solo_article.oId=b3_solo_tag_article.article_oId ").
@@ -192,8 +193,8 @@ public class CategoryRepository extends AbstractRepository {
                     append("SELECT tag_oId FROM ").append(categoryTagRepository.getName() + " AS b3_solo_category_tag WHERE b3_solo_category_tag.category_oId = ").
                     append(categoryId).append(")");
             final List<JSONObject> articlesCountResult = select(queryCount.append(queryStr.toString()).toString());
-            final int articleCount = articlesCountResult == null ? 0 : articlesCountResult.get(0).optInt("C");
-            category.put(Category.CATEGORY_T_PUBLISHED_ARTICLE_COUNT, articleCount);
+            final int articleCount = articlesCountResult == null ? 0 : articlesCountResult.get(0).optInt("C"); */
+            category.put(Category.CATEGORY_T_PUBLISHED_ARTICLE_COUNT, categoryTags.length());
         }
 
         return ret;

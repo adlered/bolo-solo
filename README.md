@@ -92,4 +92,24 @@ Bolo 在 Solo V4 版本之后仍会跟随 Solo 的版本号同步更新，同时
 - [ ] 关闭搜索功能（1.国内备案管局不允许个人建站带有搜索功能 2.节约服务器资源）
 - [ ] 敬请期待...
 
-#### 目前本地登录功能已经做好了，我录了一段 Demo 视频以代表我真的在写，而不是骗Star。在项目的根目录就有`demoX.mp4`文件，你可以下载后查看。
+# 未公开版目前实现功能截图（请点击对应链接预览）
+
+### 本地用户登录
+
+[https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/6c0e2f0e-1baf-4fac-8a7a-1052be272ead.png](https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/6c0e2f0e-1baf-4fac-8a7a-1052be272ead.png)
+
+### 默认皮肤 bolo-solo-nexmoe 主页
+
+[https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/4acc2d62-e31f-4ab0-9b61-22965dd26804.png](https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/4acc2d62-e31f-4ab0-9b61-22965dd26804.png)
+
+### 菠萝博客已部署成功
+
+[https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/9f109db0-92f8-48e2-aa83-867b69345091.png](https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/9f109db0-92f8-48e2-aa83-867b69345091.png)
+
+### 设置个人密码、头像
+
+[https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/34067167-49a9-4a79-a93f-8e965888ba04.png](https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/34067167-49a9-4a79-a93f-8e965888ba04.png)
+
+### B3log Key相关设置
+
+[https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/d353a30e-4b06-4542-b3be-8b635dc76e69.png](https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/d353a30e-4b06-4542-b3be-8b635dc76e69.png)

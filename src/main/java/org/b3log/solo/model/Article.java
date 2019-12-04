@@ -101,7 +101,7 @@ public final class Article {
     /**
      * Key of categories.
      */
-    public static final String CATEGORY_REF = "categories";
+    public static final String CATEGORY_REF = "category";
 
     /**
      * Key of comment count.

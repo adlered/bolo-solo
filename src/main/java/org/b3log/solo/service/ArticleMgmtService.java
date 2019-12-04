@@ -184,6 +184,18 @@ public class ArticleMgmtService {
     private OptionMgmtService optionMgmtService;
 
     /**
+     * Category management service.
+     */
+    @Inject
+    private CategoryMgmtService categoryMgmtService;
+
+    /**
+     * Category query service.
+     */
+    @Inject
+    private CategoryQueryService categoryQueryService;
+
+    /**
      * Refreshes GitHub repos. 同步拉取 GitHub 仓库 https://github.com/b3log/solo/issues/12514
      */
     public void refreshGitHub() {
@@ -470,6 +482,18 @@ public class ArticleMgmtService {
 
             final boolean postToCommunity = article.optBoolean(Common.POST_TO_COMMUNITY);
             article.remove(Common.POST_TO_COMMUNITY);
+
+            // Bolo category
+            String category = String.valueOf(article.get(CATEGORY_REF));
+            final JSONObject categoryTag = new JSONObject();
+            categoryTag.put(Category.CATEGORY + "_" + Keys.OBJECT_ID, category);
+            categoryTag.put(Tag.TAG + "_" + Keys.OBJECT_ID, article.optString(Keys.OBJECT_ID));
+            JSONObject cate = categoryTagRepository.getByTagId(article.optString(Keys.OBJECT_ID), 1, 1);
+            JSONObject cateS = (JSONObject) cate.optJSONArray("rslts").get(0);
+            categoryMgmtService.removeCategoryTag(cateS.optString("category_oId"), cateS.optString("tag_oId"));
+            categoryMgmtService.addCategoryTag(categoryTag);
+            article.remove(CATEGORY_REF);
+
             articleRepository.update(articleId, article);
             article.put(Common.POST_TO_COMMUNITY, postToCommunity);
 
@@ -574,6 +598,15 @@ public class ArticleMgmtService {
 
             final boolean postToCommunity = article.optBoolean(Common.POST_TO_COMMUNITY);
             article.remove(Common.POST_TO_COMMUNITY);
+
+            // Bolo category
+            String category = String.valueOf(article.get(CATEGORY_REF));
+            final JSONObject categoryTag = new JSONObject();
+            categoryTag.put(Category.CATEGORY + "_" + Keys.OBJECT_ID, category);
+            categoryTag.put(Tag.TAG + "_" + Keys.OBJECT_ID, article.optString(Keys.OBJECT_ID));
+            categoryMgmtService.addCategoryTag(categoryTag);
+            article.remove(CATEGORY_REF);
+
             articleRepository.add(article);
             transaction.commit();
 

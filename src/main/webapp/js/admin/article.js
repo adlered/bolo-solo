@@ -167,6 +167,7 @@ admin.article = {
           'postToCommunity': $('#postToCommunity').prop('checked'),
           'articleCommentable': $('#articleCommentable').prop('checked'),
           'articleViewPwd': $('#viewPwd').val(),
+          'category': $("#categorySelector").val(),
         },
       }
 
@@ -237,6 +238,7 @@ admin.article = {
           'articleCommentable': $('#articleCommentable').prop('checked'),
           'articleViewPwd': $('#viewPwd').val(),
           'postToCommunity': $('#postToCommunity').prop('checked'),
+          'category': $("#categorySelector").val(),
         },
       }
 

@@ -168,6 +168,8 @@ public class CategoryMgmtService {
             LOGGER.log(Level.ERROR, "Adds a category-tag relation failed", e);
 
             throw new ServiceException(e);
+        } catch (NullPointerException NPE) {
+            LOGGER.log(Level.ERROR, "Category not set.");
         }
     }
 

@@ -492,7 +492,7 @@ public class ArticleMgmtService {
                 JSONObject cate = categoryTagRepository.getByTagId(article.optString(Keys.OBJECT_ID), 1, 1);
                 JSONObject cateS = (JSONObject) cate.optJSONArray("rslts").get(0);
                 categoryMgmtService.removeCategoryTag(cateS.optString("category_oId"), cateS.optString("tag_oId"));
-            } catch (JSONException JSONE) {}
+            } catch (JSONException JSONE) {} catch (NullPointerException NPE) {}
             categoryMgmtService.addCategoryTag(categoryTag);
             article.remove(CATEGORY_REF);
 

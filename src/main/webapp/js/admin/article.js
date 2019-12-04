@@ -77,6 +77,7 @@ admin.article = {
         $('#tag').val(tagsString)
         $('#permalink').val(result.article.articlePermalink)
         $('#viewPwd').val(result.article.articleViewPwd)
+        $("#categorySelector").val(result.category);
 
         $('#articleCommentable').
           prop('checked', result.article.articleCommentable)

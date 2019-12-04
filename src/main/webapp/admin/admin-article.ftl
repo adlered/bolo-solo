@@ -51,7 +51,7 @@
         <label>${category1Label}</label>
         <select id="categorySelector">
             <#list categories as category>
-                <option value="${category.oId}">“${category.categoryTitle}” 当前${category.categoryPublishedArticleCount}篇文章</option>
+                <option value="${category.oId}">${category.categoryTitle} (${category.categoryPublishedArticleCount})</option>
             </#list>
         </select>
     </div>

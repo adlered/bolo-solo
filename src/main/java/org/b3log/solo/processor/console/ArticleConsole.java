@@ -25,6 +25,7 @@ import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.ioc.Singleton;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
+import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.servlet.RequestContext;
@@ -33,12 +34,14 @@ import org.b3log.latke.servlet.renderer.JsonRenderer;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Common;
+import org.b3log.solo.repository.CategoryTagRepository;
 import org.b3log.solo.service.ArticleMgmtService;
 import org.b3log.solo.service.ArticleQueryService;
 import org.b3log.solo.service.UserQueryService;
 import org.b3log.solo.util.Images;
 import org.b3log.solo.util.Solos;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
@@ -84,6 +87,12 @@ public class ArticleConsole {
      */
     @Inject
     private LangPropsService langPropsService;
+
+    /**
+     * Category tag repository.
+     */
+    @Inject
+    CategoryTagRepository categoryTagRepository;
 
     /**
      * Pushes an article to community.
@@ -183,6 +192,16 @@ public class ArticleConsole {
             final String articleId = context.pathVar("id");
             final JSONObject result = articleQueryService.getArticle(articleId);
             result.put(Keys.STATUS_CODE, true);
+            JSONObject cateS = null;
+
+            try {
+                JSONObject cate = categoryTagRepository.getByTagId(articleId, 1, 1);
+                cateS = (JSONObject) cate.optJSONArray("rslts").get(0);
+                result.put("category", cateS.optString("category_oId"));
+            } catch (JSONException JSONE) {
+                result.put("category", "");
+            }
+
             renderer.setJSONObject(result);
         } catch (final ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage(), e);
@@ -190,7 +209,7 @@ public class ArticleConsole {
             final JSONObject jsonObject = new JSONObject().put(Keys.STATUS_CODE, false);
             renderer.setJSONObject(jsonObject);
             jsonObject.put(Keys.MSG, langPropsService.get("getFailLabel"));
-        }
+        } catch (RepositoryException RE) { RE.printStackTrace(); }
     }
 
     /**

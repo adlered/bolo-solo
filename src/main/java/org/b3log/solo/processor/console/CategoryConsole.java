@@ -260,40 +260,6 @@ public class CategoryConsole {
 
         try {
             final JSONObject requestJSON = context.requestJSON();
-            String tagsStr = requestJSON.optString(Category.CATEGORY_T_TAGS);
-            tagsStr = Tag.formatTags(tagsStr, 64);
-            if (StringUtils.isBlank(tagsStr)) {
-                throw new ServiceException(langPropsService.get("tagsEmptyLabel"));
-            }
-            final String[] tagTitles = tagsStr.split(",");
-            String addArticleWithTagFirstLabel = langPropsService.get("addArticleWithTagFirstLabel");
-
-            final List<JSONObject> tags = new ArrayList<>();
-            final Set<String> deduplicate = new HashSet<>();
-            for (int i = 0; i < tagTitles.length; i++) {
-                String tagTitle = StringUtils.trim(tagTitles[i]);
-                if (StringUtils.isBlank(tagTitle)) {
-                    continue;
-                }
-
-                final JSONObject tagResult = tagQueryService.getTagByTitle(tagTitle);
-                if (null == tagResult) {
-                    addArticleWithTagFirstLabel = addArticleWithTagFirstLabel.replace("{tag}", tagTitle);
-
-                    final JSONObject jsonObject = new JSONObject().put(Keys.STATUS_CODE, false);
-                    renderer.setJSONObject(jsonObject);
-                    jsonObject.put(Keys.MSG, addArticleWithTagFirstLabel);
-
-                    return;
-                }
-
-                if (deduplicate.contains(tagTitle)) {
-                    continue;
-                }
-
-                tags.add(tagResult.optJSONObject(Tag.TAG));
-                deduplicate.add(tagTitle);
-            }
 
             final String categoryId = requestJSON.optString(Keys.OBJECT_ID);
             final String title = requestJSON.optString(Category.CATEGORY_TITLE, "Category");
@@ -336,15 +302,6 @@ public class CategoryConsole {
 
             categoryMgmtService.updateCategory(categoryId, category);
             categoryMgmtService.removeCategoryTags(categoryId); // remove old relations
-
-            // add new relations
-            for (final JSONObject tag : tags) {
-                final JSONObject categoryTag = new JSONObject();
-                categoryTag.put(Category.CATEGORY + "_" + Keys.OBJECT_ID, categoryId);
-                categoryTag.put(Tag.TAG + "_" + Keys.OBJECT_ID, tag.optString(Keys.OBJECT_ID));
-
-                categoryMgmtService.addCategoryTag(categoryTag);
-            }
 
             ret.put(Keys.OBJECT_ID, categoryId);
             ret.put(Keys.MSG, langPropsService.get("updateSuccLabel"));
@@ -392,40 +349,6 @@ public class CategoryConsole {
 
         try {
             final JSONObject requestJSONObject = context.requestJSON();
-            String tagsStr = requestJSONObject.optString(Category.CATEGORY_T_TAGS);
-            tagsStr = Tag.formatTags(tagsStr, 64);
-            if (StringUtils.isBlank(tagsStr)) {
-                throw new ServiceException(langPropsService.get("tagsEmptyLabel"));
-            }
-            final String[] tagTitles = tagsStr.split(",");
-            String addArticleWithTagFirstLabel = langPropsService.get("addArticleWithTagFirstLabel");
-
-            final List<JSONObject> tags = new ArrayList<>();
-            final Set<String> deduplicate = new HashSet<>();
-            for (int i = 0; i < tagTitles.length; i++) {
-                String tagTitle = StringUtils.trim(tagTitles[i]);
-                if (StringUtils.isBlank(tagTitle)) {
-                    continue;
-                }
-
-                final JSONObject tagResult = tagQueryService.getTagByTitle(tagTitle);
-                if (null == tagResult) {
-                    addArticleWithTagFirstLabel = addArticleWithTagFirstLabel.replace("{tag}", tagTitle);
-
-                    final JSONObject jsonObject = new JSONObject().put(Keys.STATUS_CODE, false);
-                    renderer.setJSONObject(jsonObject);
-                    jsonObject.put(Keys.MSG, addArticleWithTagFirstLabel);
-
-                    return;
-                }
-
-                if (deduplicate.contains(tagTitle)) {
-                    continue;
-                }
-
-                tags.add(tagResult.optJSONObject(Tag.TAG));
-                deduplicate.add(tagTitle);
-            }
 
             final String title = requestJSONObject.optString(Category.CATEGORY_TITLE, "Category");
             JSONObject mayExist = categoryQueryService.getByTitle(title);
@@ -466,14 +389,6 @@ public class CategoryConsole {
             category.put(Category.CATEGORY_DESCRIPTION, desc);
 
             final String categoryId = categoryMgmtService.addCategory(category);
-
-            for (final JSONObject tag : tags) {
-                final JSONObject categoryTag = new JSONObject();
-                categoryTag.put(Category.CATEGORY + "_" + Keys.OBJECT_ID, categoryId);
-                categoryTag.put(Tag.TAG + "_" + Keys.OBJECT_ID, tag.optString(Keys.OBJECT_ID));
-
-                categoryMgmtService.addCategoryTag(categoryTag);
-            }
 
             ret.put(Keys.OBJECT_ID, categoryId);
             ret.put(Keys.MSG, langPropsService.get("addSuccLabel"));

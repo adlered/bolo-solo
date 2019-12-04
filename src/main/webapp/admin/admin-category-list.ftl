@@ -29,10 +29,7 @@
     <input id="categoryURI" type="text"/>
     <label for="categoryDesc">${linkDescription1Label}</label>
     <input id="categoryDesc" type="text"/>
-    <label for="categoryTags">${tags1Label}</label>
-    <span class="tag__select">
-        <input id="categoryTags" type="text"/>
-    </span><br>
+    <br><br>
     <button onclick="admin.categoryList.add();" class="fn__right">${saveLabel}</button>
     <div class="fn__clear"></div>
 </div>

@@ -47,6 +47,14 @@
             <input id="tag" type="text"/>
         </div>
     </div>
+    <div>
+        <label>${category1Label}</label>
+        <select id="categorySelector">
+            <#list categories as category>
+                <option value="${category.categoryURI}">${category.categoryTitle}: ${category.categoryPublishedArticleCount}</option>
+            </#list>
+        </select>
+    </div>
     <div class="comment-content">
         <label>${abstract1Label}</label>
         <div>

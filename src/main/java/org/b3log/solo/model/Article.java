@@ -99,6 +99,11 @@ public final class Article {
     public static final String ARTICLE_TAGS_REF = "articleTags";
 
     /**
+     * Key of categories.
+     */
+    public static final String CATEGORY_REF = "categories";
+
+    /**
      * Key of comment count.
      */
     public static final String ARTICLE_COMMENT_COUNT = "articleCommentCount";

@@ -176,8 +176,10 @@ public class CategoryConsole {
                 }
                 tagBuilder.append(tag.optString(Tag.TAG_TITLE)).append(",");
             }
-            tagBuilder.deleteCharAt(tagBuilder.length() - 1);
-            result.put(Category.CATEGORY_T_TAGS, tagBuilder.toString());
+            if (tagBuilder.length() != 0) {
+                tagBuilder.deleteCharAt(tagBuilder.length() - 1);
+                result.put(Category.CATEGORY_T_TAGS, tagBuilder.toString());
+            }
 
             renderer.setJSONObject(result);
             result.put(Keys.STATUS_CODE, true);

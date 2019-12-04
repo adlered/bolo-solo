@@ -32,6 +32,7 @@ import org.b3log.latke.logging.Logger;
 import org.b3log.latke.model.Plugin;
 import org.b3log.latke.model.User;
 import org.b3log.latke.plugin.ViewLoadEventData;
+import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.repository.jdbc.util.Connections;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.servlet.RequestContext;
@@ -43,6 +44,7 @@ import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.model.UserExt;
+import org.b3log.solo.repository.CategoryRepository;
 import org.b3log.solo.service.DataModelService;
 import org.b3log.solo.service.ExportService;
 import org.b3log.solo.service.OptionQueryService;
@@ -113,6 +115,9 @@ public class AdminConsole {
      */
     @Inject
     private EventManager eventManager;
+
+    @Inject
+    private CategoryRepository categoryRepository;
 
     /**
      * Shows administrator index with the specified context.
@@ -188,6 +193,15 @@ public class AdminConsole {
         dataModel.putAll(langs);
         Keys.fillRuntime(dataModel);
         dataModel.put(Option.ID_C_LOCALE_STRING, locale.toString());
+
+        try {
+            // Bolo categories
+            final int mostUsedCategoryDisplayCnt = Integer.MAX_VALUE;
+            final List<JSONObject> categories = categoryRepository.getMostUsedCategories(mostUsedCategoryDisplayCnt);
+            dataModel.put("categories", categories);
+        } catch (RepositoryException RE) {
+            RE.printStackTrace();
+        }
 
         fireFreeMarkerActionEvent(templateName, dataModel);
     }

@@ -163,7 +163,6 @@ admin.categoryList = {
 
             var requestJSONObject = {
                 "categoryTitle": $("#categoryName").val(),
-                "categoryTags": $("#categoryTags").val(),
                 "categoryURI": $("#categoryURI").val(),
                 "categoryDescription": $("#categoryDesc").val()
             };
@@ -199,7 +198,6 @@ admin.categoryList = {
                     }
 
                     $("#categoryName").val("").data("oId", '');
-                    $("#categoryTags").val("");
                     $("#categoryURI").val("");
                     $("#categoryDesc").val("");
 
@@ -289,9 +287,6 @@ admin.categoryList = {
         if (2 > categoryName.length || categoryName.length > 32) {
             $("#tipMsg").text(Label.categoryTooLongLabel);
             $("#categoryName" + status).focus();
-        } else if ($.trim($("#categoryTags" + status).val()) === "") {
-            $("#tipMsg").text(Label.tagsEmptyLabel);
-            $("#categoryTags" + status).focus();
         } else {
             return true;
         }

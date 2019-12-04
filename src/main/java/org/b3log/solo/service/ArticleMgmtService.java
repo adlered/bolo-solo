@@ -26,8 +26,7 @@ import org.b3log.latke.event.EventManager;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
-import org.b3log.latke.repository.RepositoryException;
-import org.b3log.latke.repository.Transaction;
+import org.b3log.latke.repository.*;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.service.annotation.Service;
@@ -55,6 +54,7 @@ import static org.b3log.solo.model.Article.*;
  * @version 1.3.4.0, Nov 7, 2019
  * @since 0.3.5
  */
+
 @Service
 public class ArticleMgmtService {
 
@@ -62,6 +62,12 @@ public class ArticleMgmtService {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(ArticleMgmtService.class);
+
+    /**
+     * Category service.
+     */
+    @Inject
+    private CategoryRepository categoryRepository;
 
     /**
      * Article query service.
@@ -406,6 +412,7 @@ public class ArticleMgmtService {
      *                          "articleAbstract": "",
      *                          "articleContent": "",
      *                          "articleTags": "tag1,tag2,tag3", // optional, default set "待分类"
+     *                          "categories": "cat1,cat2,cat3",
      *                          "articlePermalink": "", // optional
      *                          "articleStatus": int, // 0: published, 1: draft
      *                          "articleSignId": "", // optional

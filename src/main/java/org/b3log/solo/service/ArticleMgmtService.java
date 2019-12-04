@@ -488,9 +488,11 @@ public class ArticleMgmtService {
             final JSONObject categoryTag = new JSONObject();
             categoryTag.put(Category.CATEGORY + "_" + Keys.OBJECT_ID, category);
             categoryTag.put(Tag.TAG + "_" + Keys.OBJECT_ID, article.optString(Keys.OBJECT_ID));
-            JSONObject cate = categoryTagRepository.getByTagId(article.optString(Keys.OBJECT_ID), 1, 1);
-            JSONObject cateS = (JSONObject) cate.optJSONArray("rslts").get(0);
-            categoryMgmtService.removeCategoryTag(cateS.optString("category_oId"), cateS.optString("tag_oId"));
+            try {
+                JSONObject cate = categoryTagRepository.getByTagId(article.optString(Keys.OBJECT_ID), 1, 1);
+                JSONObject cateS = (JSONObject) cate.optJSONArray("rslts").get(0);
+                categoryMgmtService.removeCategoryTag(cateS.optString("category_oId"), cateS.optString("tag_oId"));
+            } catch (JSONException JSONE) {}
             categoryMgmtService.addCategoryTag(categoryTag);
             article.remove(CATEGORY_REF);
 

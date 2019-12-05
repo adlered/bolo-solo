@@ -42,10 +42,13 @@ import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.event.EventTypes;
 import org.b3log.solo.model.*;
 import org.b3log.solo.processor.console.ConsoleRenderer;
+import org.b3log.solo.repository.CategoryRepository;
+import org.b3log.solo.repository.CategoryTagRepository;
 import org.b3log.solo.service.*;
 import org.b3log.solo.util.Markdowns;
 import org.b3log.solo.util.Skins;
 import org.b3log.solo.util.Solos;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 
@@ -135,6 +138,18 @@ public class ArticleProcessor {
      */
     @Inject
     private EventManager eventManager;
+
+    /**
+     * Category tag repository.
+     */
+    @Inject
+    private CategoryTagRepository categoryTagRepository;
+
+    /**
+     * Category query service.
+     */
+    @Inject
+    private CategoryQueryService categoryQueryService;
 
     /**
      * Markdowns.
@@ -387,7 +402,6 @@ public class ArticleProcessor {
         final JSONObject jsonObject = new JSONObject();
         final HttpServletRequest request = context.getRequest();
         final int currentPageNum = Paginator.getPage(request);
-
         Stopwatchs.start("Get Articles Paged [pageNum=" + currentPageNum + ']');
         try {
             jsonObject.put(Keys.STATUS_CODE, true);
@@ -753,6 +767,18 @@ public class ArticleProcessor {
 
             // Fire [Before Render Article] event
             final JSONObject eventData = new JSONObject();
+
+            JSONObject cateS = null;
+            try {
+                JSONObject cate = categoryTagRepository.getByTagId(articleId, 1, 1);
+                cateS = (JSONObject) cate.optJSONArray("rslts").get(0);
+                String categoryOId = cateS.optString("category_oId");
+                cateS = categoryQueryService.getCategory(categoryOId);
+                article.put("articleCategory", cateS.opt("categoryTitle"));
+            } catch (JSONException JSONE) {
+                article.put("articleCategory", "");
+            }
+
             eventData.put(Article.ARTICLE, article);
             eventManager.fireEventSynchronously(new Event<>(EventTypes.BEFORE_RENDER_ARTICLE, eventData));
         } catch (final Exception e) {
@@ -907,6 +933,7 @@ public class ArticleProcessor {
         final String articleId = article.getString(Keys.OBJECT_ID);
 
         Stopwatchs.start("Get Article Sign");
+
         LOGGER.debug("Getting article sign....");
         final JSONObject sign = articleQueryService.getSign(article.getString(Article.ARTICLE_SIGN_ID), preference);
         final String articleTitle = article.optString(Article.ARTICLE_TITLE);

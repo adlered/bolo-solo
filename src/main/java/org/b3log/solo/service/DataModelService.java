@@ -45,6 +45,7 @@ import org.b3log.solo.repository.*;
 import org.b3log.solo.util.Markdowns;
 import org.b3log.solo.util.Skins;
 import org.b3log.solo.util.Solos;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
@@ -178,6 +179,9 @@ public class DataModelService {
     @Inject
     private UserMgmtService userMgmtService;
 
+    @Inject
+    private CategoryQueryService  categoryQueryService;
+
     /**
      * Fills articles in index.ftl.
      *
@@ -217,7 +221,8 @@ public class DataModelService {
                 }
 
             final JSONObject articlesResult = articleRepository.get(query);
-            final List<JSONObject> articles = CollectionUtils.jsonArrayToList(articlesResult.optJSONArray(Keys.RESULTS));
+            List<JSONObject> articles = CollectionUtils.jsonArrayToList(articlesResult.optJSONArray(Keys.RESULTS));
+
             final int pageCount = articlesResult.optJSONObject(Pagination.PAGINATION).optInt(Pagination.PAGINATION_PAGE_COUNT);
             setArticlesExProperties(context, articles, preference);
 
@@ -935,6 +940,16 @@ public class DataModelService {
             articleQueryService.markdown(article);
 
             fillCategory(article);
+
+            try {
+                JSONObject cate = categoryTagRepository.getByTagId(article.optString("oId"), 1, 1);
+                JSONObject cateS = (JSONObject) cate.optJSONArray("rslts").get(0);
+                String categoryOId = cateS.optString("category_oId");
+                cateS = categoryQueryService.getCategory(categoryOId);
+                article.put("articleCategory", cateS.opt("categoryTitle"));
+            } catch (JSONException JSONE) {
+                article.put("articleCategory", "");
+            }
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Sets article extra properties failed", e);
             throw new ServiceException(e);

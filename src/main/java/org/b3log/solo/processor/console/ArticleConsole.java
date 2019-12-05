@@ -192,8 +192,8 @@ public class ArticleConsole {
             final String articleId = context.pathVar("id");
             final JSONObject result = articleQueryService.getArticle(articleId);
             result.put(Keys.STATUS_CODE, true);
-            JSONObject cateS = null;
 
+            JSONObject cateS = null;
             try {
                 JSONObject cate = categoryTagRepository.getByTagId(articleId, 1, 1);
                 cateS = (JSONObject) cate.optJSONArray("rslts").get(0);

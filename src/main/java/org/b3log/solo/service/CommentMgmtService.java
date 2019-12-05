@@ -20,11 +20,14 @@ package org.b3log.solo.service;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.b3log.latke.Keys;
+import org.b3log.latke.Latkes;
 import org.b3log.latke.event.Event;
 import org.b3log.latke.event.EventManager;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
+import org.b3log.latke.model.Role;
+import org.b3log.latke.model.User;
 import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.repository.Transaction;
 import org.b3log.latke.service.LangPropsService;
@@ -304,7 +307,20 @@ public class CommentMgmtService {
                             originalCommentId, commentName, commentContent);
                 }
             }
-            setCommentThumbnailURL(comment);
+            try {
+                setCommentThumbnailURL(comment);
+            } catch (NullPointerException NPE) {
+                // Bolo - 用户名如果不存在，创建一个
+                final JSONObject newUser = new JSONObject();
+                newUser.put(User.USER_NAME, commentName);
+                newUser.put(User.USER_URL, commentURL);
+                newUser.put(User.USER_ROLE, Role.VISITOR_ROLE);
+                newUser.put(UserExt.USER_AVATAR, "https://pic.stackoverflow.wiki/uploadImages/123/113/181/232/2019/12/05/20/41/2740ebc7-da8d-4220-90c5-557f7151d7bc.png");
+                newUser.put(UserExt.USER_B3_KEY, "000000");
+                newUser.put(UserExt.USER_GITHUB_ID, "000000");
+                userRepository.add(newUser);
+                setCommentThumbnailURL(comment);
+            }
             ret.put(Comment.COMMENT_THUMBNAIL_URL, comment.getString(Comment.COMMENT_THUMBNAIL_URL));
             comment.put(Comment.COMMENT_ON_ID, articleId);
             final String commentId = Ids.genTimeMillisId();

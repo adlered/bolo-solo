@@ -57,21 +57,50 @@ Bolo 在 Solo V4 版本之后仍会跟随 Solo 的版本号同步更新，同时
 |:-------------------:|:-------------------:|:-------------------:|
 |<img height='48' width='48' src='https://avatars3.githubusercontent.com/u/873584?v=4'>|<img height='48' width='48' src='https://avatars0.githubusercontent.com/u/14257327?v=4'>|<img height='48' width='48' src='https://avatars1.githubusercontent.com/u/23192332?v=4'>|
 |[@88250](https://github.com/88250)|[@csfwff](https://github.com/csfwff)|[@InkDP](https://github.com/InkDP)|
-|[hacpai.com](https://hacpai.com)|[sszsj.top](https://sszsj.top)|[inkdp.cn](https://inkdp.cn)|
+|[Solo 原作者](https://hacpai.com)|[Bolo 测试、Logo 绘制、前端技术支持](https://sszsj.top)|[Bolo 测试、后端技术支持](https://inkdp.cn)|
 
-# 迁移
+# 轻松迁移 至Bolo / 迁回Solo
 
-如果你之前使用了官方版本的Solo：
+### 从 Solo 迁移至 Bolo
 
-1. 请先**备份**原来的数据库
-2. 清空数据库
-3. 初始化Bolo
-4. 将b3_solo_user表中的一行数据备份
-5. 再次清空数据库
-6. 将原来的数据库恢复回去
-7. 将备份b3_solo_user表中的一行数据 **插入**（保留原有数据） 回去即可
+为防出现意外，请先**备份**原来的数据库
+1. 修改 Bolo 的数据库配置文件 `local.properties`，使 Bolo 连接至数据库；
+2. **清空（只清空数据，不删除表本身）** `b3_solo_user` 、 `b3_solo_category` 和 `b3_solo_category_tag` 表；
+3. 执行SQL语句，在用户表中新建一个管理员用户：
+```sql
+INSERT INTO `b3_solo_user` (
+	`oId`,
+	`userName`,
+	`userURL`,
+	`userRole`,
+	`userAvatar`,
+	`userB3Key`,
+	`userGitHubId` 
+)
+VALUES
+	(
+		'default',
+		'{管理员用户名}',
+		'{管理员的个人主页网址}',
+		'adminRole',
+		'{管理员的头像网址}',
+		'{管理员密码}',
+	'none' 
+	);
+```
+如果你修改了`b3_solo_user`的表名，请记得在 SQL 语句中也加以修改（第一行）。  
+将 SQL 语句中的`{管理员用户名}`、`{管理员的个人主页网址}`、`{管理员的头像网址}`、`{管理员密码}`修改。  
+**启动 Bolo ，迁移完成~**
 
-> 如果不会操作，可以联系我（请看我的名片）帮助操作。
+### 从 Bolo 迁回至 Solo
+
+1. **清空（只清空数据，不删除表本身）** `b3_solo_category` 和 `b3_solo_category_tag` 表；
+2. 确定 `b3_solo_user` 表中的 `userName` 列用户名，和你的 GitHub 账户用户名相同，如果不同，请直接修改；
+3. 启动 Solo；
+4. 登录，在`管理后台 - 工具 - 用户管理`中，更新管理员账号的B3log Key为黑客派中的B3log Key。
+5. 大功告成~
+
+> 如果不会操作，欢迎联系我~（请看我名片中的联系方式）
 
 # 皮肤
 

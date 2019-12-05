@@ -23,33 +23,33 @@
 <img src="https://img.shields.io/github/watchers/AdlerED/bolo-solo?style=social">
 </p>
 
+****
+
 :construction: Bolo 菠萝 博客系统仍未完成，点击右上方的 Star 和 Watch 来追踪本项目的进展，第一个 Release 版本很快就会发布 :)
 
 # 声明
 
-`Bolo` 是 `Solo` 的修改版，我们始终支持 B3log 生态。开发的初衷是做一个更符合我的偏好的博客。
+`Bolo` 是 `Solo` 的修改版，我们始终支持 B3log 生态，支持与黑客派同步文章、评论、联系方式，使用社区图床。  
 
-Bolo 的后台编辑器仍然使用HacPai的图床，但步骤不同。由于我们加入了本地登录功能，去掉了游客登录的流程，所以如要使用博客编辑器的图床，与黑客派社区同步文章的话，需要在设置中，设置你的HacPai用户名和B3 Key，但不需要使用GitHub再次登录。（发布后教程文档会同步更新）。
+### 为什么选择 bolo-solo
 
-### 特性
-
-* 持续支持WAR包部署，支持Tomcat/Jetty，使用Servlet作为底层（Solo v3.6.7 及以上已更新至 Latke 框架，不再支持 Tomcat/Jetty）
-* 与官方保持更新，兼容原版 Solo 数据库（需要与 Bolo 同版本号或更低的版本，Solo 版本高于 Bolo 需手动修改数据库中版本号，稍后会出教程）
-* 倾听：与官方保持更新的同时，更新人性化、简洁、实用的小功能，欢迎提出建议
-* 持续保留H2本地数据库
-* 无需GitHub，直接本地登录
-* 支持本地登录的同时，也支持通过[黑客派](https://hacpai.com)取得默认编辑器的图床权限
-* 支持与[黑客派](https://hacpai.com)社区进行文章/评论同步（支持手动开启/关闭） 
+* 根：本地化环境，数据存储于本地服务器。使用本地账号登录 / 评论
+* 稳：更适合求稳、专心写文的博主：如非必要，不必升级 bolo-solo
+* 易：轻松在 Solo / Bolo 之间切换
+* 能：强化分类功能，每个文章只拥有一个分类，分类功能独立
+* 跨：支持 Tomcat / Jetty / Docker 部署 Bolo（原版Solo v3.6.7 及以上已更新至 Latke 框架，不再支持 Tomcat / Jetty）
+* 选：bolo-solo 支持 B3log 体系，可选支持[黑客派](https://hacpai.com)的 B3log Key 实现图床及社区文章评论、联系方式同步功能
+* 随：跟随 [原版 Solo](https://github.com/88250/solo) 同步更新版本号及功能，同步支持最新版本 Solo / Bolo 之间切换
+* 安：完全去除对 GitHub 的支持， bolo-solo 是完全独立的博客，B3log Key 也仅是调用 API：除你自己，没人能操作你的博客，确保数据的安全
+* 兼：版本更新不会去掉已有大功能（例如：本地H2数据库、Servlet框架等），保证对旧版本用户的友好，确保旧版本用户可流畅更新至最新版本
+* 听：与官方保持更新的同时，更新人性化、简洁、实用的小功能，感谢你提出各种BUG、建议、意见
+* 教：bolo-solo 将全面更新 bolo-solo 迁移、新建、管理的教学视频（对小白十分友好）及文档，解决你遇到的绝大部分问题（2020年之前完成）
 
 ### 关于 Solo V4
 
-[Solo V4](https://hacpai.com/article/1571544590916) 版本将会有很大的变动，其将主要支持静态化页面。
-
-届时 Bolo 不会同 Solo 一起更新到 V4 版本，Bolo 会**始终保持旧版本 Bolo 用户的平滑更新升级**。
-
-Bolo 在 Solo V4 版本之后仍会跟随 Solo 的版本号同步更新，同时引入 Solo V4 的新功能与特性，但为了维持大家的使用习惯，Bolo 的更新内容将不会激进。
-
-至于 Bolo 如何进行版本更新，我们稍后会单独写出一份说明供大家参阅。
+[Solo V4](https://hacpai.com/article/1571544590916) 版本将会有很大的变动，其将主要支持静态化页面。  
+届时 Bolo 不会完全更新 Solo V4 版本的内容，Bolo 会**始终保持旧版本 Bolo 用户的平滑更新升级**。  
+Bolo 在 Solo V4 版本之后仍会跟随 Solo 的版本号同步更新，同时引入 Solo V4 的新功能与特性，但为了维持大家的使用习惯，Bolo 的更新内容将不会激进。  
 
 # 特别鸣谢
 
@@ -57,7 +57,7 @@ Bolo 在 Solo V4 版本之后仍会跟随 Solo 的版本号同步更新，同时
 |:-------------------:|:-------------------:|:-------------------:|
 |<img height='48' width='48' src='https://avatars3.githubusercontent.com/u/873584?v=4'>|<img height='48' width='48' src='https://avatars0.githubusercontent.com/u/14257327?v=4'>|<img height='48' width='48' src='https://avatars1.githubusercontent.com/u/23192332?v=4'>|
 |[@88250](https://github.com/88250)|[@csfwff](https://github.com/csfwff)|[@InkDP](https://github.com/InkDP)|
-|[Solo 原作者](https://hacpai.com)|[Bolo 测试、Logo 绘制、前端技术支持](https://sszsj.top)|[Bolo 测试、后端技术支持](https://inkdp.cn)|
+|[Solo 原作者](https://hacpai.com)|[Bolo 测试、Logo 绘制、前端技术支持](https://sszsj.top)|[Bolo 测试](https://inkdp.cn)|
 
 # 轻松迁移 至Bolo / 迁回Solo
 
@@ -116,7 +116,7 @@ VALUES
 - [x] 本地登录
 - [x] 提供持续的WAR包支持，支持Tomcat部署
 - [x] 和黑客派社区同步文章、评论、个人联系方式、使用社区图床
-- [ ] 访客评论
+- [ ] 本地评论功能（无需登录）
 - [x] 分类功能优化（解除分类与标签的关联）
 - [ ] 关闭搜索功能（1.国内备案管局不允许个人建站带有搜索功能 2.节约服务器资源）
 - [ ] 敬请期待...

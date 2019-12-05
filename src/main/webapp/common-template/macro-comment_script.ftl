@@ -18,7 +18,7 @@
 
 -->
 <#macro comment_script oId commentable>
-<#if isLoggedIn && commentable>
+<#if commentable>
     <div style="position: fixed;bottom: -300px;width: 100%;opacity: 0;background-color: #f1f7fe;padding: 20px 0;transition: all .15s ease-in-out;z-index: 100;left: 0;"
          id="soloEditor">
         <div style="max-width: 768px;margin: 0 auto;padding: 0 10px;">

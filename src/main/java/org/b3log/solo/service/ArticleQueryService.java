@@ -347,10 +347,12 @@ public class ArticleQueryService {
             final String userId = article.getString(Article.ARTICLE_AUTHOR_ID);
             JSONObject ret = userRepository.get(userId);
             if (null == ret) {
-                LOGGER.log(Level.WARN, "Gets author of article failed, assumes the administrator is the author of this article [id={0}]",
-                        article.getString(Keys.OBJECT_ID));
-                // This author may be deleted by admin, use admin as the author of this article
-                ret = userRepository.getAdmin();
+                // Bolo default userId
+                ret = userRepository.get("default");
+                if (null == ret) {
+                    // This author may be deleted by admin, use admin as the author of this article
+                    ret = userRepository.getAdmin();
+                }
             }
 
             return ret;

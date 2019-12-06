@@ -29,18 +29,20 @@
         <br>
         <form action="${servePath}/oauth/bolo/login" method="post">
             <input type="text" name="username" id="username" placeholder="用户名" style="width: 60%"/>
+            <br>
             <input type="password" name="password" id="password" placeholder="密码" style="width: 60%"/>
             <br>
-            <span id="status"></span>
-            <script>
-                status = '${data}';
-                if (status === '0') {
-                    document.getElementById('status').innerHTML = '<br><font color="red"><b>🔐 用户名或密码错误</b></font><br>';
-                }
-                if (status === '-1') {
-                    document.getElementById('status').innerHTML = '<br><font color="green"><b>💿 欢迎使用bolo-solo！输入你想设定的用户名和密码，点击管理登录即可注册！</b></font><br>';
-                }
-            </script>
+            <span id="status">
+                <script>
+                    status = '${data}';
+                    if (status === '0') {
+                        document.getElementById('status').innerHTML = '<br><font color="red" s><b>🔐 用户名或密码错误</b></font><br>';
+                    }
+                    if (status === '-1') {
+                        document.getElementById('status').innerHTML = '<br><font color="green"><b>💿 欢迎使用bolo-solo<br>输入你想设定的用户名和密码，点击管理登录即可注册！</b></font><br>';
+                    }
+                </script>
+            </span>
             <button class="startAction" style="margin-top: 16px">管理登录</button>
         </form>
         <a class="github__link" href="javascript:$('ul').slideToggle()">查看 Bolo - Solo 修改版使用说明</a>

@@ -178,12 +178,19 @@ public final class Solos {
                 return null;
             }
 
-            BeanManager beanManager = BeanManager.getInstance();
-            OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-            JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
-            String userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
-            JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
-            String userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+            String userName = "";
+            String userB3Key = "";
+
+            try {
+                BeanManager beanManager = BeanManager.getInstance();
+                OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+                JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
+                userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
+                JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+                userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+            } catch (NullPointerException NPE) {
+                return null;
+            }
 
             if (StringUtils.isBlank(userB3Key)) {
                 return null;

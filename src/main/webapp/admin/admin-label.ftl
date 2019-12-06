@@ -50,6 +50,7 @@
     Label.commentLabel = "${commentLabel}"
     Label.titleLabel = "${titleLabel}"
     Label.authorLabel = "${authorLabel}"
+    Label.categoryLabel = "${category2Label}"
     Label.dateLabel = "${dateLabel}"
     Label.pageLabel = "${pageLabel}"
     Label.gotoLabel = "${gotoLabel}"

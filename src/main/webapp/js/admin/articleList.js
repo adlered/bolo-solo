@@ -38,6 +38,11 @@ admin.articleList = {
         minWidth: 110,
         style: 'padding-left: 12px;font-size:14px;',
       }, {
+        text: Label.categoryLabel,
+        index: 'category',
+        width: 80,
+        style: 'padding-left: 12px;',
+      }, {
         text: Label.authorLabel,
         index: 'author',
         width: 150,
@@ -121,6 +126,7 @@ admin.articleList = {
           articleData[i].comments = articles[i].articleCommentCount
           articleData[i].articleViewCount = articles[i].articleViewCount
           articleData[i].author = articles[i].authorName
+          articleData[i].category = articles[i].articleCategory
 
           var topClass = articles[i].articlePutTop
             ? Label.cancelPutTopLabel

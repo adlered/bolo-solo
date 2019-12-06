@@ -195,6 +195,7 @@ admin.article = {
         complete: function (jqXHR, textStatus) {
           that._removeDisabled()
           $('#loadMsg').text('')
+          location.reload();
         },
       })
     }
@@ -264,10 +265,12 @@ admin.article = {
 
           admin.article.status.id = undefined
           admin.article.isConfirm = false
+
         },
         complete: function (jqXHR, textStatus) {
           that._removeDisabled()
           $('#loadMsg').text('')
+          location.reload();
         },
       })
     }

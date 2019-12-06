@@ -123,6 +123,12 @@ public class ArticleQueryService {
     private LangPropsService langPropsService;
 
     /**
+     * Category query service.
+     */
+    @Inject
+    private CategoryQueryService categoryQueryService;
+
+    /**
      * Searches articles with the specified keyword.
      *
      * @param keyword        the specified keyword
@@ -578,7 +584,16 @@ public class ArticleQueryService {
                 article.put(Common.AUTHOR_NAME, authorName);
                 article.put(Article.ARTICLE_CREATE_TIME, article.getLong(Article.ARTICLE_CREATED));
                 article.put(Article.ARTICLE_UPDATE_TIME, article.getLong(Article.ARTICLE_UPDATED));
-
+                // Bolo Get category
+                try {
+                    JSONObject cateS = null;
+                    JSONObject cate = categoryTagRepository.getByTagId(article.optString("oId"), 1, Integer.MAX_VALUE);
+                    int size = cate.optJSONArray("rslts").length();
+                    cateS = (JSONObject) cate.optJSONArray("rslts").get(size - 1);
+                    String categoryOId = cateS.optString("category_oId");
+                    cateS = categoryQueryService.getCategory(categoryOId);
+                    article.put("articleCategory", cateS.opt("categoryTitle"));
+                } catch (JSONException JSONE) {}
                 // Remove unused properties
                 for (int j = 0; j < excludes.length(); j++) {
                     article.remove(excludes.optString(j));

@@ -195,10 +195,11 @@ public class ArticleConsole {
 
             JSONObject cateS = null;
             try {
-                JSONObject cate = categoryTagRepository.getByTagId(articleId, 1, 1);
-                cateS = (JSONObject) cate.optJSONArray("rslts").get(0);
+                JSONObject cate = categoryTagRepository.getByTagId(articleId, 1, Integer.MAX_VALUE);
+                int size = cate.optJSONArray("rslts").length();
+                cateS = (JSONObject) cate.optJSONArray("rslts").get(size - 1);
                 result.put("category", cateS.optString("category_oId"));
-            } catch (JSONException JSONE) {
+            } catch (JSONException | NullPointerException e) {
                 result.put("category", "");
             }
 

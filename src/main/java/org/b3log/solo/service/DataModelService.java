@@ -942,8 +942,9 @@ public class DataModelService {
             fillCategory(article);
 
             try {
-                JSONObject cate = categoryTagRepository.getByTagId(article.optString("oId"), 1, 1);
-                JSONObject cateS = (JSONObject) cate.optJSONArray("rslts").get(0);
+                JSONObject cate = categoryTagRepository.getByTagId(article.optString("oId"), 1, Integer.MAX_VALUE);
+                int size = cate.optJSONArray("rslts").length();
+                JSONObject cateS = (JSONObject) cate.optJSONArray("rslts").get(size - 1);
                 String categoryOId = cateS.optString("category_oId");
                 cateS = categoryQueryService.getCategory(categoryOId);
                 article.put("articleCategory", cateS.opt("categoryTitle"));

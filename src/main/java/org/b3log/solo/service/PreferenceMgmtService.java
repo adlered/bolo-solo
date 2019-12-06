@@ -22,6 +22,7 @@ import org.b3log.latke.Latkes;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
+import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.repository.Transaction;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.service.ServiceException;
@@ -60,6 +61,20 @@ public class PreferenceMgmtService {
      */
     @Inject
     private OptionRepository optionRepository;
+
+    // Bolo default config sum
+    private void makeConfig() throws RepositoryException {
+        JSONObject hacpaiUserOpt = new JSONObject();
+        hacpaiUserOpt.put(Keys.OBJECT_ID, Option.ID_C_HACPAI_USER);
+        hacpaiUserOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_HAIPAI_USER);
+        hacpaiUserOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_HACPAI_USER);
+        optionRepository.add(hacpaiUserOpt);
+        JSONObject b3logKeyOpt = new JSONObject();
+        b3logKeyOpt.put(Keys.OBJECT_ID, Option.ID_C_B3LOG_KEY);
+        b3logKeyOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_B3LOG_KEY);
+        b3logKeyOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_B3LOG_KEY);
+        optionRepository.add(b3logKeyOpt);
+    }
 
     /**
      * Language service.

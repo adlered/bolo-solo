@@ -97,6 +97,26 @@ public class UserMgmtService {
     private InitService initService;
 
     /**
+     * Option repository.
+     */
+    @Inject
+    private OptionRepository optionRepository;
+
+    // Bolo default config sum
+    private void makeConfig() throws RepositoryException {
+        JSONObject hacpaiUserOpt = new JSONObject();
+        hacpaiUserOpt.put(Keys.OBJECT_ID, Option.ID_C_HACPAI_USER);
+        hacpaiUserOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_HAIPAI_USER);
+        hacpaiUserOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_HACPAI_USER);
+        optionRepository.add(hacpaiUserOpt);
+        JSONObject b3logKeyOpt = new JSONObject();
+        b3logKeyOpt.put(Keys.OBJECT_ID, Option.ID_C_B3LOG_KEY);
+        b3logKeyOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_B3LOG_KEY);
+        b3logKeyOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_B3LOG_KEY);
+        optionRepository.add(b3logKeyOpt);
+    }
+
+    /**
      * Refresh usite. 展示站点连接 https://github.com/b3log/solo/issues/12719
      */
     public void refreshUSite() {
@@ -113,12 +133,23 @@ public class UserMgmtService {
 
         JSONObject usite;
         try {
+            // Bolo fixed NPE
             BeanManager beanManager = BeanManager.getInstance();
             OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-            JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
-            String userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
-            JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
-            String userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+            String userName = "";
+            String userB3Key = "";
+            try {
+                JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
+                userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
+                JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+                userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+            } catch (NullPointerException NPE) {
+                makeConfig();
+                JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
+                userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
+                JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+                userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+            }
             final JSONObject requestJSON = new JSONObject().
                     put(User.USER_NAME, userName).
                     put(UserExt.USER_B3_KEY, userB3Key);

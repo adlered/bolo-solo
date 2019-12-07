@@ -119,7 +119,7 @@ VALUES
 
 目前移植的皮肤：
 
-1. solo-nexmoe → bolo-solo-nexmoe
+1. [solo-nexmoe](https://github.com/Programming-With-Love/solo-nexmoe) → bolo-solo-nexmoe
 
 # 当前进度
 

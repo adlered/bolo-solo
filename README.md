@@ -117,6 +117,10 @@ VALUES
 * Bolo 使用 [solo-nexmoe](https://github.com/Programming-With-Love/solo-nexmoe) 作为默认皮肤。
 * Bolo 皮肤已自带，不需要额外下载。
 
+目前移植的皮肤：
+
+1. solo-nexmoe → bolo-solo-nexmoe
+
 # 当前进度
 
 - [x] 本地登录

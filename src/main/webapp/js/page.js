@@ -338,6 +338,8 @@ $.extend(Page.prototype, {
       var requestJSONObject = {
         'oId': tips.oId,
         'commentContent': vditor.getValue(),
+        'boloUser': $("#boloUser").val(),
+        'boloSite': $("#boloSite").val()
       }
 
       if (this.currentCommentId) {

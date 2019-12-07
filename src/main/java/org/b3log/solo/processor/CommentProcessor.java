@@ -42,6 +42,7 @@ import org.b3log.solo.util.Skins;
 import org.b3log.solo.util.Solos;
 import org.json.JSONException;
 import org.json.JSONObject;
+import pers.adlered.simplecurrentlimiter.main.SimpleCurrentLimiter;
 
 import java.io.StringWriter;
 import java.util.HashMap;
@@ -92,6 +93,8 @@ public class CommentProcessor {
      */
     @Inject
     private OptionQueryService optionQueryService;
+
+    SimpleCurrentLimiter simpleCurrentLimiter = new SimpleCurrentLimiter(60, 1);
 
     /**
      * Adds a comment to an article.
@@ -150,6 +153,15 @@ public class CommentProcessor {
         final JsonRenderer renderer = new JsonRenderer();
         context.setRenderer(renderer);
         renderer.setJSONObject(jsonObject);
+
+        String ip = context.remoteAddr();
+        if (!simpleCurrentLimiter.access(ip)) {
+            LOGGER.log(Level.ERROR, "Can not add comment on article");
+            jsonObject.put(Keys.STATUS_CODE, false);
+            jsonObject.put(Keys.MSG, langPropsService.get("addTimeoutLabel"));
+
+            return ;
+        }
 
         /*if (!jsonObject.optBoolean(Keys.STATUS_CODE)) {
             LOGGER.log(Level.WARN, "Can't add comment[msg={0}]", jsonObject.optString(Keys.MSG));

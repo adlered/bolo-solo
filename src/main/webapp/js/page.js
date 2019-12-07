@@ -90,7 +90,11 @@ $.extend(Page.prototype, {
       that.toggleEditor()
     })
     $('#soloEditorAdd').click(function () {
-      that.submitComment()
+      if ($("#boloUser").val() == "") {
+        alert("请先填写昵称！");
+      } else {
+        that.submitComment()
+      }
     })
   },
   toggleEditor: function (commentId, name) {

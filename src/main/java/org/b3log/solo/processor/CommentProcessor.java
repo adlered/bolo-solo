@@ -19,6 +19,7 @@ package org.b3log.solo.processor;
 
 import freemarker.template.Template;
 import org.b3log.latke.Keys;
+import org.b3log.latke.Latkes;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
@@ -130,13 +131,17 @@ public class CommentProcessor {
         final JSONObject requestJSONObject = context.requestJSON();
         requestJSONObject.put(Common.TYPE, Article.ARTICLE);
 
+        String site = requestJSONObject.getString("boloSite");
+        if (site.isEmpty()) {
+            site = Latkes.getServePath();
+        }
+        requestJSONObject.put(Comment.COMMENT_URL, site);
+
         String anonymousName = "不愿透露姓名的靓仔";
-        String commentName = "";
-        try {
-            commentName = requestJSONObject.getString("commentName");
-        } catch (JSONException JSONE) {
+        if (requestJSONObject.getString("boloUser").isEmpty()) {
             requestJSONObject.put("commentName", anonymousName);
-            commentName = anonymousName;
+        } else {
+            requestJSONObject.put("commentName", requestJSONObject.getString("boloUser"));
         }
 
         fillCommenter(requestJSONObject, context);
@@ -149,7 +154,7 @@ public class CommentProcessor {
         /*if (!jsonObject.optBoolean(Keys.STATUS_CODE)) {
             LOGGER.log(Level.WARN, "Can't add comment[msg={0}]", jsonObject.optString(Keys.MSG));
             return;
-        }*/
+        }
 
         //防止冒用用户名
         if (!commentName.equals(anonymousName)) {
@@ -159,7 +164,7 @@ public class CommentProcessor {
 
                 return;
             }
-        }
+        }*/
 
         try {
             final JSONObject addResult = commentMgmtService.addArticleComment(requestJSONObject);

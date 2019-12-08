@@ -142,7 +142,7 @@ public class OAuthProcessor {
                         context.sendRedirect(Latkes.getServePath() + "/start?status=error");
                     }
                 } catch (NullPointerException NPE) {
-                    context.sendRedirect("/start?status=error");
+                    context.sendRedirect(Latkes.getServePath() + "/start?status=error");
                 }
             }
         } catch (final Exception e) {

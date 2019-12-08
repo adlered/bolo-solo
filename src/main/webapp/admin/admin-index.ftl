@@ -166,7 +166,7 @@
         </div>
         <script src="${staticServePath}/js/lib/compress/admin-lib.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vditor@1.9.1/dist/index.min.js"></script>
-        <script src="${staticServePath}/js/common${miniPostfix}.js"></script>
+        <script src="${staticServePath}/js/common.js"></script>
         <#if "" == miniPostfix>
         <script src="${staticServePath}/js/admin/admin.js"></script>
         <script src="${staticServePath}/js/admin/editor.js"></script>
@@ -188,7 +188,7 @@
         <script src="${staticServePath}/js/admin/about.js"></script>
         <script src="${staticServePath}/js/admin/themeList.js"></script>
         <#else>
-        <script src="${staticServePath}/js/admin/admin.min.js?${staticResourceVersion}"></script>
+        <script src="${staticServePath}/js/admin/admin.js?${staticResourceVersion}"></script>
         </#if>
         <#include "admin-label.ftl">
         ${plugins}

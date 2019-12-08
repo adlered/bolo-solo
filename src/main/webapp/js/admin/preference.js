@@ -252,6 +252,7 @@ admin.preference = {
         }
 
         $('#loadMsg').text('')
+        window.location.reload()
       },
     })
   },

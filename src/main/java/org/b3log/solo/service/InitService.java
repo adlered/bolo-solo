@@ -686,15 +686,21 @@ public class InitService {
         // Bolo Options
         final JSONObject hacpaiUserOpt = new JSONObject();
         hacpaiUserOpt.put(Keys.OBJECT_ID, Option.ID_C_HACPAI_USER);
-        hacpaiUserOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_HAIPAI_USER);
+        hacpaiUserOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
         hacpaiUserOpt.put(Option.OPTION_VALUE, DefaultPreference.DEFAULT_HACPAI_USER);
         optionRepository.add(hacpaiUserOpt);
 
         final JSONObject b3logKeyOpt = new JSONObject();
         b3logKeyOpt.put(Keys.OBJECT_ID, Option.ID_C_B3LOG_KEY);
-        b3logKeyOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_B3LOG_KEY);
+        b3logKeyOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
         b3logKeyOpt.put(Option.OPTION_VALUE, DefaultPreference.DEFAULT_B3LOG_KEY);
         optionRepository.add(b3logKeyOpt);
+
+        final JSONObject maxArchiveOpt = new JSONObject();
+        maxArchiveOpt.put(Keys.OBJECT_ID, Option.ID_C_MAX_ARCHIVE);
+        maxArchiveOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+        maxArchiveOpt.put(Option.OPTION_VALUE, DefaultPreference.DEFAULT_MAX_ARCHIVE);
+        optionRepository.add(maxArchiveOpt);
 
         LOGGER.info("Initialized preference");
     }

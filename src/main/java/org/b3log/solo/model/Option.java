@@ -298,19 +298,16 @@ public final class Option {
     public static final String ID_C_HACPAI_USER = "hacpaiUser";
 
     /**
-     * Category - HacPai username.
-     */
-    public static final String CATEGORY_C_HAIPAI_USER = "preference";
-
-    /**
      * Key of B3log key.
      */
     public static final String ID_C_B3LOG_KEY = "b3logKey";
 
     /**
-     * Category - B3log key.
+     * Key of max archive showing on index page.
      */
-    public static final String CATEGORY_C_B3LOG_KEY = "preference";
+    public static final String ID_C_MAX_ARCHIVE = "maxArchive";
+
+
 
     /**
      * Private constructor.
@@ -500,6 +497,11 @@ public final class Option {
          * Default B3log key.
          */
         public static final String DEFAULT_B3LOG_KEY = "000000";
+
+        /**
+         * Default max archive.
+         */
+        public static final String DEFAULT_MAX_ARCHIVE = "-1";
 
         static {
             final JSONArray signs = new JSONArray();

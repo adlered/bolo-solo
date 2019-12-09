@@ -138,6 +138,8 @@
             <option value="vs">vs</option>
             <option value="xcode">xcode</option>
         </select>
+        <label for="maxArchive">${maxArchiveLabel}</label>
+        <input id="maxArchive" class="normalInput" type="text"/>
         <label for="mostUsedTagDisplayCount">${indexTagDisplayCnt1Label}</label>
         <input id="mostUsedTagDisplayCount" class="normalInput" type="text"/>
         <label for="recentCommentDisplayCount">${indexRecentCommentDisplayCnt1Label}</label>

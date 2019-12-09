@@ -73,6 +73,7 @@ admin.preference = {
         $('#randomArticlesDisplayCount').
           val(preference.randomArticlesDisplayCount)
         $('#customVars').val(preference.customVars)
+        $('#maxArchive').val(preference.maxArchive)
 
         'true' === preference.enableArticleUpdateHint ? $('#enableArticleUpdateHint').attr('checked', 'checked') : $('#enableArticleUpdateHint').removeAttr('checked')
         'true' === preference.allowVisitDraftViaPermalink ? $('#allowVisitDraftViaPermalink').attr('checked', 'checked') : $('allowVisitDraftViaPermalink').removeAttr('checked')
@@ -232,6 +233,7 @@ admin.preference = {
         'pullGitHub': $('#pullGitHub').prop('checked'),
         'commentable': $('#commentable').prop('checked'),
         'customVars': $('#customVars').val(),
+        'maxArchive': $('#maxArchive').val(),
       },
     }
 

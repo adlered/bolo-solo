@@ -66,12 +66,12 @@ public class PreferenceMgmtService {
     private void makeConfig() throws RepositoryException {
         JSONObject hacpaiUserOpt = new JSONObject();
         hacpaiUserOpt.put(Keys.OBJECT_ID, Option.ID_C_HACPAI_USER);
-        hacpaiUserOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_HAIPAI_USER);
+        hacpaiUserOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
         hacpaiUserOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_HACPAI_USER);
         optionRepository.add(hacpaiUserOpt);
         JSONObject b3logKeyOpt = new JSONObject();
         b3logKeyOpt.put(Keys.OBJECT_ID, Option.ID_C_B3LOG_KEY);
-        b3logKeyOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_B3LOG_KEY);
+        b3logKeyOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
         b3logKeyOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_B3LOG_KEY);
         optionRepository.add(b3logKeyOpt);
     }
@@ -247,7 +247,7 @@ public class PreferenceMgmtService {
             } catch (NullPointerException NPE) {
                 JSONObject hacpaiUserOpt = new JSONObject();
                 hacpaiUserOpt.put(Keys.OBJECT_ID, Option.ID_C_HACPAI_USER);
-                hacpaiUserOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_HAIPAI_USER);
+                hacpaiUserOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
                 hacpaiUserOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_HACPAI_USER);
                 optionRepository.add(hacpaiUserOpt);
                 hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);;
@@ -262,12 +262,27 @@ public class PreferenceMgmtService {
             } catch (NullPointerException NPE) {
                 JSONObject b3logKeyOpt = new JSONObject();
                 b3logKeyOpt.put(Keys.OBJECT_ID, Option.ID_C_B3LOG_KEY);
-                b3logKeyOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_B3LOG_KEY);
+                b3logKeyOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
                 b3logKeyOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_B3LOG_KEY);
                 optionRepository.add(b3logKeyOpt);
                 b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
                 b3logKeyOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_B3LOG_KEY));
                 optionRepository.update(Option.ID_C_B3LOG_KEY, b3logKeyOpt);
+            }
+
+            try {
+                final JSONObject maxArchiveOpt = optionRepository.get(Option.ID_C_MAX_ARCHIVE);
+                maxArchiveOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_MAX_ARCHIVE));
+                optionRepository.update(Option.ID_C_MAX_ARCHIVE, maxArchiveOpt);
+            } catch (NullPointerException NPE) {
+                JSONObject maxArchiveOpt = new JSONObject();
+                maxArchiveOpt.put(Keys.OBJECT_ID, Option.ID_C_MAX_ARCHIVE);
+                maxArchiveOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+                maxArchiveOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_MAX_ARCHIVE);
+                optionRepository.add(maxArchiveOpt);
+                maxArchiveOpt = optionRepository.get(Option.ID_C_MAX_ARCHIVE);
+                maxArchiveOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_MAX_ARCHIVE));
+                optionRepository.update(Option.ID_C_MAX_ARCHIVE, maxArchiveOpt);
             }
 
             transaction.commit();

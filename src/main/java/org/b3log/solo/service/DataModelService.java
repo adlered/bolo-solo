@@ -385,22 +385,44 @@ public class DataModelService {
                 return;
             }
 
-            archiveDates2.add(archiveDates.get(0));
+            int maxArchiveResult = -1;
 
-            if (1 < archiveDates.size()) { // XXX: Workaround, remove the duplicated archive dates
-                for (int i = 1; i < archiveDates.size(); i++) {
-                    final JSONObject archiveDate = archiveDates.get(i);
+            try {
+                BeanManager beanManager = BeanManager.getInstance();
+                OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+                JSONObject maxArchiveOpt = optionRepository.get(Option.ID_C_MAX_ARCHIVE);
+                String maxArchive = (String) maxArchiveOpt.get(Option.OPTION_VALUE);
+                maxArchiveResult = Integer.parseInt(maxArchive);
+            } catch (NullPointerException | NumberFormatException NPE) {
+            }
 
-                    final long time = archiveDate.getLong(ArchiveDate.ARCHIVE_TIME);
-                    final String dateString = DateFormatUtils.format(time, "yyyy/MM");
+            // 合法性检查
+            if (maxArchiveResult < -1 || maxArchiveResult > archiveDates.size()) {
+                maxArchiveResult = -1;
+            }
 
-                    final JSONObject last = archiveDates2.get(archiveDates2.size() - 1);
-                    final String lastDateString = DateFormatUtils.format(last.getLong(ArchiveDate.ARCHIVE_TIME), "yyyy/MM");
+            if (maxArchiveResult == -1) {
+                maxArchiveResult = archiveDates.size();
+            }
 
-                    if (!dateString.equals(lastDateString)) {
-                        archiveDates2.add(archiveDate);
-                    } else {
-                        LOGGER.log(Level.DEBUG, "Found a duplicated archive date [{0}]", dateString);
+            if (maxArchiveResult != 0) {
+                archiveDates2.add(archiveDates.get(0));
+
+                if (1 < archiveDates.size()) { // XXX: Workaround, remove the duplicated archive dates
+                    for (int i = 1; i < maxArchiveResult; i++) {
+                        final JSONObject archiveDate = archiveDates.get(i);
+
+                        final long time = archiveDate.getLong(ArchiveDate.ARCHIVE_TIME);
+                        final String dateString = DateFormatUtils.format(time, "yyyy/MM");
+
+                        final JSONObject last = archiveDates2.get(archiveDates2.size() - 1);
+                        final String lastDateString = DateFormatUtils.format(last.getLong(ArchiveDate.ARCHIVE_TIME), "yyyy/MM");
+
+                        if (!dateString.equals(lastDateString)) {
+                            archiveDates2.add(archiveDate);
+                        } else {
+                            LOGGER.log(Level.DEBUG, "Found a duplicated archive date [{0}]", dateString);
+                        }
                     }
                 }
             }

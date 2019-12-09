@@ -40,7 +40,7 @@ admin.articleList = {
       }, {
         text: Label.categoryLabel,
         index: 'category',
-        width: 80,
+        width: 150,
         style: 'padding-left: 12px;',
       }, {
         text: Label.authorLabel,

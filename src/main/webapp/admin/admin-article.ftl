@@ -95,6 +95,7 @@
         <div class="fn__clear"></div>
     </div>
     <div class="fn__right">
+        <button class="marginRight12" class="marginRight12" id="cancelDo">${cancelLabel}</button>
         <button id="unSubmitArticle" class="fn__none marginRight12" onclick="admin.article.unPublish();">${unPublishLabel}</button>
         <button class="marginRight12" id="saveArticle">${saveLabel}${draftListLabel}</button>
         <button id="submitArticle">${publishLabel}</button>

@@ -417,6 +417,10 @@ admin.article = {
         admin.article.add(1)
       }
     })
+    
+    $('#cancelDo').click(function () {
+      history.go(-1);
+    })
 
     // editor
     admin.editors.articleEditor = new SoloEditor({

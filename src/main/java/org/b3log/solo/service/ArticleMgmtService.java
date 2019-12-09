@@ -359,19 +359,9 @@ public class ArticleMgmtService {
             final JSONObject categoryTag = new JSONObject();
             categoryTag.put(Category.CATEGORY + "_" + Keys.OBJECT_ID, category);
             categoryTag.put(Tag.TAG + "_" + Keys.OBJECT_ID, article.optString(Keys.OBJECT_ID));
-            JSONObject cateS = null;
+
             try {
-                JSONObject cate = categoryTagRepository.getByTagId(article.optString(Keys.OBJECT_ID), 1, Integer.MAX_VALUE);
-                int size = cate.optJSONArray("rslts").length();
-                // 细致删除
-                for (int i = 0; i < size; i++) {
-                    try {
-                        cateS = (JSONObject) cate.optJSONArray("rslts").get(i);
-                        categoryTagRepository.removeByCategoryId(cateS.optString("category_oId"));
-                    } catch (Exception e) {
-                        continue;
-                    }
-                }
+                categoryTagRepository.removeByTagId(article.optString(Keys.OBJECT_ID));
             } catch (JSONException e) {}
             categoryMgmtService.addCategoryTag(categoryTag);
             article.remove(CATEGORY_REF);
@@ -765,7 +755,8 @@ public class ArticleMgmtService {
             final String tagId = tagArticleRelation.optString(Tag.TAG + "_" + Keys.OBJECT_ID);
             final int articleCount = tagArticleRepository.getArticleCount(tagId);
             if (1 > articleCount) {
-                categoryTagRepository.removeByTagId(tagId);
+                // Bolo
+                // categoryTagRepository.removeByTagId(tagId);
                 tagRepository.remove(tagId);
             }
         }

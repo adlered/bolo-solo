@@ -693,13 +693,30 @@ public class ArticleQueryService {
                 article.put(Article.ARTICLE_CREATE_TIME, article.getLong(Article.ARTICLE_CREATED));
                 article.put(Article.ARTICLE_T_CREATE_DATE, new Date(article.getLong(Article.ARTICLE_CREATED)));
                 article.put(Article.ARTICLE_T_UPDATE_DATE, new Date(article.optLong(Article.ARTICLE_UPDATED)));
-                ret.add(article);
+                if (compareArticles(article)) {
+                    ret.add(article);
+                }
             }
 
             return ret;
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Gets articles by archive date [id=" + archiveDateId + "] failed", e);
             throw new ServiceException(e);
+        }
+    }
+
+    private static Map<String, Object> pairs = new HashMap<>();
+
+    public boolean compareArticles(JSONObject article) {
+        String archiveDate_oId = article.optString("archiveDate_oId");
+        String article_oId = article.optString("article_oId");
+        String pair = archiveDate_oId + "%" + article_oId;
+        if (!pairs.containsKey(pair)) {
+            pairs.put(pair, null);
+            return true;
+        } else {
+            // 已经包含，不允许再录入
+            return false;
         }
     }
 

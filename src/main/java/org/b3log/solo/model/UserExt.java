@@ -74,7 +74,7 @@ public final class UserExt {
             return true;
         }
 
-        char c;
+        /* char c;
         for (int i = 0; i < length; i++) {
             c = name.charAt(i);
             if (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || ('0' <= c && c <= '9') || '-' == c) {
@@ -82,9 +82,10 @@ public final class UserExt {
             }
 
             return true;
-        }
+        } */
 
-        return StringUtils.containsIgnoreCase(name, "admin");
+        // return StringUtils.containsIgnoreCase(name, "admin");
+        return false;
     }
 
     /**

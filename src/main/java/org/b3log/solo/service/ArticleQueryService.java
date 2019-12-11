@@ -593,7 +593,7 @@ public class ArticleQueryService {
                     String categoryOId = cateS.optString("category_oId");
                     cateS = categoryQueryService.getCategory(categoryOId);
                     article.put("articleCategory", cateS.opt("categoryTitle"));
-                } catch (JSONException JSONE) {}
+                } catch (JSONException | NullPointerException e) {}
                 // Remove unused properties
                 for (int j = 0; j < excludes.length(); j++) {
                     article.remove(excludes.optString(j));

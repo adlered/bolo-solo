@@ -39,7 +39,7 @@
                         document.getElementById('status').innerHTML = '<br><font color="red" s><b>🔐 用户名或密码错误</b></font><br>';
                     }
                     if (status === '-1') {
-                        document.getElementById('status').innerHTML = '<br><font color="green"><b>💿 欢迎使用bolo-solo<br>输入你想设定的用户名和密码，点击管理登录即可注册！</b></font><br>';
+                        document.getElementById('status').innerHTML = '<br><font color="green"><b>💿 欢迎使用 bolo-solo<br>输入你想设定的用户名和密码，点击管理登录即可注册！</b></font><br>';
                     }
                 </script>
             </span>

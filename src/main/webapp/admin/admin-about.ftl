@@ -24,7 +24,7 @@
     <div class="module-body padding12 fn__flex">
         <div class="about-logo">
             <a href="https://b3log.org" target="_blank">
-                <img width="128" src="${staticServePath}/images/logo.png" alt="Solo" title="Solo" />
+                <img width="128" src="https://pic.stackoverflow.wiki/uploadImages/114/244/224/38/2019/11/30/01/04/1cb648c8-f9f8-430f-8616-43f7b0e2333a.png" alt="Solo" title="Solo" />
             </a>
         </div>
         <div class="about__panel">

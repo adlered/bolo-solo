@@ -780,6 +780,9 @@ public class ArticleProcessor {
                 article.put("articleCategory", "");
             }
 
+            // Bolo 告诉前端用户是否已经登录
+            article.put("logged", String.valueOf(Solos.isLoggedIn(context)));
+
             eventData.put(Article.ARTICLE, article);
             eventManager.fireEventSynchronously(new Event<>(EventTypes.BEFORE_RENDER_ARTICLE, eventData));
         } catch (final Exception e) {

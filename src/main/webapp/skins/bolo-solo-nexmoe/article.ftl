@@ -75,6 +75,9 @@
                         ${article.articleContent}
                     </div>
                 </article>
+                <script>
+                    var loggedIn = ${article.logged};
+                </script>
                 <#if "" != article.articleSign.signHTML?trim>
                     <div class="nexmoe-post-copyright">
                         <i class="mdui-list-item-icon iconfont solo-about2"></i>

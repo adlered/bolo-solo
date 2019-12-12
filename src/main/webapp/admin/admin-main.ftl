@@ -17,6 +17,20 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 -->
-<div id="mainPanel1"></div>
+<div id="notice">
+    <div class="module-panel">
+        <div class="module-header">
+            <h2><a href="https://github.com/AdlerED/bolo-solo" target="_blank">bolo-solo 公告</a></h2>
+            公告栏仅用于显示 bolo-solo 的紧急动态，不会用于加载恶意脚本、恶意广告等操作。
+        </div>
+        <div class="module-body padding12">
+            <div id="noticeList" style="background: none;">
+                <iframe src="https://pic.stackoverflow.wiki/notice.html" height="100%" width="100%" frameborder="no" border="0" scrolling="auto"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="mainPanel1">
+</div>
 <div id="mainPanel2"></div>
 ${plugins}

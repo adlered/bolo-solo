@@ -51,10 +51,10 @@
 
 <div class="module-panel">
     <div class="module-header">
-        <h2>❤️ 欢迎成为我们的赞助者</h2>
+        <h2>✨ 赞助 <b>Solo 博客原作者</b></h2>
     </div>
     <div class="module-body padding12">
-        <h3>Bolo 项目基于 Solo 修改而成，如果你觉得 Bolo 好用，一定要先感谢 Solo 的作者。通过下方指引可以捐助 Solo 的作者：</h3>
+        Bolo 项目基于 Solo 修改而成，如果你觉得 Bolo 好用，一定要先感谢 Solo 的作者。通过下方指引可以捐助 Solo 的作者：<br><br>
         <a href="https://b3log.org">B3log 开源组织</a>旗下包含
         <a href="https://sym.b3log.org/">Symphony</a>、
         <a href="https://solo.b3log.org/">Solo</a>、

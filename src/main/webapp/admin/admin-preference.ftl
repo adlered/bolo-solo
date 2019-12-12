@@ -85,7 +85,7 @@
         <label for="localeString">${localeString1Label}</label>
         <select id="localeString">
             <option value="zh_CN">简体中文</option>
-            <option value="en_US">Englisth(US)</option>
+            <option value="en_US">English(US)</option>
         </select>
         <label for="timeZoneId">${timeZoneId1Label}</label>
         <select id="timeZoneId">

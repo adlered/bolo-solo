@@ -48,7 +48,7 @@ admin.commentList = {
       }, {
         text: Label.dateLabel,
         index: 'date',
-        width: 60,
+        width: 154,
         style: 'padding-left: 12px;',
       }])
     this.tablePagination.initPagination()

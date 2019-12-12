@@ -45,7 +45,7 @@
             </span>
             <button class="startAction" style="margin-top: 16px">管理登录</button>
         </form>
-        <a class="github__link" href="javascript:$('ul').slideToggle()">查看 Bolo - Solo 修改版使用说明</a>
+        <a class="github__link" href="javascript:$('ul').slideToggle()">查看 bolo-solo 修改版使用说明</a>
         <div class="github__text">
             <ul>
                 <li>Bolo 取消了普通用户的登录功能</li>

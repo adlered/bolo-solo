@@ -161,11 +161,11 @@
             </div>
             <div class="fn__clear"></div>
             <div class="footer">
-                Powered by <a href="https://b3log.org" target="_blank">B3log 开源</a> • <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 bolo-solo</a> ${version}
+                Powered by <a href="https://b3log.org" target="_blank">B3log 开源</a> • <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 bolo-solo</a> <span id="version">${version}</span>
             </div>
         </div>
         <script src="${staticServePath}/js/lib/compress/admin-lib.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vditor@1.9.1/dist/index.min.js"></script>
+        <script src="${staticServePath}/js/bolo/vditor/1_9_1/index.min.js"></script>
         <script src="${staticServePath}/js/common.js"></script>
         <#if "" == miniPostfix>
         <script src="${staticServePath}/js/admin/admin.js"></script>

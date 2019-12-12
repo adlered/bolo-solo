@@ -193,6 +193,7 @@ public class AdminConsole {
         dataModel.putAll(langs);
         Keys.fillRuntime(dataModel);
         dataModel.put(Option.ID_C_LOCALE_STRING, locale.toString());
+        dataModel.put(Option.ID_C_VERSION, SoloServletListener.VERSION);
 
         try {
             // Bolo categories

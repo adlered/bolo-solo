@@ -29,7 +29,8 @@
         </div>
         <div class="about__panel">
             <div class="about-margin fn__left">
-                你正在使用 bolo - solo 修改版
+                你正在使用 bolo-solo 修改版<br>
+                对应 Solo 版本：${version}
             </div>
 
             <iframe src="https://ghbtns.com/github-btn.html?user=AdlerED&repo=bolo-solo&type=star&count=true&size=large"

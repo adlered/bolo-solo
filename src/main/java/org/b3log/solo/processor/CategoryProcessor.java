@@ -191,17 +191,16 @@ public class CategoryProcessor {
             final List<JSONObject> articles = (List<JSONObject>) result.opt(Keys.RESULTS);
 
             final int pageCount = result.optJSONObject(Pagination.PAGINATION).optInt(Pagination.PAGINATION_PAGE_COUNT);
-            if (0 == pageCount) {
-                context.sendError(HttpServletResponse.SC_NOT_FOUND);
-
-                return;
-            }
+            // if (0 == pageCount) {
+                // context.sendError(HttpServletResponse.SC_NOT_FOUND);
+                // return;
+            // }
 
             Skins.fillLangs(preference.optString(Option.ID_C_LOCALE_STRING), (String) context.attr(Keys.TEMAPLTE_DIR_NAME), dataModel);
             dataModelService.setArticlesExProperties(context, articles, preference);
 
             final List<Integer> pageNums = (List) result.optJSONObject(Pagination.PAGINATION).opt(Pagination.PAGINATION_PAGE_NUMS);
-            fillPagination(dataModel, pageCount, currentPageNum, articles, pageNums);
+            fillPagination(dataModel, pageCount, currentPageNum, articles, pageNums, categoryURI);
             dataModel.put(Common.PATH, "/category/" + URLs.encode(categoryURI));
 
             dataModelService.fillCommon(context, dataModel, preference);
@@ -228,7 +227,8 @@ public class CategoryProcessor {
     private void fillPagination(final Map<String, Object> dataModel,
                                 final int pageCount, final int currentPageNum,
                                 final List<JSONObject> articles,
-                                final List<Integer> pageNums) {
+                                final List<Integer> pageNums,
+                                final String categoryURI) {
         final String previousPageNum = Integer.toString(currentPageNum > 1 ? currentPageNum - 1 : 0);
 
         dataModel.put(Pagination.PAGINATION_PREVIOUS_PAGE_NUM, "0".equals(previousPageNum) ? "" : previousPageNum);
@@ -239,8 +239,12 @@ public class CategoryProcessor {
         }
         dataModel.put(Article.ARTICLES, articles);
         dataModel.put(Pagination.PAGINATION_CURRENT_PAGE_NUM, currentPageNum);
-        dataModel.put(Pagination.PAGINATION_FIRST_PAGE_NUM, pageNums.get(0));
-        dataModel.put(Pagination.PAGINATION_LAST_PAGE_NUM, pageNums.get(pageNums.size() - 1));
+        try {
+            dataModel.put(Pagination.PAGINATION_FIRST_PAGE_NUM, pageNums.get(0));
+            dataModel.put(Pagination.PAGINATION_LAST_PAGE_NUM, pageNums.get(pageNums.size() - 1));
+        } catch (IndexOutOfBoundsException IOOBE) {
+            LOGGER.log(Level.WARN, "No category of \"" + categoryURI + "\" has found. Showing blank.");
+        }
         dataModel.put(Pagination.PAGINATION_PAGE_COUNT, pageCount);
         dataModel.put(Pagination.PAGINATION_PAGE_NUMS, pageNums);
     }

@@ -49,6 +49,7 @@
 如果你也使用 bolo-solo 驱动你的博客，欢迎向本 README 提出 Pull Request ~
 
 [贼拉正经的技术博客](https://www.stackoverflow.wiki/blog)
+
 [🐭鼠鼠在睡觉](https://sszsj.top/)
 
 # 声明

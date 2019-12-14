@@ -127,7 +127,7 @@ VALUES
 
 ### 使用 Tomcat 安装 bolo-solo（推荐）
 
-### 全新安装
+#### 全新安装
 
 [点我！查看安装教程并下载最新版菠萝博客](https://github.com/AdlerED/bolo-solo/releases)
 

@@ -204,7 +204,7 @@ admin.categoryList = {
                     admin.categoryList.getList(admin.categoryList.pageInfo.pageCount);
 
                     $("#loadMsg").text("");
-                    admin.inited();
+                    location.reload();
                 }
             });
         }
@@ -272,7 +272,7 @@ admin.categoryList = {
                     admin.categoryList.getList(pageNum);
 
                     $("#loadMsg").text("");
-                    admin.inited();
+                    location.reload();
                 }
             });
         }
@@ -318,7 +318,7 @@ admin.categoryList = {
                 admin.categoryList.getList(admin.categoryList.pageInfo.currentPage);
 
                 $("#loadMsg").text("");
-                admin.inited();
+                location.reload();
             }
         });
     }

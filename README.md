@@ -129,6 +129,15 @@ VALUES
 
 [点我！查看安装教程并下载最新版菠萝博客](https://github.com/AdlerED/bolo-solo/releases)
 
+#### Tomcat 轻松更新 bolo-solo
+
+1. 进入 bolo-solo 所在目录，备份 `WEB-INF/classes/local.properties` 和 `WEB-INF/classes/latke.properties`
+2. 清空目录
+3. 从上方安装地址下载最新版 bolo-solo
+4. 解压至目录
+5. 将备份的两个文件替换回去
+6. 完成！
+
 ### 从 Docker 使用 bolo-solo
 
 先克隆 bolo-solo 的源代码：

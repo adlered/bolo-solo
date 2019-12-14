@@ -115,6 +115,41 @@ VALUES
 5. 大功告成~
 
 > 如果不会操作，欢迎联系我~（请看我名片中的联系方式）
+>
+### 从 Docker 使用 bolo-solo
+
+先克隆 bolo-solo 的源代码：
+
+```shell script
+git clone https://github.com/AdlerED/bolo-solo
+```
+
+再进入到 bolo-solo 项目的根目录，构建 Docker 镜像：
+
+```shell script
+docker build -t "bolo" .
+```
+
+最后，每次输入下面的命令启动 bolo-solo：
+
+```shell script
+docker run -it -d -p8080:8080 --env RUNTIME_DB="MYSQL" \
+--env JDBC_USERNAME="root" \
+--env JDBC_PASSWORD="123456" \
+--env JDBC_DRIVER="com.mysql.cj.jdbc.Driver" \
+--env JDBC_URL="jdbc:mysql://192.168.2.253:3306/solo?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC" \
+--rm \
+bolo --listen_port=8080 --server_scheme=http --server_host=192.168.2.253
+```
+
+将 `JDBC_USERNAME` 修改为你的 MySQL数据库用户名  
+`JDBC_PASSWORD` 修改为数据库密码  
+修改 `JDBC_URL` 下的 `192.168.2.253` 为你服务器的域名（如没有域名，填写IP地址）  
+`server_host` 也需要改为你的域名（或IP地址）  
+`-p8080:8080` 和 `--listen_port=8080`为端口参数，把三个8080改为你想设置的端口即可。  
+记得要先在 MySQL 数据库中创建空的 `solo` 数据库哦~  
+
+如果启动后无法访问，可以去掉命令中的 `-d` 参数，使 bolo-solo 在前台运行，这样你就可以看到日志了！
 
 # 皮肤
 
@@ -129,37 +164,20 @@ VALUES
 
 1. [solo-nexmoe](https://github.com/Programming-With-Love/solo-nexmoe) → bolo-solo-nexmoe
 
-# 当前进度
+# 当前实现的特性
 
 - [x] 本地登录
 - [x] 提供持续的WAR包支持，支持Tomcat部署
 - [x] 和黑客派社区同步文章、评论、个人联系方式、使用社区图床
 - [x] 本地评论功能（无需登录）
-- [x] 分类功能优化（解除分类与标签的关联）
+- [x] 分类功能优化（解除分类与标签的关联，超级好用）
 - [x] 评论频率限制（60秒/次）
 - [x] 自定义主页存档显示数量
+- [x] 本地化JS，防止CDN造成的加载失败
+- [x] 自定义主页显示存档数量
+- [x] 皮肤显示文章日期跟随“启用文章更新提示”选项
+- [x] 本地自定义社交按钮
+- [ ] 代码显示行号功能
 - [ ] 自定义评论频率限制
 - [ ] 评论审核功能
 - [ ] 关闭搜索功能（1.国内备案管局不允许个人建站带有搜索功能 2.节约服务器资源）
-
-# 未公开版目前实现功能截图（请点击对应链接预览）
-
-### 本地用户登录
-
-[https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/6c0e2f0e-1baf-4fac-8a7a-1052be272ead.png](https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/6c0e2f0e-1baf-4fac-8a7a-1052be272ead.png)
-
-### 默认皮肤 bolo-solo-nexmoe 主页
-
-[https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/4acc2d62-e31f-4ab0-9b61-22965dd26804.png](https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/4acc2d62-e31f-4ab0-9b61-22965dd26804.png)
-
-### 菠萝博客已部署成功
-
-[https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/9f109db0-92f8-48e2-aa83-867b69345091.png](https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/9f109db0-92f8-48e2-aa83-867b69345091.png)
-
-### 设置个人密码、头像
-
-[https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/34067167-49a9-4a79-a93f-8e965888ba04.png](https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/34067167-49a9-4a79-a93f-8e965888ba04.png)
-
-### B3log Key相关设置
-
-[https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/d353a30e-4b06-4542-b3be-8b635dc76e69.png](https://pic.stackoverflow.wiki/uploadImages/123/113/178/101/2019/12/04/00/19/d353a30e-4b06-4542-b3be-8b635dc76e69.png)

@@ -28,17 +28,13 @@
 # 公告
 
 ### :tada: 菠萝版本信息
-菠萝当前公测版本：v1.0
+菠萝当前版本：v1.0 稳定版  
 对应 Solo 原版版本号：v3.6.7（即支持 Solo v3.6.7即以下的用户轻松迁移/迁回）
-
-### 安装教程 && 下载地址：
-
-[点我！查看安装教程并下载最新版菠萝博客](https://github.com/AdlerED/bolo-solo/releases)
 
 ### 当前版本注意事项：
 
-* 公测版仅测试 Tomcat 版本使用正常，其它方式（Docker、Jar等等），请自行测试，也欢迎提出建议~
-* 稳定版将在功能测试稳定后发布！建议追求稳定的用户等待稳定版发布后安装使用！
+* v1.0 稳定版发布啦！bolo-solo 稳定版支持 Docker、Tomcat 部署，多种部署方法请看下方的《bolo-solo 多种安装方法》指引 👇
+* 稳定版可持续使用，欢迎你的体验、反馈、PR！
 
 # bolo-solo 预览图
 
@@ -48,7 +44,7 @@
 
 如果你也使用 bolo-solo 驱动你的博客，欢迎向本 README 提出 Pull Request ~
 
-* [贼拉正经的技术博客](https://www.stackoverflow.wiki/blog)
+* [✨贼拉正经的技术博客](https://www.stackoverflow.wiki/blog)
 * [🐭鼠鼠在睡觉](https://sszsj.top/)
 
 # 声明
@@ -126,7 +122,13 @@ VALUES
 5. 大功告成~
 
 > 如果不会操作，欢迎联系我~（请看我名片中的联系方式）
->
+
+# bolo-solo 多种安装方法
+
+### 使用 Tomcat 安装 bolo-solo（推荐）
+
+[点我！查看安装教程并下载最新版菠萝博客](https://github.com/AdlerED/bolo-solo/releases)
+
 ### 从 Docker 使用 bolo-solo
 
 先克隆 bolo-solo 的源代码：

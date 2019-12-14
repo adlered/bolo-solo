@@ -192,7 +192,7 @@
         </#if>
         <#include "admin-label.ftl">
         ${plugins}
-        <script >
+        <script>
             admin.inited();
         </script>
     </body>

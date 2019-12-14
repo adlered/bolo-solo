@@ -195,7 +195,7 @@ admin.article = {
         complete: function (jqXHR, textStatus) {
           that._removeDisabled()
           $('#loadMsg').text('')
-          location.reload();
+          admin.inited();
         },
       })
     }
@@ -270,7 +270,7 @@ admin.article = {
         complete: function (jqXHR, textStatus) {
           that._removeDisabled()
           $('#loadMsg').text('')
-          location.reload();
+          admin.inited();
         },
       })
     }

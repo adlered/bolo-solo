@@ -122,7 +122,8 @@ public final class Markdowns {
         whitelist.addAttributes("pre", "class").
                 addAttributes("div", "class").
                 addAttributes("span", "class").
-                addAttributes("code", "class");
+                addAttributes("code", "class").
+                addAttributes("img", "class");
         return Jsoup.clean(html, whitelist);
     }
 

@@ -27,7 +27,7 @@
 
 [轻松迁移：迁移至 Bolo / 迁回至 Solo](#轻松迁移迁移至-bolo--迁回至-solo)  
 [bolo-solo 多种安装方法](#bolo-solo-多种安装方法)  
-[轻松更新 bolo-solo](#tomcat-%E8%BD%BB%E6%9D%BE%E6%9B%B4%E6%96%B0-bolo-solo)
+[轻松更新 bolo-solo](#tomcat-%E8%BD%BB%E6%9D%BE%E6%9B%B4%E6%96%B0-bolo-solo)  
 [皮肤](#皮肤)  
 [当前实现的特性](#当前实现的特性)  
 

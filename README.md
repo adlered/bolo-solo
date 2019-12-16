@@ -27,6 +27,7 @@
 
 [轻松迁移：迁移至 Bolo / 迁回至 Solo](#轻松迁移迁移至-bolo--迁回至-solo)  
 [bolo-solo 多种安装方法](#bolo-solo-多种安装方法)  
+[轻松更新 bolo-solo](#tomcat-%E8%BD%BB%E6%9D%BE%E6%9B%B4%E6%96%B0-bolo-solo)
 [皮肤](#皮肤)  
 [当前实现的特性](#当前实现的特性)  
 
@@ -191,7 +192,9 @@ bolo --listen_port=8080 --server_scheme=http --server_host=192.168.2.253
 
 目前移植的皮肤：
 
-1. [solo-nexmoe](https://github.com/Programming-With-Love/solo-nexmoe) → bolo-solo-nexmoe
+1. solo-nexmoe → [bolo-solo-nexmoe](https://github.com/AdlerED/bolo-solo/tree/master/src/main/webapp/skins/bolo-solo-nexmoe)
+
+正在加班加点努力移植... 推荐你先使用当前版本的 bolo-solo，等待你需要的皮肤更新后，直接提取 skins 文件中的皮肤，放到你的 skins 文件夹下即可~
 
 # 当前实现的特性
 

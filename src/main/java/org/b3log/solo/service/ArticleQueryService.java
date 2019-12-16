@@ -703,15 +703,20 @@ public class ArticleQueryService {
 
             return ret;
         } catch (final Exception e) {
+            pairs = new HashMap<>();
+
             LOGGER.log(Level.ERROR, "Gets articles by archive date [id=" + archiveDateId + "] failed", e);
             throw new ServiceException(e);
         }
     }
 
     public boolean compareArticles(JSONObject article) {
-        String archiveDate_oId = article.optString("archiveDate_oId");
-        String article_oId = article.optString("article_oId");
-        String pair = archiveDate_oId + "%" + article_oId;
+        String pair = article.optString("articlePermalink");
+        // pair 为空，显示所有
+        if (pair.isEmpty()) {
+            return true;
+        }
+        // 校验 pair
         if (!pairs.containsKey(pair)) {
             pairs.put(pair, null);
             return true;

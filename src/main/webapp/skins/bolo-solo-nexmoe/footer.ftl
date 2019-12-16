@@ -34,6 +34,4 @@
 <script type="text/javascript" src="${staticServePath}/skins/${skinDirName}/js/common.js?${staticResourceVersion}"
         charset="utf-8"></script>
 <#include "../../common-template/label.ftl">
-<script src="${staticServePath}/js/bolo/jquery.cookie.min.js"></script>
-
 ${plugins}

@@ -181,6 +181,13 @@ bolo --listen_port=8080 --server_scheme=http --server_host=192.168.2.253
 
 如果启动后无法访问，可以去掉命令中的 `-d` 参数，使 bolo-solo 在前台运行，这样你就可以看到日志了！
 
+### 使用 JAR 运行（不推荐）
+
+下载最新的 [bolo-solo](https://github.com/AdlerED/bolo-solo/releases) 压缩包解压，进入解压目录执行：
+
+Windows: `java -cp "WEB-INF/lib/*;WEB-INF/classes" org.b3log.solo.Starter`
+Unix-like: `java -cp "WEB-INF/lib/*:WEB-INF/classes" org.b3log.solo.Starter`
+
 # 皮肤
 
 由于特性原因，Bolo **不支持原版皮肤**。但我们会在官方皮肤的基础上修改皮肤，并**附带到** Bolo 当中。

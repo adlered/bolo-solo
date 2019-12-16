@@ -181,7 +181,7 @@ bolo --listen_port=8080 --server_scheme=http --server_host=192.168.2.253
 
 如果启动后无法访问，可以去掉命令中的 `-d` 参数，使 bolo-solo 在前台运行，这样你就可以看到日志了！
 
-### 使用 JAR 运行（不推荐）
+### 使用 Java 命令运行（不推荐）
 
 下载最新的 [bolo-solo](https://github.com/AdlerED/bolo-solo/releases) 压缩包解压，进入解压目录执行：
 

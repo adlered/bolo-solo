@@ -190,7 +190,7 @@ public class CommentMgmtService {
 
             final JSONObject commenter = userRepository.getByUserName(commentName);
             if (null == commenter) {
-                LOGGER.log(Level.WARN, "Not found user [" + commentName + "]");
+                LOGGER.log(Level.INFO, "Newing user [" + commentName + "] ...");
                 ret.put(Keys.MSG, langPropsService.get("queryUserFailedLabel"));
 
                 return ret;

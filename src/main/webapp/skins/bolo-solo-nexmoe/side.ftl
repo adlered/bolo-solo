@@ -149,22 +149,20 @@
                 <div class="nexmoe-widget">
                     <ul class="category-list">
                         <#list archiveDates as archiveDate>
-                            <#if archiveDate_index < 10>
-                                <li class="category-list-item">
-                                    <#if "en" == localeString?substring(0, 2)>
-                                        <a class="category-list-link mdui-ripple"
-                                           href="${servePath}/archives/${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}"
-                                           title="${archiveDate.archiveDateYear} ${yearLabel} ${archiveDate.archiveDateMonth} ${monthLabel} ${archiveLabel} - ${blogTitle}">
-                                            ${archiveDate.monthName} ${archiveDate.archiveDateYear}</a><span
-                                            class="category-list-count">${archiveDate.archiveDatePublishedArticleCount}</span>
-                                    <#else>
-                                        <a href="${servePath}/archives/${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}"
-                                           title="${archiveDate.archiveDateYear} ${yearLabel} ${archiveDate.archiveDateMonth} ${monthLabel} ${archiveLabel} - ${blogTitle}">
-                                            ${archiveDate.archiveDateYear} ${yearLabel} ${archiveDate.archiveDateMonth} ${monthLabel}</a>
-                                        <span class="category-list-count">${archiveDate.archiveDatePublishedArticleCount}</span>
-                                    </#if>
-                                </li>
-                            </#if>
+                            <li class="category-list-item">
+                                <#if "en" == localeString?substring(0, 2)>
+                                    <a class="category-list-link mdui-ripple"
+                                       href="${servePath}/archives/${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}"
+                                       title="${archiveDate.archiveDateYear} ${yearLabel} ${archiveDate.archiveDateMonth} ${monthLabel} ${archiveLabel} - ${blogTitle}">
+                                        ${archiveDate.monthName} ${archiveDate.archiveDateYear}</a><span
+                                        class="category-list-count">${archiveDate.archiveDatePublishedArticleCount}</span>
+                                <#else>
+                                    <a href="${servePath}/archives/${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}"
+                                       title="${archiveDate.archiveDateYear} ${yearLabel} ${archiveDate.archiveDateMonth} ${monthLabel} ${archiveLabel} - ${blogTitle}">
+                                        ${archiveDate.archiveDateYear} ${yearLabel} ${archiveDate.archiveDateMonth} ${monthLabel}</a>
+                                    <span class="category-list-count">${archiveDate.archiveDatePublishedArticleCount}</span>
+                                </#if>
+                            </li>
                         </#list>
                     </ul>
                 </div>

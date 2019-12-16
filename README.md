@@ -185,7 +185,7 @@ bolo --listen_port=8080 --server_scheme=http --server_host=192.168.2.253
 
 下载最新的 [bolo-solo](https://github.com/AdlerED/bolo-solo/releases) 压缩包解压，进入解压目录执行：
 
-Windows: `java -cp "WEB-INF/lib/*;WEB-INF/classes" org.b3log.solo.Starter`
+Windows: `java -cp "WEB-INF/lib/*;WEB-INF/classes" org.b3log.solo.Starter`  
 Unix-like: `java -cp "WEB-INF/lib/*:WEB-INF/classes" org.b3log.solo.Starter`
 
 # 皮肤

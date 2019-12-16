@@ -108,7 +108,7 @@ $.extend(Page.prototype, {
                     .then((value) => {
                         email = `${value}`;
                         if ("null" != email) {
-                            $.cookie('my_email', email, { expires: 7, path: '/' });
+                            $.cookie('my_email', email, {expires: 7, path: '/'});
                             that.submitComment();
                         }
                     });
@@ -362,9 +362,8 @@ $.extend(Page.prototype, {
                 'commentContent': vditor.getValue(),
                 'boloUser': $("#boloUser").val(),
                 'boloSite': $("#boloSite").val(),
-                'email': $.cookie("my_email"),
+                'email': $.cookie("my_email")
             };
-            alert(requestJSONObject);
 
             if (this.currentCommentId) {
                 requestJSONObject.commentOriginalCommentId = this.currentCommentId

@@ -672,6 +672,8 @@ public class ArticleQueryService {
      * @return a list of articles, returns an empty list if not found
      * @throws ServiceException service exception
      */
+    private static Map<String, Object> pairs = new HashMap<>();
+
     public List<JSONObject> getArticlesByArchiveDate(final String archiveDateId, final int currentPageNum, final int pageSize) throws ServiceException {
         try {
             final List<JSONObject> ret = new ArrayList<>();
@@ -697,6 +699,7 @@ public class ArticleQueryService {
                     ret.add(article);
                 }
             }
+            pairs = new HashMap<>();
 
             return ret;
         } catch (final Exception e) {
@@ -704,8 +707,6 @@ public class ArticleQueryService {
             throw new ServiceException(e);
         }
     }
-
-    private static Map<String, Object> pairs = new HashMap<>();
 
     public boolean compareArticles(JSONObject article) {
         String archiveDate_oId = article.optString("archiveDate_oId");

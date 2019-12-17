@@ -30,6 +30,7 @@
 [轻松更新 bolo-solo](#tomcat-%E8%BD%BB%E6%9D%BE%E6%9B%B4%E6%96%B0-bolo-solo)  
 [皮肤](#皮肤)  
 [当前实现的特性](#当前实现的特性)  
+[视频教程](#视频教程)
 [其它帮助信息](#其它帮助信息)
 
 # 公告
@@ -203,6 +204,17 @@ Unix-like: `java -cp "WEB-INF/lib/*:WEB-INF/classes" org.b3log.solo.Starter`
 1. solo-nexmoe → [bolo-solo-nexmoe](https://github.com/AdlerED/bolo-solo/tree/master/src/main/webapp/skins/bolo-solo-nexmoe)
 
 正在加班加点努力移植... 推荐你先使用当前版本的 bolo-solo，等待你需要的皮肤更新后，直接提取 skins 文件中的皮肤，放到你的 skins 文件夹下即可~
+
+# 视频教程
+
+视频教程公开在`云存储`中，你可以通过 FTP 客户端（推荐使用 `FileZilla`）进行访问下载：  
+
+FTP 地址：`adler-s-netdisk.test.upcdn.net`  
+FTP 用户名：`guest/adler-s-netdisk`  
+FTP 密码：`ETfXn7ILr3j4lfhddPN2JPWnJxTpiIG8`  
+
+视频教程还在持续更新中...  
+如果你有时间帮忙录制教程视频，请联系我，必将感激不尽！  
 
 # 其它帮助信息
 

@@ -207,7 +207,7 @@ Unix-like: `java -cp "WEB-INF/lib/*:WEB-INF/classes" org.b3log.solo.Starter`
 
 # 视频教程
 
-视频教程公开在`云存储`中，请[点击这里](https://ftp.stackoverflow.wiki/index.html)在线观看
+视频教程公开在`云存储`中，请[点击这里](https://ftp.stackoverflow.wiki/index.html)在线观看。
 
 # 其它帮助信息
 

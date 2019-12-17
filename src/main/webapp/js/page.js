@@ -107,10 +107,8 @@ $.extend(Page.prototype, {
                 })
                     .then((value) => {
                         email = `${value}`;
-                        if ("null" != email) {
-                            $.cookie('my_email', email, {expires: 7, path: '/'});
-                            that.submitComment();
-                        }
+                        $.cookie('my_email', email, {expires: 7, path: '/'});
+                        that.submitComment();
                     });
             }
         })
@@ -351,7 +349,7 @@ $.extend(Page.prototype, {
      * @description 提交评论
      * @param {String} commentId 回复评论时的评论 id
      */
-    submitComment: function (email) {
+    submitComment: function () {
         var that = this,
             tips = this.tips;
 

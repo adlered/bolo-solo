@@ -94,7 +94,7 @@ public class CommentProcessor {
     @Inject
     private OptionQueryService optionQueryService;
 
-    SimpleCurrentLimiter simpleCurrentLimiter = new SimpleCurrentLimiter(60, 1);
+    SimpleCurrentLimiter simpleCurrentLimiter = new SimpleCurrentLimiter(60, 2);
 
     /**
      * Adds a comment to an article.

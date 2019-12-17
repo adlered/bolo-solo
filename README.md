@@ -207,14 +207,7 @@ Unix-like: `java -cp "WEB-INF/lib/*:WEB-INF/classes" org.b3log.solo.Starter`
 
 # 视频教程
 
-视频教程公开在`云存储`中，你可以通过 FTP 客户端（推荐使用 `FileZilla`）进行访问下载：  
-
-FTP 地址：`adler-s-netdisk.test.upcdn.net`  
-FTP 用户名：`guest/adler-s-netdisk`  
-FTP 密码：`ETfXn7ILr3j4lfhddPN2JPWnJxTpiIG8`  
-
-视频教程还在持续更新中...  
-如果你有时间帮忙录制教程视频，请联系我，必将感激不尽！  
+视频教程公开在`云存储`中，请[点击这里](https://ftp.stackoverflow.wiki/index.html)在线观看
 
 # 其它帮助信息
 

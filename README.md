@@ -30,6 +30,7 @@
 [轻松更新 bolo-solo](#tomcat-%E8%BD%BB%E6%9D%BE%E6%9B%B4%E6%96%B0-bolo-solo)  
 [皮肤](#皮肤)  
 [当前实现的特性](#当前实现的特性)  
+[其它帮助信息](#其它帮助信息)
 
 # 公告
 
@@ -202,6 +203,10 @@ Unix-like: `java -cp "WEB-INF/lib/*:WEB-INF/classes" org.b3log.solo.Starter`
 1. solo-nexmoe → [bolo-solo-nexmoe](https://github.com/AdlerED/bolo-solo/tree/master/src/main/webapp/skins/bolo-solo-nexmoe)
 
 正在加班加点努力移植... 推荐你先使用当前版本的 bolo-solo，等待你需要的皮肤更新后，直接提取 skins 文件中的皮肤，放到你的 skins 文件夹下即可~
+
+# 其它帮助信息
+
+* [如何添加社交按钮的内容？](https://hacpai.com/article/1574741650421/comment/1574746366256)
 
 # 当前实现的特性
 

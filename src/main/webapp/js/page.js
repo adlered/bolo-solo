@@ -107,8 +107,10 @@ $.extend(Page.prototype, {
                 })
                     .then((value) => {
                         email = `${value}`;
-                        $.cookie('my_email', email, {expires: 7, path: '/'});
-                        that.submitComment();
+                        if ("null" != email) {
+                            $.cookie('my_email', email, {expires: 7, path: '/'});
+                            that.submitComment();
+                        }
                     });
             }
         })

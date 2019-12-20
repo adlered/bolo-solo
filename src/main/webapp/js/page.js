@@ -91,7 +91,12 @@ $.extend(Page.prototype, {
         });
         $('#soloEditorAdd').click(function () {
             if ($("#boloUser").val() == "" && !loggedIn) {
-                alert("请先填写昵称！");
+                swal({
+                    title: "",
+                    text: "请先填写昵称!",
+                    icon: "warning",
+                    button: "好",
+                });
             } else {
                 swal({
                     title: "谢谢！还有一件事。",
@@ -110,6 +115,12 @@ $.extend(Page.prototype, {
                         if ("null" != email) {
                             $.cookie('my_email', email, {expires: 7, path: '/'});
                             that.submitComment();
+                            swal({
+                                title: "",
+                                text: "评论已推送!",
+                                icon: "success",
+                                button: "好",
+                            });
                         }
                     });
             }

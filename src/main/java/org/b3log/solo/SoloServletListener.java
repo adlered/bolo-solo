@@ -20,6 +20,7 @@ package org.b3log.solo;
 import eu.bitwalker.useragentutils.BrowserType;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.commons.lang.StringUtils;
+import org.b3log.bolo.prop.Prop;
 import org.b3log.latke.Keys;
 import org.b3log.latke.Latkes;
 import org.b3log.latke.event.EventManager;
@@ -78,6 +79,8 @@ public final class SoloServletListener extends AbstractServletListener {
      * Bean manager.
      */
     private BeanManager beanManager;
+
+    public static Prop prop;
 
     @Override
     public void contextInitialized(final ServletContextEvent servletContextEvent) {
@@ -143,6 +146,9 @@ public final class SoloServletListener extends AbstractServletListener {
 
         final CronMgmtService cronMgmtService = beanManager.getReference(CronMgmtService.class);
         cronMgmtService.start();
+
+        // Bolo config
+        prop = new Prop();
     }
 
     @Override

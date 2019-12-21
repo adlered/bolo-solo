@@ -37,7 +37,7 @@ public class Prop {
                 upper.mkdirs();
                 file.createNewFile();
                 // Set default props
-                addProperty("hello", "world");
+                addProperty("", "");
                 BufferedReader bufferedReader = new BufferedReader(new FileReader(propPath));
                 properties.load(bufferedReader);
             } catch (IOException IOE) {

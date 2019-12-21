@@ -5,6 +5,7 @@ import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.solo.SoloServletListener;
+import org.b3log.solo.util.Solos;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,14 +21,27 @@ import javax.servlet.http.HttpServletResponse;
 public class PropProcessor {
     @RequestProcessing(value = "/prop/set", method = {HttpMethod.GET})
     public void setProperty(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return ;
+        }
         HttpServletRequest request = context.getRequest();
         String key = request.getParameter("key");
         String value = request.getParameter("value");
         SoloServletListener.prop.setProperty(key, value);
+        context.renderJSON().renderMsg("OK");
+
+        return ;
     }
 
     @RequestProcessing(value = "/prop/get", method = {HttpMethod.GET})
     public void getProperty(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return ;
+        }
         HttpServletRequest request = context.getRequest();
         String key = request.getParameter("key");
         String value = SoloServletListener.prop.getProperty(key);

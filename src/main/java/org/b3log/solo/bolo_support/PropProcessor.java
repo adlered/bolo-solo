@@ -2,7 +2,6 @@ package org.b3log.solo.bolo_support;
 
 import io.github.biezhi.ome.OhMyEmail;
 import io.github.biezhi.ome.SendMailException;
-import org.b3log.bolo.prop.MailProp;
 import org.b3log.bolo.prop.Prop;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
@@ -31,7 +30,7 @@ public class PropProcessor {
         if (!Solos.isAdminLoggedIn(context)) {
             context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 
-            return ;
+            return;
         }
         HttpServletRequest request = context.getRequest();
         String key = request.getParameter("key");
@@ -39,7 +38,7 @@ public class PropProcessor {
         Prop.setProperty(key, value);
         context.renderJSON().renderMsg("OK");
 
-        return ;
+        return;
     }
 
     @RequestProcessing(value = "/prop/get", method = {HttpMethod.GET})
@@ -47,14 +46,14 @@ public class PropProcessor {
         if (!Solos.isAdminLoggedIn(context)) {
             context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 
-            return ;
+            return;
         }
         HttpServletRequest request = context.getRequest();
         String key = request.getParameter("key");
         String value = Prop.getProperty(key);
         context.renderJSON().renderMsg(value);
 
-        return ;
+        return;
     }
 
     @RequestProcessing(value = "/prop/mail/send", method = {HttpMethod.GET})
@@ -62,7 +61,7 @@ public class PropProcessor {
         if (!Solos.isAdminLoggedIn(context)) {
             context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 
-            return ;
+            return;
         }
 
         HttpServletRequest request = context.getRequest();
@@ -81,14 +80,26 @@ public class PropProcessor {
             context.renderJSON().renderCode(200);
             context.renderJSON().renderMsg("Mail has sent.");
 
-            return ;
+            return;
         } catch (SendMailException SME) {
             LOGGER.log(Level.ERROR, "Send mail failed! Please check your MailBox Settings.");
 
             context.renderJSON().renderCode(500);
             context.renderJSON().renderMsg("Send mail failed! Please check your MailBox Settings.");
 
-            return ;
+            return;
         }
+    }
+
+    /*
+        === 静态方法区 ===
+     */
+
+    public static void localSendMailMethod(String subject, String from, String to, String html) throws SendMailException {
+        OhMyEmail.subject(subject)
+                .from(from)
+                .to(to)
+                .html(html)
+                .send();
     }
 }

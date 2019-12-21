@@ -42,7 +42,7 @@
             <button onclick="admin.preference.update()" class="fn__right">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
-        <h3>B3log 生态设置</h3>
+        <h3>B3log 生态设定</h3>
         <label for="hacpaiUser">${hacpaiUser1Label}</label>
         <input id="hacpaiUser" type="text"/>
         <label for="b3logKey">${b3logKey1Label}</label>
@@ -58,7 +58,23 @@
             修改并更新后，刷新页面生效。
         </div>
         <br>
-        <h3>本地博客设置</h3>
+        <h3>邮件服务器设定</h3>
+        <label for="mailBox">${mailBoxLabel}</label>
+        <select id="mailBox">
+            <option value="QQ">QQ 邮箱</option>
+            <option value="QQ_ENT">QQ 企业版邮箱</option>
+            <option value="163">163 网易免费邮箱</option>
+        </select>
+        <label for="mailUsername">${mailUsernameLabel}</label>
+        <input id="mailUsername" type="text"/>
+        <label for="mailPassword">${mailPasswordLabel}</label>
+        <input id="mailPassword" type="text"/>
+        <div>
+            设定你的邮件服务器，以正常向用户发送评论 / 通知提醒。<br>
+            目前支持：QQ邮箱、QQ企业版邮箱、163 网易免费邮箱
+        </div>
+        <br>
+        <h3>本地博客设定</h3>
         <label for="blogTitle">${blogTitle1Label}</label>
         <input id="blogTitle" type="text"/>
         <label for="blogSubtitle">${blogSubtitle1Label}</label>

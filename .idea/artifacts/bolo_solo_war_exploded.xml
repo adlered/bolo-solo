@@ -89,6 +89,9 @@
           <element id="library" level="project" name="Maven: org.yaml:snakeyaml:1.18" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.10" />
           <element id="library" level="project" name="Maven: eu.bitwalker:UserAgentUtils:1.21" />
+          <element id="library" level="project" name="Maven: io.github.biezhi:oh-my-email:0.0.4" />
+          <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.6.2" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">

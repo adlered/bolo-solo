@@ -80,8 +80,6 @@ public final class SoloServletListener extends AbstractServletListener {
      */
     private BeanManager beanManager;
 
-    public static Prop prop;
-
     @Override
     public void contextInitialized(final ServletContextEvent servletContextEvent) {
         Latkes.setScanPath("org.b3log.solo");
@@ -148,7 +146,7 @@ public final class SoloServletListener extends AbstractServletListener {
         cronMgmtService.start();
 
         // Bolo config
-        prop = new Prop();
+        Prop.init();
     }
 
     @Override

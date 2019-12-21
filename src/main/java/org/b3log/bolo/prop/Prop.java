@@ -21,10 +21,9 @@ public class Prop {
     private static final Logger LOGGER = Logger.getLogger(Prop.class);
 
     private static Properties properties = new Properties();
+    private static String propPath = "bolo_config/config.prop";
 
-    private String propPath = "bolo_config/config.prop";
-
-    public Prop() {
+    public static void init() {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(propPath));
             properties.load(bufferedReader);
@@ -37,7 +36,9 @@ public class Prop {
                 upper.mkdirs();
                 file.createNewFile();
                 // Set default props
-                addProperty("", "");
+                addProperty("mailBox", "");
+                addProperty("mailUsername", "");
+                addProperty("mailPassword", "");
                 BufferedReader bufferedReader = new BufferedReader(new FileReader(propPath));
                 properties.load(bufferedReader);
             } catch (IOException IOE) {
@@ -46,9 +47,10 @@ public class Prop {
         } catch (IOException IOE) {
             IOE.printStackTrace();
         }
+        MailProp.loadMailSettings();
     }
 
-    public Prop addAnnotation(String annotation) {
+    public static void addAnnotation(String annotation) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(new File(propPath), true);
             fileOutputStream.write(("# " + annotation + "\n").getBytes());
@@ -59,10 +61,9 @@ public class Prop {
         } catch (IOException IOE) {
             IOE.printStackTrace();
         }
-        return this;
     }
 
-    public Prop addProperty(String key, String value) {
+    public static void addProperty(String key, String value) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(new File(propPath), true);
             fileOutputStream.write((key + "=" + value + "\n").getBytes());
@@ -73,14 +74,17 @@ public class Prop {
         } catch (IOException IOE) {
             IOE.printStackTrace();
         }
-        return this;
     }
 
-    public String getProperty(String key) {
-        return properties.getProperty(key);
+    public static String getProperty(String key) {
+        String value = properties.getProperty(key);
+        if (null == value) {
+            value = "";
+        }
+        return value;
     }
 
-    public void setProperty(String key, String value) {
+    public static void setProperty(String key, String value) {
         try {
             properties.setProperty(key, value);
             PrintWriter printWriter = new PrintWriter(new FileWriter(propPath), true);

@@ -47,6 +47,7 @@ public class MailProcessor {
 
             context.renderJSON().renderCode(200);
             context.renderJSON().renderMsg("Mail has sent.");
+            LOGGER.log(Level.INFO, "Mail has sent [subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
 
             return;
         } catch (SendMailException SME) {
@@ -69,5 +70,6 @@ public class MailProcessor {
                 .to(to)
                 .html(html)
                 .send();
+        LOGGER.log(Level.INFO, "Mail has sent [subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
     }
 }

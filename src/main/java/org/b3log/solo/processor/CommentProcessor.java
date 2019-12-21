@@ -149,8 +149,6 @@ public class CommentProcessor {
         }
         requestJSONObject.put(Comment.COMMENT_NAME, username);
 
-        String email = requestJSONObject.getString("email");
-
         fillCommenter(requestJSONObject, context);
 
         final JSONObject jsonObject = commentMgmtService.checkAddCommentRequest(requestJSONObject);
@@ -169,6 +167,12 @@ public class CommentProcessor {
 
         try {
             final JSONObject addResult = commentMgmtService.addArticleComment(requestJSONObject);
+
+            // 用户关系表
+            String commentId = addResult.optString("oId");
+            String commentUser = requestJSONObject.getString("boloUser");
+            String commentEmail = requestJSONObject.getString("email");
+            System.out.println("commentId: " + commentId + " | username: " + username + " | email: " + commentEmail);
 
             final Map<String, Object> dataModel = new HashMap<>();
             dataModel.put(Comment.COMMENT, addResult);

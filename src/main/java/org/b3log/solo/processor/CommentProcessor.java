@@ -141,11 +141,15 @@ public class CommentProcessor {
         }
         requestJSONObject.put(Comment.COMMENT_URL, site);
 
-        if (requestJSONObject.getString("boloUser").isEmpty()) {
+        String username = requestJSONObject.getString("boloUser");
+        if (username.isEmpty()) {
             context.sendError(HttpServletResponse.SC_NOT_FOUND);
 
             return ;
         }
+        requestJSONObject.put(Comment.COMMENT_NAME, username);
+
+        String email = requestJSONObject.getString("email");
 
         fillCommenter(requestJSONObject, context);
 

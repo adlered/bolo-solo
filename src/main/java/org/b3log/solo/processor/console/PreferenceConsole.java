@@ -17,7 +17,6 @@
  */
 package org.b3log.solo.processor.console;
 
-import org.b3log.bolo.prop.Prop;
 import org.b3log.latke.Keys;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
@@ -191,11 +190,6 @@ public class PreferenceConsole {
                 footerContent = opt.optString(Option.OPTION_VALUE);
             }
             preference.put(Option.ID_C_FOOTER_CONTENT, footerContent);
-
-            // Bolo Mail Settings load
-            preference.put(Option.ID_C_MAIL_BOX, Prop.getProperty("mailBox"));
-            preference.put(Option.ID_C_MAIL_USERNAME, Prop.getProperty("mailUsername"));
-            preference.put(Option.ID_C_MAIL_PASSWORD, Prop.getProperty("mailPassword"));
 
             final JSONObject ret = new JSONObject();
             renderer.setJSONObject(ret);

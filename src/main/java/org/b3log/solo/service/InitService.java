@@ -701,6 +701,24 @@ public class InitService {
         maxArchiveOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
         maxArchiveOpt.put(Option.OPTION_VALUE, DefaultPreference.DEFAULT_MAX_ARCHIVE);
         optionRepository.add(maxArchiveOpt);
+        
+        final JSONObject mailBoxOpt = new JSONObject();
+        mailBoxOpt.put(Keys.OBJECT_ID, Option.ID_C_MAIL_BOX);
+        mailBoxOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+        mailBoxOpt.put(Option.OPTION_VALUE, "");
+        optionRepository.add(mailBoxOpt);
+
+        final JSONObject mailUsernameOpt = new JSONObject();
+        mailUsernameOpt.put(Keys.OBJECT_ID, Option.ID_C_MAIL_USERNAME);
+        mailUsernameOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+        mailUsernameOpt.put(Option.OPTION_VALUE, "");
+        optionRepository.add(mailUsernameOpt);
+
+        final JSONObject mailPasswordOpt = new JSONObject();
+        mailPasswordOpt.put(Keys.OBJECT_ID, Option.ID_C_MAIL_PASSWORD);
+        mailPasswordOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+        mailPasswordOpt.put(Option.OPTION_VALUE, "");
+        optionRepository.add(mailPasswordOpt);
 
         LOGGER.info("Initialized preference");
     }

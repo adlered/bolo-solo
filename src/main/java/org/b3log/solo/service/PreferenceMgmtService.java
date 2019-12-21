@@ -17,7 +17,6 @@
  */
 package org.b3log.solo.service;
 
-import org.b3log.bolo.prop.MailProp;
 import org.b3log.latke.Keys;
 import org.b3log.latke.Latkes;
 import org.b3log.latke.ioc.Inject;
@@ -29,6 +28,7 @@ import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Locales;
+import org.b3log.solo.bolo.prop.MailService;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.OptionRepository;
 import org.json.JSONObject;
@@ -272,12 +272,52 @@ public class PreferenceMgmtService {
                 optionRepository.update(Option.ID_C_MAX_ARCHIVE, maxArchiveOpt);
             }
 
-            // Set Mail Settings
-            MailProp.setMail(
-                    preference.optString(Option.ID_C_MAIL_BOX),
-                    preference.optString(Option.ID_C_MAIL_USERNAME),
-                    preference.optString(Option.ID_C_MAIL_PASSWORD)
-            );
+            try {
+                final JSONObject mailBoxOpt = optionRepository.get(Option.ID_C_MAIL_BOX);
+                mailBoxOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_MAIL_BOX));
+                optionRepository.update(Option.ID_C_MAIL_BOX, mailBoxOpt);
+            } catch (NullPointerException NPE) {
+                JSONObject mailBoxOpt = new JSONObject();
+                mailBoxOpt.put(Keys.OBJECT_ID, Option.ID_C_MAIL_BOX);
+                mailBoxOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+                mailBoxOpt.put(Option.OPTION_VALUE, "");
+                optionRepository.add(mailBoxOpt);
+                mailBoxOpt = optionRepository.get(Option.ID_C_MAIL_BOX);
+                mailBoxOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_MAIL_BOX));
+                optionRepository.update(Option.ID_C_MAIL_BOX, mailBoxOpt);
+            }
+
+            try {
+                final JSONObject mailUsernameOpt = optionRepository.get(Option.ID_C_MAIL_USERNAME);
+                mailUsernameOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_MAIL_USERNAME));
+                optionRepository.update(Option.ID_C_MAIL_USERNAME, mailUsernameOpt);
+            } catch (NullPointerException NPE) {
+                JSONObject mailUsernameOpt = new JSONObject();
+                mailUsernameOpt.put(Keys.OBJECT_ID, Option.ID_C_MAIL_USERNAME);
+                mailUsernameOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+                mailUsernameOpt.put(Option.OPTION_VALUE, "");
+                optionRepository.add(mailUsernameOpt);
+                mailUsernameOpt = optionRepository.get(Option.ID_C_MAIL_USERNAME);
+                mailUsernameOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_MAIL_USERNAME));
+                optionRepository.update(Option.ID_C_MAIL_USERNAME, mailUsernameOpt);
+            }
+
+            try {
+                final JSONObject mailPasswordOpt = optionRepository.get(Option.ID_C_MAIL_PASSWORD);
+                mailPasswordOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_MAIL_PASSWORD));
+                optionRepository.update(Option.ID_C_MAIL_PASSWORD, mailPasswordOpt);
+            } catch (NullPointerException NPE) {
+                JSONObject mailPasswordOpt = new JSONObject();
+                mailPasswordOpt.put(Keys.OBJECT_ID, Option.ID_C_MAIL_PASSWORD);
+                mailPasswordOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+                mailPasswordOpt.put(Option.OPTION_VALUE, "");
+                optionRepository.add(mailPasswordOpt);
+                mailPasswordOpt = optionRepository.get(Option.ID_C_MAIL_PASSWORD);
+                mailPasswordOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_MAIL_PASSWORD));
+                optionRepository.update(Option.ID_C_MAIL_PASSWORD, mailPasswordOpt);
+            }
+
+            MailService.loadMailSettings();
 
             transaction.commit();
         } catch (final Exception e) {

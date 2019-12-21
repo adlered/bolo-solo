@@ -1,8 +1,7 @@
-package org.b3log.solo.bolo_support;
+package org.b3log.solo.bolo.prop;
 
 import io.github.biezhi.ome.OhMyEmail;
 import io.github.biezhi.ome.SendMailException;
-import org.b3log.bolo.prop.Prop;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.servlet.HttpMethod;
@@ -22,39 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  * @date : 2019-12-20 20:02
  **/
 @RequestProcessor
-public class PropProcessor {
-    private static final Logger LOGGER = Logger.getLogger(PropProcessor.class);
-
-    @RequestProcessing(value = "/prop/set", method = {HttpMethod.GET})
-    public void setProperty(final RequestContext context) {
-        if (!Solos.isAdminLoggedIn(context)) {
-            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-
-            return;
-        }
-        HttpServletRequest request = context.getRequest();
-        String key = request.getParameter("key");
-        String value = request.getParameter("value");
-        Prop.setProperty(key, value);
-        context.renderJSON().renderMsg("OK");
-
-        return;
-    }
-
-    @RequestProcessing(value = "/prop/get", method = {HttpMethod.GET})
-    public void getProperty(final RequestContext context) {
-        if (!Solos.isAdminLoggedIn(context)) {
-            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-
-            return;
-        }
-        HttpServletRequest request = context.getRequest();
-        String key = request.getParameter("key");
-        String value = Prop.getProperty(key);
-        context.renderJSON().renderMsg(value);
-
-        return;
-    }
+public class MailProcessor {
+    private static final Logger LOGGER = Logger.getLogger(MailProcessor.class);
 
     @RequestProcessing(value = "/prop/mail/send", method = {HttpMethod.GET})
     public void sendMail(final RequestContext context) {

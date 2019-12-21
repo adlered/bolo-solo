@@ -46,7 +46,7 @@
         <label for="hacpaiUser">${hacpaiUser1Label}</label>
         <input id="hacpaiUser" type="text"/>
         <label for="b3logKey">${b3logKey1Label}</label>
-        <input id="b3logKey" type="text">
+        <input id="b3logKey" type="password">
         <div>
             设置黑客派用户名和 B3log Key 后，你可以：<br>
             1. 使用 Bolo 的编辑器图床<br>
@@ -69,7 +69,7 @@
         <label for="mailUsername">${mailUsernameLabel}</label>
         <input id="mailUsername" type="text"/>
         <label for="mailPassword">${mailPasswordLabel}</label>
-        <input id="mailPassword" type="text"/>
+        <input id="mailPassword" type="password"/>
         <div>
             设定你的邮件服务器，以正常向用户发送评论 / 通知提醒。<br>
             目前支持：QQ 邮箱、QQ 企业版邮箱、163 网易免费邮箱

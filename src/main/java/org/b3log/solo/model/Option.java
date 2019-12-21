@@ -323,6 +323,11 @@ public final class Option {
     public static final String ID_C_MAIL_PASSWORD = "mailPassword";
 
     /**
+     * Key Mail User Context.
+     */
+    public static final String ID_C_MAIL_USER_CONTEXT = "mailUserContext";
+
+    /**
      * Private constructor.
      */
     private Option() {

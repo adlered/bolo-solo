@@ -27,6 +27,7 @@ public class MailProp {
         Prop.setProperty("mailBox", mailBox);
         Prop.setProperty("mailUsername", mailUsername);
         Prop.setProperty("mailPassword", mailPassword);
+        loadMailSettings();
     }
 
     public static void loadMailSettings() {

@@ -17,6 +17,7 @@
  */
 package org.b3log.solo.service;
 
+import org.b3log.bolo.prop.MailProp;
 import org.b3log.latke.Keys;
 import org.b3log.latke.Latkes;
 import org.b3log.latke.ioc.Inject;
@@ -61,20 +62,6 @@ public class PreferenceMgmtService {
      */
     @Inject
     private OptionRepository optionRepository;
-
-    // Bolo default config sum
-    private void makeConfig() throws RepositoryException {
-        JSONObject hacpaiUserOpt = new JSONObject();
-        hacpaiUserOpt.put(Keys.OBJECT_ID, Option.ID_C_HACPAI_USER);
-        hacpaiUserOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
-        hacpaiUserOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_HACPAI_USER);
-        optionRepository.add(hacpaiUserOpt);
-        JSONObject b3logKeyOpt = new JSONObject();
-        b3logKeyOpt.put(Keys.OBJECT_ID, Option.ID_C_B3LOG_KEY);
-        b3logKeyOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
-        b3logKeyOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_B3LOG_KEY);
-        optionRepository.add(b3logKeyOpt);
-    }
 
     /**
      * Language service.
@@ -284,6 +271,13 @@ public class PreferenceMgmtService {
                 maxArchiveOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_MAX_ARCHIVE));
                 optionRepository.update(Option.ID_C_MAX_ARCHIVE, maxArchiveOpt);
             }
+
+            // Set Mail Settings
+            MailProp.setMail(
+                    preference.optString(Option.ID_C_MAIL_BOX),
+                    preference.optString(Option.ID_C_MAIL_USERNAME),
+                    preference.optString(Option.ID_C_MAIL_PASSWORD)
+            );
 
             transaction.commit();
         } catch (final Exception e) {

@@ -61,6 +61,7 @@
         <h3>邮件服务器设定</h3>
         <label for="mailBox">${mailBoxLabel}</label>
         <select id="mailBox">
+            <option value="" selected>未设定</option>
             <option value="QQ">QQ 邮箱</option>
             <option value="QQ_ENT">QQ 企业版邮箱</option>
             <option value="163">163 网易免费邮箱</option>
@@ -71,7 +72,7 @@
         <input id="mailPassword" type="text"/>
         <div>
             设定你的邮件服务器，以正常向用户发送评论 / 通知提醒。<br>
-            目前支持：QQ邮箱、QQ企业版邮箱、163 网易免费邮箱
+            目前支持：QQ 邮箱、QQ 企业版邮箱、163 网易免费邮箱
         </div>
         <br>
         <h3>本地博客设定</h3>

@@ -307,7 +307,20 @@ public final class Option {
      */
     public static final String ID_C_MAX_ARCHIVE = "maxArchive";
 
+    /**
+     * Key of Mailbox.
+     */
+    public static final String ID_C_MAIL_BOX = "mailBox";
 
+    /**
+     * Key of Mailbox Username.
+     */
+    public static final String ID_C_MAIL_USERNAME = "mailUsername";
+
+    /**
+     * Key of Mailbox Password.
+     */
+    public static final String ID_C_MAIL_PASSWORD = "mailPassword";
 
     /**
      * Private constructor.

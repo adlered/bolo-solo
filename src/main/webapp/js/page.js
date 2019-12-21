@@ -115,12 +115,6 @@ $.extend(Page.prototype, {
                         if ("null" != email) {
                             $.cookie('my_email', email, {expires: 7, path: '/'});
                             that.submitComment();
-                            swal({
-                                title: "",
-                                text: "评论已推送!",
-                                icon: "success",
-                                button: "好",
-                            });
                         }
                     });
             }
@@ -390,15 +384,34 @@ $.extend(Page.prototype, {
                     $('#soloEditorAdd').removeAttr('disabled');
                     if (!result.sc) {
                         $('#soloEditorError').html(result.msg);
+                        swal({
+                            title: "",
+                            text: "评论推送失败: " + result.msg,
+                            icon: "error",
+                            button: "好",
+                        });
+
                         return
                     }
                     that.toggleEditor();
                     vditor.setValue('');
                     that.addCommentAjax(result.cmtTpl)
+                    swal({
+                        title: "",
+                        text: "评论已推送!",
+                        icon: "success",
+                        button: "好",
+                    });
                 },
             })
         } else {
             $('#soloEditorError').text(that.tips.commentContentCannotEmptyLabel)
+            swal({
+                title: "",
+                text: "评论推送失败: " + that.tips.commentContentCannotEmptyLabel,
+                icon: "error",
+                button: "好",
+            });
         }
     },
     /*

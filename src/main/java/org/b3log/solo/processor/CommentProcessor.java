@@ -30,6 +30,7 @@ import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.JsonRenderer;
+import org.b3log.solo.bolo.prop.MailService;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Comment;
 import org.b3log.solo.model.Common;
@@ -172,7 +173,7 @@ public class CommentProcessor {
             String commentId = addResult.optString("oId");
             String commentUser = requestJSONObject.getString("boloUser");
             String commentEmail = requestJSONObject.getString("email");
-            System.out.println("commentId: " + commentId + " | username: " + username + " | email: " + commentEmail);
+            MailService.addCommentMailContext(commentId, commentUser, commentEmail);
 
             final Map<String, Object> dataModel = new HashMap<>();
             dataModel.put(Comment.COMMENT, addResult);

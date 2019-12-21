@@ -44,6 +44,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import pers.adlered.simplecurrentlimiter.main.SimpleCurrentLimiter;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -140,11 +141,10 @@ public class CommentProcessor {
         }
         requestJSONObject.put(Comment.COMMENT_URL, site);
 
-        String anonymousName = "不愿透露姓名的靓仔";
         if (requestJSONObject.getString("boloUser").isEmpty()) {
-            requestJSONObject.put("commentName", anonymousName);
-        } else {
-            requestJSONObject.put("commentName", requestJSONObject.getString("boloUser"));
+            context.sendError(HttpServletResponse.SC_NOT_FOUND);
+
+            return ;
         }
 
         fillCommenter(requestJSONObject, context);
@@ -162,21 +162,6 @@ public class CommentProcessor {
 
             return ;
         }
-
-        /*if (!jsonObject.optBoolean(Keys.STATUS_CODE)) {
-            LOGGER.log(Level.WARN, "Can't add comment[msg={0}]", jsonObject.optString(Keys.MSG));
-            return;
-        }
-
-        //防止冒用用户名
-        if (!commentName.equals(anonymousName)) {
-            if (!Solos.isLoggedIn(context)) {
-                jsonObject.put(Keys.STATUS_CODE, false);
-                jsonObject.put(Keys.MSG, "Need login");
-
-                return;
-            }
-        }*/
 
         try {
             final JSONObject addResult = commentMgmtService.addArticleComment(requestJSONObject);

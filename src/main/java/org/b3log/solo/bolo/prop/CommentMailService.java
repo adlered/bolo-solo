@@ -3,6 +3,7 @@ package org.b3log.solo.bolo.prop;
 import io.github.biezhi.ome.SendMailException;
 import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.ioc.Inject;
+import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.solo.model.Option;
@@ -40,6 +41,7 @@ public class CommentMailService {
                     "<b>" + whoCommentHim + "</b> 刚刚回复了你的评论！请点击进入查看：<a href='" + URL + "'>" + URL + "</a>"
             );
         } catch (SendMailException SME) {
+            LOGGER.log(Level.ERROR, "Failed send mail [emailAdd=" + emailAdd + ", URL=" + URL + ", whoCommentHim=" + whoCommentHim + "]");
         }
     }
 }

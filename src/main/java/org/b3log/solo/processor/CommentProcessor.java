@@ -182,7 +182,7 @@ public class CommentProcessor {
                 originalCommentId = requestJSONObject.getString("commentOriginalCommentId");
                 CommentMailService.remindCommentedGuy(
                         originalCommentId,
-                        context.getRequest().getLocalAddr(),
+                        requestJSONObject.getString("URI"),
                         commentUser
                 );
             } catch (JSONException JSONE) {
@@ -191,7 +191,7 @@ public class CommentProcessor {
 
             // TODO 提醒作者
 
-            final Map<String, Object> dataModel = new HashMap<>();
+            final Map<String, Object> dataModel = new HashMap<> ();
             dataModel.put(Comment.COMMENT, addResult);
             final JSONObject article = addResult.optJSONObject(Article.ARTICLE);
             article.put(Common.COMMENTABLE, addResult.opt(Common.COMMENTABLE));

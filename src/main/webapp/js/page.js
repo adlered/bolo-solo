@@ -367,7 +367,8 @@ $.extend(Page.prototype, {
                 'commentContent': vditor.getValue(),
                 'boloUser': $("#boloUser").val(),
                 'boloSite': $("#boloSite").val(),
-                'email': $.cookie("my_email")
+                'email': $.cookie("my_email"),
+                'URI': window.location.href
             };
 
             if (this.currentCommentId) {

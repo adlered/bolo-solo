@@ -64,6 +64,15 @@ public class MailProcessor {
         === 静态方法区 ===
      */
 
+    /**
+     * 发送普通邮件
+     *
+     * @param subject
+     * @param from
+     * @param to
+     * @param html
+     * @throws SendMailException
+     */
     public static void localSendMailMethod(String subject, String from, String to, String html) throws SendMailException {
         OhMyEmail.subject(subject)
                 .from(from)

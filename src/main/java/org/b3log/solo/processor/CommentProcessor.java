@@ -30,6 +30,7 @@ import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.JsonRenderer;
+import org.b3log.solo.bolo.prop.CommentMailService;
 import org.b3log.solo.bolo.prop.MailService;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Comment;
@@ -174,6 +175,21 @@ public class CommentProcessor {
             String commentUser = requestJSONObject.getString("boloUser");
             String commentEmail = requestJSONObject.getString("email");
             MailService.addCommentMailContext(commentId, commentUser, commentEmail);
+
+            // 提醒被回复的用户
+            String originalCommentId = "";
+            try {
+                originalCommentId = requestJSONObject.getString("commentOriginalCommentId");
+                CommentMailService.remindCommentedGuy(
+                        originalCommentId,
+                        context.getRequest().getLocalAddr(),
+                        commentUser
+                );
+            } catch (JSONException JSONE) {
+                LOGGER.log(Level.DEBUG, "No originalCommentId for [from=" + commentId + ", to=" + originalCommentId + "]");
+            }
+
+            // TODO 提醒作者
 
             final Map<String, Object> dataModel = new HashMap<>();
             dataModel.put(Comment.COMMENT, addResult);

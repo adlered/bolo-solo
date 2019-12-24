@@ -34,6 +34,119 @@ public class MailService {
      */
     private static final Logger LOGGER = Logger.getLogger(MailService.class);
 
+    /**
+     * 添加指定用户评论的邮件提醒服务
+     *
+     * @param commentId
+     * @param commentUser
+     * @param commentEmail
+     */
+    public static void addCommentMailContext(String commentId, String commentUser, String commentEmail) {
+        final BeanManager beanManager = BeanManager.getInstance();
+        final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+        String mailUserContext = "";
+        try {
+            mailUserContext = optionRepository.get(Option.ID_C_MAIL_USER_CONTEXT).optString(Option.OPTION_VALUE);
+        } catch (Exception e) {
+        }
+
+        // Bind
+        StringBuilder bind = new StringBuilder();
+        bind.append(mailUserContext);
+        if (!mailUserContext.isEmpty()) {
+            bind.append(";");
+        }
+        bind.append(commentId)
+                .append(":")
+                .append(commentUser)
+                .append(":")
+                .append(commentEmail);
+        // Write
+        try {
+            final Transaction transaction = optionRepository.beginTransaction();
+
+            final JSONObject mailUserContextOpt = optionRepository.get(Option.ID_C_MAIL_USER_CONTEXT);
+            mailUserContextOpt.put(Option.OPTION_VALUE, bind.toString());
+            optionRepository.update(Option.ID_C_MAIL_USER_CONTEXT, mailUserContextOpt);
+
+            transaction.commit();
+        } catch (RepositoryException RE) {
+        }
+        LOGGER.log(Level.INFO, "Generate user comment context [commentId: " + commentId + ", commentUser: " + commentUser + ", email: " + commentEmail + "]");
+    }
+
+    /**
+     * List 化用户邮件关系表
+     *
+     * @return
+     */
+    @RequestProcessing("/listContext")
+    public void listContext(final RequestContext context) {
+        List<MailBind> mailBindList = getUserMailContext();
+        context.renderJSON().renderMsg(mailBindList.toString());
+        System.out.println("email is " + getEmailAddressByCommentId("15769242461912"));
+        return ;
+    }
+
+    /**
+     * 通过评论 Id 获取指定用户邮箱地址
+     *
+     * @param commentId
+     * @return
+     */
+    public static String getEmailAddressByCommentId(String commentId) {
+        List<MailBind> mailBindList = getUserMailContext();
+        for (int i = (mailBindList.size() - 1); i >= 0; i--) {
+            MailBind mailBind = mailBindList.get(i);
+            if (mailBind.getCommentId().equals(commentId)) {
+                return mailBind.getCommentEmail();
+            }
+        }
+        return "";
+    }
+
+    /**
+     * 将 Mail Context 转换为可视列表
+     *
+     * @return
+     */
+    public static List<MailBind> getUserMailContext() {
+        List<MailBind> mailBindList = new ArrayList<>();
+
+        try {
+            final BeanManager beanManager = BeanManager.getInstance();
+            final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+            String mailUserContext = "";
+            try {
+                mailUserContext = optionRepository.get(Option.ID_C_MAIL_USER_CONTEXT).optString(Option.OPTION_VALUE);
+            } catch (Exception e) {
+            }
+            String[] perUser = mailUserContext.split(";");
+            for (int i = 0; i < perUser.length; i++) {
+                try {
+                    String[] perSet = perUser[i].split(":");
+                    String commentId = perSet[0];
+                    String commentUser = perSet[1];
+                    String commentEmail = perSet[2];
+                    MailBind mailBind = new MailBind();
+                    mailBind.setCommentId(commentId);
+                    mailBind.setCommentUser(commentUser);
+                    mailBind.setCommentEmail(commentEmail);
+                    mailBindList.add(mailBind);
+                } catch (Exception e) {
+                    // 分割出问题，一定要抓取然后继续
+                    continue;
+                }
+            }
+        } catch (Exception e) {
+        }
+
+        return mailBindList;
+    }
+
+    /**
+     * 重载邮件设置至内存
+     */
     public static void loadMailSettings() {
         try {
             final BeanManager beanManager = BeanManager.getInstance();
@@ -82,6 +195,11 @@ public class MailService {
         }
     }
 
+    /**
+     * 获取可视化邮件服务器设定
+     *
+     * @return
+     */
     public static String getMailSet() {
         try {
             final BeanManager beanManager = BeanManager.getInstance();
@@ -97,83 +215,5 @@ public class MailService {
 
             return "";
         }
-    }
-
-    public static void addCommentMailContext(String commentId, String commentUser, String commentEmail) {
-        final BeanManager beanManager = BeanManager.getInstance();
-        final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-        String mailUserContext = "";
-        try {
-            mailUserContext = optionRepository.get(Option.ID_C_MAIL_USER_CONTEXT).optString(Option.OPTION_VALUE);
-        } catch (Exception e) {
-        }
-
-        // Bind
-        StringBuilder bind = new StringBuilder();
-        bind.append(mailUserContext);
-        if (!mailUserContext.isEmpty()) {
-            bind.append(";");
-        }
-        bind.append(commentId)
-                .append(":")
-                .append(commentUser)
-                .append(":")
-                .append(commentEmail);
-        // Write
-        try {
-            final Transaction transaction = optionRepository.beginTransaction();
-
-            final JSONObject mailUserContextOpt = optionRepository.get(Option.ID_C_MAIL_USER_CONTEXT);
-            mailUserContextOpt.put(Option.OPTION_VALUE, bind.toString());
-            optionRepository.update(Option.ID_C_MAIL_USER_CONTEXT, mailUserContextOpt);
-
-            transaction.commit();
-        } catch (RepositoryException RE) {
-        }
-        LOGGER.log(Level.INFO, "Generate user comment context [commentId: " + commentId + ", commentUser: " + commentUser + ", email: " + commentEmail + "]");
-    }
-
-    /**
-     * List 化用户邮件关系表
-     *
-     * @return
-     */
-    @RequestProcessing("/maph")
-    public void listContext(final RequestContext context) {
-
-    }
-
-    public static List<MailBind> getUserMailContext() {
-        List<MailBind> mailBindList = new ArrayList<>();
-
-        try {
-            final BeanManager beanManager = BeanManager.getInstance();
-            final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-            String mailUserContext = "";
-            try {
-                mailUserContext = optionRepository.get(Option.ID_C_MAIL_USER_CONTEXT).optString(Option.OPTION_VALUE);
-            } catch (Exception e) {
-            }
-            String[] perUser = mailUserContext.split(";");
-            for (int i = 0; i < perUser.length; i++) {
-                try {
-                    String[] perSet = perUser[i].split(":");
-                    String commentId = perSet[0];
-                    String commentUser = perSet[1];
-                    String commentEmail = perSet[2];
-                    MailBind mailBind = new MailBind();
-                    mailBind.setCommentId(commentId);
-                    mailBind.setCommentUser(commentUser);
-                    mailBind.setCommentEmail(commentEmail);
-                    mailBindList.add(mailBind);
-                } catch (Exception e) {
-                    // 分割出问题，一定要抓取然后继续
-                    continue;
-                }
-            }
-        } catch (Exception e) {
-        }
-
-        return mailBindList;
     }
 }

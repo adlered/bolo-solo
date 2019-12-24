@@ -139,7 +139,11 @@ public class MailService {
      * @return
      */
     @RequestProcessing("/maph")
-    public void getUserMailContext(final RequestContext context) {
+    public void listContext(final RequestContext context) {
+
+    }
+
+    public static List<MailBind> getUserMailContext() {
         List<MailBind> mailBindList = new ArrayList<>();
 
         try {
@@ -152,17 +156,24 @@ public class MailService {
             }
             String[] perUser = mailUserContext.split(";");
             for (int i = 0; i < perUser.length; i++) {
-                String[] perSet = perUser[i].split(":");
-                String commentId = perSet[0];
-                String commentUser = perSet[1];
-                String commentEmail = perSet[2];
-                MailBind mailBind = new MailBind();
-                mailBind.setCommentId(commentId);
-                mailBind.setCommentUser(commentUser);
-                mailBind.setCommentEmail(commentEmail);
-                mailBindList.add(mailBind);
+                try {
+                    String[] perSet = perUser[i].split(":");
+                    String commentId = perSet[0];
+                    String commentUser = perSet[1];
+                    String commentEmail = perSet[2];
+                    MailBind mailBind = new MailBind();
+                    mailBind.setCommentId(commentId);
+                    mailBind.setCommentUser(commentUser);
+                    mailBind.setCommentEmail(commentEmail);
+                    mailBindList.add(mailBind);
+                } catch (Exception e) {
+                    // 分割出问题，一定要抓取然后继续
+                    continue;
+                }
             }
         } catch (Exception e) {
         }
+
+        return mailBindList;
     }
 }

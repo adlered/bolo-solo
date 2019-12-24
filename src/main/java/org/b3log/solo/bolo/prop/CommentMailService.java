@@ -33,15 +33,11 @@ public class CommentMailService {
         String blogTitle = preference.getString(Option.ID_C_BLOG_TITLE);
 
         String emailAdd = MailService.getEmailAddressByCommentId(originalId);
-        try {
-            MailProcessor.localSendMailMethod(
-                    "Bolo 博客 - 你的新提醒",
-                    blogTitle,
-                    emailAdd,
-                    "<b>" + whoCommentHim + "</b> 刚刚回复了你的评论！请点击进入查看：<a href='" + URL + "'>" + URL + "</a>"
-            );
-        } catch (SendMailException SME) {
-            LOGGER.log(Level.ERROR, "Failed send mail [emailAdd=" + emailAdd + ", URL=" + URL + ", whoCommentHim=" + whoCommentHim + "]");
-        }
+        MailProcessor.localSendMailMethod(
+                "Bolo 博客 - 你的新提醒",
+                blogTitle,
+                emailAdd,
+                "<b>" + whoCommentHim + "</b> 刚刚回复了你的评论！请点击进入查看：<a href='" + URL + "'>" + URL + "</a>"
+        );
     }
 }

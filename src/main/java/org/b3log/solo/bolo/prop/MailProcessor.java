@@ -73,12 +73,21 @@ public class MailProcessor {
      * @param html
      * @throws SendMailException
      */
-    public static void localSendMailMethod(String subject, String from, String to, String html) throws SendMailException {
-        OhMyEmail.subject(subject)
-                .from(from)
-                .to(to)
-                .html(html)
-                .send();
-        LOGGER.log(Level.INFO, "Mail has sent [subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
+    public static void localSendMailMethod(String subject, String from, String to, String html) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OhMyEmail.subject(subject)
+                            .from(from)
+                            .to(to)
+                            .html(html)
+                            .send();
+                    LOGGER.log(Level.INFO, "Mail has sent [subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
+                } catch (SendMailException e) {
+                    LOGGER.log(Level.INFO, "Mail sent failed [subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
+                }
+            }
+        }).start();
     }
 }

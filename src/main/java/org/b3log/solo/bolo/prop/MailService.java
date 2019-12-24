@@ -130,7 +130,7 @@ public class MailService {
             transaction.commit();
         } catch (RepositoryException RE) {
         }
-        LOGGER.log(Level.INFO, "Into user comment context [commentId: " + commentId + ", commentUser: " + commentUser + ", email: " + commentEmail + "]");
+        LOGGER.log(Level.INFO, "Generate user comment context [commentId: " + commentId + ", commentUser: " + commentUser + ", email: " + commentEmail + "]");
     }
 
     /**

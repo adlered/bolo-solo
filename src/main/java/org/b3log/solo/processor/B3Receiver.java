@@ -19,6 +19,7 @@ package org.b3log.solo.processor;
 
 import org.apache.commons.lang.StringUtils;
 import org.b3log.latke.Keys;
+import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
@@ -31,12 +32,10 @@ import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.util.Ids;
 import org.b3log.latke.util.Strings;
-import org.b3log.solo.model.Article;
-import org.b3log.solo.model.Comment;
-import org.b3log.solo.model.Common;
-import org.b3log.solo.model.UserExt;
+import org.b3log.solo.model.*;
 import org.b3log.solo.repository.ArticleRepository;
 import org.b3log.solo.repository.CommentRepository;
+import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.service.*;
 import org.json.JSONObject;
@@ -272,7 +271,13 @@ public class B3Receiver {
             }
 
             final String b3Key = symClient.optString(UserExt.USER_B3_KEY);
-            final String key = articleAuthor.optString(UserExt.USER_B3_KEY);
+
+            // Bolo b3key 校验
+            final BeanManager beanManager = BeanManager.getInstance();
+            OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+            JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+            String key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+
             if (!StringUtils.equals(key, b3Key)) {
                 ret.put(Keys.CODE, 1);
                 final String msg = "Wrong key";

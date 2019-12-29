@@ -76,19 +76,6 @@ public class MailService {
     }
 
     /**
-     * List 化用户邮件关系表
-     *
-     * @return
-     */
-    @RequestProcessing("/listContext")
-    public void listContext(final RequestContext context) {
-        List<MailBind> mailBindList = getUserMailContext();
-        context.renderJSON().renderMsg(mailBindList.toString());
-        System.out.println("email is " + getEmailAddressByCommentId("15769242461912"));
-        return ;
-    }
-
-    /**
      * 通过评论 Id 获取指定用户邮箱地址
      *
      * @param commentId

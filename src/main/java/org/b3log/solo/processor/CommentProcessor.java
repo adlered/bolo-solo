@@ -24,6 +24,7 @@ import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.model.User;
+import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
@@ -36,6 +37,7 @@ import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Comment;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
+import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.service.CommentMgmtService;
 import org.b3log.solo.service.OptionQueryService;
 import org.b3log.solo.service.UserMgmtService;
@@ -66,38 +68,37 @@ public class CommentProcessor {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(CommentProcessor.class);
-
+    SimpleCurrentLimiter simpleCurrentLimiter = new SimpleCurrentLimiter(60, 2);
     /**
      * Language service.
      */
     @Inject
     private LangPropsService langPropsService;
-
     /**
      * Comment management service.
      */
     @Inject
     private CommentMgmtService commentMgmtService;
-
     /**
      * User query service.
      */
     @Inject
     private UserQueryService userQueryService;
-
     /**
      * User management service.
      */
     @Inject
     private UserMgmtService userMgmtService;
-
     /**
      * Option query service.
      */
     @Inject
     private OptionQueryService optionQueryService;
-
-    SimpleCurrentLimiter simpleCurrentLimiter = new SimpleCurrentLimiter(60, 2);
+    /**
+     * User repository.
+     */
+    @Inject
+    private UserRepository userRepository;
 
     /**
      * Adds a comment to an article.
@@ -145,18 +146,36 @@ public class CommentProcessor {
 
         String username = requestJSONObject.getString("boloUser");
         if (username.isEmpty()) {
-            context.sendError(HttpServletResponse.SC_NOT_FOUND);
+            username = Solos.getCurrentUser(context.getRequest(), context.getResponse()).optString(User.USER_NAME);
 
-            return ;
+            if (username.isEmpty()) {
+                context.sendError(HttpServletResponse.SC_FORBIDDEN);
+
+                return ;
+            }
         }
         requestJSONObject.put(Comment.COMMENT_NAME, username);
-
-        fillCommenter(requestJSONObject, context);
 
         final JSONObject jsonObject = commentMgmtService.checkAddCommentRequest(requestJSONObject);
         final JsonRenderer renderer = new JsonRenderer();
         context.setRenderer(renderer);
         renderer.setJSONObject(jsonObject);
+
+        // 禁止冒用管理员评论
+        JSONObject admin = new JSONObject();
+        try {
+            admin = userRepository.getAdmin();
+        } catch (RepositoryException RE) {
+            RE.printStackTrace();
+        }
+        if (admin.optString(User.USER_NAME).equals(username)) {
+            if (!Solos.isAdminLoggedIn(context)) {
+                jsonObject.put(Keys.STATUS_CODE, false);
+                jsonObject.put(Keys.MSG, "你输入了管理员的昵称，但并没有登录！");
+
+                return ;
+            }
+        }
 
         String ip = context.remoteAddr();
         if (!simpleCurrentLimiter.access(ip)) {
@@ -189,9 +208,7 @@ public class CommentProcessor {
                 LOGGER.log(Level.DEBUG, "No originalCommentId for [from=" + commentId + ", to=" + originalCommentId + "]");
             }
 
-            // TODO 提醒作者
-
-            final Map<String, Object> dataModel = new HashMap<> ();
+            final Map<String, Object> dataModel = new HashMap<>();
             dataModel.put(Comment.COMMENT, addResult);
             final JSONObject article = addResult.optJSONObject(Article.ARTICLE);
             article.put(Common.COMMENTABLE, addResult.opt(Common.COMMENTABLE));
@@ -235,7 +252,7 @@ public class CommentProcessor {
     private void fillCommenter(final JSONObject requestJSONObject, final RequestContext context) {
         final JSONObject currentUser = Solos.getCurrentUser(context.getRequest(), context.getResponse());
         if (null == currentUser) {
-            return;
+            return ;
         }
 
         requestJSONObject.put(Comment.COMMENT_NAME, currentUser.optString(User.USER_NAME));

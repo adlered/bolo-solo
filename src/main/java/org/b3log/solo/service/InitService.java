@@ -53,7 +53,7 @@ import java.util.List;
  * Solo initialization service.
  *
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 1.5.2.35, Oct 23, 2019
+ * @version 1.5.2.36, Dec 28, 2019
  * @since 0.4.0
  */
 @Service

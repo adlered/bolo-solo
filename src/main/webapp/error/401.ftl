@@ -19,10 +19,10 @@
 -->
 <#include "../common-template/macro-common_page.ftl">
 
-<@commonPage "401 Unauthorized!">
+<@commonPage "401 未登录">
 <h2>401 Unauthorized!</h2>
 <img class="img-error" src="${staticServePath}/images/401.png" alt="401" title="401 Unauthorized!" />
 <div class="a-error">
-    Please <a href="${loginURL}">start</a> or return to <a href="${servePath}">Index</a>.
+    <a href="${loginURL}">登录</a> | <a href="${servePath}">返回主页</a>
 </div>
 </@commonPage>

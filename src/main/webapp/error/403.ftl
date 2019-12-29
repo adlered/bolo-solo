@@ -19,12 +19,24 @@
 -->
 <#include "../common-template/macro-common_page.ftl">
 
-<@commonPage "403 Forbidden!">
+<@commonPage "403 权限不足">
 <h2>403 Forbidden!</h2>
 <img class="img-error" src="${staticServePath}/images/403.png" alt="403" title="403 Forbidden!" />
 <div class="a-error">
     ${msg!}
     您的账号没有后台管理权限<br>
-    请返回 <a href="${servePath}">主页</a>.
+    <span id="sec">3</span> 秒后返回 <a href="${servePath}">主页</a>
+    <script>
+        i = 2;
+        intervalId = setInterval("fun()", 1000);
+        function fun() {
+            if (i == 0) {
+                window.location.href = "${servePath}";
+                clearInterval(intervalId);
+            }
+            document.getElementById("sec").innerHTML = i;
+            i--;
+        }
+    </script>
 </div>
 </@commonPage>

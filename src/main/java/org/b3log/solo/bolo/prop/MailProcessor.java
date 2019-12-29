@@ -84,8 +84,8 @@ public class MailProcessor {
                             .html(html)
                             .send();
                     LOGGER.log(Level.INFO, "Mail has sent [subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
-                } catch (SendMailException e) {
-                    LOGGER.log(Level.INFO, "Mail sent failed [subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
+                } catch (SendMailException SME) {
+                    LOGGER.log(Level.INFO, "Mail sent failed [cause=" + SME.getCause() + ", subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
                 }
             }
         }).start();

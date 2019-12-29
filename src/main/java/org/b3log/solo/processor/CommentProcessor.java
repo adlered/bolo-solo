@@ -191,9 +191,10 @@ public class CommentProcessor {
 
             // 用户关系表
             String commentId = addResult.optString("oId");
-            String commentUser = requestJSONObject.getString("boloUser");
             String commentEmail = requestJSONObject.getString("email");
-            MailService.addCommentMailContext(commentId, commentUser, commentEmail);
+            if (!commentEmail.isEmpty()) {
+                MailService.addCommentMailContext(commentId, username, commentEmail);
+            }
 
             // 提醒被回复的用户
             String originalCommentId = "";
@@ -202,7 +203,7 @@ public class CommentProcessor {
                 CommentMailService.remindCommentedGuy(
                         originalCommentId,
                         requestJSONObject.getString("URI"),
-                        commentUser
+                        username
                 );
             } catch (JSONException JSONE) {
                 LOGGER.log(Level.DEBUG, "No originalCommentId for [from=" + commentId + ", to=" + originalCommentId + "]");

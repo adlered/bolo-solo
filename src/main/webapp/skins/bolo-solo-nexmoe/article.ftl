@@ -44,8 +44,7 @@
             <div class="nexmoe-post">
                 <div class="nexmoe-post-cover">
                     <img src="${article.articleImg1URL}" alt="${article.articleTitle}"
-                         data-src="${article.articleImg1URL}" class=" ls-is-cached lazyloaded"
-                         referrerpolicy="no-referrer">
+                         data-src="${article.articleImg1URL}" class=" ls-is-cached lazyloaded">
                     <h1>${article.articleTitle}</h1>
                 </div>
                 <div class="nexmoe-post-meta">

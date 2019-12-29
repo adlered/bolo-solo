@@ -25,13 +25,14 @@
 
 ****
 
-* [轻松迁移：迁移至 Bolo / 迁回至 Solo](#轻松迁移迁移至-bolo--迁回至-solo)  
 * [bolo-solo 多种安装方法](#bolo-solo-多种安装方法)  
 * [轻松更新 bolo-solo](#tomcat-%E8%BD%BB%E6%9D%BE%E6%9B%B4%E6%96%B0-bolo-solo)  
-* [皮肤](#皮肤)  
-* [当前实现的特性](#当前实现的特性)  
 * [视频教程](#视频教程)  
 * [其它帮助信息](#其它帮助信息)  
+
+* [轻松迁移：迁移至 Bolo / 迁回至 Solo](#轻松迁移迁移至-bolo--迁回至-solo)  
+* [皮肤](#皮肤)  
+* [当前实现的特性](#当前实现的特性)  
 
 # 公告
 
@@ -74,12 +75,6 @@
 * 听：与官方保持更新的同时，更新人性化、简洁、实用的小功能，感谢你提出各种BUG、建议、意见
 * 教：bolo-solo 将全面更新 bolo-solo 迁移、新建、管理的教学视频（对小白十分友好）及文档，解决你遇到的绝大部分问题（2020年之前完成）
 
-### 关于 Solo V4
-
-[Solo V4](https://hacpai.com/article/1571544590916) 版本将会有很大的变动，其将主要支持静态化页面。  
-届时 Bolo 不会完全更新 Solo V4 版本的内容，Bolo 会**始终保持旧版本 Bolo 用户的平滑更新升级**。  
-Bolo 在 Solo V4 版本之后仍会跟随 Solo 的版本号同步更新，同时引入 Solo V4 的新功能与特性，但为了维持大家的使用习惯，Bolo 的更新内容将不会激进。  
-
 # 特别鸣谢
 
 |:construction_worker:|:construction_worker:|:construction_worker:|
@@ -87,49 +82,6 @@ Bolo 在 Solo V4 版本之后仍会跟随 Solo 的版本号同步更新，同时
 |<img height='48' width='48' src='https://avatars3.githubusercontent.com/u/873584?v=4'>|<img height='48' width='48' src='https://avatars0.githubusercontent.com/u/14257327?v=4'>|<img height='48' width='48' src='https://avatars1.githubusercontent.com/u/23192332?v=4'>|
 |[@88250](https://github.com/88250)|[@csfwff](https://github.com/csfwff)|[@InkDP](https://github.com/InkDP)|
 |[Solo 原作者](https://hacpai.com)|[Bolo 测试、Logo 绘制、前端技术支持](https://sszsj.top)|[默认皮肤 solo-nexmoe 原作者](https://inkdp.cn)|
-
-# 轻松迁移：迁移至 Bolo / 迁回至 Solo
-
-### 从 Solo 迁移至 Bolo
-
-为防出现意外，请先**备份**原来的数据库
-1. 修改 Bolo 的数据库配置文件 `local.properties`，使 Bolo 连接至数据库；
-2. **清空（只清空数据，不删除表本身）** `b3_solo_user` 、 `b3_solo_category` 和 `b3_solo_category_tag` 表；
-3. 执行SQL语句，在用户表中新建一个管理员用户：
-```sql
-INSERT INTO `b3_solo_user` (
-	`oId`,
-	`userName`,
-	`userURL`,
-	`userRole`,
-	`userAvatar`,
-	`userB3Key`,
-	`userGitHubId` 
-)
-VALUES
-	(
-		'default',
-		'{管理员用户名}',
-		'{管理员的个人主页网址}',
-		'adminRole',
-		'{管理员的头像网址}',
-		'{管理员密码}',
-	'none' 
-	);
-```
-如果你修改了`b3_solo_user`的表名，请记得在 SQL 语句中也加以修改（第一行）。  
-将 SQL 语句中的`{管理员用户名}`、`{管理员的个人主页网址}`、`{管理员的头像网址}`、`{管理员密码}`修改。  
-**启动 Bolo ，迁移完成~**
-
-### 从 Bolo 迁回至 Solo
-
-1. **清空（只清空数据，不删除表本身）** `b3_solo_category` 和 `b3_solo_category_tag` 表；
-2. 确定 `b3_solo_user` 表中的 `userName` 列用户名，和你的 GitHub 账户用户名相同，如果不同，请直接修改；
-3. 启动 Solo；
-4. 登录，在`管理后台 - 工具 - 用户管理`中，更新管理员账号的B3log Key为黑客派中的B3log Key。
-5. 大功告成~
-
-> 如果不会操作，欢迎联系我~（请看我名片中的联系方式）
 
 # bolo-solo 多种安装方法
 
@@ -190,6 +142,57 @@ bolo --listen_port=8080 --server_scheme=http --server_host=192.168.2.253
 Windows: `java -cp "WEB-INF/lib/*;WEB-INF/classes" org.b3log.solo.Starter`  
 Unix-like: `java -cp "WEB-INF/lib/*:WEB-INF/classes" org.b3log.solo.Starter`
 
+# 视频教程
+
+视频教程公开在`云存储`中，请[点击这里](https://ftp.stackoverflow.wiki)在线观看。
+
+# 其它帮助信息
+
+* [如何添加社交按钮的内容？](https://hacpai.com/article/1574741650421/comment/1574746366256)
+
+# 轻松迁移：迁移至 Bolo / 迁回至 Solo
+
+### 从 Solo 迁移至 Bolo
+
+为防出现意外，请先**备份**原来的数据库
+1. 修改 Bolo 的数据库配置文件 `local.properties`，使 Bolo 连接至数据库；
+2. **清空（只清空数据，不删除表本身）** `b3_solo_user` 、 `b3_solo_category` 和 `b3_solo_category_tag` 表；
+3. 执行SQL语句，在用户表中新建一个管理员用户：
+```sql
+INSERT INTO `b3_solo_user` (
+	`oId`,
+	`userName`,
+	`userURL`,
+	`userRole`,
+	`userAvatar`,
+	`userB3Key`,
+	`userGitHubId` 
+)
+VALUES
+	(
+		'default',
+		'{管理员用户名}',
+		'{管理员的个人主页网址}',
+		'adminRole',
+		'{管理员的头像网址}',
+		'{管理员密码}',
+	'none' 
+	);
+```
+如果你修改了`b3_solo_user`的表名，请记得在 SQL 语句中也加以修改（第一行）。  
+将 SQL 语句中的`{管理员用户名}`、`{管理员的个人主页网址}`、`{管理员的头像网址}`、`{管理员密码}`修改。  
+**启动 Bolo ，迁移完成~**
+
+### 从 Bolo 迁回至 Solo
+
+1. **清空（只清空数据，不删除表本身）** `b3_solo_category` 和 `b3_solo_category_tag` 表；
+2. 确定 `b3_solo_user` 表中的 `userName` 列用户名，和你的 GitHub 账户用户名相同，如果不同，请直接修改；
+3. 启动 Solo；
+4. 登录，在`管理后台 - 工具 - 用户管理`中，更新管理员账号的B3log Key为黑客派中的B3log Key。
+5. 大功告成~
+
+> 如果不会操作，欢迎联系我~（请看我名片中的联系方式）
+
 # 皮肤
 
 由于特性原因，Bolo **不支持原版皮肤**。但我们会在官方皮肤的基础上修改皮肤，并**附带到** Bolo 当中。
@@ -204,14 +207,6 @@ Unix-like: `java -cp "WEB-INF/lib/*:WEB-INF/classes" org.b3log.solo.Starter`
 1. solo-nexmoe → [bolo-solo-nexmoe](https://github.com/AdlerED/bolo-solo/tree/master/src/main/webapp/skins/bolo-solo-nexmoe)
 
 正在加班加点努力移植... 推荐你先使用当前版本的 bolo-solo，等待你需要的皮肤更新后，直接提取 skins 文件中的皮肤，放到你的 skins 文件夹下即可~
-
-# 视频教程
-
-视频教程公开在`云存储`中，请[点击这里](https://ftp.stackoverflow.wiki)在线观看。
-
-# 其它帮助信息
-
-* [如何添加社交按钮的内容？](https://hacpai.com/article/1574741650421/comment/1574746366256)
 
 # 当前实现的特性
 
@@ -230,3 +225,9 @@ Unix-like: `java -cp "WEB-INF/lib/*:WEB-INF/classes" org.b3log.solo.Starter`
 - [ ] 自定义评论频率限制
 - [ ] 评论审核功能
 - [ ] 关闭搜索功能（1.国内备案管局不允许个人建站带有搜索功能 2.节约服务器资源）
+
+### 关于 Solo V4
+
+[Solo V4](https://hacpai.com/article/1571544590916) 版本将会有很大的变动，其将主要支持静态化页面。  
+届时 Bolo 不会完全更新 Solo V4 版本的内容，Bolo 会**始终保持旧版本 Bolo 用户的平滑更新升级**。  
+Bolo 在 Solo V4 版本之后仍会跟随 Solo 的版本号同步更新，同时引入 Solo V4 的新功能与特性，但为了维持大家的使用习惯，Bolo 的更新内容将不会激进。  

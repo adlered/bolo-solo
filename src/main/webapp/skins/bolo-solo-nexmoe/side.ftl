@@ -175,6 +175,6 @@
         ${footerContent} <br>
         Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 bolo-solo</a> <br>
         Theme <a rel="friend" href="https://github.com/InkDP/solo-nexmoe" target="_blank">${skinDirName}</a>
-        by <a rel="friend" href="https://www.jinjianh.com" target="_blank">InkDP</a>
+        by <a rel="friend" href="https://www.inkdp.cn" target="_blank">InkDP</a>
     </div>
 </div>

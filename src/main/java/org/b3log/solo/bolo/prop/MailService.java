@@ -7,18 +7,19 @@ import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.repository.Transaction;
-import org.b3log.latke.service.annotation.Service;
+import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.solo.bolo.prop.bind.MailBind;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.OptionRepository;
+import org.b3log.solo.util.Solos;
 import org.json.JSONObject;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <h3>bolo-solo</h3>
@@ -73,6 +74,34 @@ public class MailService {
         } catch (RepositoryException RE) {
         }
         LOGGER.log(Level.INFO, "Generate user comment context [commentId: " + commentId + ", commentUser: " + commentUser + ", email: " + commentEmail + "]");
+    }
+
+    /**
+     * 清空指定用户评论的邮件提醒服务列表
+     */
+    @RequestProcessing(value = "/prop/mail/clear", method = {HttpMethod.GET})
+    public void clearCommentMailContext(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
+
+        final BeanManager beanManager = BeanManager.getInstance();
+        final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+
+        // Clear ALL context
+        try {
+            final Transaction transaction = optionRepository.beginTransaction();
+
+            final JSONObject mailUserContextOpt = optionRepository.get(Option.ID_C_MAIL_USER_CONTEXT);
+            mailUserContextOpt.put(Option.OPTION_VALUE, "");
+            optionRepository.update(Option.ID_C_MAIL_USER_CONTEXT, mailUserContextOpt);
+
+            transaction.commit();
+        } catch (RepositoryException RE) {
+        }
+        LOGGER.log(Level.INFO, "All comment mail context cleared successfully.");
     }
 
     /**

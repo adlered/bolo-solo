@@ -32,7 +32,7 @@
                 <#if article.hasUpdated>
                     <sup>
                         <a href="${servePath}${article.articlePermalink}">
-                        ${updatedLabel}
+                            ${updatedLabel}
                         </a>
                     </sup>
                 </#if>
@@ -46,8 +46,16 @@
                 </#if>
             </a>
             <div class="fn__clear">
-                ${article.articleUpdateDate?string("yyyy-MM-dd")}   &nbsp;·&nbsp;
+                ${article.articleUpdateDate?string("yyyy-MM-dd")} &nbsp;·&nbsp;
                 <a href="${servePath}/authors/${article.authorId}">${article.authorName}</a>
+                &nbsp;·&nbsp;
+                <#if article.articleCategory != "">
+                    <span>
+                        <a class="item__tag" href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a>
+                    </span>
+                <#else>
+                    <a class="item__tag">无</a>
+                </#if>
                 &nbsp;·&nbsp;
                 <#list article.articleTags?split(",") as articleTag>
                     <a rel="tag" class="item__tag" href="${servePath}/tags/${articleTag?url('UTF-8')}">
@@ -83,12 +91,14 @@
                 <#if paginationPageNum == paginationCurrentPageNum>
                     <span class="pagination__item pagination__item--active">${paginationPageNum}</span>
                 <#else>
-                    <a class="pagination__item" href="${servePath}${path}?p=${paginationPageNum}">${paginationPageNum}</a>
+                    <a class="pagination__item"
+                       href="${servePath}${path}?p=${paginationPageNum}">${paginationPageNum}</a>
                 </#if>
             </#list>
             <#if paginationPageNums?last != paginationPageCount>
                 <span class="pagination__item pagination__item--omit">...</span>
-                <a href="${servePath}${path}?p=${paginationPageCount}" class="pagination__item">${paginationPageCount}</a>
+                <a href="${servePath}${path}?p=${paginationPageCount}"
+                   class="pagination__item">${paginationPageCount}</a>
                 <a href="${servePath}${path}?p=${paginationNextPageNum}" aria-label="${nextPagePabel}"
                    class="pagination__item vditor-tooltipped__n vditor-tooltipped">&raquo;</a>
             </#if>

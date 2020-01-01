@@ -67,7 +67,7 @@
 
 ## 针对 Solo 博客的改进和优化
 
-### [如果你还没有用过 Bolo 基于的原版 Solo 博客，点我进入 Solo 博客项目主页！](https://github.com/88250/Solo)
+#### [如果你还没有用过 Bolo 基于的原版 Solo 博客，点我进入 Solo 博客项目主页！](https://github.com/88250/Solo)
 
 - [x] 轻松迁移
 - [x] 本地评论功能（无需登录）

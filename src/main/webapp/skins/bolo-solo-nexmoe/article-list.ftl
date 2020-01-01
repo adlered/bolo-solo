@@ -47,19 +47,12 @@
 
                 <#if article.articleCategory != "">
                     <span>
-                        <i class="nexomefont iconfont solo-category"></i>${article.articleCategory}
+                        <a class="nexmoefont iconfont solo-category"
+                           href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a>
                     </span>
                 </#if>
 
                 <#list article.articleTags?split(",") as articleTag>
-                <#if articleTag_index == 0>
-                    <#if article.category??>
-                        <span>
-                            <a class="nexmoefont iconfont solo-category -link"
-                               href="${servePath}/category/${article.category.categoryURI}">${article.category.categoryTitle}</a>
-                </span>
-                    </#if>
-                </#if>
                 <span>
                     <a class="nexmoefont iconfont solo-tag -link"
                        href="${servePath}/tags/${articleTag?url('UTF-8')}">${articleTag}</a>

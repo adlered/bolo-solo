@@ -82,6 +82,9 @@
                 </div>
             </#if>
         </div>
+        <script>
+            var loggedIn = ${article.logged};
+        </script>
     </div>
     <div class="post__toc">
         <#if article?? && article.articleToC?? && article.articleToC?size &gt; 0>

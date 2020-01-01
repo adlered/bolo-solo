@@ -79,6 +79,9 @@
                 </#if>
             </section>
         </div>
+        <script>
+            var loggedIn = ${article.logged};
+        </script>
     </div>
     <#if article?? && article.articleToC?? && article.articleToC?size &gt; 0>
         <div class="post__toc">

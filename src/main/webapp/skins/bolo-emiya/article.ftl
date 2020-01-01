@@ -20,6 +20,9 @@
               </div>
               </#if>
             </div>
+            <script>
+              var loggedIn = ${article.logged};
+            </script>
             <div class="share__container">
               <a class="item J_share" data-type="weibo" href="javascript:;"></a>
               <a class="item J_share" data-type="qzone" href="javascript:;"></a>

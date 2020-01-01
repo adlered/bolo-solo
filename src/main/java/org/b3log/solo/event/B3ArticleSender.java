@@ -96,11 +96,12 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
                 return;
             }
 
-            if (StringUtils.containsIgnoreCase(Latkes.getServePath(), ("localhost")) || Strings.isIPv4(Latkes.getServerHost())) {
+            // 注释本地关闭推送功能
+            /* if (StringUtils.containsIgnoreCase(Latkes.getServePath(), ("localhost")) || Strings.isIPv4(Latkes.getServerHost())) {
                 LOGGER.log(Level.INFO, "Solo is running on local server, ignored push article [title={0}] to Rhy", title);
 
                 return;
-            }
+            } */
 
             final BeanManager beanManager = BeanManager.getInstance();
             final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);

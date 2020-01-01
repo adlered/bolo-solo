@@ -24,18 +24,13 @@
            style="background-image: url(${article.articleImg1URL})">
         </a>
         <div class="item__main">
-            <#list article.articleTags?split(",") as articleTag>
-                <#if articleTag_index == 0>
-                    <#if article.category??>
-                    <a class="item__tag"
-                       href="${servePath}/category/${article.category.categoryURI}">${article.category.categoryTitle}</a>
-                    <#else>
-                    <a rel="tag" class="item__tag" href="${servePath}/tags/${articleTag?url('UTF-8')}">
-                        ${articleTag}
-                    </a>
-                    </#if>
-                </#if>
-            </#list>
+            <#if article.articleCategory != "">
+                <span>
+                    <a class="item__tag" href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a>
+                </span>
+            <#else>
+                <a class="item__tag">无</a>
+            </#if>
             <h2 class="item__title">
                 <a rel="bookmark" href="${servePath}${article.articlePermalink}">
                     ${article.articleTitle}

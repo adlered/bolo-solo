@@ -49,7 +49,7 @@ import org.json.JSONObject;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
  * @author <a href="https://hacpai.com/member/armstrong">ArmstrongCN</a>
- * @version 1.0.2.20, Apr 13, 2019
+ * @version 1.0.2.23, Jan 1, 2020
  * @since 0.3.1
  */
 @Singleton
@@ -97,7 +97,7 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
             }
 
             // 注释本地关闭推送功能
-            /* if (StringUtils.containsIgnoreCase(Latkes.getServePath(), ("localhost")) || Strings.isIPv4(Latkes.getServerHost())) {
+            /* if (isLocalServer()) {
                 LOGGER.log(Level.INFO, "Solo is running on local server, ignored push article [title={0}] to Rhy", title);
 
                 return;
@@ -140,6 +140,11 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Pushes an article to Rhy failed: " + e.getMessage());
         }
+    }
+
+    static boolean isLocalServer() {
+        return StringUtils.containsIgnoreCase(Latkes.getServePath(), "localhost") || Strings.isIPv4(Latkes.getServerHost()) ||
+                (StringUtils.isNotBlank(Latkes.getServerPort())) && !"80".equals(Latkes.getServerPort()) && !"443".equals(Latkes.getServerPort());
     }
 
     /**

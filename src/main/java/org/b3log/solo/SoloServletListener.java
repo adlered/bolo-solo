@@ -76,6 +76,11 @@ public final class SoloServletListener extends AbstractServletListener {
     public static final String VERSION = "3.6.7";
 
     /**
+     * Bolo version.
+     */
+    public static final String BOLO_VERSION = "V1.1 稳定版";
+
+    /**
      * Bean manager.
      */
     private BeanManager beanManager;
@@ -329,6 +334,7 @@ public final class SoloServletListener extends AbstractServletListener {
         final AdminConsole adminConsole = beanManager.getReference(AdminConsole.class);
         DispatcherServlet.get("/admin-index.do", adminConsole::showAdminIndex);
         DispatcherServlet.get("/admin-preference.do", adminConsole::showAdminPreferenceFunction);
+        DispatcherServlet.get("/admin-tool-box.do", adminConsole::showAdminToolBoxFunction);
         DispatcherServlet.route().get(new String[]{"/admin-article.do",
                 "/admin-article-list.do",
                 "/admin-comment-list.do",

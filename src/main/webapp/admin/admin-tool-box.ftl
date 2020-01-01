@@ -19,15 +19,11 @@
 -->
 <div id="tabPreferencePanel" class="sub-tabs-main">
     <div id="tabPreferencePanel_config" class="form">
-        <div class="fn__clear">
-            <button onclick="admin.toolBox.update()" class="fn__right">${updateLabel}</button>
-        </div>
-        <div class="fn__clear"></div>
         <h3>Bolo 实用工具箱</h3>
+        <br>
+        <b>Bolo 实用工具箱是一个黑科技产品。</b>实用工具箱内的全部工具、插件和补丁都是联网获取的。<br>
+        通过远程下载更新补丁，在本机实时编译运行 Java 代码从而实现众多实用功能。<br>
 
-        <div class="fn__clear">
-            <button onclick="admin.toolBox.update()" class="fn__right">${updateLabel}</button>
-        </div>
     </div>
 </div>
 ${plugins}

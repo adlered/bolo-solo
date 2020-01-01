@@ -19,7 +19,6 @@
 -->
 <li id="${comment.oId}" class="item">
     <div class="fn__clear">
-        <div class="item__avatar" style="background-image: url(${comment.commentThumbnailURL})"></div>
         <div class="item__name">
             <#if "http://" == comment.commentURL>
                 <span class="ft__fade">${comment.commentName}</span>

@@ -1,7 +1,7 @@
 <footer class="footer">
   <div class="footer__container">
     © ${year} <a href="${servePath}">${blogTitle}</a> ${footerContent}<br/>
-    Powered by <a href="https://solo.b3log.org" target="_blank">Solo</a> 
+    Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">bolo-solo</a>
     Theme <a rel="friend" href="https://github.com/zjhch123/solo-skin-emiya" target="_blank">${skinDirName}</a>
     <sup>[<a href="https://github.com/spiritree/typecho-theme-amaze" target="_blank">ref</a>]</sup> 
     by <a href="https://github.com/zjhch123" target="_blank">Jiahao.Zhang</a>

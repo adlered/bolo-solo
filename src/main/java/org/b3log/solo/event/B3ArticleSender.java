@@ -91,15 +91,15 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
             }
 
             if (!originalArticle.optBoolean(Common.POST_TO_COMMUNITY)) {
-                LOGGER.log(Level.INFO, "Article [title={0}] push flag [postToCommunity] is false, ignored push to Rhy", title);
+                LOGGER.log(Level.INFO, "Article [title={0}] push flag [postToCommunity] is [false], ignored push to Rhy", title);
 
                 return;
             }
 
             // 注释本地关闭推送功能
             /* if (isLocalServer()) {
-                LOGGER.log(Level.INFO, "Solo is running on local server, ignored push article [title={0}] to Rhy", title);
-
+                LOGGER.log(Level.INFO, "Solo is running on a local server [servePath=" + Latkes.getServePath() +
+                        ", serverHost=" + Latkes.getServerHost() + ", serverPort=" + Latkes.getServerPort() + "], ignored push article [title=" + title + "] to Rhy");
                 return;
             } */
 

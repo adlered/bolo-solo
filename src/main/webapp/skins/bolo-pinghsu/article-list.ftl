@@ -47,16 +47,14 @@
                             ${article.articleTitle}
                         </a>
                     </h2>
+
                     <#list article.articleTags?split(",") as articleTag>
                         <#if articleTag_index == 0>
                             <div class="ico ico--${article_index % 10}"></div>
-                            <#if article.category??>
-                                <a class="item__tag"
-                                   href="${servePath}/category/${article.category.categoryURI}">${article.category.categoryTitle}</a>
+                            <#if article.articleCategory != "">
+                                <a class="item__tag" href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a>
                             <#else>
-                                <a rel="tag" class="item__tag" href="${servePath}/tags/${articleTag?url('UTF-8')}">
-                                    ${articleTag}
-                                </a>
+                                <a class="item__tag">无</a>
                             </#if>
                         </#if>
                     </#list>

@@ -203,7 +203,11 @@ VALUES
 
 目前移植的皮肤：
 
-1. solo-nexmoe → [bolo-solo-nexmoe](https://github.com/AdlerED/bolo-solo/tree/master/src/main/webapp/skins/bolo-solo-nexmoe)
+1. `V1.0` 及以上版本：solo-nexmoe → [bolo-solo-nexmoe](https://github.com/AdlerED/bolo-solo/tree/master/src/main/webapp/skins/bolo-solo-nexmoe)
+2. `V1.1` 及以上版本：emiya -> [bolo-emiya](https://github.com/zjhch123/solo-skin-emiya)
+3. `V1.1` 及以上版本：bubble -> bolo-bubble
+4. `V1.1` 及以上版本：casper -> bolo-casper
+5. `V1.1` 及以上版本：pinghsu -> bolo-pinghsu
 
 正在加班加点努力移植... 推荐你先使用当前版本的 bolo-solo，等待你需要的皮肤更新后，直接提取 skins 文件中的皮肤，放到你的 skins 文件夹下即可~
 

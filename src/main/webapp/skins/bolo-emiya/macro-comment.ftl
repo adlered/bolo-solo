@@ -1,6 +1,5 @@
 <#macro dynamic_comment comment>
   <div class="comment" id="${comment.oId}">
-    <img class="comment__avatar" src="${comment.commentThumbnailURL}" />
     <div class="comment__info">
       <#if "http://" == comment.commentURL>
       <span class="username">${comment.commentName}</span>
@@ -20,7 +19,6 @@
 
 <#macro article_comment comment article>
   <div class="comment" id="${comment.oId}">
-    <img class="comment__avatar" src="${comment.commentThumbnailURL}" />
     <div class="comment__info">
       <#if "http://" == comment.commentURL || "https://" == comment.commentURL>
         <span class="username">${comment.commentName}</span>

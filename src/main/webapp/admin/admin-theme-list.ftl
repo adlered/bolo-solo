@@ -19,7 +19,7 @@
 -->
 <div class="module-panel">
     <div class="module-header">
-        Bolo 主题由 Solo 主题移植而来，获取更多主题请关注 <a href="https://github.com/AdlerED/bolo-solo" target="_blank">bolo-solo 项目主页</a>
+        Bolo 主题由 Solo 主题移植而来，获取更多主题请关注 <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo 项目主页</a>
     </div>
     <div class="module-body padding12"><div id="skinMain"></div></div>
 </div>

@@ -23,7 +23,7 @@
             &copy; ${year}
             <a href="${servePath}">${blogTitle}</a>
             ${footerContent} &nbsp;•&nbsp;
-            Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">bolo-solo</a>
+            Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a>
             <br>
             Theme ${skinDirName}
             <sup>[<a href="https://github.com/TryGhost/Casper" target="_blank">ref</a>]</sup>

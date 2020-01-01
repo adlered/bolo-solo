@@ -21,7 +21,7 @@
     <div class="module-panel">
         <div class="module-header">
             <h2><a href="https://github.com/AdlerED/bolo-solo" target="_blank">实时公告</a></h2>
-            <h6>公告栏仅用于显示 bolo-solo 的重要动态，不会用于加载恶意脚本、恶意广告等操作。</h6>
+            <h6>公告栏仅用于显示 Bolo 的重要动态，不会用于加载恶意脚本、恶意广告等操作。</h6>
         </div>
         <div class="module-body padding12">
             <div id="noticeList" style="background: none;">

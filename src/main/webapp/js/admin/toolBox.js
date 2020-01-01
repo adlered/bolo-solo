@@ -23,255 +23,35 @@
  * @version 1.3.0.3, Aug 18, 2019
  */
 
-/* preference 相关操作 */
-admin.preference = {
+/* tool-box 相关操作 */
+admin.toolBox = {
   locale: '',
   /*
    * 初始化
    */
   init: function () {
-    $('#tabPreference').tabs()
-
-    $.ajax({
-      url: Label.servePath + '/console/preference/',
-      type: 'GET',
-      cache: false,
-      success: function (result, textStatus) {
-        $('#tipMsg').text(result.msg)
-        if (!result.sc) {
-          $('#loadMsg').text('')
-          return
-        }
-
-        var preference = result.preference
-
-        $('#hacpaiUser').val(preference.hacpaiUser)
-        $('#b3logKey').val(preference.b3logKey)
-        $('#mailBox').val(preference.mailBox)
-        $('#mailUsername').val(preference.mailUsername)
-        $('#mailPassword').val(preference.mailPassword)
-        $('#metaKeywords').val(preference.metaKeywords)
-        $('#metaDescription').val(preference.metaDescription)
-        $('#blogTitle').val(preference.blogTitle)
-        $('#blogSubtitle').val(preference.blogSubtitle)
-        $('#mostCommentArticleDisplayCount').
-          val(preference.mostCommentArticleDisplayCount)
-        $('#mostViewArticleDisplayCount').
-          val(preference.mostViewArticleDisplayCount)
-        $('#recentCommentDisplayCount').
-          val(preference.recentCommentDisplayCount)
-        $('#mostUsedTagDisplayCount').val(preference.mostUsedTagDisplayCount)
-        $('#articleListDisplayCount').val(preference.articleListDisplayCount)
-        $('#articleListPaginationWindowSize').
-          val(preference.articleListPaginationWindowSize)
-        $('#localeString').val(preference.localeString)
-        $('#timeZoneId').val(preference.timeZoneId)
-        $('#noticeBoard').val(preference.noticeBoard)
-        $('#footerContent').val(preference.footerContent)
-        $('#htmlHead').val(preference.htmlHead)
-        $('#externalRelevantArticlesDisplayCount').
-          val(preference.externalRelevantArticlesDisplayCount)
-        $('#relevantArticlesDisplayCount').
-          val(preference.relevantArticlesDisplayCount)
-        $('#randomArticlesDisplayCount').
-          val(preference.randomArticlesDisplayCount)
-        $('#customVars').val(preference.customVars)
-        $('#maxArchive').val(preference.maxArchive)
-
-        'true' === preference.enableArticleUpdateHint ? $('#enableArticleUpdateHint').attr('checked', 'checked') : $('#enableArticleUpdateHint').removeAttr('checked')
-        'true' === preference.allowVisitDraftViaPermalink ? $('#allowVisitDraftViaPermalink').attr('checked', 'checked') : $('allowVisitDraftViaPermalink').removeAttr('checked')
-        'true' === preference.commentable ? $('#commentable').attr('checked', 'checked') : $('commentable').removeAttr('checked')
-        'true' === preference.syncGitHub ? $('#syncGitHub').attr('checked', 'checked') : $('syncGitHub').removeAttr('checked')
-        'true' === preference.pullGitHub ? $('#pullGitHub').attr('checked', 'checked') : $('pullGitHub').removeAttr('checked')
-
-        admin.preference.locale = preference.localeString
-
-        // sign
-        var signs = eval('(' + preference.signs + ')')
-        for (var j = 1; j < signs.length; j++) {
-          $('#preferenceSign' + j).val(signs[j].signHTML)
-        }
-
-        $('#articleListDisplay').val(preference.articleListStyle)
-        $('#hljsTheme').val(preference.hljsTheme)
-        $('#feedOutputMode').val(preference.feedOutputMode)
-        $('#feedOutputCnt').val(preference.feedOutputCnt)
-        $('#faviconURL').val(preference.faviconURL)
-
-        $('#loadMsg').text('')
-      },
-    })
+    $('#loadMsg').text('');
   },
   /*
    * @description 参数校验
    */
   validate: function () {
-    if (!/^\d+$/.test($('#mostUsedTagDisplayCount').val())) {
-      $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
-          Label.indexTagDisplayCntLabel + '] ' +
-          Label.nonNegativeIntegerOnlyLabel)
-      $('#mostUsedTagDisplayCount').focus()
-      return false
-    } else if (!/^\d+$/.test($('#recentCommentDisplayCount').val())) {
-      $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
-          Label.indexRecentCommentDisplayCntLabel + '] ' +
-          Label.nonNegativeIntegerOnlyLabel)
-      $('#recentCommentDisplayCount').focus()
-      return false
-    } else if (!/^\d+$/.test($('#mostCommentArticleDisplayCount').val())) {
-      $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
-          Label.indexMostCommentArticleDisplayCntLabel + '] ' +
-          Label.nonNegativeIntegerOnlyLabel)
-      $('#mostCommentArticleDisplayCount').focus()
-      return false
-    } else if (!/^\d+$/.test($('#mostViewArticleDisplayCount').val())) {
-      $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
-          Label.indexMostViewArticleDisplayCntLabel + '] ' +
-          Label.nonNegativeIntegerOnlyLabel)
-      $('#mostViewArticleDisplayCount').focus()
-      return false
-    } else if (!/^\d+$/.test($('#articleListDisplayCount').val())) {
-      $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' + Label.pageSizeLabel +
-          '] ' + Label.nonNegativeIntegerOnlyLabel)
-      $('#articleListDisplayCount').focus()
-      return false
-    } else if (!/^\d+$/.test($('#articleListPaginationWindowSize').val())) {
-      $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' + Label.windowSizeLabel +
-          '] ' + Label.nonNegativeIntegerOnlyLabel)
-      $('#articleListPaginationWindowSize').focus()
-      return false
-    } else if (!/^\d+$/.test($('#randomArticlesDisplayCount').val())) {
-      $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
-          Label.randomArticlesDisplayCntLabel + '] ' +
-          Label.nonNegativeIntegerOnlyLabel)
-      $('#randomArticlesDisplayCount').focus()
-      return false
-    } else if (!/^\d+$/.test($('#relevantArticlesDisplayCount').val())) {
-      $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
-          Label.relevantArticlesDisplayCntLabel + '] ' +
-          Label.nonNegativeIntegerOnlyLabel)
-      $('#relevantArticlesDisplayCount').focus()
-      return false
-    } else if (!/^\d+$/.test(
-      $('#externalRelevantArticlesDisplayCount').val())) {
-      $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
-          Label.externalRelevantArticlesDisplayCntLabel + '] ' +
-          Label.nonNegativeIntegerOnlyLabel)
-      $('#externalRelevantArticlesDisplayCount').focus()
-      return false
-    }
     return true
   },
   /*
    * @description 更新
    */
   update: function () {
-    if (!admin.preference.validate()) {
-      return
-    }
-
-    $('#tipMsg').text('')
-    $('#loadMsg').text(Label.loadingLabel)
-    var signs = [
-      {
-        'oId': 0,
-        'signHTML': '',
-      }, {
-        'oId': 1,
-        'signHTML': $('#preferenceSign1').val(),
-      }, {
-        'oId': 2,
-        'signHTML': $('#preferenceSign2').val(),
-      }, {
-        'oId': 3,
-        'signHTML': $('#preferenceSign3').val(),
-      }]
-
-    var requestJSONObject = {
-      'preference': {
-        'hacpaiUser': $('#hacpaiUser').val(),
-        'b3logKey': $('#b3logKey').val(),
-        'mailBox': $('#mailBox').val(),
-        'mailUsername': $('#mailUsername').val(),
-        'mailPassword': $('#mailPassword').val(),
-        'metaKeywords': $('#metaKeywords').val(),
-        'metaDescription': $('#metaDescription').val(),
-        'blogTitle': $('#blogTitle').val(),
-        'blogSubtitle': $('#blogSubtitle').val(),
-        'mostCommentArticleDisplayCount': $('#mostCommentArticleDisplayCount').
-          val(),
-        'mostViewArticleDisplayCount': $('#mostViewArticleDisplayCount').val(),
-        'recentCommentDisplayCount': $('#recentCommentDisplayCount').val(),
-        'mostUsedTagDisplayCount': $('#mostUsedTagDisplayCount').val(),
-        'articleListDisplayCount': $('#articleListDisplayCount').val(),
-        'articleListPaginationWindowSize': $(
-          '#articleListPaginationWindowSize').val(),
-        'localeString': $('#localeString').val(),
-        'timeZoneId': $('#timeZoneId').val(),
-        'noticeBoard': $('#noticeBoard').val(),
-        'footerContent': $('#footerContent').val(),
-        'htmlHead': $('#htmlHead').val(),
-        'externalRelevantArticlesDisplayCount': $(
-          '#externalRelevantArticlesDisplayCount').val(),
-        'relevantArticlesDisplayCount': $('#relevantArticlesDisplayCount').
-          val(),
-        'randomArticlesDisplayCount': $('#randomArticlesDisplayCount').val(),
-        'enableArticleUpdateHint': $('#enableArticleUpdateHint').
-          prop('checked'),
-        'signs': signs,
-        'allowVisitDraftViaPermalink': $('#allowVisitDraftViaPermalink').
-          prop('checked'),
-        'articleListStyle': $('#articleListDisplay').val(),
-        'hljsTheme': $('#hljsTheme').val(),
-        'feedOutputMode': $('#feedOutputMode').val(),
-        'feedOutputCnt': $('#feedOutputCnt').val(),
-        'faviconURL': $('#faviconURL').val(),
-        'syncGitHub': $('#syncGitHub').prop('checked'),
-        'pullGitHub': $('#pullGitHub').prop('checked'),
-        'commentable': $('#commentable').prop('checked'),
-        'customVars': $('#customVars').val(),
-        'maxArchive': $('#maxArchive').val(),
-      },
-    }
-
-    $.ajax({
-      url: Label.servePath + '/console/preference/',
-      type: 'PUT',
-      cache: false,
-      data: JSON.stringify(requestJSONObject),
-      success: function (result, textStatus) {
-        $('#tipMsg').text(result.msg)
-        if (!result.sc) {
-          $('#loadMsg').text('')
-          return
-        }
-
-        if ($('#localeString').val() !== admin.preference.locale) {
-          window.location.reload()
-        }
-
-        $('#loadMsg').text('')
-        window.location.reload()
-      },
-    })
-  },
+    alert("updated");
+  }
 }
 
 /*
- * 注册到 admin 进行管理 
+ * 注册到 admin 进行管理
  */
 admin.register['tool-box'] = {
-  'obj': admin.preference,
-  'init': admin.preference.init,
+  'obj': admin.toolBox,
+  'init': admin.toolBox.init,
   'refresh': function () {
     admin.clearTip()
   },

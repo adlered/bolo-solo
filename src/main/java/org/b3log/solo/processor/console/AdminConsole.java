@@ -257,23 +257,6 @@ public class AdminConsole {
         dataModel.putAll(langs);
         dataModel.put(Option.ID_C_LOCALE_STRING, locale.toString());
 
-        final JSONObject preference = optionQueryService.getPreference();
-        final StringBuilder timeZoneIdOptions = new StringBuilder();
-        final String[] availableIDs = TimeZone.getAvailableIDs();
-        for (int i = 0; i < availableIDs.length; i++) {
-            final String id = availableIDs[i];
-            String option;
-
-            if (id.equals(preference.optString(Option.ID_C_TIME_ZONE_ID))) {
-                option = "<option value=\"" + id + "\" selected=\"true\">" + id + "</option>";
-            } else {
-                option = "<option value=\"" + id + "\">" + id + "</option>";
-            }
-
-            timeZoneIdOptions.append(option);
-        }
-
-        dataModel.put("timeZoneIdOptions", timeZoneIdOptions.toString());
         fireFreeMarkerActionEvent(templateName, dataModel);
     }
 

@@ -109,8 +109,7 @@ public class CronMgmtService {
 
         SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
             try {
-                // 废除与 GitHub 同步功能
-                // exportService.exportGitHubRepo();
+                exportService.exportHacPai();
             } catch (final Exception e) {
                 LOGGER.log(Level.ERROR, "Executes cron failed", e);
             } finally {
@@ -118,7 +117,6 @@ public class CronMgmtService {
             }
         }, delay + 1000 * 60 * 10, 1000 * 60 * 60 * 24, TimeUnit.MILLISECONDS);
         delay += 2000;
-
     }
 
     /**

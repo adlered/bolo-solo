@@ -26,6 +26,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.b3log.latke.Keys;
 import org.b3log.latke.Latkes;
+import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
@@ -273,10 +274,6 @@ public class ExportService {
                 return;
             }
 
-            if (Latkes.getServePath().contains("localhost") || Strings.isIPv4(Latkes.getServerHost())) {
-                return;
-            }
-
             if (Latkes.RuntimeMode.PRODUCTION != Latkes.getRuntimeMode()) {
                 return;
             }
@@ -301,9 +298,13 @@ public class ExportService {
             FileUtils.deleteQuietly(localFile);
             FileUtils.deleteQuietly(zipFile);
 
-            final JSONObject user = userRepository.getAdmin();
-            final String userName = user.optString(User.USER_NAME);
-            final String userB3Key = user.optString(UserExt.USER_B3_KEY);
+            BeanManager beanManager = BeanManager.getInstance();
+            OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+            JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
+            String userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
+            JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+            String userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+
             final String clientTitle = preference.optString(Option.ID_C_BLOG_TITLE);
             final String clientSubtitle = preference.optString(Option.ID_C_BLOG_SUBTITLE);
 

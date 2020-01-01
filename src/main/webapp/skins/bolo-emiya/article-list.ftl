@@ -7,7 +7,18 @@
           <img class="author__avatar" src="${article.authorThumbnailURL}" alt="author avatar" />
           <span class="author__name">${article.authorName}</span>
         </a>
-        <span class="split">in</span>
+        <span class="split">分类</span>
+
+        <#if article.articleCategory != "">
+          <span>
+            <a class="tags__name" href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a>
+          </span>
+          <#else>
+            <a class="tags__name">无</a>
+        </#if>
+
+        <span class="split">标签</span>
+
         <span class="tags">
           <#list article.articleTags?split(",") as articleTag>
           <a class="tags__name" rel="tag" href="${servePath}/tags/${articleTag?url('UTF-8')}">${articleTag}</a>

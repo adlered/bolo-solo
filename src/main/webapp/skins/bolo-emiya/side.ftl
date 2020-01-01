@@ -41,6 +41,19 @@
   </section>
   </#if>
 
+  <#if 0 != mostUsedCategories?size>
+    <section class="sidebar__container">
+      <div class="header">
+        <span>${categoryLabel}</span>
+      </div>
+      <div class="tags rowSmallItemLayout">
+        <#list mostUsedCategories as category>
+          <a class="item" href="${servePath}/category/${category.categoryURI}">${category.categoryTitle}</a>
+        </#list>
+      </div>
+    </section>
+  </#if>
+
   <#if 0 != mostCommentArticles?size>
   <section class="sidebar__container">
     <div class="header">

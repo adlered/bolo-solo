@@ -43,7 +43,7 @@
                 <a href="${servePath}/category/${category.categoryURI}"
                    class="other__item">
                     ${category.categoryTitle} -
-                    <b>${category.categoryTagCnt}</b> ${tagsLabel}
+                    <b>${category.categoryTagCnt}</b> ${categoriesLabel}
                 </a>
             </#list>
             <br><br>

@@ -1,0 +1,76 @@
+package org.b3log.solo.bolo.invoke;
+
+import org.b3log.latke.logging.Logger;
+import org.b3log.latke.servlet.HttpMethod;
+import org.b3log.latke.servlet.RequestContext;
+import org.b3log.latke.servlet.annotation.RequestProcessing;
+import org.b3log.latke.servlet.annotation.RequestProcessor;
+
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * <h3>bolo-solo</h3>
+ * <p>以字符串运行代码类（实用工具）</p>
+ *
+ * @author : https://github.com/AdlerED
+ * @date : 2020-01-01 21:47
+ **/
+@RequestProcessor
+public class Invoker {
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(Invoker.class);
+
+    /**
+     * 执行 Java 代码
+     */
+    @RequestProcessing(value = "/invoke", method = {HttpMethod.POST})
+    public void invoke(final RequestContext context) {
+        String code = context.getRequest().getParameter("code");
+
+        File file = new File("Invoke00.java");
+        file.delete();
+        try {
+            file.createNewFile();
+        } catch (IOException IOE) {
+            IOE.printStackTrace();
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            out.write(code.getBytes());
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        int compileResult = compiler.run(null, System.out, null, file.getAbsolutePath());
+
+        List<String> strList = new ArrayList<String>();
+        try {
+            Process process = Runtime.getRuntime().exec(new String[]{"java","Invoke00"},null,null);
+            InputStreamReader ir = new InputStreamReader(process.getInputStream());
+            LineNumberReader input = new LineNumberReader(ir);
+            String line;
+            process.waitFor();
+            while ((line = input.readLine()) != null){
+                strList.add(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (String i : strList) {
+            sb.append(i + "\n");
+        }
+
+        context.renderJSON().renderData(sb.toString());
+    }
+}

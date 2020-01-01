@@ -46,14 +46,13 @@
 </#macro>
 
 <#macro article_comments commentList article>
+<#if article.commentable>
+  <input id="boloUser" placeholder="你的昵称" style="width: 95%; border: 1px solid #eee; padding: 20px">
+  <input id="boloSite" placeholder="你的个人主页URL（选填）" style="width: 95%; border: 1px solid #eee; padding: 20px">
+  <textarea rows="3" placeholder="${postCommentsLabel}" class="comment__textarea" id="comment"></textarea>
+  <script type="text/javascript" src="${staticServePath}/js/bolo/sweetalert.min.js"></script>
+</#if>
 <#if commentList?size != 0>
-  <#if article.commentable>
-    <input id="boloUser" placeholder="你的昵称" style="width: 95%; border: 1px solid #eee; padding: 20px">
-    <input id="boloSite" placeholder="你的个人主页URL（选填）" style="width: 95%; border: 1px solid #eee; padding: 20px">
-    <textarea rows="3" placeholder="${postCommentsLabel}" class="comment__textarea" id="comment"></textarea>
-    <script type="text/javascript" src="${staticServePath}/js/bolo/sweetalert.min.js"></script>
-  </#if>
-
   <h3>评论列表</h3>
   <ul class="article__comments" id="comments">
     <#list commentList as comment>

@@ -203,8 +203,8 @@ VALUES
 
 目前移植的皮肤：
 
-1. `V1.0` 及以上版本：[solo-nexmoe](https://github.com/AdlerED/bolo-solo/tree/master/src/main/webapp/skins/bolo-solo-nexmoe) → bolo-solo-nexmoe
-2. `V1.1` 及以上版本：[emiya](https://github.com/zjhch123/solo-skin-emiya) -> bolo-emiya
+1. `V1.0` 及以上版本：solo-nexmoe → bolo-nexmoe
+2. `V1.1` 及以上版本：emiya -> bolo-emiya
 3. `V1.1` 及以上版本：bubble -> bolo-bubble
 4. `V1.1` 及以上版本：casper -> bolo-casper
 5. `V1.1` 及以上版本：pinghsu -> bolo-pinghsu

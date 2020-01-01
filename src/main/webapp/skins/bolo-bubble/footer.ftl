@@ -25,7 +25,7 @@
         <a href="${servePath}">${blogTitle}</a>
         ${footerContent}
         <span class="footer__heart">❤️</span>
-        Powered by <a href="https://solo.b3log.org" target="_blank">Solo</a>
+        Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">bolo-solo</a>
         <br>
         Theme ${skinDirName}
         <sup>[<a href="https://www.cnblogs.com/jajian" target="_blank">ref</a>]</sup>

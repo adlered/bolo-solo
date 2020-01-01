@@ -70,7 +70,7 @@
             <a class="ft__link" href="${servePath}">${blogTitle}</a>
             ${footerContent}
             <br>
-            Powered by <a class="ft__link" href="https://solo.b3log.org" target="_blank">Solo</a>
+            Powered by <a class="ft__link" href="https://github.com/AdlerED/bolo-solo" target="_blank">bolo-solo</a>
             <br>
             Theme ${skinDirName}
             <sup>[<a class="ft__link" target="_blank" href="https://github.com/chakhsu/pinghsu">ref</a>]</sup>

@@ -112,7 +112,15 @@ $.extend(Page.prototype, {
                 })
                     .then((value) => {
                         email = `${value}`;
-                        if ("null" != email) {
+                        reg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+                        if (!reg.test(email) && email !== "") {
+                            swal({
+                                title: "",
+                                text: "评论推送失败: 非法邮箱格式",
+                                icon: "error",
+                                button: "好",
+                            });
+                        } else if ("null" !== email) {
                             $.cookie('my_email', email, {expires: 7, path: '/'});
                             that.submitComment();
                         }

@@ -125,6 +125,17 @@ public class MailService {
         return "";
     }
 
+    public static String getUsernameByCommentId(String commentId) {
+        List<MailBind> mailBindList = getUserMailContext();
+        for (int i = (mailBindList.size() - 1); i >= 0; i--) {
+            MailBind mailBind = mailBindList.get(i);
+            if (mailBind.getCommentId().equals(commentId)) {
+                return mailBind.getCommentUser();
+            }
+        }
+        return "";
+    }
+
     /**
      * 将 Mail Context 转换为可视列表
      *

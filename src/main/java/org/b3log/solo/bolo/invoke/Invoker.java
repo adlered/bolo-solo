@@ -1,11 +1,14 @@
 package org.b3log.solo.bolo.invoke;
 
+import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
+import org.b3log.solo.util.Solos;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 import java.io.*;
@@ -31,7 +34,20 @@ public class Invoker {
      */
     @RequestProcessing(value = "/invoke", method = {HttpMethod.POST})
     public void invoke(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
+
         String code = context.getRequest().getParameter("code");
+        String head = context.getRequest().getParameter("head");
+        StringBuilder codeBuilt = new StringBuilder();
+        codeBuilt.append(head);
+        codeBuilt.append("public class Invoke00 { ");
+        codeBuilt.append(code);
+        codeBuilt.append(" }");
+        LOGGER.log(Level.INFO, "Running code: " + codeBuilt.toString());
 
         File file = new File("Invoke00.java");
         file.delete();
@@ -42,7 +58,7 @@ public class Invoker {
         }
         try {
             FileOutputStream out = new FileOutputStream(file);
-            out.write(code.getBytes());
+            out.write(codeBuilt.toString().getBytes());
             out.flush();
             out.close();
         } catch (IOException e) {
@@ -54,7 +70,7 @@ public class Invoker {
 
         List<String> strList = new ArrayList<String>();
         try {
-            Process process = Runtime.getRuntime().exec(new String[]{"java","Invoke00"},null,null);
+            Process process = Runtime.getRuntime().exec(new String[]{"java", "Invoke00"},null,null);
             InputStreamReader ir = new InputStreamReader(process.getInputStream());
             LineNumberReader input = new LineNumberReader(ir);
             String line;
@@ -65,6 +81,10 @@ public class Invoker {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // 删除文件
+        file.delete();
+        new File("Invoke00.class").delete();
 
         StringBuilder sb = new StringBuilder();
         for (String i : strList) {

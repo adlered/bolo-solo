@@ -101,7 +101,11 @@ public class MailService {
             transaction.commit();
         } catch (RepositoryException RE) {
         }
+
         LOGGER.log(Level.INFO, "All comment mail context cleared successfully.");
+
+        context.renderJSON().renderCode(200);
+        context.renderJSON().renderMsg("All comment mail context cleared successfully.");
     }
 
     /**

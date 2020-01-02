@@ -38,7 +38,7 @@
 
 <#macro common_header>
   <@blog_header>
-    <header class="custom_header" style="background-image: url('/skins/${skinDirName}/images/header.jpg')">
+    <header class="custom_header" style="background-image: url('${staticServePath}/skins/${skinDirName}/images/header.jpg')">
       <div class="custom_header__container">
         <p class="subtitle">${blogSubtitle}</p>
       </div>
@@ -48,7 +48,7 @@
 
 <#macro article_header>
   <@blog_header>
-    <header class="custom_header" style="background-image: url('/skins/${skinDirName}/images/header.jpg')">
+    <header class="custom_header" style="background-image: url('${staticServePath}/skins/${skinDirName}/images/header.jpg')">
       <div class="custom_header__container">
         <div class="custom_header__articleMeta">
           <h1 class="articleMeta__title">${article.articleTitle}</h1>

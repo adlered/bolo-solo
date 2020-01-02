@@ -59,8 +59,6 @@
         (function () {
             try {
                 $('.startAction').click(function () {
-                    // var isAgreen = $('#isAgreenCheck').prop('checked') ? '0' : '1';
-                    // window.location.href = '${servePath}/oauth/github/redirect?referer=${referer}__' + isAgreen;
                     $('#github').addClass('github--loading')
                 })
             } catch (e) {

@@ -55,10 +55,7 @@ import org.json.JSONObject;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -68,7 +65,7 @@ import java.util.*;
  * Admin console render processing.
  *
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 1.7.0.16, Sep 17, 2019
+ * @version 1.7.0.17, Dec 15, 2019
  * @since 0.4.1
  */
 @Singleton
@@ -204,6 +201,9 @@ public class AdminConsole {
             RE.printStackTrace();
         }
 
+        // Bolo version
+        dataModel.put("boloVersion", SoloServletListener.BOLO_VERSION);
+
         fireFreeMarkerActionEvent(templateName, dataModel);
     }
 
@@ -243,6 +243,24 @@ public class AdminConsole {
     }
 
     /**
+     * Shows Bolo tool box preference function with the specified context.
+     *
+     * @param context the specified context
+     */
+    public void showAdminToolBoxFunction(final RequestContext context) {
+        final String templateName = "admin-tool-box.ftl";
+        final AbstractFreeMarkerRenderer renderer = new ConsoleRenderer(context, templateName);
+
+        final Locale locale = Latkes.getLocale();
+        final Map<String, String> langs = langPropsService.getAll(locale);
+        final Map<String, Object> dataModel = renderer.getDataModel();
+        dataModel.putAll(langs);
+        dataModel.put(Option.ID_C_LOCALE_STRING, locale.toString());
+
+        fireFreeMarkerActionEvent(templateName, dataModel);
+    }
+
+    /**
      * Exports data as SQL zip file.
      *
      * @param context the specified request context
@@ -262,100 +280,23 @@ public class AdminConsole {
             // ignored
         }
 
-        final Latkes.RuntimeDatabase runtimeDatabase = Latkes.getRuntimeDatabase();
-        if (Latkes.RuntimeDatabase.H2 != runtimeDatabase && Latkes.RuntimeDatabase.MYSQL != runtimeDatabase) {
-            context.renderJSON().renderMsg("Just support MySQL/H2 export now");
+        final byte[] zipData = exportService.exportSQL();
+        if (null == zipData) {
+            context.sendError(500);
 
             return;
         }
 
-        final String dbUser = Latkes.getLocalProperty("jdbc.username");
-        final String dbPwd = Latkes.getLocalProperty("jdbc.password");
-        final String dbURL = Latkes.getLocalProperty("jdbc.URL");
-        String sql; // exported SQL script
-
-        if (Latkes.RuntimeDatabase.MYSQL == runtimeDatabase) {
-            String db = StringUtils.substringAfterLast(dbURL, "/");
-            db = StringUtils.substringBefore(db, "?");
-
-            try {
-                if (StringUtils.isNotBlank(dbPwd)) {
-                    sql = Execs.exec("mysqldump -u" + dbUser + " -p" + dbPwd + " --databases " + db, 60 * 1000 * 5);
-                } else {
-                    sql = Execs.exec("mysqldump -u" + dbUser + " --databases " + db, 60 * 1000 * 5);
-                }
-            } catch (final Exception e) {
-                LOGGER.log(Level.ERROR, "Export failed", e);
-                context.renderJSON().renderMsg("Export failed, please check log");
-
-                return;
-            }
-        } else if (Latkes.RuntimeDatabase.H2 == runtimeDatabase) {
-            try (final Connection connection = Connections.getConnection();
-                 final Statement statement = connection.createStatement()) {
-                final StringBuilder sqlBuilder = new StringBuilder();
-                final ResultSet resultSet = statement.executeQuery("SCRIPT");
-                while (resultSet.next()) {
-                    final String stmt = resultSet.getString(1);
-                    sqlBuilder.append(stmt).append(Strings.LINE_SEPARATOR);
-                }
-                resultSet.close();
-
-                sql = sqlBuilder.toString();
-            } catch (final Exception e) {
-                LOGGER.log(Level.ERROR, "Export failed", e);
-                context.renderJSON().renderMsg("Export failed, please check log");
-
-                return;
-            }
-        } else {
-            context.renderJSON().renderMsg("Just support MySQL/H2 export now");
-
-            return;
-        }
-
-        if (StringUtils.isBlank(sql)) {
-            LOGGER.log(Level.ERROR, "Export failed, executing export script returns empty");
-            context.renderJSON().renderMsg("Export failed, please check log");
-
-            return;
-        }
-
-        final String tmpDir = System.getProperty("java.io.tmpdir");
         final String date = DateFormatUtils.format(new Date(), "yyyyMMddHHmmss");
-        String localFilePath = tmpDir + File.separator + "solo-" + date + ".sql";
-        LOGGER.trace(localFilePath);
-        final File localFile = new File(localFilePath);
-
+        response.setContentType("application/zip");
+        final String fileName = "solo-sql-" + date + ".zip";
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
         try {
-            final byte[] data = sql.getBytes("UTF-8");
-            try (final OutputStream output = new FileOutputStream(localFile)) {
-                IOUtils.write(data, output);
-            }
-
-            final File zipFile = ZipUtil.zip(localFile);
-            byte[] zipData;
-            try (final FileInputStream inputStream = new FileInputStream(zipFile)) {
-                zipData = IOUtils.toByteArray(inputStream);
-            }
-
-            response.setContentType("application/zip");
-            final String fileName = "solo-sql-" + date + ".zip";
-            response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
-
-            final ServletOutputStream outputStream = response.getOutputStream();
-            outputStream.write(zipData);
-            outputStream.flush();
-            outputStream.close();
-
-            // 导出 SQL 包后清理临时文件 https://github.com/b3log/solo/issues/12770
-            localFile.delete();
-            zipFile.delete();
-        } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Export failed", e);
-            context.renderJSON().renderMsg("Export failed, please check log");
-
-            return;
+            ServletOutputStream out = response.getOutputStream();
+            out.write(zipData);
+            out.flush();
+            out.close();
+        } catch (IOException IOE) {
         }
     }
 

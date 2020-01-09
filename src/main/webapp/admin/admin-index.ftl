@@ -32,7 +32,7 @@
         <div id="allPanel">
             <div id="top">
                 <a href="${servePath}" target="_blank" class="hover">
-                    bolo-solo
+                    Bolo🍍
                 </a>
                 <span class="icon-unordered-list top__menu fn__none"
                       onclick="admin.toggleMenu()"></span>
@@ -91,6 +91,11 @@
                             <span class="icon-chevron-down fn__right"></span>
                         </div>
                         <ul class="fn__none" id="tabTools">
+                            <li>
+                                <div id="tabs_tool-box">
+                                    <a href="#tools/tool-box">${toolBoxLabel}</a>
+                                </div>
+                            </li>
                             <li>
                                 <div id="tabs_preference">
                                     <a href="#tools/preference">${preferenceLabel}</a>
@@ -158,10 +163,11 @@
                 <div id="tabsPanel_comment-list" class="fn__none"></div>
                 <div id="tabsPanel_plugin-list" class="fn__none"></div>
                 <div id="tabsPanel_about" class="fn__none"></div>
+                <div id="tabsPanel_tool-box" class="fn__none"></div>
             </div>
             <div class="fn__clear"></div>
             <div class="footer">
-                Powered by <a href="https://b3log.org" target="_blank">B3log 开源</a> • <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 bolo-solo</a> <span id="version">${version}</span>
+                Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a> <span id="version">${version}</span>
             </div>
         </div>
         <script src="${staticServePath}/js/lib/compress/admin-lib.min.js"></script>
@@ -187,6 +193,7 @@
         <script src="${staticServePath}/js/admin/main.js"></script>
         <script src="${staticServePath}/js/admin/about.js"></script>
         <script src="${staticServePath}/js/admin/themeList.js"></script>
+        <script src="${staticServePath}/js/admin/toolBox.js"></script>
         <#else>
         <script src="${staticServePath}/js/admin/admin.js?${staticResourceVersion}"></script>
         </#if>

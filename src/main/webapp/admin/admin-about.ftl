@@ -29,7 +29,8 @@
         </div>
         <div class="about__panel">
             <div class="about-margin fn__left">
-                你正在使用 bolo-solo 修改版<br>
+                你正在使用 菠萝博客 Bolo<br>
+                当前 Bolo 版本：${boloVersion}<br>
                 对应 Solo 版本：${version}
             </div>
 

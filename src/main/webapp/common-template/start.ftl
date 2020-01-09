@@ -39,13 +39,13 @@
                         document.getElementById('status').innerHTML = '<br><font color="red" s><b>🔐 用户名或密码错误</b></font><br>';
                     }
                     if (status === '-1') {
-                        document.getElementById('status').innerHTML = '<br><font color="green"><b>💿 欢迎使用 bolo-solo<br>输入你想设定的用户名和密码，点击管理登录即可注册！</b></font><br>';
+                        document.getElementById('status').innerHTML = '<br><font color="green"><b>💿 欢迎使用 菠萝博客 Bolo<br>输入你想设定的用户名和密码，点击管理登录即可注册！</b></font><br>';
                     }
                 </script>
             </span>
             <button class="startAction" style="margin-top: 16px">管理登录</button>
         </form>
-        <a class="github__link" href="javascript:$('ul').slideToggle()">查看 bolo-solo 修改版使用说明</a>
+        <a class="github__link" href="javascript:$('ul').slideToggle()">查看 菠萝博客 Bolo 使用说明</a>
         <div class="github__text">
             <ul>
                 <li>Bolo 取消了普通用户的登录功能</li>
@@ -59,8 +59,6 @@
         (function () {
             try {
                 $('.startAction').click(function () {
-                    // var isAgreen = $('#isAgreenCheck').prop('checked') ? '0' : '1';
-                    // window.location.href = '${servePath}/oauth/github/redirect?referer=${referer}__' + isAgreen;
                     $('#github').addClass('github--loading')
                 })
             } catch (e) {

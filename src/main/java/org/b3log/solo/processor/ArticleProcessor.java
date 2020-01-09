@@ -781,7 +781,8 @@ public class ArticleProcessor {
             }
 
             // Bolo 告诉前端用户是否已经登录
-            article.put("logged", String.valueOf(Solos.isLoggedIn(context)));
+            String logged = String.valueOf(Solos.isLoggedIn(context));
+            article.put("logged", logged);
 
             eventData.put(Article.ARTICLE, article);
             eventManager.fireEventSynchronously(new Event<>(EventTypes.BEFORE_RENDER_ARTICLE, eventData));

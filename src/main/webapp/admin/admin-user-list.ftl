@@ -31,7 +31,7 @@
     <label for="userAvatarUpdate">${userAvatar1Label}</label>
     <input id="userAvatarUpdate" type="text"/>
     <label for="userB3KeyUpdate">密码：</label>
-    <input id="userB3KeyUpdate" type="text"/>
+    <input id="userB3KeyUpdate" type="password" placeholder="如不修改密码，请留空"/>
     <br><br>
     <button onclick="admin.userList.update();" class="fn__right">${updateLabel}</button>
     <div class="fn__clear"></div>

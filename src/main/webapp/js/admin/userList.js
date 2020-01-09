@@ -150,7 +150,8 @@ admin.userList = {
 
         $('#userURLUpdate').val(result.user.userURL)
         $('#userAvatarUpdate').val(result.user.userAvatar)
-        $('#userB3KeyUpdate').val(result.user.userB3Key)
+        // $('#userB3KeyUpdate').val(result.user.userB3Key)
+        $('#userB3KeyUpdate').val('')
         $('#userNameUpdate').val(result.user.userName).data('userInfo', {
           'oId': id,
           'userRole': userRole,

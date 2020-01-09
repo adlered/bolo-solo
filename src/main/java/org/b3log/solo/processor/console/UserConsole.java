@@ -30,6 +30,8 @@ import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.Before;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.JsonRenderer;
+import org.b3log.solo.bolo.tool.MD5Utils;
+import org.b3log.solo.model.UserExt;
 import org.b3log.solo.service.UserMgmtService;
 import org.b3log.solo.service.UserQueryService;
 import org.b3log.solo.util.Solos;
@@ -106,6 +108,13 @@ public class UserConsole {
 
         try {
             final JSONObject requestJSONObject = context.requestJSON();
+            final String password = requestJSONObject.optString(UserExt.USER_B3_KEY);
+            if (password.isEmpty()) {
+                String srcPassword = userQueryService.getUserByName(requestJSONObject.optString("userName")).optString(UserExt.USER_B3_KEY);
+                requestJSONObject.put(UserExt.USER_B3_KEY, srcPassword);
+            } else {
+                requestJSONObject.put(UserExt.USER_B3_KEY, MD5Utils.stringToMD5(password));
+            }
             userMgmtService.updateUser(requestJSONObject);
 
             ret.put(Keys.STATUS_CODE, true);

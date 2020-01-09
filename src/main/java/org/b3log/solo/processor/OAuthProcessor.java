@@ -35,6 +35,7 @@ import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.util.Requests;
 import org.b3log.latke.util.URLs;
+import org.b3log.solo.bolo.tool.MD5Utils;
 import org.b3log.solo.model.UserExt;
 import org.b3log.solo.service.*;
 import org.b3log.solo.util.GitHubs;
@@ -119,14 +120,15 @@ public class OAuthProcessor {
         HttpServletRequest request = context.getRequest();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String md5 = MD5Utils.stringToMD5(password);
         try {
             if (!initService.isInited()) {
                 LOGGER.log(Level.INFO, "Bolo initializing...");
                 final JSONObject initReq = new JSONObject();
                 initReq.put(User.USER_NAME, username);
                 initReq.put(UserExt.USER_B3_KEY, password);
-                initReq.put(UserExt.USER_AVATAR, "");
-                initReq.put(UserExt.USER_GITHUB_ID, "");
+                initReq.put(UserExt.USER_AVATAR, "https://pic.stackoverflow.wiki/uploadImages/114/244/224/38/2019/11/30/01/04/1cb648c8-f9f8-430f-8616-43f7b0e2333a.png");
+                initReq.put(UserExt.USER_GITHUB_ID, "000000");
                 initService.init(initReq);
                 context.sendRedirect(Latkes.getServePath() + "/");
             } else {
@@ -134,7 +136,8 @@ public class OAuthProcessor {
                     JSONObject user = userQueryService.getUserByName(username);
                     String cUser = user.optString(User.USER_NAME);
                     String cPass = user.optString(UserExt.USER_B3_KEY);
-                    if (username.equals(cUser) && password.equals(cPass)) {
+                    // 同时兼容明文和密文密码
+                    if ((username.equals(cUser) && password.equals(cPass)) || (username.equals(cUser) && md5.equals(cPass))) {
                         Solos.login(user, context.getResponse());
                         LOGGER.log(Level.INFO, "Logged in [name={0}, remoteAddr={1}] with bolo auth", username, Requests.getRemoteAddr(request));
                         context.sendRedirect(Latkes.getServePath() + "/admin-index.do#main");

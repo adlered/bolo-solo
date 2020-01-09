@@ -58,7 +58,7 @@ public final class Option {
     public static final String ID_C_HLJS_THEME = "hljsTheme";
 
     /**
-     * Key of enable sync (push) GitHub. 导出文章到仓库 https://hacpai.com/article/1557238327458
+     * Key of enable backup public articles to HacPai. 备份公开文章到社区 https://hacpai.com/article/1557238327458
      */
     public static final String ID_C_SYNC_GITHUB = "syncGitHub";
 
@@ -307,7 +307,25 @@ public final class Option {
      */
     public static final String ID_C_MAX_ARCHIVE = "maxArchive";
 
+    /**
+     * Key of Mailbox.
+     */
+    public static final String ID_C_MAIL_BOX = "mailBox";
 
+    /**
+     * Key of Mailbox Username.
+     */
+    public static final String ID_C_MAIL_USERNAME = "mailUsername";
+
+    /**
+     * Key of Mailbox Password.
+     */
+    public static final String ID_C_MAIL_PASSWORD = "mailPassword";
+
+    /**
+     * Key Mail User Context.
+     */
+    public static final String ID_C_MAIL_USER_CONTEXT = "mailUserContext";
 
     /**
      * Private constructor.

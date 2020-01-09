@@ -50,4 +50,5 @@
         <#nested>
     });
 </script>
+<script src="${staticServePath}/js/bolo/jquery.cookie.min.js"></script>
 </#macro>

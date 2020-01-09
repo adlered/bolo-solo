@@ -26,13 +26,16 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.b3log.latke.Keys;
 import org.b3log.latke.Latkes;
+import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.model.Plugin;
 import org.b3log.latke.model.User;
 import org.b3log.latke.repository.*;
+import org.b3log.latke.repository.jdbc.util.Connections;
 import org.b3log.latke.service.annotation.Service;
+import org.b3log.latke.util.Execs;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.model.*;
@@ -44,6 +47,11 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -51,7 +59,7 @@ import java.util.stream.Collectors;
  * Export service.
  *
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 1.1.1.1, Sep 18, 2019
+ * @version 1.1.1.4, Dec 15, 2019
  * @since 2.5.0
  */
 @Service
@@ -145,6 +153,243 @@ public class ExportService {
      */
     @Inject
     private OptionQueryService optionQueryService;
+
+    /**
+     * Article query service.
+     */
+    @Inject
+    private ArticleQueryService articleQueryService;
+
+    /**
+     * Statistic query service.
+     */
+    @Inject
+    private StatisticQueryService statisticQueryService;
+
+    /**
+     * Tag query service.
+     */
+    @Inject
+    private TagQueryService tagQueryService;
+
+    /**
+     * Exports SQL in zip bytes.
+     *
+     * @return data bytes, returns {@code null} if occurs exception
+     */
+    public byte[] exportSQL() {
+        final Latkes.RuntimeDatabase runtimeDatabase = Latkes.getRuntimeDatabase();
+        if (Latkes.RuntimeDatabase.H2 != runtimeDatabase && Latkes.RuntimeDatabase.MYSQL != runtimeDatabase) {
+            LOGGER.log(Level.ERROR, "Just support MySQL/H2 export now");
+
+            return null;
+        }
+
+        final String dbUser = Latkes.getLocalProperty("jdbc.username");
+        final String dbPwd = Latkes.getLocalProperty("jdbc.password");
+        final String dbURL = Latkes.getLocalProperty("jdbc.URL");
+        String sql = ""; // exported SQL script
+
+        if (Latkes.RuntimeDatabase.MYSQL == runtimeDatabase) {
+            String db = StringUtils.substringAfterLast(dbURL, "/");
+            db = StringUtils.substringBefore(db, "?");
+
+            try {
+                if (StringUtils.isNotBlank(dbPwd)) {
+                    sql = Execs.exec("mysqldump -u" + dbUser + " -p" + dbPwd + " --databases " + db, 60 * 1000 * 5);
+                } else {
+                    sql = Execs.exec("mysqldump -u" + dbUser + " --databases " + db, 60 * 1000 * 5);
+                }
+            } catch (final Exception e) {
+                LOGGER.log(Level.ERROR, "Export failed, please check command \"mysqldump\" is on your system", e);
+
+                return null;
+            }
+        } else if (Latkes.RuntimeDatabase.H2 == runtimeDatabase) {
+            try (final Connection connection = Connections.getConnection();
+                 final Statement statement = connection.createStatement()) {
+                final StringBuilder sqlBuilder = new StringBuilder();
+                final ResultSet resultSet = statement.executeQuery("SCRIPT");
+                while (resultSet.next()) {
+                    final String stmt = resultSet.getString(1);
+                    sqlBuilder.append(stmt).append(Strings.LINE_SEPARATOR);
+                }
+                resultSet.close();
+
+                sql = sqlBuilder.toString();
+            } catch (final Exception e) {
+                LOGGER.log(Level.ERROR, "Export failed", e);
+
+                return null;
+            }
+        }
+
+        if (StringUtils.isBlank(sql)) {
+            LOGGER.log(Level.ERROR, "Export failed, executing export script returns empty");
+
+            return null;
+        }
+
+        final String tmpDir = System.getProperty("java.io.tmpdir");
+        final String date = DateFormatUtils.format(new Date(), "yyyyMMddHHmmss");
+        String localFilePath = tmpDir + File.separator + "solo-" + date + ".sql";
+        final File localFile = new File(localFilePath);
+
+        try {
+            final byte[] data = sql.getBytes("UTF-8");
+            try (final OutputStream output = new FileOutputStream(localFile)) {
+                IOUtils.write(data, output);
+            }
+
+            final File zipFile = ZipUtil.zip(localFile);
+            byte[] ret;
+            try (final FileInputStream inputStream = new FileInputStream(zipFile)) {
+                ret = IOUtils.toByteArray(inputStream);
+            }
+
+            // 导出 SQL 包后清理临时文件 https://github.com/b3log/solo/issues/12770
+            localFile.delete();
+            zipFile.delete();
+
+            return ret;
+        } catch (final Exception e) {
+            LOGGER.log(Level.ERROR, "Export failed", e);
+
+            return null;
+        }
+    }
+
+    /**
+     * Exports public articles to admin's HacPai account.
+     */
+    public void exportHacPai() {
+        LOGGER.log(Level.INFO, "Backup public articles to HacPai....");
+        try {
+            final JSONObject preference = optionQueryService.getPreference();
+            if (null == preference) {
+                return;
+            }
+
+            if (!preference.optBoolean(Option.ID_C_SYNC_GITHUB)) {
+                return;
+            }
+
+            if (Latkes.RuntimeMode.PRODUCTION != Latkes.getRuntimeMode()) {
+                return;
+            }
+
+            final JSONObject mds = exportHexoMDs();
+            final List<JSONObject> posts = (List<JSONObject>) mds.opt("posts");
+
+            final String tmpDir = System.getProperty("java.io.tmpdir");
+            final String date = DateFormatUtils.format(new Date(), "yyyyMMddHHmmss");
+            String localFilePath = tmpDir + File.separator + "solo-hexo-" + date;
+            final File localFile = new File(localFilePath);
+
+            final File postDir = new File(localFilePath + File.separator + "posts");
+            exportHexoMd(posts, postDir.getPath());
+
+            final File zipFile = ZipUtil.zip(localFile);
+            byte[] zipData;
+            try (final FileInputStream inputStream = new FileInputStream(zipFile)) {
+                zipData = IOUtils.toByteArray(inputStream);
+            }
+
+            FileUtils.deleteQuietly(localFile);
+            FileUtils.deleteQuietly(zipFile);
+
+            BeanManager beanManager = BeanManager.getInstance();
+            OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+            JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
+            String userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
+            JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+            String userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+
+            final String clientTitle = preference.optString(Option.ID_C_BLOG_TITLE);
+            final String clientSubtitle = preference.optString(Option.ID_C_BLOG_SUBTITLE);
+
+            final Set<String> articleIds = new HashSet<>();
+            final Filter published = new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL, Article.ARTICLE_STATUS_C_PUBLISHED);
+
+            final StringBuilder bodyBuilder = new StringBuilder("### 最新\n");
+            final List<JSONObject> recentArticles = articleRepository.getList(new Query().setFilter(published).select(Keys.OBJECT_ID, Article.ARTICLE_TITLE, Article.ARTICLE_PERMALINK).addSort(Article.ARTICLE_CREATED, SortDirection.DESCENDING).setPage(1, 20));
+            for (final JSONObject article : recentArticles) {
+                final String title = article.optString(Article.ARTICLE_TITLE);
+                final String link = Latkes.getServePath() + article.optString(Article.ARTICLE_PERMALINK);
+                bodyBuilder.append("\n* [").append(title).append("](").append(link).append(")");
+                articleIds.add(article.optString(Keys.OBJECT_ID));
+            }
+            bodyBuilder.append("\n\n");
+
+            final StringBuilder mostViewBuilder = new StringBuilder();
+            final List<JSONObject> mostViewArticles = articleRepository.getList(new Query().setFilter(published).select(Keys.OBJECT_ID, Article.ARTICLE_TITLE, Article.ARTICLE_PERMALINK).addSort(Article.ARTICLE_VIEW_COUNT, SortDirection.DESCENDING).setPage(1, 40));
+            int count = 0;
+            for (final JSONObject article : mostViewArticles) {
+                final String articleId = article.optString(Keys.OBJECT_ID);
+                if (!articleIds.contains(articleId)) {
+                    final String title = article.optString(Article.ARTICLE_TITLE);
+                    final String link = Latkes.getServePath() + article.optString(Article.ARTICLE_PERMALINK);
+                    mostViewBuilder.append("\n* [").append(title).append("](").append(link).append(")");
+                    articleIds.add(articleId);
+                    count++;
+                }
+                if (20 <= count) {
+                    break;
+                }
+            }
+            if (0 < mostViewBuilder.length()) {
+                bodyBuilder.append("### 热门\n").append(mostViewBuilder).append("\n\n");
+            }
+
+            final StringBuilder mostCmtBuilder = new StringBuilder();
+            final List<JSONObject> mostCmtArticles = articleRepository.getList(new Query().setFilter(published).select(Keys.OBJECT_ID, Article.ARTICLE_TITLE, Article.ARTICLE_PERMALINK).addSort(Article.ARTICLE_COMMENT_COUNT, SortDirection.DESCENDING).setPage(1, 60));
+            count = 0;
+            for (final JSONObject article : mostCmtArticles) {
+                final String articleId = article.optString(Keys.OBJECT_ID);
+                if (!articleIds.contains(articleId)) {
+                    final String title = article.optString(Article.ARTICLE_TITLE);
+                    final String link = Latkes.getServePath() + article.optString(Article.ARTICLE_PERMALINK);
+                    mostCmtBuilder.append("\n* [").append(title).append("](").append(link).append(")");
+                    articleIds.add(articleId);
+                    count++;
+                }
+                if (20 <= count) {
+                    break;
+                }
+            }
+            if (0 < mostCmtBuilder.length()) {
+                bodyBuilder.append("### 热议\n").append(mostCmtBuilder);
+            }
+
+            final JSONObject stat = new JSONObject();
+            stat.put("recentArticleTime", articleQueryService.getRecentArticleTime());
+            final JSONObject statistic = statisticQueryService.getStatistic();
+            stat.put("articleCount", statistic.getLong(Option.ID_T_STATISTIC_PUBLISHED_ARTICLE_COUNT));
+            stat.put("commentCount", statistic.getLong(Option.ID_T_STATISTIC_PUBLISHED_BLOG_COMMENT_COUNT));
+            stat.put("tagCount", tagQueryService.getTagCount());
+            stat.put("skin", optionQueryService.getOptionById(Option.ID_C_SKIN_DIR_NAME).optString(Option.OPTION_VALUE));
+            stat.put("mobileSkin", optionQueryService.getOptionById(Option.ID_C_MOBILE_SKIN_DIR_NAME).optString(Option.OPTION_VALUE));
+
+            final HttpResponse response = HttpRequest.post("https://hacpai.com/github/repos").
+                    connectionTimeout(7000).timeout(60000).trustAllCerts(true).header("User-Agent", Solos.USER_AGENT).
+                    form("userName", userName,
+                            "userB3Key", userB3Key,
+                            "clientName", "Solo",
+                            "clientVersion", SoloServletListener.VERSION,
+                            "clientHost", Latkes.getServePath(),
+                            "clientFavicon", preference.optString(Option.ID_C_FAVICON_URL),
+                            "clientTitle", clientTitle,
+                            "clientSubtitle", clientSubtitle,
+                            "clientBody", bodyBuilder.toString(),
+                            "stat", stat.toString(),
+                            "file", zipData).send();
+            response.close();
+            response.charset("UTF-8");
+            LOGGER.info("Backup public articles to HacPai completed: " + response.bodyText());
+        } catch (final Exception e) {
+            LOGGER.log(Level.ERROR, "Exports articles to github repo failed:" + e.getMessage());
+        }
+    }
 
     /**
      * Exports the specified articles to the specified dir path.

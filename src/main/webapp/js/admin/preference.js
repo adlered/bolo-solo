@@ -47,6 +47,9 @@ admin.preference = {
 
         $('#hacpaiUser').val(preference.hacpaiUser)
         $('#b3logKey').val(preference.b3logKey)
+        $('#mailBox').val(preference.mailBox)
+        $('#mailUsername').val(preference.mailUsername)
+        $('#mailPassword').val(preference.mailPassword)
         $('#metaKeywords').val(preference.metaKeywords)
         $('#metaDescription').val(preference.metaDescription)
         $('#blogTitle').val(preference.blogTitle)
@@ -197,6 +200,9 @@ admin.preference = {
       'preference': {
         'hacpaiUser': $('#hacpaiUser').val(),
         'b3logKey': $('#b3logKey').val(),
+        'mailBox': $('#mailBox').val(),
+        'mailUsername': $('#mailUsername').val(),
+        'mailPassword': $('#mailPassword').val(),
         'metaKeywords': $('#metaKeywords').val(),
         'metaDescription': $('#metaDescription').val(),
         'blogTitle': $('#blogTitle').val(),

@@ -191,9 +191,6 @@ public class CommentMgmtService {
             final JSONObject commenter = userRepository.getByUserName(commentName);
             if (null == commenter) {
                 LOGGER.log(Level.INFO, "Newing user [" + commentName + "] ...");
-                ret.put(Keys.MSG, langPropsService.get("queryUserFailedLabel"));
-
-                return ret;
             }
 
             final String commentURL = requestJSONObject.optString(Comment.COMMENT_URL);

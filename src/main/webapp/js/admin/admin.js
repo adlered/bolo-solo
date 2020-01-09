@@ -34,11 +34,11 @@ var Admin = function () {
   // 工具栏下的工具
   this.tools = [
     '#page-list', '#theme-list', '#link-list', '#preference',
-    '#user-list', '#plugin-list', '#others', '#category-list']
+    '#user-list', '#plugin-list', '#others', '#category-list', '#tool-box']
   // 多用户时，一般用户不能使用的功能
   this.adTools = [
     'link-list', 'preference', 'theme-list', 'page-list',
-    'user-list', 'plugin-list', 'others', 'category-list']
+    'user-list', 'plugin-list', 'others', 'category-list', 'tool-box']
 }
 
 $.extend(Admin.prototype, {

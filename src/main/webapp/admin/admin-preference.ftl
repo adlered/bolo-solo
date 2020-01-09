@@ -42,23 +42,44 @@
             <button onclick="admin.preference.update()" class="fn__right">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
-        <h3>B3log 生态设置</h3>
+        <h3>B3log 生态设定</h3>
         <label for="hacpaiUser">${hacpaiUser1Label}</label>
         <input id="hacpaiUser" type="text"/>
         <label for="b3logKey">${b3logKey1Label}</label>
         <input id="b3logKey" type="text">
         <div>
-            设置黑客派用户名和 B3log Key 后，你可以：<br>
+            <b>设置黑客派用户名和 B3log Key 后，你可以</b><br>
             1. 使用 Bolo 的编辑器图床<br>
             2. 与黑客派社区同步发送的文章和评论<br>
             3. 同步你在黑客派中的GitHub、QQ等链接（<a href="https://hacpai.com/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719">功能详情</a><br>
-            如需停用此功能，将 B3log Key 设定为 000000 即可。<br>
-            1) <a href="https://hacpai.com/register?r=AdlerED" target="_blank">在这里</a>注册一个黑客派用户（在<a href="https://hacpai.com/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>
-            2) <a href="https://hacpai.com/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key<br>
-            修改并更新后，刷新页面生效。
+            4. 使用自动备份全部文章至黑客派功能（<a href="https://hacpai.com/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br><br>
+            <b>如何取得 B3log Key</b><br>
+            1. <a href="https://hacpai.com/register?r=AdlerED" target="_blank">在这里</a>注册一个黑客派用户（在<a href="https://hacpai.com/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>
+            2. <a href="https://hacpai.com/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key<br><br>
+            <b>Bolo 坚实的防数据丢失策略</b><br>
+            1. 与黑客派仅保持<b>单向</b>联系。即：只允许上传下载（备份至黑客派、上传至黑客派图床、同步联系方式、同步文章与评论等），不允许修改或删除你的任何本地博客数据<br>
+            2. 完全解除与 GitHub 联系的 API 接口<br>
         </div>
         <br>
-        <h3>本地博客设置</h3>
+        <h3>邮件服务器设定</h3>
+        <label for="mailBox">${mailBoxLabel}</label>
+        <select id="mailBox">
+            <option value="" selected>未设定</option>
+            <option value="QQ">QQ 邮箱</option>
+            <option value="QQ_ENT">QQ 企业版邮箱</option>
+            <option value="163">163 网易免费邮箱</option>
+        </select>
+        <label for="mailUsername">${mailUsernameLabel}</label>
+        <input id="mailUsername" type="text"/>
+        <label for="mailPassword">${mailPasswordLabel}</label>
+        <input id="mailPassword" type="text"/>
+        <div>
+            设定你的邮件服务器，以正常向用户发送评论 / 通知提醒。<br>
+            目前支持：QQ 邮箱、QQ 企业版邮箱、163 网易免费邮箱<br>
+            请注意：<b>有些邮箱服务器可能设有独立密码，具体设定方法请查询后填写！</b>
+        </div>
+        <br>
+        <h3>本地博客设定</h3>
         <label for="blogTitle">${blogTitle1Label}</label>
         <input id="blogTitle" type="text"/>
         <label for="blogSubtitle">${blogSubtitle1Label}</label>
@@ -185,6 +206,12 @@
             <div class="fn__flex-inline">
                 ${allowComment1Label}
                 <input id="commentable" type="checkbox" class="normalInput"/>
+            </div>
+        </label>
+        <label>
+            <div class="fn__flex-inline">
+                ${syncGitHubLabel}
+                <input id="syncGitHub" type="checkbox" class="normalInput"/>
             </div>
         </label>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>

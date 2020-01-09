@@ -28,7 +28,7 @@
 </head>
 <body class="search__body">
 <div class="search__header fn-clear">
-    <a href="${servePath}"><img width="32" border="0" alt="Solo" title="Solo" src="${faviconURL}"/></a>
+    <a href="${servePath}"><img width="32" border="0" alt="Bolo" title="Bolo" src="${faviconURL}"/></a>
     <div class="search__input">
         <input value="${keyword}" id="keyword" type="text" onkeypress="if(event.keyCode===13){document.getElementById('searchBtn').click()}">
         <button id="searchBtn" onclick="window.location.href='${servePath}/search?keyword=' + document.getElementById('keyword').value">搜索</button>
@@ -103,7 +103,7 @@ No Result, Return to <a href="${servePath}">Index</a> or <a href="https://hacpai
 
 <div class="footerWrapper">
     <div class="footer">
-        Powered by <a href="https://b3log.org" target="_blank">B3log 开源</a> • <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 bolo-solo</a> ${version}
+        Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a> ${version}
     </div>
 </div>
 </body>

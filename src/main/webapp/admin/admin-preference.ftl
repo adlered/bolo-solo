@@ -51,7 +51,7 @@
             <b>设置黑客派用户名和 B3log Key 后，你可以</b><br>
             1. 使用 Bolo 的编辑器图床<br>
             2. 与黑客派社区同步发送的文章和评论<br>
-            3. 同步你在黑客派中的GitHub、QQ等链接（<a href="https://hacpai.com/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719">功能详情</a><br>
+            3. 同步你在黑客派中的GitHub、QQ等链接（<a href="https://hacpai.com/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>
             4. 使用自动备份全部文章至黑客派功能（<a href="https://hacpai.com/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br><br>
             <b>如何取得 B3log Key</b><br>
             1. <a href="https://hacpai.com/register?r=AdlerED" target="_blank">在这里</a>注册一个黑客派用户（在<a href="https://hacpai.com/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>

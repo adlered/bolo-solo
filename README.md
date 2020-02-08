@@ -56,6 +56,7 @@
 * [✨贼拉正经的技术博客](https://www.stackoverflow.wiki/blog)
 * [🐭鼠鼠在碎觉](https://sszsj.top/)
 * [☁刘欣的代码笔记](https://www.liuxincode.cn/)
+* [:smile_cat:GeekTom | Blog](https://blog.zhqy.xyz)
 
 # Bolo 的功能亮点
 

@@ -26,6 +26,7 @@ import org.b3log.latke.ioc.Singleton;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.repository.RepositoryException;
+import org.b3log.latke.repository.Transaction;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.servlet.RequestContext;
@@ -35,9 +36,7 @@ import org.b3log.latke.util.Strings;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.repository.CategoryTagRepository;
-import org.b3log.solo.service.ArticleMgmtService;
-import org.b3log.solo.service.ArticleQueryService;
-import org.b3log.solo.service.UserQueryService;
+import org.b3log.solo.service.*;
 import org.b3log.solo.util.Images;
 import org.b3log.solo.util.Solos;
 import org.json.JSONArray;
@@ -93,6 +92,18 @@ public class ArticleConsole {
      */
     @Inject
     CategoryTagRepository categoryTagRepository;
+
+    /**
+     * Category management service.
+     */
+    @Inject
+    private CategoryMgmtService categoryMgmtService;
+
+    /**
+     * Category query service.
+     */
+    @Inject
+    private CategoryQueryService categoryQueryService;
 
     /**
      * Pushes an article to community.
@@ -304,7 +315,7 @@ public class ArticleConsole {
      * @param context the specified request context
      */
     public void removeArticle(final RequestContext context) {
-        // 备注：文章分类总数必须--
+        // 备注：文章分类总数必须 --
         final JsonRenderer renderer = new JsonRenderer();
         context.setRenderer(renderer);
         final JSONObject ret = new JSONObject();
@@ -320,6 +331,12 @@ public class ArticleConsole {
                 return;
             }
 
+            final Transaction transaction = categoryTagRepository.beginTransaction();
+            // TagId 是文章号
+            categoryTagRepository.removeByTagId(articleId);
+            transaction.commit();
+
+            // 删除文章
             articleMgmtService.removeArticle(articleId);
 
             ret.put(Keys.STATUS_CODE, true);

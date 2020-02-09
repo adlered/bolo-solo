@@ -304,6 +304,7 @@ public class ArticleConsole {
      * @param context the specified request context
      */
     public void removeArticle(final RequestContext context) {
+        // 备注：文章分类总数必须--
         final JsonRenderer renderer = new JsonRenderer();
         context.setRenderer(renderer);
         final JSONObject ret = new JSONObject();

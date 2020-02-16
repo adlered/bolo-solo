@@ -57,6 +57,7 @@
 * [🐭鼠鼠在碎觉](https://sszsj.top/)
 * [☁刘欣的代码笔记](https://www.liuxincode.cn/)
 * [:smile_cat:GeekTom | Blog](https://blog.zhqy.xyz)
+* [:tropical_fish:糖醋鱼的小破站](https://expoli.tech/)
 
 # Bolo 的功能亮点
 

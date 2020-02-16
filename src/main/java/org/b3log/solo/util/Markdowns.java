@@ -108,7 +108,7 @@ public final class Markdowns {
     /**
      * Whether Lute is available.
      */
-    public static boolean LUTE_AVAILABLE;
+    public static boolean LUTE_AVAILABLE = false;
 
     /**
      * Lute status
@@ -272,8 +272,15 @@ public final class Markdowns {
     private static String toHtmlByLute(final String markdownText) throws Exception {
         final URL url = new URL(LUTE_ENGINE_URL);
         final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestProperty("X-CodeSyntaxHighlightLineNum", String.valueOf(false));
+        conn.setRequestProperty("X-Footnotes", String.valueOf(false));
+        conn.setRequestProperty("X-ToC", String.valueOf(false));
+        conn.setRequestProperty("X-AutoSpace", String.valueOf(false));
+        conn.setRequestProperty("X-FixTermTypo", String.valueOf(false));
+        conn.setRequestProperty("X-ChinesePunct", String.valueOf(false));
+        conn.setRequestProperty("X-IMADAOM", String.valueOf(false));
         conn.setConnectTimeout(100);
-        conn.setReadTimeout(1000);
+        conn.setReadTimeout(3000);
         conn.setDoOutput(true);
 
         try (final OutputStream outputStream = conn.getOutputStream()) {

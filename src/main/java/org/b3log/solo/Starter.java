@@ -169,6 +169,11 @@ public final class Starter {
             Markdowns.LUTE_ENGINE_URL = luteHttp;
             Markdowns.LUTE_AVAILABLE = true;
         }
+        String luteHttp2 = System.getProperty("lute_http");
+        if (luteHttp2 != null && !luteHttp2.isEmpty()) {
+            Markdowns.LUTE_ENGINE_URL = luteHttp2;
+            Markdowns.LUTE_AVAILABLE = true;
+        }
 
         String webappDirLocation = "src/main/webapp/"; // POM structure in dev env
         final File file = new File(webappDirLocation);

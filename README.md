@@ -26,6 +26,7 @@
 ****
 
 * [Bolo 的功能亮点](#Bolo-的功能亮点)  
+* [全新！使用 Docker 光速安装 Bolo](#使用-Docker-光速安装-Bolo)
 * [Bolo 多种安装方法](#Bolo-多种安装方法)  
 * [轻松更新 Bolo](#tomcat-%E8%BD%BB%E6%9D%BE%E6%9B%B4%E6%96%B0-Bolo)  
 * [视频教程](#视频教程)  
@@ -36,13 +37,14 @@
 # 公告
 
 ### :tada: 菠萝版本信息
+
 菠萝当前版本：v1.2 稳定版  
-对应 Solo 原版版本号：v3.8.0（即支持 Solo v3.8.0 及以下的用户轻松迁移/迁回）
+对应 Solo 原版版本号：v3.8.0（自 Bolo `v1.2 稳定版` 开始，它将兼容意料 Solo 版本之外的 Solo 数据库迁移）  
 
 ### 当前版本注意事项：
 
 * v1.2 稳定版发布啦！Bolo 稳定版支持 Docker、Tomcat 部署，多种部署方法请看下方的《Bolo 多种安装方法》指引 👇
-* v1.1 版本支持邮件提醒评论被回复啦！升级后，在后台配置发信服务器，然后发条评论试试吧~
+* 自 v1.1 版本开始，支持邮件提醒评论被回复啦！升级后，在后台配置发信服务器，然后发条评论试试吧~
 * 稳定版可持续使用，欢迎你的体验、反馈、PR！
 
 # Bolo 预览图
@@ -68,23 +70,6 @@
 - [x] 用户的评论，如果有人回复会通过用户设定的邮箱地址回复（管理员需在后台设置发信邮箱）
 - [x] 视频教程，小白轻松部署
 
-## 针对 Solo 博客的改进和优化
-
-#### [如果你还没有用过 Bolo 基于的原版 Solo 博客，点我进入 Solo 博客项目主页！](https://github.com/88250/Solo)
-
-- [x] 轻松迁移
-- [x] 本地评论功能（无需登录）
-- [x] 分类功能优化（解除分类与标签的关联，超级好用）
-- [x] 评论频率限制（60秒/2次）
-- [x] 自定义主页存档显示数量
-- [x] 本地化JS，防止CDN造成的加载失败
-- [x] 自定义主页显示存档数量
-- [x] 免登录评论
-
-# 声明
-
-`Bolo` 是 `Solo` 的修改版，我们始终支持 B3log 生态，支持与黑客派同步文章、评论、联系方式，使用社区图床。  
-
 ### 为什么选择 Bolo
 
 * 核：基于强大的 [Solo](https://github.com/88250/solo) 进行修改，解析快、占用资源少
@@ -107,6 +92,19 @@
 |<img height='48' width='48' src='https://avatars3.githubusercontent.com/u/873584?v=4'>|<img height='48' width='48' src='https://avatars0.githubusercontent.com/u/14257327?v=4'>|<img height='48' width='48' src='https://avatars1.githubusercontent.com/u/23192332?v=4'>|
 |[@88250](https://github.com/88250)|[@csfwff](https://github.com/csfwff)|[@InkDP](https://github.com/InkDP)|
 |[Solo 原作者](https://hacpai.com)|[Bolo 测试、Logo 绘制、前端技术支持](https://sszsj.top)|[默认皮肤 bolo-nexmoe 原作者](https://inkdp.cn)|
+
+# 使用 Docker 光速安装 Bolo
+
+我们对 Bolo 的 Docker 部署逻辑进行了全新设计，现在 Bolo 可以更灵活地在 Docker 中进行运行、修改、调试了！  
+
+* 我们放弃了使用 Maven 在线部署，它通常需要 20 分钟才可以搞定；新版 Bolo Docker 可以在 15 秒内解决问题。
+* 新的 Bolo Docker 将 Bolo 整合到 Tomcat 当中，且支持 Tomcat APR 模式，运行在 Tomcat 最高效的模式中。
+* 通过一个带有**中文注释**的配置文件，修改你的数据库、HTTP 连接方式，简单易用。
+* 在配置文件中一键连接你的 [lute-http](https://github.com/88250/lute-http) Markdown 渲染服务。
+* 更新仅需替换 Bolo 源码！
+* 旧版 Docker 安装方式会被保留。
+
+[点击这里，使用新版 Bolo Docker 部署你的菠萝博客！](https://github.com/AdlerED/bolo-docker)
 
 # Bolo 多种安装方法
 
@@ -234,6 +232,23 @@ VALUES
 3. `V1.1` 及以上版本：bubble -> bolo-bubble
 4. `V1.1` 及以上版本：casper -> bolo-casper
 5. `V1.1` 及以上版本：pinghsu -> bolo-pinghsu
+
+## 针对 Solo 博客的改进和优化
+
+#### [如果你还没有用过 Bolo 基于的原版 Solo 博客，点我进入 Solo 博客项目主页！](https://github.com/88250/Solo)
+
+- [x] 轻松迁移
+- [x] 本地评论功能（无需登录）
+- [x] 分类功能优化（解除分类与标签的关联，超级好用）
+- [x] 评论频率限制（60秒/2次）
+- [x] 自定义主页存档显示数量
+- [x] 本地化JS，防止CDN造成的加载失败
+- [x] 自定义主页显示存档数量
+- [x] 免登录评论
+
+# 声明
+
+`Bolo` 是 `Solo` 的修改版，我们始终支持 B3log 生态，支持与黑客派同步文章、评论、联系方式，使用社区图床。  
 
 ### 关于 Solo V4
 

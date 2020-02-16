@@ -93,15 +93,20 @@ public class UpgradeService {
                     V365_366.perform();
                 case "3.6.6":
                     V366_367.perform();
-
+                case "3.6.7":
+                    V367_368.perform();
+                case "3.6.8":
+                    V368_370.perform();
+                case "3.7.0":
+                    V370_380.perform();
                     break;
                 default:
-                    LOGGER.log(Level.ERROR, "Please upgrade to v3.0.0 first");
-                    System.exit(-1);
+                    LOGGER.log(Level.INFO, "Version " + currentVer + " loaded in compatibility mode. (unresolvable)");
+                    SoloServletListener.VERSION = currentVer;
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Upgrade failed, please contact the Solo developers or reports this "
-                    + "issue: https://github.com/b3log/solo/issues/new", e);
+            LOGGER.log(Level.ERROR, "Upgrade failed, please contact the Bolo developers or reports this "
+                    + "issue: https://github.com/AdlerED/bolo-solo/issues/new", e);
             System.exit(-1);
         }
     }

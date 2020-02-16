@@ -111,6 +111,11 @@ public final class Markdowns {
     public static boolean LUTE_AVAILABLE;
 
     /**
+     * Lute status
+     */
+    private static boolean LUTE_OK = false;
+
+    /**
      * Cleans the specified HTML.
      *
      * @param html the specified HTML
@@ -156,6 +161,12 @@ public final class Markdowns {
             if (LUTE_AVAILABLE) {
                 try {
                     html = toHtmlByLute(markdownText);
+                    if (!LUTE_OK) {
+                        LOGGER.log(Level.INFO, "Lute-HTTP To HTML successful.");
+                        LUTE_OK = true;
+                    } else {
+                        LOGGER.log(Level.DEBUG, "Lute-HTTP To HTML successful.");
+                    }
                 } catch (final Exception e) {
                     LOGGER.log(Level.WARN, "Failed to use [Lute] for markdown [md=" + StringUtils.substring(markdownText, 0, 256) + "]: " + e.getMessage());
                 }

@@ -41,6 +41,25 @@ $.extend(SoloEditor.prototype, {
    * @description 初始化编辑器
    */
   init: function () {
+    // 编辑器常用表情使用社区端的设置
+    $.ajax({
+      url: 'https://hacpai.com/apis/vcomment/users/emotions',
+      type: 'GET',
+      cache: true,
+      async: false,
+      xhrFields: {
+        withCredentials: true,
+      },
+      success: function (result) {
+        Label.emoji = {}
+        if (Array.isArray(result.data)) {
+          result.data.forEach(item => {
+            const key = Object.keys(item)[0]
+            Label.emoji[key] = item[key]
+          })
+        }
+      },
+    })
     this.editor = new Vditor(this.conf.id, {
       typewriterMode: this.conf.typewriterMode,
       cache: true,
@@ -76,6 +95,10 @@ $.extend(SoloEditor.prototype, {
         enable: this.conf.resize,
       },
       lang: Label.localeString,
+      hint: {
+        emojiTail: `<a href="https://hacpai.com/settings/function" target="_blank">设置常用表情</a>`,
+        emoji: Label.emoji,
+      },
     })
 
     if (typeof this.conf.fun === 'function') {

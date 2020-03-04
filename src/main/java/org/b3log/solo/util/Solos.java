@@ -240,8 +240,11 @@ public final class Solos {
 
             final JSONObject data = result.optJSONObject(Common.DATA);
             uploadTokenTime = now;
+            // 自定义图床字段
             uploadToken = data.optString("uploadToken");
-            uploadURL = data.optString("uploadURL");
+            //uploadURL = data.optString("uploadURL");
+            // uploadToken = "123456";
+            uploadURL = "/pic/upload";
             uploadMsg = "";
 
             return new JSONObject().

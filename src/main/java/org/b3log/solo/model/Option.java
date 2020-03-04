@@ -323,9 +323,14 @@ public final class Option {
     public static final String ID_C_MAIL_PASSWORD = "mailPassword";
 
     /**
-     * Key Mail User Context.
+     * Key of Mail User Context.
      */
     public static final String ID_C_MAIL_USER_CONTEXT = "mailUserContext";
+
+    /**
+     * Key of TuChuang Config.
+     */
+    public static final String ID_C_TUCHUANG_CONFIG = "tuChuangConfig";
 
     /**
      * Private constructor.

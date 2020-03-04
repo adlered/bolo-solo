@@ -723,6 +723,12 @@ public class InitService {
         mailPasswordOpt.put(Option.OPTION_VALUE, "");
         optionRepository.add(mailPasswordOpt);
 
+        final JSONObject tuChuangConfigOpt = new JSONObject();
+        tuChuangConfigOpt.put(Keys.OBJECT_ID, Option.ID_C_TUCHUANG_CONFIG);
+        tuChuangConfigOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+        tuChuangConfigOpt.put(Option.OPTION_VALUE, "");
+        optionRepository.add(tuChuangConfigOpt);
+
         LOGGER.info("Initialized preference");
     }
 }

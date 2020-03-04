@@ -30,19 +30,19 @@ public class PicUploadProcessor {
         factory.setRepository(new File("temp/"));
         ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setHeaderEncoding("UTF-8");
+        Map okPic = new HashMap();
         try {
             List<FileItem> itemList = upload.parseRequest(context.getRequest());
             for (FileItem item : itemList) {
-                String name = item.getFieldName();
+                String name = item.getName();
                 String value = item.getString("UTF-8");
                 System.out.println("name="+name+"  value="+value);
+                okPic.put(name, "https://pic.stackoverflow.wiki/uploadImages/114/244/228/172/2020/03/04/21/53/7d0fb26a-cc23-454b-b4b3-5bd58f5ed292.jpg");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         Map map = new HashMap();
-        Map okPic = new HashMap();
-        okPic.put("屏幕快照20200303下午3.56.06.png", "https://pic.stackoverflow.wiki/uploadImages/114/244/228/172/2020/03/04/21/53/7d0fb26a-cc23-454b-b4b3-5bd58f5ed292.jpg");
         map.put("succMap", okPic);
         map.put("errFiles", new ArrayList<>());
         context.renderJSON().renderData(map);

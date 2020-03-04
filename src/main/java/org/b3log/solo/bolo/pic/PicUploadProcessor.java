@@ -7,7 +7,9 @@ import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
+import org.b3log.solo.util.Solos;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.util.ArrayList;
@@ -26,6 +28,11 @@ import java.util.Map;
 public class PicUploadProcessor {
     @RequestProcessing(value = "/pic/upload", method = {HttpMethod.POST})
     public void uploadPicture(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
         DiskFileItemFactory factory = new DiskFileItemFactory();
         factory.setRepository(new File("temp/"));
         ServletFileUpload upload = new ServletFileUpload(factory);

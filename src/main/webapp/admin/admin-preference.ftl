@@ -42,6 +42,13 @@
             <button onclick="admin.preference.update()" class="fn__right">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
+        <label for="tcS">自定义图床</label>
+        <select id="tcS">
+            <option value="hacpai" selected>黑客派图床（默认）</option>
+            <option value="picuang">基于 Picuang 的自搭建图床</option>
+        </select>
+        元数据：<span id="sourceTC"></span>
+        <br>
         <h3>B3log 生态设定</h3>
         <label for="hacpaiUser">${hacpaiUser1Label}</label>
         <input id="hacpaiUser" type="text"/>

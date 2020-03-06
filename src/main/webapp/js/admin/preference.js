@@ -45,6 +45,7 @@ admin.preference = {
 
         var preference = result.preference
 
+        $('#sourceTC').text(preference.tuChuangConfig)
         $('#hacpaiUser').val(preference.hacpaiUser)
         $('#b3logKey').val(preference.b3logKey)
         $('#mailBox').val(preference.mailBox)
@@ -198,6 +199,7 @@ admin.preference = {
 
     var requestJSONObject = {
       'preference': {
+        'tuChuangConfig': 'helloooo test',
         'hacpaiUser': $('#hacpaiUser').val(),
         'b3logKey': $('#b3logKey').val(),
         'mailBox': $('#mailBox').val(),

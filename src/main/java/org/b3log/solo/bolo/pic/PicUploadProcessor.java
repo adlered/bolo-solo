@@ -10,7 +10,6 @@ import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.solo.util.Solos;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +43,8 @@ public class PicUploadProcessor {
                 String name = item.getName();
                 String value = item.getString("UTF-8");
                 System.out.println("name="+name+"  value="+value);
-                okPic.put(name, "https://pic.stackoverflow.wiki/uploadImages/114/244/228/172/2020/03/04/21/53/7d0fb26a-cc23-454b-b4b3-5bd58f5ed292.jpg");
+                String url = "https://pic.stackoverflow.wiki/uploadImages/114/244/228/172/2020/03/04/21/53/7d0fb26a-cc23-454b-b4b3-5bd58f5ed292.jpg";
+                okPic.put(name, url);
             }
         } catch (Exception e) {
             e.printStackTrace();

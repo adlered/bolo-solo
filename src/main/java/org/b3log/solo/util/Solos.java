@@ -243,7 +243,6 @@ public final class Solos {
             // 自定义图床字段
             uploadToken = data.optString("uploadToken");
             //uploadURL = data.optString("uploadURL");
-            // uploadToken = "123456";
             uploadURL = Latkes.getStaticServePath() + "/pic/upload";
             uploadMsg = "";
 

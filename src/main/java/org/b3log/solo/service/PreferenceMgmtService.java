@@ -235,11 +235,8 @@ public class PreferenceMgmtService {
                 JSONObject hacpaiUserOpt = new JSONObject();
                 hacpaiUserOpt.put(Keys.OBJECT_ID, Option.ID_C_HACPAI_USER);
                 hacpaiUserOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
-                hacpaiUserOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_HACPAI_USER);
-                optionRepository.add(hacpaiUserOpt);
-                hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);;
                 hacpaiUserOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_HACPAI_USER));
-                optionRepository.update(Option.ID_C_HACPAI_USER, hacpaiUserOpt);
+                optionRepository.add(hacpaiUserOpt);
             }
 
             try {
@@ -250,11 +247,8 @@ public class PreferenceMgmtService {
                 JSONObject b3logKeyOpt = new JSONObject();
                 b3logKeyOpt.put(Keys.OBJECT_ID, Option.ID_C_B3LOG_KEY);
                 b3logKeyOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
-                b3logKeyOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_B3LOG_KEY);
-                optionRepository.add(b3logKeyOpt);
-                b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
                 b3logKeyOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_B3LOG_KEY));
-                optionRepository.update(Option.ID_C_B3LOG_KEY, b3logKeyOpt);
+                optionRepository.add(b3logKeyOpt);
             }
 
             try {
@@ -265,11 +259,8 @@ public class PreferenceMgmtService {
                 JSONObject maxArchiveOpt = new JSONObject();
                 maxArchiveOpt.put(Keys.OBJECT_ID, Option.ID_C_MAX_ARCHIVE);
                 maxArchiveOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
-                maxArchiveOpt.put(Option.OPTION_VALUE, Option.DefaultPreference.DEFAULT_MAX_ARCHIVE);
-                optionRepository.add(maxArchiveOpt);
-                maxArchiveOpt = optionRepository.get(Option.ID_C_MAX_ARCHIVE);
                 maxArchiveOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_MAX_ARCHIVE));
-                optionRepository.update(Option.ID_C_MAX_ARCHIVE, maxArchiveOpt);
+                optionRepository.add(maxArchiveOpt);
             }
 
             try {
@@ -280,11 +271,8 @@ public class PreferenceMgmtService {
                 JSONObject mailBoxOpt = new JSONObject();
                 mailBoxOpt.put(Keys.OBJECT_ID, Option.ID_C_MAIL_BOX);
                 mailBoxOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
-                mailBoxOpt.put(Option.OPTION_VALUE, "");
-                optionRepository.add(mailBoxOpt);
-                mailBoxOpt = optionRepository.get(Option.ID_C_MAIL_BOX);
                 mailBoxOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_MAIL_BOX));
-                optionRepository.update(Option.ID_C_MAIL_BOX, mailBoxOpt);
+                optionRepository.add(mailBoxOpt);
             }
 
             try {
@@ -295,11 +283,8 @@ public class PreferenceMgmtService {
                 JSONObject mailUsernameOpt = new JSONObject();
                 mailUsernameOpt.put(Keys.OBJECT_ID, Option.ID_C_MAIL_USERNAME);
                 mailUsernameOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
-                mailUsernameOpt.put(Option.OPTION_VALUE, "");
-                optionRepository.add(mailUsernameOpt);
-                mailUsernameOpt = optionRepository.get(Option.ID_C_MAIL_USERNAME);
                 mailUsernameOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_MAIL_USERNAME));
-                optionRepository.update(Option.ID_C_MAIL_USERNAME, mailUsernameOpt);
+                optionRepository.add(mailUsernameOpt);
             }
 
             try {
@@ -310,15 +295,23 @@ public class PreferenceMgmtService {
                 JSONObject mailPasswordOpt = new JSONObject();
                 mailPasswordOpt.put(Keys.OBJECT_ID, Option.ID_C_MAIL_PASSWORD);
                 mailPasswordOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
-                mailPasswordOpt.put(Option.OPTION_VALUE, "");
-                optionRepository.add(mailPasswordOpt);
-                mailPasswordOpt = optionRepository.get(Option.ID_C_MAIL_PASSWORD);
                 mailPasswordOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_MAIL_PASSWORD));
-                optionRepository.update(Option.ID_C_MAIL_PASSWORD, mailPasswordOpt);
+                optionRepository.add(mailPasswordOpt);
+            }
+
+            try {
+                final JSONObject tuChuangConfigOpt = optionRepository.get(Option.ID_C_TUCHUANG_CONFIG);
+                tuChuangConfigOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_TUCHUANG_CONFIG));
+                optionRepository.update(Option.ID_C_TUCHUANG_CONFIG, tuChuangConfigOpt);
+            } catch (NullPointerException NPE) {
+                JSONObject tuChuangConfigOpt = new JSONObject();
+                tuChuangConfigOpt.put(Keys.OBJECT_ID, Option.ID_C_TUCHUANG_CONFIG);
+                tuChuangConfigOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+                tuChuangConfigOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_TUCHUANG_CONFIG));
+                optionRepository.add(tuChuangConfigOpt);
             }
 
             MailService.loadMailSettings();
-
             transaction.commit();
         } catch (final Exception e) {
             if (transaction.isActive()) {

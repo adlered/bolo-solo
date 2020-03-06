@@ -46,6 +46,8 @@ admin.preference = {
         var preference = result.preference
 
         $('#sourceTC').text(preference.tuChuangConfig)
+        sltd = $('#sourceTC').text().split('<<>>')[0];
+        $('#tcS').val(sltd);
         $('#hacpaiUser').val(preference.hacpaiUser)
         $('#b3logKey').val(preference.b3logKey)
         $('#mailBox').val(preference.mailBox)

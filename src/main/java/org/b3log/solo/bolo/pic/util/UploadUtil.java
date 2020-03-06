@@ -1,5 +1,8 @@
 package org.b3log.solo.bolo.pic.util;
 
+import com.aliyun.oss.OSS;
+import com.aliyun.oss.OSSClientBuilder;
+import com.aliyun.oss.model.PutObjectRequest;
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
@@ -8,6 +11,7 @@ import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -98,9 +102,23 @@ public class UploadUtil {
                     }
                 }
                 break;
-            default:
+            case "aliyun":
+                String accessKeyID = config.split("<<>>")[1];
+                String accessKeySecret = config.split("<<>>")[2];
+                String endPoint = config.split("<<>>")[3];
+                String bucketName = config.split("<<>>")[4];
+                String bucketDomain = config.split("<<>>")[5];
+                String aliTreaty = config.split("<<>>")[6];
+                String filename = RandomStringUtils.randomAlphanumeric(10);
+
+                OSS ossClient = new OSSClientBuilder().build(endPoint, accessKeyID, accessKeySecret);
+                PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, filename, file);
+                ossClient.putObject(putObjectRequest);
+                ossClient.shutdown();
+                result = aliTreaty + "://" + bucketDomain + "/" + filename;
                 break;
         }
+        file.delete();
         return result;
     }
 }

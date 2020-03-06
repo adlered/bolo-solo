@@ -52,6 +52,7 @@
             <option value="hacpai">黑客派图床（默认）</option>
             <option value="picuang">基于 Picuang 的自搭建图床</option>
             <option value="qiniu">七牛云</option>
+            <option value="aliyun">阿里云</option>
         </select>
         <div class="fn__clear" id="changeCfgBtn">
             <button onclick="unlock()" class="fn__left">允许修改图床配置</button>
@@ -68,6 +69,8 @@
         <input id="tc5" type="text" style="display:none" />
         <div id="td6" for="tc6" style="display:none"></div>
         <input id="tc6" type="text" style="display:none" />
+        <div id="td7" for="tc7" style="display:none"></div>
+        <input id="tc7" type="text" style="display:none" />
         <div class="fn__clear" id="tuChuangCfg" style="display: none">
             <button onclick="save()" class="fn__left">保存图床配置</button>
         </div>
@@ -98,19 +101,32 @@
                         $('#td3').show(); $('#tc3').show();
                         $('#td3').html('<b>SecretKey</b>');
                         $('#td4').show(); $('#tc4').show();
-                        $('#td4').html('<b>Bucket</b>');
+                        $('#td4').html('<b>Bucket 名称</b>');
                         $('#td5').show(); $('#tc5').show();
                         $('#td5').html('<b>Bucket 绑定的域名（不需要填写协议，正确示例：qiniu.stackoverflow.wiki）</b>');
                         $('#td6').show(); $('#tc6').show();
                         $('#td6').html('<b>协议（填写英文小写 http 或 https，以你的设定为准）</b>');
-                    default:
-                        break;
+                    case 'aliyun':
+                        $('#td1').show();
+                        $('#td1').html('Bolo 支持阿里云图床。AccessKey 信息可以从 AccessKey 管理中找到，必须将 Bucket ACL 的权限设定为 公共读写。<a target="_blank" href="https://help.aliyun.com/document_detail/31817.html">阿里云开发文档</a>');
+                        $('#td2').show(); $('#tc2').show();
+                        $('#td2').html('<b>AccessKeyID</b>');
+                        $('#td3').show(); $('#tc3').show();
+                        $('#td3').html('<b>AccessKeySecret</b>');
+                        $('#td4').show(); $('#tc4').show();
+                        $('#td4').html('<b>EndPoint（地域节点）</b>');
+                        $('#td5').show(); $('#tc5').show();
+                        $('#td5').html('<b>Bucket 名称</b>');
+                        $('#td6').show(); $('#tc6').show();
+                        $('#td6').html('<b>Bucket 域名</b>');
+                        $('#td7').show(); $('#tc7').show();
+                        $('#td7').html('<b>协议（填写英文小写 http 或 https，以你的设定为准）</b>')
                 }
             }
             $('#tcS').change(loadRemind);
 
             function clear() {
-                for (i = 1; i <= 6; i++) {
+                for (i = 1; i <= 7; i++) {
                     $('#tc' + i).hide();
                     $('#td' + i).hide();
                 }
@@ -134,18 +150,16 @@
                         break;
                     case 'qiniu':
                         $('#sourceTC').text('qiniu<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
+                        break;
+                    case 'aliyun':
+                        $('#sourceTC').text('aliyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val() + '<<>>' + $('#tc7').val());
+                        break;
                 }
                 alert('配置已保存。如果自定义图床未生效，请清除浏览器缓存。');
                 admin.preference.update();
             }
-
-            $(function() {
-                setTimeout(function () {
-                    sltd = $('#sourceTC').text().split('<<>>')[0];
-                    $('#tcS').val(sltd);
-                }, 2000);
-            })
         </script>
+        <div>配置图床期间出现疑问或问题，请联系作者微信：1101635162</div>
         <br>
         <h3>B3log 生态设定</h3>
         <label for="hacpaiUser">${hacpaiUser1Label}</label>

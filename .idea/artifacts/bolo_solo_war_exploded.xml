@@ -101,6 +101,14 @@
           <element id="library" level="project" name="Maven: com.squareup.okhttp3:okhttp:3.14.4" />
           <element id="library" level="project" name="Maven: com.squareup.okio:okio:1.17.2" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.6" />
+          <element id="library" level="project" name="Maven: com.aliyun.oss:aliyun-sdk-oss:3.8.0" />
+          <element id="library" level="project" name="Maven: org.jdom:jdom:1.1" />
+          <element id="library" level="project" name="Maven: org.codehaus.jettison:jettison:1.1" />
+          <element id="library" level="project" name="Maven: stax:stax-api:1.0.1" />
+          <element id="library" level="project" name="Maven: com.aliyun:aliyun-java-sdk-core:3.4.0" />
+          <element id="library" level="project" name="Maven: com.aliyun:aliyun-java-sdk-ram:3.0.0" />
+          <element id="library" level="project" name="Maven: com.aliyun:aliyun-java-sdk-sts:3.0.0" />
+          <element id="library" level="project" name="Maven: com.aliyun:aliyun-java-sdk-ecs:4.2.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">

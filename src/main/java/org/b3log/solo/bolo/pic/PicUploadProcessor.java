@@ -39,44 +39,46 @@ public class PicUploadProcessor {
 
     @RequestProcessing(value = "/pic/upload", method = {HttpMethod.POST})
     public void uploadPicture(final RequestContext context) {
-        if (!Solos.isAdminLoggedIn(context)) {
-            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        synchronized (this) {
+            if (!Solos.isAdminLoggedIn(context)) {
+                context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 
-            return;
-        }
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        factory.setRepository(new File("temp/"));
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        upload.setHeaderEncoding("UTF-8");
-        Map okPic = new HashMap();
-        List<String> errFiles = new ArrayList<>();
-        try {
-            List<FileItem> itemList = upload.parseRequest(context.getRequest());
-            for (FileItem item : itemList) {
-                String name = item.getName();
-                String config = "hacpai";
-                try {
-                    config = optionRepository.get(Option.ID_C_TUCHUANG_CONFIG).optString(Option.OPTION_VALUE);
-                } catch (Exception e) {
-                }
-                File file = new File("temp/" + name);
-                item.write(file);
-                item.delete();
-                try {
-                    String url = UploadUtil.upload(config, file);
-                    okPic.put(name, url);
-                } catch (Exception e) {
-                    errFiles.add(name);
-                }
+                return;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            factory.setRepository(new File("temp/"));
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            upload.setHeaderEncoding("UTF-8");
+            Map okPic = new HashMap();
+            List<String> errFiles = new ArrayList<>();
+            try {
+                List<FileItem> itemList = upload.parseRequest(context.getRequest());
+                for (FileItem item : itemList) {
+                    String name = item.getName();
+                    String config = "hacpai";
+                    try {
+                        config = optionRepository.get(Option.ID_C_TUCHUANG_CONFIG).optString(Option.OPTION_VALUE);
+                    } catch (Exception e) {
+                    }
+                    File file = new File("temp/" + name);
+                    item.write(file);
+                    item.delete();
+                    try {
+                        String url = UploadUtil.upload(config, file);
+                        okPic.put(name, url);
+                    } catch (Exception e) {
+                        errFiles.add(name);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Map map = new HashMap();
+            map.put("succMap", okPic);
+            map.put("errFiles", errFiles);
+            context.renderJSON().renderData(map);
+            context.renderCode(0);
+            context.renderMsg("");
         }
-        Map map = new HashMap();
-        map.put("succMap", okPic);
-        map.put("errFiles", errFiles);
-        context.renderJSON().renderData(map);
-        context.renderCode(0);
-        context.renderMsg("");
     }
 }

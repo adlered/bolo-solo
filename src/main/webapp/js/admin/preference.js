@@ -199,7 +199,7 @@ admin.preference = {
 
     var requestJSONObject = {
       'preference': {
-        'tuChuangConfig': 'helloooo test',
+        'tuChuangConfig': 'picuang',
         'hacpaiUser': $('#hacpaiUser').val(),
         'b3logKey': $('#b3logKey').val(),
         'mailBox': $('#mailBox').val(),

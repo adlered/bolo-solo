@@ -42,12 +42,89 @@
             <button onclick="admin.preference.update()" class="fn__right">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
-        <label for="tcS">自定义图床</label>
-        <select id="tcS">
+        <div>
+            元数据：<span id="sourceTC"></span>
+        </div>
+        <h3>自定义图床</h3>
+        <label for="tcS">图床选择</label>
+        <select id="tcS" disabled>
             <option value="hacpai" selected>黑客派图床（默认）</option>
             <option value="picuang">基于 Picuang 的自搭建图床</option>
         </select>
-        元数据：<span id="sourceTC"></span>
+        <div class="fn__clear" id="changeCfgBtn">
+            <button onclick="unlock()" class="fn__left">允许修改图床配置</button>
+        </div>
+        <div id="td1" for="tc1" style="display:none"></div>
+        <input id="tc1" type="text" style="display:none" />
+        <div id="td2" for="tc2" style="display:none"></div>
+        <input id="tc2" type="text" style="display:none" />
+        <div id="td3" for="tc3" style="display:none"></div>
+        <input id="tc3" type="text" style="display:none" />
+        <div id="td4" for="tc4" style="display:none"></div>
+        <input id="tc4" type="text" style="display:none" />
+        <div id="td5" for="tc5" style="display:none"></div>
+        <input id="tc5" type="text" style="display:none" />
+        <div id="td6" for="tc6" style="display:none"></div>
+        <input id="tc6" type="text" style="display:none" />
+        <div class="fn__clear" id="tuChuangCfg" style="display: none">
+            <button onclick="save()" class="fn__left">保存图床配置</button>
+        </div>
+        <script>
+            function loadRemind() {
+                clear();
+                sel = $('#tcS').val();
+                switch (sel) {
+                    case 'hacpai':
+                        console.log('黑客派');
+                        $('#td1').show();
+                        $('#td1').text('使用黑客派默认图床，请在偏好设置中配置黑客派的用户名和 B3log Key。');
+                        break;
+                    case 'picuang':
+                        console.log('Picuang');
+                        $('#td1').show();
+                        $('#td1').html('Picuang 是 Bolo 博客作者开发的一款在自己服务器上搭建的公开图床，<a target="_blank" href="https://github.com/AdlerED/Picuang">项目地址</a>');
+                        $('#td2').show(); $('#tc2').show();
+                        $('#td2').html('<b>图床地址</b>')
+                        $('#td3').show();
+                        $('#td3').text('图床地址需带上 HTTP/HTTPS 协议地址，例：https://pic.stackoverflow.wiki')
+                        $('#td4').show();
+                        $('#td4').text('图床必须允许匿名用户上传才可以使用。');
+                        break;
+                    default:
+                        console.log('无符合');
+                        break;
+                }
+            }
+            $('#tcS').change(loadRemind);
+
+            function clear() {
+                for (i = 1; i <= 6; i++) {
+                    $('#tc' + i).hide();
+                    $('#td' + i).hide();
+                }
+            }
+
+            function unlock() {
+                $('#changeCfgBtn').hide();
+                $('#tcS').removeAttr("disabled");
+                $('#tuChuangCfg').show();
+                loadRemind();
+            }
+
+            function save() {
+                sel = $('#tcS').val();
+                switch (sel) {
+                    case 'hacpai':
+                        $('#sourceTC').text('hacpai');
+                        break;
+                    case 'picuang':
+                        $('#sourceTC').text('picuang<<>>' + $('#tc2').val());
+                        break;
+                }
+                alert('配置已保存。如果自定义图床未生效，请清除浏览器缓存。');
+                admin.preference.update();
+            }
+        </script>
         <br>
         <h3>B3log 生态设定</h3>
         <label for="hacpaiUser">${hacpaiUser1Label}</label>

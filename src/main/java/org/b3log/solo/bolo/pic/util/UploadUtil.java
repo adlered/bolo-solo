@@ -1,5 +1,13 @@
 package org.b3log.solo.bolo.pic.util;
 
+import com.google.gson.Gson;
+import com.qiniu.common.QiniuException;
+import com.qiniu.http.Response;
+import com.qiniu.storage.Configuration;
+import com.qiniu.storage.Region;
+import com.qiniu.storage.UploadManager;
+import com.qiniu.storage.model.DefaultPutRet;
+import com.qiniu.util.Auth;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -14,6 +22,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 /**
  * <h3>bolo-solo</h3>
@@ -26,9 +35,9 @@ public class UploadUtil {
     public static String upload(String config, File file) throws Exception {
         String result = "";
         String type = config.split("<<>>")[0];
-        String site = config.split("<<>>")[1];
         switch (type) {
             case "picuang":
+                String site = config.split("<<>>")[1];
                 CloseableHttpClient httpClient = HttpClients.createDefault();
                 try {
                     HttpPost httpPost = new HttpPost(site + "/upload");
@@ -43,12 +52,9 @@ public class UploadUtil {
                         if (response.getStatusLine().getStatusCode() == 200) {
                             HttpEntity resEntity = response.getEntity();
                             String str = EntityUtils.toString(resEntity);
-                            if (resEntity != null) {
-                                System.out.println("Response content length: " + str);
-                            }
                             EntityUtils.consume(resEntity);
                             JSONObject jsonObject = new JSONObject(str);
-                            return site + (String) jsonObject.get("msg");
+                            result = site + (String) jsonObject.get("msg");
                         } else {
                             throw new NullPointerException();
                         }
@@ -62,6 +68,33 @@ public class UploadUtil {
                         httpClient.close();
                     } catch (IOException IOE) {
                         IOE.printStackTrace();
+                    }
+                }
+                break;
+            case "qiniu":
+                Configuration cfg = new Configuration(Region.autoRegion());
+                UploadManager uploadManager = new UploadManager(cfg);
+                String accessKey = config.split("<<>>")[1];
+                String secretKey = config.split("<<>>")[2];
+                String bucket = config.split("<<>>")[3];
+                String domain = config.split("<<>>")[4];
+                String treaty = config.split("<<>>")[5];
+                String localFilePath = file.getAbsolutePath();
+                String key = null;
+
+                Auth auth = Auth.create(accessKey, secretKey);
+                String upToken = auth.uploadToken(bucket);
+                try {
+                    Response response = uploadManager.put(localFilePath, key, upToken);
+                    DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
+                    result = treaty + "://" + domain + "/" + putRet.key;
+                } catch (QiniuException ex) {
+                    Response r = ex.response;
+                    System.err.println(r.toString());
+                    try {
+                        System.err.println(r.bodyString());
+                    } catch (QiniuException ex2) {
+                        //ignore
                     }
                 }
                 break;

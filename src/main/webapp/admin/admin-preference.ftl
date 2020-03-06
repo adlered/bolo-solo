@@ -48,8 +48,10 @@
         <h3>自定义图床</h3>
         <label for="tcS">图床选择</label>
         <select id="tcS" disabled>
-            <option value="hacpai" selected>黑客派图床（默认）</option>
+            <option selected></option>
+            <option value="hacpai">黑客派图床（默认）</option>
             <option value="picuang">基于 Picuang 的自搭建图床</option>
+            <option value="qiniu">七牛云</option>
         </select>
         <div class="fn__clear" id="changeCfgBtn">
             <button onclick="unlock()" class="fn__left">允许修改图床配置</button>
@@ -75,23 +77,33 @@
                 sel = $('#tcS').val();
                 switch (sel) {
                     case 'hacpai':
-                        console.log('黑客派');
                         $('#td1').show();
                         $('#td1').text('使用黑客派默认图床，请在偏好设置中配置黑客派的用户名和 B3log Key。');
                         break;
                     case 'picuang':
-                        console.log('Picuang');
                         $('#td1').show();
                         $('#td1').html('Picuang 是 Bolo 博客作者开发的一款在自己服务器上搭建的公开图床，<a target="_blank" href="https://github.com/AdlerED/Picuang">项目地址</a>');
                         $('#td2').show(); $('#tc2').show();
-                        $('#td2').html('<b>图床地址</b>')
+                        $('#td2').html('<b>图床地址</b>');
                         $('#td3').show();
                         $('#td3').text('图床地址需带上 HTTP/HTTPS 协议地址，例：https://pic.stackoverflow.wiki')
                         $('#td4').show();
                         $('#td4').text('图床必须允许匿名用户上传才可以使用。');
                         break;
+                    case 'qiniu':
+                        $('#td1').show();
+                        $('#td1').html('Bolo 支持七牛云图床。AK/SK 可以从密钥管理找到，请确保你的 Bucket 已经配置好域名。<a target="_blank" href="https://developer.qiniu.com/kodo/manual/1272/form-upload">七牛云开发文档</a>');
+                        $('#td2').show(); $('#tc2').show();
+                        $('#td2').html('<b>AccessKey</b>');
+                        $('#td3').show(); $('#tc3').show();
+                        $('#td3').html('<b>SecretKey</b>');
+                        $('#td4').show(); $('#tc4').show();
+                        $('#td4').html('<b>Bucket</b>');
+                        $('#td5').show(); $('#tc5').show();
+                        $('#td5').html('<b>Bucket 绑定的域名（不需要填写协议，正确示例：qiniu.stackoverflow.wiki）</b>');
+                        $('#td6').show(); $('#tc6').show();
+                        $('#td6').html('<b>协议（填写英文小写 http 或 https，以你的设定为准）</b>');
                     default:
-                        console.log('无符合');
                         break;
                 }
             }
@@ -120,10 +132,19 @@
                     case 'picuang':
                         $('#sourceTC').text('picuang<<>>' + $('#tc2').val());
                         break;
+                    case 'qiniu':
+                        $('#sourceTC').text('qiniu<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
                 }
                 alert('配置已保存。如果自定义图床未生效，请清除浏览器缓存。');
                 admin.preference.update();
             }
+
+            $(function() {
+                setTimeout(function () {
+                    sltd = $('#sourceTC').text().split('<<>>')[0];
+                    $('#tcS').val(sltd);
+                }, 2000);
+            })
         </script>
         <br>
         <h3>B3log 生态设定</h3>

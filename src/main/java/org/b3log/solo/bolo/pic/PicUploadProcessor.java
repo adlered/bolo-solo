@@ -61,6 +61,7 @@ public class PicUploadProcessor {
                 }
                 File file = new File("temp/" + name);
                 item.write(file);
+                item.delete();
                 try {
                     String url = UploadUtil.upload(config, file);
                     okPic.put(name, url);

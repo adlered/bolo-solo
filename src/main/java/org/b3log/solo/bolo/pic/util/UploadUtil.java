@@ -38,12 +38,16 @@ public class UploadUtil {
 
                     CloseableHttpResponse response = httpClient.execute(httpPost);
                     try {
-                        System.out.println(response.getStatusLine());
-                        HttpEntity resEntity = response.getEntity();
-                        if (resEntity != null) {
-                            System.out.println("Response content length: " + resEntity.getContentLength());
+                        if (response.getStatusLine().getStatusCode() == 200) {
+                            HttpEntity resEntity = response.getEntity();
+                            String str = EntityUtils.toString(resEntity);
+                            if (resEntity != null) {
+                                System.out.println("Response content length: " + str);
+                            }
+                            EntityUtils.consume(resEntity);
+                        } else {
+                            throw new NullPointerException();
                         }
-                        EntityUtils.consume(resEntity);
                     } finally {
                         response.close();
                     }

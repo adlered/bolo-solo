@@ -175,7 +175,7 @@
                         $('#sourceTC').text('upyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
                         break;
                 }
-                alert('配置已保存。如果自定义图床未生效，请清除浏览器缓存。');
+                alert('配置已保存。如果自定义图床未生效，请清除浏览器缓存并重启 Bolo 服务端。');
                 admin.preference.update();
             }
         </script>

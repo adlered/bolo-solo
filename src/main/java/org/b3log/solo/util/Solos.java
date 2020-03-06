@@ -244,7 +244,7 @@ public final class Solos {
             uploadToken = data.optString("uploadToken");
             //uploadURL = data.optString("uploadURL");
             // uploadToken = "123456";
-            uploadURL = "/pic/upload";
+            uploadURL = Latkes.getStaticServePath() + "/pic/upload";
             uploadMsg = "";
 
             return new JSONObject().

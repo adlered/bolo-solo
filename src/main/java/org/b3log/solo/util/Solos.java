@@ -241,9 +241,19 @@ public final class Solos {
             final JSONObject data = result.optJSONObject(Common.DATA);
             uploadTokenTime = now;
             // 自定义图床字段
+            final BeanManager beanManager = BeanManager.getInstance();
+            final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+            String config = "hacpai";
+            try {
+                config = optionRepository.get(Option.ID_C_TUCHUANG_CONFIG).optString(Option.OPTION_VALUE);
+            } catch (Exception e) {
+            }
+            if (config.equals("hacpai")) {
+                uploadURL = data.optString("uploadURL");
+            } else {
+                uploadURL = Latkes.getStaticServePath() + "/pic/upload";
+            }
             uploadToken = data.optString("uploadToken");
-            //uploadURL = data.optString("uploadURL");
-            uploadURL = Latkes.getStaticServePath() + "/pic/upload";
             uploadMsg = "";
 
             return new JSONObject().

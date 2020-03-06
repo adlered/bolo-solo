@@ -10,6 +10,7 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,11 +26,12 @@ public class UploadUtil {
     public static String upload(String config, File file) throws Exception {
         String result = "";
         String type = config.split("<<>>")[0];
+        String site = config.split("<<>>")[1];
         switch (type) {
             case "picuang":
                 CloseableHttpClient httpClient = HttpClients.createDefault();
                 try {
-                    HttpPost httpPost = new HttpPost("http://localhost:1212/upload");
+                    HttpPost httpPost = new HttpPost(site + "/upload");
                     FileBody bin = new FileBody(file);
                     StringBody comment = new StringBody("file", ContentType.TEXT_PLAIN);
                     HttpEntity reqEntity = MultipartEntityBuilder.create().addPart("file", bin).addPart("comment", comment).build();
@@ -45,6 +47,8 @@ public class UploadUtil {
                                 System.out.println("Response content length: " + str);
                             }
                             EntityUtils.consume(resEntity);
+                            JSONObject jsonObject = new JSONObject(str);
+                            return site + (String) jsonObject.get("msg");
                         } else {
                             throw new NullPointerException();
                         }

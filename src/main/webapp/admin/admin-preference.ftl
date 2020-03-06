@@ -42,7 +42,7 @@
             <button onclick="admin.preference.update()" class="fn__right">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
-        <div>
+        <div style="display: none">
             元数据：<span id="sourceTC"></span>
         </div>
         <h3>自定义图床</h3>
@@ -50,9 +50,10 @@
         <select id="tcS" disabled>
             <option selected></option>
             <option value="hacpai">黑客派图床（默认）</option>
-            <option value="picuang">基于 Picuang 的自搭建图床</option>
             <option value="qiniu">七牛云</option>
             <option value="aliyun">阿里云</option>
+            <option value="upyun">又拍云</option>
+            <option value="picuang">基于 Picuang 的自搭建图床</option>
         </select>
         <div class="fn__clear" id="changeCfgBtn">
             <button onclick="unlock()" class="fn__left">允许修改图床配置</button>
@@ -106,6 +107,7 @@
                         $('#td5').html('<b>Bucket 绑定的域名（不需要填写协议，正确示例：qiniu.stackoverflow.wiki）</b>');
                         $('#td6').show(); $('#tc6').show();
                         $('#td6').html('<b>协议（填写英文小写 http 或 https，以你的设定为准）</b>');
+                        break;
                     case 'aliyun':
                         $('#td1').show();
                         $('#td1').html('Bolo 支持阿里云图床。AccessKey 信息可以从 AccessKey 管理中找到，必须将 Bucket ACL 的权限设定为 公共读写。<a target="_blank" href="https://help.aliyun.com/document_detail/31817.html">阿里云开发文档</a>');
@@ -121,6 +123,21 @@
                         $('#td6').html('<b>Bucket 域名</b>');
                         $('#td7').show(); $('#tc7').show();
                         $('#td7').html('<b>协议（填写英文小写 http 或 https，以你的设定为准）</b>')
+                        break;
+                    case 'upyun':
+                        $('#td1').show();
+                        $('#td1').html('Bolo 支持又拍云图床。<a target="_blank" href="https://help.upyun.com/knowledge-base/rest_api/">又拍云开发文档</a>');
+                        $('#td2').show(); $('#tc2').show();
+                        $('#td2').html('<b>空间名称（服务名称）</b>');
+                        $('#td3').show(); $('#tc3').show();
+                        $('#td3').html('<b>操作员名称</b>');
+                        $('#td4').show(); $('#tc4').show();
+                        $('#td4').html('<b>操作员密码</b>');
+                        $('#td5').show(); $('#tc5').show();
+                        $('#td5').html('<b>绑定域名</b>');
+                        $('#td6').show(); $('#tc6').show();
+                        $('#td6').html('<b>协议（填写英文小写 http 或 https，以你的设定为准）</b>');
+                        break;
                 }
             }
             $('#tcS').change(loadRemind);
@@ -153,6 +170,9 @@
                         break;
                     case 'aliyun':
                         $('#sourceTC').text('aliyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val() + '<<>>' + $('#tc7').val());
+                        break;
+                    case 'upyun':
+                        $('#sourceTC').text('upyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
                         break;
                 }
                 alert('配置已保存。如果自定义图床未生效，请清除浏览器缓存。');

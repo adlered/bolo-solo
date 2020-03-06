@@ -1,7 +1,9 @@
 package org.b3log.solo.bolo.pic.util;
 
+import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
+import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
@@ -11,6 +13,7 @@ import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
+import com.upyun.RestManager;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -26,7 +29,8 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <h3>bolo-solo</h3>
@@ -92,14 +96,8 @@ public class UploadUtil {
                     Response response = uploadManager.put(localFilePath, key, upToken);
                     DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
                     result = treaty + "://" + domain + "/" + putRet.key;
-                } catch (QiniuException ex) {
-                    Response r = ex.response;
-                    System.err.println(r.toString());
-                    try {
-                        System.err.println(r.bodyString());
-                    } catch (QiniuException ex2) {
-                        //ignore
-                    }
+                } catch (QiniuException e) {
+                    throw new NullPointerException();
                 }
                 break;
             case "aliyun":
@@ -113,9 +111,27 @@ public class UploadUtil {
 
                 OSS ossClient = new OSSClientBuilder().build(endPoint, accessKeyID, accessKeySecret);
                 PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, filename, file);
-                ossClient.putObject(putObjectRequest);
-                ossClient.shutdown();
-                result = aliTreaty + "://" + bucketDomain + "/" + filename;
+                try {
+                    ossClient.putObject(putObjectRequest);
+                    ossClient.shutdown();
+                    result = aliTreaty + "://" + bucketDomain + "/" + filename;
+                } catch (OSSException| ClientException e) {
+                    throw new NullPointerException();
+                }
+                break;
+            case "upyun":
+                String zoneName = config.split("<<>>")[1];
+                String name = config.split("<<>>")[2];
+                String pwd = config.split("<<>>")[3];
+                String upDomain = config.split("<<>>")[4];
+                String upTreaty = config.split("<<>>")[5];
+                String filenm = RandomStringUtils.randomAlphanumeric(10);
+
+                RestManager manager = new RestManager(zoneName, name, pwd);
+                manager.setApiDomain(RestManager.ED_AUTO);
+                Map<String, String> params = new HashMap<String, String>();
+                manager.writeFile("/" + filenm, file, params);
+                result = upTreaty + "://" + upDomain + "/" + filenm;
                 break;
         }
         file.delete();

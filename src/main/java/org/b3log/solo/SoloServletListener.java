@@ -71,14 +71,13 @@ public final class SoloServletListener extends AbstractServletListener {
     private static final Logger LOGGER = Logger.getLogger(SoloServletListener.class);
 
     /**
-     * Solo version.
-     */
-    public static String VERSION = "3.8.0";
-
-    /**
      * Bolo version.
      */
-    public static final String BOLO_VERSION = "v1.2 稳定版";
+    public static final String BOLO_VERSION = "v1.3 稳定版";
+    /**
+     * Solo version.
+     */
+    public static String VERSION = "3.9.0";
 
     /**
      * Bean manager.

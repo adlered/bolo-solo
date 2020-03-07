@@ -59,9 +59,9 @@
                         </span></#if>
                     <#list article.articleTags?split(",") as articleTag>
                         <#if articleTag_index == 0>
-                            <#if article.category??><span>
+                            <#if articleCategory??><span>
                                 <a class="nexmoefont iconfont solo-category -link"
-                                   href="${servePath}/category/${article.category.categoryURI}">${article.category.categoryTitle}</a>
+                                   href="${servePath}/category/${articleCategory.categoryURI}">${articleCategory.categoryTitle}</a>
                                 </span>
                             </#if>
                         </#if><span><a class="nexmoefont iconfont solo-tag -link"

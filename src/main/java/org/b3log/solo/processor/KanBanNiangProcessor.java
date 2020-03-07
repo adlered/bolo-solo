@@ -70,7 +70,7 @@ public class KanBanNiangProcessor {
             try (final InputStream modelResource = servletContext.getResourceAsStream(assets + "/model/" + model + "/index.json")) {
                 final JSONObject index = new JSONObject(IOUtils.toString(modelResource, "UTF-8"));
                 final JSONArray textures = index.optJSONArray("textures");
-                if (textures.isEmpty()) {
+                if (textures.length() == 0) {
                     try (final InputStream texturesRes = servletContext.getResourceAsStream(assets + "/model/" + model + "/textures.json")) {
                         final JSONArray texturesArray = new JSONArray(IOUtils.toString(texturesRes, "UTF-8"));
                         final Object element = texturesArray.opt(RandomUtils.nextInt(texturesArray.length()));

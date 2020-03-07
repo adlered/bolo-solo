@@ -35,17 +35,26 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContextBuilder;
+import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import javax.net.ssl.SSLContext;
 import java.io.File;
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,15 +72,13 @@ public class UploadUtil {
         switch (type) {
             case "picuang":
                 String site = config.split("<<>>")[1];
-                CloseableHttpClient httpClient = HttpClients.createDefault();
+                CloseableHttpClient httpClient = createSSLClientDefault();
                 try {
                     HttpPost httpPost = new HttpPost(site + "/upload");
                     FileBody bin = new FileBody(file);
                     StringBody comment = new StringBody("file", ContentType.TEXT_PLAIN);
                     HttpEntity reqEntity = MultipartEntityBuilder.create().addPart("file", bin).addPart("comment", comment).build();
                     httpPost.setEntity(reqEntity);
-                    System.out.println("executing request " + httpPost.getRequestLine());
-
                     CloseableHttpResponse response = httpClient.execute(httpPost);
                     try {
                         if (response.getStatusLine().getStatusCode() == 200) {
@@ -153,5 +160,30 @@ public class UploadUtil {
         }
         file.delete();
         return result;
+    }
+
+    /**
+     * 设置可访问https
+     * @return
+     */
+    public static CloseableHttpClient createSSLClientDefault() {
+        try {
+            SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
+                //信任所有
+                public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                    return true;
+                }
+            }).build();
+            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext,SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
+            return HttpClients.custom().setSSLSocketFactory(sslsf).build();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        }
+        return HttpClients.createDefault();
     }
 }

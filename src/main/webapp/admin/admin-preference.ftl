@@ -179,7 +179,7 @@
                 admin.preference.update();
             }
         </script>
-        <div>配置图床期间出现疑问或问题，请联系作者微信：1101635162</div>
+        <div><b>请注意！</b>如使用自定义图床中出现 "413 Request Entity Too Large" 等类似报错，请调整 Nginx / Tomcat 的数据包大小限制。<br>配置图床期间出现疑问或问题，请联系作者微信：1101635162</div>
         <br>
         <h3>B3log 生态设定</h3>
         <label for="hacpaiUser">${hacpaiUser1Label}</label>

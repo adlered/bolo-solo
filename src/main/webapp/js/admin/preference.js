@@ -45,6 +45,7 @@ admin.preference = {
 
         var preference = result.preference
 
+        $('#replyRemind').val(preference.replyRemind)
         $('#sourceTC').text(preference.tuChuangConfig)
         sltd = $('#sourceTC').text().split('<<>>')[0];
         $('#tcS').val(sltd);
@@ -201,6 +202,7 @@ admin.preference = {
 
     var requestJSONObject = {
       'preference': {
+        'replyRemind': $('#replyRemind').val(),
         'tuChuangConfig': $('#sourceTC').text(),
         'hacpaiUser': $('#hacpaiUser').val(),
         'b3logKey': $('#b3logKey').val(),

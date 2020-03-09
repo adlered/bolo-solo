@@ -37,6 +37,7 @@ import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Comment;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
+import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.service.CommentMgmtService;
 import org.b3log.solo.service.OptionQueryService;
@@ -99,6 +100,12 @@ public class CommentProcessor {
      */
     @Inject
     private UserRepository userRepository;
+
+    /**
+     * Option repository.
+     */
+    @Inject
+    private OptionRepository optionRepository;
 
     /**
      * Adds a comment to an article.
@@ -198,15 +205,34 @@ public class CommentProcessor {
 
             // 提醒被回复的用户
             String originalCommentId = "";
+            String blogSite = requestJSONObject.getString("URI");
+            String blogTitle = optionQueryService.getPreference().getString(Option.ID_C_BLOG_TITLE);
             try {
                 originalCommentId = requestJSONObject.getString("commentOriginalCommentId");
                 CommentMailService.remindCommentedGuy(
                         originalCommentId,
-                        requestJSONObject.getString("URI"),
-                        username
+                        blogSite,
+                        username,
+                        blogTitle
                 );
             } catch (JSONException JSONE) {
                 LOGGER.log(Level.DEBUG, "No originalCommentId for [from=" + commentId + ", to=" + originalCommentId + "]");
+            }
+
+            // 提醒博主
+            String replyRemindMailBoxAddress = optionRepository.get(Option.ID_C_REPLY_REMIND).optString(Option.OPTION_VALUE);
+            String user = requestJSONObject.getString("commentName");
+            String comment = requestJSONObject.getString("commentContent");
+            try {
+                CommentMailService.remindAdmin(
+                        replyRemindMailBoxAddress,
+                        blogSite,
+                        user,
+                        comment,
+                        blogTitle
+                );
+            } catch (JSONException JSONE) {
+                LOGGER.log(Level.DEBUG, "Send admin mail remind failed [replyRemindMailBoxAddress=" + replyRemindMailBoxAddress + "]");
             }
 
             final Map<String, Object> dataModel = new HashMap<>();

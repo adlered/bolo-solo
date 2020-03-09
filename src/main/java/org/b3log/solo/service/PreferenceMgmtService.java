@@ -311,6 +311,18 @@ public class PreferenceMgmtService {
                 optionRepository.add(tuChuangConfigOpt);
             }
 
+            try {
+                final JSONObject replyRemindOpt = optionRepository.get(Option.ID_C_REPLY_REMIND);
+                replyRemindOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_REPLY_REMIND));
+                optionRepository.update(Option.ID_C_REPLY_REMIND, replyRemindOpt);
+            } catch (NullPointerException NPE) {
+                JSONObject replyRemindOpt = new JSONObject();
+                replyRemindOpt.put(Keys.OBJECT_ID, Option.ID_C_REPLY_REMIND);
+                replyRemindOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+                replyRemindOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_REPLY_REMIND));
+                optionRepository.add(replyRemindOpt);
+            }
+
             MailService.loadMailSettings();
             transaction.commit();
         } catch (final Exception e) {

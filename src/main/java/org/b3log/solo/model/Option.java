@@ -333,6 +333,11 @@ public final class Option {
     public static final String ID_C_TUCHUANG_CONFIG = "tuChuangConfig";
 
     /**
+     * Key of replyRemind
+     */
+    public static final String ID_C_REPLY_REMIND = "replyRemind";
+
+    /**
      * Private constructor.
      */
     private Option() {

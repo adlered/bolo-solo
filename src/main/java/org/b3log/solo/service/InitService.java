@@ -729,6 +729,12 @@ public class InitService {
         tuChuangConfigOpt.put(Option.OPTION_VALUE, "");
         optionRepository.add(tuChuangConfigOpt);
 
+        final JSONObject replyRemindOpt = new JSONObject();
+        replyRemindOpt.put(Keys.OBJECT_ID, Option.ID_C_REPLY_REMIND);
+        replyRemindOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+        replyRemindOpt.put(Option.OPTION_VALUE, "");
+        optionRepository.add(replyRemindOpt);
+
         LOGGER.info("Initialized preference");
     }
 }

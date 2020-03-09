@@ -218,6 +218,14 @@
             请注意：<b>有些邮箱服务器可能设有独立密码，具体设定方法请查询后填写！</b>
         </div>
         <br>
+        <h3>回帖提醒</h3>
+        <label for="replyRemind">博主邮箱：</label>
+        <input id="replyRemind" type="text" />
+        <div>
+            填写你用于接收提醒的邮箱，当有人在你的博客文章中评论时，菠萝会发送邮件提醒你。<br>
+            <b>此项设定必须先设定邮件服务器。</b>
+        </div>
+        <br>
         <h3>本地博客设定</h3>
         <label for="blogTitle">${blogTitle1Label}</label>
         <input id="blogTitle" type="text"/>

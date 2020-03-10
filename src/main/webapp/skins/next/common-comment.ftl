@@ -18,8 +18,7 @@
 
 -->
 <li id="${comment.oId}" class="fn-clear">
-    <img class="avatar-48" title="${comment.commentName}" src="${comment.commentThumbnailURL}">
-    <div class="comment-body">
+    <div class="comment-body" style="margin: 8px 0 0 0px;">
         <div class="fn-clear comment-meta">
                 <span class="fn-left">
                     <#if "http://" == comment.commentURL>

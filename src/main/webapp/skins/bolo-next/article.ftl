@@ -80,12 +80,6 @@
                 </div>
                 <footer>
                     <div class="post-tags">
-                        <#if article.articleCategory != "">
-                            <span>
-                                ${article.articleCategory}
-                            </span>
-                        </#if>
-                        <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
                         <#list article.articleTags?split(",") as articleTag>
                             <a rel="tag" href="${servePath}/tags/${articleTag?url('UTF-8')}">
                                 ${articleTag}</a>

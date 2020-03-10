@@ -30,8 +30,8 @@
 
 <#if article.commentable>
 <div class="form" style="padding-left: 0">
-    <input id="boloUser" placeholder="你的昵称" style="padding: 20px; width: fill-available; width: -webkit-fill-available;">
-    <input id="boloSite" placeholder="你的个人主页URL（选填）" style="margin-top: 3px; margin-bottom: 10px; padding: 20px; width: fill-available; width: -webkit-fill-available;">
+    <input id="boloUser" placeholder="你的昵称" style="padding: 10px; width: fill-available; width: -webkit-fill-available;">
+    <input id="boloSite" placeholder="你的个人主页URL（选填）" style="margin-top: 3px; margin-bottom: 10px; padding: 10px; width: fill-available; width: -webkit-fill-available;">
     <textarea rows="3" placeholder="${postCommentsLabel}" id="comment"></textarea>
     <script type="text/javascript" src="${staticServePath}/js/bolo/sweetalert.min.js"></script></div>
 </#if>

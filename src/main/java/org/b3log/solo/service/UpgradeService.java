@@ -103,6 +103,7 @@ public class UpgradeService {
                     V380_390.perform();
                 case "3.9.0":
                     V390_400.perform();
+                    break;
                 default:
                     LOGGER.log(Level.INFO, "Version " + currentVer + " loaded in compatibility mode. (unresolvable)");
                     SoloServletListener.VERSION = currentVer;

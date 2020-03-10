@@ -19,7 +19,6 @@
 -->
 <li id="${comment.oId}" class="comment__item">
     <div class="fn__flex">
-        <div class="comment__avatar" style="background-image: url(${comment.commentThumbnailURL})"></div>
         <main class="comment__main fn__flex-1">
             <div class="fn__clear ft__gray">
             <#if "http://" == comment.commentURL>

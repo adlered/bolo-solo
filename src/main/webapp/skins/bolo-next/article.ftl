@@ -82,7 +82,7 @@
                     <div class="post-tags">
                         <#if article.articleCategory != "">
                             <span>
-                                <i class="nexomefont iconfont solo-category"></i>${article.articleCategory}
+                                ${article.articleCategory}
                             </span>
                         </#if>
                         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>

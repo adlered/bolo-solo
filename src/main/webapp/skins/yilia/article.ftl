@@ -55,6 +55,9 @@
             <span class="icon-tag fn__flex-center"></span>
             <span>&nbsp;&nbsp;&nbsp;</span>
             <div class="tags fn__flex-1 fn__flex-center">
+                <#if article.articleCategory != "">
+                <a class="tag" rel="tag">分类：${article.articleCategory}</a>
+                </#if>
                 <#list article.articleTags?split(",") as articleTag>
                     <a class="tag" rel="tag" href="${servePath}/tags/${articleTag?url('UTF-8')}">
                         ${articleTag}</a>

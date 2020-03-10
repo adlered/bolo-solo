@@ -50,12 +50,15 @@
         </#if>
         <footer class="article__footer fn__flex">
             <span class="icon-tag fn__flex-center"></span>
-            <span>&nbsp;&nbsp;&nbsp;</span>
             <div class="tags fn__flex-1 fn__flex-center">
-                <#list article.articleTags?split(",") as articleTag>
-                    <a class="tag" rel="tag" href="${servePath}/tags/${articleTag?url('UTF-8')}">
-                        ${articleTag}</a>
-                </#list>
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            <#if article.articleCategory != "">
+                <a class="tag" rel="tag" href="${servePath}/category/${article.categoryURI}">分类：${article.articleCategory}</a>
+            </#if>
+            <#list article.articleTags?split(",") as articleTag>
+                <a class="tag" rel="tag" href="${servePath}/tags/${articleTag?url('UTF-8')}">
+                    ${articleTag}</a>
+            </#list>
             </div>
             <span>&nbsp;&nbsp;&nbsp;</span>
             <#if article.articleCommentCount != 0>

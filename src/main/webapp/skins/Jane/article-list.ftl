@@ -42,6 +42,11 @@
             </time>
             &nbsp;
             <span class="mobile__none">
+            <#if article.articleCategory != "">
+                <span>
+                    <a class="ft__green" rel="tag" href="${servePath}/category/${article.categoryURI}">所属分类 > ${article.articleCategory}</a>
+                </span>
+            </#if>
             <#list article.articleTags?split(",") as articleTag>
                 <a rel="tag" class="ft__red" href="${servePath}/tags/${articleTag?url('UTF-8')}">
                     ${articleTag}</a><#if articleTag_has_next>, </#if>

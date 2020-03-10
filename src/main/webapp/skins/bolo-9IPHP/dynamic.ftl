@@ -35,8 +35,6 @@
                             <#list recentComments as comment>
                                 <li id="${comment.oId}">
                                     <div>
-                                        <div class="avatar vditor-tooltipped vditor-tooltipped__n" aria-label="${comment.commentName}"
-                                             style="background-image: url(${comment.commentThumbnailURL})"></div>
                                         <main>
                                             <div class="fn-clear">
                                                 <#if "http://" == comment.commentURL>

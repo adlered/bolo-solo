@@ -33,9 +33,7 @@
                 <#list recentComments as comment>
                 <#if comment_index < 6>
                 <li>
-                    <img class="avatar" title="${comment.commentName}"
-                         alt="${comment.commentName}" src="${comment.commentThumbnailURL}">
-                    <div class="content">
+                    <div class="content" style="margin-left: 0px;">
                         <div class="fn-clear post-meta">
                             <span class="fn-left">
                                 <#if "http://" == comment.commentURL>

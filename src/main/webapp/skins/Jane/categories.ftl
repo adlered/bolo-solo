@@ -41,7 +41,7 @@
                 <a href="${servePath}/category/${category.categoryURI}"
                    class="ft__red">
                     ${category.categoryTitle}
-                    <span class="ft__gray">(${category.categoryTagCnt} ${tagsLabel})</span>
+                    <span class="ft__gray">(${category.categoryTagCnt})</span>
                 </a>
             </#list>
         </div>

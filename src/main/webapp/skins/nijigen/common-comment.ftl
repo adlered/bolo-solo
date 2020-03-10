@@ -35,7 +35,6 @@
         <time>${comment.commentDate2?string("yyyy-MM-dd HH:mm")}</time>
     </div>
     <main class="comments__content fn__clear">
-        <div class="comments__avatar" style="background-image: url(${comment.commentThumbnailURL})"></div>
         <div class="vditor-reset">
         ${comment.commentContent}
         </div>

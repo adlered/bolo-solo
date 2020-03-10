@@ -77,7 +77,7 @@ public final class SoloServletListener extends AbstractServletListener {
     /**
      * Solo version.
      */
-    public static String VERSION = "3.9.0";
+    public static String VERSION = "4.0.0";
 
     /**
      * Bean manager.

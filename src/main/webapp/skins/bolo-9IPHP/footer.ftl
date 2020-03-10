@@ -22,7 +22,7 @@
     <a href="${servePath}">${blogTitle}</a>
     ${footerContent}
     <br/>
-    Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">Bolo</a>
+    Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a>
     <span class="ft-warn">&heartsuit;</span>
     Theme ${skinDirName}
     <sup>[<a href="https://github.com/9IPHP/9IPHP" target="_blank">ref</a>]</sup>

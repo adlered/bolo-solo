@@ -40,9 +40,6 @@
         <ul class="recent-comments">
             <#list recentComments as comment>
                 <li>
-                    <img class='left' title='${comment.commentName}'
-                         alt='${comment.commentName}'
-                         src='${comment.commentThumbnailURL}'/>
                     <div class='recent-comments-main'>
                         <div>
                         <span class="left">

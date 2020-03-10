@@ -69,6 +69,11 @@
     </div>
     <div class="article-element">
         <span class="tag-ico" title="${tagsLabel}">
+            <#if article.articleCategory != "">
+                <span>
+                    <a rel="tag" href="${servePath}/category/${article.categoryURI}">分类：${article.articleCategory}</a>
+                </span>
+            </#if>
             <#list article.articleTags?split(",") as articleTag>
             <a rel="tag" href="${servePath}/tags/${articleTag?url('UTF-8')}">
                 ${articleTag}</a><#if articleTag_has_next>,</#if>

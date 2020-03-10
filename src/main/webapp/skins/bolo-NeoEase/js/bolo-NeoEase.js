@@ -67,7 +67,7 @@ var getArticle = function (it, id) {
       dataType: 'html',
       beforeSend: function () {
         $abstract.css('background',
-          'url(/skins/neoease/images/ajax-loader.gif) no-repeat scroll center center transparent')
+          'url(/skins/bolo-NeoEase/images/ajax-loader.gif) no-repeat scroll center center transparent')
       },
       success: function (result, textStatus) {
         it.className = 'collapse-ico'

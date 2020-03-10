@@ -18,8 +18,6 @@
 
 -->
 <div id="${comment.oId}">
-    <img class="comment-header" title="${comment.commentName}"
-         alt="${comment.commentName}" src="${comment.commentThumbnailURL}"/>
     <div class="comment-panel">
         <div class="left">
         <#if "http://" == comment.commentURL>

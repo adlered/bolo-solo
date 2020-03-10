@@ -95,6 +95,9 @@
                         </div>
                         </#if>
                     </div>
+                    <script>
+                        var loggedIn = ${article.logged};
+                    </script>
                 </div>
             </div>
 

@@ -111,6 +111,9 @@
                 </aside>
             </#if>
         </section>
+        <script>
+            var loggedIn = ${article.logged};
+        </script>
 
         <footer class="fn-clear share">
             <div class="fn-right">

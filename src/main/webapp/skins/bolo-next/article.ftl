@@ -78,6 +78,9 @@
                         </div>
                     </#if>
                 </div>
+                <script>
+                    var loggedIn = ${article.logged};
+                </script>
                 <footer>
                     <div class="post-tags">
                         <#list article.articleTags?split(",") as articleTag>

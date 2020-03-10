@@ -76,6 +76,9 @@
             </div>
             </#if>
         </div>
+        <script>
+            var loggedIn = ${article.logged};
+        </script>
 
         <#if previousArticlePermalink?? || nextArticlePermalink??>
         <div class="article__near article__near--point fn__flex">

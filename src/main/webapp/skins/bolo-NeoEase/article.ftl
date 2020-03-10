@@ -76,6 +76,9 @@
                             </div>
                             </#if>
                         </div>
+                        <script>
+                            var loggedIn = ${article.logged};
+                        </script>
                         <div class="article-element article-element--article">
                             <span class="tag-ico" title="${tagsLabel}">
                                 <#list article.articleTags?split(",") as articleTag>

@@ -65,6 +65,12 @@
                     </div>
 
                     <div class="ft__center">
+                        <#if article.articleCategory != "">
+                        <span class="tag">
+                            <i class="icon__category"></i>
+                            <a rel="tag">${article.articleCategory}</a>
+                        </span>
+                        </#if>
                         <span class="tag">
                             <i class="icon__tags"></i>
                             <#list article.articleTags?split(",") as articleTag>

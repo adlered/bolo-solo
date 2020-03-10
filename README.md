@@ -38,12 +38,13 @@
 
 ### :tada: 菠萝版本信息
 
-菠萝当前版本：v1.3 稳定版  
+菠萝当前版本：v1.4 稳定版  
 对应 Solo 原版版本号：v3.9.0  
 
 ### 当前版本注意事项：
 
-* v1.3 稳定版发布啦！Bolo 稳定版支持 Docker、Tomcat 部署，多种部署方法请看下方的《Bolo 多种安装方法》指引 👇
+* v1.4 稳定版发布啦！Bolo 稳定版支持 Docker、Tomcat 部署，多种部署方法请看下方的《Bolo 多种安装方法》指引 👇
+* v1.4 版本新增 6 款皮肤支持！
 * 自 v1.3 版本开始，Bolo 支持 **自定义图床** 功能，支持以下存储服务图床：
 
 1. 七牛云
@@ -238,6 +239,12 @@ VALUES
 3. `V1.1` 及以上版本：bubble -> bolo-bubble
 4. `V1.1` 及以上版本：casper -> bolo-casper
 5. `V1.1` 及以上版本：pinghsu -> bolo-pinghsu
+6. `V1.4` 及以上版本：9IPHP -> bolo-9IPHP
+7. `V1.4` 及以上版本：Jane -> bolo-Jane
+8. `V1.4` 及以上版本：NeoEase -> bolo-NeoEase
+9. `V1.4` 及以上版本：next -> bolo-next
+10. `V1.4` 及以上版本：nijigen ->  bolo-nijigen
+11. `V1.4` 及以上版本：yilia -> bolo-yilia
 
 ## 针对 Solo 博客的改进和优化
 

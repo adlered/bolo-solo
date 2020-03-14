@@ -248,7 +248,7 @@ public final class Solos {
                 config = optionRepository.get(Option.ID_C_TUCHUANG_CONFIG).optString(Option.OPTION_VALUE);
             } catch (Exception e) {
             }
-            if (config.equals("hacpai")) {
+            if (config.equals("hacpai") || config.isEmpty()) {
                 uploadURL = data.optString("uploadURL");
             } else {
                 uploadURL = Latkes.getStaticServePath() + "/pic/upload";

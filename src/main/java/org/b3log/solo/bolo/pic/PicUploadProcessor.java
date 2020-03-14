@@ -83,7 +83,7 @@ public class PicUploadProcessor {
                     try {
                         String url = UploadUtil.upload(config, file);
                         if (url.isEmpty()) {
-                            url = "接口调用错误，请清除浏览器缓存并重启 Bolo 服务端！";
+                            url = "接口调用错误，请检查偏好设置-自定义图床配置，清除浏览器缓存并重启服务端。";
                         }
                         okPic.put(name, url);
                     } catch (Exception e) {

@@ -235,7 +235,7 @@ public final class Solos {
                 // 去除后台 B3 Key 提示
                 // LOGGER.log(Level.ERROR, uploadMsg);
 
-                return null;
+                // return null;
             }
 
             final JSONObject data = result.optJSONObject(Common.DATA);
@@ -253,7 +253,11 @@ public final class Solos {
             } else {
                 uploadURL = Latkes.getStaticServePath() + "/pic/upload";
             }
-            uploadToken = data.optString("uploadToken");
+            try {
+                uploadToken = data.optString("uploadToken");
+            } catch (NullPointerException NPE) {
+                uploadToken = "";
+            }
             uploadMsg = "";
 
             return new JSONObject().

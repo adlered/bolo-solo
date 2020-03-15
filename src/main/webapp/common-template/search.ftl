@@ -110,7 +110,29 @@
             <br><br>
         </#list>
     </div>
-    <br><br><br>
+    <#if 0 != articles?size>
+        <nav class="search__pagination">
+            <#if 1 != pagination.paginationPageNums?first>
+                <a href="${servePath}/search?keyword=${keyword}&p=${pagination.paginationCurrentPageNum - 1}">&laquo;</a>
+                <a href="${servePath}/search?keyword=${keyword}&p=1">1</a> <span class="page-number">...</span>
+            </#if>
+            <#list pagination.paginationPageNums as paginationPageNum>
+                <#if paginationPageNum == pagination.paginationCurrentPageNum>
+                    <span>${paginationPageNum}</span>
+                <#else>
+                    <a href="${servePath}/search?keyword=${keyword}&p=${paginationPageNum}">${paginationPageNum}</a>
+                </#if>
+            </#list>
+            <#if pagination.paginationPageNums?last != pagination.paginationPageCount>
+                <span>...</span>
+                <a href="${servePath}/search?keyword=${keyword}&p=${pagination.paginationPageCount}">${pagination.paginationPageCount}</a>
+                <a href="${servePath}/search?keyword=${keyword}&p=${pagination.paginationCurrentPageNum + 1}">&raquo;</a>
+            </#if>
+        </nav>
+    <#else>
+        什么都没找到 :(
+    </#if>
+    <br><br><br><br>
 </div>
 <div class="navbar-nav fixed-bottom navbar-transparent" style="color: white;">
     <footer class="footer">

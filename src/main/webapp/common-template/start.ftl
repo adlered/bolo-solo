@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" href="${faviconURL}"/>
     <link rel="apple-touch-icon" href="${faviconURL}">
     <link rel="shortcut icon" type="image/x-icon" href="${faviconURL}">
-    <title>欢迎使用菠萝博客</title>
+    <title>管理登录</title>
 </head>
 
 <body class="login-page sidebar-collapse">

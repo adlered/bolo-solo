@@ -183,8 +183,8 @@
                 admin.preference.update();
             }
         </script>
-        <div><b><font color="red">请注意！</font>如使用自定义图床中出现 "413 Request Entity Too Large" 等类似报错，请调整 Nginx / Tomcat 的数据包大小限制。</b>
-            <br><br>
+        <div><b>请注意！如使用自定义图床中出现 "413 Request Entity Too Large" 等类似报错，请调整 Nginx / Tomcat 的数据包大小限制。</b>
+            <br>
             配置图床期间出现疑问或问题，请联系作者微信：1101635162</div>
         <br>
         <h3>B3log 生态设定</h3>
@@ -193,8 +193,8 @@
         <label for="b3logKey">${b3logKey1Label}</label>
         <input id="b3logKey" type="text">
         <div>
-            <b><font color="red">请注意！</font>此项设置需要重启服务端后生效。</b>
-            <br><br>
+            <b>请注意！此项设置需要重启服务端后生效。</b>
+            <br>
             <b>设置黑客派用户名和 B3log Key 后，你可以</b><br>
             1. 使用 Bolo 的编辑器图床<br>
             2. 与黑客派社区同步发送的文章和评论<br>

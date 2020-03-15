@@ -139,6 +139,10 @@
                         $('#td6').html('<b>协议（填写英文小写 http 或 https，以你的设定为准）</b>');
                         break;
                 }
+                var stc = $('#sourceTC').text().split('<<>>');
+                for (var i = 1; i < stc.length; i++) {
+                    $('#tc' + (i + 1)).val(stc[i]);
+                }
             }
             $('#tcS').change(loadRemind);
 

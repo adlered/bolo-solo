@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-    <link href="https://ftp.stackoverflow.wiki/bolo/start-style/css/font.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://ftp.stackoverflow.wiki/bolo/start-style/css/font-awesome.min.css" />
-    <link href="https://ftp.stackoverflow.wiki/bolo/start-style/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://ftp.stackoverflow.wiki/bolo/start-style/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
-    <link href="https://ftp.stackoverflow.wiki/bolo/start-style/css/demo.css" rel="stylesheet" />
+    <link href="${staticServePath}/js/bolo/start-style/css/font.css" rel="stylesheet" />
+    <link rel="stylesheet" href="${staticServePath}/js/bolo/start-style/css/font-awesome.min.css" />
+    <link href="${staticServePath}/js/bolo/start-style/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="${staticServePath}/js/bolo/start-style/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
+    <link href="${staticServePath}/js/bolo/start-style/css/demo.css" rel="stylesheet" />
     <link rel="icon" type="image/png" href="${faviconURL}"/>
     <link rel="apple-touch-icon" href="${faviconURL}">
     <link rel="shortcut icon" type="image/x-icon" href="${faviconURL}">
@@ -17,7 +16,7 @@
 </head>
 
 <body class="login-page sidebar-collapse">
-<nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
+<nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
     <div class="container">
         <div class="dropdown button-dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
@@ -40,7 +39,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
             </button>
         </div>
-        <div class="collapse navbar-collapse justify-content-end" data-nav-image="https://ftp.stackoverflow.wiki/bolo/start-style/img/blurred-image-1.jpg">
+        <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" rel="tooltip" title="开源驱动：菠萝博客" data-placement="bottom" href="https://github.com/AdlerED/bolo-solo" target="_blank">
@@ -53,7 +52,7 @@
     </div>
 </nav>
 <div class="page-header" filter-color="orange">
-    <div class="page-header-image" style="background-image:url(https://ftp.stackoverflow.wiki/bolo/start-style/img/blurred-image-1.jpg)"></div>
+    <div class="page-header-image"></div>
     <div class="container">
         <div class="col-md-4 content-center">
             <div class="card card-login card-plain">
@@ -63,13 +62,13 @@
                                 <span class="input-group-addon">
                                     <i class="now-ui-icons users_circle-08"></i>
                                 </span>
-                            <input type="text" id="username" name="username"class="form-control" placeholder="管理员用户名" />
+                            <input type="text" id="username" name="username" class="form-control" placeholder="管理员用户名" />
                         </div>
                         <div class="input-group form-group-no-border input-lg">
                                 <span class="input-group-addon">
                                     <i class="now-ui-icons text_caps-small"></i>
                                 </span>
-                            <input type="password" id="password" name="password" class="form-control" placeholder="管理员密码" />
+                            <input type="password" id="password" name="password" class="form-control" placeholder="管理员密码"  />
                         </div>
                     </div>
                     <div class="footer text-center">
@@ -86,7 +85,7 @@
             document.getElementById('status').innerHTML = '用户名或密码错误';
         }
         if (status === '-1') {
-            document.getElementById('status').innerHTML = '您的博客尚未初始化<br>请设定管理后台用户名和密码！';
+            document.getElementById('status').innerHTML = '您的博客尚未初始化<br>请设定管理后台用户名和密码';
             document.getElementById('loginBtn').innerHTML = '开始初始化';
             document.getElementById('password').setAttribute("type", "text");
         }
@@ -103,12 +102,12 @@
     </footer>
 </div>
 </body>
-<script src="https://ftp.stackoverflow.wiki/bolo/start-style/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-<script src="https://ftp.stackoverflow.wiki/bolo/start-style/js/core/popper.min.js" type="text/javascript"></script>
-<script src="https://ftp.stackoverflow.wiki/bolo/start-style/js/core/bootstrap.min.js" type="text/javascript"></script>
-<script src="https://ftp.stackoverflow.wiki/bolo/start-style/js/plugins/bootstrap-switch.js"></script>
-<script src="https://ftp.stackoverflow.wiki/bolo/start-style/js/plugins/nouislider.min.js" type="text/javascript"></script>
-<script src="https://ftp.stackoverflow.wiki/bolo/start-style/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
-<script src="https://ftp.stackoverflow.wiki/bolo/start-style/js/plugins/jquery.sharrre.js" type="text/javascript"></script>
-<script src="https://ftp.stackoverflow.wiki/bolo/start-style/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+<script src="${staticServePath}/js/bolo/start-style/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="${staticServePath}/js/bolo/start-style/js/core/popper.min.js" type="text/javascript"></script>
+<script src="${staticServePath}/js/bolo/start-style/js/core/bootstrap.min.js" type="text/javascript"></script>
+<script src="${staticServePath}/js/bolo/start-style/js/plugins/bootstrap-switch.js"></script>
+<script src="${staticServePath}/js/bolo/start-style/js/plugins/nouislider.min.js" type="text/javascript"></script>
+<script src="${staticServePath}/js/bolo/start-style/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="${staticServePath}/js/bolo/start-style/js/plugins/jquery.sharrre.js" type="text/javascript"></script>
+<script src="${staticServePath}/js/bolo/start-style/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
 </html>

@@ -55,7 +55,11 @@
             <#list pageNavigations as page>
                 <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="${page.pagePermalink}"
                    title="${page.pageTitle}" target="${page.pageOpenTarget}">
-                    <img class="mdui-list-item-icon" src="${page.pageIcon}">
+                    <#if page.pageIcon?contains("/")>
+                        <img class="mdui-list-item-icon" src="${page.pageIcon}">
+                    <#else>
+                        <i class="mdui-list-item-icon iconfont solo-${page.pageIcon}"></i>
+                    </#if>
                     <div class="mdui-list-item-content">${page.pageTitle}</div>
                 </a>
             </#list>

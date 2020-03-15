@@ -249,7 +249,10 @@ public final class Solos {
             } catch (Exception e) {
             }
             if (config.equals("hacpai") || config.isEmpty()) {
-                uploadURL = data.optString("uploadURL");
+                try {
+                    uploadURL = data.optString("uploadURL");
+                } catch (NullPointerException NPE) {
+                }
             } else {
                 uploadURL = Latkes.getStaticServePath() + "/pic/upload";
             }

@@ -39,31 +39,27 @@
 			"fade_in": 0,
 			"fade_out": 0
 		}],
-		"tap_head": [{
+		"tap_body": [{
 			"file": "model/Violet/motions/tap_face.mtn",
 			"text": "",
 			"fade_in": 0,
 			"fade_out": 0
-		}],
-		"tap_body": [{
+		},{
 			"file": "model/Violet/motions/tap_body.mtn",
 			"text": "",
 			"fade_in": 0,
 			"fade_out": 0
-		}],
-		"tap_arm_left": [{
+		},{
 			"file": "model/Violet/motions/tap_Lhand.mtn",
 			"text": "",
 			"fade_in": 0,
 			"fade_out": 0
-		}],
-		"tap_arm_right": [{
+		},{
 			"file": "model/Violet/motions/tap_Rhand.mtn",
 			"text": "",
 			"fade_in": 0,
 			"fade_out": 0
-		}],
-		"tap_skirt": [{
+		},{
 			"file": "model/Violet/motions/tap_qunzi.mtn",			
 			"text": "",
 			"fade_in": 0,
@@ -76,27 +72,13 @@
 			"fade_out": 0
 		}]
 	},
-	"hit_areas": [{
-			"name": "head",
-			"id": "D_REF.face"
-		},
-		{
-			"name": "body",
-			"id": "D_REF.body"
-		},
-		{
-			"name": "arm_left",
-			"id": "D_REF.Lhand"
-		},
-		{
-			"name": "arm_right",
-			"id": "D_REF.Rhand"
-		},
-		{
-			"name": "skirt",
-			"id": "D_REF.QUNZI"
-		}
-	],
+	
+	"hit_areas_custom":{
+		"head_x": [-2, 2],
+		"head_y": [-2, 2],
+		"body_x": [-0.6, 0.6],
+		"body_y": [0.0, -0.9]
+	},
 	"loop_params": [{
 		"id": "PARAM_HBPL",
 		"duration": 8000,

@@ -11,23 +11,20 @@
 		"center_x": 0,
 		"center_y": -0.28
 	},
-	"hit_areas": [
-		{
-			"name": "head",
-			"id": "D_REF.PT_HEAD"
-		},
-		{
-			"name": "body",
-			"id": "D_REF.PT_BODY"
-		}
-	],
+
+	"hit_areas_custom":{
+		"head_x": [-2, 2],
+		"head_y": [-2, 2],
+		"body_x": [-0.6, 0.6],
+		"body_y": [0.0, -0.9]
+	},
 	"motions": {
 		"idle": [
 			{
 				"file": "model/aoba/mtn/aoba_live2D_idle.mtn"
 			}
 		],
-        "tap_head": [
+        "tap_body": [
 			{
 				"file": "model/aoba/mtn/aoba_live2D_01.mtn"
 			},
@@ -82,8 +79,7 @@
 			{
 				"file": "model/aoba/mtn/aoba_live2D_34.mtn"
 			}
-		],
-		"tap_body": [
+		,
 			{
 				"file": "model/aoba/mtn/aoba_live2D_11.mtn"
 			},
@@ -129,13 +125,11 @@
 			{
 				"file": "model/aoba/mtn/aoba_live2D_26.mtn"
 			}
-		],		
-		"shake": [
+		,
 			{
 				"file": "model/aoba/mtn/aoba_live2D_21.mtn"
 			}
-		],
-		"new_msg": [
+		,
 			{
 				"file": "motions/aoba_live2D_01.mtn"
 			}

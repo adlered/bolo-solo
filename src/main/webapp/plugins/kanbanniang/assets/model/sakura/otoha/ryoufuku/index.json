@@ -6,6 +6,12 @@
 		"model/sakura/otoha/ryoufuku/ryoufuku.1024/L2DOTH_R_01.png",
 		"model/sakura/otoha/ryoufuku/ryoufuku.1024/L2DOTH_R_02.png"
 	],
+	"hit_areas_custom": {
+        "head_x": [-0.35, 0.6],
+        "head_y": [0.19, -0.2],
+        "body_x": [-0.3, -0.25],
+        "body_y": [0.3, -0.9]
+    },
 	"motions":{
 		"idle":[
 			{
@@ -56,15 +62,15 @@
 		]
 	},
 	"expressions":[
-		{"name":"f01.exp.json","file":"model/sakura/otohaexpressions/f01.exp.json"},
-		{"name":"f02.exp.json","file":"model/sakura/otohaexpressions/f02.exp.json"},
-		{"name":"f03.exp.json","file":"model/sakura/otohaexpressions/f03.exp.json"},
-		{"name":"f04.exp.json","file":"model/sakura/otohaexpressions/f04.exp.json"},
-		{"name":"f05.exp.json","file":"model/sakura/otohaexpressions/f05.exp.json"},
-		{"name":"f06.exp.json","file":"model/sakura/otohaexpressions/f06.exp.json"},
-		{"name":"f07.exp.json","file":"model/sakura/otohaexpressions/f07.exp.json"},
-		{"name":"f08.exp.json","file":"model/sakura/otohaexpressions/f08.exp.json"}
+		{"name":"f01.exp.json","file":"model/sakura/otoha/expressions/f01.exp.json"},
+		{"name":"f02.exp.json","file":"model/sakura/otoha/expressions/f02.exp.json"},
+		{"name":"f03.exp.json","file":"model/sakura/otoha/expressions/f03.exp.json"},
+		{"name":"f04.exp.json","file":"model/sakura/otoha/expressions/f04.exp.json"},
+		{"name":"f05.exp.json","file":"model/sakura/otoha/expressions/f05.exp.json"},
+		{"name":"f06.exp.json","file":"model/sakura/otoha/expressions/f06.exp.json"},
+		{"name":"f07.exp.json","file":"model/sakura/otoha/expressions/f07.exp.json"},
+		{"name":"f08.exp.json","file":"model/sakura/otoha/expressions/f08.exp.json"}
 	],
-	"physics":"model/sakura/otohaphysics.json",
+	"physics":"model/sakura/otoha/physics.json",
 	"pose":"model/sakura/otoha/ryoufuku/ryoufuku.pose.json"
 }

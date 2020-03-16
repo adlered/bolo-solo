@@ -13,15 +13,15 @@
 		"center_x": 0,
 		"center_y": -0.29
 	},
-	"hit_areas": [{
-			"name": "head",
-			"id": "D_REF.PT_HEAD"
-		},
-		{
-			"name": "body",
-			"id": "D_REF.PT_BODY"
-		}
-	],
+
+
+	
+	"hit_areas_custom":{
+		"head_x": [-2, 2],
+		"head_y": [-2, 2],
+		"body_x": [-0.6, 0.6],
+		"body_y": [0.0, -0.9]
+	},
 
 	"motions": {
 		"start": [{
@@ -30,7 +30,7 @@
 		"idle": [{
 			"file": "model/remu/motions/Live2D_remu_idle.mtn"
 		}],
-		"tap_head": [{
+		"tap_body": [{
 				"file": "model/remu/motions/Live2D_remu01.mtn"
 			},
 			{
@@ -60,8 +60,7 @@
 			{
 				"file": "model/remu/motions/Live2D_remu25.mtn"
 			}
-		],
-		"tap_body": [
+		,
 			{
 				"file": "model/remu/motions/Live2D_remu06.mtn"
 			},

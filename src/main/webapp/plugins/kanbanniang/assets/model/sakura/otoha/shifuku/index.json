@@ -6,6 +6,12 @@
 		"model/sakura/otoha/shifuku/shifuku.1024/L2DOTH_S_01.png",
 		"model/sakura/otoha/shifuku/shifuku.1024/L2DOTH_S_02.png"
 	],
+	"hit_areas_custom": {
+        "head_x": [-0.35, 0.6],
+        "head_y": [0.19, -0.2],
+        "body_x": [-0.3, -0.25],
+        "body_y": [0.3, -0.9]
+    },
 	"motions":{
 		"idle":[
 			{

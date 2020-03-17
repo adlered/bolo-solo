@@ -27,6 +27,7 @@ import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.JsonRenderer;
 import org.b3log.solo.SoloServletListener;
+import org.b3log.solo.bolo.SslUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.zeroturnaround.zip.ZipUtil;
@@ -53,6 +54,10 @@ public class KanBanNiangProcessor {
      */
     private static final Logger LOGGER = Logger.getLogger(KanBanNiangProcessor.class);
 
+    /**
+     * Online KanBanNiang resources download.
+     * Default had 3, but bigger cloud.
+     */
     public static void downloadKBNResource() {
         String path = "";
         File file = null;
@@ -65,6 +70,7 @@ public class KanBanNiangProcessor {
             file = new File(path + "KBNModel.zip");
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             URL url = new URL(downloadURL);
+            SslUtils.ignoreSsl();
             URLConnection connection = url.openConnection();
             InputStream inputStream = connection.getInputStream();
             long sizeKB = 0;
@@ -127,21 +133,6 @@ public class KanBanNiangProcessor {
             }
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Returns a random KanBanNiang model failed.");
-        }
-    }
-
-
-    private static void deleteDir(String path) {
-        File file = new File(path);
-        String[] content = file.list();
-        for (String name : content) {
-            File temp = new File(path, name);
-            if (temp.isDirectory()) {
-                deleteDir(temp.getAbsolutePath());
-                temp.delete();
-            } else {
-                temp.delete();
-            }
         }
     }
 }

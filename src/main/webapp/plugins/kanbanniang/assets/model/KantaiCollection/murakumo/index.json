@@ -1,9 +1,9 @@
 {
-	"model": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/model.moc",
+	"model": "model/KantaiCollection/murakumo/model.moc",
 	"textures": [
 		"https://cdn.jsdelivr.net/npm/kanbanniang/model/KantaiCollection/murakumo/textures.1024/00.png"
 	],
-	"physics": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/physics.json",
+	"physics": "model/KantaiCollection/murakumo/physics.json",
 	"layout": {
 		"center_x": 0,
 		"center_y": 0,
@@ -12,19 +12,19 @@
 	"expressions": [
 		{
 			"name": "f01",
-			"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/expressions/f01.exp.json"
+			"file": "model/KantaiCollection/murakumo/expressions/f01.exp.json"
 		},
 		{
 			"name": "f02",
-			"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/expressions/f02.exp.json"
+			"file": "model/KantaiCollection/murakumo/expressions/f02.exp.json"
 		},
 		{
 			"name": "f03",
-			"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/expressions/f03.exp.json"
+			"file": "model/KantaiCollection/murakumo/expressions/f03.exp.json"
 		},
 		{
 			"name": "f04",
-			"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/expressions/f04.exp.json"
+			"file": "model/KantaiCollection/murakumo/expressions/f04.exp.json"
 		}
 	],
 	"hit_areas_custom": {
@@ -48,38 +48,38 @@
 	"motions": {
 		"idle": [
 			{
-				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/motions/murakumo_idle_01.mtn",
+				"file": "model/KantaiCollection/murakumo/motions/murakumo_idle_01.mtn",
 				"fade_in": 2000,
 				"fade_out": 2000
 			},
 			{
-				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/motions/murakumo_idle_02.mtn",
+				"file": "model/KantaiCollection/murakumo/motions/murakumo_idle_02.mtn",
 				"fade_in": 2000,
 				"fade_out": 2000
 			},
 			{
-				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/motions/murakumo_idle_03.mtn",
+				"file": "model/KantaiCollection/murakumo/motions/murakumo_idle_03.mtn",
 				"fade_in": 2000,
 				"fade_out": 2000
 			}
 		],
 		"flick_head": [
 			{
-				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/motions/murakumo_m_01.mtn"
+				"file": "model/KantaiCollection/murakumo/motions/murakumo_m_01.mtn"
 			},
 			{
-				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/motions/murakumo_m_02.mtn"
+				"file": "model/KantaiCollection/murakumo/motions/murakumo_m_02.mtn"
 			}
 		],
 		"tap_body": [
 			{
-				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/motions/murakumo_tap_bust_01.mtn"
+				"file": "model/KantaiCollection/murakumo/motions/murakumo_tap_bust_01.mtn"
 			},
 			{
-				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/motions/murakumo_tap_bust_02.mtn"
+				"file": "model/KantaiCollection/murakumo/motions/murakumo_tap_bust_02.mtn"
 			},
 			{
-				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/KantaiCollection/murakumo/motions/murakumo_tap_ear_01.mtn"
+				"file": "model/KantaiCollection/murakumo/motions/murakumo_tap_ear_01.mtn"
 			}
 		]
 	}

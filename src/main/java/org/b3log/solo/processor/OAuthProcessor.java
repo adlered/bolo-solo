@@ -139,7 +139,7 @@ public class OAuthProcessor {
                     // 同时兼容明文和密文密码
                     if ((username.equals(cUser) && password.equals(cPass)) || (username.equals(cUser) && md5.equals(cPass))) {
                         Solos.login(user, context.getResponse());
-                        LOGGER.log(Level.INFO, "Logged in [name={0}, remoteAddr={1}] with bolo auth", username, Requests.getRemoteAddr(request));
+                        LOGGER.log(Level.INFO, "Logged in [name={0}, remoteAddr={1}] with Bolo auth", username, Requests.getRemoteAddr(request));
                         context.sendRedirect(Latkes.getServePath() + "/admin-index.do#main");
                     } else {
                         context.sendRedirect(Latkes.getServePath() + "/start?status=error");

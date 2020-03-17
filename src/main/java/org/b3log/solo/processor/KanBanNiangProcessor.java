@@ -29,9 +29,14 @@ import org.b3log.latke.servlet.renderer.JsonRenderer;
 import org.b3log.solo.SoloServletListener;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.zeroturnaround.zip.ZipUtil;
 
 import javax.servlet.ServletContext;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * KanBanNiang processor. https://github.com/b3log/solo/issues/12472
@@ -85,6 +90,60 @@ public class KanBanNiangProcessor {
             }
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Returns a random KanBanNiang model failed", e);
+        }
+    }
+
+    public static void downloadKBNResource() {
+        String path = "";
+        File file = null;
+        try {
+            LOGGER.log(Level.INFO, "Downloading KanBanNiang resources online...");
+            final ServletContext servletContext = SoloServletListener.getServletContext();
+            final String assets = "/plugins/kanbanniang/assets/model/";
+            path = servletContext.getResource(assets).getPath();
+            deleteDir(path);
+            String downloadURL = "https://ftp.stackoverflow.wiki/bolo/kanbanniang/KBNModel.zip";
+            file = new File(path + "KBNModel.zip");
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            URL url = new URL(downloadURL);
+            URLConnection connection = url.openConnection();
+            InputStream inputStream = connection.getInputStream();
+            long sizeKB = 0;
+            int length = 0;
+            byte[] bytes = new byte[1024];
+            while ((length = inputStream.read(bytes)) != -1) {
+                sizeKB++;
+                fileOutputStream.write(bytes, 0, length);
+                if (sizeKB % 1024 == 0) {
+                    System.out.print((sizeKB / 1024) + " MB ");
+                }
+            }
+            System.out.println();
+            LOGGER.log(Level.INFO, "Unpacking KanBanNiang resources...");
+            fileOutputStream.close();
+            inputStream.close();
+            ZipUtil.unpack(file, new File(path));
+            file.delete();
+            LOGGER.log(Level.INFO, "KanBanNiang is ready.");
+        } catch (Exception e) {
+            deleteDir(path);
+            file.delete();
+            LOGGER.log(Level.ERROR, "KanBanNiang resources download failed. Reason: " + e.toString());
+        }
+    }
+
+
+    private static void deleteDir(String path) {
+        File file = new File(path);
+        String[] content = file.list();
+        for (String name : content) {
+            File temp = new File(path, name);
+            if (temp.isDirectory()) {
+                deleteDir(temp.getAbsolutePath());
+                temp.delete();
+            } else {
+                temp.delete();
+            }
         }
     }
 }

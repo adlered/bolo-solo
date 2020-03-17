@@ -41,6 +41,7 @@ import org.b3log.solo.event.B3CommentSender;
 import org.b3log.solo.event.PluginRefresher;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.processor.InitCheckHandler;
+import org.b3log.solo.processor.KanBanNiangProcessor;
 import org.b3log.solo.processor.PermalinkHandler;
 import org.b3log.solo.processor.console.*;
 import org.b3log.solo.repository.OptionRepository;
@@ -150,6 +151,13 @@ public final class SoloServletListener extends AbstractServletListener {
         cronMgmtService.start();
 
         MailService.loadMailSettings();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                KanBanNiangProcessor.downloadKBNResource();
+            }
+        }).start();
     }
 
     @Override

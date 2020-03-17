@@ -131,5 +131,6 @@
     <orderEntry type="library" name="Maven: com.aliyun:aliyun-java-sdk-ecs:4.2.0" level="project" />
     <orderEntry type="library" name="Maven: com.upyun:java-sdk:4.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20160212" level="project" />
+    <orderEntry type="library" name="Maven: org.zeroturnaround:zt-zip:1.14" level="project" />
   </component>
 </module>

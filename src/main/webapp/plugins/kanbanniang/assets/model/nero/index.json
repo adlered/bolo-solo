@@ -1,11 +1,11 @@
 {
 	"version":"Sample 1.0.0",
-	"name":"model/nero/nero",
-	"model":"model/nero/nero.moc",
+	"name":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/nero",
+	"model":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/nero.moc",
 	"textures":[
-		"model/nero/nero2048/texture_00.png"
+		"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/nero2048/texture_00.png"
 	],
-	"physics":"model/nero/nero.physics.json",
+	"physics":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/nero.physics.json",
 	"lip_sync":"true",
 	"layout":
 	{
@@ -25,61 +25,61 @@
 	{
 		"idle":
 		[
-			{"file":"model/nero/mtn/nero_live2D_idle.mtn"}
+			{"file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_idle.mtn"}
 		],
 		"start":
 		[
-			{ "file":"model/nero/mtn/nero_live2D_03.mtn"},
-            { "file":"model/nero/mtn/nero_live2D_05.mtn"}
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_03.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_05.mtn"}
 		],
         "tap_body":
 		[
-			{ "file":"model/nero/mtn/nero_live2D_07.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_08.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_09.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_10.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_11.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_12.mtn"},
-            { "file":"model/nero/mtn/nero_live2D_13.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_14.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_15.mtn"},
-            { "file":"model/nero/mtn/nero_live2D_16.mtn"},
-            { "file":"model/nero/mtn/nero_live2D_18.mtn"},
-            { "file":"model/nero/mtn/nero_live2D_19.mtn"},
-            { "file":"model/nero/mtn/nero_live2D_20.mtn"},
-            { "file":"model/nero/mtn/nero_live2D_21.mtn"}
-		,	{ "file":"model/nero/mtn/nero_live2D_01.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_02.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_04.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_05.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_06.mtn"},
-            { "file":"model/nero/mtn/nero_live2D_17.mtn"},
-            { "file":"model/nero/mtn/nero_live2D_22.mtn"},
-            { "file":"model/nero/mtn/nero_live2D_23.mtn"},
-            { "file":"model/nero/mtn/nero_live2D_24.mtn"}
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_07.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_08.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_09.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_10.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_11.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_12.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_13.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_14.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_15.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_16.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_18.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_19.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_20.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_21.mtn"}
+		,	{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_01.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_02.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_04.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_05.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_06.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_17.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_22.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_23.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_24.mtn"}
 		],
         "shake":
 		[
-			{ "file":"model/nero/mtn/nero_live2D_14.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_15.mtn"}
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_14.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_15.mtn"}
 		],
 		"random":
 		[
-			{ "file":"model/nero/mtn/nero_live2D_07.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_08.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_09.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_10.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_11.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_12.mtn"},
-            { "file":"model/nero/mtn/nero_live2D_13.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_14.mtn"},
-            { "file":"model/nero/mtn/nero_live2D_01.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_02.mtn"},
-			{ "file":"model/nero/mtn/nero_live2D_04.mtn"}
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_07.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_08.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_09.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_10.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_11.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_12.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_13.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_14.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_01.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_02.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_04.mtn"}
 		],
 		"new_msg":
 		[
-            { "file":"model/nero/mtn/nero_live2D_02.mtn"}
-		]        
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/nero/mtn/nero_live2D_02.mtn"}
+		]
 	}
 }

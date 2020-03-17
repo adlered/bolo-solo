@@ -1,11 +1,11 @@
 {
 	"version":"Sample 1.0.0",
 	"name":"tamamo",
-	"model":"model/tamamo/tamamo.moc",
+	"model":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/tamamo.moc",
 	"textures":[
-		"model/tamamo/tamamo2048/texture_00.png"
+		"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/tamamo2048/texture_00.png"
 	],
-	"physics":"model/tamamo/tamamo.physics.json",
+	"physics":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/tamamo.physics.json",
 	"lip_sync":"true",
 	"layout":
 	{
@@ -24,58 +24,58 @@
 	{
 		"idle":
 		[
-			{"file":"model/tamamo/mtn/tamamo_live2D_idle.mtn"}
+			{"file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_idle.mtn"}
 		],
 		"start":
 		[
-			{ "file":"model/tamamo/mtn/tamamo_live2D_01.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_02.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_03.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_04.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_05.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_06.mtn"}
-		],        
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_01.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_02.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_03.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_04.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_05.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_06.mtn"}
+		],
 		"tap_body":
 		[
-			{ "file":"model/tamamo/mtn/tamamo_live2D_07.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_17.mtn"},
-            { "file":"model/tamamo/mtn/tamamo_live2D_23.mtn"},
-            { "file":"model/tamamo/mtn/tamamo_live2D_08.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_09.mtn"}
-		,					
-			{ "file":"model/tamamo/mtn/tamamo_live2D_10.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_11.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_12.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_13.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_14.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_15.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_16.mtn"}
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_07.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_17.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_23.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_08.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_09.mtn"}
+		,
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_10.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_11.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_12.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_13.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_14.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_15.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_16.mtn"}
 		],
 		"shake":
 		[
-			{ "file":"model/tamamo/mtn/tamamo_live2D_13.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_14.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_15.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_16.mtn"}
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_13.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_14.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_15.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_16.mtn"}
 		],
 		"random":
 		[
-			{ "file":"model/tamamo/mtn/tamamo_live2D_07.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_17.mtn"},
-            { "file":"model/tamamo/mtn/tamamo_live2D_23.mtn"},
-            { "file":"model/tamamo/mtn/tamamo_live2D_08.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_09.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_10.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_11.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_12.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_13.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_14.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_15.mtn"},
-			{ "file":"model/tamamo/mtn/tamamo_live2D_16.mtn"}
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_07.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_17.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_23.mtn"},
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_08.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_09.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_10.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_11.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_12.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_13.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_14.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_15.mtn"},
+			{ "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_16.mtn"}
 		],
 		"new_msg":
 		[
-            { "file":"model/tamamo/mtn/tamamo_live2D_02.mtn"}
+            { "file":"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/tamamo/mtn/tamamo_live2D_02.mtn"}
 		]
 	}
 }

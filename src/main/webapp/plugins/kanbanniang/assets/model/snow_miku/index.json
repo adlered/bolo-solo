@@ -1,8 +1,8 @@
 {
     "posted": "Dreamer-Paul",
-    "model": "model/snow_miku/model.moc",
+    "model": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/snow_miku/model.moc",
     "textures": [
-        "model/snow_miku/textures/texture_00.png"
+        "https://ftp.stackoverflow.wiki/bolo/kanbanniang/snow_miku/textures/texture_00.png"
     ],
     "layout": {
         "center_x": 0.0,
@@ -17,7 +17,7 @@
     },
     "motions": {
         "idle": [
-            {"file": "model/snow_miku/motions/idle/idle.mtn"}
+            {"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/snow_miku/motions/idle/idle.mtn"}
         ]
     }
 }

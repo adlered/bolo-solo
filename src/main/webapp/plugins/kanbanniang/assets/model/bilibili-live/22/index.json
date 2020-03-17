@@ -1,5 +1,5 @@
 {
-  "model": "model/bilibili-live/22/model.moc",
+  "model": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/bilibili-live/22/model.moc",
   "textures": [],
   "layout": {
     "center_x": 0,
@@ -28,31 +28,31 @@
   "motions": {
     "idle": [
       {
-        "file": "model/bilibili-live/22/motions/idle-01.mtn",
+        "file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/bilibili-live/22/motions/idle-01.mtn",
         "fade_in": 2000,
         "fade_out": 2000
       },
       {
-        "file": "model/bilibili-live/22/motions/touch.mtn",
+        "file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/bilibili-live/22/motions/touch.mtn",
         "fade_in": 500,
         "fade_out": 200
       },
       {
-        "file": "model/bilibili-live/22/motions/idle-03.mtn",
+        "file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/bilibili-live/22/motions/idle-03.mtn",
         "fade_in": 100,
         "fade_out": 100
       }
     ],
     "flick_head": [
       {
-        "file": "model/bilibili-live/22/motions/idle-02.mtn",
+        "file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/bilibili-live/22/motions/idle-02.mtn",
         "fade_in": 2000,
         "fade_out": 2000
       }
     ],
     "tap_body": [
       {
-        "file": "model/bilibili-live/22/motions/thanking.mtn",
+        "file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/bilibili-live/22/motions/thanking.mtn",
         "fade_in": 2000,
         "fade_out": 2000
       }

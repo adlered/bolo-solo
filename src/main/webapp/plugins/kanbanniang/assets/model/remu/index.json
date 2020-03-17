@@ -1,12 +1,12 @@
 {
 	"version": "Live2D MoePet v1.1",
 	"name": "remu",
-	"model": "model/remu/remu.moc",
+	"model": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/remu.moc",
 	"textures": [
-		"model/remu/remu2048/texture_00.png"
+		"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/remu2048/texture_00.png"
 	],
-	"physics": "model/remu/remu.physics.json",
-	"pose": "model/remu/remu.pose.json",
+	"physics": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/remu.physics.json",
+	"pose": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/remu.pose.json",
 	"lip_sync": "false",
 	"layout": {
 		"width": 2.0,
@@ -15,7 +15,7 @@
 	},
 
 
-	
+
 	"hit_areas_custom":{
 		"head_x": [-2, 2],
 		"head_y": [-2, 2],
@@ -25,122 +25,122 @@
 
 	"motions": {
 		"start": [{
-			"file": "model/remu/motions/Live2D_remu26.mtn"
+			"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu26.mtn"
 		}],
 		"idle": [{
-			"file": "model/remu/motions/Live2D_remu_idle.mtn"
+			"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu_idle.mtn"
 		}],
 		"tap_body": [{
-				"file": "model/remu/motions/Live2D_remu01.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu01.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu02.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu02.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu03.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu03.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu04.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu04.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu05.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu05.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu21.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu21.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu22.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu22.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu23.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu23.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu24.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu24.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu25.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu25.mtn"
 			}
 		,
 			{
-				"file": "model/remu/motions/Live2D_remu06.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu06.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu07.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu07.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu08.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu08.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu09.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu09.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu10.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu10.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu11.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu11.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu12.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu12.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu13.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu13.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu14.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu14.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu15.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu15.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu16.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu16.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu17.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu17.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu18.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu18.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu19.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu19.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu20.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu20.mtn"
 			}
 		],
 		"random": [{
-				"file": "model/remu/motions/Live2D_remu01.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu01.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu02.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu02.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu03.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu03.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu04.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu04.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu05.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu05.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu21.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu21.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu22.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu22.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu23.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu23.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu24.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu24.mtn"
 			},
 			{
-				"file": "model/remu/motions/Live2D_remu25.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu25.mtn"
 			}
         ],
 		"new_msg": [
 			{
-				"file": "model/remu/motions/Live2D_remu24.mtn"
+				"file": "https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/remu/motions/Live2D_remu24.mtn"
 			}
 		]
 	}

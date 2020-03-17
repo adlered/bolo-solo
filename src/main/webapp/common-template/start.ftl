@@ -71,7 +71,7 @@
     </div>
 </nav>
 <div class="page-header" filter-color="orange">
-    <div class="page-header-image"></div>
+    <div class="page-header-image" style="background-image:url(https://www.stackoverflow.wiki/images/BG-EveryDayBing.jpg)"></div>
     <div class="container">
         <div class="col-md-4 content-center">
             <div class="card card-login card-plain">
@@ -115,6 +115,7 @@
     <footer class="footer">
         <div class="container">
             <div class="copyright">
+                登录背景来自 <a href="https://www.bing.com/?mkt=zh-CN" target="_blank">必应今日美图</a><br>
                 Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a> ${version}
             </div>
         </div>

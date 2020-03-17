@@ -78,13 +78,13 @@
                 <form class="form" action="${servePath}/oauth/bolo/login" method="POST">
                     <div class="content">
                         <div class="input-group form-group-no-border input-lg">
-                                <span class="input-group-addon">
+                                <span class="input-group-addon" style="padding-right: 12px;">
                                     <i class="now-ui-icons users_circle-08"></i>
                                 </span>
                             <input type="text" id="username" name="username" class="form-control" placeholder="管理员用户名" />
                         </div>
                         <div class="input-group form-group-no-border input-lg">
-                                <span class="input-group-addon">
+                                <span class="input-group-addon" style="padding-right: 12px;">
                                     <i class="now-ui-icons text_caps-small"></i>
                                 </span>
                             <input type="password" id="password" name="password" class="form-control" placeholder="管理员密码"  />

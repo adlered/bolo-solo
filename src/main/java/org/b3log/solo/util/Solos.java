@@ -268,7 +268,7 @@ public final class Solos {
                     put(Common.UPLOAD_URL, uploadURL).
                     put(Common.UPLOAD_MSG, uploadMsg);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets upload token failed", e);
+            LOGGER.log(Level.ERROR, "Gets Hacpai upload token failed, Wrong Hacpai Username / B3log key.");
 
             return null;
         }

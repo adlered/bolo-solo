@@ -56,7 +56,6 @@ public class KanBanNiangProcessor {
 
     /**
      * Online KanBanNiang resources download.
-     * Default had 3, but bigger cloud.
      */
     public static void downloadKBNResource() {
         String path = "";

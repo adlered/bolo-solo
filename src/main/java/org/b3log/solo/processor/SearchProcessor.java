@@ -32,6 +32,7 @@ import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.AbstractFreeMarkerRenderer;
 import org.b3log.latke.servlet.renderer.TextXmlRenderer;
 import org.b3log.latke.util.Paginator;
+import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
@@ -160,6 +161,8 @@ public class SearchProcessor {
             LOGGER.log(Level.ERROR, "Search articles failed");
 
             dataModel.put(Article.ARTICLES, Collections.emptyList());
+        } finally {
+            dataModel.put("boloVersion", SoloServletListener.BOLO_VERSION);
         }
     }
 }

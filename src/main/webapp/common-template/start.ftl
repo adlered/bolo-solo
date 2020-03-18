@@ -109,14 +109,14 @@
             document.getElementById('password').setAttribute("type", "text");
         }
         document.getElementById('loginBtn').onclick = function () {
-            document.getElementById('loginBtn').innerHTML = '<i class="fa fa-circle-o-notch fa-spin"></i> 登录中';
+            document.getElementById('loginBtn').innerHTML = '<i class="fa fa-spinner fa-pulse"></i> 登录中';
         }
     </script>
     <footer class="footer">
         <div class="container">
             <div class="copyright">
                 <span id="description"></span>
-                Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a> ${version}
+                Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a> ${boloVersion}
                 <br>
                 由 <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝 Sir</a> 挑选优美的「无版权背景图」
             </div>

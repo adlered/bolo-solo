@@ -71,6 +71,8 @@ public class KanBanNiangProcessor {
             URL url = new URL(downloadURL);
             SslUtils.ignoreSsl();
             URLConnection connection = url.openConnection();
+            float size = (connection.getContentLength() / 1024 / 1024);
+            System.out.println("KanBanNiang resources total size: " + size + " MB ");
             InputStream inputStream = connection.getInputStream();
             long sizeKB = 0;
             int length = 0;
@@ -79,7 +81,8 @@ public class KanBanNiangProcessor {
                 sizeKB++;
                 fileOutputStream.write(bytes, 0, length);
                 if (sizeKB % 1024 == 0) {
-                    System.out.print((sizeKB / 1024) + " MB ");
+                    int percent = (int) (((sizeKB / 1024) / size) * 100);
+                    System.out.print(percent + "% ");
                 }
             }
             System.out.println();

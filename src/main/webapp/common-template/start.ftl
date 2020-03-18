@@ -71,7 +71,7 @@
     </div>
 </nav>
 <div class="page-header" filter-color="orange">
-    <div class="page-header-image" style="background-image:url(https://www.stackoverflow.wiki/images/BG-EveryDayBing.jpg)"></div>
+    <div class="page-header-image" style="background-image:url(https://ftp.stackoverflow.wiki/bolo/bg.png)"></div>
     <div class="container">
         <div class="col-md-4 content-center">
             <div class="card card-login card-plain">
@@ -115,8 +115,10 @@
     <footer class="footer">
         <div class="container">
             <div class="copyright">
-                登录背景来自 <a href="https://www.bing.com/?mkt=zh-CN" target="_blank">必应今日美图</a><br>
+                <span id="description"></span>
                 Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a> ${version}
+                <br>
+                由 <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝 Sir</a> 挑选优美的「无版权背景图」
             </div>
         </div>
     </footer>
@@ -130,4 +132,7 @@
 <script src="${staticServePath}/js/bolo/start-style/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
 <script src="${staticServePath}/js/bolo/start-style/js/plugins/jquery.sharrre.js" type="text/javascript"></script>
 <script src="${staticServePath}/js/bolo/start-style/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+<script>
+    $('#description').load('https://ftp.stackoverflow.wiki/bolo/description.html');
+</script>
 </html>

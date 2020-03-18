@@ -25,7 +25,7 @@
         </div>
         <div class="module-body padding12">
             <div id="noticeList" style="background: none;">
-                <iframe src="https://ftp.stackoverflow.wiki/bolo/notice.html" height="168px" width="100%" frameborder="no" border="0" scrolling="auto"></iframe>
+                <iframe src="https://ftp.stackoverflow.wiki/bolo/notice.html" height="400px" width="100%" frameborder="no" border="0" scrolling="auto"></iframe>
             </div>
         </div>
     </div>

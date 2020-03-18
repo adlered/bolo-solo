@@ -59,13 +59,6 @@ public class BackupService {
             return;
         }
 
-        final JSONObject preference = optionQueryService.getPreference();
-        if (!preference.optBoolean(Option.ID_C_SYNC_GITHUB)) {
-            context.sendError(405);
-
-            return;
-        }
-
         try {
             exportService.exportHacPai();
 

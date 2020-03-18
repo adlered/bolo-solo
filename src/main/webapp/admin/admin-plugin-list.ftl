@@ -24,4 +24,7 @@
 <div id="pluginSetting" class="fn__none">
 </div>
 <div class="fn__clear"></div>
+<div style="padding: 0px 25px 0px 25px;">
+    <b>看板娘 +</b> 拥有海量看板娘资源，所以本地默认只提供三款看板娘。菠萝博客在每次启动、启用看板娘插件时会自动从云端下载看板娘资源，资源大小约 50 MB。资源包会不定时更新更多看板娘，这一切不需要你做任何操作，只需要打开看板娘插件即可。
+</div>
 ${plugins}

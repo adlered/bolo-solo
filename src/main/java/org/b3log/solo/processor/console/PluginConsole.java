@@ -28,6 +28,7 @@ import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.Before;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.JsonRenderer;
+import org.b3log.solo.processor.KanBanNiangProcessor;
 import org.b3log.solo.service.PluginMgmtService;
 import org.b3log.solo.service.PluginQueryService;
 import org.b3log.solo.util.Solos;
@@ -92,6 +93,13 @@ public class PluginConsole {
         final String pluginId = requestJSONObject.getString(Keys.OBJECT_ID);
         final String status = requestJSONObject.getString(Plugin.PLUGIN_STATUS);
         final JSONObject result = pluginMgmtService.setPluginStatus(pluginId, status);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                KanBanNiangProcessor.downloadKBNResource();
+            }
+        }).start();
 
         renderer.setJSONObject(result);
     }

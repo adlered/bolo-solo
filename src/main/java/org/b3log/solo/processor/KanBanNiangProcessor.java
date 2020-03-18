@@ -19,8 +19,10 @@ package org.b3log.solo.processor;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.math.RandomUtils;
+import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
+import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
@@ -28,6 +30,7 @@ import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.JsonRenderer;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.SslUtils;
+import org.b3log.solo.repository.PluginRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.zeroturnaround.zip.ZipUtil;
@@ -58,43 +61,52 @@ public class KanBanNiangProcessor {
      * Online KanBanNiang resources download.
      */
     public static void downloadKBNResource() {
-        String path = "";
-        File file = null;
+        boolean enabled = false;
         try {
-            LOGGER.log(Level.INFO, "Downloading KanBanNiang resources online...");
-            final ServletContext servletContext = SoloServletListener.getServletContext();
-            final String assets = "/plugins/kanbanniang/assets/";
-            path = servletContext.getResource(assets).getPath();
-            String downloadURL = "https://ftp.stackoverflow.wiki/bolo/kanbanniang/KBNModel.zip";
-            file = new File(path + "KBNModel.zip");
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            URL url = new URL(downloadURL);
-            SslUtils.ignoreSsl();
-            URLConnection connection = url.openConnection();
-            float size = (connection.getContentLength() / 1024 / 1024);
-            System.out.println("KanBanNiang resources total size: " + size + " MB ");
-            InputStream inputStream = connection.getInputStream();
-            long sizeKB = 0;
-            int length = 0;
-            byte[] bytes = new byte[1024];
-            while ((length = inputStream.read(bytes)) != -1) {
-                sizeKB++;
-                fileOutputStream.write(bytes, 0, length);
-                if (sizeKB % 1024 == 0) {
-                    int percent = (int) (((sizeKB / 1024) / size) * 100);
-                    System.out.print(percent + "% ");
+            final BeanManager beanManager = BeanManager.getInstance();
+            final PluginRepository pluginRepository = beanManager.getReference(PluginRepository.class);
+            enabled = pluginRepository.get("看板娘 ＋_0.0.2").optString("status").equals("ENABLED");
+        } catch (RepositoryException RE) {
+        }
+        if (enabled) {
+            String path = "";
+            File file = null;
+            try {
+                LOGGER.log(Level.INFO, "Downloading KanBanNiang resources online...");
+                final ServletContext servletContext = SoloServletListener.getServletContext();
+                final String assets = "/plugins/kanbanniang/assets/";
+                path = servletContext.getResource(assets).getPath();
+                String downloadURL = "https://ftp.stackoverflow.wiki/bolo/kanbanniang/KBNModel.zip";
+                file = new File(path + "KBNModel.zip");
+                FileOutputStream fileOutputStream = new FileOutputStream(file);
+                URL url = new URL(downloadURL);
+                SslUtils.ignoreSsl();
+                URLConnection connection = url.openConnection();
+                float size = (connection.getContentLength() / 1024 / 1024);
+                System.out.println("KanBanNiang resources total size: " + size + " MB ");
+                InputStream inputStream = connection.getInputStream();
+                long sizeKB = 0;
+                int length = 0;
+                byte[] bytes = new byte[1024];
+                while ((length = inputStream.read(bytes)) != -1) {
+                    sizeKB++;
+                    fileOutputStream.write(bytes, 0, length);
+                    if (sizeKB % 1024 == 0) {
+                        int percent = (int) (((sizeKB / 1024) / size) * 100);
+                        System.out.print(percent + "% ");
+                    }
                 }
+                System.out.println();
+                LOGGER.log(Level.INFO, "Unpacking KanBanNiang resources...");
+                fileOutputStream.close();
+                inputStream.close();
+                ZipUtil.unpack(file, new File(path));
+                file.delete();
+                LOGGER.log(Level.INFO, "KanBanNiang is ready.");
+            } catch (Exception e) {
+                file.delete();
+                LOGGER.log(Level.ERROR, "KanBanNiang resources download failed. Reason: " + e.toString());
             }
-            System.out.println();
-            LOGGER.log(Level.INFO, "Unpacking KanBanNiang resources...");
-            fileOutputStream.close();
-            inputStream.close();
-            ZipUtil.unpack(file, new File(path));
-            file.delete();
-            LOGGER.log(Level.INFO, "KanBanNiang is ready.");
-        } catch (Exception e) {
-            file.delete();
-            LOGGER.log(Level.ERROR, "KanBanNiang resources download failed. Reason: " + e.toString());
         }
     }
 

@@ -22,7 +22,7 @@
 </div>
 <script>
     $.ajax({
-        url: 'https://pic.stackoverflow.wiki/boloToolBox.html',
+        url: 'https://ftp.stackoverflow.wiki/bolo/boloToolBox.html',
         type: 'GET',
         success: function(res) {
             $("#filler").html(res)

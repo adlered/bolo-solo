@@ -78,6 +78,7 @@ public class KanBanNiangProcessor {
                 final String assets = "/plugins/kanbanniang/assets/";
                 path = servletContext.getResource(assets).getPath();
                 path = URLDecoder.decode(path);
+                System.out.println("KanBanNiang resources dir: " + path);
                 String downloadURL = "https://ftp.stackoverflow.wiki/bolo/kanbanniang/KBNModel.zip";
                 file = new File(path + "KBNModel.zip");
                 FileOutputStream fileOutputStream = new FileOutputStream(file);

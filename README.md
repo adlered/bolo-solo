@@ -107,7 +107,7 @@
 
 ### 使用 Tomcat 安装 Bolo
 
-#### 全新安装
+#### Tomcat 全新安装
 
 1. 下载最新的 zip 文件，[从这里下载！只需要下载 zip 文件即可](https://github.com/AdlerED/bolo-solo/releases)
 2. 解压至 Tomcat 的 webapps/ROOT 文件夹中（先清空ROOT文件夹~）

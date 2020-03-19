@@ -56,10 +56,6 @@
 4. 基于 [Picuang](https://github.com/AdlerED/Picuang) 的自搭建图床
 5. 黑客派公共图床（默认）
 
-# Bolo 预览图
-
-[点我查看 Bolo 预览图](/preview/preview.md)
-
 ### 使用 Bolo 驱动的博客
 
 如果你也使用 Bolo 驱动你的博客，欢迎向本 README 提出 Pull Request ~

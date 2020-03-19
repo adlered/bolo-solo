@@ -26,6 +26,7 @@
 ****
 
 * [Bolo 的功能亮点](#Bolo-的功能亮点)  
+* [人工帮助](#人工帮助)
 * [Bolo 多种安装方法](#Bolo-多种安装方法)  
 * [轻松更新 Bolo](#tomcat-%E8%BD%BB%E6%9D%BE%E6%9B%B4%E6%96%B0-Bolo)  
 * [视频教程](#视频教程)  
@@ -100,6 +101,12 @@
 |<img height='48' width='48' src='https://avatars3.githubusercontent.com/u/873584?v=4'>|<img height='48' width='48' src='https://avatars0.githubusercontent.com/u/14257327?v=4'>|<img height='48' width='48' src='https://avatars1.githubusercontent.com/u/23192332?v=4'>|
 |[@88250](https://github.com/88250)|[@csfwff](https://github.com/csfwff)|[@InkDP](https://github.com/InkDP)|
 |[Solo 原作者](https://hacpai.com)|[Bolo 测试、Logo 绘制、前端技术支持](https://sszsj.top)|[默认皮肤 bolo-nexmoe 原作者](https://inkdp.cn)|
+
+# 人工帮助
+
+如果你在安装、使用的过程中出现任何问题，欢迎微信扫描咨询：
+
+![人工帮助](/pic/bolo_customer.png)
 
 # Bolo 多种安装方法
 

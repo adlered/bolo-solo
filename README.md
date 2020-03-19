@@ -191,10 +191,6 @@ Unix-like: `java -cp "WEB-INF/lib/*:WEB-INF/classes" org.b3log.solo.Starter`
 
 视频教程公开在`云存储`中，请[点击这里](https://ftp.stackoverflow.wiki)在线观看。
 
-# 其它帮助信息
-
-* [如何添加社交按钮的内容？](https://hacpai.com/article/1574741650421/comment/1574746366256)
-
 # 轻松迁移：迁移至 Bolo / 迁回至 Solo
 
 ### 从 Solo 迁移至 Bolo
@@ -236,7 +232,9 @@ VALUES
 4. 登录，在`管理后台 - 工具 - 用户管理`中，更新管理员账号的B3log Key为黑客派中的B3log Key。
 5. 大功告成~
 
-> 如果不会操作，欢迎联系我~（请看我名片中的联系方式）
+# 其它帮助信息
+
+* [如何添加社交按钮的内容？](https://hacpai.com/article/1574741650421/comment/1574746366256)
 
 # 皮肤
 

@@ -1,7 +1,7 @@
 <p align = "center">
 <img alt="Bolo" src="bolo-logo-256.png">
 <br><br>
-基于 Solo 的离线多功能版 Bolo 博客，使用 Java 编写，专为程序员设计
+菠萝博客，使用 Java 编写，专为程序员设计
 <br><br>
 <img src="http://img.shields.io/badge/license-AGPLv3-orange.svg?style=flat-square">
 <img src="https://img.shields.io/github/last-commit/AdlerED/bolo-solo.svg?style=flat-square">

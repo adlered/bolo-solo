@@ -50,6 +50,7 @@
     <div>
         <label>${category1Label}</label>
         <select id="categorySelector">
+            <option value="">无分类</option>
             <#list categories as category>
                 <option value="${category.oId}">${category.categoryTitle} (${category.categoryPublishedArticleCount})</option>
             </#list>

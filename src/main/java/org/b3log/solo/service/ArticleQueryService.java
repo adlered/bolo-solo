@@ -259,7 +259,10 @@ public class ArticleQueryService {
                 // 这里放文章oId
                 articleIds.add(tagArticles.get(i).optString("C"));
             }
-            final Query query = new Query().setFilter(new PropertyFilter(Keys.OBJECT_ID, FilterOperator.IN, articleIds)).
+            final List<Filter> filters = new ArrayList<>();
+            filters.add(new PropertyFilter(Keys.OBJECT_ID, FilterOperator.IN, articleIds));
+            filters.add(new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL, 0));
+            final Query query = new Query().setFilter(new CompositeFilter(CompositeFilterOperator.AND, filters)).
                     setPageCount(1).addSort(Keys.OBJECT_ID, SortDirection.DESCENDING);
             final List<JSONObject> articles = new ArrayList<>();
             final JSONArray articleArray = articleRepository.get(query).optJSONArray(Keys.RESULTS);

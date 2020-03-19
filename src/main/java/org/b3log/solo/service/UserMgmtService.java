@@ -103,6 +103,65 @@ public class UserMgmtService {
     private OptionRepository optionRepository;
 
     /**
+     * Refresh usite. 展示站点连接 https://github.com/b3log/solo/issues/12719
+     */
+    public void refreshUSite() {
+        if (!initService.isInited()) {
+            return;
+        }
+
+        String userName = "";
+        String userB3Key = "";
+        try {
+            final BeanManager beanManager = BeanManager.getInstance();
+            OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+            JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
+            userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
+            JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+            userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+        } catch (RepositoryException e) {
+        }
+
+        JSONObject usite;
+        try {
+            final JSONObject requestJSON = new JSONObject().
+                    put(User.USER_NAME, userName).
+                    put(UserExt.USER_B3_KEY, userB3Key);
+            final HttpResponse res = HttpRequest.post("https://hacpai.com/user/usite").trustAllCerts(true).
+                    connectionTimeout(3000).timeout(7000).header("User-Agent", Solos.USER_AGENT).
+                    body(requestJSON.toString()).send();
+            if (200 != res.statusCode()) {
+                return;
+            }
+            res.charset("UTF-8");
+            final JSONObject result = new JSONObject(res.bodyText());
+            if (0 != result.optInt(Keys.STATUS_CODE)) {
+                return;
+            }
+            usite = result.optJSONObject(Common.DATA);
+        } catch (final Exception e) {
+            LOGGER.log(Level.ERROR, "Gets usite failed", e);
+
+            return;
+        }
+
+        JSONObject usiteOpt = optionQueryService.getOptionById(Option.ID_C_USITE);
+        if (null == usiteOpt) {
+            usiteOpt = new JSONObject();
+            usiteOpt.put(Keys.OBJECT_ID, Option.ID_C_USITE);
+            usiteOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_HACPAI);
+        }
+        usiteOpt.put(Option.OPTION_VALUE, usite.toString());
+        try {
+            optionMgmtService.addOrUpdateOption(usiteOpt);
+        } catch (final Exception e) {
+            LOGGER.log(Level.ERROR, "Updates usite option failed", e);
+
+            return;
+        }
+    }
+
+    /**
      * Updates a user by the specified request json object.
      *
      * @param requestJSONObject the specified request json object, for example,

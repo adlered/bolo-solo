@@ -26,7 +26,6 @@
 ****
 
 * [Bolo 的功能亮点](#Bolo-的功能亮点)  
-* [全新！使用 Docker 光速安装 Bolo](#使用-Docker-光速安装-Bolo)
 * [Bolo 多种安装方法](#Bolo-多种安装方法)  
 * [轻松更新 Bolo](#tomcat-%E8%BD%BB%E6%9D%BE%E6%9B%B4%E6%96%B0-Bolo)  
 * [视频教程](#视频教程)  
@@ -104,7 +103,31 @@
 |[@88250](https://github.com/88250)|[@csfwff](https://github.com/csfwff)|[@InkDP](https://github.com/InkDP)|
 |[Solo 原作者](https://hacpai.com)|[Bolo 测试、Logo 绘制、前端技术支持](https://sszsj.top)|[默认皮肤 bolo-nexmoe 原作者](https://inkdp.cn)|
 
-# 使用 Docker 光速安装 Bolo
+# Bolo 多种安装方法
+
+### 使用 Tomcat 安装 Bolo
+
+#### 全新安装
+
+1. 下载最新的 zip 文件，[从这里下载！只需要下载 zip 文件即可](https://github.com/AdlerED/bolo-solo/releases)
+2. 解压至 Tomcat 的 webapps/ROOT 文件夹中（先清空ROOT文件夹~）
+3. 安装MySQL，新建 `solo` 数据库
+4. 配置 `WEB-INF/classes/local.properties` 修改数据库地址、用户名、密码、库名
+5. 如果你的 Tomcat 使用 **HTTPS** 连接，将 `WEB-INF/classes/latke.properties` 中的 `HTTP` 修改为 `HTTPS` 即可
+6. 启动 Tomcat，Hello world!
+
+#### Tomcat 轻松**更新** Bolo
+
+1. 进入 Bolo 所在目录，备份 `WEB-INF/classes/local.properties` 和 `WEB-INF/classes/latke.properties`
+2. 清空目录
+3. 从上方安装地址下载最新版 Bolo
+4. 解压至目录
+5. 将备份的两个文件替换回去
+6. 完成！
+
+### 使用 Docker 安装 Bolo
+
+#### 通过 bolo-docker 使用 Docker 光速安装 Bolo
 
 我们对 Bolo 的 Docker 部署逻辑进行了全新设计，现在 Bolo 可以更灵活地在 Docker 中进行运行、修改、调试了！  
 
@@ -117,24 +140,7 @@
 
 [点击这里，使用新版 Bolo Docker 部署你的菠萝博客！](https://github.com/AdlerED/bolo-docker)
 
-# Bolo 多种安装方法
-
-### 使用 Tomcat 安装 Bolo（推荐）
-
-#### 全新安装
-
-[点我！查看安装教程并下载最新版菠萝博客](https://github.com/AdlerED/bolo-solo/releases)
-
-#### Tomcat 轻松**更新** Bolo
-
-1. 进入 Bolo 所在目录，备份 `WEB-INF/classes/local.properties` 和 `WEB-INF/classes/latke.properties`
-2. 清空目录
-3. 从上方安装地址下载最新版 Bolo
-4. 解压至目录
-5. 将备份的两个文件替换回去
-6. 完成！
-
-### 从 Docker 使用 Bolo
+#### 原始方法 从 Docker 使用 Bolo
 
 先克隆 Bolo 的源代码：
 

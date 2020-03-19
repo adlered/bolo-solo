@@ -41,6 +41,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLDecoder;
 
 /**
  * KanBanNiang processor. https://github.com/b3log/solo/issues/12472
@@ -76,6 +77,7 @@ public class KanBanNiangProcessor {
                 final ServletContext servletContext = SoloServletListener.getServletContext();
                 final String assets = "/plugins/kanbanniang/assets/";
                 path = servletContext.getResource(assets).getPath();
+                path = URLDecoder.decode(path);
                 String downloadURL = "https://ftp.stackoverflow.wiki/bolo/kanbanniang/KBNModel.zip";
                 file = new File(path + "KBNModel.zip");
                 FileOutputStream fileOutputStream = new FileOutputStream(file);

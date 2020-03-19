@@ -67,33 +67,6 @@
 * [:smile_cat:GeekTom | Blog](https://blog.zhqy.xyz)
 * [:tropical_fish:糖醋鱼的小破站](https://expoli.tech/)
 
-# Bolo 的功能亮点
-
-- [x] 本地登录，匿名评论
-- [x] 提供持续的 WAR 包支持，支持 Tomcat 部署，支持 JAR 方式运行，支持 Docker 光速部署
-- [x] 与黑客派社区同步文章、评论、个人联系方式、使用社区图床（可选）
-- [x] 通过黑客派备份博客中的全部文章
-- [x] 用户的评论，如果有人回复会通过用户设定的邮箱地址回复（管理员需在后台设置发信邮箱）
-- [x] 博客动态邮件提醒博主（管理员需在后台设置发信、博主邮箱）
-- [x] 视频教程，小白轻松部署
-- [x] 自定义图床
-- [x] 看板娘+，自动更新的海量资源看板娘
-
-### 为什么选择 Bolo
-
-* 核：基于强大的 [Solo](https://github.com/88250/solo) 进行修改，解析快、占用资源少
-* 根：本地化环境，数据存储于本地服务器。使用本地账号登录 / 评论
-* 稳：更适合求稳、专心写文的博主：如非必要，不必升级 Bolo
-* 易：轻松在 Solo / Bolo 之间切换
-* 能：强化分类功能，每个文章只拥有一个分类，分类功能独立
-* 跨：支持 Tomcat / Jetty / Docker 部署 Bolo（原版Solo v3.6.7 及以上已更新至 Latke 框架，不再支持 Tomcat / Jetty）
-* 选：Bolo 支持 B3log 体系，可选支持 [黑客派](https://hacpai.com) 的 B3log Key 实现图床及社区文章评论、联系方式同步功能
-* 随：跟随 [原版 Solo](https://github.com/88250/solo) 同步更新版本号及功能，同步支持最新版本 Solo / Bolo 之间切换
-* 安：完全去除对 GitHub 的支持， Bolo 是完全独立的博客，B3log Key 也仅是调用 API：除你自己，没人能操作你的博客，确保数据的安全
-* 兼：版本更新不会去掉已有大功能（例如：本地H2数据库、Servlet框架等），保证对旧版本用户的友好，确保旧版本用户可流畅更新至最新版本
-* 听：与官方保持更新的同时，更新人性化、简洁、实用的小功能，感谢你提出各种BUG、建议、意见
-* 教：Bolo 将全面更新 Bolo 迁移、新建、管理的教学视频（对小白十分友好）及文档，解决你遇到的绝大部分问题
-
 # 特别鸣谢
 
 |:construction_worker:|:construction_worker:|:construction_worker:|
@@ -186,6 +159,33 @@ bolo --listen_port=8080 --server_scheme=http --server_host=192.168.2.253
 
 Windows: `java -cp "WEB-INF/lib/*;WEB-INF/classes" org.b3log.solo.Starter`  
 Unix-like: `java -cp "WEB-INF/lib/*:WEB-INF/classes" org.b3log.solo.Starter`
+
+# Bolo 的功能亮点
+
+- [x] 本地登录，匿名评论
+- [x] 提供持续的 WAR 包支持，支持 Tomcat 部署，支持 JAR 方式运行，支持 Docker 光速部署
+- [x] 与黑客派社区同步文章、评论、个人联系方式、使用社区图床（可选）
+- [x] 通过黑客派备份博客中的全部文章
+- [x] 用户的评论，如果有人回复会通过用户设定的邮箱地址回复（管理员需在后台设置发信邮箱）
+- [x] 博客动态邮件提醒博主（管理员需在后台设置发信、博主邮箱）
+- [x] 视频教程，小白轻松部署
+- [x] 自定义图床
+- [x] 看板娘+，自动更新的海量资源看板娘
+
+### 为什么选择 Bolo
+
+* 核：基于强大的 [Solo](https://github.com/88250/solo) 进行修改，解析快、占用资源少
+* 根：本地化环境，数据存储于本地服务器。使用本地账号登录 / 评论
+* 稳：更适合求稳、专心写文的博主：如非必要，不必升级 Bolo
+* 易：轻松在 Solo / Bolo 之间切换
+* 能：强化分类功能，每个文章只拥有一个分类，分类功能独立
+* 跨：支持 Tomcat / Jetty / Docker 部署 Bolo（原版Solo v3.6.7 及以上已更新至 Latke 框架，不再支持 Tomcat / Jetty）
+* 选：Bolo 支持 B3log 体系，可选支持 [黑客派](https://hacpai.com) 的 B3log Key 实现图床及社区文章评论、联系方式同步功能
+* 随：跟随 [原版 Solo](https://github.com/88250/solo) 同步更新版本号及功能，同步支持最新版本 Solo / Bolo 之间切换
+* 安：完全去除对 GitHub 的支持， Bolo 是完全独立的博客，B3log Key 也仅是调用 API：除你自己，没人能操作你的博客，确保数据的安全
+* 兼：版本更新不会去掉已有大功能（例如：本地H2数据库、Servlet框架等），保证对旧版本用户的友好，确保旧版本用户可流畅更新至最新版本
+* 听：与官方保持更新的同时，更新人性化、简洁、实用的小功能，感谢你提出各种BUG、建议、意见
+* 教：Bolo 将全面更新 Bolo 迁移、新建、管理的教学视频（对小白十分友好）及文档，解决你遇到的绝大部分问题
 
 # 视频教程
 

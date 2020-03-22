@@ -118,7 +118,14 @@
 
 ### 使用 Docker 安装 Bolo
 
-#### 通过 bolo-docker 使用 Docker 光速安装 Bolo
+#### 方法1：使用 docker-compose 一键启动 Bolo 博客（推荐）
+
+**特别鸣谢** [@糖醋鱼](https://github.com/expoli) 提供的 Bolo docker-compose 源及教程文档！
+
+* 如何通过 docker-compose 部署请看：[安装教程文档](https://expoli.tech/articles/2020/03/22/1584849176609.html)
+* 附：[docker-compose 源](https://github.com/expoli/start-bolo-with-docker-compose)
+
+#### 方法2：通过 bolo-docker 使用 Docker 光速安装 Bolo（推荐）
 
 我们对 Bolo 的 Docker 部署逻辑进行了全新设计，现在 Bolo 可以更灵活地在 Docker 中进行运行、修改、调试了！  
 
@@ -131,7 +138,7 @@
 
 [点击这里，使用新版 Bolo Docker 部署你的菠萝博客！](https://github.com/AdlerED/bolo-docker)
 
-#### 原始方法 从 Docker 使用 Bolo
+#### 方法3：原始方法 从 Docker 使用 Bolo
 
 先克隆 Bolo 的源代码：
 

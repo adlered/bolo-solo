@@ -119,7 +119,7 @@ public class UserMgmtService {
             userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
             JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
             userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
-        } catch (RepositoryException e) {
+        } catch (Exception e) {
         }
 
         JSONObject usite;

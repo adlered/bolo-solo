@@ -300,10 +300,15 @@ public class ExportService {
 
             BeanManager beanManager = BeanManager.getInstance();
             OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-            JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
-            String userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
-            JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
-            String userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+            String userName = "";
+            String userB3Key = "";
+            try {
+                JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
+                userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
+                JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
+                userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+            } catch (Exception e) {
+            }
 
             final String clientTitle = preference.optString(Option.ID_C_BLOG_TITLE);
             final String clientSubtitle = preference.optString(Option.ID_C_BLOG_SUBTITLE);

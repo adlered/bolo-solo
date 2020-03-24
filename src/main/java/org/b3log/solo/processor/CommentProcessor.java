@@ -220,7 +220,11 @@ public class CommentProcessor {
             }
 
             // 提醒博主
-            String replyRemindMailBoxAddress = optionRepository.get(Option.ID_C_REPLY_REMIND).optString(Option.OPTION_VALUE);
+            String replyRemindMailBoxAddress = "";
+            try {
+                replyRemindMailBoxAddress = optionRepository.get(Option.ID_C_REPLY_REMIND).optString(Option.OPTION_VALUE);
+            } catch (NullPointerException e) {
+            }
             String user = requestJSONObject.getString("commentName");
             String comment = requestJSONObject.getString("commentContent");
             try {

@@ -338,6 +338,11 @@ public final class Option {
     public static final String ID_C_REPLY_REMIND = "replyRemind";
 
     /**
+     * Key of KanBanNiang selector
+     */
+    public static final String ID_C_KANBANNIANG_SELECTOR = "kanbanniangSelector";
+
+    /**
      * Private constructor.
      */
     private Option() {

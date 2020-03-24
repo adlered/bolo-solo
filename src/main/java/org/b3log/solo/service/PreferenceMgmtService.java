@@ -323,8 +323,20 @@ public class PreferenceMgmtService {
                 optionRepository.add(replyRemindOpt);
             }
 
-            MailService.loadMailSettings();
+            try {
+                final JSONObject kanbanniangSelectorOpt = optionRepository.get(Option.ID_C_KANBANNIANG_SELECTOR);
+                kanbanniangSelectorOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_KANBANNIANG_SELECTOR));
+                optionRepository.update(Option.ID_C_KANBANNIANG_SELECTOR, kanbanniangSelectorOpt);
+            } catch (NullPointerException NPE) {
+                JSONObject kanbanniangSelectorOpt = new JSONObject();
+                kanbanniangSelectorOpt.put(Keys.OBJECT_ID, Option.ID_C_KANBANNIANG_SELECTOR);
+                kanbanniangSelectorOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+                kanbanniangSelectorOpt.put(Option.OPTION_VALUE, preference.optString(Option.ID_C_KANBANNIANG_SELECTOR));
+                optionRepository.add(kanbanniangSelectorOpt);
+            }
+
             transaction.commit();
+            MailService.loadMailSettings();
         } catch (final Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();

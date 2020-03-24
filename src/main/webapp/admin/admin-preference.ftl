@@ -345,6 +345,10 @@
         <input id="faviconURL" class="normalInput" type="text"/>
         <label for="customVars">${customVars1Label}</label>
         <input id="customVars" class="normalInput" type="text"/>
+        <label for="kanbanniangSelector">固定看板娘</label>
+        <select id="kanbanniangSelector">
+            <option value="" selected>不固定，随机</option>
+        </select>
         <label>
             <div class="fn__flex-inline">
                 ${enableArticleUpdateHint1Label}

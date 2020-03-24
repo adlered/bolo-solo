@@ -20,6 +20,7 @@ package org.b3log.solo.processor;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.math.RandomUtils;
 import org.b3log.latke.ioc.BeanManager;
+import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.repository.RepositoryException;
@@ -30,18 +31,24 @@ import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.JsonRenderer;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.SslUtils;
+import org.b3log.solo.model.Option;
+import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.repository.PluginRepository;
+import org.b3log.solo.util.Solos;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.zeroturnaround.zip.ZipUtil;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
+import java.util.Iterator;
 
 /**
  * KanBanNiang processor. https://github.com/b3log/solo/issues/12472
@@ -57,6 +64,12 @@ public class KanBanNiangProcessor {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(KanBanNiangProcessor.class);
+
+    /**
+     * Option repository.
+     */
+    @Inject
+    private OptionRepository optionRepository;
 
     /**
      * Online KanBanNiang resources download.
@@ -126,12 +139,18 @@ public class KanBanNiangProcessor {
             final String assets = "/plugins/kanbanniang/assets";
             String model;
             final ServletContext servletContext = SoloServletListener.getServletContext();
-            try (final InputStream inputStream = servletContext.getResourceAsStream(assets + "/model-list.json")) {
-                final JSONArray models = new JSONArray(IOUtils.toString(inputStream, "UTF-8"));
-                final int i = RandomUtils.nextInt(models.length());
-                model = models.getString(i);
+            try {
+                model = optionRepository.get(Option.ID_C_KANBANNIANG_SELECTOR).optString(Option.OPTION_VALUE);
+                if (model.isEmpty()) {
+                    throw new NullPointerException();
+                }
+            } catch (NullPointerException e) {
+                try (final InputStream inputStream = servletContext.getResourceAsStream(assets + "/model-list.json")) {
+                    final JSONArray models = new JSONArray(IOUtils.toString(inputStream, "UTF-8"));
+                    final int i = RandomUtils.nextInt(models.length());
+                    model = models.getString(i);
+                }
             }
-
             try (final InputStream modelResource = servletContext.getResourceAsStream(assets + "/model/" + model + "/index.json")) {
                 final JSONObject index = new JSONObject(IOUtils.toString(modelResource, "UTF-8"));
                 final JSONArray textures = index.optJSONArray("textures");
@@ -150,6 +169,32 @@ public class KanBanNiangProcessor {
             }
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Returns a random KanBanNiang model failed.");
+        }
+    }
+
+    @RequestProcessing(value = "/plugins/kanbanniang/assets/list")
+    public void kanbanniangList(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
+
+        final String assets = "/plugins/kanbanniang/assets";
+        final ServletContext servletContext = SoloServletListener.getServletContext();
+        try (final InputStream inputStream = servletContext.getResourceAsStream(assets + "/model-list.json")) {
+            final JSONArray models = new JSONArray(IOUtils.toString(inputStream, "UTF-8"));
+            StringBuilder stringBuilder = new StringBuilder();
+            Iterator iterator = models.iterator();
+            if (models.length() != 0) {
+                stringBuilder.append(iterator.next());
+            }
+            while (iterator.hasNext()) {
+                stringBuilder.append(";" + iterator.next());
+            }
+            context.renderJSON().renderMsg(stringBuilder.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

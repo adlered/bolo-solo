@@ -45,6 +45,21 @@ admin.preference = {
 
         var preference = result.preference
 
+        $.ajax({
+          url: Label.servePath + '/plugins/kanbanniang/assets/list',
+          type: 'GET',
+          async: false,
+          success: function(res) {
+            var kanbanniangList = res.msg.split(';');
+            for (var i = 0; i < kanbanniangList.length; i++) {
+              $('#kanbanniangSelector').append(
+                  '<option value="' + kanbanniangList[i] + '">' + kanbanniangList[i] + '</option>'
+              );
+            }
+          }
+        });
+
+        $('#kanbanniangSelector').val(preference.kanbanniangSelector)
         $('#replyRemind').val(preference.replyRemind)
         $('#sourceTC').text(preference.tuChuangConfig)
         sltd = $('#sourceTC').text().split('<<>>')[0];
@@ -202,6 +217,7 @@ admin.preference = {
 
     var requestJSONObject = {
       'preference': {
+        'kanbanniangSelector': $('#kanbanniangSelector').val(),
         'replyRemind': $('#replyRemind').val(),
         'tuChuangConfig': $('#sourceTC').text(),
         'hacpaiUser': $('#hacpaiUser').val(),

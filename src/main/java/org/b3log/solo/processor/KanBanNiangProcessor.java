@@ -75,12 +75,12 @@ public class KanBanNiangProcessor {
      * Online KanBanNiang resources download.
      */
     public static void downloadKBNResource() {
-        boolean enabled = false;
+        boolean enabled = true;
         try {
             final BeanManager beanManager = BeanManager.getInstance();
             final PluginRepository pluginRepository = beanManager.getReference(PluginRepository.class);
             enabled = pluginRepository.get("看板娘 ＋_0.0.2").optString("status").equals("ENABLED");
-        } catch (RepositoryException RE) {
+        } catch (Exception e) {
         }
         if (enabled) {
             String path = "";

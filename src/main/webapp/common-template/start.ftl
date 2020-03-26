@@ -75,7 +75,7 @@
     <div class="container">
         <div class="col-md-4 content-center">
             <div class="card card-login card-plain">
-                <form class="form" action="${servePath}/oauth/bolo/login" method="POST">
+                <form class="form" action="${servePath}/oauth/bolo/login" method="POST" id="loginForm">
                     <div class="content">
                         <div class="input-group form-group-no-border input-lg">
                                 <span class="input-group-addon" style="padding-right: 12px;">
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <div class="footer text-center">
-                        <button class="btn btn-primary btn-round btn-lg btn-block" id="loginBtn">登录</button>
+                        <button class="btn btn-primary btn-round btn-lg btn-block" id="loginBtn" type="button">登录</button>
                     </div>
                 </form>
                 <span id="status"></span>
@@ -104,12 +104,21 @@
             document.getElementById('status').innerHTML = '用户名或密码错误';
         }
         if (status === '-1') {
-            document.getElementById('status').innerHTML = '您的博客尚未初始化<br>请设定管理后台用户名和密码';
+            document.getElementById('status').innerHTML = '您的博客尚未初始化<br>请在输入框中设定管理后台用户名和密码<br>点击“开始初始化”按钮初始化你的菠萝博客';
             document.getElementById('loginBtn').innerHTML = '开始初始化';
             document.getElementById('password').setAttribute("type", "text");
         }
         document.getElementById('loginBtn').onclick = function () {
-            document.getElementById('loginBtn').innerHTML = '<i class="fa fa-spinner fa-pulse"></i> 登录中';
+            if (document.getElementById('username').value !== '' && document.getElementById('password').value !== '') {
+                if (status === '-1') {
+                    document.getElementById('loginBtn').innerHTML = '<i class="fa fa-spinner fa-pulse"></i> 正在初始化，请稍候';
+                } else {
+                    document.getElementById('loginBtn').innerHTML = '<i class="fa fa-spinner fa-pulse"></i> 登录中';
+                }
+                document.getElementById('loginForm').submit();
+            } else {
+                document.getElementById('status').innerHTML = '请填写用户名和密码！';
+            }
         }
     </script>
     <footer class="footer">

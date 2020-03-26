@@ -761,8 +761,7 @@ public class DataModelService {
                 break;
 
             case PRODUCTION:
-                // dataModel.put(Common.MINI_POSTFIX, Common.MINI_POSTFIX_VALUE);
-                dataModel.put(Common.MINI_POSTFIX, "");
+                dataModel.put(Common.MINI_POSTFIX, Common.MINI_POSTFIX_VALUE);
                 break;
 
             default:

@@ -1,3 +1,4 @@
 # Project exclude paths
 /node_modules/
 /target/
+/src/main/webapp/plugins/kanbanniang/assets/

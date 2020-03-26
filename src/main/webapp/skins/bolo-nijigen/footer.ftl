@@ -25,7 +25,7 @@
     <div class="fn__none"></div>
     <br/>
 
-    Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a>
+    Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a>
     <div class="fn__none"></div>
     &nbsp; &heartsuit;  &nbsp;
     Theme ${skinDirName}

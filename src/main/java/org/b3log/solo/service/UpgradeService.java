@@ -110,7 +110,7 @@ public class UpgradeService {
             }
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Upgrade failed, please contact the Bolo developers or reports this "
-                    + "issue: https://github.com/AdlerED/bolo-solo/issues/new", e);
+                    + "issue: https://github.com/adlered/bolo-solo/issues/new", e);
             System.exit(-1);
         }
     }

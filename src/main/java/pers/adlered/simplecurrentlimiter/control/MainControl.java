@@ -24,7 +24,7 @@ import pers.adlered.simplecurrentlimiter.cache.pair.CachePair;
  * <h3>SimpleCurrentLimiter</h3>
  * <p>底层数据控制</p>
  *
- * @author : https://github.com/AdlerED
+ * @author : https://github.com/adlered
  * @date : 2019-10-10 22:55
  **/
 public class MainControl extends MainCache {

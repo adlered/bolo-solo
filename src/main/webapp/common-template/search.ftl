@@ -80,7 +80,7 @@
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="开源驱动：菠萝博客" data-placement="bottom" href="https://github.com/AdlerED/bolo-solo" target="_blank">
+                    <a class="nav-link" rel="tooltip" title="开源驱动：菠萝博客" data-placement="bottom" href="https://github.com/adlered/bolo-solo" target="_blank">
                         <i class="fa fa-github"></i>
                         <p class="d-lg-none d-xl-none">Bolo on GitHub</p>
                     </a>
@@ -138,7 +138,7 @@
     <footer class="footer">
         <div class="container">
             <div class="copyright">
-                Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a> ${boloVersion}
+                Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a> ${boloVersion}
             </div>
         </div>
     </footer>

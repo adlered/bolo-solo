@@ -25,7 +25,7 @@ import java.security.NoSuchAlgorithmException;
  * <h3>bolo-solo</h3>
  * <p>MD5</p>
  *
- * @author : https://github.com/AdlerED
+ * @author : https://github.com/adlered
  * @date : 2020-01-02 21:42
  **/
 public class MD5Utils {

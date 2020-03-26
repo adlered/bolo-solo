@@ -167,7 +167,7 @@
             </div>
             <div class="fn__clear"></div>
             <div class="footer">
-                Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a> <span id="version">${version}</span>
+                Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a> <span id="version">${version}</span>
             </div>
         </div>
         <script src="${staticServePath}/js/lib/compress/admin-lib.min.js"></script>

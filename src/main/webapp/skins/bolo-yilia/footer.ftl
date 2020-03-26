@@ -39,7 +39,7 @@
         <a href="${servePath}">${blogTitle}</a>
         ${footerContent}
         <span class="fn-right">
-            Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a>
+            Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a>
         </span>
     </div>
     <span onclick="Util.goTop()" class="icon-goup"></span>

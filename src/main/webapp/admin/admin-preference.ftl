@@ -86,7 +86,7 @@
                         break;
                     case 'picuang':
                         $('#td1').show();
-                        $('#td1').html('Picuang 是 Bolo 博客作者开发的一款在自己服务器上搭建的公开图床，<a target="_blank" href="https://github.com/AdlerED/Picuang">项目地址</a>');
+                        $('#td1').html('Picuang 是 Bolo 博客作者开发的一款在自己服务器上搭建的公开图床，<a target="_blank" href="https://github.com/adlered/Picuang">项目地址</a>');
                         $('#td2').show(); $('#tc2').show();
                         $('#td2').html('<b>图床地址</b>');
                         $('#td3').show();
@@ -201,7 +201,7 @@
             3. 同步你在黑客派中的GitHub、QQ等链接（<a href="https://hacpai.com/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>
             4. 使用自动备份全部文章至黑客派功能（<a href="https://hacpai.com/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br><br>
             <b>如何取得 B3log Key</b><br>
-            1. <a href="https://hacpai.com/register?r=AdlerED" target="_blank">在这里</a>注册一个黑客派用户（在<a href="https://hacpai.com/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>
+            1. <a href="https://hacpai.com/register?r=adlered" target="_blank">在这里</a>注册一个黑客派用户（在<a href="https://hacpai.com/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>
             2. <a href="https://hacpai.com/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key<br><br>
             <b>Bolo 坚实的防数据丢失策略</b><br>
             1. 与黑客派仅保持<b>单向</b>联系。即：只允许上传下载（备份至黑客派、上传至黑客派图床、同步联系方式、同步文章与评论等），不允许修改或删除你的任何本地博客数据<br>

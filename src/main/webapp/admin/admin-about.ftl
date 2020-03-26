@@ -23,7 +23,7 @@
     </div>
     <div class="module-body padding12 fn__flex">
         <div class="about-logo">
-            <a href="https://github.com/AdlerED/bolo-solo" target="_blank">
+            <a href="https://github.com/adlered/bolo-solo" target="_blank">
                 <img width="128" src="https://pic.stackoverflow.wiki/uploadImages/114/244/224/38/2019/11/30/01/04/1cb648c8-f9f8-430f-8616-43f7b0e2333a.png" alt="Bolo 重塑经典，致敬 Solo" title="Bolo 重塑经典，致敬 Solo" />
             </a>
         </div>
@@ -34,7 +34,7 @@
                 对应 Solo 版本：${version}
             </div>
 
-            <iframe src="https://ghbtns.com/github-btn.html?user=AdlerED&repo=bolo-solo&type=star&count=true&size=large"
+            <iframe src="https://ghbtns.com/github-btn.html?user=adlered&repo=bolo-solo&type=star&count=true&size=large"
                     frameborder="0" scrolling="0" width="160px" height="30px" class="about__iframe"
                     style="margin: 21px 0 0 20px;border: 0"
                     class="fn__left"></iframe>
@@ -43,7 +43,7 @@
             ${aboutContentLabel}
             <br/>
             <ul class="about-list">
-                <li><a target="_blank" href="https://github.com/AdlerED/bolo-solo">Bolo 源代码</a></li>
+                <li><a target="_blank" href="https://github.com/adlered/bolo-solo">Bolo 源代码</a></li>
             </ul>
         </div>
         <span class="fn__clear" /> <br/><br/>

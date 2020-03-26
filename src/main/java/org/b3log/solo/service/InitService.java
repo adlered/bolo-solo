@@ -282,8 +282,8 @@ public class InitService {
 
         final JSONObject comment = new JSONObject();
         comment.put(Keys.OBJECT_ID, articleId);
-        comment.put(Comment.COMMENT_NAME, "AdlerED");
-        comment.put(Comment.COMMENT_URL, "https://github.com/AdlerED");
+        comment.put(Comment.COMMENT_NAME, "adlered");
+        comment.put(Comment.COMMENT_URL, "https://github.com/adlered");
         comment.put(Comment.COMMENT_CONTENT, langPropsService.get("helloWorld.comment.content"));
         comment.put(Comment.COMMENT_ORIGINAL_COMMENT_ID, "");
         comment.put(Comment.COMMENT_ORIGINAL_COMMENT_NAME, "");

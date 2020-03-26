@@ -82,8 +82,8 @@
 </style>
 <div id="showTop"></div>
 <div id="top">
-    <a href="https://github.com/b3log/solo" target="_blank" class="hover">
-        Solo
+    <a href="https://github.com/adlered/bolo-solo" target="_blank" class="hover">
+        Bolo
     </a>
     <span class="left">&nbsp;${onlineVisitor1Label}${onlineVisitorCnt}</span>
     <span class="right" id="admin" data-login="${isLoggedIn?string}">

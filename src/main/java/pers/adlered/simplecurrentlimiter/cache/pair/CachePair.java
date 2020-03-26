@@ -21,7 +21,7 @@ package pers.adlered.simplecurrentlimiter.cache.pair;
  * <h3>SimpleCurrentLimiter</h3>
  * <p>字符串和次数 Bean</p>
  *
- * @author : https://github.com/AdlerED
+ * @author : https://github.com/adlered
  * @date : 2019-10-10 22:52
  **/
 public class CachePair {

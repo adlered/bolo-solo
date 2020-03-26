@@ -42,7 +42,7 @@ import java.util.List;
  * <h3>bolo-solo</h3>
  * <p>邮箱设定</p>
  *
- * @author : https://github.com/AdlerED
+ * @author : https://github.com/adlered
  * @date : 2019-12-21 16:44
  **/
 @RequestProcessor

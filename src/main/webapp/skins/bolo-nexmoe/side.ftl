@@ -177,7 +177,7 @@
     <div class="nexmoe-copyright">
         © ${year} <a href="${servePath}">${blogTitle}</a> <br/>
         ${footerContent} <br>
-        Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a> <br>
+        Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a> <br>
         Theme <a rel="friend" href="https://github.com/InkDP/solo-nexmoe" target="_blank">${skinDirName}</a>
         by <a rel="friend" href="https://www.inkdp.cn" target="_blank">InkDP</a>
     </div>

@@ -4,23 +4,23 @@
 菠萝博客，使用 Java 编写，专为程序员设计
 <br><br>
 <img src="http://img.shields.io/badge/license-AGPLv3-orange.svg?style=flat-square">
-<img src="https://img.shields.io/github/last-commit/AdlerED/bolo-solo.svg?style=flat-square">
-<img src="https://img.shields.io/github/issues-pr-closed/AdlerED/bolo-solo.svg?style=flat-square">
-<img src="https://img.shields.io/github/downloads/AdlerED/bolo-solo/total?style=flat-square">
-<img src="https://img.shields.io/github/v/release/AdlerED/bolo-solo?style=flat-square">
-<img src="https://img.shields.io/github/commit-activity/y/AdlerED/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/last-commit/adlered/bolo-solo.svg?style=flat-square">
+<img src="https://img.shields.io/github/issues-pr-closed/adlered/bolo-solo.svg?style=flat-square">
+<img src="https://img.shields.io/github/downloads/adlered/bolo-solo/total?style=flat-square">
+<img src="https://img.shields.io/github/v/release/adlered/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/commit-activity/y/adlered/bolo-solo?style=flat-square">
 <br>
-<img src="https://img.shields.io/github/languages/code-size/AdlerED/bolo-solo.svg?style=flat-square">
-<img src="https://img.shields.io/github/repo-size/AdlerED/bolo-solo?style=flat-square">
-<img src="https://img.shields.io/github/languages/count/AdlerED/bolo-solo?style=flat-square">
-<img src="https://img.shields.io/github/languages/top/AdlerED/bolo-solo?style=flat-square">
-<img src="https://img.shields.io/github/issues/AdlerED/bolo-solo?style=flat-square">
-<img src="https://img.shields.io/github/issues-closed-raw/AdlerED/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/languages/code-size/adlered/bolo-solo.svg?style=flat-square">
+<img src="https://img.shields.io/github/repo-size/adlered/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/languages/count/adlered/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/languages/top/adlered/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/issues/adlered/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/issues-closed-raw/adlered/bolo-solo?style=flat-square">
 <br>
-<img src="https://img.shields.io/github/followers/AdlerED?style=social">
-<img src="https://img.shields.io/github/forks/AdlerED/bolo-solo?style=social">
-<img src="https://img.shields.io/github/stars/AdlerED/bolo-solo?style=social">
-<img src="https://img.shields.io/github/watchers/AdlerED/bolo-solo?style=social">
+<img src="https://img.shields.io/github/followers/adlered?style=social">
+<img src="https://img.shields.io/github/forks/adlered/bolo-solo?style=social">
+<img src="https://img.shields.io/github/stars/adlered/bolo-solo?style=social">
+<img src="https://img.shields.io/github/watchers/adlered/bolo-solo?style=social">
 </p>
 
 ****
@@ -55,7 +55,7 @@
 1. 七牛云
 2. 阿里云
 3. 又拍云
-4. 基于 [Picuang](https://github.com/AdlerED/Picuang) 的自搭建图床
+4. 基于 [Picuang](https://github.com/adlered/Picuang) 的自搭建图床
 5. 黑客派公共图床（默认）
 
 ### 使用 Bolo 驱动的博客
@@ -100,7 +100,7 @@
 
 #### Tomcat 全新安装
 
-1. 下载最新的 zip 文件，[从这里下载！只需要下载 zip 文件即可](https://github.com/AdlerED/bolo-solo/releases)
+1. 下载最新的 zip 文件，[从这里下载！只需要下载 zip 文件即可](https://github.com/adlered/bolo-solo/releases)
 2. 解压至 Tomcat 的 webapps/ROOT 文件夹中（先清空ROOT文件夹~）
 3. 安装MySQL，新建 `solo` 数据库
 4. 配置 `WEB-INF/classes/local.properties` 修改数据库地址、用户名、密码、库名
@@ -136,14 +136,14 @@
 * 更新仅需替换 Bolo 源码！
 * 旧版 Docker 安装方式会被保留。
 
-[点击这里，使用新版 Bolo Docker 部署你的菠萝博客！](https://github.com/AdlerED/bolo-docker)
+[点击这里，使用新版 Bolo Docker 部署你的菠萝博客！](https://github.com/adlered/bolo-docker)
 
 #### 方法3：原始方法 从 Docker 使用 Bolo
 
 先克隆 Bolo 的源代码：
 
 ```shell script
-git clone https://github.com/AdlerED/bolo-solo
+git clone https://github.com/adlered/bolo-solo
 ```
 
 再进入到 Bolo 项目的根目录，构建 Docker 镜像：
@@ -175,7 +175,7 @@ bolo --listen_port=8080 --server_scheme=http --server_host=192.168.2.253
 
 ### 使用 Java 命令运行（不推荐）
 
-下载最新的 [Bolo](https://github.com/AdlerED/bolo-solo/releases) 压缩包解压，进入解压目录执行：
+下载最新的 [Bolo](https://github.com/adlered/bolo-solo/releases) 压缩包解压，进入解压目录执行：
 
 Windows: `java -cp "WEB-INF/lib/*;WEB-INF/classes" org.b3log.solo.Starter`  
 Unix-like: `java -cp "WEB-INF/lib/*:WEB-INF/classes" org.b3log.solo.Starter`

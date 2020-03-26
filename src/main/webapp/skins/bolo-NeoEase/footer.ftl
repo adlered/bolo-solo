@@ -21,7 +21,7 @@
     <div class="wrapper">
         <div class="left">
             <span style="color: gray;">&copy; ${year}</span> <a href="${servePath}">${blogTitle}</a> ${footerContent}<br/>
-            Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a>
+            Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a>
             Theme ${skinDirName}
             by <a rel="friend" href="http://vanessa.b3log.org" target="_blank">Vanessa</a>.
         </div>

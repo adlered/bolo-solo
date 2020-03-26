@@ -31,7 +31,7 @@
             &copy; ${year}
             <a href="${servePath}">${blogTitle}</a>
             ${footerContent}
-            Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a>
+            Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a>
 
             <div class="fn-right">
                 Theme ${skinDirName}

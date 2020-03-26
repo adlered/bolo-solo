@@ -26,7 +26,7 @@ import java.util.Map;
  * <h3>SimpleCurrentLimiter</h3>
  * <p>存储字符串、次数信息</p>
  *
- * @author : https://github.com/AdlerED
+ * @author : https://github.com/adlered
  * @date : 2019-10-10 22:49
  **/
 public class MainCache {

@@ -36,7 +36,7 @@ import java.util.List;
  * <h3>bolo-solo</h3>
  * <p>以字符串运行代码类（实用工具）</p>
  *
- * @author : https://github.com/AdlerED
+ * @author : https://github.com/adlered
  * @date : 2020-01-01 21:47
  **/
 @RequestProcessor

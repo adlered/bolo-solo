@@ -34,7 +34,7 @@ import javax.servlet.http.HttpServletResponse;
  * <h3>bolo-solo</h3>
  * <p>属性 API.</p>
  *
- * @author : https://github.com/AdlerED
+ * @author : https://github.com/adlered
  * @date : 2019-12-20 20:02
  **/
 @RequestProcessor

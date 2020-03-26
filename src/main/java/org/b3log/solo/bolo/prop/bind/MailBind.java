@@ -21,7 +21,7 @@ package org.b3log.solo.bolo.prop.bind;
  * <h3>bolo-solo</h3>
  * <p>Mail bind.</p>
  *
- * @author : https://github.com/AdlerED
+ * @author : https://github.com/adlered
  * @date : 2019-12-21 18:31
  **/
 public class MailBind {

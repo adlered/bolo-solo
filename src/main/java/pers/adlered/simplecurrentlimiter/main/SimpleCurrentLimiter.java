@@ -23,7 +23,7 @@ import pers.adlered.simplecurrentlimiter.control.MainControl;
  * <h3>SimpleCurrentLimiter</h3>
  * <p>简单限流器，用于IP地址访问次数验证，其它字符串访问次数验证</p>
  *
- * @author : https://github.com/AdlerED
+ * @author : https://github.com/adlered
  * @date : 2019-10-10 22:45
  **/
 public class SimpleCurrentLimiter {

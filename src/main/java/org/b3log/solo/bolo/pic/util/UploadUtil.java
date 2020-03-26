@@ -62,7 +62,7 @@ import java.util.Map;
  * <h3>bolo-solo</h3>
  * <p>图片上传</p>
  *
- * @author : https://github.com/AdlerED
+ * @author : https://github.com/adlered
  * @date : 2020-03-06 14:35
  **/
 public class UploadUtil {

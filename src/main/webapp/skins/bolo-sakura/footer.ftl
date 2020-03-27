@@ -61,6 +61,8 @@
     </div>
 </div>
 <canvas id="night-mode-cover"></canvas>
+<script type="text/javascript" src="${staticServePath}/js/common.js?${staticResourceVersion}"
+        charset="utf-8"></script>
 <script defer src="${staticServePath}/skins/${skinDirName}/js/common.js?${staticResourceVersion}"></script>
 <#include "../../common-template/label.ftl">
 

@@ -4,6 +4,8 @@
     <@head title="${blogTitle}">
         <link media="all" href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}"
               rel="stylesheet"/>
+        <link media="all" href="${staticServePath}/skins/${skinDirName}/css/style.css?${staticResourceVersion}"
+              rel="stylesheet"/>
         <script type='application/ld+json' class='yoast-schema-graph yoast-schema-graph--main'>{
                 "@context": "https://schema.org",
                 "@graph": [

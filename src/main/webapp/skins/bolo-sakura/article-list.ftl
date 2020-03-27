@@ -23,7 +23,9 @@
 <#list articles as article>
 <article class="post post-list-thumb " itemscope="" itemtype="http://schema.org/BlogPosting">
     <div class="post-thumb">
-        <a href="${servePath}${article.articlePermalink}" style="background-image: url(${article.articleImg1URL})"></a>
+        <a href="${servePath}${article.articlePermalink}">
+            <img class="lazyload" referrerpolicy="origin" src="${article.articleImg1URL}" onerror="imgError(this,3)" data-src="${article.articleImg1URL}">
+        </a>
     </div>
     <div class="post-content-wrap">
         <div class="post-content">

@@ -137,17 +137,11 @@
                    style="background-image: url('https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/sakura.svg');">
                 </p>
                 <p style="font-family: 'Ubuntu', sans-serif;">
-                    <span style="color: #666666;">Crafted with <i class='fa fa-heart animated'
-                                                                  style="color: #e74c3c;"></i> by <a rel="me"
-                                                                                                     href="https://hello.2heng.xin/@mashiro"
-                                                                                                     target="_blank"
-                                                                                                     style="color: #000000;text-decoration:none;">Mashiro</a></span>
+                    <span style="color: #666666;">Crafted with <i class='fa fa-heart animated' style="color: #e74c3c;"></i> by <a rel="me" href="https://github.com/adlered/bolo-solo" target="_blank" style="color: #000000;text-decoration:none;">菠萝博客</a> X <a rel="me" href="https://hello.2heng.xin/@mashiro" target="_blank" style="color: #000000;text-decoration:none;">Mashiro</a></span>
                 </p>
+                Theme <a rel="friend" href="https://github.com/mashirozx/Sakura" target="_blank">${skinDirName}</a><br>
                 <!-- 此处放页脚 -->
-                © ${year} <a href="${servePath}">${blogTitle}</a><br><br>
-                Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a><br>
-                Theme <a rel="friend" href="https://github.com/mashirozx/Sakura" target="_blank">${skinDirName}</a>
-                by <a rel="friend" href="https://hello.2heng.xin/@mashiro" target="_blank">Mashiro</a><br>
+                © ${year} <a href="${servePath}">${blogTitle}</a><br>
                 ${footerContent}
             </div>
             <div class="footer-device">

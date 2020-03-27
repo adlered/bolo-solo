@@ -72,11 +72,11 @@
                     </div>
                     <nav class="mobile-fit-control hide">
                         <ul id="menu-new" class="menu">
-                            <li><a href="/" aria-current="page"><span class="faa-parent animated-hover"><i
+                            <li><a href="${servePath}/" aria-current="page"><span class="faa-parent animated-hover"><i
                                                 class="fa fa-home"></i> 首页</span></a></li>
-                            <li><a href="/" aria-current="page"><span class="faa-parent animated-hover"><i
+                            <li><a href="${servePath}/links.html"><span class="faa-parent animated-hover"><i
                                                 class="fa fa-link"></i> 友链</span></a></li>
-                            <li><a href="/" aria-current="page"><span class="faa-parent animated-hover"><i
+                            <li><a href="${servePath}/tags.html"><span class="faa-parent animated-hover"><i
                                                 class="fa fa-tag"></i> 标签</span></a></li>
                             <#list pageNavigations as page>
                                 <li><a href="${page.pagePermalink}" target="${page.pageOpenTarget}"><span

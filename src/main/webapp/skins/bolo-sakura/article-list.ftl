@@ -21,7 +21,7 @@
 <main id="main" class="site-main" role="main">
 <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;"><i class="fa fa-envira" aria-hidden="true"></i> Discovery</h1>
 <#list articles as article>
-<article class="post post-list-thumb " itemscope="" itemtype="http://schema.org/BlogPosting">
+<article class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
     <div class="post-thumb">
         <a href="${servePath}${article.articlePermalink}">
             <img class="lazyload" referrerpolicy="origin" src="${article.articleImg1URL}" onerror="imgError(this,3)" data-src="${article.articleImg1URL}">

@@ -86,7 +86,7 @@
                 this.email_name = "me";
                 this.cookie_version_control = "---2018/9/17";
                 this.qzone_autocomplete = false;
-                this.site_name = "樱花庄的白猫";
+                this.site_name = "${blogTitle}";
                 this.author_name = "Mashiro";
                 this.template_url = "https://2heng.xin/wp-content/themes/Sakura";
                 this.site_url = "https://2heng.xin";
@@ -156,16 +156,16 @@
             </div>
         </div>
         <div class="site-branding">
-            <h1 class="site-title"><a href="https://2heng.xin">樱花庄的白猫</a></h1>
+            <h1 class="site-title"><a href="${staticServePath}/">${blogTitle}</a></h1>
         </div>
     </div>
 </section>
 <div id="mo-nav">
     <div class="m-avatar">
-        <img src="https://static.mashiro.top/avatar.jpg">
+        <img src="${adminUser.userAvatar}">
     </div>
     <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">
-        Mashiro Sama...
+        ${userName}
     </p>
     <p style="text-align: center; word-spacing: 20px;">
         <a href="https://twitter.com/2hengxin" class="fa fa-twitter" target="_blank" style="color: #00aced"></a><a

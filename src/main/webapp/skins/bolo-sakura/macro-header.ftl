@@ -68,8 +68,8 @@
         <div class="site-top">
             <div class="site-branding">
                 <span class="site-title"><span class="logolink moe-mashiro"><a href="${servePath}/" alt="${blogTitle}"><ruby><span
-                                        class="sakuraso">${blogTitle}</span><span class="no">の</span><span
-                                        class="shironeko">${blogSubtitle}</span><rp></rp><rt class="chinese-font">${blogTitle}</rt><rp></rp></ruby></a></span></span>
+                                        class="sakuraso">${userName}</span><span class="no">の</span><span
+                                        class="shironeko">${blogTitle}</span><rp></rp><rt class="chinese-font">${blogSubtitle}</rt><rp></rp></ruby></a></span></span>
             </div>
             <div class="lower-cantiner">
                 <div class="lower">

@@ -43,7 +43,7 @@
             <#if pjax><!---- pjax {#pjax} start ----></#if>
             <div class="nexmoe-post">
                 <div class="nexmoe-post-cover">
-                    <img src="${article.articleImg1URL}" alt="${article.articleTitle}"
+                    <img referrerpolicy="origin" src="${article.articleImg1URL}" alt="${article.articleTitle}"
                          data-src="${article.articleImg1URL}" class=" ls-is-cached lazyloaded">
                     <h1>${article.articleTitle}</h1>
                 </div>

@@ -19,7 +19,7 @@
 -->
 
 <main id="main" class="site-main" role="main">
-<h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;"><i class="fa fa-envira" aria-hidden="true"></i> Discovery</h1>
+<h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;"><i class="fa fa-envira" aria-hidden="true"></i> 文章</h1>
 <#list articles as article>
 <article class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
     <div class="post-thumb">

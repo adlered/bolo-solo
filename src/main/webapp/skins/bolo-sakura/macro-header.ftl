@@ -78,6 +78,8 @@
                                                 class="fa fa-link faa-horizontal" aria-hidden="true"></i> 友链</span></a></li>
                             <li><a href="${servePath}/tags.html"><span class="faa-parent animated-hover"><i
                                                 class="fa fa-tag faa-horizontal" aria-hidden="true"></i> 标签</span></a></li>
+                            <li><a href="${servePath}/archives.html"><span class="faa-parent animated-hover"><i
+                                                class="fa fa-archive faa-horizontal" aria-hidden="true"></i> 归档</span></a></li>
                             <#list pageNavigations as page>
                                 <li><a href="${page.pagePermalink}" target="${page.pageOpenTarget}"><span
                                                 class="faa-parent animated-hover">

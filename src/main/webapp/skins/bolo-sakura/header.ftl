@@ -81,22 +81,7 @@
             var mashiro_global = {};
             var mashiro_option = new function () {
                 this.NProgressON = true;
-                this.email_domain = "moezx.cc";
-                this.email_name = "me";
-                this.cookie_version_control = "---2018/9/17";
-                this.qzone_autocomplete = false;
                 this.site_name = "${blogTitle}";
-                this.author_name = "Mashiro";
-                this.template_url = "https://2heng.xin/wp-content/themes/Sakura";
-                this.site_url = "https://2heng.xin";
-                this.qq_api_url = "https://api.2heng.xin/qqinfo/";
-                this.qq_avatar_api_url = "https://api.2heng.xin/qqinfo/";
-                this.is_app = function (app_version) {
-                    window.is_app = true;
-                    window.checked = false;
-                    window.app_version = app_version;
-                    window.latest_version = 7;
-                }
             };;
             mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.7.5/css/lib.min.css";
             mashiro_option.head_notice = "off";

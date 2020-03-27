@@ -9,7 +9,7 @@
         <div id="content" class="site-content">
             <div id="primary" class="content-area">
                 <#if pjax><!---- pjax {#pjax} start ----></#if>
-                <#include "article-list.ftl">
+                LINK
                 <#if pjax><!---- pjax {#pjax} end ----></#if>
             </div>
         </div>

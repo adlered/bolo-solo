@@ -72,20 +72,20 @@
                     </div>
                     <nav class="mobile-fit-control hide">
                         <ul id="menu-new" class="menu">
-                            <li><a href="${servePath}/" aria-current="page"><span class="faa-parent animated-hover"><i
-                                                class="fa fa-home"></i> 首页</span></a></li>
+                            <li><a href="${servePath}/"><span class="faa-parent animated-hover"><i
+                                                class="fa fa-home faa-horizontal" aria-hidden="true"></i> 首页</span></a></li>
                             <li><a href="${servePath}/links.html"><span class="faa-parent animated-hover"><i
-                                                class="fa fa-link"></i> 友链</span></a></li>
+                                                class="fa fa-link faa-horizontal" aria-hidden="true"></i> 友链</span></a></li>
                             <li><a href="${servePath}/tags.html"><span class="faa-parent animated-hover"><i
-                                                class="fa fa-tag"></i> 标签</span></a></li>
+                                                class="fa fa-tag faa-horizontal" aria-hidden="true"></i> 标签</span></a></li>
                             <#list pageNavigations as page>
                                 <li><a href="${page.pagePermalink}" target="${page.pageOpenTarget}"><span
                                                 class="faa-parent animated-hover">
                                             <#if page.pageIcon?contains("/")>
-                                                <img class="icon" style="height: 16px; width: 16px;"
+                                                <img class="icon faa-horizontal" aria-hidden="true" style="height: 16px; width: 16px;"
                                                      src="${page.pageIcon}">
                                             <#else>
-                                                <i class="fa fa-${page.pageIcon}"></i>
+                                                <i class="fa fa-${page.pageIcon} faa-horizontal" aria-hidden="true"></i>
                                             </#if> ${page.pageTitle}</span></a></li>
                             </#list>
                         </ul>

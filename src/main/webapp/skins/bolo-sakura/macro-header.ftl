@@ -14,38 +14,27 @@
                 </#if>
             </p>
             <div class="top-social_v2">
-                <li id="bg-pre"><img class="flipx"
-                                     src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/next-b.svg"/>
-                </li>
-                <li><a href="https://github.com/mashirozx" target="_blank" class="social-github" title="github"><img
-                                src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/sns/github.png"/></a>
-                </li>
-                <li><a href="https://weibo.com/mashirozx?is_all=1" target="_blank" class="social-sina" title="sina"><img
-                                src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/sns/sina.png"/></a>
-                </li>
-                <li><a href="https://t.me/SakurasoNoMashiro" target="_blank" class="social-lofter" title="telegram"><img
-                                src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/sns/telegram.svg"/></a>
-                </li>
-                <li><a rel="me" href="https://hello.2heng.xin/@mashiro" target="_blank" class="social-lofter"
-                       title="Mastodon"><img
-                                src="https://2heng.xin/wp-content/themes/Sakura/images/Mastodon_Logotype_Simple.svg"/></a>
-                </li>
-                <li><a href="https://music.163.com/m/user/home?id=2655217" target="_blank" class="social-wangyiyun"
-                       title="CloudMusic"><img
-                                src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/sns/wangyiyun.png"/></a>
-                </li>
-                <li><a href="https://twitter.com/2hengxin" target="_blank" class="social-wangyiyun" title="Twitter"><img
-                                src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/sns/twitter.png"/></a>
-                </li>
-                <li><a href="https://www.zhihu.com/people/young-dolphin" target="_blank" class="social-wangyiyun"
-                       title="Zhihu"><img
-                                src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/sns/zhihu.png"/></a>
-                </li>
-                <li><a onclick="mail_me()" class="social-wangyiyun" title="E-mail"><img
-                                src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/sns/email.svg"/></a>
-                </li>
-                <li id="bg-next"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/next-b.svg"/>
-                </li>
+                <style>
+                    .pc .user__site {
+                        width: 32px;
+                        height: 32px;
+                        float: left;
+                        background-color: #f1f2f7;
+                        border-radius: 50%;
+                        margin-right: 10px;
+                        opacity: 0.6;
+                    }
+
+                    .pc .user__site svg {
+                        vertical-align:middle;
+                        width: 20px;
+                        height: 20px;
+                    }
+                </style>
+                <div class="pc">
+                    <#include "../../common-template/macro-user_site.ftl"/>
+                    <@userSite dir=""></@userSite>
+                </div>
             </div>
         </div>
     </div>
@@ -68,7 +57,7 @@
         <div class="site-top">
             <div class="site-branding">
                 <span class="site-title"><span class="logolink moe-mashiro"><a href="${servePath}/" alt="${blogTitle}"><ruby><span
-                                        class="sakuraso">${userName}</span><span class="no">の</span><span
+                                        class="sakuraso">${blogSubtitle}</span><span class="no">の</span><span
                                         class="shironeko">${blogTitle}</span><rp></rp><rt class="chinese-font">${blogSubtitle}</rt><rp></rp></ruby></a></span></span>
             </div>
             <div class="lower-cantiner">
@@ -104,15 +93,26 @@
                 </div>
             </div>
             <div class="header-user-avatar">
-                <a href="https://2heng.xin/wp-login.php"><img class="faa-shake animated-hover"
-                                                              src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/none.png"
-                                                              width="30" height="30"></a>
-                <div class="header-user-menu">
-                    <div class="herder-user-name no-logged">
-                        Whether to <a href="https://2heng.xin/login/" target="_blank"
-                                      style="color:#333;font-weight:bold;text-decoration:none">log in</a> now?
+                <#if isLoggedIn>
+                    <a href="${servePath}/admin-index.do#main"><img class="faa-shake animated-hover"
+                                                      src="${gravatar}"
+                                                      width="30" height="30"></a>
+                    <div class="header-user-menu">
+                        <div class="herder-user-name logged-in-as">
+                            ${adminLabel}
+                        </div>
                     </div>
-                </div>
+                <#else>
+                    <a href="${servePath}/start"><img class="faa-shake animated-hover"
+                                                                  src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/none.png"
+                                                                  width="30" height="30"></a>
+                    <div class="header-user-menu">
+                        <div class="herder-user-name no-logged">
+                            ${startToUseLabel}
+                        </div>
+                    </div>
+                </#if>
+
             </div>
             <div class="searchbox">
                 <i class="iconfont js-toggle-search iconsearch icon-search"></i>

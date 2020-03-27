@@ -64,3 +64,4 @@
 <a href="#" class="cd-top faa-float animated "></a>
 <button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top"><i class="fa fa-chevron-up"
                                                                                             aria-hidden="true"></i>
+</button>

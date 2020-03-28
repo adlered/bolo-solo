@@ -79,6 +79,12 @@
         Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a><br>
         Theme <a rel="friend" href="https://github.com/mashirozx/Sakura" target="_blank">${skinDirName}</a>
         by <a rel="friend" href="https://hello.2heng.xin/@mashiro" target="_blank">Mashiro</a><br>
+        <span>${viewLabel}</span>
+        ${statistic.statisticBlogViewCount}
+        <span>${articleLabel}</span>
+        ${statistic.statisticPublishedBlogArticleCount}
+        <span>${commentLabel}</span>
+        ${statistic.statisticPublishedBlogCommentCount}<br>
         ${footerContent}
     </p>
 </div>

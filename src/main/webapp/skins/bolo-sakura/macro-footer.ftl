@@ -32,6 +32,12 @@
             </p>
             Theme <a rel="friend" href="https://github.com/mashirozx/Sakura" target="_blank">${skinDirName}</a><br>
             © ${year} <a href="${servePath}">${blogTitle}</a><br>
+            <span>${viewLabel}</span>
+            ${statistic.statisticBlogViewCount}
+            <span>${articleLabel}</span>
+            ${statistic.statisticPublishedBlogArticleCount}
+            <span>${commentLabel}</span>
+            ${statistic.statisticPublishedBlogCommentCount}<br>
             ${footerContent}
         </div>
         <div class="footer-device">

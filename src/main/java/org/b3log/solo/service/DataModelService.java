@@ -970,7 +970,11 @@ public class DataModelService {
                 String categoryOId = cateS.optString("category_oId");
                 cateS = categoryQueryService.getCategory(categoryOId);
                 article.put("articleCategory", cateS.opt("categoryTitle"));
-                article.put("categoryURI", cateS.opt("categoryURI"));
+                try {
+                    article.put("categoryURI", cateS.opt("categoryURI"));
+                } catch (JSONException | NullPointerException e) {
+                    article.put("categoryURI", cateS.opt(""));
+                }
             } catch (JSONException | NullPointerException e) {
                 article.put("articleCategory", "");
             }

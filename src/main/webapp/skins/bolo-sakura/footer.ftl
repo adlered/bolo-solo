@@ -30,15 +30,8 @@
     <div class="search_close">
     </div>
 </form>
-<script type='text/javascript'>var HermitX = {
-        "ajaxurl": "https:\/\/2heng.xin\/wp-admin\/admin-ajax.php",
-        "version": "2.9.6"
-    };</script>
-<script type='text/javascript'
-        src='https://cdn.jsdelivr.net/gh/moeplayer/hermit-x@2.9.6/assets/js/hermit-load.min.js?ver=2.9.6'></script>
 <script type='text/javascript' src='https://cdn.jsdelivr.net/gh/moezx/cdn@3.7.5/js/lib.min.js?ver=3.1.5'></script>
 <script type='text/javascript'>var Poi = {
-        "pjax": "1",
         "movies": {
             "url": "https:\/\/cdn.jsdelivr.net\/gh\/moezx\/cdn@3.1.3\/",
             "name": "The Pet Girl of Sakurasou",
@@ -82,7 +75,9 @@
 <canvas id="night-mode-cover"></canvas>
 <script type="text/javascript" src="${staticServePath}/js/common.js?${staticResourceVersion}"
         charset="utf-8"></script>
-<script defer src="${staticServePath}/skins/${skinDirName}/js/common.js?${staticResourceVersion}"></script>
+<script defer src="${staticServePath}/skins/${skinDirName}/js/main.js?${staticResourceVersion}"></script>
+<script type="text/javascript" src="${staticServePath}/skins/${skinDirName}/js/common.js?${staticResourceVersion}"
+        charset="utf-8"></script>
 <#include "../../common-template/label.ftl">
 
 ${plugins}

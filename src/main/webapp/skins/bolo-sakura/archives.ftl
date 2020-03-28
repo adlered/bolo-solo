@@ -27,7 +27,6 @@
         <#include 'macro-header.ftl'>
         <div id="content" class="site-content">
             <div id="primary" class="content-area">
-                <#if pjax><!---- pjax {#pjax} start ----></#if>
                 <header class="page-header">
                     <h1 class="cat-title">归档</h1>
                     <span class="cat-des"><p>Archives</p> </span>
@@ -68,7 +67,6 @@
                         </div>
                     </article>
                 </div>
-                <#if pjax><!---- pjax {#pjax} end ----></#if>
             </div>
         </div>
     </div>

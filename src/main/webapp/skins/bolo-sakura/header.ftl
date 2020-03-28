@@ -101,14 +101,12 @@
         <script>/*Initial Variables*/
             var mashiro_global = {};
             var mashiro_option = new function () {
-                this.NProgressON = true;
+                this.NProgressON = false;
                 this.site_name = "${blogTitle}";
             };;
             mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.7.5/css/lib.min.css";
-            mashiro_option.head_notice = "off";
+            mashiro_option.head_notice = "on";
             /*End of Initial Variables*/
-            console.log = function () {
-            };
             console.info("%c Bolo %c", "background:#24272A; color:#ffffff", "", "https://github.com/adlered/bolo-solo");
             mashiro_option.land_at_home = true;</script>
         <script type="text/javascript">if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?

@@ -53,36 +53,27 @@
 
         <div id="content" class="site-content">
             <div id="primary" class="content-area">
-                <#if pjax><!---- pjax {#pjax} start ----></#if>
                 <main id="main" class="site-main" role="main">
                     <article class="post-4491 post type-post status-publish format-standard has-post-thumbnail hentry category-hacking tag-graphql tag-javascript tag-wordpress">
                         <div class="entry-content">
-
                             ${article.articleContent}
                             <#if "" != article.articleSign.signHTML?trim>
                                 <div>
-
                                     ${article.articleSign.signHTML}
                                 </div>
                             </#if>
-
                             <script>
                                 var loggedIn = ${article.logged};
                             </script>
                         </div>
                     </article>
                 </main>
-                <#if pjax><!---- pjax {#pjax} end ----></#if>
             </div>
         </div>
 
         <section id="comments" class="comments">
-            <h3 id="comments-list-title">Comments | <span class="noticom">${article.articleCommentCount} ${commentLabel} </span></h3>
-            <div id="loading-comments">
-                <span></span>
-            </div>
             <ul class="commentwrap">
-                <@comments commentList=articleComments article=article></@comments>
+                <@comments commentList=articleComments article=article count=article.articleCommentCount></@comments>
             </ul>
         </section>
     </div>
@@ -90,10 +81,19 @@
 </section>
 <#include 'side-mobile.ftl'>
 <#include 'footer.ftl'>
-<#if pjax><!---- pjax {#pjax} start ----></#if>
 <@comment_script oId=article.oId commentable=article.commentable>
+    page.tips.externalRelevantArticlesDisplayCount = "${externalRelevantArticlesDisplayCount}";
+    <#if 0 != randomArticlesDisplayCount>
+        page.loadRandomArticles('<h3>${randomArticlesLabel}</h3>');
+    </#if>
+    <#if 0 != externalRelevantArticlesDisplayCount>
+        page.loadExternalRelevantArticles("<#list article.articleTags?split(",") as articleTag>${articleTag}<#if articleTag_has_next>,</#if></#list>",
+        '<h3>${externalRelevantArticlesLabel}</h3>');
+    </#if>
+    <#if 0 != relevantArticlesDisplayCount>
+        page.loadRelevantArticles('${article.oId}', '<h3>${relevantArticlesLabel}</h3>');
+    </#if>
     Skin.initArticle()
 </@comment_script>
-<#if pjax><!---- pjax {#pjax} end ----></#if>
 </body>
 </html>

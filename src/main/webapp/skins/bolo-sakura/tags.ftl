@@ -27,7 +27,6 @@
         <#include 'macro-header.ftl'>
         <div id="content" class="site-content">
             <div id="primary" class="content-area">
-                <#if pjax><!---- pjax {#pjax} start ----></#if>
                 <h3 class="link-title"><span class="fake-title">分类</span></h3>
                 <#list mostUsedCategories as category>
                     <span style="width: 256px; display: inline-block">
@@ -48,7 +47,6 @@
                         <span>${tag.tagPublishedRefCount} ${countLabel}</span>
                     </span>
                 </#list>
-                <#if pjax><!---- pjax {#pjax} end ----></#if>
             </div>
         </div>
     </div>

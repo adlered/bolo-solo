@@ -42,8 +42,10 @@
                             class="bull">·</span>${article.articleUpdateDate?string("yyyy-MM-dd")}<span
                             class="bull">·</span>${article.articleViewCount} 次阅读<span
                             class="bull">·</span>${article.articleCommentCount} ${commentLabel}</p>
-                <#if article.articleCategory != '' && article.categoryURI??>
-                    <a href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a> »
+                <#if article.articleCategory??>
+                    <#if article.has("categoryURI") && article.articleCategory != ''>
+                        <a href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a> »
+                    </#if>
                 </#if>
                 <#list article.articleTags?split(",") as articleTag>
                 <a rel="tag" href="${servePath}/tags/${articleTag?url('UTF-8')}">

@@ -31,6 +31,7 @@ var Skin = {
         Skin._initToc()
     },
     _initToc: function () {
+        $('.entry-content p img:eq(0)').hide();
     },
     _initShare: function () {
     },

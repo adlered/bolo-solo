@@ -36,7 +36,7 @@
                                                      referrerpolicy="origin">
             </div>
             <header class="pattern-header single-header"><h1 class="entry-title">${article.articleTitle}</h1>
-                <p class="entry-census"><span><a href="https://2heng.xin/author/Mashiro/"><img
+                <p class="entry-census"><span><a href="${servePath}/"><img
                                     src="${article.authorThumbnailURL}"></a></span><span><a
                                 href="https://2heng.xin/author/Mashiro/">${article.authorName}</a></span><span
                             class="bull">·</span>${article.articleUpdateDate?string("yyyy-MM-dd")}<span

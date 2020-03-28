@@ -55,6 +55,12 @@
         </form>
     </div>
     <ul id="menu-new-1" class="menu">
+        <#if isLoggedIn>
+            <li><a href="${servePath}/admin-index.do#main"><span class="faa-parent animated-hover"><img src="${gravatar}" width="15px" height="15px" style="border-radius:50%"> ${adminLabel}</span></a>
+        <#else>
+            <li><a href="${servePath}/start"><span class="faa-parent animated-hover"><i
+                            class="fa fa-user faa-horizontal" aria-hidden="true"></i> ${startToUseLabel}</span></a>
+        </#if>
         <li><a href="${servePath}/"><span class="faa-parent animated-hover"><i
                             class="fa fa-home faa-horizontal" aria-hidden="true"></i> 首页</span></a>
         <li><a href="${servePath}/links.html"><span class="faa-parent animated-hover"><i

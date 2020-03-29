@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="solo.war">
+    <root id="archive" name="bolo.war">
       <element id="artifact" artifact-name="bolo-solo:war exploded" />
     </root>
   </artifact>

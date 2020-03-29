@@ -1,4 +1,4 @@
-Solo - A small and beautiful blogging system written in Java.
+Bolo - A stable and beautiful blogging system based in Solo.
 Copyright (c) ${year}, ${devTeam}
 
 This program is free software: you can redistribute it and/or modify

@@ -7,24 +7,25 @@
     Author: <a href="http://vanessa.b3log.org">Vanessa</a>
     Author: <a href="https://github.com/nanolikeyou">nanolikeyou</a>
     Author: <a href="https://github.com/hzchendou">hzchendou</a>
+    Author: <a href="https://github.com/adlered">adlered</a>
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.b3log</groupId>
-    <artifactId>solo</artifactId>
+    <groupId>pers.adlered</groupId>
+    <artifactId>bolo</artifactId>
     <packaging>war</packaging>
-    <name>Solo</name>
-    <version>4.0.0</version>
+    <name>Bolo</name>
+    <version>v1.6-stable</version>
     <description>
-        一款小而美的博客系统，专为程序员设计。
+        本地化、稳定精致的 Java 博客系统 - 菠萝博客，基于 Solo。
     </description>
-    <inceptionYear>2010</inceptionYear>
+    <inceptionYear>2019</inceptionYear>
 
     <organization>
-        <name>B3log</name>
-        <url>https://b3log.org</url>
+        <name>adlered</name>
+        <url>https://github.com/adlered</url>
     </organization>
 
     <licenses>
@@ -61,15 +62,26 @@
             <organizationUrl>https://b3log.org</organizationUrl>
             <timezone>+8</timezone>
         </developer>
+
+        <developer>
+            <id>adlered@stackoverflow.wiki</id>
+            <name>Adler Chan</name>
+            <email>adlered@outlook.com</email>
+            <url>https://www.stackoverflow.wiki</url>
+            <roles>
+                <role>Re-builder</role>
+                <role>Commiter</role>
+            </roles>
+        </developer>
     </developers>
 
     <issueManagement>
         <system>GitHub Issues</system>
-        <url>https://github.com/b3log/solo/issues</url>
+        <url>https://github.com/adlered/bolo-solo/issues</url>
     </issueManagement>
 
     <scm>
-        <url>https://github.com/b3log/solo</url>
+        <url>https://github.com/adlered/bolo-solo</url>
     </scm>
 
     <properties>
@@ -388,8 +400,8 @@
                     </mapping>
                     <useDefaultMapping>true</useDefaultMapping>
                     <properties>
-                        <year>2010-present</year>
-                        <devTeam>b3log.org</devTeam>
+                        <year>2020</year>
+                        <devTeam>https://github.com/adlered</devTeam>
                     </properties>
                     <encoding>UTF-8</encoding>
                 </configuration>
@@ -427,7 +439,7 @@
 
         </plugins>
 
-        <finalName>solo</finalName>
+        <finalName>bolo</finalName>
     </build>
 
     <profiles>

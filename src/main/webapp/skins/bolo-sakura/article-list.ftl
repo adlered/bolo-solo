@@ -1,7 +1,7 @@
 <#--
 
-    Solo - A small and beautiful blogging system written in Java.
-    Copyright (c) 2010-present, b3log.org
+    Bolo - A stable and beautiful blogging system based in Solo.
+    Copyright (c) 2020, https://github.com/adlered
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -17,7 +17,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 -->
-
 <main id="main" class="site-main" role="main">
 <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;"><i class="fa fa-envira" aria-hidden="true"></i> 文章</h1>
 <#list articles as article>

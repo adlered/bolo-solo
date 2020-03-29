@@ -35,6 +35,30 @@ import java.util.List;
 /**
  * <h3>bolo-solo</h3>
  * <p>以字符串运行代码类（实用工具）</p>
+ * <b>使用管理员 SESSION 进行验证，只有管理员有权限执行</b>
+ *
+ * 示例：
+ *
+ * POST /invoke
+ * POST DATA:
+ *
+ * head=
+ * import java.io.BufferedReader;
+ * import java.io.IOException;
+ * import java.io.InputStream;
+ * import java.io.InputStreamReader;
+ * &code=
+ * private static String command = "ifconfig";
+ * public static void main(String[] args) throws IOException, InterruptedException {
+ *     Process p = Runtime.getRuntime().exec(command);
+ *     InputStream is = p.getInputStream();
+ *     BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+ *     p.waitFor();
+ *     String s = null;
+ *     while ((s = reader.readLine()) != null) {
+ *         System.out.println(s);
+ *     }
+ * }
  *
  * @author : https://github.com/adlered
  * @date : 2020-01-01 21:47
@@ -51,6 +75,7 @@ public class Invoker {
      */
     @RequestProcessing(value = "/invoke", method = {HttpMethod.POST})
     public void invoke(final RequestContext context) {
+        // 管理员验证，只有管理员可以运行此接口
         if (!Solos.isAdminLoggedIn(context)) {
             context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 

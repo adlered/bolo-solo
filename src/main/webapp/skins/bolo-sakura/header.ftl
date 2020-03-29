@@ -93,7 +93,7 @@
             }
 
             .centerbg {
-                background-image: url("https://api.2heng.xin/cover/");
+                background-image: url("https://programmingwithlove.stackoverflow.wiki/randombg");
                 background-position: center center;
                 background-attachment: inherit;
             }

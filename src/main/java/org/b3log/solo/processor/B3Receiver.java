@@ -19,6 +19,7 @@ package org.b3log.solo.processor;
 
 import org.apache.commons.lang.StringUtils;
 import org.b3log.latke.Keys;
+import org.b3log.latke.Latkes;
 import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
@@ -32,12 +33,14 @@ import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.util.Ids;
 import org.b3log.latke.util.Strings;
+import org.b3log.solo.bolo.prop.CommentMailService;
 import org.b3log.solo.model.*;
 import org.b3log.solo.repository.ArticleRepository;
 import org.b3log.solo.repository.CommentRepository;
 import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.service.*;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
@@ -361,6 +364,26 @@ public class B3Receiver {
             commentRepository.add(comment);
             articleMgmtService.incArticleCommentCount(articleId);
             transaction.commit();
+
+            // 邮件提醒 Admin
+            String replyRemindMailBoxAddress = "";
+            try {
+                replyRemindMailBoxAddress = optionRepository.get(Option.ID_C_REPLY_REMIND).optString(Option.OPTION_VALUE);
+            } catch (NullPointerException e) {
+            }
+            String blogSite = Latkes.getServePath() + "/";
+            String blogTitle = optionQueryService.getPreference().getString(Option.ID_C_BLOG_TITLE);
+            try {
+                CommentMailService.remindAdmin(
+                        replyRemindMailBoxAddress,
+                        blogSite,
+                        commentName,
+                        commentContent,
+                        blogTitle
+                );
+            } catch (JSONException JSONE) {
+                LOGGER.log(Level.DEBUG, "Send admin mail remind failed [replyRemindMailBoxAddress=" + replyRemindMailBoxAddress + "]");
+            }
 
             LOGGER.log(Level.INFO, "Added a comment from Sym [" + requestJSONObject.toString() + "]");
         } catch (final Exception e) {

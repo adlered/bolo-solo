@@ -32,3 +32,6 @@
 <script src="${staticServePath}/js/lib/compress/pjax.min.js"></script>
 <script src="${staticServePath}/js/common${miniPostfix}.js?${staticResourceVersion}"></script>
 <script src="${staticServePath}/skins/${skinDirName}/js/common${miniPostfix}.js?${staticResourceVersion}"></script>
+<#include "../../common-template/label.ftl">
+
+${plugins}

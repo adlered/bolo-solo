@@ -16,7 +16,7 @@
                                 <div class="blog-slider__title "><a class="title is-5"
                                         href="${servePath}${article.articlePermalink}">${article.articleTitle!}</a>
                                 </div>
-                                <div class="blog-slider__text" content="">${article.articleAbstractText!?substring(0, 128)} ......</div>
+                                <div class="blog-slider__text" content="">${article.articleAbstractText!?substring(0, 24)} ......</div>
                                 <a href="${servePath}${article.articlePermalink}" class="blog-slider__button">阅读更多</a>
                             </div>
                         </div>

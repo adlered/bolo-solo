@@ -19,6 +19,8 @@
         <link rel="stylesheet"
               href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}"/>
         <link rel="stylesheet"
+              href="${staticServePath}/skins/${skinDirName}/css/style.css?${staticResourceVersion}"/>
+        <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css">
         <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js'></script>
     </@head>
@@ -27,6 +29,9 @@
 
 <body class="is-3-column">
 <#include "header.ftl">
+<script>
+    var loggedIn = ${article.logged};
+</script>
 <div class="card-normal">
     <section class="section">
         <div class="container">
@@ -34,7 +39,7 @@
                 <div div
                      class="column is-12-tablet is-8-desktop is-8-widescreen is-8-fullhd has-order-2 column-main">
                     <div class="card" style="display: block">
-                        <div class="card-content article " id="card-content"
+                        <div class="card-content article" id="card-content"
                              style="width: 100%">
                             <div
                                     class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
@@ -65,11 +70,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card" id="comment-wrapper">
+                    <div class="card">
                         <div class="card-content">
                             <h3 class="title is-5 has-text-weight-normal">评论</h3>
-
-
+                            <@comments commentList=articleComments article=article count=article.articleCommentCount></@comments>
                         </div>
                     </div>
                 </div>

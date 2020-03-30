@@ -137,6 +137,17 @@
     </#if>
     Skin.initArticle()
 </@comment_script>
+<script>
+    // 延时检测右侧 “相关阅读” 是否为空，如果空则删除空 div，好看些
+    $(function () {
+        setTimeout(function () {
+            var judgeEmptyShowing = $('#relevantArticles').text();
+            if (judgeEmptyShowing === '') {
+                $('.card')[3].remove();
+            }
+        }, 1500)
+    })
+</script>
 </body>
 
 </html>

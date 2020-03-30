@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <section id="comments" class="comments">
+        <section class="comments">
             <ul class="commentwrap">
                 <@comments commentList=articleComments article=article count=article.articleCommentCount></@comments>
             </ul>

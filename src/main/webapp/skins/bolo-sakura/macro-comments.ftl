@@ -33,6 +33,7 @@
     </#if>
     <br>
     <h3 id="comments-list-title">Comments | <span class="noticom">${count} 条评论</span></h3>
+    <span id="comments"></span>
     <#list commentList as comment>
         <#include 'common-comment.ftl'/>
     </#list>

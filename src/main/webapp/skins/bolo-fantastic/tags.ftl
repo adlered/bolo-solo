@@ -48,7 +48,7 @@
                                                                             class="tag">${category.categoryTitle}</span>
                                                                         <span
                                                                             class="tag is-grey">${category.categoryTagCnt}
-                                                                            ${tagLabel}</span>
+                                                                            ${articleLabel}</span>
                                                                     </a>
                                                                 </div>
                                                             </#list>

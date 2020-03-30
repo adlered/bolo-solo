@@ -79,6 +79,28 @@
                 </div>
                 <div
                         class="column is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd  is-hidden-touch  has-order-3 column-right <%= sticky_class(position) %>">
+                    <div class="card widget">
+                        <div class="card-content">
+                            <article class="media">
+                                <div class="media-content">
+                                    <div class="content">
+                                        <div class="item" id="randomArticles"></div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="card widget" id="r2">
+                        <div class="card-content">
+                            <article class="media">
+                                <div class="media-content">
+                                    <div class="content" id="rArticles">
+                                        <div class="item" id="relevantArticles"></div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
                     <#if 0 != externalRelevantArticlesDisplayCount>
                         <div class="card widget">
                             <div class="card-content">
@@ -92,28 +114,6 @@
                             </div>
                         </div>
                     </#if>
-                    <div class="card widget">
-                        <div class="card-content">
-                            <article class="media">
-                                <div class="media-content">
-                                    <div class="content">
-                                        <div class="item" id="randomArticles"></div>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                    <div class="card widget">
-                        <div class="card-content">
-                            <article class="media">
-                                <div class="media-content">
-                                    <div class="content">
-                                        <div class="item" id="relevantArticles"></div>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
                 </div>
 
             </div>
@@ -140,12 +140,21 @@
 <script>
     // 延时检测右侧 “相关阅读” 是否为空，如果空则删除空 div，好看些
     $(function () {
+        var tempHtml = '<a rel="nofollow" href="javascript:void(0)"><i class="fas fa-search fa-spin"></i> 努力寻找中 ...</a>';
+        $('#rArticles').append(tempHtml);
         setTimeout(function () {
-            var judgeEmptyShowing = $('#relevantArticles').text();
+            var judgeEmptyShowing = $('#rArticles').html();
+            judgeEmptyShowing = judgeEmptyShowing.replace(tempHtml, '');
+            $('#rArticles').html(judgeEmptyShowing);
+            judgeEmptyShowing = judgeEmptyShowing.replace(/[\r\n]/g, "");
+            judgeEmptyShowing = judgeEmptyShowing.replace(new RegExp(/( )/g),"");
             if (judgeEmptyShowing === '') {
-                $('.card')[3].remove();
+                $('#rArticles').html('<a href="javascript:void(0)"><i class="fa fa-battery-empty"></i> 什么都没找到</a>');
+                setTimeout(function () {
+                    $('#r2').fadeOut(1000);
+                }, 1000)
             }
-        }, 1500)
+        }, 3000)
     })
 </script>
 </body>

@@ -4,7 +4,7 @@
             <div class="navbar-brand transparent">
                 <a class="navbar-item navbar-logo" href="${servePath}" rel="start">
                     <img src="${faviconURL}" alt="${blogTitle!}" height="28"/>
-                    ${blogTitle!}
+                    &nbsp;${blogTitle!}
                 </a>
                 <span class="navbar-burger burger" data-target="navMenu">
                     <span></span>

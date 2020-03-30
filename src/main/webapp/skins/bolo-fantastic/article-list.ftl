@@ -7,7 +7,7 @@
                         <div class="blog-slider__item swiper-slide">
                             <div class="blog-slider__img">
                                 <a href="${servePath}${article.articlePermalink}">
-                                    <img src="${article.articleImg1URL}" alt="${article.articleTitle!}">
+                                    <img src="${article.articleImg1URL}" alt="${article.articleTitle!}" referrerpolicy="origin">
                                 </a>
                             </div>
                             <div class="blog-slider__content">
@@ -16,7 +16,7 @@
                                 <div class="blog-slider__title "><a class="title is-5"
                                         href="${servePath}${article.articlePermalink}">${article.articleTitle!}</a>
                                 </div>
-                                <div class="blog-slider__text" content="">${article.articleAbstractText!}</div>
+                                <div class="blog-slider__text" content="">${article.articleAbstractText!?substring(0, 128)} ......</div>
                                 <a href="${servePath}${article.articlePermalink}" class="blog-slider__button">阅读更多</a>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                 <div class="card">
                     <div class="card-image">
                         <a href="${servePath}${article.articlePermalink}">
-                            <img class="thumbnail" src="${article.articleImg1URL}" alt="${article.articleTitle!}">
+                            <img class="thumbnail" src="${article.articleImg1URL}" alt="${article.articleTitle!}" referrerpolicy="origin">
                         </a>
 
                     </div>
@@ -47,7 +47,7 @@
 
                         </h1>
                         <div id="is-hidden-touch" class="content is-hidden-touch">
-                            ${article.articleAbstractText}
+                            ${article.articleAbstractText!?substring(0, 128)} ......
                         </div>
 
                         <div class="level is-mobile">

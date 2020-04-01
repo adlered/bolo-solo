@@ -20,7 +20,12 @@
 <li id="li-comment-${comment.oId}" itemtype="http://schema.org/Comment" itemprop="comment"
     class="comment index-1">
     <div id="comment-${comment.oId}" class="comment-body">
-        <div class="contain-main" style="margin-left: 0 !important;">
+    <div class="comment-avatar">
+    <a href="" rel="nofollow" target="_blank">
+    <img alt="${comment.commentName}" src="${comment.commentThumbnailURL}" class="avatar">
+    </a>
+    </div>
+        <div class="contain-main" >
             <div class="comment-meta">
                 <div itemprop="author" class="comment-author">
                     <#if "http://" == comment.commentURL>
@@ -30,7 +35,7 @@
                     </#if>
 
                     <#if comment.isReply>
-                        @
+                        <span class="comment-content" style="margin:0;padding:0;">@</span>
                         <a href="${servePath}${article.permalink}#li-comment-${comment.commentOriginalCommentId}"
                            onmouseover="page.showComment(this, '${comment.commentOriginalCommentId}', 20);"
                            onmouseout="page.hideComment('${comment.commentOriginalCommentId}')"

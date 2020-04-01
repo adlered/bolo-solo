@@ -101,7 +101,7 @@ box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);">
               </div>
           </div>
                <div class="card widget">
-              <div class="card-content">
+              <div class="card-content" style="width:100%">
                   <div class="menu">
                       <h3 class="menu-label">
                          公告

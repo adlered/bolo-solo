@@ -79,6 +79,7 @@
                 </div>
                 <div
                         class="column is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd  is-hidden-touch  has-order-3 column-right <%= sticky_class(position) %>">
+                      <#include "toc-post.ftl">
                     <div class="card widget">
                         <div class="card-content">
                             <article class="media">

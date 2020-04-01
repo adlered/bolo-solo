@@ -14,15 +14,16 @@
             </div>
             <div class="level-end">
                 <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                       <a href="${servePath}/search"> 搜索</a>&nbsp;•&nbsp;
                     <a href="${servePath}/tags.html"> ${allTagsLabel}</a>&nbsp;•&nbsp;
-                    <a href="${servePath}/archives.html"> ${archiveLabel}</a>&nbsp;•&nbsp;
+                 
                     <a href="${servePath}/links.html">
                         ${linkLabel}
-                    </a><br />
+                    </a>
                    
                 </div>
                  <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                 ${footerContent} <br>
+                 <div>${footerContent} <br></div>
                  </div>
             </div>
         </div>

@@ -40,8 +40,7 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div div
-                     class="column is-12-tablet is-8-desktop is-8-widescreen is-8-fullhd has-order-2 column-main">
+                <div class="column is-12-tablet is-8-desktop is-8-widescreen is-8-fullhd has-order-2 column-main">
                     <div class="card" style="display: block">
                         <div class="card-content article" id="card-content" style="width: 100%">
                             <div

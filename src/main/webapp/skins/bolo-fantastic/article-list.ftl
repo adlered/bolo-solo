@@ -16,7 +16,7 @@
                                 <div class="blog-slider__title "><a class="title is-5"
                                         href="${servePath}${article.articlePermalink}">${article.articleTitle!}</a>
                                 </div>
-                                <div class="blog-slider__text" content="">${article.articleAbstractText!?substring(0, 24)} ......</div>
+                                <div class="blog-slider__text" content=""><#if article.articleAbstractText!?length gt 24>${article.articleAbstractText!?substring(0, 24)} ......<#else>${article.articleAbstractText!}</#if></div>
                                 <a href="${servePath}${article.articlePermalink}" class="blog-slider__button">阅读更多</a>
                             </div>
                         </div>
@@ -47,7 +47,8 @@
 
                         </h1>
                         <div id="is-hidden-touch" class="content is-hidden-touch">
-                            ${article.articleAbstractText!?substring(0, 128)} ......
+                        <#if article.articleAbstractText!?length gt 128>${article.articleAbstractText!?substring(0, 128)} ......<#else>${article.articleAbstractText!}</#if>
+                            <#--  ${article.articleAbstractText!?substring(0, 128)} ......  -->
                         </div>
 
                         <div class="level is-mobile">
@@ -101,4 +102,4 @@
 
         </nav>
     </div>
-    <div>
+    </div>

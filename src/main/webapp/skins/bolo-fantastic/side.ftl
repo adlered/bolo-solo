@@ -11,10 +11,10 @@ box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);">
                               </figure>
                               <div class="level-right">
                                   <div>
-                                      <p class="title is-3" style="text-align: center">
+                                      <p class="title is-4" style="text-align: center">
                                           ${blogTitle!}
                                       </p>
-                                      <p class="is-size-5 is-block" style="padding-left: 1em;text-align: center">
+                                      <p class="is-size-6 is-block" style="text-align: center">
                                           ${blogSubtitle!}
                                       </p>
                                   </div>
@@ -55,43 +55,43 @@ box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);">
                       </div>
                   </nav>
                   <div class="level is-mobile">
-                      <#if usite.usiteQQ != ''>
+                      <#if usite.usiteQQ !=''>
                           <a class="level-item button is-marginless" target="_blank" title="QQ"
                               href="tencent://message/?uin=${usite.usiteQQ}">
                               <i class="fab fa-qq"></i>
                           </a>
                       </#if>
-                      <#if usite.usiteWeChat != ''>
+                      <#if usite.usiteWeChat !=''>
                           <a class="level-item button is-marginless" target="_blank" title="WeChat"
-                             href="javascript:alert('我的微信号：${usite.usiteWeChat}')">
+                              href="javascript:alert('我的微信号：${usite.usiteWeChat}')">
                               <i class="fab fa-weixin"></i>
                           </a>
                       </#if>
-                      <#if usite.usiteWeiBo != ''>
+                      <#if usite.usiteWeiBo !=''>
                           <a class="level-item button is-marginless" target="_blank" title="Weibo"
                               href="https://weibo.com/${usite.usiteWeiBo}">
                               <i class="fab fa-weibo"></i>
                           </a>
                       </#if>
-                      <#if usite.usiteGitHub != ''>
+                      <#if usite.usiteGitHub !=''>
                           <a class="level-item button is-marginless" target="_blank" title="Github"
                               href="https://github.com/${usite.usiteGitHub}">
                               <i class="fab fa-github"></i>
                           </a>
                       </#if>
-                      <#if usite.usiteTwitter !=  ''>
+                      <#if usite.usiteTwitter !=''>
                           <a class="level-item button is-marginless" target="_blank" title="Twitter"
                               href="https://twitter.com/${usite.usiteTwitter}">
                               <i class="fab fa-twitter"></i>
                           </a>
                       </#if>
-                      <#if usite.usiteFacebook != ''>
+                      <#if usite.usiteFacebook !=''>
                           <a class="level-item button is-marginless" target="_blank" title="Facebook"
                               href="https://www.facebook.com/${usite.usiteFacebook}">
                               <i class="fab fa-facebook"></i>
                           </a>
                       </#if>
-                      <#if usite.usiteTelegram != ''>
+                      <#if usite.usiteTelegram !=''>
                           <a class="level-item button is-marginless" target="_blank" title="Telegram"
                               href="https://telegram.me/${usite.usiteTelegram}">
                               <i class="fab fa-telegram"></i>
@@ -100,11 +100,11 @@ box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);">
                   </div>
               </div>
           </div>
-               <div class="card widget">
-              <div class="card-content">
+          <div class="card widget">
+              <div class="card-content" style="width:100%">
                   <div class="menu">
                       <h3 class="menu-label">
-                         公告
+                          公告
                       </h3>
                       <ul class="menu-list">
                           ${noticeBoard}
@@ -154,7 +154,8 @@ box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);">
                   </div>
               </div>
           </div>
-          <div class="card widget">
+          <div class="column-right-shadow is-hidden-widescreen is-6-fullhd" >
+           <div class="card widget">
               <div class="card-content">
                   <h3 class="menu-label">
                       ${mostViewCountArticlesLabel}
@@ -173,9 +174,9 @@ box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);">
                           <div class="media-content">
                               <div class="content">
                                   <div style="padding-top: 10px;">
-                              
-                                      <div class="has-text-grey is-size-7 is-uppercase" 
-                                      >${article.articleViewCount}浏览</div>
+
+                                      <div class="has-text-grey is-size-7 is-uppercase">${article.articleViewCount}浏览
+                                      </div>
                                   </div>
                                   <a href="${servePath}${article.articlePermalink}"
                                       class="title has-link-black-ter is-size-6 has-text-weight-normal">${article.articleTitle!}</a>
@@ -186,7 +187,7 @@ box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);">
 
               </div>
           </div>
-                <div class="card widget">
+          <div class="card widget">
               <div class="card-content">
                   <div class="menu">
                       <h3 class="menu-label">
@@ -195,12 +196,15 @@ box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);">
                       <ul class="menu-list">
                           <#list archiveDates as archiveDate>
                               <li>
-                                  <a class="level is-marginless" href="${servePath}/archives/${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}">
+                                  <a class="level is-marginless"
+                                      href="${servePath}/archives/${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}">
                                       <span class="level-start">
-                                          <span class="level-item">${archiveDate.archiveDateYear} ${yearLabel} ${archiveDate.archiveDateMonth} ${monthLabel}</span>
+                                          <span class="level-item">${archiveDate.archiveDateYear} ${yearLabel}
+                                              ${archiveDate.archiveDateMonth} ${monthLabel}</span>
                                       </span>
                                       <span class="level-end">
-                                          <span class="level-item tag">${archiveDate.archiveDatePublishedArticleCount}</span>
+                                          <span
+                                              class="level-item tag">${archiveDate.archiveDatePublishedArticleCount}</span>
                                       </span>
                                   </a>
                               </li>
@@ -209,5 +213,7 @@ box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);">
                   </div>
               </div>
           </div>
+          </div>
+      
 
       </div>

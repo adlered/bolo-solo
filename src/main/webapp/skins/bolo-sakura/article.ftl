@@ -57,7 +57,9 @@
             <div id="primary" class="content-area">
                 <main id="main" class="site-main" role="main">
                     <article class="post-4491 post type-post status-publish format-standard has-post-thumbnail hentry category-hacking tag-graphql tag-javascript tag-wordpress">
+                        <div class="toc-container"><div class="toc"></div></div>
                         <div class="entry-content">
+                            <div class="has-toc have-toc"></div>
                             ${article.articleContent}
                             <#if "" != article.articleSign.signHTML?trim>
                                 <div>

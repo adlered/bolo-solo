@@ -13,11 +13,11 @@
         <head>
             <@head title="${blogTitle}">
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.5/css/bulma.min.css" />
-       <link rel="stylesheet" href="https://ftp.stackoverflow.wiki/bolo/fantastic/css/all.min.css">
+                <link rel="stylesheet" href="https://ftp.stackoverflow.wiki/bolo/fantastic/css/all.min.css">
                 <link rel="stylesheet"
                     href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}" />
-                      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css">
-                      <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js'></script>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css">
+                <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js'></script>
             </@head>
             <#-- <#include "style.theme.ftl"> -->
         </head>
@@ -28,23 +28,36 @@
                     <section class="section">
                         <div class="container">
                             <div class="columns">
-                             <#include "side.ftl">
+
                                 <div class="column is-8-tablet is-8-desktop is-9-widescreen is-9-fullhd has-order-2 column-main"
                                     style="margin-left: 10px">
                                     <div class="columns">
                                         <div
                                             class="column is-12-tablet is-12-desktop is-12-widescreen has-order-2 column-main">
-                                                <#include "article-list.ftl">
+                                            <div class="level">
+                                                <div class="columns">
+                                                    <div
+                                                        class="column is-12-tablet is-12-desktop is-8-widescreen is-8-fullhd has-order-2 column-main">
+                                                        <#include "article-list.ftl">
+                                                    </div>
+                                                    <div
+                                                        class="column is-4-tablet is-4-desktop  is-hidden-touch is-hidden-desktop-only is-4-widescreen is-4-fullhd   has-order-3 column-right <%= sticky_class(position) %>">
+                                                        <#include "side-right.ftl">
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                          
+                                <#include "side.ftl">
                             </div>
-                                
+
                         </div>
                     </section>
                 </div>
-                 <a id="back-to-top" title="返回顶部" href="javascript:;"><i class="fas fa-chevron-up"></i></a>
+                <a id="back-to-top" title="返回顶部" href="javascript:;"><i class="fas fa-chevron-up"></i></a>
                 <#include "footer.ftl">
         </body>
 

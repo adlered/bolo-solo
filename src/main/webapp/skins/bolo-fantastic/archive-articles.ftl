@@ -24,23 +24,36 @@
 
         <body class="is-3-column">
             <#include "header.ftl">
-                <div class="card-normal">
+                 <div class="card-normal">
                     <section class="section">
                         <div class="container">
                             <div class="columns">
-                             <#include "side.ftl">
+
                                 <div class="column is-8-tablet is-8-desktop is-9-widescreen is-9-fullhd has-order-2 column-main"
                                     style="margin-left: 10px">
                                     <div class="columns">
                                         <div
                                             class="column is-12-tablet is-12-desktop is-12-widescreen has-order-2 column-main">
-                                                <#include "article-list.ftl">
+                                            <div class="level">
+                                                <div class="columns" style="width:100%">
+                                                    <div
+                                                        class="column is-12-tablet is-12-desktop is-8-widescreen is-8-fullhd has-order-2 column-main">
+                                                        <#include "article-list.ftl">
+                                                    </div>
+                                                    <div
+                                                        class="column is-4-tablet is-4-desktop  is-hidden-touch is-hidden-desktop-only is-4-widescreen is-4-fullhd   has-order-3 column-right <%= sticky_class(position) %>">
+                                                        <#include "side-right.ftl">
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                          
+                                <#include "side.ftl">
                             </div>
-                                
+
                         </div>
                     </section>
                 </div>

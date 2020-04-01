@@ -7,24 +7,27 @@
     see <https://www.gnu.org/licenses/>. -->
     <#include "../../common-template/macro-common_head.ftl">
 
+
         <!DOCTYPE html>
         <html>
 
         <head>
-            <@head title="${tag.tagTitle} ${tagLabel} - ${blogTitle}">
+            <@head title="${archiveLabel} - ${blogTitle}">
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.5/css/bulma.min.css" />
-       <link rel="stylesheet" href="https://ftp.stackoverflow.wiki/bolo/fantastic/css/all.min.css">
+                <link rel="stylesheet" href="https://ftp.stackoverflow.wiki/bolo/fantastic/css/all.min.css">
                 <link rel="stylesheet"
                     href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}" />
-                      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css">
-                      <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js'></script>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css">
+                <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js'></script>
             </@head>
+
+
             <#-- <#include "style.theme.ftl"> -->
         </head>
 
         <body class="is-3-column">
             <#include "header.ftl">
-                 <div class="card-normal">
+            <div class="card-normal">
                     <section class="section">
                         <div class="container">
                             <div class="columns">
@@ -38,7 +41,36 @@
                                                 <div class="columns" style="width:100%">
                                                     <div
                                                         class="column is-12-tablet is-12-desktop is-8-widescreen is-8-fullhd has-order-2 column-main">
-                                                        <#include "article-list.ftl">
+                                                          <div class="card widget">
+                                                    <div class="card-content">
+                                                        <h3 class="menu-label">
+                                                            ${archiveDates?size} ${cntMonthLabel}
+                                                            ${statistic.statisticPublishedBlogArticleCount}
+                                                            ${cntArticleLabel}
+                                                        </h3>
+
+                                                        <div class="field is-grouped is-grouped-multiline">
+                                                            <#if 0 !=archiveDates?size>
+                                                                <#list archiveDates as archiveDate>
+                                                                    <div class="control">
+                                                                        <a class="tags has-addons"
+                                                                            href="${servePath}/archives/${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}">
+                                                                            <span
+                                                                                class="tag">${archiveDate.archiveDateYear}
+                                                                                ${yearLabel}
+                                                                                ${archiveDate.archiveDateMonth}
+                                                                                ${monthLabel}</span>
+                                                                            <span class="tag is-grey">
+                                                                                ${archiveDate.archiveDatePublishedArticleCount}
+                                                                                ${cntArticleLabel}</span>
+                                                                        </a>
+                                                                    </div>
+                                                                </#list>
+                                                            </#if>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                                     </div>
                                                     <div
                                                         class="column is-4-tablet is-4-desktop  is-hidden-touch is-hidden-desktop-only is-4-widescreen is-4-fullhd   has-order-3 column-right <%= sticky_class(position) %>">
@@ -57,7 +89,9 @@
                         </div>
                     </section>
                 </div>
-                 <a id="back-to-top" title="返回顶部" href="javascript:;"><i class="fas fa-chevron-up"></i></a>
+
+               
+                <a id="back-to-top" title="返回顶部" href="javascript:;"><i class="fas fa-chevron-up"></i></a>
                 <#include "footer.ftl">
         </body>
 

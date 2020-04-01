@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <a href="${servePath}${article.articlePermalink}"
-                            class="title has-link-black-ter is-size-6 has-text-weight-normal">${article.articleTitle!}</a>
+                           class="title has-link-black-ter is-size-6 has-text-weight-normal">${article.articleTitle!}</a>
                     </div>
                 </div>
             </article>
@@ -40,7 +40,7 @@
                 <#list archiveDates as archiveDate>
                     <li>
                         <a class="level is-marginless"
-                            href="${servePath}/archives/${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}">
+                           href="${servePath}/archives/${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}">
                             <span class="level-start">
                                 <span class="level-item">${archiveDate.archiveDateYear}
                                     ${yearLabel}

@@ -8,23 +8,23 @@
                     <br>
                     &nbsp;&nbsp;&nbsp;Theme <a href="https://github.com/csfwff">Fantastic</a> by
                     <a href="https://github.com/csfwff" target="_blank">唐墨夏</a>
-                    <br />
+                    <br/>
 
                 </p>
             </div>
             <div class="level-end">
                 <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                       <a href="${servePath}/search"> 搜索</a>&nbsp;•&nbsp;
+                    <a href="${servePath}/search"> 搜索</a>&nbsp;•&nbsp;
                     <a href="${servePath}/tags.html"> ${allTagsLabel}</a>&nbsp;•&nbsp;
-                 <a href="${servePath}/archives.html"> ${archiveLabel}</a>&nbsp;•&nbsp;
+                    <a href="${servePath}/archives.html"> ${archiveLabel}</a>&nbsp;•&nbsp;
                     <a href="${servePath}/links.html">
                         ${linkLabel}
                     </a>
-                   
+
                 </div>
-                 <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                 <div>${footerContent} <br></div>
-                 </div>
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                    <div>${footerContent} <br></div>
+                </div>
             </div>
         </div>
     </div>

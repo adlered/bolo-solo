@@ -1,4 +1,3 @@
-
 <style>
     :root {
         --color: #333333;
@@ -39,6 +38,7 @@
         --toc-vertical-line-color: #1485FE;
         --toc-item-bg-hover: #1485FE;
     }
+
     <#if settings.auto_theme!true>
     /*light theme*/
     @media (prefers-color-scheme: light) {
@@ -170,6 +170,7 @@
             --toc-item-bg-hover: #1485FE;
         }
     }
+
     </#if>
     /* Light mode */
 
@@ -485,6 +486,6 @@
     }
 
     .has-text-black-ter {
-       color: var(--color) !important;
+        color: var(--color) !important;
     }
 </style>

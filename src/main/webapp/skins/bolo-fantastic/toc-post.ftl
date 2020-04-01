@@ -11,7 +11,7 @@
     //     initRelationship()
     //     tocFixed()
     // }
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#toc').html('');
 
         var postDirectoryBuild = function () {
@@ -32,7 +32,7 @@
                     return result;
                 },
                 createPostDirectory = function (article, directory, isDirNum) {
-                 
+
                     var contentArr = [],
                         titleId = [],
                         levelArr, root, level,
@@ -132,10 +132,10 @@
 
         var dir = $("#toc");
         var postdiv = $(".article-content");
-        var offsetLength = dir.offset().top
-        $(document).scroll(function() {
+        var offsetLength = dir.offset().top;
+        $(document).scroll(function () {
             var distance = offsetLength - $(window).scrollTop();
-           
+
             if (distance <= 0) {
                 if (!dir.hasClass('directory-fixed')) {
                     dir.addClass('directory-fixed');
@@ -169,13 +169,14 @@
         })
 
     }
+
     function tocFixed() {
         var dir = $("#toc");
         var postdiv = $(".article-content");
-        var offsetLength = dir.offset().top
+        var offsetLength = dir.offset().top;
         $(document).scroll(function () {
             var distance = offsetLength - $(window).scrollTop();
-    
+
             if (distance <= 0) {
                 if (!dir.hasClass('directory-fixed')) {
                     dir.addClass('directory-fixed');
@@ -196,7 +197,7 @@
         display: inline-block;
         text-align: left;
         margin-top: 20px;
-        padding-bottom:20px;
+        padding-bottom: 20px;
         /*width: 260px;*/
         /*margin-left: 330px;*/
     }
@@ -299,7 +300,6 @@
         white-space: nowrap;
         width: 200px;
     }
-
 
 
     .directory-fixed {

@@ -20,18 +20,20 @@
 <li id="li-comment-${comment.oId}" itemtype="http://schema.org/Comment" itemprop="comment"
     class="comment index-1">
     <div id="comment-${comment.oId}" class="comment-body">
-    <div class="comment-avatar">
-    <a href="" rel="nofollow" target="_blank">
-    <img alt="${comment.commentName}" src="${comment.commentThumbnailURL}" class="avatar">
-    </a>
-    </div>
-        <div class="contain-main" >
+        <div class="comment-avatar">
+            <a href="" rel="nofollow" target="_blank">
+                <img alt="${comment.commentName}" src="${comment.commentThumbnailURL}" class="avatar">
+            </a>
+        </div>
+        <div class="contain-main">
             <div class="comment-meta">
                 <div itemprop="author" class="comment-author">
                     <#if "http://" == comment.commentURL>
-                        <a href="javascript:void(0);" rel="nofollow" target="_blank" class="author-name">${comment.commentName}</a>
+                        <a href="javascript:void(0);" rel="nofollow" target="_blank"
+                           class="author-name">${comment.commentName}</a>
                     <#else>
-                        <a href="${comment.commentURL}" rel="nofollow" target="_blank" class="author-name">${comment.commentName}</a>
+                        <a href="${comment.commentURL}" rel="nofollow" target="_blank"
+                           class="author-name">${comment.commentName}</a>
                     </#if>
 
                     <#if comment.isReply>
@@ -48,9 +50,11 @@
                         </span>
                     </#if>
 
-                    <div class="useragent-info"><a href="${comment.commentURL}" target="_blank">${comment.commentURL!}</a></div>
+                    <div class="useragent-info"><a href="${comment.commentURL}"
+                                                   target="_blank">${comment.commentURL!}</a></div>
                 </div>
-                <time itemprop="datePublished" datetime="${comment.commentDate2?string("yyyy-MM-dd")}" class="comment-time">
+                <time itemprop="datePublished" datetime="${comment.commentDate2?string("yyyy-MM-dd")}"
+                      class="comment-time">
                     ${comment.commentDate2?string("yyyy-MM-dd HH:mm")}
                 </time>
                 <a href="#li-comment-${comment.oId}" class="comment-id">#${comment.oId}</a></div>

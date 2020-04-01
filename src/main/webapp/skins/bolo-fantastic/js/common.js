@@ -1,5 +1,7 @@
 //animate
 (function () {
+    Util.initPjax();
+
     function $() {
         return Array.prototype.slice.call(document.querySelectorAll.apply(document, arguments));
     }

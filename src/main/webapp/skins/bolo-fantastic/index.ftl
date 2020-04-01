@@ -24,6 +24,7 @@
 
 <body class="is-3-column">
 <#include "header.ftl">
+<div id="pjax"><#if pjax><!---- pjax {#pjax} start ----></#if>
 <div class="card-normal">
     <section class="section">
         <div class="container">
@@ -53,10 +54,10 @@
                 </div>
                 <#include "side.ftl">
             </div>
-
         </div>
     </section>
 </div>
+<#if pjax><!---- pjax {#pjax} end ----></#if></div>
 <a id="back-to-top" title="返回顶部" href="javascript:"><i class="fas fa-chevron-up"></i></a>
 <#include "footer.ftl">
 </body>

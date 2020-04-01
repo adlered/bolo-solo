@@ -36,6 +36,7 @@
     }
 
 </script>
+<div id="pjax"><#if pjax><!---- pjax {#pjax} start ----></#if>
 <div class="card-normal">
     <section class="section">
         <div class="container">
@@ -130,10 +131,10 @@
                 </div>
 
             </div>
-
         </div>
     </section>
 </div>
+<#if pjax><!---- pjax {#pjax} end ----></#if></div>
 <a id="back-to-top" title="返回顶部" href="javascript:"><i class="fas fa-chevron-up"></i></a>
 <#include "footer.ftl">
 <@comment_script oId=article.oId commentable=article.commentable>

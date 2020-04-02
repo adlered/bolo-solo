@@ -330,11 +330,6 @@ public class CommentMgmtService {
             commentRepository.add(comment);
             articleMgmtService.incArticleCommentCount(articleId);
 
-            final JSONObject eventData = new JSONObject();
-            eventData.put(Comment.COMMENT, comment);
-            eventData.put(Article.ARTICLE, article);
-            eventManager.fireEventAsynchronously(new Event<>(EventTypes.ADD_COMMENT_TO_ARTICLE, eventData));
-
             transaction.commit();
         } catch (final Exception e) {
             if (transaction.isActive()) {

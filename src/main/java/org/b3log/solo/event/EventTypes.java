@@ -42,11 +42,6 @@ public final class EventTypes {
     public static final String BEFORE_RENDER_ARTICLE = "Before Render Article";
 
     /**
-     * Indicates an add comment to article event.
-     */
-    public static final String ADD_COMMENT_TO_ARTICLE = "Add Comment To Article";
-
-    /**
      * Indicates an add comment to page event.
      */
     public static final String ADD_COMMENT_TO_PAGE = "Add Comment To Page";

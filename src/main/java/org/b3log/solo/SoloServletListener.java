@@ -37,7 +37,6 @@ import org.b3log.latke.util.Strings;
 import org.b3log.solo.bolo.prop.MailService;
 import org.b3log.solo.event.B3ArticleSender;
 import org.b3log.solo.event.B3ArticleUpdater;
-import org.b3log.solo.event.B3CommentSender;
 import org.b3log.solo.event.PluginRefresher;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.processor.InitCheckHandler;
@@ -251,8 +250,6 @@ public final class SoloServletListener extends AbstractServletListener {
             eventManager.registerListener(articleSender);
             final B3ArticleUpdater articleUpdater = beanManager.getReference(B3ArticleUpdater.class);
             eventManager.registerListener(articleUpdater);
-            final B3CommentSender commentSender = beanManager.getReference(B3CommentSender.class);
-            eventManager.registerListener(commentSender);
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Register event handlers failed", e);
 

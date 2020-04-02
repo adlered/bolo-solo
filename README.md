@@ -31,6 +31,8 @@
 ![Fantastic 皮肤 - 文章页](/preview/4.png)
 ![后台管理主页](/preview/5.png)
 
+# 阅读指引
+
 * [供测试菠萝博客Demo](#供测试菠萝博客Demo)
 * [Bolo 的功能亮点](#Bolo-的功能亮点)  
 * [人工帮助](#人工帮助)

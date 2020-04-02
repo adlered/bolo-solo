@@ -19,8 +19,8 @@
 -->
 <div class="module-panel">
     <div class="module-header">
-        Bolo 主题由 Solo 主题移植而来，获取更多主题请关注 <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo 项目主页</a>
+        菠萝博客保持每两个版本至少一款高级主题的更新。更多独占主题正在开发中，请关注 <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客项目主页</a>
     </div>
-    <div class="module-body padding12"><div id="skinMain"></div></div>
+    <div class="module-body padding12"><b>bolo-fantastic 皮肤为抢先体验版本，暂未适配 Pjax，请酌情使用。</b><div id="skinMain"></div></div>
 </div>
 ${plugins}

@@ -187,27 +187,6 @@
             <br>
             配置图床期间出现疑问或问题，请联系作者微信：1101635162</div>
         <br>
-        <h3>B3log 生态设定</h3>
-        <label for="hacpaiUser">${hacpaiUser1Label}</label>
-        <input id="hacpaiUser" type="text"/>
-        <label for="b3logKey">${b3logKey1Label}</label>
-        <input id="b3logKey" type="text">
-        <div>
-            <b>请注意！此项设置需要重启服务端后生效。</b>
-            <br>
-            <b>设置黑客派用户名和 B3log Key 后，你可以</b><br>
-            1. 使用 Bolo 的编辑器图床<br>
-            2. 与黑客派社区同步发送的文章和评论<br>
-            3. 同步你在黑客派中的GitHub、QQ等链接（<a href="https://hacpai.com/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>
-            4. 使用自动备份全部文章至黑客派功能（<a href="https://hacpai.com/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br><br>
-            <b>如何取得 B3log Key</b><br>
-            1. <a href="https://hacpai.com/register?r=adlered" target="_blank">在这里</a>注册一个黑客派用户（在<a href="https://hacpai.com/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>
-            2. <a href="https://hacpai.com/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key<br><br>
-            <b>Bolo 坚实的防数据丢失策略</b><br>
-            1. 与黑客派仅保持<b>单向</b>联系。即：只允许上传下载（备份至黑客派、上传至黑客派图床、同步联系方式、同步文章与评论等），不允许修改或删除你的任何本地博客数据<br>
-            2. 完全解除与 GitHub 联系的 API 接口<br>
-        </div>
-        <br>
         <h3>邮件服务器设定</h3>
         <label for="mailBox">${mailBoxLabel}</label>
         <select id="mailBox">
@@ -232,6 +211,40 @@
         <div>
             填写你用于接收提醒的邮箱，当有人在你的博客文章中评论时，菠萝会发送邮件提醒你。<br>
             <b>此项设定必须先设定邮件服务器。</b>
+        </div>
+        <br>
+        <h3>B3log 生态设定</h3>
+        <label for="hacpaiUser">${hacpaiUser1Label}</label>
+        <input id="hacpaiUser" type="text"/>
+        <label for="b3logKey">${b3logKey1Label}</label>
+        <input id="b3logKey" type="text">
+        <div>
+            <b>请注意！此项设置需要重启服务端后生效。</b>
+            <style>
+                .menu ul li {
+                    list-style-type: none;
+                }
+            </style>
+            <details class="menu">
+                <summary>设置以后，我可以做什么？</summary>
+                <ul>
+                    <li>
+                        1. 使用 Bolo 的编辑器的黑客派图床（其它图床不受影响）<br>
+                        2. 与黑客派社区同步发送的文章<s>和评论</s>（黑客派已废弃评论推送接口，文章推送 / 同步不受影响）<br>
+                        3. 同步你在黑客派中的GitHub、QQ等链接（<a href="https://hacpai.com/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>
+                        4. 使用自动备份全部文章至黑客派功能（<a href="https://hacpai.com/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br><br>
+                    </li>
+                </ul>
+            </details>
+            <details class="menu">
+                <summary>如何取得 B3log Key？</summary>
+                <ul>
+                    <li>
+                        1. <a href="https://hacpai.com/register?r=adlered" target="_blank">在这里</a>注册一个黑客派用户（在<a href="https://hacpai.com/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>
+                        2. <a href="https://hacpai.com/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key<br>
+                    </li>
+                </ul>
+            </details>
         </div>
         <br>
         <h3>本地博客设定</h3>

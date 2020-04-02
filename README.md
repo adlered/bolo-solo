@@ -118,7 +118,7 @@
 |:-------------------:|:-------------------:|:-------------------:|
 |<img height='48' width='48' src='https://avatars3.githubusercontent.com/u/873584?v=4'>|<img height='48' width='48' src='https://avatars0.githubusercontent.com/u/14257327?v=4'>|<img height='48' width='48' src='https://avatars1.githubusercontent.com/u/23192332?v=4'>|
 |[@88250](https://github.com/88250)|[@csfwff](https://github.com/csfwff)|[@InkDP](https://github.com/InkDP)|
-|[Solo 原作者](https://hacpai.com)|[Bolo 测试、Logo 绘制、前端技术支持](https://sszsj.top)|[默认皮肤 bolo-nexmoe 原作者](https://inkdp.cn)|
+|[Solo 原作者](https://hacpai.com)|[参与菠萝博客开发、前端及皮肤技术支持](https://sszsj.top)|[菠萝博客测试官](https://inkdp.cn)|
 
 # 人工帮助
 

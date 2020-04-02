@@ -19,28 +19,21 @@ package org.b3log.solo.processor;
 
 import org.apache.commons.lang.StringUtils;
 import org.b3log.latke.Keys;
-import org.b3log.latke.Latkes;
 import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
-import org.b3log.latke.model.Role;
 import org.b3log.latke.model.User;
-import org.b3log.latke.repository.Transaction;
 import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
-import org.b3log.latke.util.Ids;
-import org.b3log.latke.util.Strings;
-import org.b3log.solo.bolo.prop.CommentMailService;
 import org.b3log.solo.model.*;
 import org.b3log.solo.repository.ArticleRepository;
 import org.b3log.solo.repository.CommentRepository;
 import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.service.*;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
@@ -214,178 +207,6 @@ public class B3Receiver {
             final JSONObject updateRequest = new JSONObject().put(Article.ARTICLE, oldArticle);
             articleMgmtService.updateArticle(updateRequest);
             LOGGER.log(Level.INFO, "Updated an article [" + title + "] via Sym");
-        } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, e.getMessage(), e);
-            ret.put(Keys.CODE, 1).put(Keys.MSG, e.getMessage());
-        }
-    }
-
-    /**
-     * Adds a comment with the specified request.
-     * <p>
-     * Request json:
-     * <pre>
-     * {
-     *     "comment": {
-     *         "articleId": "",
-     *         "content": "",
-     *         "contentHTML": "",
-     *         "ua": "",
-     *         "ip": "",
-     *         "authorName": "",
-     *         "authorURL": "",
-     *         "authorAvatarURL": "",
-     *         "isArticleAuthor": true,
-     *         "time": 1457784330398
-     *     },
-     *     "client": {
-     *         "userName": "88250",
-     *         "userB3Key": ""
-     *     }
-     * }
-     * </pre>
-     * </p>
-     * <p>
-     * Renders the response with a json object, for example,
-     * <pre>
-     * {
-     *     "sc": true
-     * }
-     * </pre>
-     * </p>
-     *
-     * @param context the specified request context
-     */
-    @RequestProcessing(value = "/apis/symphony/comment", method = HttpMethod.PUT)
-    public void addComment(final RequestContext context) {
-        final JSONObject ret = new JSONObject().put(Keys.CODE, 0);
-        context.renderJSON(ret);
-
-        final JSONObject requestJSONObject = context.requestJSON();
-
-        LOGGER.log(Level.INFO, "Adds a comment from Sym [" + requestJSONObject.toString() + "]");
-
-        try {
-            final JSONObject symCmt = requestJSONObject.optJSONObject(Comment.COMMENT);
-            final JSONObject symClient = requestJSONObject.optJSONObject("client");
-            final String articleAuthorName = symClient.optString(User.USER_NAME);
-            final JSONObject articleAuthor = userRepository.getByUserName(articleAuthorName);
-            if (null == articleAuthor) {
-                ret.put(Keys.CODE, 1);
-                final String msg = "Not found user [" + articleAuthorName + "]";
-                ret.put(Keys.MSG, msg);
-                LOGGER.log(Level.WARN, msg);
-
-                return;
-            }
-
-            final String b3Key = symClient.optString(UserExt.USER_B3_KEY);
-
-            // Bolo b3key 校验
-            final BeanManager beanManager = BeanManager.getInstance();
-            OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-            JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
-            String key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
-
-            if (!StringUtils.equals(key, b3Key)) {
-                ret.put(Keys.CODE, 1);
-                final String msg = "Wrong key";
-                ret.put(Keys.MSG, msg);
-                LOGGER.log(Level.WARN, msg);
-
-                return;
-            }
-
-            final String articleId = symCmt.getString("articleId");
-            final JSONObject article = articleRepository.get(articleId);
-            if (null == article) {
-                ret.put(Keys.CODE, 1);
-                final String msg = "Not found the specified article [id=" + articleId + "]";
-                ret.put(Keys.MSG, msg);
-                LOGGER.log(Level.WARN, msg);
-
-                return;
-            }
-
-            final String commentName = symCmt.getString("authorName");
-            String commentURL = symCmt.optString("authorURL");
-            if (!Strings.isURL(commentURL)) {
-                commentURL = "";
-            }
-            final String commentThumbnailURL = symCmt.getString("authorAvatarURL");
-
-            final JSONObject commenter = userRepository.getByUserName(commentName);
-            if (null == commenter) {
-                // 社区回帖同步博客评论 https://github.com/b3log/solo/issues/12691
-                final JSONObject addUserReq = new JSONObject();
-                addUserReq.put(User.USER_NAME, commentName);
-                addUserReq.put(UserExt.USER_AVATAR, commentThumbnailURL);
-                addUserReq.put(User.USER_ROLE, Role.VISITOR_ROLE);
-                addUserReq.put(UserExt.USER_GITHUB_ID, "");
-                addUserReq.put(UserExt.USER_B3_KEY, "");
-                try {
-                    userMgmtService.addUser(addUserReq);
-                    LOGGER.log(Level.INFO, "Created a user [role=" + Role.VISITOR_ROLE + "] via Sym comment");
-                } catch (final Exception e) {
-                    LOGGER.log(Level.ERROR, "Adds a user [" + commentName + "] failed", e);
-                    ret.put(Keys.CODE, 1);
-                    ret.put(Keys.MSG, "Adds a user [" + commentName + "] failed");
-
-                    return;
-                }
-            }
-
-            if (!optionQueryService.allowComment() || !article.optBoolean(Article.ARTICLE_COMMENTABLE)) {
-                ret.put(Keys.CODE, 1);
-                final String msg = "Not allow comment";
-                ret.put(Keys.MSG, msg);
-                LOGGER.log(Level.WARN, msg);
-
-                return;
-            }
-
-            String commentContent = symCmt.getString("content"); // Markdown
-
-            final Transaction transaction = commentRepository.beginTransaction();
-            final JSONObject comment = new JSONObject();
-            final String commentId = Ids.genTimeMillisId();
-            comment.put(Keys.OBJECT_ID, commentId);
-            comment.put(Comment.COMMENT_NAME, commentName);
-            comment.put(Comment.COMMENT_URL, commentURL);
-            comment.put(Comment.COMMENT_THUMBNAIL_URL, commentThumbnailURL);
-            comment.put(Comment.COMMENT_CONTENT, commentContent);
-            final Date date = new Date();
-            comment.put(Comment.COMMENT_CREATED, date.getTime());
-            comment.put(Comment.COMMENT_ORIGINAL_COMMENT_ID, "");
-            comment.put(Comment.COMMENT_ORIGINAL_COMMENT_NAME, "");
-            comment.put(Comment.COMMENT_ON_ID, articleId);
-            final String commentSharpURL = Comment.getCommentSharpURLForArticle(article, commentId);
-            comment.put(Comment.COMMENT_SHARP_URL, commentSharpURL);
-            commentRepository.add(comment);
-            articleMgmtService.incArticleCommentCount(articleId);
-            transaction.commit();
-
-            // 邮件提醒 Admin
-            String replyRemindMailBoxAddress = "";
-            try {
-                replyRemindMailBoxAddress = optionRepository.get(Option.ID_C_REPLY_REMIND).optString(Option.OPTION_VALUE);
-            } catch (NullPointerException e) {
-            }
-            String blogSite = Latkes.getServePath() + "/";
-            String blogTitle = optionQueryService.getPreference().getString(Option.ID_C_BLOG_TITLE);
-            try {
-                CommentMailService.remindAdmin(
-                        replyRemindMailBoxAddress,
-                        blogSite,
-                        commentName,
-                        commentContent,
-                        blogTitle
-                );
-            } catch (JSONException JSONE) {
-                LOGGER.log(Level.DEBUG, "Send admin mail remind failed [replyRemindMailBoxAddress=" + replyRemindMailBoxAddress + "]");
-            }
-
-            LOGGER.log(Level.INFO, "Added a comment from Sym [" + requestJSONObject.toString() + "]");
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, e.getMessage(), e);
             ret.put(Keys.CODE, 1).put(Keys.MSG, e.getMessage());

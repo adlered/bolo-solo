@@ -47,6 +47,7 @@
 ### 当前版本更新日志
 <details open>
 <summary>v1.6 稳定版</summary>
+
 新版亮点
 
 * 新增 `Sakura` 和 `Fantastic` 皮肤！全新首发移植自 `WordPress` 及 `Halo` 博客平台主题
@@ -83,6 +84,7 @@
 
 <details>
 <summary>v1.3 稳定版</summary>
+
 自 v1.3 版本开始，Bolo 支持自定义图床功能，支持以下存储服务图床：
 
 * 七牛云

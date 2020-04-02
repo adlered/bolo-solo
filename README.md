@@ -42,14 +42,39 @@
 菠萝当前版本：v1.6 稳定版  
 对应 Solo 原版版本号：v4.0.0  
 
-### 当前版本更新日志
+> 菠萝博客将保持每两个版本更新一款新皮肤
 
-* v1.5 稳定版发布啦！Bolo 稳定版支持 Docker、Tomcat 部署，多种部署方法请看下方的《Bolo 多种安装方法》指引 👇
+### 当前版本更新日志
+<details open>
+<summary>v1.6 稳定版</summary>
+新版亮点
+
+* 新增 `Sakura` 和 `Fantastic` 皮肤！全新首发移植自 `WordPress` 及 `Halo` 博客平台主题
+* 支持看板娘固定功能！在`偏好设定`的`参数设置`选项卡中找到，留住心仪的 TA 吧 #滑稽
+
+边边角角
+
+* SCSS、JS代码整理
+* 修复 bolo-nexmoe 皮肤来自黑客派图片的封面 403 问题
+* 空用户名和密码将无法通过验证
+* 处理部分代码空指针问题
+* 删除无用图片素材
+* 搜索页面和开始页面顶栏图片更新
+* 废除黑客派评论推送接口
+* 偏好设置、主题设置界面更新
+* 关于页面界面更新
+</details>
+
+<details>
+<summary>v1.5 稳定版</summary>
 * 重写登录和搜索界面、登录界面动态背景每日刷新，天天好心情（全部背景图皆无版权，放心使用）
 * 更新插件：看板娘+，支持自动更新资源包（无需升级 Bolo），新增且持续更新很多萌妹，总有一个你喜欢的~（感谢 [@csfwff](https://github.com/csfwff) 提供插件更新）
 * 自定义图床不需要先设置 B3log Key 就可以使用了
 * 若干 BUG 修复、若干细节修缮、若干皮肤更新
+</details>
 
+<details>
+<summary>v1.3 稳定版</summary>
 自 v1.3 版本开始，Bolo 支持 **自定义图床** 功能，支持以下存储服务图床：
 
 1. 七牛云
@@ -57,6 +82,7 @@
 3. 又拍云
 4. 基于 [Picuang](https://github.com/adlered/Picuang) 的自搭建图床
 5. 黑客派公共图床（默认）
+</details>
 
 ### 使用 Bolo 驱动的博客
 
@@ -278,6 +304,8 @@ VALUES
 9. `V1.4` 及以上版本：next -> bolo-next
 10. `V1.4` 及以上版本：nijigen ->  bolo-nijigen
 11. `V1.4` 及以上版本：yilia -> bolo-yilia
+12. `V1.6` 及以上版本：Sakura -> bolo-sakura 菠萝博客团队**全新**移植自 WordPress 平台，菠萝博客首发
+13. `V1.6` 及以上版本：Fantastic -> bolo-fantastic 菠萝博客团队**全新**移植自 Halo 平台，菠萝博客首发
 
 ## 针对 Solo 博客的改进和优化
 

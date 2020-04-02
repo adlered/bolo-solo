@@ -41,21 +41,40 @@
             <div class="fn__clear"></div>
 
             ${aboutContentLabel}
-            <br/>
-            <ul class="about-list">
-                <li><a target="_blank" href="https://github.com/adlered/bolo-solo">Bolo 源代码</a></li>
-            </ul>
+            <br>
+            <button id="sup">赞助菠萝博客作者</button>
+            <button id="sup2">赞助原作者</button>
+            <br>
+            <script type="text/javascript">
+                $('#sup').click(function () {
+                    $('#sup').html('<b>支付宝成功付款 6666.66 元</b>');
+                    setTimeout(function () {
+                        $('#sup').html('开玩笑的啦 #滑稽');
+                        setTimeout(function () {
+                            $('#sup').html('我们用爱发电，暂时不需要赞助，<a href="https://github.com/adlered/bolo-solo" target="_blank" style="color: #ffffff"><b>给项目点个 Star</b></a> 就是对我最大的动力吼~');
+                            setTimeout(function () {
+                                $('#sup').html('<s>赞助菠萝博客作者</s>');
+                            }, 6000);
+                        }, 1500);
+                    }, 2000);
+                });
+
+                $('#sup2').click(function () {
+                    $('#sponsor').toggle(500);
+                });
+            </script>
         </div>
-        <span class="fn__clear" /> <br/><br/>
+        <span class="fn__clear" />
+        <br><br>
     </div>
 </div>
 
-<div class="module-panel">
+<div class="module-panel" style="display: none" id="sponsor">
     <div class="module-header">
         <h2>✨ 赞助 <b>Solo 博客原作者</b></h2>
     </div>
     <div class="module-body padding12">
-        Bolo 项目基于 Solo 修改而成，如果你觉得 Bolo 好用，一定要先感谢 Solo 的作者。通过下方指引可以捐助 Solo 的作者：<br><br>
+        菠萝博客基于 Solo 修改而成，通过下方指引可以捐助原作者：<br>
         <a href="https://b3log.org">B3log 开源组织</a>旗下包含
         <a href="https://sym.b3log.org/">Symphony</a>、
         <a href="https://solo.b3log.org/">Solo</a>、
@@ -64,8 +83,6 @@
         <a href="https://github.com/b3log/latke">Latke</a>、
         <a href="https://github.com/b3log/vditor">Vditor</a>、
         <a href="https://github.com/b3log/gulu">Gulu</a>&nbsp;等一系列开源项目。随着项目规模的增长，我们需要有相应的资金支持才能持续项目的维护和开发。
-        <br/> <br/>
-        如果你觉得 Solo 还算好用，可通过支付宝对我们进行赞助，谢谢 🙏
         <br/> <br/>
         <div class="ft__center">
             <button class="fn__flex-inline" onclick="window.open('https://hacpai.com/sponsor')">

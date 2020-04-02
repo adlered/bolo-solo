@@ -23,6 +23,12 @@
 <img src="https://img.shields.io/github/watchers/adlered/bolo-solo?style=social">
 </p>
 
+![Sakura 皮肤 - 主页](/preview/1.png)
+![Sakura 皮肤 - 文章页](/preview/2.png)
+![Fantastic 皮肤 - 主页](/preview/3.png)
+![Fantastic 皮肤 - 文章页](/preview/4.png)
+![后台管理主页](/preview/5.png)
+
 ****
 
 * [供测试菠萝博客Demo](#供测试菠萝博客Demo)

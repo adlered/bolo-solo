@@ -42,7 +42,7 @@
 菠萝当前版本：v1.6 稳定版  
 对应 Solo 原版版本号：v4.0.0  
 
-> 菠萝博客将保持每两个版本更新一款新皮肤
+> 菠萝博客将保持每两个版本更新一款新皮肤，敬请期待！
 
 ### 当前版本更新日志
 <details open>
@@ -67,6 +67,7 @@
 
 <details>
 <summary>v1.5 稳定版</summary>
+
 * 重写登录和搜索界面、登录界面动态背景每日刷新，天天好心情（全部背景图皆无版权，放心使用）
 * 更新插件：看板娘+，支持自动更新资源包（无需升级 Bolo），新增且持续更新很多萌妹，总有一个你喜欢的~（感谢 [@csfwff](https://github.com/csfwff) 提供插件更新）
 * 自定义图床不需要先设置 B3log Key 就可以使用了
@@ -74,14 +75,21 @@
 </details>
 
 <details>
-<summary>v1.3 稳定版</summary>
-自 v1.3 版本开始，Bolo 支持 **自定义图床** 功能，支持以下存储服务图床：
+<summary>v1.4 稳定版</summary>
 
-1. 七牛云
-2. 阿里云
-3. 又拍云
-4. 基于 [Picuang](https://github.com/adlered/Picuang) 的自搭建图床
-5. 黑客派公共图床（默认）
+* 新增 6 款皮肤支持
+* 没啥更新内容了
+</details>
+
+<details>
+<summary>v1.3 稳定版</summary>
+自 v1.3 版本开始，Bolo 支持自定义图床功能，支持以下存储服务图床：
+
+* 七牛云
+* 阿里云
+* 又拍云
+* 基于 [Picuang](https://github.com/adlered/Picuang) 的自搭建图床
+* 黑客派公共图床（默认）
 </details>
 
 ### 使用 Bolo 驱动的博客

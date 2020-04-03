@@ -25,7 +25,7 @@
                     &copy; ${.now?string('yyyy')} ${blogTitle!}&nbsp;
                     Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a>
                     <br>
-                    &nbsp;&nbsp;&nbsp;Theme <a href="https://github.com/csfwff">Fantastic</a> by
+                    &nbsp;&nbsp;&nbsp;Theme <a href="https://github.com/csfwff/bolo-fantastic">Fantastic</a> by
                     <a href="https://github.com/csfwff" target="_blank">唐墨夏</a>
                     <br/>
 

@@ -283,7 +283,7 @@ public class DataModelService {
     public void fillTags(final Map<String, Object> dataModel) throws ServiceException {
         Stopwatchs.start("Fill Tags");
         try {
-            final List<JSONObject> tags = tagQueryService.getTags();
+            final List<JSONObject> tags = tagQueryService.getTagsOfPublishedArticles();
             dataModel.put(Tag.TAGS, tags);
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Fills tags failed", e);

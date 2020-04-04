@@ -28,10 +28,27 @@
             </a>
         </div>
         <div class="about__panel">
+            <script type="text/javascript" src="${staticServePath}/js/bolo/sweetalert.min.js"></script>
+            <script type="text/javascript">
+                function moveHelp() {
+                    swal({
+                        title: "",
+                        text: "菠萝博客支持从 Solo 的指定版本快速迁移。详情请参阅帮助文档。",
+                        icon: "success",
+                        buttons: ["好", "前往帮助文档"],
+                    })
+                    .then((value) => {
+                        if (null !== value) {
+                            window.open('https://github.com/adlered/bolo-solo#%E8%BD%BB%E6%9D%BE%E8%BF%81%E7%A7%BB%E8%BF%81%E7%A7%BB%E8%87%B3-bolo--%E8%BF%81%E5%9B%9E%E8%87%B3-solo');
+                        }
+                    });
+                }
+            </script>
+
             <div class="about-margin fn__left">
-                你正在使用 菠萝博客 Bolo<br>
+                您正在使用 菠萝博客 Bolo<br>
                 当前 Bolo 版本：${boloVersion}<br>
-                对应 Solo 版本：${version}
+                支持 Solo 快速迁移版本：2.9.9 ~ ${version} <a href="javascript:moveHelp()"><sup>？</sup></a>
             </div>
 
             <iframe src="https://ghbtns.com/github-btn.html?user=adlered&repo=bolo-solo&type=star&count=true&size=large"
@@ -39,12 +56,14 @@
                     style="margin: 21px 0 0 20px;border: 0"
                     class="fn__left"></iframe>
             <div class="fn__clear"></div>
-
-            ${aboutContentLabel}
+            <script type="text/javascript">
+                var version = '${boloVersion}';
+            </script>
+            <b><p id="updateCheck">正在检查版本更新...</p></b>
             <br>
             <button id="sup">赞助菠萝博客作者</button>
             <button id="sup2">赞助原作者</button>
-            <br>
+            <br><br>
             <script type="text/javascript">
                 $('#sup').click(function () {
                     $('#sup').html('<b>支付宝成功付款 6666.66 元</b>');

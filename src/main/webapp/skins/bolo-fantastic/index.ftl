@@ -57,7 +57,8 @@
                                 <div class="columns">
                                     <div
                                             class="column is-12-tablet is-12-desktop is-8-widescreen is-8-fullhd has-order-2 column-main">
-                                        <#include "article-list.ftl">
+                                    
+                                            <#include "article-list.ftl">
                                     </div>
                                     <div
                                             class="column is-4-tablet is-4-desktop  is-hidden-touch is-hidden-desktop-only is-4-widescreen is-4-fullhd   has-order-3 column-right <%= sticky_class(position) %>">

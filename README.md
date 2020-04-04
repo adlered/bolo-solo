@@ -49,13 +49,18 @@
 
 ### :tada: 菠萝版本信息
 
-菠萝当前版本：v1.6 稳定版  
-对应 Solo 原版版本号：v4.0.0  
+菠萝当前版本：v1.7 稳定版  
 
 > 菠萝博客将保持每两个版本更新一款新皮肤，敬请期待！
 
 ### 更新日志
 <details open>
+<summary>v1.7 稳定版</summary>
+
+* 暂无
+</details>
+
+<details>
 <summary>v1.6 稳定版</summary>
 
 新版亮点

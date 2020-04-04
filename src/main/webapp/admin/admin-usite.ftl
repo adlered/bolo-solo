@@ -17,17 +17,26 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 -->
-<div id="filler">
-    <center>联网加载中，请稍候...</center>
+<div>
+    <div id="linkTable"></div>
+    <div id="linkPagination" class="fn__margin12 fn__right"></div>
 </div>
-<script>
-    $.ajax({
-        url: 'https://ftp.stackoverflow.wiki/bolo/boloToolBox.html',
-        type: 'GET',
-        success: function(res) {
-            $("#filler").html(res)
-            $(".footer").remove();
-        }
-    });
-</script>
+<div class="fn__clear"></div>
+<div class="form form__no-table">
+    联系方式
+    <label>社交媒体</label>
+    <input id="linkTitle" type="text"/>
+    <label>个人主页链接</label>
+    <input id="linkAddress" type="text"/><br><br>
+    <button onclick="admin.linkList.add();" class="fn__right">${saveLabel}</button>
+    <div class="fn__clear"></div>
+</div>
+<div id="updateLink" class="fn__none form form__no-table" data-title="${updateLinkLabel}">
+    <label>社交媒体</label>
+    <input id="linkTitleUpdate" type="text"/>
+    <label>个人主页链接</label>
+    <input id="linkAddressUpdate" type="text"/><br><br>
+    <button onclick="admin.linkList.update();" class="fn__right">${updateLabel}</button>
+    <div class="fn__clear"></div>
+</div>
 ${plugins}

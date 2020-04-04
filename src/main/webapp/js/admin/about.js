@@ -86,6 +86,7 @@ admin.about = {
       type: 'head',
       error: function () {
         $('#updateCheck').html('<font style="color: #e94c89">版本更新检查失败，网络错误或该版本为内测版本。</font>');
+        $('#loadMsg').text('');
       },
       success: function () {
         console.info('当前版本在数据库中存在！查询新版本...');
@@ -130,9 +131,9 @@ admin.about = {
         } else {
           $('#updateCheck').html('<font style="color: #991a1a">菠萝博客 v' + finalVersion.replace('_', '.') + ' 已推出，赶快更新吧！</font>');
         }
+        $('#loadMsg').text('');
       }
     })
-    $('#loadMsg').text('')
   },
 }
 

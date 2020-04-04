@@ -57,7 +57,14 @@
 <details open>
 <summary>v1.7 稳定版</summary>
 
-* 暂无
+新版亮点
+
+* 版本更新检测，不用手动检测了
+* 大量简化，降低「内容侵略性」
+
+边边角角
+
+* 登录、搜索界面 CDN 化，修改缓存策略
 </details>
 
 <details>

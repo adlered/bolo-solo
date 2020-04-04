@@ -118,7 +118,6 @@ admin.about = {
             error: function () {
               console.info('版本 v' + rollback.replace('_', '.') + ' 不存在，停止遍历');
               hasNext = false;
-              $('#loadMsg').text('')
             },
             success: function () {
               finalVersion = rollback;
@@ -133,6 +132,7 @@ admin.about = {
         }
       }
     })
+    $('#loadMsg').text('')
   },
 }
 

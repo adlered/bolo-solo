@@ -98,7 +98,8 @@ function miniAdmin () {
     './src/main/webapp/js/admin/plugin.js',
     './src/main/webapp/js/admin/main.js',
     './src/main/webapp/js/admin/about.js',
-    './src/main/webapp/js/admin/toolBox.js']
+    './src/main/webapp/js/admin/toolBox.js',
+    './src/main/webapp/js/admin/usite.js']
   return gulp.src(jsJqueryUpload).
   pipe(terser({
     output: {

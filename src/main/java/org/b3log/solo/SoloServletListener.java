@@ -338,7 +338,6 @@ public final class SoloServletListener extends AbstractServletListener {
         final AdminConsole adminConsole = beanManager.getReference(AdminConsole.class);
         DispatcherServlet.get("/admin-index.do", adminConsole::showAdminIndex);
         DispatcherServlet.get("/admin-preference.do", adminConsole::showAdminPreferenceFunction);
-        DispatcherServlet.get("/admin-tool-box.do", adminConsole::showAdminToolBoxFunction);
         DispatcherServlet.route().get(new String[]{"/admin-article.do",
                 "/admin-article-list.do",
                 "/admin-comment-list.do",
@@ -351,7 +350,9 @@ public final class SoloServletListener extends AbstractServletListener {
                 "/admin-theme-list.do",
                 "/admin-plugin-list.do",
                 "/admin-main.do",
-                "/admin-about.do"}, adminConsole::showAdminFunctions);
+                "/admin-about.do",
+                "/admin-tool-box.do",
+                "/admin-usite.do"}, adminConsole::showAdminFunctions);
         DispatcherServlet.get("/console/export/sql", adminConsole::exportSQL);
         DispatcherServlet.get("/console/export/json", adminConsole::exportJSON);
         DispatcherServlet.get("/console/export/hexo", adminConsole::exportHexo);

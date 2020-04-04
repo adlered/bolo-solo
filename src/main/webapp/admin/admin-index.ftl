@@ -97,6 +97,11 @@
                                 </div>
                             </li>
                             <li>
+                                <div id="tabs_usite">
+                                    <a href="#tools/usite">${usiteLabel}</a>
+                                </div>
+                            </li>
+                            <li>
                                 <div id="tabs_preference">
                                     <a href="#tools/preference">${preferenceLabel}</a>
                                 </div>
@@ -164,6 +169,7 @@
                 <div id="tabsPanel_plugin-list" class="fn__none"></div>
                 <div id="tabsPanel_about" class="fn__none"></div>
                 <div id="tabsPanel_tool-box" class="fn__none"></div>
+                <div id="tabsPanel_usite" class="fn__none"></div>
             </div>
             <div class="fn__clear"></div>
             <div class="footer">
@@ -194,6 +200,7 @@
         <script src="${staticServePath}/js/admin/about.js"></script>
         <script src="${staticServePath}/js/admin/themeList.js"></script>
         <script src="${staticServePath}/js/admin/toolBox.js"></script>
+        <script src="${staticServePath}/js/admin/usite.js"></script>
         <#else>
         <script src="${staticServePath}/js/admin/admin.js?${staticResourceVersion}"></script>
         </#if>

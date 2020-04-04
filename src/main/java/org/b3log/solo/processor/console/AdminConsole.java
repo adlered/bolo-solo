@@ -244,24 +244,6 @@ public class AdminConsole {
     }
 
     /**
-     * Shows Bolo tool box preference function with the specified context.
-     *
-     * @param context the specified context
-     */
-    public void showAdminToolBoxFunction(final RequestContext context) {
-        final String templateName = "admin-tool-box.ftl";
-        final AbstractFreeMarkerRenderer renderer = new ConsoleRenderer(context, templateName);
-
-        final Locale locale = Latkes.getLocale();
-        final Map<String, String> langs = langPropsService.getAll(locale);
-        final Map<String, Object> dataModel = renderer.getDataModel();
-        dataModel.putAll(langs);
-        dataModel.put(Option.ID_C_LOCALE_STRING, locale.toString());
-
-        fireFreeMarkerActionEvent(templateName, dataModel);
-    }
-
-    /**
      * Exports data as SQL zip file.
      *
      * @param context the specified request context

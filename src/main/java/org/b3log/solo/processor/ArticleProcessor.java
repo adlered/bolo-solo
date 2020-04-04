@@ -232,6 +232,7 @@ public class ArticleProcessor {
         final JSONObject preference = optionQueryService.getPreference();
         dataModel.put(Option.ID_C_BLOG_TITLE, preference.getString(Option.ID_C_BLOG_TITLE));
         dataModel.put(Common.VERSION, SoloServletListener.VERSION);
+        dataModel.put(Common.BOLO_VERSION, SoloServletListener.BOLO_VERSION);
         dataModel.put(Common.STATIC_RESOURCE_VERSION, Latkes.getStaticResourceVersion());
         dataModel.put(Common.YEAR, String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
 

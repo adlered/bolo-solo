@@ -162,7 +162,7 @@ public class SearchProcessor {
 
             dataModel.put(Article.ARTICLES, Collections.emptyList());
         } finally {
-            dataModel.put("boloVersion", SoloServletListener.BOLO_VERSION);
+            dataModel.put(Common.BOLO_VERSION, SoloServletListener.BOLO_VERSION);
         }
     }
 }

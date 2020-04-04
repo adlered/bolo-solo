@@ -1,10 +1,10 @@
 package org.b3log.solo.log4j;
 
 import org.apache.log4j.AppenderSkeleton;
-import org.apache.log4j.Layout;
 import org.apache.log4j.spi.LoggingEvent;
 import org.b3log.solo.bolo.tool.FixSizeLinkedList;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,23 +17,30 @@ import java.util.Map;
  **/
 public class RamAppender extends AppenderSkeleton {
     // 定长列表
-    public static FixSizeLinkedList<Map<String,Object>> list = new FixSizeLinkedList<>(10);
+    public static FixSizeLinkedList<Map<String,Object>> list = new FixSizeLinkedList<>(16);
 
     public static FixSizeLinkedList<Map<String, Object>> getList() {
         return list;
     }
 
+    public static long id = 0;
+
     @Override
     protected void append(LoggingEvent loggingEvent) {
         final Map<String,Object> map = new HashMap<>();
         map.put("name", loggingEvent.getLoggerName());
-        map.put("date", new Date(loggingEvent.getTimeStamp()));
+        map.put("date", new SimpleDateFormat("yyyy-MM-dd HH:ss:SS").format(new Date(loggingEvent.getTimeStamp())));
         map.put("level", loggingEvent.getLevel().toString());
-        map.put("thread", loggingEvent.getThreadName());
         map.put("message", "" + loggingEvent.getMessage());
         map.put("methodName", loggingEvent.getLocationInformation().getMethodName());
         map.put("lineNumber", loggingEvent.getLocationInformation().getLineNumber());
         map.put("freeMemory", Runtime.getRuntime().freeMemory());
+
+        map.put("id", id);
+        if (id == Long.MAX_VALUE) {
+            id = 0;
+        }
+        ++id;
 
         map.put("throwable", null);
         if(loggingEvent.getThrowableInformation()!=null && loggingEvent.getThrowableInformation().getThrowable()!=null){

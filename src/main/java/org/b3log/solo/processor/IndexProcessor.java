@@ -36,6 +36,8 @@ import org.b3log.latke.util.Locales;
 import org.b3log.latke.util.Paginator;
 import org.b3log.latke.util.URLs;
 import org.b3log.solo.SoloServletListener;
+import org.b3log.solo.bolo.tool.FixSizeLinkedList;
+import org.b3log.solo.log4j.RamAppender;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.service.DataModelService;
@@ -256,5 +258,22 @@ public class IndexProcessor {
      */
     private boolean isInternalLinks(final String destinationURL) {
         return destinationURL.startsWith(Latkes.getServePath());
+    }
+
+    /**
+     * Get logs.
+     */
+    @RequestProcessing(value = "/admin/logs", method = HttpMethod.GET)
+    public void logs(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
+
+        FixSizeLinkedList<Map<String, Object>> list = RamAppender.getList();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("result", list);
+        context.renderJSON(jsonObject);
     }
 }

@@ -24,6 +24,7 @@
  */
 
 /* others 相关操作 */
+var last = -1;
 admin.others = {
   /*
    * @description 初始化
@@ -31,6 +32,70 @@ admin.others = {
   init: function () {
     $("#tabOthers").tabs();
     $('#loadMsg').text('')
+
+    clearInterval(admin.others.intervalId)
+    admin.others.intervalId = setInterval(() => {
+      admin.others.getLog(false)
+    }, 1000)
+    admin.others.getLog(true)
+  },
+
+  getLog: (first) => {
+    if (first) {
+      $.ajax({
+        url: Label.servePath + '/admin/logs',
+        cache: false,
+        timeout: 3000,
+        success: function (result) {
+          var json = result.result;
+          for (var i = 0; i < json.length; i++) {
+            var r = json[i];
+            var rId = r.id;
+            var rDate = r.date;
+            var rLevel = r.level;
+            var rSrc = r.name + ':' + r.lineNumber;
+            var msg = r.message;
+            var res = '[ ' + rLevel + ' ] [ ' + rDate + ' ' + rSrc + ' ] ' + msg + '\n';
+            $('#memFree').html((r.freeMemory / (1024 * 1024)).toFixed(2) + ' MB');
+            if (r.throwable !== undefined) {
+              res += r.throwable.class + ': ' + r.throwable.message + '\n';
+              for (var j = 0; j < r.throwable.stackTrace.length; j++) {
+                res += r.throwable.stackTrace[j] + '\n';
+              }
+            }
+            $('#tabOthersPanel_log textarea').append(res);
+            last = rId;
+          }
+        },
+      })
+    } else {
+      $.ajax({
+        url: Label.servePath + '/admin/logs',
+        cache: false,
+        timeout: 3000,
+        success: function (result) {
+          var json = result.result;
+          var r = json[json.length - 1];
+          var rId = r.id;
+          if (rId !== last) {
+            var rDate = r.date;
+            var rLevel = r.level;
+            var rSrc = r.name + ':' + r.lineNumber;
+            var msg = r.message;
+            var res = '[ ' + rLevel + ' ] [ ' + rDate + ' ' + rSrc + ' ] ' + msg  + '\n';
+            $('#memFree').html((r.freeMemory / (1024 * 1024)).toFixed(2) + ' MB');
+            if (r.throwable !== undefined) {
+              res += r.throwable.class + ': ' + r.throwable.message + '\n';
+              for (var j = 0; j < r.throwable.stackTrace.length; j++) {
+                res += r.throwable.stackTrace[j] + '\n';
+              }
+            }
+            $('#tabOthersPanel_log textarea').append(res);
+          }
+          last = rId;
+        },
+      })
+    }
   },
   /*
    * @description 移除未使用的存档

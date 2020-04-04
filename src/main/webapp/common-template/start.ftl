@@ -23,11 +23,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-    <link href="${staticServePath}/js/bolo/start-style/css/font.css" rel="stylesheet" />
-    <link rel="stylesheet" href="${staticServePath}/js/bolo/start-style/css/font-awesome.min.css" />
-    <link href="${staticServePath}/js/bolo/start-style/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="${staticServePath}/js/bolo/start-style/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
-    <link href="${staticServePath}/js/bolo/start-style/css/demo.css" rel="stylesheet" />
+    <link href="https://ftp.stackoverflow.wiki/bolo/start/css/font.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://ftp.stackoverflow.wiki/bolo/start/css/font-awesome.min.css" />
+    <link href="https://ftp.stackoverflow.wiki/bolo/start/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://ftp.stackoverflow.wiki/bolo/start/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
+    <link href="https://ftp.stackoverflow.wiki/bolo/start/css/demo.css" rel="stylesheet" />
     <link rel="icon" type="image/png" href="${faviconURL}"/>
     <link rel="apple-touch-icon" href="${faviconURL}">
     <link rel="shortcut icon" type="image/x-icon" href="${faviconURL}">
@@ -62,7 +62,7 @@
             <ul class="navbar-nav">
                 <li>
                     <a class="nav-link" rel="tooltip" title="中国智造" data-placement="bottom" href="https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD/1122445" target="_blank">
-                        <img src="${staticServePath}/js/bolo/start-style/img/flags/CN.png" />
+                        <img src="https://ftp.stackoverflow.wiki/bolo/start/img/flags/CN.png" />
                         <p class="d-lg-none d-xl-none">中国智造</p>
                     </a>
                 </li>
@@ -83,7 +83,7 @@
     </div>
 </nav>
 <div class="page-header" filter-color="orange">
-    <div class="page-header-image" style="background-image:url(https://ftp.stackoverflow.wiki/bolo/bg.png)"></div>
+    <div class="page-header-image" id="bgHeader"></div>
     <div class="container">
         <div class="col-md-4 content-center">
             <div class="card card-login card-plain">
@@ -145,15 +145,17 @@
     </footer>
 </div>
 </body>
-<script src="${staticServePath}/js/bolo/start-style/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-<script src="${staticServePath}/js/bolo/start-style/js/core/popper.min.js" type="text/javascript"></script>
-<script src="${staticServePath}/js/bolo/start-style/js/core/bootstrap.min.js" type="text/javascript"></script>
-<script src="${staticServePath}/js/bolo/start-style/js/plugins/bootstrap-switch.js"></script>
-<script src="${staticServePath}/js/bolo/start-style/js/plugins/nouislider.min.js" type="text/javascript"></script>
-<script src="${staticServePath}/js/bolo/start-style/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
-<script src="${staticServePath}/js/bolo/start-style/js/plugins/jquery.sharrre.js" type="text/javascript"></script>
-<script src="${staticServePath}/js/bolo/start-style/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
-<script>
-    $('#description').load('https://ftp.stackoverflow.wiki/bolo/description.html');
+<script src="https://ftp.stackoverflow.wiki/bolo/start/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="https://ftp.stackoverflow.wiki/bolo/start/js/core/popper.min.js" type="text/javascript"></script>
+<script src="https://ftp.stackoverflow.wiki/bolo/start/js/core/bootstrap.min.js" type="text/javascript"></script>
+<script src="https://ftp.stackoverflow.wiki/bolo/start/js/plugins/bootstrap-switch.js"></script>
+<script src="https://ftp.stackoverflow.wiki/bolo/start/js/plugins/nouislider.min.js" type="text/javascript"></script>
+<script src="https://ftp.stackoverflow.wiki/bolo/start/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="https://ftp.stackoverflow.wiki/bolo/start/js/plugins/jquery.sharrre.js" type="text/javascript"></script>
+<script src="https://ftp.stackoverflow.wiki/bolo/start/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+<script type="text/javascript">
+    var timeStamp = Date.parse(new Date());
+    $('#description').load('https://programmingwithlove.stackoverflow.wiki/loginDescription?version=' + timeStamp);
+    $('#bgHeader').prop('style', 'background-image:url(https://programmingwithlove.stackoverflow.wiki/loginBg?version=' + timeStamp + ')');
 </script>
 </html>

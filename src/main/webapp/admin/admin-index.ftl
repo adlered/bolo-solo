@@ -172,6 +172,9 @@
                 <div id="tabsPanel_usite" class="fn__none"></div>
             </div>
             <div class="fn__clear"></div>
+            <script type="text/javascript">
+                var boloVersion = '${boloVersion}';
+            </script>
             <div class="footer">
                 Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a> <span id="version">${boloVersion}</span>
             </div>

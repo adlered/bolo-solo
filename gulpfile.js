@@ -115,7 +115,9 @@ function miniAdminLibs () {
   // concat js
   const jsJqueryUpload = [
     './src/main/webapp/js/lib/jquery/jquery.min.js',
-    './src/main/webapp/js/lib/jquery/jquery.bowknot.min.js']
+    './src/main/webapp/js/lib/jquery/jquery.bowknot.min.js',
+    './src/main/webapp/js/lib/jquery/jquery.showtips.js',
+    './src/main/webapp/js/lib/jquery/jquery.cookie.min.js' ]
   return gulp.src(jsJqueryUpload).
   pipe(terser({
     output: {

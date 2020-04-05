@@ -30,7 +30,12 @@
         </div>
     </div>
 </div>
-<script>
+<style>
+    .tripscon {
+        padding: 10px 10px 10px 10px;
+    }
+</style>
+<script type="text/javascript">
     var key = 'neverShowVer';
 
     $(function () {

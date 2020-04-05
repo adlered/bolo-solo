@@ -37,6 +37,9 @@ import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -167,6 +170,27 @@ public class UserTemplateProcessor {
             usiteOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_HACPAI);
         }
         String usite = context.requestJSON().toString();
+
+        // Usite 合法性检测
+        try {
+            JSONObject usiteObject = new JSONObject(usite);
+            List<String> usiteList = new ArrayList<>();
+            Collections.addAll(usiteList, "usiteUserId", "usiteWeiBo", "usiteQQMusic", "usiteStackOverflow", "usiteDribbble", "usiteGitHub", "usiteMedium", "usiteTwitter", "usiteQQ", "usiteLinkedIn", "usiteSteam", "oId", "usiteInstagram", "usiteCodePen", "usiteWYMusic", "usiteWeChat", "usiteZhiHu", "usiteBehance", "usiteTelegram", "usiteFacebook");
+            for (String i : usiteList) {
+                if (!usiteObject.has(i)) {
+                    LOGGER.log(Level.ERROR, "Updates usite option failed: Invalid JSON Object.");
+                    context.renderJSON().renderCode(500);
+
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, "Updates usite option failed", e);
+            context.renderJSON().renderCode(500);
+
+            return;
+        }
+
         usiteOpt.put(Option.OPTION_VALUE, usite);
         try {
             optionMgmtService.addOrUpdateOption(usiteOpt);

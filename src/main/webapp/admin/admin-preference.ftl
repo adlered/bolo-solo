@@ -229,9 +229,9 @@
                 <summary>设置以后，我可以做什么？</summary>
                 <ul>
                     <li>
-                        1. 使用 Bolo 的编辑器的黑客派图床（其它图床不受影响）<br>
+                        1. 使用 Bolo 的编辑器的黑客派图床（<b>其它图床不受影响</b>）<br>
                         2. 与黑客派社区同步发送的文章<s>和评论</s>（黑客派已废弃评论推送接口，文章推送 / 同步不受影响）<br>
-                        3. 同步你在黑客派中的GitHub、QQ等链接（<a href="https://hacpai.com/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>
+                        3. 同步你在黑客派中的GitHub、QQ等链接（<b>也可以在工具-联系方式选项直接设置，无需配置 B3log Key。</b>如果要通过黑客派同步：<a href="https://hacpai.com/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>
                         4. 使用自动备份全部文章至黑客派功能（<a href="https://hacpai.com/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br><br>
                     </li>
                 </ul>

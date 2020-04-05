@@ -139,11 +139,18 @@ admin.usite = {
       async: false,
       dataType: 'json',
       data: $('#usiteEditor').val(),
-      success: function () {
-        $('#loadMsg').text('联系方式元数据更新成功！');
-        setTimeout(function () {
-          $('#loadMsg').text('');
-        }, 2000)
+      success: function (data) {
+        if (data.code === 200) {
+          $('#loadMsg').text('联系方式元数据更新成功！');
+          setTimeout(function () {
+            $('#loadMsg').text('');
+          }, 4000)
+        } else {
+          $('#loadMsg').text('联系方式元数据更新失败！请检查元数据内容后重试。');
+          setTimeout(function () {
+            $('#loadMsg').text('');
+          }, 4000)
+        }
       }
     });
   },

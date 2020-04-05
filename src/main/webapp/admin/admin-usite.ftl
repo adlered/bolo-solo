@@ -17,26 +17,28 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 -->
-<div>
-    <div id="linkTable"></div>
-    <div id="linkPagination" class="fn__margin12 fn__right"></div>
+<div id="tabUsite" class="sub-tabs">
+    <ul>
+        <li>
+            <div id="tabUsite_edit">
+                <a href="#tools/usite/edit">数据编辑</a>
+            </div>
+        </li>
+    </ul>
 </div>
-<div class="fn__clear"></div>
-<div class="form form__no-table">
-    联系方式
-    <label>社交媒体</label>
-    <input id="linkTitle" type="text"/>
-    <label>个人主页链接</label>
-    <input id="linkAddress" type="text"/><br><br>
-    <button onclick="admin.linkList.add();" class="fn__right">${saveLabel}</button>
-    <div class="fn__clear"></div>
-</div>
-<div id="updateLink" class="fn__none form form__no-table" data-title="${updateLinkLabel}">
-    <label>社交媒体</label>
-    <input id="linkTitleUpdate" type="text"/>
-    <label>个人主页链接</label>
-    <input id="linkAddressUpdate" type="text"/><br><br>
-    <button onclick="admin.linkList.update();" class="fn__right">${updateLabel}</button>
-    <div class="fn__clear"></div>
+<div id="tabUsitePanel" class="sub-tabs-main">
+    <div id="tabUsitePanel_edit" class="fn__none form">
+        <div class="fn__clear">
+            <button onclick="admin.usite.reset()" class="fn__right">${resetUsiteLabel}</button>
+        </div>
+        <textarea rows="24" id="usiteEditor"></textarea>
+        <div class="fn__clear">
+            <button onclick="admin.usite.update()" class="fn__right">${updateLabel}</button>
+        </div>
+        <div class="fn__clear">
+            <h3>元数据配置指南</h3>
+            <p>联系方式元数据采用 JSON 键值方式存储，<b>请勿修改表结构</b>。</p>
+        </div>
+    </div>
 </div>
 ${plugins}

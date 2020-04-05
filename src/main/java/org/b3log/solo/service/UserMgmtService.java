@@ -136,13 +136,13 @@ public class UserMgmtService {
             res.charset("UTF-8");
             final JSONObject result = new JSONObject(res.bodyText());
             if (0 != result.optInt(Keys.STATUS_CODE)) {
-                LOGGER.log(Level.ERROR, "Updates usite option failed: Invalid Username or B3log Key.");
+                LOGGER.log(Level.DEBUG, "Updates usite option failed: Invalid Username or B3log Key.");
 
                 return;
             }
             usite = result.optJSONObject(Common.DATA);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets usite failed", e);
+            LOGGER.log(Level.DEBUG, "Gets usite failed", e);
 
             return;
         }

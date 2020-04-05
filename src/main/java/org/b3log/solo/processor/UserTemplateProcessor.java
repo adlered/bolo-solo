@@ -214,10 +214,14 @@ public class UserTemplateProcessor {
             return;
         }
 
-        JSONObject usiteOpt = optionQueryService.getOptionById(Option.ID_C_USITE);
-        String usite = usiteOpt.optString(Option.OPTION_VALUE);
-
-        context.renderJSON().renderCode(200);
-        context.renderJSON().renderMsg(usite);
+        try {
+            JSONObject usiteOpt = optionQueryService.getOptionById(Option.ID_C_USITE);
+            String usite = usiteOpt.optString(Option.OPTION_VALUE);
+            context.renderJSON().renderCode(200);
+            context.renderJSON().renderMsg(usite);
+        } catch (Exception e) {
+            context.renderJSON().renderCode(500);
+            context.renderJSON().renderMsg("");
+        }
     }
 }

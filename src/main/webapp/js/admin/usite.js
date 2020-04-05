@@ -119,7 +119,11 @@ admin.usite = {
       type: 'GET',
       async: false,
       success: function (data) {
-        $('#usiteEditor').val(formatJson(data.msg));
+        if (data.msg === '') {
+          admin.usite.reset();
+        } else {
+          $('#usiteEditor').val(formatJson(data.msg));
+        }
       }
     })
   },

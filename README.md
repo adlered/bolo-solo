@@ -68,6 +68,7 @@
 
 * 登录、搜索界面 CDN 化，修改缓存策略
 * 新功能小气泡提醒
+* Fantastic 皮肤 Bug 修复
 </details>
 
 <details>

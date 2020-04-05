@@ -17,7 +17,7 @@ import java.util.Map;
  **/
 public class RamAppender extends AppenderSkeleton {
     // 定长列表
-    public static FixSizeLinkedList<Map<String,Object>> list = new FixSizeLinkedList<>(16);
+    public static FixSizeLinkedList<Map<String,Object>> list = new FixSizeLinkedList<>(22);
 
     public static FixSizeLinkedList<Map<String, Object>> getList() {
         return list;

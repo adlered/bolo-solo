@@ -49,7 +49,7 @@
         <button class="fn__margin12" onclick="admin.others.exportHexo();">${exportHexoLabel}</button>
     </div>
     <div id="tabOthersPanel_log" class="fn__none form">
-        <span style="float: left">JVM 空闲内存：<span id="memFree" style="font-weight: bold"></span></span><span style="float: right">日志浏览会动态更新控制台信息，且默认读取 16 条历史日志</span>
+        <span style="float: left">JVM 空闲内存：<span id="memFree" style="font-weight: bold"></span></span><span style="float: right">日志浏览会读取 22 条历史日志，并动态更新控制台信息</span>
         <br><br>
         <textarea rows="32" readonly></textarea>
     </div>

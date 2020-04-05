@@ -47,9 +47,6 @@
         }
         if (isShowTips) {
             showTips();
-            console.log('show');
-        } else {
-            console.log('skip');
         }
     });
 

@@ -18,7 +18,7 @@
 
 -->
 <link type="text/css" rel="stylesheet" href="https://ftp.stackoverflow.wiki/bolo/kanbanniang/index.css"/>
-<script async src="https://ftp.stackoverflow.wiki/bolo/kanbanniang/index.js"></script>
+<script async src="https://ftp.stackoverflow.wiki/bolo/kanbanniang/index.new.js"></script>
 <div class="solo-kanbanniang">
     <div class="solo-kanbanniang__tip"></div>
     <canvas id="soloKanbanniang" width="280" height="250"></canvas>

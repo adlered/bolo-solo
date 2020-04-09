@@ -127,7 +127,7 @@ public class KanBanNiangProcessor {
     }
 
     /**
-     * Returns a random model.
+     * Returns a random model (or selected).
      *
      * @param context the specified request context
      */
@@ -151,6 +151,46 @@ public class KanBanNiangProcessor {
                     model = models.getString(i);
                 }
             }
+
+            try (final InputStream modelResource = servletContext.getResourceAsStream(assets + "/model/" + model + "/index.json")) {
+                final JSONObject index = new JSONObject(IOUtils.toString(modelResource, "UTF-8"));
+                final JSONArray textures = index.optJSONArray("textures");
+                if (textures.length() == 0) {
+                    try (final InputStream texturesRes = servletContext.getResourceAsStream(assets + "/model/" + model + "/textures.json")) {
+                        final JSONArray texturesArray = new JSONArray(IOUtils.toString(texturesRes, "UTF-8"));
+                        final Object element = texturesArray.opt(RandomUtils.nextInt(texturesArray.length()));
+                        if (element instanceof JSONArray) {
+                            index.put("textures", element);
+                        } else {
+                            index.put("textures", new JSONArray().put(element));
+                        }
+                    }
+                }
+                renderer.setJSONObject(index);
+            }
+        } catch (final Exception e) {
+            LOGGER.log(Level.ERROR, "Returns a random KanBanNiang model failed.");
+        }
+    }
+    /**
+     * Returns a absolutely random model.
+     *
+     * @param context the specified request context
+     */
+    @RequestProcessing(value = "/plugins/kanbanniang/assets/absoluteRandomModel", method = HttpMethod.GET)
+    public void absolutelyRandomModel(final RequestContext context) {
+        final JsonRenderer renderer = new JsonRenderer();
+        context.setRenderer(renderer);
+        try {
+            final String assets = "/plugins/kanbanniang/assets";
+            String model;
+            final ServletContext servletContext = SoloServletListener.getServletContext();
+            try (final InputStream inputStream = servletContext.getResourceAsStream(assets + "/model-list.json")) {
+                final JSONArray models = new JSONArray(IOUtils.toString(inputStream, "UTF-8"));
+                final int i = RandomUtils.nextInt(models.length());
+                model = models.getString(i);
+            }
+
             try (final InputStream modelResource = servletContext.getResourceAsStream(assets + "/model/" + model + "/index.json")) {
                 final JSONObject index = new JSONObject(IOUtils.toString(modelResource, "UTF-8"));
                 final JSONArray textures = index.optJSONArray("textures");
@@ -172,6 +212,11 @@ public class KanBanNiangProcessor {
         }
     }
 
+    /**
+     * Get KanBanNiang skins loaded.
+     *
+     * @param context
+     */
     @RequestProcessing(value = "/plugins/kanbanniang/assets/list")
     public void kanbanniangList(final RequestContext context) {
         if (!Solos.isAdminLoggedIn(context)) {

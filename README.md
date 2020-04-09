@@ -33,8 +33,6 @@
 
 ## 文档
 
-我们已将菠萝博客的项目文档整理至文档库，提供搜索分类功能。
-
 #### [点击跳转至菠萝博客文档库：菠萝博客指引](https://doc.stackoverflow.wiki/web/#/7?page_id=46)
 
 你还可以：[访问旧版完整文档](/all-readme/README.md)

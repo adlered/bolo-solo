@@ -172,6 +172,7 @@ public class KanBanNiangProcessor {
             LOGGER.log(Level.ERROR, "Returns a random KanBanNiang model failed.");
         }
     }
+
     /**
      * Returns a absolutely random model.
      *

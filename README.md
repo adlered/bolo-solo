@@ -33,6 +33,6 @@
 
 ## 文档
 
-#### [点击跳转至菠萝博客文档库：菠萝博客指引](https://doc.stackoverflow.wiki/web/#/7?page_id=46)
+#### [点击跳转至菠萝博客文档库：菠萝博客指引](https://programmingwithlove.stackoverflow.wiki/bolodoc)
 
 你还可以：[访问旧版完整文档](/all-readme/README.md)

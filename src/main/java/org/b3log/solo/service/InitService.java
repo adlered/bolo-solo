@@ -435,23 +435,6 @@ public class InitService {
      */
     private void initLink() throws Exception {
         LOGGER.debug("Initializing link....");
-
-        JSONObject link = new JSONObject();
-        link.put(Link.LINK_TITLE, "黑客派");
-        link.put(Link.LINK_ADDRESS, "https://hacpai.com");
-        link.put(Link.LINK_DESCRIPTION, "黑客与画家的社区");
-        link.put(Link.LINK_ICON, "https://static.hacpai.com/images/favicon.png");
-        link.put(Link.LINK_ORDER, 0);
-        linkRepository.add(link);
-
-        link = new JSONObject();
-        link.put(Link.LINK_TITLE, "贼拉正经的技术博客");
-        link.put(Link.LINK_ADDRESS, "https://www.stackoverflow.wiki/blog");
-        link.put(Link.LINK_ICON, "https://www.stackoverflow.wiki/blog/images/favicon.png");
-        link.put(Link.LINK_DESCRIPTION, "菠萝博客作者");
-        link.put(Link.LINK_ORDER, 1);
-        linkRepository.add(link);
-
         LOGGER.info("Initialized link");
     }
 

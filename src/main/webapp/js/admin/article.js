@@ -93,6 +93,21 @@ admin.article = {
           }
         })
 
+        // Article create date
+        function getNowFormatDate(date) {
+          var seperator1 = "-";
+          var seperator2 = ":";
+          var month = date.getMonth() + 1<10? "0"+(date.getMonth() + 1):date.getMonth() + 1;
+          var strDate = date.getDate()<10? "0" + date.getDate():date.getDate();
+          var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+              + " " + date.getHours() + seperator2 + date.getMinutes() + seperator2 + date.getSeconds();
+          return currentdate;
+        }
+
+        var createDate = new Date();
+        createDate.setTime(result.article.articleCreated);
+        $('#createDate').val(getNowFormatDate(createDate));
+
         admin.article.setStatus()
         $('#loadMsg').text('')
       },
@@ -179,8 +194,12 @@ admin.article = {
           'category': $("#categorySelector").val(),
         },
       }
+      var created = new Date($('#createDate').val()).getTime();
+      if (!isNaN(created)) {
+        requestJSONObject.article.articleCreated = created;
+      }
 
-      $.ajax({
+        $.ajax({
         url: Label.servePath + '/console/article/',
         type: 'POST',
         cache: false,
@@ -249,6 +268,7 @@ admin.article = {
           'articleViewPwd': $('#viewPwd').val(),
           'postToCommunity': $('#postToCommunity').prop('checked'),
           'category': $("#categorySelector").val(),
+          'articleCreated': new Date($('#createDate').val()).getTime(),
         },
       }
 
@@ -487,28 +507,30 @@ admin.article = {
    * @description 取消发布
    */
   unPublish: function () {
-    var that = this
-    that._addDisabled()
-    $.ajax({
-      url: Label.servePath + '/console/article/unpublish/' +
-          admin.article.status.id,
-      type: 'PUT',
-      cache: false,
-      success: function (result, textStatus) {
-        $('#tipMsg').text(result.msg)
-        if (!result.sc) {
-          return
-        }
+    if (confirm('移至草稿箱将导致本次对文章的修改丢失，建议先点击\"发布\"将文章保存，再移至草稿箱。你确定要继续吗？')) {
+      var that = this
+      that._addDisabled()
+      $.ajax({
+        url: Label.servePath + '/console/article/unpublish/' +
+            admin.article.status.id,
+        type: 'PUT',
+        cache: false,
+        success: function (result, textStatus) {
+          $('#tipMsg').text(result.msg)
+          if (!result.sc) {
+            return
+          }
 
-        admin.selectTab('article/draft-list')
-        admin.article.status.id = undefined
-        admin.article.isConfirm = false
-      },
-      complete: function (jqXHR, textStatus) {
-        that._removeDisabled()
-        $('#loadMsg').text('')
-      },
-    })
+          admin.selectTab('article/draft-list')
+          admin.article.status.id = undefined
+          admin.article.isConfirm = false
+        },
+        complete: function (jqXHR, textStatus) {
+          that._removeDisabled()
+          $('#loadMsg').text('')
+        },
+      })
+    }
   },
   /**
    * @description 数组中无重复

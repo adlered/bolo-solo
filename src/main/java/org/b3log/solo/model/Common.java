@@ -163,6 +163,11 @@ public final class Common {
     public static final String VERSION = "version";
 
     /**
+     * Bolo version.
+     */
+    public static final String BOLO_VERSION = "boloVersion";
+
+    /**
      * Static resource version.
      */
     public static final String STATIC_RESOURCE_VERSION = "staticResourceVersion";

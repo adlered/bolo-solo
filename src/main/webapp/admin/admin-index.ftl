@@ -97,6 +97,11 @@
                                 </div>
                             </li>
                             <li>
+                                <div id="tabs_usite">
+                                    <a href="#tools/usite">${usiteLabel}</a>
+                                </div>
+                            </li>
+                            <li>
                                 <div id="tabs_preference">
                                     <a href="#tools/preference">${preferenceLabel}</a>
                                 </div>
@@ -164,10 +169,14 @@
                 <div id="tabsPanel_plugin-list" class="fn__none"></div>
                 <div id="tabsPanel_about" class="fn__none"></div>
                 <div id="tabsPanel_tool-box" class="fn__none"></div>
+                <div id="tabsPanel_usite" class="fn__none"></div>
             </div>
             <div class="fn__clear"></div>
+            <script type="text/javascript">
+                var boloVersion = '${boloVersion}';
+            </script>
             <div class="footer">
-                Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a> <span id="version">${version}</span>
+                Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a> <span id="version">${boloVersion}</span>
             </div>
         </div>
         <script src="${staticServePath}/js/lib/compress/admin-lib.min.js"></script>
@@ -194,6 +203,7 @@
         <script src="${staticServePath}/js/admin/about.js"></script>
         <script src="${staticServePath}/js/admin/themeList.js"></script>
         <script src="${staticServePath}/js/admin/toolBox.js"></script>
+        <script src="${staticServePath}/js/admin/usite.js"></script>
         <#else>
         <script src="${staticServePath}/js/admin/admin.js?${staticResourceVersion}"></script>
         </#if>

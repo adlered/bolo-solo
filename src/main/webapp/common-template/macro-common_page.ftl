@@ -42,7 +42,7 @@
     </div>
     <div class="footerWrapper">
         <div class="footer">
-            Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a> ${version}
+            Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a> ${boloVersion}
         </div>
     </div>
 </div>

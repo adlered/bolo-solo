@@ -283,7 +283,7 @@ public class DataModelService {
     public void fillTags(final Map<String, Object> dataModel) throws ServiceException {
         Stopwatchs.start("Fill Tags");
         try {
-            final List<JSONObject> tags = tagQueryService.getTags();
+            final List<JSONObject> tags = tagQueryService.getTagsOfPublishedArticles();
             dataModel.put(Tag.TAGS, tags);
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Fills tags failed", e);
@@ -649,6 +649,7 @@ public class DataModelService {
             dataModel.put(Option.ID_C_BLOG_TITLE, blogTitle);
             dataModel.put("blogHost", Latkes.getServePath());
             dataModel.put(Common.VERSION, SoloServletListener.VERSION);
+            dataModel.put(Common.BOLO_VERSION, SoloServletListener.BOLO_VERSION);
             dataModel.put(Common.STATIC_RESOURCE_VERSION, Latkes.getStaticResourceVersion());
             dataModel.put(Common.YEAR, String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
             String footerContent = "";

@@ -141,6 +141,7 @@ public class AdminConsole {
             dataModel.put(Option.ID_C_BLOG_TITLE, preference.getString(Option.ID_C_BLOG_TITLE));
             dataModel.put(Option.ID_C_BLOG_SUBTITLE, preference.getString(Option.ID_C_BLOG_SUBTITLE));
             dataModel.put(Common.VERSION, SoloServletListener.VERSION);
+            dataModel.put(Common.BOLO_VERSION, SoloServletListener.BOLO_VERSION);
             dataModel.put(Common.STATIC_RESOURCE_VERSION, Latkes.getStaticResourceVersion());
             dataModel.put(Common.YEAR, String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
             dataModel.put(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT, preference.getInt(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT));
@@ -202,7 +203,7 @@ public class AdminConsole {
         }
 
         // Bolo version
-        dataModel.put("boloVersion", SoloServletListener.BOLO_VERSION);
+        dataModel.put(Common.BOLO_VERSION, SoloServletListener.BOLO_VERSION);
 
         fireFreeMarkerActionEvent(templateName, dataModel);
     }
@@ -239,24 +240,6 @@ public class AdminConsole {
         }
 
         dataModel.put("timeZoneIdOptions", timeZoneIdOptions.toString());
-        fireFreeMarkerActionEvent(templateName, dataModel);
-    }
-
-    /**
-     * Shows Bolo tool box preference function with the specified context.
-     *
-     * @param context the specified context
-     */
-    public void showAdminToolBoxFunction(final RequestContext context) {
-        final String templateName = "admin-tool-box.ftl";
-        final AbstractFreeMarkerRenderer renderer = new ConsoleRenderer(context, templateName);
-
-        final Locale locale = Latkes.getLocale();
-        final Map<String, String> langs = langPropsService.getAll(locale);
-        final Map<String, Object> dataModel = renderer.getDataModel();
-        dataModel.putAll(langs);
-        dataModel.put(Option.ID_C_LOCALE_STRING, locale.toString());
-
         fireFreeMarkerActionEvent(templateName, dataModel);
     }
 

@@ -30,14 +30,16 @@ import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.AbstractFreeMarkerRenderer;
 import org.b3log.latke.util.Locales;
 import org.b3log.solo.model.Option;
-import org.b3log.solo.service.DataModelService;
-import org.b3log.solo.service.OptionQueryService;
-import org.b3log.solo.service.StatisticMgmtService;
+import org.b3log.solo.service.*;
 import org.b3log.solo.util.Skins;
+import org.b3log.solo.util.Solos;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -84,6 +86,18 @@ public class UserTemplateProcessor {
     private OptionQueryService optionQueryService;
 
     /**
+     * User management service.
+     */
+    @Inject
+    private UserMgmtService userMgmtService;
+
+    /**
+     * Option management service.
+     */
+    @Inject
+    private OptionMgmtService optionMgmtService;
+
+    /**
      * Shows the user template page.
      *
      * @param context the specified context
@@ -120,6 +134,94 @@ public class UserTemplateProcessor {
             LOGGER.log(Level.ERROR, e.getMessage(), e);
 
             context.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+
+    /**
+     * Refresh usite from hacpai.
+     * @param context
+     */
+    @RequestProcessing(value = "/admin/usite/refresh", method = HttpMethod.GET)
+    public void refreshUsite(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
+
+        userMgmtService.refreshUSite();
+
+        context.renderJSON().renderCode(200);
+        context.renderJSON().renderMsg("OK");
+    }
+
+    @RequestProcessing(value = "/admin/usite/set", method = HttpMethod.POST)
+    public void setUsite(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
+
+        JSONObject usiteOpt = optionQueryService.getOptionById(Option.ID_C_USITE);
+        if (null == usiteOpt) {
+            usiteOpt = new JSONObject();
+            usiteOpt.put(Keys.OBJECT_ID, Option.ID_C_USITE);
+            usiteOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_HACPAI);
+        }
+        String usite = context.requestJSON().toString();
+
+        // Usite 合法性检测
+        try {
+            JSONObject usiteObject = new JSONObject(usite);
+            List<String> usiteList = new ArrayList<>();
+            Collections.addAll(usiteList, "usiteUserId", "usiteWeiBo", "usiteQQMusic", "usiteStackOverflow", "usiteDribbble", "usiteGitHub", "usiteMedium", "usiteTwitter", "usiteQQ", "usiteLinkedIn", "usiteSteam", "oId", "usiteInstagram", "usiteCodePen", "usiteWYMusic", "usiteWeChat", "usiteZhiHu", "usiteBehance", "usiteTelegram", "usiteFacebook");
+            for (String i : usiteList) {
+                if (!usiteObject.has(i)) {
+                    LOGGER.log(Level.ERROR, "Updates usite option failed: Invalid JSON Object.");
+                    context.renderJSON().renderCode(500);
+
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, "Updates usite option failed", e);
+            context.renderJSON().renderCode(500);
+
+            return;
+        }
+
+        usiteOpt.put(Option.OPTION_VALUE, usite);
+        try {
+            optionMgmtService.addOrUpdateOption(usiteOpt);
+            LOGGER.log(Level.INFO, "Usite refresh from Local successful: " + usite);
+            context.renderJSON().renderCode(200);
+
+            return;
+        } catch (final Exception e) {
+            LOGGER.log(Level.ERROR, "Updates usite option failed", e);
+            context.renderJSON().renderCode(500);
+
+            return;
+        }
+    }
+
+    @RequestProcessing(value = "/admin/usite/get", method = HttpMethod.GET)
+    public void getUsite(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
+
+        try {
+            JSONObject usiteOpt = optionQueryService.getOptionById(Option.ID_C_USITE);
+            String usite = usiteOpt.optString(Option.OPTION_VALUE);
+            context.renderJSON().renderCode(200);
+            context.renderJSON().renderMsg(usite);
+        } catch (Exception e) {
+            context.renderJSON().renderCode(500);
+            context.renderJSON().renderMsg("");
         }
     }
 }

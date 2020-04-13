@@ -145,4 +145,17 @@ public class TagQueryService {
             throw new ServiceException(e);
         }
     }
+
+    /**
+     * Gets tags of the published articles
+     *
+     * @return tags list
+     * @throws ServiceException service exception
+     */
+    public List<JSONObject> getTagsOfPublishedArticles() throws ServiceException {
+        final List<JSONObject> ret = getTags();
+        ret.removeIf(tag -> tagArticleRepository.getPublishedArticleCount(tag.optString(Keys.OBJECT_ID)) < 1);
+
+        return ret;
+    }
 }

@@ -30,6 +30,47 @@
         </div>
     </div>
 </div>
+<style>
+    .tripscon {
+        padding: 10px 10px 10px 10px;
+    }
+</style>
+<script type="text/javascript">
+    var key = 'neverShowVer';
+
+    $(function () {
+        var isShowTips = true;
+        if ($.cookie(key)) {
+            if ($.cookie(key) === boloVersion) {
+                isShowTips = false;
+            }
+        }
+        if (isShowTips) {
+            showTips();
+        }
+    });
+
+    function neverShowTips() {
+        $.removeCookie(key);
+        $.cookie(key, boloVersion, { expires: 222, path: '/' });
+        $('.trips').remove();
+
+    }
+
+    function showTips() {
+        var config = {
+            content: "新增 <b>联系方式自定义</b>、<b>其他-日志浏览</b> 功能<br>" +
+                "更方便实用，快来体验吧！<br>" +
+                "<a href='javascript:neverShowTips()'>不再提醒</a>",
+            type: "html",
+            alignTo: ["right","top"],
+            trigger: "show",
+            isclose: false,
+            color: ["#B2E281","#B2E281"]
+        };
+        $("#tabToolsTitle").showTips(config);
+    }
+</script>
 <div id="mainPanel1">
 </div>
 <div id="mainPanel2"></div>

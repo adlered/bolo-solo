@@ -29,10 +29,9 @@
 ![Sakura 皮肤 - 文章页](/preview/2.png)
 ![Fantastic 皮肤 - 主页](/preview/3.png)
 ![Fantastic 皮肤 - 文章页](/preview/4.png)
-![后台管理主页](/preview/5.png)
 
 ## 文档
 
-#### [点击跳转至菠萝博客文档库：菠萝博客指引](https://programmingwithlove.stackoverflow.wiki/bolodoc)
+### [开始使用：菠萝博客用户指南](https://programmingwithlove.stackoverflow.wiki/bolodoc)
 
 你还可以：[访问旧版完整文档](/all-readme/README.md)

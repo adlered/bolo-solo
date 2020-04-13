@@ -41,8 +41,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static org.b3log.solo.model.Article.*;
@@ -876,7 +878,17 @@ public class ArticleMgmtService {
      */
     private void fillAutoProperties(final JSONObject oldArticle, final JSONObject article) throws JSONException {
         final long created = oldArticle.getLong(ARTICLE_CREATED);
-        article.put(ARTICLE_CREATED, created);
+        try {
+            final long newCreated = article.getLong(ARTICLE_CREATED);
+            // 测试时间戳是否合法
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String newDate = simpleDateFormat.format(new Date(newCreated));
+            LOGGER.log(Level.INFO, "New article date: " + newDate);
+            article.put(ARTICLE_CREATED, newCreated);
+        } catch (Exception e) {
+            LOGGER.log(Level.ERROR, "Customize article create time: timestamp syntax error, using earlier...");
+            article.put(ARTICLE_CREATED, created);
+        }
         article.put(ARTICLE_COMMENT_COUNT, oldArticle.getInt(ARTICLE_COMMENT_COUNT));
         article.put(ARTICLE_VIEW_COUNT, oldArticle.getInt(ARTICLE_VIEW_COUNT));
         article.put(ARTICLE_PUT_TOP, oldArticle.getBoolean(ARTICLE_PUT_TOP));

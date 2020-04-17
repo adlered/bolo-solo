@@ -205,7 +205,7 @@
         <script src="${staticServePath}/js/admin/toolBox.js"></script>
         <script src="${staticServePath}/js/admin/usite.js"></script>
         <#else>
-        <script src="${staticServePath}/js/admin/admin.js?${staticResourceVersion}"></script>
+        <script src="${staticServePath}/js/admin/admin.min.js?${staticResourceVersion}"></script>
         </#if>
         <#include "admin-label.ftl">
         ${plugins}

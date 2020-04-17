@@ -106,7 +106,7 @@ function miniAdmin () {
       ascii_only: true,
     },
   })).
-  pipe(concat('admin.js')).
+  pipe(concat('admin.min.js')).
   pipe(gulp.dest('./src/main/webapp/js/admin'))
 
 }

@@ -1,5 +1,5 @@
 <p align = "center">
-<img alt="Bolo" src="bolo-logo-256.png">
+<img alt="Bolo" src="bolo-logo-256.png" height="128px" width="128px">
 <br><br>
 菠萝博客，使用 Java 编写，专为程序员设计
 <br><br>

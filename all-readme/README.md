@@ -325,19 +325,19 @@ VALUES
 
 菠萝博客当前支持且预置的皮肤：
 
-1. `V1.0` 及以上版本：solo-nexmoe → bolo-nexmoe
-2. `V1.1` 及以上版本：emiya -> bolo-emiya
-3. `V1.1` 及以上版本：bubble -> bolo-bubble
-4. `V1.1` 及以上版本：casper -> bolo-casper
-5. `V1.1` 及以上版本：pinghsu -> bolo-pinghsu
-6. `V1.4` 及以上版本：9IPHP -> bolo-9IPHP
-7. `V1.4` 及以上版本：Jane -> bolo-Jane
-8. `V1.4` 及以上版本：NeoEase -> bolo-NeoEase
-9. `V1.4` 及以上版本：next -> bolo-next
-10. `V1.4` 及以上版本：nijigen ->  bolo-nijigen
-11. `V1.4` 及以上版本：yilia -> bolo-yilia
-12. `V1.6` 及以上版本：Sakura -> bolo-sakura 菠萝博客团队**全新**移植自 WordPress 平台，菠萝博客首发
-13. `V1.6` 及以上版本：Fantastic -> bolo-fantastic 菠萝博客团队**全新**移植自 Halo 平台，菠萝博客首发
+1. `V1.0` 及以上版本：solo-nexmoe → bolo-nexmoe [皮肤预览](https://demo.stackoverflow.wiki?skin=bolo-nexmoe)
+2. `V1.1` 及以上版本：emiya -> bolo-emiya [皮肤预览](https://demo.stackoverflow.wiki?skin=bolo-emiya)
+3. `V1.1` 及以上版本：bubble -> bolo-bubble [皮肤预览](https://demo.stackoverflow.wiki?skin=bolo-bubble)
+4. `V1.1` 及以上版本：casper -> bolo-casper [皮肤预览](https://demo.stackoverflow.wiki?skin=bolo-casper)
+5. `V1.1` 及以上版本：pinghsu -> bolo-pinghsu [皮肤预览](https://demo.stackoverflow.wiki?skin=bolo-pinghsu)
+6. `V1.4` 及以上版本：9IPHP -> bolo-9IPHP [皮肤预览](https://demo.stackoverflow.wiki?skin=bolo-9IPHP)
+7. `V1.4` 及以上版本：Jane -> bolo-Jane [皮肤预览](https://demo.stackoverflow.wiki?skin=bolo-Jane)
+8. `V1.4` 及以上版本：NeoEase -> bolo-NeoEase [皮肤预览](https://demo.stackoverflow.wiki?skin=bolo-NeoEase)
+9. `V1.4` 及以上版本：next -> bolo-next [皮肤预览](https://demo.stackoverflow.wiki?skin=bolo-next)
+10. `V1.4` 及以上版本：nijigen ->  bolo-nijigen [皮肤预览](https://demo.stackoverflow.wiki?skin=bolo-nijigen)
+11. `V1.4` 及以上版本：yilia -> bolo-yilia [皮肤预览](https://demo.stackoverflow.wiki?skin=bolo-yilia)
+12. `V1.6` 及以上版本：Sakura -> bolo-sakura `首发！` [皮肤介绍](https://www.stackoverflow.wiki/blog/articles/2020/03/28/1585384897191.html) [皮肤预览](https://demo.stackoverflow.wiki?skin=bolo-sakura)
+13. `V1.6` 及以上版本：Fantastic -> bolo-fantastic `首发！` [皮肤介绍](https://sszsj.top/articles/2020/04/06/1586156153265.html) [皮肤预览](https://demo.stackoverflow.wiki?skin=bolo-fantastic)
 
 # 其它帮助信息
 

@@ -77,7 +77,7 @@
                                 <div class="level-left">
                                     <time
                                         class="level-item has-text-grey">${article.articleUpdateDate?string("yyyy年MM月dd日")}</time>
-                                    <#if article.categoryURI??>
+                                    <#if article.articleCategory != "">
                                         <a class="has-link-black-ter"
                                             href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a>
                                     </#if>

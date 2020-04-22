@@ -59,7 +59,7 @@
                 <#setting locale="en_US">
                 ${article.articleUpdateDate?string["MMM d, yyyy"]}
             </time>
-            <#if article.category??>
+            <#if article.articleCategory != "">
                 in <a href="${servePath}/category/${article.category.categoryURI}">${article.category.categoryTitle}</a>
             </#if>
             with ${article.articleViewCount} views

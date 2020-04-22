@@ -60,7 +60,7 @@
                 ${article.articleUpdateDate?string["MMM d, yyyy"]}
             </time>
             <#if article.articleCategory != "">
-                in <a href="${servePath}/category/${article.category.categoryURI}">${article.category.categoryTitle}</a>
+                in <a href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a>
             </#if>
             with ${article.articleViewCount} views
             <#if article.articleCommentCount != 0>

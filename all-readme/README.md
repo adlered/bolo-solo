@@ -49,12 +49,18 @@
 
 ### :tada: 菠萝版本信息
 
-菠萝当前版本：v1.7 稳定版  
+菠萝当前版本：v1.8 稳定版  
 
 > 菠萝博客将保持每两个版本更新一款新皮肤，敬请期待！
 
 ### 更新日志
 <details open>
+<summary>v1.8 稳定版</summary>
+
+新版亮点
+</details>
+
+<details>
 <summary>v1.7 稳定版</summary>
 
 🏆 里程碑

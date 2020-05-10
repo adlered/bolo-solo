@@ -18,7 +18,7 @@
 
 -->
 <style>
-    iframe {
+    #broadcast {
         display: block;
         height: 550px;
         width: 100%;
@@ -31,7 +31,7 @@
         </div>
         <div class="module-body padding12">
             <div id="noticeList" style="background: none;">
-                <iframe src="https://ftp.stackoverflow.wiki/bolo/notice.html" frameborder="no" border="0" scrolling="auto"></iframe>
+                <iframe id="broadcast" src="https://ftp.stackoverflow.wiki/bolo/notice.html" frameborder="no" border="0" scrolling="auto"></iframe>
             </div>
         </div>
     </div>

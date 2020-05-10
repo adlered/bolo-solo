@@ -110,7 +110,7 @@
                         break;
                     case 'aliyun':
                         $('#td1').show();
-                        $('#td1').html('Bolo 支持阿里云图床。AccessKey 信息可以从 AccessKey 管理中找到，必须将 Bucket ACL 的权限设定为 公共读写。<a target="_blank" href="https://help.aliyun.com/document_detail/31817.html">阿里云开发文档</a>');
+                        $('#td1').html('Bolo 支持阿里云图床。AccessKey 信息可以从 AccessKey 管理中找到，必须将 Bucket ACL 的权限设定为 公读私写 或 公共读写。<a target="_blank" href="https://help.aliyun.com/document_detail/31817.html">阿里云开发文档</a>');
                         $('#td2').show(); $('#tc2').show();
                         $('#td2').html('<b>AccessKeyID</b>');
                         $('#td3').show(); $('#tc3').show();

@@ -39,7 +39,7 @@
                     })
                     .then((value) => {
                         if (null !== value) {
-                            window.open('https://github.com/adlered/bolo-solo#%E8%BD%BB%E6%9D%BE%E8%BF%81%E7%A7%BB%E8%BF%81%E7%A7%BB%E8%87%B3-bolo--%E8%BF%81%E5%9B%9E%E8%87%B3-solo');
+                            window.open('https://doc.stackoverflow.wiki/web/#/7?page_id=83');
                         }
                     });
                 }

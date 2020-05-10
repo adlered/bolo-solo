@@ -33,6 +33,7 @@ import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.JsonRenderer;
 import org.b3log.solo.bolo.prop.CommentMailService;
 import org.b3log.solo.bolo.prop.MailService;
+import org.b3log.solo.bolo.tool.AntiXSS;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Comment;
 import org.b3log.solo.model.Common;
@@ -53,6 +54,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Comment processor.
@@ -146,12 +149,18 @@ public class CommentProcessor {
         requestJSONObject.put(Common.TYPE, Article.ARTICLE);
 
         String site = requestJSONObject.getString("boloSite");
+        // XSS 处理
+        site = AntiXSS.getSafeStringXSS(site);
         if (site.isEmpty()) {
             site = Latkes.getServePath();
         }
         requestJSONObject.put(Comment.COMMENT_URL, site);
 
         String username = requestJSONObject.getString("boloUser");
+        // XSS 处理
+        username = AntiXSS.getSafeStringXSS(username);
+        // 替换空格
+        username = username.replaceAll(" ", "_");
         if (username.isEmpty()) {
             username = Solos.getCurrentUser(context.getRequest(), context.getResponse()).optString(User.USER_NAME);
 

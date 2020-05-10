@@ -20,7 +20,7 @@
 <style>
     iframe {
         display: block;
-        height: 100vh;
+        height: 550px;
         width: 100%;
     }
 </style>

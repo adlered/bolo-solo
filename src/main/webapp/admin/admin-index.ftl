@@ -92,11 +92,6 @@
                         </div>
                         <ul class="fn__none" id="tabTools">
                             <li>
-                                <div id="tabs_tool-box">
-                                    <a href="#tools/tool-box">${toolBoxLabel}</a>
-                                </div>
-                            </li>
-                            <li>
                                 <div id="tabs_usite">
                                     <a href="#tools/usite">${usiteLabel}</a>
                                 </div>
@@ -134,6 +129,11 @@
                             <li>
                                 <div id="tabs_plugin-list">
                                     <a href="#tools/plugin-list">${pluginMgmtLabel}</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div id="tabs_tool-box">
+                                    <a href="#tools/tool-box">${toolBoxLabel}</a>
                                 </div>
                             </li>
                             <li>

@@ -72,6 +72,8 @@
         <input id="tc6" type="text" style="display:none" />
         <div id="td7" for="tc7" style="display:none"></div>
         <input id="tc7" type="text" style="display:none" />
+        <div id="td8" for="tc8" style="display:none"></div>
+        <input id="tc8" type="text" style="display:none" />
         <div class="fn__clear" id="tuChuangCfg" style="display: none">
             <button onclick="save()" class="fn__left">保存图床配置</button>
         </div>
@@ -123,6 +125,8 @@
                         $('#td6').html('<b>Bucket 域名</b>');
                         $('#td7').show(); $('#tc7').show();
                         $('#td7').html('<b>协议（填写英文小写 http 或 https，以你的设定为准）</b>')
+                        $('#td8').show(); $('#tc8').show();
+                        $('#td8').html('<b>子目录（为空则保存至根目录，不需要在最前和最后输入斜杠，直接输入目录名即可，二级目录可以使用 "level1/level2" 类似格式，以此类推）</b>')
                         break;
                     case 'upyun':
                         $('#td1').show();
@@ -173,7 +177,7 @@
                         $('#sourceTC').text('qiniu<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
                         break;
                     case 'aliyun':
-                        $('#sourceTC').text('aliyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val() + '<<>>' + $('#tc7').val());
+                        $('#sourceTC').text('aliyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val() + '<<>>' + $('#tc7').val() + '<<>>' + $('#tc8').val());
                         break;
                     case 'upyun':
                         $('#sourceTC').text('upyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());

@@ -131,8 +131,13 @@ public class UploadUtil {
                 String bucketName = config.split("<<>>")[4];
                 String bucketDomain = config.split("<<>>")[5];
                 String aliTreaty = config.split("<<>>")[6];
-                String filename = RandomStringUtils.randomAlphanumeric(10);
-
+                String filename;
+                try {
+                    String subDir = config.split("<<>>")[7];
+                    filename = subDir + "/" + RandomStringUtils.randomAlphanumeric(10);
+                } catch (Exception e) {
+                    filename = RandomStringUtils.randomAlphanumeric(10);
+                }
                 OSS ossClient = new OSSClientBuilder().build(endPoint, accessKeyID, accessKeySecret);
                 PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, filename, file);
                 try {

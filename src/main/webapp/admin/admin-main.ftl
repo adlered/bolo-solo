@@ -65,7 +65,7 @@
 
     function showTips() {
         var config = {
-            content: "欢迎使用菠萝博客 V1.8 稳定版，体验各项功能吧！<br>" +
+            content: "欢迎使用菠萝博客 V1.8 稳定版，体验各项功能吧！<br>支持从各大平台的备份文件将文章导入到菠萝博客了，快来试试~<br>" +
                 "<a href='javascript:neverShowTips()'>不再提醒</a>",
             type: "html",
             alignTo: ["right","top"],

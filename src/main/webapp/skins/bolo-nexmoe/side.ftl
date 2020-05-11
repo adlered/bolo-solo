@@ -44,13 +44,18 @@
             </a>
             <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="${servePath}/links.html"
                title="${linkLabel} - ${blogTitle}">
-                <i class="mdui-list-item-icon iconfont solo-list"></i>
+                <i class="mdui-list-item-icon iconfont solo-about"></i>
                 <div class="mdui-list-item-content">${linkLabel}</div>
             </a>
             <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="${servePath}/tags.html"
                title="${tagLabel} - ${blogTitle}">
                 <i class="mdui-list-item-icon iconfont solo-tags"></i>
                 <div class="mdui-list-item-content">${tagLabel}</div>
+            </a>
+            <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="${servePath}/archives.html"
+               title="${tagLabel} - ${blogTitle}">
+                <i class="mdui-list-item-icon iconfont solo-list"></i>
+                <div class="mdui-list-item-content">时间线</div>
             </a>
             <#list pageNavigations as page>
                 <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="${page.pagePermalink}"

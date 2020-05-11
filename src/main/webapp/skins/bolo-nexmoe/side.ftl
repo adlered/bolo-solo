@@ -53,7 +53,7 @@
                 <div class="mdui-list-item-content">${tagLabel}</div>
             </a>
             <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="${servePath}/archives.html"
-               title="${tagLabel} - ${blogTitle}">
+               title="${archiveLabel} - ${blogTitle}">
                 <i class="mdui-list-item-icon iconfont solo-list"></i>
                 <div class="mdui-list-item-content">时间线</div>
             </a>

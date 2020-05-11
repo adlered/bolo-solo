@@ -87,7 +87,7 @@
                        title="${adminLabel}">
                         <i class="mdui-list-item-icon iconfont solo-spin"></i>
                     </a>
-                    <a href="${logoutURL}" title="${logoutLabel}">
+                    <a href="javascript:location.href='${logoutURL}'" title="${logoutLabel}">
                         <i class="mdui-list-item-icon iconfont solo-logout"></i>
                     </a>
                 <#else>

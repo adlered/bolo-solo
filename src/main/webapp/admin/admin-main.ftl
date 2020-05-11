@@ -65,8 +65,7 @@
 
     function showTips() {
         var config = {
-            content: "新增 <b>联系方式自定义</b>、<b>其他-日志浏览</b> 功能<br>" +
-                "更方便实用，快来体验吧！<br>" +
+            content: "欢迎使用菠萝博客 V1.8 稳定版，体验各项功能吧！<br>" +
                 "<a href='javascript:neverShowTips()'>不再提醒</a>",
             type: "html",
             alignTo: ["right","top"],

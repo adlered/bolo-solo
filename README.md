@@ -34,4 +34,6 @@
 
 ### [开始使用：菠萝博客用户指南](https://programmingwithlove.stackoverflow.wiki/bolodoc)
 
-你还可以：[访问旧版完整文档](/all-readme/README.md)
+## 用户讨论群
+
+<img src="/pic/qqgroup.png" height="256px" width="256px">

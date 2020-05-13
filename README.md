@@ -36,4 +36,4 @@
 
 ## 用户讨论群
 
-<img src="/pic/qqgroup.png" height="256px" width="256px">
+<img src="/pic/qqgroup.png" width="256px">

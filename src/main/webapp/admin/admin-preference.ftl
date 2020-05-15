@@ -151,7 +151,7 @@
             $('#tcS').change(loadRemind);
 
             function clear() {
-                for (i = 1; i <= 7; i++) {
+                for (i = 1; i <= 8; i++) {
                     $('#tc' + i).hide();
                     $('#td' + i).hide();
                 }

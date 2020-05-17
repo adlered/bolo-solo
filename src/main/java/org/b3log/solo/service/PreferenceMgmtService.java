@@ -40,7 +40,7 @@ import java.util.Locale;
  * Preference management service.
  *
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 1.4.0.2, Aug 18, 2019
+ * @version 1.4.0.6, Apr 6, 2020
  * @since 0.4.0
  */
 @Service
@@ -335,6 +335,9 @@ public class PreferenceMgmtService {
                 optionRepository.add(kanbanniangSelectorOpt);
             }
 
+            final String editorModeVal = preference.optString(Option.ID_C_EDITOR_MODE);
+            emptyPreferenceOptSave(Option.ID_C_EDITOR_MODE, editorModeVal);
+
             transaction.commit();
             MailService.loadMailSettings();
         } catch (final Exception e) {
@@ -347,5 +350,20 @@ public class PreferenceMgmtService {
         }
 
         LOGGER.log(Level.DEBUG, "Updates preference successfully");
+    }
+
+    private void emptyPreferenceOptSave(final String optID, final String val) throws Exception {
+        // 该方法用于向后兼容，如果数据库中不存在该配置项则创建再保存
+        JSONObject opt = optionRepository.get(optID);
+        if (null == opt) {
+            opt = new JSONObject();
+            opt.put(Keys.OBJECT_ID, optID);
+            opt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+            opt.put(Option.OPTION_VALUE, val);
+            optionRepository.add(opt);
+        } else {
+            opt.put(Option.OPTION_VALUE, val);
+            optionRepository.update(optID, opt);
+        }
     }
 }

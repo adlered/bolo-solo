@@ -16,14 +16,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 /**
- * base style
- *
- * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 2.0.0.1, Mar 16, 2019
+* base style
+*
+* @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
+* @version 2.0.0.2, Feb 9, 2020
 */
 
 @import "../scss/reset";
-@import "vditor/src/assets/scss/classic";
+@import "vditor/src/assets/scss/index";
 
 textarea {
   overflow: hidden;

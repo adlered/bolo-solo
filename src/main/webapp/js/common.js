@@ -168,7 +168,7 @@ var Util = {
 
     if (typeof Vditor === 'undefined') {
       Util.addScript(
-          'https://cdn.jsdelivr.net/npm/vditor@2.1.15/dist/method.min.js',
+          'https://cdn.jsdelivr.net/npm/vditor@3.1.11/dist/method.min.js',
           'vditorPreviewScript')
     }
 

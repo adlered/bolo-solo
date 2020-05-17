@@ -411,9 +411,6 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_markdown" class="fn__none form">
-        <div class="fn__clear">
-            ${luteHTTPLabel}
-        </div>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__flex">
             <div class="fn__flex-1">

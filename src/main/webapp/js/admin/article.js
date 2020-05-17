@@ -452,12 +452,13 @@ admin.article = {
 
     // editor
     admin.editors.articleEditor = new SoloEditor({
+      outline: true,
       id: 'articleContent',
       height: 500,
       fun: fun,
       previewMode: 'both',
       resize: false,
-      typewriterMode: true
+      typewriterMode: true,
     })
 
     admin.editors.abstractEditor = new SoloEditor({
@@ -465,7 +466,7 @@ admin.article = {
       height: 200,
       previewMode: 'editor',
       resize: true,
-      typewriterMode: false
+      typewriterMode: false,
     })
 
     // thumbnail

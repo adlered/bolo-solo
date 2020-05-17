@@ -34,6 +34,11 @@
                 <a href="#tools/preference/setting">${paramSettingsLabel}</a>
             </div>
         </li>
+        <li>
+            <div id="tabPreference_markdown">
+                <a href="#tools/preference/markdown">Markdown</a>
+            </div>
+        </li>
     </ul>
 </div>
 <div id="tabPreferencePanel" class="sub-tabs-main">
@@ -403,6 +408,18 @@
         <button id="preferenceSignButton3">${signLabel}3</button>
         <textarea rows="8" id="preferenceSign3"></textarea><br><br>
         <button onclick="admin.preference.update()" class="fn__right">${updateLabel}</button>
+        <div class="fn__clear"></div>
+    </div>
+    <div id="tabPreferencePanel_markdown" class="fn__none form">
+        <div class="fn__clear">
+            ${luteHTTPLabel}
+        </div>
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__flex">
+            <div class="fn__flex-1">
+            </div>
+        </div>
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>
 </div>

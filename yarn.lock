@@ -3342,10 +3342,10 @@ value-or-function@^3.0.0:
   resolved "https://registry.npm.taobao.org/value-or-function/download/value-or-function-3.0.0.tgz#1c243a50b595c1be54a754bfece8563b9ff8d813"
   integrity sha1-HCQ6ULWVwb5Up1S/7OhWO5/42BM=
 
-vditor@2.1.15:
-  version "2.1.15"
-  resolved "https://registry.npm.taobao.org/vditor/download/vditor-2.1.15.tgz#71e5fe893af82d73b6e709b07a2159199ab98e42"
-  integrity sha1-ceX+iTr4LXO25wmweiFZGZq5jkI=
+vditor@3.1.11:
+  version "3.1.11"
+  resolved "https://registry.npm.taobao.org/vditor/download/vditor-3.1.11.tgz#a08cc57cffb517f1224fcf6b20ea5fb2dc66294d"
+  integrity sha1-oIzFfP+1F/EiT89rIOpfstxmKU0=
   dependencies:
     diff-match-patch "^1.0.4"
 

@@ -19,9 +19,9 @@
  * @fileoverview editor
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 1.6.0.0, Apr 16, 2020
+ * @version 1.3.0.1, Aug 6, 2019
  */
+
 admin.editors = {}
 
 /*
@@ -31,7 +31,7 @@ admin.editors = {}
  * @param conf.id 编辑器渲染元素 id
  * @param conf.height 编辑器种类
  */
-window.SoloEditor = function (conf) {
+var SoloEditor = function (conf) {
   this.conf = conf
   this.init()
 }
@@ -63,6 +63,7 @@ $.extend(SoloEditor.prototype, {
     })
 
     const options = {
+      outline: this.conf.outline || false,
       mode: Label.editorMode,
       typewriterMode: this.conf.typewriterMode,
       cache: {
@@ -87,6 +88,7 @@ $.extend(SoloEditor.prototype, {
       upload: {
         max: 10 * 1024 * 1024,
         url: Label.uploadURL,
+        linkToImgUrl: Label.servePath + '/upload/fetch',
         token: Label.uploadToken,
         filename: function (name) {
           return name.replace(/[^(a-zA-Z0-9\u4e00-\u9fa5\.)]/g, '').
@@ -110,6 +112,51 @@ $.extend(SoloEditor.prototype, {
       toolbarConfig: {
         pin: true,
       },
+      toolbar:[
+        "emoji",
+        "headings",
+        "bold",
+        "link",
+        "|",
+        "list",
+        "ordered-list",
+        "check",
+        "outdent",
+        "indent",
+        "|",
+        "quote",
+        "code",
+        "insert-before",
+        "insert-after",
+        "|",
+        "upload",
+        "record",
+        "table",
+        "|",
+        "undo",
+        "redo",
+        "|",
+        "fullscreen",
+        "edit-mode",
+        {
+          name: "more",
+          toolbar: [
+            "italic",
+            "strike",
+            "line",
+            "inline-code",
+            "both",
+            "code-theme",
+            "content-theme",
+            "export",
+            "outline",
+            "preview",
+            "format",
+            "devtools",
+            "info",
+            "help",
+          ],
+        }],
       after: () => {
         if (typeof this.conf.fun === 'function') {
           this.conf.fun()
@@ -122,10 +169,18 @@ $.extend(SoloEditor.prototype, {
         'emoji',
         'link',
         'upload',
-        'insert-after',
         'edit-mode',
-        'preview',
-        'fullscreen',
+        {
+          name: 'more',
+          toolbar: [
+            'insert-after',
+            'fullscreen',
+            'preview',
+            'format',
+            'info',
+            'help',
+          ],
+        },
       ]
       options.resize.enable = false
       options.toolbarConfig.pin = true

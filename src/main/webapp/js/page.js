@@ -148,44 +148,42 @@ $.extend(Page.prototype, {
                 'bold',
                 'italic',
                 'strike',
-                '|',
-                'line',
-                'quote',
+                'link',
                 '|',
                 'list',
                 'ordered-list',
                 'check',
                 '|',
+                'quote',
+                'line',
                 'code',
                 'inline-code',
+                'table',
                 '|',
                 'undo',
                 'redo',
                 '|',
-                'link',
-                'table',
-                '|',
+                'wysiwyg',
                 'both',
                 'preview',
                 'format',
                 '|',
-                'devtools',
                 'fullscreen',
+                'devtools',
                 'info',
                 'help',
             ], resizeEnable = true;
             if ($(window).width() < 768) {
                 toolbar = [
                     'emoji',
-                    'line',
-                    'quote',
-                    'list',
-                    'ordered-list',
-                    'check',
+                    'bold',
+                    'italic',
                     'link',
+                    'list',
+                    'check',
+                    'wysiwyg',
                     'preview',
-                    'format',
-                    'info',
+                    'fullscreen',
                     'help',
                 ];
                 resizeEnable = false
@@ -223,8 +221,10 @@ $.extend(Page.prototype, {
                 },
                 lang: Label.langLabel,
                 toolbar: toolbar,
+                after: () => {
+                    vditor.focus()
+                }
             });
-            vditor.focus()
         }
 
         if ($editor.css('bottom') === '-300px' || commentId) {
@@ -237,7 +237,7 @@ $.extend(Page.prototype, {
 
             this.currentCommentId = commentId;
             $('#soloEditorReplyTarget').text(name ? '@' + name : '');
-            if (typeof vditor !== 'undefined') {
+            if (typeof vditor !== 'undefined' && vditor.vditor.wysiwyg) {
                 vditor.focus()
             }
         } else {

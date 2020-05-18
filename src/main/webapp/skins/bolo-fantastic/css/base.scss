@@ -1146,7 +1146,7 @@ a.navbar-item:hover {
 /*code {
   color: var(--color);
   background-color: var(--code-bg-color)
-}*/
+}
 
 code[class*="language-"],
 pre[class*="language-"] {
@@ -1157,7 +1157,7 @@ pre[class*="language-"] {
 pre[class*="language-"],
 :not(pre) > code[class*="language-"] {
   background: var(--background);
-}
+}*/
 
 :not(pre) > code[class*="language-"] {
   border: red;

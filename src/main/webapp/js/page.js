@@ -155,7 +155,6 @@ $.extend(Page.prototype, {
                 'check',
                 'outdent',
                 'indent',
-                '|',
                 'quote',
                 'line',
                 'code',
@@ -166,7 +165,6 @@ $.extend(Page.prototype, {
                 '|',
                 'undo',
                 'redo',
-                '|',
                 'edit-mode',
                 'both',
                 'preview',
@@ -174,7 +172,6 @@ $.extend(Page.prototype, {
                 '|',
                 'fullscreen',
                 'devtools',
-                'info',
                 'help',
             ], resizeEnable = true;
             if ($(window).width() < 768) {

@@ -411,13 +411,10 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_markdown" class="fn__none form">
-        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
-        <div class="fn__flex">
-            <div class="fn__flex-1">
-            </div>
-        </div>
-        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
-        <div class="fn__clear"></div>
+        ${editorModeLabel}
+        <label><input name="editorMode" type="radio" value="wysiwyg">&nbsp;${editorModeWYSIWYGLabel} </label>
+        <label><input name="editorMode" type="radio" value="ir">&nbsp;${editorModeIRLabel} </label>
+        <label><input name="editorMode" type="radio" value="sv" checked>&nbsp;${editorModeSVLabel} </label>
     </div>
 </div>
 ${plugins}

@@ -189,7 +189,7 @@
             </a>
         </#if>
         <#if usite.usiteWYMusic != ''>
-            <a href="https://music.163.com/#/user/home?id=${usite.usiteWYMusic}"
+            <a target="_blank" href="https://music.163.com/#/user/home?id=${usite.usiteWYMusic}"
                class="<#if dir!=''>vditor-tooltipped__${dir} vditor-tooltipped  </#if>user__site"
                <#if dir==''>title<#else>aria-label</#if>="${usite.usiteWYMusic}">
                 <svg viewBox="0 0 1024 1024" width="100%" height="100%">

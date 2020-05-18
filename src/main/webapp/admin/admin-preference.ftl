@@ -415,6 +415,9 @@
         <label><input name="editorMode" type="radio" value="wysiwyg">&nbsp;${editorModeWYSIWYGLabel} </label>
         <label><input name="editorMode" type="radio" value="ir">&nbsp;${editorModeIRLabel} </label>
         <label><input name="editorMode" type="radio" value="sv" checked>&nbsp;${editorModeSVLabel} </label>
+
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
     </div>
 </div>
 ${plugins}

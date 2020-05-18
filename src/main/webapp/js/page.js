@@ -319,7 +319,8 @@ $.extend(Page.prototype, {
      * @param {String} headTitle 站外相关文章标题
      */
     loadExternalRelevantArticles: function (tags, headTitle) {
-        var tips = this.tips;
+        $('#externalRelevantArticles').remove();
+        /* var tips = this.tips;
         try {
             $.ajax({
                 url: 'https://rhythm.b3log.org/get-articles-by-tags.do?tags=' + tags
@@ -358,7 +359,7 @@ $.extend(Page.prototype, {
             })
         } catch (e) {
             // 忽略相关文章加载异常：load script error
-        }
+        } */
     },
     /*
      * @description 提交评论

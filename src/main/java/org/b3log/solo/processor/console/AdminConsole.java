@@ -140,7 +140,7 @@ public class AdminConsole {
             // 支持配置编辑器模式 https://github.com/88250/solo/issues/95
             String editorMode = preference.optString(Option.ID_C_EDITOR_MODE);
             if (StringUtils.isBlank(editorMode)) {
-                editorMode = "wysiwyg";
+                editorMode = "sv";
             }
             dataModel.put(Option.ID_C_EDITOR_MODE, editorMode);
 

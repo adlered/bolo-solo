@@ -411,25 +411,5 @@ if (!Cookie) {
       document.cookie = name + '=' + encodeURIComponent(value) + expires +
         '; path=/'
     },
-
-    loadVditor: function (cb) {
-      $.ajax({
-        method: 'GET',
-        url: 'https://cdn.jsdelivr.net/npm/vditor@3.2.6/dist/index.min.js',
-        dataType: 'script',
-        cache: true,
-        success: () => {
-          Util.init(window.utilOptions)
-          if (cb) {
-            cb()
-          }
-        },
-      })
-    },
   }
 }
-(() => {
-  if (typeof Vditor === 'undefined') {
-    Util.loadVditor()
-  }
-})()

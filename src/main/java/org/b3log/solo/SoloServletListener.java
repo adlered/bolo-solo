@@ -73,7 +73,7 @@ public final class SoloServletListener extends AbstractServletListener {
     /**
      * Bolo version.
      */
-    public static final String BOLO_VERSION = "v1.8 稳定版";
+    public static final String BOLO_VERSION = "v1.8 开发版";
     /**
      * Solo version.
      */

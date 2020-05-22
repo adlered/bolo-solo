@@ -50,16 +50,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import pers.adlered.simplecurrentlimiter.main.SimpleCurrentLimiter;
 
-import javax.imageio.metadata.IIOMetadataFormat;
 import javax.servlet.http.HttpServletResponse;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import java.util.*;
 /**
  * Comment processor.
  *
@@ -207,9 +200,19 @@ public class CommentProcessor {
 
         // 评论过滤检查
         String filterComment = requestJSONObject.getString("commentContent");
-        List<String> filterCommentList = new ArrayList<>();
-        filterCommentList.add("爹");
-        filterCommentList.add("妈");
+        // 读取用户禁言设置
+        String spamList = "";
+        try {
+            spamList = optionQueryService.getPreference().getString(Option.ID_C_SPAM);
+        } catch (Exception e) {
+            spamList = "";
+        }
+        List<String> filterCommentList;
+        try {
+            filterCommentList = Arrays.asList(spamList.split(","));
+        } catch (Exception e) {
+            filterCommentList = new ArrayList<>();
+        }
         for (String i : filterCommentList) {
             if (filterComment.contains(i)) {
                 LOGGER.log(Level.ERROR, "Can not add comment on article because it has spam words");

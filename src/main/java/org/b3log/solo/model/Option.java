@@ -355,6 +355,11 @@ public final class Option {
     public static final String ID_C_KANBANNIANG_SELECTOR = "kanbanniangSelector";
 
     /**
+     * Key of spam words
+     */
+    public static final String ID_C_SPAM = "spam";
+
+    /**
      * Private constructor.
      */
     private Option() {

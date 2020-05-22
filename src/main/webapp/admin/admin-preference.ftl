@@ -214,12 +214,18 @@
             请注意：<b>有些邮箱服务器可能设有独立密码，具体设定方法请查询后填写！</b>
         </div>
         <br>
-        <h3>回帖提醒</h3>
+        <h3>评论与回复</h3>
         <label for="replyRemind">博主邮箱：</label>
         <input id="replyRemind" type="text" />
         <div>
             填写你用于接收提醒的邮箱，当有人在你的博客文章中评论时，菠萝会发送邮件提醒你。<br>
             <b>此项设定必须先设定邮件服务器。</b>
+        </div>
+        <label for="spam">评论敏感词拦截：</label>
+        <input id="spam" type="text" />
+        <div>
+            用户的评论中<b>包含设定的敏感词</b>时，将提示用户"系统维护中"。<br>
+            通过英文小写逗号分割。例：AAA,bbb,123,456
         </div>
         <br>
         <h3>B3log 生态设定</h3>

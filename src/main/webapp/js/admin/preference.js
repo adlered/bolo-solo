@@ -60,6 +60,7 @@ admin.preference = {
           }
         });
 
+        $('#spam').val(preference.spam)
         $('#kanbanniangSelector').val(preference.kanbanniangSelector)
         $('#replyRemind').val(preference.replyRemind)
         $('#sourceTC').text(preference.tuChuangConfig)
@@ -221,6 +222,7 @@ admin.preference = {
 
     var requestJSONObject = {
       'preference': {
+        'spam': $('#spam').val(),
         'kanbanniangSelector': $('#kanbanniangSelector').val(),
         'replyRemind': $('#replyRemind').val(),
         'tuChuangConfig': $('#sourceTC').text(),

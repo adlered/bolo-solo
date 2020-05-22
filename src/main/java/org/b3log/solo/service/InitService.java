@@ -730,6 +730,12 @@ public class InitService {
         kanbanniangSelectorOpt.put(Option.OPTION_VALUE, "");
         optionRepository.add(kanbanniangSelectorOpt);
 
+        final JSONObject spamOpt = new JSONObject();
+        spamOpt.put(Keys.OBJECT_ID, Option.ID_C_SPAM);
+        spamOpt.put(Option.OPTION_CATEGORY, Option.CATEGORY_C_PREFERENCE);
+        spamOpt.put(Option.OPTION_VALUE, "");
+        optionRepository.add(spamOpt);
+
         LOGGER.info("Initialized preference");
     }
 }

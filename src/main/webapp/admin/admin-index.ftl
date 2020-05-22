@@ -92,13 +92,13 @@
                         </div>
                         <ul class="fn__none" id="tabTools">
                             <li>
-                                <div id="tabs_usite">
-                                    <a href="#tools/usite">${usiteLabel}</a>
+                                <div id="tabs_preference">
+                                    <a href="#tools/preference">${preferenceLabel}</a>
                                 </div>
                             </li>
                             <li>
-                                <div id="tabs_preference">
-                                    <a href="#tools/preference">${preferenceLabel}</a>
+                                <div id="tabs_usite">
+                                    <a href="#tools/usite">${usiteLabel}</a>
                                 </div>
                             </li>
                             <li>

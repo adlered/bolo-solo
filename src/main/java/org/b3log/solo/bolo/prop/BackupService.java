@@ -138,8 +138,8 @@ public class BackupService {
                     article.put(Keys.OBJECT_ID, ret);
                     article.put(Article.ARTICLE_TITLE, i.getTitle());
                     String content = i.getArticleContent();
-                    article.put(Article.ARTICLE_ABSTRACT_TEXT, Article.getAbstractText(content));
-                    article.put(Article.ARTICLE_ABSTRACT, content);
+                    article.put(Article.ARTICLE_ABSTRACT_TEXT, "");
+                    article.put(Article.ARTICLE_ABSTRACT, "");
                     article.put(Article.ARTICLE_CONTENT, content);
                     article.put(Article.ARTICLE_TAGS_REF, "");
                     final String permalink = "/articles/" + DateFormatUtils.format(i.getDate(), "yyyy/MM/dd") + "/" + article.optString(Keys.OBJECT_ID) + ".html";
@@ -159,7 +159,11 @@ public class BackupService {
                     article.put(Article.ARTICLE_VIEW_PWD, "");
                     final String articleImg1URL = Article.getArticleImg1URL(article);
                     article.put(Article.ARTICLE_IMG1_URL, articleImg1URL);
-                    initService.importArticle(article);
+                    long contentLength = content.getBytes("UTF-8").length;
+                    System.out.println("文章长度：" + contentLength);
+                    if (contentLength <= 16777215) {
+                        initService.importArticle(article);
+                    }
                     transaction.commit();
                 } catch (Exception e) {
                     e.printStackTrace();

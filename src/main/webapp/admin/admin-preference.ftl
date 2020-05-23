@@ -35,6 +35,11 @@
             </div>
         </li>
         <li>
+            <div id="tabPreference_import">
+                <a href="#tools/preference/import">${importLabel}</a>
+            </div>
+        </li>
+        <li>
             <div id="tabPreference_markdown">
                 <a href="#tools/preference/markdown">Markdown</a>
             </div>
@@ -417,6 +422,9 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_markdown" class="fn__none form">
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
+
         ${editorModeLabel}
         <label><input name="editorMode" type="radio" value="wysiwyg">&nbsp;${editorModeWYSIWYGLabel} </label>
         <label><input name="editorMode" type="radio" value="ir">&nbsp;${editorModeIRLabel} </label>
@@ -425,5 +433,40 @@
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>
-</div>
+    <div id="tabPreferencePanel_import" class="fn__none form">
+        <h3>从其它平台导入文章</h3>
+        <label>请先选择备份文件</label>
+        <form id="fileUploadForm" enctype="multipart/form-data">
+            <input name="file" type="file" name="fileUpload" id="backupUpload" accept=".zip,.dat" multiple="multiple">
+        </form>
+        <br>
+        <script>
+            $("#cnblogs").click(function () {
+                if ($("#backupUpload").val() !== "") {
+                    $("#cnblogs").html("正在导入中，请不要进行其它操作！");
+                    let formData = new FormData($("#fileUploadForm")[0]);
+                    let options = {
+                        url: "${staticServePath}/import/cnblogs",
+                        async: "false",
+                        type: 'POST',
+                        data: formData,
+                        dataType: 'json',
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        success: function (result) {
+                            //返回数据后你的后续处理
+                            alert(result.msg);
+                            location.reload();
+                        }
+                    };
+                    $.ajax(options);
+                } else {
+                    alert("请先选择文件！");
+                }
+            });
+        </script>
+
+        <button id="cnblogs">从博客园备份文件导入文章</button>
+    </div>
 ${plugins}

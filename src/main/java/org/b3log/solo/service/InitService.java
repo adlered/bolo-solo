@@ -329,6 +329,28 @@ public class InitService {
     }
 
     /**
+     * Import article.
+     *
+     * @param article the specified "Hello World" article
+     * @return generated article id
+     * @throws RepositoryException repository exception
+     */
+    public void importArticle(final JSONObject article) throws RepositoryException {
+        try {
+            final String tagsString = article.optString(Article.ARTICLE_TAGS_REF);
+            final String[] tagTitles = tagsString.split(",");
+            final JSONArray tags = tag(tagTitles, article);
+            addTagArticleRelation(tags, article);
+            archiveDate(article);
+            articleRepository.add(article);
+        } catch (final RepositoryException e) {
+            LOGGER.log(Level.ERROR, "Adds an article failed", e);
+
+            throw new RepositoryException(e);
+        }
+    }
+
+    /**
      * Archive the create date with the specified article.
      *
      * @param article the specified article, for example,

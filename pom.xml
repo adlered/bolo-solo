@@ -300,6 +300,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/rome/rome -->
+        <dependency>
+            <groupId>rome</groupId>
+            <artifactId>rome</artifactId>
+            <version>0.9</version>
+        </dependency>
     </dependencies>
 
     <build>

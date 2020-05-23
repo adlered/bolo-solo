@@ -132,5 +132,7 @@
     <orderEntry type="library" name="Maven: com.upyun:java-sdk:4.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20160212" level="project" />
     <orderEntry type="library" name="Maven: org.zeroturnaround:zt-zip:1.14" level="project" />
+    <orderEntry type="library" name="Maven: rome:rome:0.9" level="project" />
+    <orderEntry type="library" name="Maven: jdom:jdom:1.0" level="project" />
   </component>
 </module>

@@ -75,6 +75,7 @@ public class ImportService {
         new Thread(() -> {
             final ServletContext servletContext = SoloServletListener.getServletContext();
             final String markdownsPath = servletContext.getRealPath("markdowns");
+            new File(markdownsPath).mkdirs();
             LOGGER.debug("Import directory [" + markdownsPath + "]");
 
             final JSONObject admin = userQueryService.getAdmin();

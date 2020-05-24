@@ -437,7 +437,7 @@
         <h3>从其它平台导入文章</h3>
         <label>请先选择备份文件</label>
         <form id="fileUploadForm" enctype="multipart/form-data">
-            <input name="file" type="file" name="fileUpload" id="backupUpload" accept=".zip,.dat" multiple="multiple">
+            <input name="file" type="file" name="fileUpload" id="backupUpload" accept=".xml,.zip,.dat" multiple="multiple">
         </form>
         <br>
         <script>

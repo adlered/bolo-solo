@@ -129,7 +129,6 @@ public class BackupService {
                 item.delete();
             }
             List<TranslateResult> list = run("CNBlogs");
-            XML.printResult(list);
             for (TranslateResult i : list) {
                 try {
                     final Transaction transaction = userRepository.beginTransaction();
@@ -160,10 +159,12 @@ public class BackupService {
                     final String articleImg1URL = Article.getArticleImg1URL(article);
                     article.put(Article.ARTICLE_IMG1_URL, articleImg1URL);
                     long contentLength = content.getBytes("UTF-8").length;
+                    System.out.println("========== 正在导入 ==========");
+                    System.out.println("文章标题：" + i.getTitle());
                     System.out.println("文章长度：" + contentLength);
-                    if (contentLength <= 16777215) {
-                        initService.importArticle(article);
-                    }
+                    initService.importArticle(article);
+                    System.out.println("========== 导入完成 ==========");
+
                     transaction.commit();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -177,6 +178,7 @@ public class BackupService {
             return;
         }
 
+        System.out.println("博客园文章已全部导入。");
         DeleteFolder.delFolder(new File("temp/file/").getAbsolutePath());
         context.renderJSON().renderMsg("从博客园恢复备份成功。");
 

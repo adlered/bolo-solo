@@ -72,7 +72,7 @@ public class Options {
     public static List<Object[]> loadOptList(JSONObject requestJSONObject) {
         List<Object[]> optList = new ArrayList<>();
         Collections.addAll(optList,
-                // Solo
+                // Solo 字段
                 new Object[] { Option.ID_C_EDITOR_MODE, Option.CATEGORY_C_PREFERENCE, "sv" },
                 new Object[] { Option.ID_C_HLJS_THEME, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_HLJS_THEME },
                 new Object[] { Option.ID_C_SYNC_GITHUB, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_SYNC_GITHUB },
@@ -108,7 +108,7 @@ public class Options {
                 new Object[] { Option.ID_C_FOOTER_CONTENT, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_FOOTER_CONTENT },
                 new Object[] { Option.ID_C_SKIN_DIR_NAME, Option.CATEGORY_C_SKIN, Option.DefaultPreference.DEFAULT_SKIN_DIR_NAME },
                 new Object[] { Option.ID_C_MOBILE_SKIN_DIR_NAME, Option.CATEGORY_C_SKIN, Option.DefaultPreference.DEFAULT_MOBILE_SKIN_DIR_NAME },
-                // Bolo
+                // Bolo 字段
                 new Object[] { Option.ID_C_HACPAI_USER, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_HACPAI_USER },
                 new Object[] { Option.ID_C_B3LOG_KEY, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_B3LOG_KEY },
                 new Object[] { Option.ID_C_MAX_ARCHIVE, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_MAX_ARCHIVE },

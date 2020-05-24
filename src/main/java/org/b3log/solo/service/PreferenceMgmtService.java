@@ -28,6 +28,7 @@ import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Locales;
 import org.b3log.solo.bolo.prop.MailService;
+import org.b3log.solo.bolo.prop.Options;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.OptionRepository;
 import org.json.JSONObject;
@@ -95,55 +96,7 @@ public class PreferenceMgmtService {
             final String localeString = preference.getString(Option.ID_C_LOCALE_STRING);
             Latkes.setLocale(new Locale(Locales.getLanguage(localeString), Locales.getCountry(localeString)));
 
-            List<String> optionList = new ArrayList<>();
-            Collections.addAll(optionList,
-                    // Solo 字段
-                    Option.ID_C_CUSTOM_VARS,
-                    Option.ID_C_HLJS_THEME,
-                    Option.ID_C_PULL_GITHUB,
-                    Option.ID_C_SYNC_GITHUB,
-                    Option.ID_C_FAVICON_URL,
-                    Option.ID_C_VERSION,
-                    Option.ID_C_TIME_ZONE_ID,
-                    Option.ID_C_SIGNS,
-                    Option.ID_C_RELEVANT_ARTICLES_DISPLAY_CNT,
-                    Option.ID_C_RECENT_COMMENT_DISPLAY_CNT,
-                    Option.ID_C_RECENT_ARTICLE_DISPLAY_CNT,
-                    Option.ID_C_RANDOM_ARTICLES_DISPLAY_CNT,
-                    Option.ID_C_NOTICE_BOARD,
-                    Option.ID_C_MOST_VIEW_ARTICLE_DISPLAY_CNT,
-                    Option.ID_C_MOST_USED_TAG_DISPLAY_CNT,
-                    Option.ID_C_MOST_COMMENT_ARTICLE_DISPLAY_CNT,
-                    Option.ID_C_META_KEYWORDS,
-                    Option.ID_C_META_DESCRIPTION,
-                    Option.ID_C_LOCALE_STRING,
-                    Option.ID_C_HTML_HEAD,
-                    Option.ID_C_FOOTER_CONTENT,
-                    Option.ID_C_FEED_OUTPUT_MODE,
-                    Option.ID_C_FEED_OUTPUT_CNT,
-                    Option.ID_C_EXTERNAL_RELEVANT_ARTICLES_DISPLAY_CNT,
-                    Option.ID_C_ENABLE_ARTICLE_UPDATE_HINT,
-                    Option.ID_C_COMMENTABLE,
-                    Option.ID_C_BLOG_TITLE,
-                    Option.ID_C_BLOG_SUBTITLE,
-                    Option.ID_C_ARTICLE_LIST_STYLE,
-                    Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE,
-                    Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT,
-                    Option.ID_C_ALLOW_VISIT_DRAFT_VIA_PERMALINK,
-                    // Bolo 字段
-                    Option.ID_C_MAX_ARCHIVE,
-                    Option.ID_C_MAIL_BOX,
-                    Option.ID_C_MAIL_USERNAME,
-                    Option.ID_C_MAIL_PASSWORD,
-                    Option.ID_C_TUCHUANG_CONFIG,
-                    Option.ID_C_REPLY_REMIND,
-                    Option.ID_C_KANBANNIANG_SELECTOR,
-                    Option.ID_C_EDITOR_MODE,
-                    Option.ID_C_B3LOG_KEY,
-                    Option.ID_C_HACPAI_USER,
-                    Option.ID_C_SPAM
-                    );
-
+            List<String> optionList = Options.loadOptions();
             for (String i : optionList) {
                 emptyPreferenceOptSave(i, preference.optString(i));
             }

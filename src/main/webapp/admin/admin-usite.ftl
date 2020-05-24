@@ -21,13 +21,13 @@
     <ul>
         <li>
             <div id="tabUsite_edit">
-                <a href="#tools/usite/edit">数据编辑</a>
+                <a class="tab-current" href="#tools/usite/edit">数据编辑</a>
             </div>
         </li>
     </ul>
 </div>
 <div id="tabUsitePanel" class="sub-tabs-main">
-    <div id="tabUsitePanel_edit" class="fn__none form">
+    <div id="tabUsitePanel_edit" class="form">
         <div class="fn__clear">
             <button onclick="admin.usite.reset()" class="fn__right">${resetUsiteLabel}</button>
         </div>

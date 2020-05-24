@@ -25,6 +25,21 @@
             </div>
         </li>
         <li>
+            <div id="tabPreference_imageBed">
+                <a href="#tools/preference/imageBed">${imageBedLabel}</a>
+            </div>
+        </li>
+        <li>
+            <div id="tabPreference_mailAndRemind">
+                <a href="#tools/preference/mailAndRemind">${mailAndRemindLabel}</a>
+            </div>
+        </li>
+        <li>
+            <div id="tabPreference_b3logEcology">
+                <a href="#tools/preference/b3logEcology">${b3logEcologyLabel}</a>
+            </div>
+        </li>
+        <li>
             <div id="tabPreference_signs">
                 <a href="#tools/preference/signs">${signLabel}</a>
             </div>

@@ -112,8 +112,6 @@ admin.usite = {
     $("#tabUsite").tabs();
     $('#loadMsg').text('');
 
-    location.href = '#tools/usite/edit';
-
     $.ajax({
       url: Label.servePath + '/admin/usite/get',
       type: 'GET',

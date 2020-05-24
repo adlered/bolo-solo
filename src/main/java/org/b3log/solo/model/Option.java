@@ -541,12 +541,12 @@ public final class Option {
         /**
          * Default HacPai username.
          */
-        public static final String DEFAULT_HACPAI_USER = "none";
+        public static final String DEFAULT_HACPAI_USER = "BoloDefault";
 
         /**
          * Default B3log key.
          */
-        public static final String DEFAULT_B3LOG_KEY = "000000";
+        public static final String DEFAULT_B3LOG_KEY = "123456";
 
         /**
          * Default max archive.

@@ -32,19 +32,23 @@ import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.util.Ids;
+import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.tool.DeleteFolder;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.service.ExportService;
+import org.b3log.solo.service.ImportService;
 import org.b3log.solo.service.InitService;
 import org.b3log.solo.service.OptionQueryService;
 import org.b3log.solo.util.Solos;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.zeroturnaround.zip.ZipUtil;
 import pers.adlered.blog_platform_export_tool.module.TranslateResult;
 import pers.adlered.blog_platform_export_tool.util.XML;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.List;
@@ -83,6 +87,12 @@ public class BackupService {
      */
     @Inject
     private InitService initService;
+
+    /**
+     * Import service.
+     */
+    @Inject
+    private ImportService importService;
 
     @RequestProcessing(value = "/prop/backup/hacpai/do/upload", method = {HttpMethod.GET})
     public void uploadBackupToHacpai(final RequestContext context) {
@@ -181,6 +191,47 @@ public class BackupService {
         System.out.println("博客园文章已全部导入。");
         DeleteFolder.delFolder(new File("temp/file/").getAbsolutePath());
         context.renderJSON().renderMsg("从博客园恢复备份成功。");
+
+        return;
+    }
+
+    @RequestProcessing(value = "/import/markdown", method = {HttpMethod.POST})
+    public void importFromMarkdown (final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
+
+        final ServletContext servletContext = SoloServletListener.getServletContext();
+        final String markdownsPath = servletContext.getRealPath("markdowns");
+
+        DeleteFolder.delAllFile(markdownsPath);
+
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        factory.setRepository(new File(markdownsPath));
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        upload.setHeaderEncoding("UTF-8");
+        String result = "";
+        try {
+            List<FileItem> itemList = upload.parseRequest(context.getRequest());
+            for (FileItem item : itemList) {
+                String name = item.getName();
+                File file = new File(markdownsPath + name);
+                item.write(file);
+                item.delete();
+                ZipUtil.unpack(new File(markdownsPath + name), new File(markdownsPath));
+                file.delete();
+            }
+            result = importService.importMarkdownsSync();
+        } catch (Exception e) {
+            context.renderJSON().renderMsg("从 Markdown zip 恢复备份失败，请重试！" + result);
+
+            return;
+        }
+
+        DeleteFolder.delAllFile(markdownsPath);
+        context.renderJSON().renderMsg("从 Markdown zip 恢复备份成功。" + result);
 
         return;
     }

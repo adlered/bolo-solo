@@ -440,13 +440,13 @@
             <input name="file" type="file" name="fileUpload" id="backupUpload" accept=".xml,.zip,.dat" multiple="multiple">
         </form>
         <br>
-        <script>
-            $("#cnblogs").click(function () {
+        <script type="text/javascript">
+            function uploadFile(name) {
                 if ($("#backupUpload").val() !== "") {
-                    $("#cnblogs").html("正在导入中，请不要进行其它操作！");
+                    $("#" + name).html("正在导入中，请不要进行其它操作！");
                     let formData = new FormData($("#fileUploadForm")[0]);
                     let options = {
-                        url: "${staticServePath}/import/cnblogs",
+                        url: "${staticServePath}/import/" + name,
                         async: "false",
                         type: 'POST',
                         data: formData,
@@ -464,9 +464,21 @@
                 } else {
                     alert("请先选择文件！");
                 }
+            }
+
+            $("#cnblogs").click(function () {
+                uploadFile("cnblogs");
+            });
+
+
+            $("#markdown").click(function () {
+                uploadFile("markdown");
             });
         </script>
 
         <button id="cnblogs">从博客园备份文件导入文章</button>
+        <label>可将从博客园备份的 xml 文件导入至菠萝博客。</label>
+        <button id="markdown">Markdown zip 导入文章</button>
+        <label>可将多篇 .md 文章打包成 zip 导入至菠萝博客。</label>
     </div>
 ${plugins}

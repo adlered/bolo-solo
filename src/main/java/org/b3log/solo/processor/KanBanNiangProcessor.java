@@ -24,6 +24,7 @@ import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.repository.RepositoryException;
+import org.b3log.latke.repository.Transaction;
 import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
@@ -79,7 +80,9 @@ public class KanBanNiangProcessor {
         try {
             final BeanManager beanManager = BeanManager.getInstance();
             final PluginRepository pluginRepository = beanManager.getReference(PluginRepository.class);
+            final Transaction transaction = pluginRepository.beginTransaction();
             enabled = pluginRepository.get("看板娘 ＋_0.0.2").optString("status").equals("ENABLED");
+            transaction.commit();
         } catch (Exception e) {
         }
         if (enabled) {

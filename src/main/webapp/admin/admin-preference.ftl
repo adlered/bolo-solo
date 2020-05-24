@@ -239,7 +239,14 @@
         <label for="b3logKey">${b3logKey1Label}</label>
         <input id="b3logKey" type="text">
         <div>
-            <b>请注意！此项设置需要重启服务端后生效。</b>
+            <div>
+                <b>请注意！此项设置需要重启服务端后生效。</b>
+                <br>
+                菠萝博客为您提供了一个公共账号，无需自行注册账号，即可使用图床服务；<br>
+                该账号在系统初始化时默认使用，使用公共账号的图床需要将自定义图床修改为黑客派。<br>
+                公共账号 用户名：BoloDefault<br>
+                公共账号 B3log Key：123456<br>
+            </div>
             <style>
                 .menu ul li {
                     list-style-type: none;

@@ -127,8 +127,6 @@ public final class Solos {
             }
             if (Markdowns.LUTE_AVAILABLE) {
                 LOGGER.log(Level.INFO, "lute_http configure detected [url=" + Markdowns.LUTE_ENGINE_URL + "]");
-            } else {
-                LOGGER.log(Level.INFO, "lute_http configure not found, using locale markdown engine.");
             }
         } catch (final Exception e) {
             // ignored

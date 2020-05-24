@@ -50,11 +50,6 @@
             </div>
         </li>
         <li>
-            <div id="tabPreference_import">
-                <a href="#tools/preference/import">${importLabel}</a>
-            </div>
-        </li>
-        <li>
             <div id="tabPreference_markdown">
                 <a href="#tools/preference/markdown">Markdown</a>
             </div>
@@ -455,52 +450,32 @@
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>
-    <div id="tabPreferencePanel_import" class="fn__none form">
-        <h3>从其它平台导入文章</h3>
-        <label>请先选择备份文件</label>
-        <form id="fileUploadForm" enctype="multipart/form-data">
-            <input name="file" type="file" name="fileUpload" id="backupUpload" accept=".xml,.zip,.dat" multiple="multiple">
-        </form>
-        <br>
-        <script type="text/javascript">
-            function uploadFile(name) {
-                if ($("#backupUpload").val() !== "") {
-                    $("#" + name).html("正在导入中，请不要进行其它操作！");
-                    let formData = new FormData($("#fileUploadForm")[0]);
-                    let options = {
-                        url: "${staticServePath}/import/" + name,
-                        async: "false",
-                        type: 'POST',
-                        data: formData,
-                        dataType: 'json',
-                        cache: false,
-                        processData: false,
-                        contentType: false,
-                        success: function (result) {
-                            //返回数据后你的后续处理
-                            alert(result.msg);
-                            location.reload();
-                        }
-                    };
-                    $.ajax(options);
-                } else {
-                    alert("请先选择文件！");
-                }
-            }
+    <div id="tabPreferencePanel_imageBed" class="fn__none form">
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
 
-            $("#cnblogs").click(function () {
-                uploadFile("cnblogs");
-            });
+        图床
 
-
-            $("#markdown").click(function () {
-                uploadFile("markdown");
-            });
-        </script>
-
-        <button id="cnblogs">从博客园备份文件导入文章</button>
-        <label>可将从博客园备份的 xml 文件导入至菠萝博客。</label>
-        <button id="markdown">Markdown zip 导入文章</button>
-        <label>可将多篇 .md 文章打包成 zip 导入至菠萝博客。</label>
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
     </div>
+    <div id="tabPreferencePanel_mailAndRemind" class="fn__none form">
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
+
+        提醒
+
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
+    </div>
+    <div id="tabPreferencePanel_b3logEcology" class="fn__none form">
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
+
+        b3log
+
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
+    </div>
+</div>
 ${plugins}

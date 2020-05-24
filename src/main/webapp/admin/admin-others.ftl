@@ -34,6 +34,11 @@
                 <a href="#tools/others/log">${viewLogLabel}</a>
             </div>
         </li>
+        <li>
+            <div id="tabOthers_import">
+                <a href="#tools/others/import">${importLabel}</a>
+            </div>
+        </li>
     </ul>
 </div>
 <div id="tabOthersPanel" class="sub-tabs-main">
@@ -52,6 +57,55 @@
         <span style="float: left">JVM 空闲内存：<span id="memFree" style="font-weight: bold"></span></span><span style="float: right">日志浏览会读取 22 条历史日志，并动态更新控制台信息</span>
         <br><br>
         <textarea rows="32" readonly></textarea>
+    </div>
+    <div id="tabOthersPanel_import" class="fn__none">
+        <h3>从其它平台导入文章</h3>
+        <br>
+        <p><b>请先选择备份文件</b></p>
+        <form id="fileUploadForm" enctype="multipart/form-data">
+            <input name="file" type="file" name="fileUpload" id="backupUpload" accept=".xml,.zip,.dat" multiple="multiple">
+        </form>
+        <br>
+        <script type="text/javascript">
+            function uploadFile(name) {
+                if ($("#backupUpload").val() !== "") {
+                    $("#" + name).html("正在导入中，请不要进行其它操作！");
+                    let formData = new FormData($("#fileUploadForm")[0]);
+                    let options = {
+                        url: "${staticServePath}/import/" + name,
+                        async: "false",
+                        type: 'POST',
+                        data: formData,
+                        dataType: 'json',
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        success: function (result) {
+                            //返回数据后你的后续处理
+                            alert(result.msg);
+                            location.reload();
+                        }
+                    };
+                    $.ajax(options);
+                } else {
+                    alert("请先选择文件！");
+                }
+            }
+
+            $("#cnblogs").click(function () {
+                uploadFile("cnblogs");
+            });
+
+
+            $("#markdown").click(function () {
+                uploadFile("markdown");
+            });
+        </script>
+
+        <button id="cnblogs">从博客园备份文件导入文章</button>
+        <p style="margin-top: 5px">可将从博客园备份的 xml 文件导入至菠萝博客。</p>
+        <button id="markdown" style="margin-top: 10px">Markdown zip 导入文章</button>
+        <p style="margin-top: 5px">可将多篇 .md 文章打包成 zip 导入至菠萝博客。</p>
     </div>
 </div>
 ${plugins}

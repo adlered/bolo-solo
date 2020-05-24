@@ -344,7 +344,7 @@ public class InitService {
             archiveDate(article);
             articleRepository.add(article);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "该文章导入失败，请手动导入！");
+            System.out.println("该文章导入失败，请手动导入！");
         }
     }
 

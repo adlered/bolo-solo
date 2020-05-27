@@ -138,7 +138,7 @@
                             </li>
                             <li>
                                 <div id="tabs_others">
-                                    <a href="#tools/others/tag">${functionalLabel}</a>
+                                    <a href="#tools/others/data">${functionalLabel}</a>
                                 </div>
                             </li>
                         </ul>

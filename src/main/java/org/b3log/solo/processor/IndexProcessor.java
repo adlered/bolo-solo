@@ -274,6 +274,7 @@ public class IndexProcessor {
         FixSizeLinkedList<Map<String, Object>> list = RamAppender.getList();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("result", list);
+        jsonObject.put("freeMemNow", Runtime.getRuntime().freeMemory());
         context.renderJSON(jsonObject);
     }
 }

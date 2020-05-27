@@ -34,7 +34,7 @@ import java.util.Map;
  **/
 public class RamAppender extends AppenderSkeleton {
     // 定长列表
-    public static FixSizeLinkedList<Map<String,Object>> list = new FixSizeLinkedList<>(22);
+    public static FixSizeLinkedList<Map<String,Object>> list = new FixSizeLinkedList<>(50);
 
     public static FixSizeLinkedList<Map<String, Object>> getList() {
         return list;
@@ -51,7 +51,6 @@ public class RamAppender extends AppenderSkeleton {
         map.put("message", "" + loggingEvent.getMessage());
         map.put("methodName", loggingEvent.getLocationInformation().getMethodName());
         map.put("lineNumber", loggingEvent.getLocationInformation().getLineNumber());
-        map.put("freeMemory", Runtime.getRuntime().freeMemory());
 
         map.put("id", id);
         if (id == Long.MAX_VALUE) {
@@ -60,7 +59,7 @@ public class RamAppender extends AppenderSkeleton {
         ++id;
 
         map.put("throwable", null);
-        if(loggingEvent.getThrowableInformation()!=null && loggingEvent.getThrowableInformation().getThrowable()!=null){
+        if (loggingEvent.getThrowableInformation()!=null && loggingEvent.getThrowableInformation().getThrowable()!=null) {
             Throwable t = loggingEvent.getThrowableInformation().getThrowable();
             Map<String, Object> throwableMap = new HashMap<>();
             throwableMap.put("message", t.getMessage());

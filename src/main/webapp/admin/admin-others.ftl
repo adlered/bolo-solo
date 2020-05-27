@@ -20,13 +20,13 @@
 <div id="tabOthers" class="sub-tabs">
     <ul>
         <li>
-            <div id="tabOthers_tag">
-                <a href="#tools/others/tag">${clearDataLabel}</a>
+            <div id="tabOthers_data">
+                <a href="#tools/others/data">${exportDataLabel}</a>
             </div>
         </li>
         <li>
-            <div id="tabOthers_data">
-                <a href="#tools/others/data">${exportDataLabel}</a>
+            <div id="tabOthers_import">
+                <a href="#tools/others/import">${importDataLabel}</a>
             </div>
         </li>
         <li>
@@ -35,8 +35,8 @@
             </div>
         </li>
         <li>
-            <div id="tabOthers_import">
-                <a href="#tools/others/import">${importLabel}</a>
+            <div id="tabOthers_tag">
+                <a href="#tools/others/tag">${clearDataLabel}</a>
             </div>
         </li>
     </ul>
@@ -54,9 +54,13 @@
         <button class="fn__margin12" onclick="admin.others.exportHexo();">${exportHexoLabel}</button>
     </div>
     <div id="tabOthersPanel_log" class="fn__none form">
-        <span style="float: left">JVM 空闲内存：<span id="memFree" style="font-weight: bold"></span></span><span style="float: right">日志浏览会读取 22 条历史日志，并动态更新控制台信息</span>
+        <span style="float: left">JVM 空闲内存：<span id="memFree" style="font-weight: bold"></span></span><span style="float: right"><span id="now"></span> 更新</span>
         <br><br>
-        <textarea rows="32" readonly></textarea>
+        <table>
+            <tr><th style="width:30px">级别</th><th style="width: 90%">日志</th></tr>
+        </table>
+        <table id="logList">
+        </table>
     </div>
     <div id="tabOthersPanel_import" class="fn__none">
         <h3>从其它平台导入文章</h3>

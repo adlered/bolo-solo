@@ -35,8 +35,8 @@
             </div>
         </li>
         <li>
-            <div id="tabPreference_b3logEcology">
-                <a href="#tools/preference/b3logEcology">${b3logEcologyLabel}</a>
+            <div id="tabPreference_setting">
+                <a href="#tools/preference/setting">${paramSettingsLabel}</a>
             </div>
         </li>
         <li>
@@ -45,13 +45,13 @@
             </div>
         </li>
         <li>
-            <div id="tabPreference_setting">
-                <a href="#tools/preference/setting">${paramSettingsLabel}</a>
+            <div id="tabPreference_markdown">
+                <a href="#tools/preference/markdown">${editorLabel}</a>
             </div>
         </li>
         <li>
-            <div id="tabPreference_markdown">
-                <a href="#tools/preference/markdown">${editorLabel}</a>
+            <div id="tabPreference_b3logEcology">
+                <a href="#tools/preference/b3logEcology">${b3logEcologyLabel}</a>
             </div>
         </li>
     </ul>

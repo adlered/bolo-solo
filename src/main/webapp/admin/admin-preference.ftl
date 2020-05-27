@@ -78,7 +78,7 @@
         <label for="noticeBoard">${noticeBoard1Label}</label>
         <textarea rows="6" id="noticeBoard"></textarea>
         <label for="footerContent">${footerContent1Label}</label>
-        <textarea rows="2" id="footerContent"></textarea><br><br>
+        <textarea rows="6" id="footerContent"></textarea><br><br>
         <div class="fn__clear">
             <button onclick="admin.preference.update()" class="fn__right">${updateLabel}</button>
         </div>

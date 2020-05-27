@@ -32,7 +32,7 @@
         <div id="allPanel">
             <div id="top">
                 <a href="${servePath}" target="_blank" class="hover">
-                    Bolo🍍
+                    ${blogTitle}
                 </a>
                 <span class="icon-unordered-list top__menu fn__none"
                       onclick="admin.toggleMenu()"></span>
@@ -49,7 +49,7 @@
                     <li>
                         <div id="tabs_main">
                             <a href="#main">
-                                <span class="icon-refresh"></span> ${adminIndexLabel}
+                                ${adminIndexLabel}
                             </a>
                         </div>
                     </li>
@@ -138,7 +138,7 @@
                             </li>
                             <li>
                                 <div id="tabs_others">
-                                    <a href="#tools/others/tag">${othersLabel}</a>
+                                    <a href="#tools/others/tag">${functionalLabel}</a>
                                 </div>
                             </li>
                         </ul>

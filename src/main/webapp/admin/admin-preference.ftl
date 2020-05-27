@@ -51,7 +51,7 @@
         </li>
         <li>
             <div id="tabPreference_markdown">
-                <a href="#tools/preference/markdown">Markdown</a>
+                <a href="#tools/preference/markdown">${editorLabel}</a>
             </div>
         </li>
     </ul>

@@ -62,15 +62,16 @@ admin.others = {
             rDate = rDate.substring(0, 19);
             let build1 = '';
             if (rLevel === 'WARN') {
-              build1 = '<td style="width: 30px"><span style="color: #f8ba0b; font-weight: bold">' + rLevel + '</span></td>';
+              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #f8ba0b; font-weight: bold">' + rLevel + '</span></td>';
             } else if (rLevel === 'INFO') {
-              build1 = '<td style="width: 30px"><span style="color: #00bbff; font-weight: bold">' + rLevel + '</span></td>';
+              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #00bbff; font-weight: bold">' + rLevel + '</span></td>';
             } else {
-              build1 = '<td style="width: 30px"><span style="color: #1ea0c3" font-weight: bold">' + rLevel + '</span></td>';
+              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #1ea0c3" font-weight: bold">' + rLevel + '</span></td>';
             }
-            let build2 = '<td><span style="word-wrap: break-word; white-space: normal; word-break: break-all; font-weight: bold"><span style="color: #4caf50">' + rDate + ' ' + rSrc + '</span><br>' + msg + '</span></td>';
+            let build2 = '<td style="width: 135px; vertical-align: top"><span style="color: #4caf50; font-weight: bold">' + rDate + '</span></td>';
+            let build3 = '<td style="vertical-align: top"><span style="word-wrap: break-word; white-space: normal; word-break: break-all"><span style="color: #4caf50; font-weight: bold">' + rSrc + '</span><br>' + msg + '</span></td>';
             let buildEnd = '</tr></tbody>';
-            var res = buildStart + build1 + build2 + buildEnd;
+            var res = buildStart + build1 + build2 + build3 + buildEnd;
             if (r.throwable !== undefined) {
               res += r.throwable.class + ': ' + r.throwable.message + '<br>';
               for (var j = 0; j < r.throwable.stackTrace.length; j++) {
@@ -103,15 +104,16 @@ admin.others = {
             rDate = rDate.substring(0, 19);
             let build1 = '';
             if (rLevel === 'WARN') {
-              build1 = '<td style="width: 30px"><span style="color: #f8ba0b; font-weight: bold">' + rLevel + '</span></td>';
+              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #f8ba0b; font-weight: bold">' + rLevel + '</span></td>';
             } else if (rLevel === 'INFO') {
-              build1 = '<td style="width: 30px"><span style="color: #00bbff; font-weight: bold">' + rLevel + '</span></td>';
+              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #00bbff; font-weight: bold">' + rLevel + '</span></td>';
             } else {
-              build1 = '<td style="width: 30px"><span style="color: #1ea0c3" font-weight: bold">' + rLevel + '</span></td>';
+              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #1ea0c3" font-weight: bold">' + rLevel + '</span></td>';
             }
-            let build2 = '<td><span style="word-wrap: break-word; white-space: normal; word-break: break-all; font-weight: bold"><span style="color: #4caf50">' + rDate + ' ' + rSrc + '</span><br>' + msg + '</span></td>';
+            let build2 = '<td style="width: 135px; vertical-align: top"><span style="color: #4caf50; font-weight: bold">' + rDate + '</span></td>';
+            let build3 = '<td style="vertical-align: top"><span style="word-wrap: break-word; white-space: normal; word-break: break-all"><span style="color: #4caf50; font-weight: bold">' + rSrc + '</span><br>' + msg + '</span></td>';
             let buildEnd = '</tr></tbody>';
-            var res = buildStart + build1 + build2 + buildEnd;
+            var res = buildStart + build1 + build2 + build3 + buildEnd;
             if (r.throwable !== undefined) {
               res += r.throwable.class + ': ' + r.throwable.message + '<br>';
               for (var j = 0; j < r.throwable.stackTrace.length; j++) {

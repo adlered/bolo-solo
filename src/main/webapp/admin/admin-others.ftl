@@ -56,9 +56,6 @@
     <div id="tabOthersPanel_log" class="fn__none form">
         <span style="float: left">JVM 空闲内存：<span id="memFree" style="font-weight: bold"></span></span><span style="float: right"><span id="now"></span> 更新</span>
         <br><br>
-        <table>
-            <tr><th style="width:30px">级别</th><th style="width: 90%">日志</th></tr>
-        </table>
         <table id="logList">
         </table>
     </div>

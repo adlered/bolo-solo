@@ -62,7 +62,6 @@
             <button onclick="admin.preference.update()" class="fn__right">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
-        <h3>基本博客设定</h3>
         <label for="blogTitle">${blogTitle1Label}</label>
         <input id="blogTitle" type="text"/>
         <label for="blogSubtitle">${blogSubtitle1Label}</label>
@@ -234,7 +233,6 @@
         <div style="display: none">
             元数据：<span id="sourceTC"></span>
         </div>
-        <h3>自定义图床</h3>
         <label for="tcS">图床选择</label>
         <select id="tcS" disabled>
             <option selected></option>
@@ -386,7 +384,6 @@
     <div id="tabPreferencePanel_mailAndRemind" class="fn__none form">
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
-        <h3>邮件服务器设定</h3>
         <label for="mailBox">${mailBoxLabel}</label>
         <select id="mailBox">
             <option value="" selected>未设定</option>
@@ -422,7 +419,6 @@
     <div id="tabPreferencePanel_b3logEcology" class="fn__none form">
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
-        <h3>B3log 生态设定</h3>
         <label for="hacpaiUser">${hacpaiUser1Label}</label>
         <input id="hacpaiUser" type="text"/>
         <label for="b3logKey">${b3logKey1Label}</label>

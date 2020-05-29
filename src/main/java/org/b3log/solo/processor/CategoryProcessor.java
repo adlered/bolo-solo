@@ -243,6 +243,9 @@ public class CategoryProcessor {
             dataModel.put(Pagination.PAGINATION_FIRST_PAGE_NUM, pageNums.get(0));
             dataModel.put(Pagination.PAGINATION_LAST_PAGE_NUM, pageNums.get(pageNums.size() - 1));
         } catch (IndexOutOfBoundsException IOOBE) {
+            dataModel.put(Pagination.PAGINATION_FIRST_PAGE_NUM, 1);
+            dataModel.put(Pagination.PAGINATION_LAST_PAGE_NUM, 1);
+
             LOGGER.log(Level.WARN, "No category of \"" + categoryURI + "\" has found. Showing blank.");
         }
         dataModel.put(Pagination.PAGINATION_PAGE_COUNT, pageCount);

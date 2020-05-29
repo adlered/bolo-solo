@@ -732,6 +732,19 @@ public class DataModelService {
             dataModel.put(User.USERS, userList);
             final JSONObject admin = userRepository.getAdmin();
             dataModel.put(Common.ADMIN_USER, admin);
+            // 返回 Bolo 设定的黑客派用户名
+            String userName = "";
+            try {
+                BeanManager beanManager = BeanManager.getInstance();
+                OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+                JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
+                userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
+                if (userName.equals("BoloDefault")) {
+                    userName = "";
+                }
+            } catch (NullPointerException NPE) {
+            }
+            dataModel.put(Option.ID_C_HACPAI_USER, userName);
             final String skinDirName = (String) context.attr(Keys.TEMAPLTE_DIR_NAME);
             dataModel.put(Option.ID_C_SKIN_DIR_NAME, skinDirName);
             Keys.fillRuntime(dataModel);

@@ -19,17 +19,19 @@
 -->
 <#macro userSite dir>
     <#if usite??>
-        <a href="https://hacpai.com/member/${adminUser.userName}"
-           <#if dir==''>title<#else>aria-label</#if>="https://hacpai.com/member/${adminUser.userName}"
-           class="<#if dir!=''>vditor-tooltipped__${dir} vditor-tooltipped  </#if>user__site"
-           target="_blank" rel="noopener nofollow">
-            <svg viewBox="0 0 32 32" width="100%" height="100%">
-                <path fill="#d23f31" style="fill: var(--color1, #d23f31)"
-                      d="M5.787 17.226h17.033l5.954 9.528c0.47 0.752 0.003 1.361-1.042 1.361h-15.141z"></path>
-                <path d="M10.74 3.927h17.033c1.045 0 1.512 0.609 1.042 1.361l-5.954 9.528h-19.872l6.379-10.209c0.235-0.376 0.849-0.681 1.372-0.681z"></path>
-                <path d="M2.953 17.226h2.839l6.804 10.889h-1.892c-0.523 0-1.137-0.305-1.372-0.681z"></path>
-            </svg>
-        </a>
+        <#if hacpaiUser != ''>
+            <a href="https://hacpai.com/member/${adminUser.userName}"
+               <#if dir==''>title<#else>aria-label</#if>="https://hacpai.com/member/${adminUser.userName}"
+               class="<#if dir!=''>vditor-tooltipped__${dir} vditor-tooltipped  </#if>user__site"
+               target="_blank" rel="noopener nofollow">
+                <svg viewBox="0 0 32 32" width="100%" height="100%">
+                    <path fill="#d23f31" style="fill: var(--color1, #d23f31)"
+                          d="M5.787 17.226h17.033l5.954 9.528c0.47 0.752 0.003 1.361-1.042 1.361h-15.141z"></path>
+                    <path d="M10.74 3.927h17.033c1.045 0 1.512 0.609 1.042 1.361l-5.954 9.528h-19.872l6.379-10.209c0.235-0.376 0.849-0.681 1.372-0.681z"></path>
+                    <path d="M2.953 17.226h2.839l6.804 10.889h-1.892c-0.523 0-1.137-0.305-1.372-0.681z"></path>
+                </svg>
+            </a>
+        </#if>
 
         <#if usite.usiteGitHub != ''>
             <a href="https://github.com/${usite.usiteGitHub}"

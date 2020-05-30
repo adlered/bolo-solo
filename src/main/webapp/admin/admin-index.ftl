@@ -24,6 +24,7 @@
         <@head title="${adminConsoleLabel} - ${blogTitle}">
             <link type="text/css" rel="stylesheet" href="${staticServePath}/scss/admin.css?${staticResourceVersion}" />
             <meta name="robots" content="fn__none" />
+            <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         </@head>
     </head>
     <body onhashchange="admin.setCurByHash();">
@@ -49,13 +50,14 @@
                     <li>
                         <div id="tabs_main">
                             <a href="#main">
+                                <i class="fa fa-home"></i>
                                 ${adminIndexLabel}
                             </a>
                         </div>
                     </li>
                     <li>
                         <div id="tabArticleTitle" class="tab-current" onclick="admin.collapseNav(this)">
-                            <span class="icon-article"></span>
+                            <i class="fa fa-align-left"></i>
                             ${articleLabel}
                             <span class="icon-chevron-up fn__right"></span>
                         </div>
@@ -80,13 +82,14 @@
                     <li>
                         <div id="tabs_comment-list">
                             <a href="#comment-list">
-                                <span class="icon-cmts"></span> ${commentListLabel}
+                                <i class="fa fa-commenting"></i>
+                                ${commentListLabel}
                             </a>
                         </div>
                     </li>
                     <li>
                         <div id="tabToolsTitle" onclick="admin.collapseNav(this)">
-                            <span class="icon-setting"></span>
+                            <i class="fa fa-gear"></i>
                             ${ToolLabel}
                             <span class="icon-chevron-down fn__right"></span>
                         </div>
@@ -146,7 +149,16 @@
                     <li>
                         <div id="tabs_about">
                             <a href="#about">
-                                <span class="icon-info"></span> ${aboutLabel}
+                                <i class="fa fa-info-circle"></i>
+                                ${aboutLabel}
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <a href="https://doc.stackoverflow.wiki/web/#/7?page_id=46" target="_blank">
+                                <i class="fa fa-question-circle"></i>
+                                ${helpLabel}
                             </a>
                         </div>
                     </li>

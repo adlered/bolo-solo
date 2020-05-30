@@ -135,5 +135,6 @@
     <orderEntry type="library" name="Maven: rome:rome:0.9" level="project" />
     <orderEntry type="library" name="Maven: jdom:jdom:1.0" level="project" />
     <orderEntry type="library" name="typing" level="application" />
+    <orderEntry type="library" name="font-awesome" level="application" />
   </component>
 </module>

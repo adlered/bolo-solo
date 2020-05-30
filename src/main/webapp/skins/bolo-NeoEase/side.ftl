@@ -34,6 +34,7 @@
      </div>
 
      <#else>
+         <#if interactive == "on">
          <#if 0 != recentComments?size>
     <div>
         <h4>${recentCommentsLabel}</h4>
@@ -78,6 +79,7 @@
             </#list>
         </ul>
     </div>
+         </#if>
          </#if>
          <#if 0 != mostViewCountArticles?size>
     <div>

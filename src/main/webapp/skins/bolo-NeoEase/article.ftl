@@ -60,9 +60,11 @@
                             </span>
                         </div>
                         <div class="right article-element">
+                            <#if interactive == "on">
                             <a rel="nofollow" href="${servePath}${article.articlePermalink}#comments">
                                 ${article.articleCommentCount}&nbsp;&nbsp;${commentLabel}
                             </a>&nbsp;&nbsp;
+                            </#if>
                             <a rel="nofollow" href="${servePath}${article.articlePermalink}">
                                 ${article.articleViewCount}&nbsp;&nbsp;${viewLabel}
                             </a>
@@ -107,7 +109,9 @@
                             <div id="externalRelevantArticles"></div>
                         </div>
                     </div>
+                    <#if interactive == "on">
                     <@comments commentList=articleComments article=article></@comments>
+                    </#if>
                 </div>
                 <#include "side.ftl">
                 <div class="clear"></div>

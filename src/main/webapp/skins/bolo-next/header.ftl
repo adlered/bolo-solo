@@ -45,12 +45,14 @@
                 </#list>
             </ul>
 
+            <#if interactive == "on">
             <div class="site-search">
                 <form action="${servePath}/search">
                     <input placeholder="${searchLabel}" id="search" type="text" name="keyword"/>
                     <input type="submit" value="" class="fn-none" />
                 </form>
             </div>
+            </#if>
         </nav>
     </div>
 </header>

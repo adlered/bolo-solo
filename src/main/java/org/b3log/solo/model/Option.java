@@ -360,6 +360,11 @@ public final class Option {
     public static final String ID_C_SPAM = "spam";
 
     /**
+     * Key of interactive switch
+     */
+    public static final String ID_C_INTERACTIVE = "interactive";
+
+    /**
      * Private constructor.
      */
     private Option() {

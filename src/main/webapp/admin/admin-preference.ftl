@@ -54,6 +54,11 @@
                 <a href="#tools/preference/b3logEcology">${b3logEcologyLabel}</a>
             </div>
         </li>
+        <li>
+            <div id="tabPreference_interactive">
+                <a href="#tools/preference/interactive">${interactiveLabel}</a>
+            </div>
+        </li>
     </ul>
 </div>
 <div id="tabPreferencePanel" class="sub-tabs-main">
@@ -458,6 +463,22 @@
                 </ul>
             </details>
         </div>
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
+    </div>
+    <div id="tabPreferencePanel_interactive" class="fn__none">
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
+        <label><b>${nonInteractiveLabel}</b>
+            <br>
+            ${interactiveDescribeLabel}
+        </label>
+        <br><br>
+        <select id="interactiveSwitch">
+            <option value="on" selected="">${enableLabel}</option>
+            <option value="off">${disableLabel}</option>
+        </select>
+        <br><br>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>

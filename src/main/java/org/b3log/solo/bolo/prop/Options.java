@@ -1,8 +1,11 @@
 package org.b3log.solo.bolo.prop;
 
+import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.model.User;
+import org.b3log.latke.repository.RepositoryException;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.model.Option;
+import org.b3log.solo.repository.OptionRepository;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -64,7 +67,8 @@ public class Options {
                 Option.ID_C_EDITOR_MODE,
                 Option.ID_C_B3LOG_KEY,
                 Option.ID_C_HACPAI_USER,
-                Option.ID_C_SPAM
+                Option.ID_C_SPAM,
+                Option.ID_C_INTERACTIVE
         );
         return optionList;
     }
@@ -118,8 +122,15 @@ public class Options {
                 new Object[] { Option.ID_C_TUCHUANG_CONFIG, Option.CATEGORY_C_PREFERENCE, "hacpai" },
                 new Object[] { Option.ID_C_REPLY_REMIND, Option.CATEGORY_C_PREFERENCE, "" },
                 new Object[] { Option.ID_C_KANBANNIANG_SELECTOR, Option.CATEGORY_C_PREFERENCE, "" },
-                new Object[] { Option.ID_C_SPAM, Option.CATEGORY_C_PREFERENCE, "" }
+                new Object[] { Option.ID_C_SPAM, Option.CATEGORY_C_PREFERENCE, "" },
+                new Object[] { Option.ID_C_INTERACTIVE, Option.CATEGORY_C_PREFERENCE, "on"}
                 );
         return optList;
+    }
+
+    public static String get(String key) throws RepositoryException {
+        final BeanManager beanManager = BeanManager.getInstance();
+        OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+        return optionRepository.get(key).optString(Option.OPTION_VALUE);
     }
 }

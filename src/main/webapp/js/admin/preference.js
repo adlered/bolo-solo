@@ -60,6 +60,11 @@ admin.preference = {
           }
         });
 
+        if (preference.interactive === "" || preference.interactive === undefined) {
+          $("#interactiveSwitch").val("on")
+        } else {
+          $("#interactiveSwitch").val(preference.interactive)
+        }
         $('#spam').val(preference.spam)
         $('#kanbanniangSelector').val(preference.kanbanniangSelector)
         $('#replyRemind').val(preference.replyRemind)
@@ -220,8 +225,13 @@ admin.preference = {
         'signHTML': $('#preferenceSign3').val(),
       }]
 
+    if ($("#interactiveSwitch").val() === null) {
+      $("#interactiveSwitch").val("on");
+    }
+
     var requestJSONObject = {
       'preference': {
+        'interactive': $("#interactiveSwitch").val(),
         'spam': $('#spam').val(),
         'kanbanniangSelector': $('#kanbanniangSelector').val(),
         'replyRemind': $('#replyRemind').val(),

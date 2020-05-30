@@ -79,7 +79,7 @@ public class PreferenceMgmtService {
         while (keys.hasNext()) {
             final String key = keys.next();
             if (preference.isNull(key)) {
-                throw new ServiceException("A value is null of preference [key=" + key + "]");
+                LOGGER.log(Level.ERROR, "A value is null of preference [key=" + key + "]");
             }
         }
 

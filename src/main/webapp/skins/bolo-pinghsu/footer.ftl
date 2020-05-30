@@ -70,7 +70,7 @@
             <a class="ft__link" href="${servePath}">${blogTitle}</a>
             ${footerContent}
             <br>
-            Powered by <a class="ft__link" href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a>
+            Powered by <a class="ft__link" href="https://github.com/adlered/bolo-solo" target="_blank">Bolo</a>
             <br>
             Theme ${skinDirName}
             <sup>[<a class="ft__link" target="_blank" href="https://github.com/chakhsu/pinghsu">ref</a>]</sup>

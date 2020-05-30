@@ -23,7 +23,7 @@
             <div class="level-start has-text-centered-mobile">
                 <p class="is-size-6">
                     &copy; ${.now?string('yyyy')} ${blogTitle!}&nbsp;
-                    Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">菠萝博客 Bolo</a>
+                    Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">Bolo</a>
                     <br>
                     &nbsp;&nbsp;&nbsp;Theme <a href="https://github.com/csfwff/bolo-fantastic">Fantastic</a> by
                     <a href="https://github.com/csfwff" target="_blank">唐墨夏</a>
@@ -33,7 +33,7 @@
             </div>
             <div class="level-end">
                 <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                    <a href="${servePath}/search"> 搜索</a>&nbsp;•&nbsp;
+                    <#if interactive == "on"><a href="${servePath}/search"> 搜索</a>&nbsp;•&nbsp;</#if>
                     <a href="${servePath}/tags.html"> ${allTagsLabel}</a>&nbsp;•&nbsp;
                     <a href="${servePath}/archives.html"> ${archiveLabel}</a>&nbsp;•&nbsp;
                     <a href="${servePath}/links.html">

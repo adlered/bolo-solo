@@ -150,7 +150,7 @@
     <footer class="footer">
         <div class="container">
             <div class="copyright">
-                Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a> ${boloVersion}
+                Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">Bolo</a> ${boloVersion}
             </div>
         </div>
     </footer>

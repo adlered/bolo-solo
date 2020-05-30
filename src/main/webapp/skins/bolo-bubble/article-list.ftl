@@ -62,11 +62,13 @@
                         ${articleTag}
                     </a> &nbsp;
                 </#list>
+                <#if interactive == "on">
                 <#if article.articleCommentCount != 0>
                     &nbsp;·&nbsp;
                     <a class="item__tag" href="${servePath}${article.articlePermalink}#comments">
                         ${article.articleCommentCount} ${commentLabel}
                     </a>
+                </#if>
                 </#if>
                 <#if article.articleViewCount != 0>
                     &nbsp;·&nbsp;

@@ -94,9 +94,12 @@
                 <li>
                     <a rel="alternate" href="${servePath}/rss.xml">RSS</a>
                 </li>
+                <#if interactive == "on">
                 <li>
                     <a href="${servePath}/search?keyword=">Search</a>
                 </li>
+                </#if>
+                <#if interactive == "on">
                 <#if isLoggedIn>
                     <li>
                         <a href="${servePath}/admin-index.do#main">
@@ -114,6 +117,7 @@
                             ${startToUseLabel}
                         </a>
                     </li>
+                </#if>
                 </#if>
             </ul>
         </div>

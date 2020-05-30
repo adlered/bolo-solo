@@ -43,7 +43,7 @@
             </a>
             <br>
             ${statistic.statisticPublishedBlogArticleCount} ${articleLabel} &nbsp;
-            ${statistic.statisticPublishedBlogCommentCount} ${commentLabel} &nbsp;
+            <#if interactive == "on">${statistic.statisticPublishedBlogCommentCount} ${commentLabel} &nbsp;</#if>
             ${statistic.statisticBlogViewCount} ${viewLabel} &nbsp;
             ${onlineVisitorCnt} ${onlineVisitorLabel}
         </div>

@@ -41,9 +41,11 @@
             </a>
         </#list>
 
+        <#if interactive == "on">
         <a href="${servePath}/search">
             ${searchLabel}
         </a>
+        </#if>
 
         <div class="fn__right">
             <#include "../../common-template/macro-user_site.ftl">
@@ -52,6 +54,7 @@
                 RSS
             </a>
 
+            <#if interactive == "on">
             <#if isLoggedIn>
             <a href="${servePath}/admin-index.do#main">
                 ${adminLabel}
@@ -63,6 +66,7 @@
             <a rel="alternate" href="${servePath}/start">
                 ${startToUseLabel}
             </a>
+            </#if>
             </#if>
         </div>
     </nav>

@@ -64,9 +64,15 @@
                     <img src="${article.authorThumbnailURL}" />
                 </a>
                 <#if article.articleCommentCount != 0>
-                <a class="item__meta" href="${servePath}${article.articlePermalink}#comments">
-                    ${article.articleCommentCount} ${commentLabel}
-                </a>
+                <#if interactive == "on">
+                    <a class="item__meta" href="${servePath}${article.articlePermalink}#comments">
+                        ${article.articleCommentCount} ${commentLabel}
+                    </a>
+                <#else>
+                    <a class="item__meta" href="${servePath}${article.articlePermalink}">
+                        ${article.articleViewCount} ${viewLabel}
+                    </a>
+                </#if>
                 <#else>
                     <a class="item__meta" href="${servePath}${article.articlePermalink}">
                         ${article.articleViewCount} ${viewLabel}

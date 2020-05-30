@@ -54,6 +54,20 @@ public class InitCheckHandler implements Handler {
         final boolean isSpiderBot = (boolean) context.attr(Keys.HttpRequest.IS_SEARCH_ENGINE_BOT);
         LOGGER.log(Level.TRACE, "Request [URI={0}]", requestURI);
 
+        /**
+         * Bolo WAF
+         */
+        String requestIP = context.remoteAddr();
+        String requestURL = context.requestURI();
+        if (!(
+                requestURL.equals("/articles/random") ||
+                requestURL.equals("/manifest.json") ||
+                requestURL.endsWith("/relevant/articles") ||
+                requestURL.equals("/opensearch.xml")
+        )) {
+            LOGGER.log(Level.INFO, "{WAF} " + requestIP + " >>> " + requestURL);
+        }
+
         // 禁止直接获取 robots.txt https://github.com/b3log/solo/issues/12543
         if (requestURI.startsWith("/robots.txt") && !isSpiderBot) {
             context.sendError(HttpServletResponse.SC_FORBIDDEN);

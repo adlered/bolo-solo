@@ -150,7 +150,7 @@ public class BackupService {
                     article.put(Article.ARTICLE_ABSTRACT_TEXT, "");
                     article.put(Article.ARTICLE_ABSTRACT, "");
                     article.put(Article.ARTICLE_CONTENT, content);
-                    article.put(Article.ARTICLE_TAGS_REF, "");
+                    article.put(Article.ARTICLE_TAGS_REF, "待分类");
                     final String permalink = "/articles/" + DateFormatUtils.format(i.getDate(), "yyyy/MM/dd") + "/" + article.optString(Keys.OBJECT_ID) + ".html";
                     article.put(Article.ARTICLE_PERMALINK, permalink);
                     article.put(Article.ARTICLE_STATUS, Article.ARTICLE_STATUS_C_PUBLISHED);

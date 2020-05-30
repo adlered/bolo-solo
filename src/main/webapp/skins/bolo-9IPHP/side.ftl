@@ -70,15 +70,18 @@
                     <a href="${servePath}/archives.html">
                         ${statistic.statisticPublishedBlogArticleCount}
                         <span class="ft-gray">${articleLabel}</span></a><br/>
+                    <#if interactive == "on">
                     <a href="${servePath}/dynamic.html">
                         ${statistic.statisticPublishedBlogCommentCount}
                         <span class="ft-gray">${commentLabel}</span></a><br/>
+                    </#if>
                     ${statistic.statisticBlogViewCount} <span class="ft-gray">${viewLabel}</span><br/>
                     ${onlineVisitorCnt} <span class="ft-gray">${onlineVisitorLabel}</span>
                 </div>
             </main>
         </div>
 
+        <#if interactive == "on">
         <#if 0 != mostCommentArticles?size>
         <div class="module">
             <header><h2>${mostCommentArticlesLabel}</h2></header>
@@ -96,6 +99,7 @@
                 </ul>
             </main>
         </div>
+        </#if>
         </#if>
 
         <#if 0 != mostViewCountArticles?size>

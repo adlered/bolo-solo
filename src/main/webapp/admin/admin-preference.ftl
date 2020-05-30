@@ -228,7 +228,6 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_imageBed" class="fn__none form">
-        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
         <div style="display: none">
             元数据：<span id="sourceTC"></span>
@@ -377,8 +376,6 @@
         <div><b>请注意！如使用自定义图床中出现 "413 Request Entity Too Large" 等类似报错，请调整 Nginx / Tomcat 的数据包大小限制。</b>
             <br>
             配置图床期间出现疑问或问题，请联系作者微信：1101635162</div>
-
-        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_mailAndRemind" class="fn__none form">

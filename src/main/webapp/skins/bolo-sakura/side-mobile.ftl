@@ -49,17 +49,21 @@
         </div>
     </div>
     </p>
+    <#if interactive == "on">
     <div class="m-search">
         <form class="m-search-form" method="get" action="${servePath}/search" role="search">
             <input class="m-search-input" type="search" name="keyword" placeholder="搜索..." required>
         </form>
     </div>
+    </#if>
     <ul id="menu-new-1" class="menu">
+        <#if interactive == "on">
         <#if isLoggedIn>
             <li><a href="${servePath}/admin-index.do#main"><span class="faa-parent animated-hover"><img src="${gravatar}" width="15px" height="15px" style="border-radius:50%"> ${adminLabel}</span></a>
         <#else>
             <li><a href="${servePath}/start"><span class="faa-parent animated-hover"><i
                             class="fa fa-user faa-horizontal" aria-hidden="true"></i> ${startToUseLabel}</span></a>
+        </#if>
         </#if>
         <li><a href="${servePath}/"><span class="faa-parent animated-hover"><i
                             class="fa fa-home faa-horizontal" aria-hidden="true"></i> 首页</span></a>
@@ -89,8 +93,10 @@
         ${statistic.statisticBlogViewCount}
         <span>${articleLabel}</span>
         ${statistic.statisticPublishedBlogArticleCount}
+        <#if interactive == "on">
         <span>${commentLabel}</span>
         ${statistic.statisticPublishedBlogCommentCount}<br>
+        </#if>
         ${footerContent}
     </p>
 </div>

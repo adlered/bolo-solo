@@ -114,6 +114,7 @@
                 </div>
             </div>
             <div class="header-user-avatar">
+                <#if interactive == "on">
                 <#if isLoggedIn>
                     <a href="${servePath}/admin-index.do#main"><img class="faa-shake animated-hover"
                                                       src="${gravatar}"
@@ -133,11 +134,14 @@
                         </div>
                     </div>
                 </#if>
+                </#if>
 
             </div>
+            <#if interactive == "on">
             <div class="searchbox">
                 <i class="iconfont js-toggle-search iconsearch icon-search"></i>
             </div>
+            </#if>
         </div>
     </header>
     <div class="blank">

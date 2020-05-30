@@ -40,8 +40,8 @@
                                     src="${article.authorThumbnailURL}"></a></span><span><a
                                 href="https://2heng.xin/author/Mashiro/">${article.authorName}</a></span><span
                             class="bull">·</span>${article.articleUpdateDate?string("yyyy-MM-dd")}<span
-                            class="bull">·</span>${article.articleViewCount} 次阅读<span
-                            class="bull">·</span>${article.articleCommentCount} ${commentLabel}</p>
+                            class="bull">·</span>${article.articleViewCount} 次阅读<#if interactive == "on"><span
+                            class="bull">·</span>${article.articleCommentCount} ${commentLabel}</#if></p>
                 <#if article.articleCategory??>
                     <#if article.has("categoryURI") && article.articleCategory != ''>
                         <a href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a> »
@@ -75,11 +75,13 @@
             </div>
         </div>
 
+        <#if interactive == "on">
         <section class="comments">
             <ul class="commentwrap">
                 <@comments commentList=articleComments article=article count=article.articleCommentCount></@comments>
             </ul>
         </section>
+        </#if>
     </div>
     <#include 'macro-footer.ftl'>
 </section>

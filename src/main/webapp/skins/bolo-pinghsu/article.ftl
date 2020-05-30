@@ -63,8 +63,10 @@
                 in <a href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a>
             </#if>
             with ${article.articleViewCount} views
+            <#if interactive == "on">
             <#if article.articleCommentCount != 0>
                 and <a href="#comments">${article.articleCommentCount} comments</a>
+            </#if>
             </#if>
         </div>
         <div class="item__tags">
@@ -93,7 +95,9 @@
     </div>
     <div class="body--gray post__gray">
         <div class="wrapper comment">
+            <#if interactive == "on">
             <@comments commentList=articleComments article=article></@comments>
+            </#if>
 
             <div class="post__list fn__flex">
                 <div class="fn__flex-1">

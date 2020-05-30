@@ -208,6 +208,24 @@ public class IndexProcessor {
     }
 
     /**
+     * Auto login page.
+     *
+     * @param context the specified context
+     */
+    @RequestProcessing(value = "/root", method = HttpMethod.GET)
+    public void showRoot(final RequestContext context) {
+        if (initService.isInited() && null != Solos.getCurrentUser(context.getRequest(), context.getResponse())) {
+            context.sendRedirect(Latkes.getServePath() + "/admin-index.do#main");
+
+            return;
+        } else {
+            context.sendRedirect(Latkes.getServePath() + "/start");
+
+            return;
+        }
+    }
+
+    /**
      * Logout.
      *
      * @param context the specified context

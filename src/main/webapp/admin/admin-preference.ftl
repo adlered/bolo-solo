@@ -469,10 +469,9 @@
     <div id="tabPreferencePanel_interactive" class="fn__none">
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
-        <label><b>${nonInteractiveLabel}</b>
-            <br>
-            ${interactiveDescribeLabel}
-        </label>
+        <label>${nonInteractiveLabel}</label>
+        <br>
+        ${interactiveDescribeLabel}
         <br><br>
         <select id="interactiveSwitch">
             <option value="on" selected="">${enableLabel}</option>

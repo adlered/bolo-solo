@@ -43,20 +43,20 @@
                 </div>
             </div>
             <div class="navbar-end">
-
-                <#if isLoggedIn>
-                    <a class="navbar-item" href="${servePath}/admin-index.do#main" title="${adminLabel}">
-                        ${adminLabel}
-                    </a>
-                    <a class="navbar-item" href="${logoutURL}">
-                        ${logoutLabel}
-                    </a>
-                <#else>
-                    <a class="navbar-item" href="${servePath}/start">
-                        ${startToUseLabel}
-                    </a>
+                <#if interactive == "on">
+                    <#if isLoggedIn>
+                        <a class="navbar-item" href="${servePath}/admin-index.do#main" title="${adminLabel}">
+                            ${adminLabel}
+                        </a>
+                        <a class="navbar-item" href="${logoutURL}">
+                            ${logoutLabel}
+                        </a>
+                    <#else>
+                        <a class="navbar-item" href="${servePath}/start">
+                            ${startToUseLabel}
+                        </a>
+                    </#if>
                 </#if>
-
             </div>
         </div>
 </nav>

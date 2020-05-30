@@ -27,10 +27,12 @@
             <span>${articleLabel}</span>
             ${statistic.statisticPublishedBlogArticleCount}
         </div>
+        <#if interactive == "on">
         <div>
             <span>${commentLabel}</span>
             ${statistic.statisticPublishedBlogCommentCount}
         </div>
+        </#if>
         <div>
             <span>${viewLabel}</span>
             ${statistic.statisticBlogViewCount}
@@ -75,13 +77,16 @@
         <div class="nexmoe-widget-wrap">
             <h3 class="nexmoe-widget-title">功能按钮</h3>
             <div class="nexmoe-widget nexmoe-social features">
+                <#if interactive == "on">
                 <a href="${servePath}/search" title="搜索">
                     <i class="mdui-list-item-icon iconfont solo-search"></i>
                     <div class="mdui-list-item-content">搜索</div>
                 </a>
+                </#if>
                 <a href="${servePath}/rss.xml" title="RSS">
                     <i class="mdui-list-item-icon iconfont solo-rss"></i>
                 </a>
+                <#if interactive == "on">
                 <#if isLoggedIn>
                     <a href="${servePath}/admin-index.do#main" target="_blank"
                        title="${adminLabel}">
@@ -95,6 +100,7 @@
                         <i class="mdui-list-item-icon iconfont solo-login"></i>
                         <div class="mdui-list-item-content"> ${startToUseLabel}</div>
                     </a>
+                </#if>
                 </#if>
             </div>
         </div>

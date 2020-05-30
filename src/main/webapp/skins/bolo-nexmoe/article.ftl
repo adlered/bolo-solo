@@ -51,12 +51,13 @@
                 <span>
                     <i class="nexmoefont iconfont solo-calendarl"></i>${article.articleUpdateDate?string("yyyy年MM月dd日")}
                 </span><span>
-                    <i class="nexmoefont iconfont solo-heat"></i>${article.articleViewCount} °C
+                    <i class="nexmoefont iconfont solo-heat"></i>${article.articleViewCount} 浏览
                 </span><#if article.articleCategory != ""><span>
                     <i class="nexomefont iconfont solo-category"></i>${article.articleCategory}</span></#if>
+                    <#if interactive == "on">
                     <#if article.articleCommentCount != 0><span>
                         <i class="nexmoefont iconfont solo-comment"></i>${article.articleCommentCount}
-                        </span></#if>
+                        </span></#if></#if>
                     <#list article.articleTags?split(",") as articleTag>
                         <#if articleTag_index == 0>
                             <#if articleCategory??><span>
@@ -89,7 +90,9 @@
                     <#include "../../common-template/toc.ftl"/>
                 </#if>
             </div>
+            <#if interactive == "on">
             <@comments commentList=articleComments article=article></@comments>
+            </#if>
             <#if pjax><!---- pjax {#pjax} end ----></#if>
         </main>
 

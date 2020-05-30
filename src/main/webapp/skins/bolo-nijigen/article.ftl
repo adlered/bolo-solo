@@ -78,9 +78,11 @@
                                 ${articleTag}</a><#if articleTag_has_next>,</#if>
                             </#list>
                         </span>
+                        <#if interactive == "on">
                         <a class="tag" href="${servePath}${article.articlePermalink}#comments">
                             <i class="icon__comments"></i> ${article.articleCommentCount} ${commentLabel}
                         </a>
+                        </#if>
                         <span class="tag">
                             <i class="icon__views"></i>
                         ${article.articleViewCount} ${viewLabel}
@@ -140,7 +142,9 @@
             </div>
             </#if>
 
+            <#if interactive == "on">
             <@comments commentList=articleComments article=article></@comments>
+            </#if>
 
             <div class="fn__flex article__relevant">
                 <div class="fn__flex-1" id="externalRelevantArticlesWrap">

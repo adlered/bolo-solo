@@ -18,6 +18,7 @@
 
 -->
 <div class="sidebar">
+  <#if interactive == "on">
   <section class="sidebar__container">
     <div class="header">
       <span>${searchLabel}</span>
@@ -31,6 +32,7 @@
       </form>
     </div>
   </section>
+  </#if>
 
   <section class="sidebar__container">
     <div class="header">
@@ -40,7 +42,7 @@
       <img class="user__avatar" src="${adminUser.userAvatar}" alt="${adminUser.userName}"/>
       <div class="user__info">
         <div class="item"><a href="${servePath}/archives.html">${statistic.statisticPublishedBlogArticleCount}<span class="text">${articleLabel}</span></a></div>
-        <div class="item"><a href="${servePath}/dynamic.html">${statistic.statisticPublishedBlogCommentCount}<span class="text">${commentLabel}</span></a></div>
+        <#if interactive == "on"><div class="item"><a href="${servePath}/dynamic.html">${statistic.statisticPublishedBlogCommentCount}<span class="text">${commentLabel}</span></a></div></#if>
         <div class="item">${statistic.statisticBlogViewCount}<span class="text">${viewLabel}</span></div>
         <div class="item">${onlineVisitorCnt}<span class="text">${onlineVisitorLabel}</span></div>
       </div>
@@ -73,6 +75,7 @@
     </section>
   </#if>
 
+  <#if interactive == "on">
   <#if 0 != mostCommentArticles?size>
   <section class="sidebar__container">
     <div class="header">
@@ -84,6 +87,7 @@
       </#list>
     </div>
   </section>
+  </#if>
   </#if>
 
   <#if 0 != mostViewCountArticles?size>

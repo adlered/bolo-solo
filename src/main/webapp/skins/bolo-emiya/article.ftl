@@ -54,9 +54,11 @@
                 data-url="${servePath}${article.articlePermalink}"
                 data-avatar="${article.authorThumbnailURL}"></a>
             </div>
+            <#if interactive == "on">
             <div class="comment__container">
               <@article_comments commentList=articleComments article=article></@article_comments>
             </div>
+            </#if>
             <div class="recommendation__container">
               <div class="item" id="externalRelevantArticles">
               </div>

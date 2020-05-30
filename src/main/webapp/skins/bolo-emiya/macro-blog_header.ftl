@@ -21,11 +21,13 @@
   <#list pageNavigations as page>
   <li><a href="${page.pagePermalink}" target="${page.pageOpenTarget}">${page.pageTitle}</a></li>
   </#list>
+  <#if interactive == "on">
   <#if isLoggedIn>
   <li><a href="${servePath}/admin-index.do#main">${adminLabel}</a></li>
   <li><a href="${logoutURL}">${logoutLabel}</a></li>
   <#else>
   <li><a href="${servePath}/start">${startToUseLabel}</a></li>
+  </#if>
   </#if>
   <#nested>
 </#macro>
@@ -73,9 +75,11 @@
           <h1 class="articleMeta__title">${article.articleTitle}</h1>
           <div class="articleMeta__info">
             <span class="author">@${article.authorName} &nbsp;${article.articleCreateDate?string("yyyy-MM-dd")}</span>
+            <#if interactive == "on">
             <span class="comments">
               <a href="${servePath}${article.articlePermalink}#comments">${article.articleCommentCount} ${commentLabel}</a>
             </span>
+            </#if>
             <span class="views">
               ${article.articleViewCount} ${viewLabel}
             </span>

@@ -62,8 +62,10 @@
             </#list>
             </span>
             <div class="fn__right">
+                <#if interactive == "on">
                 <a class="ft__red" href="${servePath}${article.articlePermalink}#comments"><#if article.articleCommentCount gt 0>${article.articleCommentCount} </#if>${commentLabel}</a>
                 •
+                </#if>
                 ${article.articleViewCount} ${viewLabel}
             </div>
         </div>
@@ -103,7 +105,9 @@
         </#if>
     </div>
 
+    <#if interactive == "on">
     <@comments commentList=articleComments article=article></@comments>
+    </#if>
     <#if 0 != relevantArticlesDisplayCount>
         <div id="relevantArticles" class="article__near"></div>
     </#if>

@@ -39,6 +39,11 @@
                 <a href="#tools/others/tag">${clearDataLabel}</a>
             </div>
         </li>
+        <li>
+            <div id="tabOthers_commentSync">
+                <a href="#tools/others/commentSync">${syncLabel}</a>
+            </div>
+        </li>
     </ul>
 </div>
 <div id="tabOthersPanel" class="sub-tabs-main">
@@ -107,6 +112,48 @@
         <p style="margin-top: 5px">可将从博客园备份的 xml 文件导入至菠萝博客。</p>
         <button id="markdown" style="margin-top: 10px">Markdown zip 导入文章</button>
         <p style="margin-top: 5px">可将多篇 .md 文章打包成 zip 导入至菠萝博客。</p>
+    </div>
+    <div id="tabOthersPanel_commentSync" class="fn__none form">
+        你可以手动从黑客派拉取文章中的评论到本地博客的某篇文章中。<br>
+        但需要该文章为本人编写，从博客平台编写且将文章推送到黑客派中过。
+        <br><br>
+        <b>1. 输入黑客派文章号：</b><br>
+        https://hacpai.com/article/ <input id="remoteArticleID" type="text" style="width: 200px">
+        <br>
+        <b>2.选择本地文章：</b>
+        <br>
+        <select id="localArticleList">
+        </select>
+        <br><br>
+        <script type="text/javascript">
+            $.ajax({
+                url: Label.servePath + '/article/commentSync/getList',
+                type: 'GET',
+                async: false,
+                success: function(res) {
+                    let data = res.data;
+                    for(i = 0; i < data.length; i++) {
+                        let oId = data[i].oId;
+                        let title = data[i].title;
+                        $("#localArticleList").append("<option value=\"" +  oId + "\">" + title + "</option>");
+                    }
+                }
+            });
+
+            function commentSync() {
+                let locale = $("#localArticleList").val();
+                let remote = $("#remoteArticleID").val();
+                $.ajax({
+                    url: Label.servePath + '/article/commentSync/' + locale + '/' + remote,
+                    type: 'GET',
+                    async: false,
+                    success: function(res) {
+                        alert(res.msg);
+                    }
+                });
+            }
+        </script>
+        <button onclick="commentSync()">开始同步</button>
     </div>
 </div>
 ${plugins}

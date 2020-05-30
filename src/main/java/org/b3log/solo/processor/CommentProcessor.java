@@ -18,13 +18,16 @@
 package org.b3log.solo.processor;
 
 import freemarker.template.Template;
+import jodd.http.HttpRequest;
+import jodd.http.HttpResponse;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.b3log.latke.Keys;
 import org.b3log.latke.Latkes;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.model.User;
-import org.b3log.latke.repository.RepositoryException;
+import org.b3log.latke.repository.*;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
@@ -38,16 +41,19 @@ import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Comment;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
+import org.b3log.solo.repository.ArticleRepository;
+import org.b3log.solo.repository.CommentRepository;
 import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.repository.UserRepository;
-import org.b3log.solo.service.CommentMgmtService;
-import org.b3log.solo.service.OptionQueryService;
-import org.b3log.solo.service.UserMgmtService;
-import org.b3log.solo.service.UserQueryService;
+import org.b3log.solo.service.*;
 import org.b3log.solo.util.Skins;
 import org.b3log.solo.util.Solos;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import pers.adlered.simplecurrentlimiter.main.SimpleCurrentLimiter;
 
 import javax.servlet.http.HttpServletResponse;
@@ -105,6 +111,30 @@ public class CommentProcessor {
      */
     @Inject
     private OptionRepository optionRepository;
+
+    /**
+     * Article query service.
+     */
+    @Inject
+    private ArticleQueryService articleQueryService;
+
+    /**
+     * Comment repository.
+     */
+    @Inject
+    private CommentRepository commentRepository;
+
+    /**
+     * Article management service.
+     */
+    @Inject
+    private ArticleMgmtService articleMgmtService;
+
+    /**
+     * Article repository.
+     */
+    @Inject
+    private ArticleRepository articleRepository;
 
     /**
      * Adds a comment to an article.
@@ -318,5 +348,111 @@ public class CommentProcessor {
 
         requestJSONObject.put(Comment.COMMENT_NAME, currentUser.optString(User.USER_NAME));
         requestJSONObject.put(Comment.COMMENT_URL, currentUser.optString(User.USER_URL));
+    }
+
+    @RequestProcessing(value = "/article/commentSync/getList", method = HttpMethod.GET)
+    public void commentGetArticleList(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
+
+        final Query query = new Query().setFilter(CompositeFilterOperator.and(
+                new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL, Article.ARTICLE_STATUS_C_PUBLISHED),
+                new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL, Article.ARTICLE_STATUS_C_PUBLISHED)
+        )).
+                setPageCount(1).
+                addSort(Keys.OBJECT_ID, SortDirection.DESCENDING);
+        List<JSONObject> articlesList = new ArrayList<>();
+        try {
+            final List<JSONObject> articles = articleRepository.getList(query);
+            for (final JSONObject article : articles) {
+                JSONObject articleInfo = new JSONObject();
+                String oId = article.optString("oId");
+                String title = article.optString(Article.ARTICLE_TITLE);
+                articleInfo.put("oId", oId);
+                articleInfo.put("title", title);
+                articlesList.add(articleInfo);
+            }
+            context.renderJSON().renderData(articlesList);
+        } catch (RepositoryException repositoryException) {
+            repositoryException.printStackTrace();
+            context.renderJSON().renderCode(1);
+        }
+    }
+
+    /**
+     * Sync comment from HacPai to article
+     *
+     * @param context
+     */
+    @RequestProcessing(value = "/article/commentSync/{localaid}/{remoteaid}", method = HttpMethod.GET)
+    public void commentSync(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
+
+        final Transaction transaction = commentRepository.beginTransaction();
+        long localaid = Long.parseLong(context.pathVar("localaid"));
+        long remoteaid = Long.parseLong(context.pathVar("remoteaid"));
+        // 获取本地文章信息
+        final JSONObject article = articleQueryService.getArticleById(String.valueOf(localaid));
+        String authorId = article.optString(Article.ARTICLE_AUTHOR_ID);
+        final JSONObject authorRet = userQueryService.getUser(authorId);
+        String username = authorRet.getJSONObject(User.USER).optString("userName");
+        String fetchURL = "https://hacpai.com/apis/vcomment?aid=" + remoteaid + "&p=1&un=" + username;
+        // 从远程拉取评论列表
+        final HttpResponse res = HttpRequest.get(fetchURL).trustAllCerts(true).
+                connectionTimeout(3000).timeout(7000).header("User-Agent", Solos.USER_AGENT)
+                .send();
+        if (200 != res.statusCode()) {
+            return;
+        }
+        res.charset("UTF-8");
+        final JSONObject result = new JSONObject(res.bodyText());
+        String html = "";
+        try {
+            html = result.optJSONObject("data").optString("html");
+        } catch (Exception e) {
+            context.renderJSON().renderMsg("评论同步失败！");
+
+            return;
+        }
+        Document document = Jsoup.parse(html);
+        Elements elements = document.getElementsByTag("li");
+        for (Element element : elements) {
+            String id = element.attr("id");
+            if (!id.isEmpty()) {
+                String link = element.getElementsByClass("vcomment__avatarlink").get(0).attr("href");
+                String avatar = element.getElementsByClass("vcomment__avatar").get(0).attr("src");
+                String comment = element.getElementsByClass("vditor-reset").get(0).html();
+                String author = element.getElementsByClass("vditor-reset").get(0).attr("data-author");
+                String srcLink = element.getElementsByClass("vditor-reset").get(0).attr("data-link");
+                final JSONObject commentObject = new JSONObject();
+                commentObject.put(Comment.COMMENT_ORIGINAL_COMMENT_ID, "");
+                commentObject.put(Comment.COMMENT_ORIGINAL_COMMENT_NAME, "");
+                commentObject.put(Comment.COMMENT_NAME, author);
+                commentObject.put(Comment.COMMENT_URL, link);
+                commentObject.put(Comment.COMMENT_CONTENT, comment);
+                commentObject.put(Comment.COMMENT_CREATED, Long.parseLong(id));
+                commentObject.put(Comment.COMMENT_THUMBNAIL_URL, avatar);
+                commentObject.put(Comment.COMMENT_ON_ID, localaid);
+                commentObject.put(Keys.OBJECT_ID, id);
+                final long date = article.optLong(Article.ARTICLE_CREATED);
+                commentObject.put(Comment.COMMENT_SHARP_URL, "/articles/" + DateFormatUtils.format(date, "yyyy/MM/dd") + "/" + article.optString(Keys.OBJECT_ID) + ".html#" + Long.parseLong(id));
+                try {
+                    commentRepository.add(commentObject);
+                    articleMgmtService.incArticleCommentCount(article.optString(Keys.OBJECT_ID));
+                } catch (RepositoryException repositoryException) {
+                    repositoryException.printStackTrace();
+                }
+            }
+        }
+        transaction.commit();
+
+        context.renderJSON().renderMsg("评论同步成功。");
     }
 }

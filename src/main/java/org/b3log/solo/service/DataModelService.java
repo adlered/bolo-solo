@@ -747,7 +747,11 @@ public class DataModelService {
             }
             dataModel.put(Option.ID_C_HACPAI_USER, userName);
             // 交互式开关是否开启
-            dataModel.put(Option.ID_C_INTERACTIVE, Options.get(Option.ID_C_INTERACTIVE));
+            try {
+                dataModel.put(Option.ID_C_INTERACTIVE, Options.get(Option.ID_C_INTERACTIVE));
+            } catch (Exception e) {
+                dataModel.put(Option.ID_C_INTERACTIVE, "on");
+            }
             final String skinDirName = (String) context.attr(Keys.TEMAPLTE_DIR_NAME);
             dataModel.put(Option.ID_C_SKIN_DIR_NAME, skinDirName);
             Keys.fillRuntime(dataModel);

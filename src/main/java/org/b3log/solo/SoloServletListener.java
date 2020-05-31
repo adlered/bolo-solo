@@ -35,6 +35,7 @@ import org.b3log.latke.util.Requests;
 import org.b3log.latke.util.Stopwatchs;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.bolo.prop.MailService;
+import org.b3log.solo.bolo.waf.WAF;
 import org.b3log.solo.event.B3ArticleSender;
 import org.b3log.solo.event.B3ArticleUpdater;
 import org.b3log.solo.event.PluginRefresher;
@@ -150,6 +151,8 @@ public final class SoloServletListener extends AbstractServletListener {
         cronMgmtService.start();
 
         MailService.loadMailSettings();
+
+        WAF.on();
 
         new Thread(new Runnable() {
             @Override

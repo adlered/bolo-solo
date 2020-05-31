@@ -59,6 +59,11 @@
                 <a href="#tools/preference/interactive">${interactiveLabel}</a>
             </div>
         </li>
+        <li>
+            <div id="tabPreference_security">
+                <a href="#tools/preference/security">${securityLabel}</a>
+            </div>
+        </li>
     </ul>
 </div>
 <div id="tabPreferencePanel" class="sub-tabs-main">
@@ -477,6 +482,16 @@
             <option value="on" selected="">${enableLabel}</option>
             <option value="off">${disableLabel}</option>
         </select>
+        <br><br>
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
+    </div>
+    <div id="tabPreferencePanel_security" class="fn__none">
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
+        <label>${securityPowerLabel}</label>
+        <br>
+        ${securityDescribeLabel}
         <br><br>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>

@@ -345,24 +345,39 @@ public final class Option {
     public static final String ID_C_TUCHUANG_CONFIG = "tuChuangConfig";
 
     /**
-     * Key of replyRemind
+     * Key of replyRemind.
      */
     public static final String ID_C_REPLY_REMIND = "replyRemind";
 
     /**
-     * Key of KanBanNiang selector
+     * Key of KanBanNiang selector.
      */
     public static final String ID_C_KANBANNIANG_SELECTOR = "kanbanniangSelector";
 
     /**
-     * Key of spam words
+     * Key of spam words.
      */
     public static final String ID_C_SPAM = "spam";
 
     /**
-     * Key of interactive switch
+     * Key of interactive switch.
      */
     public static final String ID_C_INTERACTIVE = "interactive";
+
+    /**
+     * Key of WAF.
+     */
+    public static final String ID_C_WAF_POWER = "wafPower";
+
+    /**
+     * Key of WAF current limit by second.
+     */
+    public static final String ID_C_WAF_CURRENT_LIMIT_SECOND = "wafCurrentLimitSecond";
+
+    /**
+     * Key of WAF current limit by times.
+     */
+    public static final String ID_C_WAF_CURRENT_LIMIT_TIMES = "wafCurrentLimitTimes";
 
     /**
      * Private constructor.

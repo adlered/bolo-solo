@@ -59,7 +59,12 @@ public class InitCheckHandler implements Handler {
          * Bolo WAF
          */
         String requestIP = context.remoteAddr();
-        WAF.in(requestIP, requestURI);
+        if (!WAF.in(requestIP, requestURI)) {
+            context.sendRedirect(Latkes.getContextPath() + "/waf/denied");
+            context.handle();
+
+            return;
+        }
 
         // 禁止直接获取 robots.txt https://github.com/b3log/solo/issues/12543
         if (requestURI.startsWith("/robots.txt") && !isSpiderBot) {

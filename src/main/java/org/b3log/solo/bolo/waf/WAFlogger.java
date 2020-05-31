@@ -19,10 +19,6 @@ public class WAFlogger {
     public static final String prefix = "${ Web Application Firewall } ";
 
     public static void log(String log) {
-        if (!WAF.POWER) {
-            return;
-        }
-
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(prefix);
         stringBuilder.append(log);
@@ -30,20 +26,10 @@ public class WAFlogger {
     }
 
     public static void logTrace(String requestIP, String requestURL) {
-        if (!WAF.POWER) {
-            return;
-        }
-
-        if (!(
-                requestURL.equals("/articles/random") ||
-                        requestURL.equals("/manifest.json") ||
-                        requestURL.endsWith("/relevant/articles") ||
-                        requestURL.equals("/opensearch.xml")
-        )) {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(prefix);
-            stringBuilder.append(requestIP + " >>> " + requestURL);
-            LOGGER.log(Level.INFO, stringBuilder.toString());
-        }
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(prefix);
+        stringBuilder.append(requestIP + " >>> " + requestURL);
+        LOGGER.log(Level.INFO, stringBuilder.toString());
     }
+
 }

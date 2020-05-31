@@ -152,7 +152,7 @@ public final class SoloServletListener extends AbstractServletListener {
 
         MailService.loadMailSettings();
 
-        WAF.on();
+        WAF.set();
 
         new Thread(new Runnable() {
             @Override

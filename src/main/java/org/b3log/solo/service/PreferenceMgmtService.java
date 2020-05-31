@@ -29,6 +29,7 @@ import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Locales;
 import org.b3log.solo.bolo.prop.MailService;
 import org.b3log.solo.bolo.prop.Options;
+import org.b3log.solo.bolo.waf.WAF;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.OptionRepository;
 import org.json.JSONObject;
@@ -102,6 +103,9 @@ public class PreferenceMgmtService {
             }
 
             transaction.commit();
+
+            WAF.set();
+
             MailService.loadMailSettings();
         } catch (final Exception e) {
             if (transaction.isActive()) {

@@ -229,7 +229,7 @@
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
 
-        ${editorModeLabel}
+        <label>${editorModeLabel}</label>
         <label><input name="editorMode" type="radio" value="wysiwyg">&nbsp;${editorModeWYSIWYGLabel} </label>
         <label><input name="editorMode" type="radio" value="ir">&nbsp;${editorModeIRLabel} </label>
         <label><input name="editorMode" type="radio" value="sv" checked>&nbsp;${editorModeSVLabel} </label>
@@ -238,6 +238,7 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_imageBed" class="fn__none form">
+        <div class="fn__clear"></div>
         <div class="fn__clear"></div>
         <div style="display: none">
             元数据：<span id="sourceTC"></span>
@@ -471,8 +472,10 @@
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>
-    <div id="tabPreferencePanel_interactive" class="fn__none">
-        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+    <div id="tabPreferencePanel_interactive" class="fn__none form">
+        <div class="fn__clear">
+            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        </div>
         <div class="fn__clear"></div>
         <label>${nonInteractiveLabel}</label>
         <br>
@@ -486,13 +489,23 @@
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>
-    <div id="tabPreferencePanel_security" class="fn__none">
-        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+    <div id="tabPreferencePanel_security" class="fn__none form">
+        <div class="fn__clear">
+            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        </div>
         <div class="fn__clear"></div>
         <label>${securityPowerLabel}</label>
         <br>
         ${securityDescribeLabel}
         <br><br>
+        <select id="wafSwitch">
+            <option value="on" selected="">${enableLabel}</option>
+            <option value="off">${disableLabel}</option>
+        </select>
+        <br><br>
+        <label>${frequencyLimit}</label>
+        <br>
+        <input id="wafCurrentLimitTimes" type="text" style="width: 100px"> ${securitySetTimes} <input id="wafCurrentLimitSecond" type="text" style="width: 100px"> ${securitySetSecond}
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>

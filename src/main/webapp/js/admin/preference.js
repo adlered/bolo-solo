@@ -60,6 +60,24 @@ admin.preference = {
           }
         });
 
+        if (preference.wafCurrentLimitTimes === "" || preference.wafCurrentLimitTimes === undefined) {
+          $("#wafCurrentLimitTimes").val("180")
+        } else {
+          $("#wafCurrentLimitTimes").val(preference.wafCurrentLimitTimes)
+        }
+
+        if (preference.wafCurrentLimitSecond === "" || preference.wafCurrentLimitSecond === undefined) {
+          $("#wafCurrentLimitSecond").val("180")
+        } else {
+          $("#wafCurrentLimitSecond").val(preference.wafCurrentLimitSecond)
+        }
+
+        if (preference.wafPower === "" || preference.wafPower === undefined) {
+          $("#wafPower").val("on")
+        } else {
+          $("#wafPower").val(preference.wafPower)
+        }
+
         if (preference.interactive === "" || preference.interactive === undefined) {
           $("#interactiveSwitch").val("on")
         } else {
@@ -231,6 +249,9 @@ admin.preference = {
 
     var requestJSONObject = {
       'preference': {
+        'wafCurrentLimitTimes': $("#wafCurrentLimitTimes").val(),
+        'wafCurrentLimitSecond': $("#wafCurrentLimitSecond").val(),
+        'wafPower': $("#wafPower").val(),
         'interactive': $("#interactiveSwitch").val(),
         'spam': $('#spam').val(),
         'kanbanniangSelector': $('#kanbanniangSelector').val(),

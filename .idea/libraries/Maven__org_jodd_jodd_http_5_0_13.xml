@@ -3,9 +3,7 @@
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/jodd/jodd-http/5.0.13/jodd-http-5.0.13.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/org/jodd/jodd-http/5.0.13/jodd-http-5.0.13-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/jodd/jodd-http/5.0.13/jodd-http-5.0.13-sources.jar!/" />
     </SOURCES>

@@ -60,7 +60,7 @@ public class InitCheckHandler implements Handler {
          */
         String requestIP = context.remoteAddr();
         if (!WAF.in(requestIP, requestURI)) {
-            context.sendRedirect(Latkes.getContextPath() + "/waf/denied");
+            context.attr(Keys.HttpRequest.REQUEST_URI, Latkes.getContextPath() + "/waf/denied");
             context.handle();
 
             return;

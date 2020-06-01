@@ -408,18 +408,16 @@
             目前支持：QQ 邮箱、QQ 企业版邮箱、163 网易免费邮箱<br>
             请注意：<b>有些邮箱服务器可能设有独立密码，具体设定方法请查询后填写！</b>
         </div>
-        <h3>评论与回复</h3>
-        <label for="replyRemind">博主邮箱：</label>
+        <h3>${CommentAndReplyLabel}</h3>
+        <label for="replyRemind">${BloggerMailboxLabel}</label>
         <input id="replyRemind" type="text" />
         <div>
-            填写你用于接收提醒的邮箱，当有人在你的博客文章中评论时，菠萝会发送邮件提醒你。<br>
-            <b>此项设定必须先设定邮件服务器。</b>
+            ${BloggerMailboxDescribeLabel}
         </div>
-        <label for="spam">评论敏感词拦截：</label>
+        <label for="spam">${CommentSpamLabel}</label>
         <input id="spam" type="text" />
         <div>
-            用户的评论中<b>包含设定的敏感词</b>时，将提示用户"系统维护中"。<br>
-            通过英文小写逗号分割。例：AAA,bbb,123,456
+            ${CommentSpamDescribeLabel}
         </div>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
@@ -498,14 +496,14 @@
         <br>
         ${securityDescribeLabel}
         <br><br>
-        <select id="wafSwitch">
+        <select id="wafPower">
             <option value="on" selected="">${enableLabel}</option>
             <option value="off">${disableLabel}</option>
         </select>
         <br><br>
-        <label>${frequencyLimit}</label>
+        <label>${frequencyLimitLabel}</label>
         <br>
-        <input id="wafCurrentLimitTimes" type="text" style="width: 100px"> ${securitySetTimes} <input id="wafCurrentLimitSecond" type="text" style="width: 100px"> ${securitySetSecond}
+        <input id="wafCurrentLimitTimes" type="text" style="width: 100px"> ${securitySetTimesLabel} <input id="wafCurrentLimitSecond" type="text" style="width: 100px"> ${securitySetSecondLabel}
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>

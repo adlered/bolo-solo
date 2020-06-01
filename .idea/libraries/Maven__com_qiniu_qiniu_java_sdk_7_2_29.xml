@@ -3,9 +3,7 @@
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/com/qiniu/qiniu-java-sdk/7.2.29/qiniu-java-sdk-7.2.29.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/com/qiniu/qiniu-java-sdk/7.2.29/qiniu-java-sdk-7.2.29-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/com/qiniu/qiniu-java-sdk/7.2.29/qiniu-java-sdk-7.2.29-sources.jar!/" />
     </SOURCES>

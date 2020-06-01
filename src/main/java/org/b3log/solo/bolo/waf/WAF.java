@@ -18,9 +18,13 @@
 package org.b3log.solo.bolo.waf;
 
 import org.b3log.latke.repository.RepositoryException;
+import org.b3log.latke.servlet.RequestContext;
 import org.b3log.solo.bolo.prop.Options;
 import org.b3log.solo.model.Option;
+import org.b3log.solo.util.Solos;
 import pers.adlered.simplecurrentlimiter.main.SimpleCurrentLimiter;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <h3>bolo-solo</h3>
@@ -95,7 +99,11 @@ public class WAF {
                         requestURL.equals("/admin/logs") ||
                         requestURL.equals("/waf/denied") ||
                         requestIP.equals("0:0:0:0:0:0:0:1") ||
-                        requestIP.equals("127.0.0.1")
+                        requestIP.equals("127.0.0.1") ||
+                        requestURL.startsWith("/admin") ||
+                        requestURL.startsWith("/console") ||
+                        requestURL.startsWith("/plugins") ||
+                        requestURL.equals("/oauth/bolo/login")
         )) {
 
             WAFlogger.logTrace(requestIP, requestURL);

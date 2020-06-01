@@ -3,7 +3,9 @@
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-gfm-strikethrough/0.50.40/flexmark-ext-gfm-strikethrough-0.50.40.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-gfm-strikethrough/0.50.40/flexmark-ext-gfm-strikethrough-0.50.40-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-gfm-strikethrough/0.50.40/flexmark-ext-gfm-strikethrough-0.50.40-sources.jar!/" />
     </SOURCES>

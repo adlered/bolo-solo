@@ -92,18 +92,18 @@ public class WAF {
         }
 
         if (!(
-                requestURL.equals("/articles/random") ||
-                        requestURL.equals("/manifest.json") ||
+                requestURL.contains("/articles/random") ||
+                        requestURL.contains("/manifest.json") ||
                         requestURL.endsWith("/relevant/articles") ||
-                        requestURL.equals("/opensearch.xml") ||
-                        requestURL.equals("/admin/logs") ||
-                        requestURL.equals("/waf/denied") ||
+                        requestURL.contains("/opensearch.xml") ||
+                        requestURL.contains("/admin/logs") ||
+                        requestURL.contains("/waf/denied") ||
                         requestIP.equals("0:0:0:0:0:0:0:1") ||
                         requestIP.equals("127.0.0.1") ||
-                        requestURL.startsWith("/admin") ||
-                        requestURL.startsWith("/console") ||
-                        requestURL.startsWith("/plugins") ||
-                        requestURL.equals("/oauth/bolo/login")
+                        requestURL.contains("/admin") ||
+                        requestURL.contains("/console") ||
+                        requestURL.contains("/plugins") ||
+                        requestURL.contains("/oauth/bolo/login")
         )) {
 
             WAFlogger.logTrace(requestIP, requestURL);

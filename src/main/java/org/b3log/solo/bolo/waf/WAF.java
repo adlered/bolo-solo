@@ -96,14 +96,18 @@ public class WAF {
                         requestURL.contains("/manifest.json") ||
                         requestURL.endsWith("/relevant/articles") ||
                         requestURL.contains("/opensearch.xml") ||
-                        requestURL.contains("/admin/logs") ||
                         requestURL.contains("/waf/denied") ||
                         requestIP.equals("0:0:0:0:0:0:0:1") ||
                         requestIP.equals("127.0.0.1") ||
                         requestURL.contains("/admin") ||
                         requestURL.contains("/console") ||
                         requestURL.contains("/plugins") ||
-                        requestURL.contains("/oauth/bolo/login")
+                        requestURL.contains("/bolo") ||
+                        requestURL.contains("/logout") ||
+                        requestURL.contains("/start") ||
+                        requestURL.contains("/favicon.ico") ||
+                        requestURL.contains("/error/410") ||
+                        requestURL.contains("/images")
         )) {
 
             WAFlogger.logTrace(requestIP, requestURL);

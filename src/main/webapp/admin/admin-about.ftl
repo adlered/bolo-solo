@@ -64,17 +64,10 @@
     </div>
     <span class="fn__clear">
         <div style="margin: 25px 25px 0px 25px">
-            <span id="words"></span><span id="cursor">|</span>
+            <iframe src="https://doc.stackoverflow.wiki/web/#/7?page_id=91" frameborder="no" border="0" scrolling="auto" style="display: block; height: 550px; width: 100%;"></iframe>
         </div>
-        <br><br>
     </span>
-    <script>
-        var strings = new Array(
-            "　　菠萝博客是一个离线化的博客平台，基于 Solo。Bolo 为用户提供完整的个人博客体验。菠萝博客开发组保持高频率的测试版本更新，并为参与内测的用户推送内测包。菠萝博客从用户的角度出发，解决用户提出的每个反馈、建议，致力于打造最佳体验的博客系统，感谢你的使用！参与内测请加入菠萝博客体验官 QQ 群：1105260625，提出问题、建议请访问：https://github.com/adlered/bolo-solo/issues/new",
-        );
-    </script>
-    <link href="https://ftp.stackoverflow.wiki/bolo/typing.js/css/typing.css" rel="stylesheet">
-    <script src="https://ftp.stackoverflow.wiki/bolo/typing.js/js/typing.js"></script>
+    <br><br>
 </div>
 
 ${plugins}

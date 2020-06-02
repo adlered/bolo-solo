@@ -23,6 +23,6 @@
     <h2>访问太快啦！请稍候重试。</h2>
     <img class="img-error" src="${staticServePath}/images/shield.png" title="500" alt="500 Internal Server Error!"/>
     <div class="a-error">
-        <a href="${loginURL}">登录</a> | <a href="${servePath}">返回主页</a>
+        <a href="${servePath}/root">登录</a> | <a href="${servePath}">返回主页</a>
     </div>
 </@commonPage>

@@ -107,7 +107,8 @@ public class WAF {
                         requestURL.contains("/start") ||
                         requestURL.contains("/favicon.ico") ||
                         requestURL.contains("/error/410") ||
-                        requestURL.contains("/images")
+                        requestURL.contains("/images") ||
+                        requestURL.contains("/root")
         )) {
 
             WAFlogger.logTrace(requestIP, requestURL);

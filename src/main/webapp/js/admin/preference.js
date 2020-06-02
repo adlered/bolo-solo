@@ -215,6 +215,12 @@ admin.preference = {
           Label.nonNegativeIntegerOnlyLabel)
       $('#externalRelevantArticlesDisplayCount').focus()
       return false
+    } else if (
+        (!/^\d+$/.test($('#wafCurrentLimitTimes').val())) || $('#wafCurrentLimitTimes').val() < 2 || $('#wafCurrentLimitTimes').val() > 2147483647 ||
+        (!/^\d+$/.test($('#wafCurrentLimitSecond').val())) || $('#wafCurrentLimitSecond').val() < 2 || $('#wafCurrentLimitSecond').val() > 2147483647
+    ) {
+      $('#tipMsg').text('访问频率次数与时间必须在 2-2147483647 之间!')
+      return false
     }
     return true
   },

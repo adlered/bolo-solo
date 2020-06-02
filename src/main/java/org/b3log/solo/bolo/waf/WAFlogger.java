@@ -55,4 +55,11 @@ public class WAFlogger {
         stringBuilder.append(log);
         LOGGER.log(Level.ERROR, stringBuilder.toString());
     }
+
+    public static void logWarn(String log) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(prefix);
+        stringBuilder.append(log);
+        LOGGER.log(Level.WARN, stringBuilder.toString());
+    }
 }

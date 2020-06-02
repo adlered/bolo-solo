@@ -46,7 +46,7 @@ public class RamAppender extends AppenderSkeleton {
     protected void append(LoggingEvent loggingEvent) {
         final Map<String,Object> map = new HashMap<>();
         map.put("name", loggingEvent.getLoggerName());
-        map.put("date", new SimpleDateFormat("yyyy-MM-dd HH:ss:SS").format(new Date(loggingEvent.getTimeStamp())));
+        map.put("date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date(loggingEvent.getTimeStamp())));
         map.put("level", loggingEvent.getLevel().toString());
         map.put("message", "" + loggingEvent.getMessage());
         map.put("methodName", loggingEvent.getLocationInformation().getMethodName());

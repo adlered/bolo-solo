@@ -108,7 +108,8 @@ public class WAF {
                         requestURL.contains("/favicon.ico") ||
                         requestURL.contains("/error") ||
                         requestURL.contains("/images") ||
-                        requestURL.contains("/root")
+                        requestURL.contains("/root") ||
+                        requestURL.contains("/article/commentSync/getList")
         )) {
 
             WAFrule rule = new WAFrule();
@@ -119,7 +120,7 @@ public class WAF {
 
                 return true;
             } else {
-                WAFlogger.logError("REQUEST DENIED! " + requestIP + " >>> " + requestURL);
+                WAFlogger.logWarn("REQUEST DENIED! " + requestIP + " >>> " + requestURL);
 
                 return false;
             }

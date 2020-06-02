@@ -65,6 +65,8 @@ admin.others = {
               build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #f8ba0b; font-weight: bold">' + rLevel + '</span></td>';
             } else if (rLevel === 'INFO') {
               build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #00bbff; font-weight: bold">' + rLevel + '</span></td>';
+            } else if (rLevel === 'ERROR') {
+              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #dd1144" font-weight: bold">' + rLevel + '</span></td>';
             } else {
               build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #1ea0c3" font-weight: bold">' + rLevel + '</span></td>';
             }
@@ -107,6 +109,8 @@ admin.others = {
               build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #f8ba0b; font-weight: bold">' + rLevel + '</span></td>';
             } else if (rLevel === 'INFO') {
               build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #00bbff; font-weight: bold">' + rLevel + '</span></td>';
+            } else if (rLevel === 'ERROR') {
+              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #dd1144" font-weight: bold">' + rLevel + '</span></td>';
             } else {
               build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #1ea0c3" font-weight: bold">' + rLevel + '</span></td>';
             }

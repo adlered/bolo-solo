@@ -49,4 +49,10 @@ public class WAFlogger {
         LOGGER.log(Level.INFO, stringBuilder.toString());
     }
 
+    public static void logError(String log) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(prefix);
+        stringBuilder.append(log);
+        LOGGER.log(Level.ERROR, stringBuilder.toString());
+    }
 }

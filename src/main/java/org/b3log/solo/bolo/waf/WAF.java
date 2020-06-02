@@ -106,22 +106,23 @@ public class WAF {
                         requestURL.contains("/logout") ||
                         requestURL.contains("/start") ||
                         requestURL.contains("/favicon.ico") ||
-                        requestURL.contains("/error/410") ||
+                        requestURL.contains("/error") ||
                         requestURL.contains("/images") ||
                         requestURL.contains("/root")
         )) {
 
-            WAFlogger.logTrace(requestIP, requestURL);
             WAFrule rule = new WAFrule();
             String str = requestIP;
 
             if (rule.access(str)) {
+                WAFlogger.logTrace(requestIP, requestURL);
 
                 return true;
-            }
+            } else {
+                WAFlogger.logError("REQUEST DENIED! " + requestIP + " >>> " + requestURL);
 
-            WAFlogger.log("Request denied of " + requestIP + ".");
-            return false;
+                return false;
+            }
         }
 
         return true;

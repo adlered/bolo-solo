@@ -67,7 +67,8 @@
     <div id="tabOthersPanel_import" class="fn__none">
         <h3>从其它平台导入文章</h3>
         <br>
-        <p><b>请先选择备份文件</b></p>
+        <p><b>第一步，选择备份文件</b></p>
+        <br>
         <form id="fileUploadForm" enctype="multipart/form-data">
             <input name="file" type="file" name="fileUpload" id="backupUpload" accept=".xml,.zip,.dat" multiple="multiple">
         </form>
@@ -108,10 +109,15 @@
             });
         </script>
 
+        <br>
+        <p><b>第二步，选择备份文件的类型</b></p>
+        <br>
         <button id="cnblogs">从博客园备份文件导入文章</button>
-        <p style="margin-top: 5px">可将从博客园备份的 xml 文件导入至菠萝博客。</p>
+        <p style="margin-top: 5px">可将从博客园备份的 xml 文件导入至菠萝博客，部分文章可能会由于长度原因跳过导入。</p>
         <button id="markdown" style="margin-top: 10px">Markdown zip 导入文章</button>
-        <p style="margin-top: 5px">可将多篇 .md 文章打包成 zip 导入至菠萝博客。</p>
+        <p style="margin-top: 5px">可将多篇 .md 文章打包成 zip 导入至菠萝博客，支持 Hexo/jekyll 格式文件；支持从<a href="#tools/others/data">数据导出</a>选项卡中导出的 Hexo 文件导入。</p>
+        <br>
+        <p><b>文章导入功能可能存在数据风险，请谨慎使用。</b></p>
     </div>
     <div id="tabOthersPanel_commentSync" class="fn__none form">
         你可以手动从黑客派拉取文章中的评论到本地博客的某篇文章中。<br>

@@ -59,10 +59,16 @@
         <button class="fn__margin12" onclick="admin.others.exportHexo();">${exportHexoLabel}</button>
     </div>
     <div id="tabOthersPanel_log" class="fn__none form">
+        <div class="fn__clear">
+            <button onclick="admin.others.getLog()" class="fn__right">${RefreshLabel}</button>
+        </div>
         <span style="float: left">JVM 空闲内存：<span id="memFree" style="font-weight: bold"></span></span><span style="float: right"><span id="now"></span> 更新</span>
-        <br><br>
+        <div class="fn__clear"></div>
         <table id="logList">
         </table>
+        <div class="fn__clear">
+            <button onclick="admin.others.getLog()" class="fn__right">${RefreshLabel}</button>
+        </div>
     </div>
     <div id="tabOthersPanel_import" class="fn__none">
         <h3>从其它平台导入文章</h3>

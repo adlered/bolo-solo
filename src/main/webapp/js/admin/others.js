@@ -31,106 +31,58 @@ admin.others = {
    */
   init: function () {
     $("#tabOthers").tabs();
-    $('#loadMsg').text('')
+    $('#loadMsg').text('');
 
-    clearInterval(admin.others.intervalId)
-    admin.others.intervalId = setInterval(() => {
-      admin.others.getLog(false)
-    }, 1000)
-    admin.others.getLog(true)
+    admin.others.getLog();
   },
 
-  getLog: (first) => {
-    if (first) {
-      $.ajax({
-        url: Label.servePath + '/admin/logs',
-        cache: false,
-        timeout: 3000,
-        success: function (result) {
-          var json = result.result;
-          let free = (result.freeMemNow / (1024 * 1024)).toFixed(2) + ' MB';
-          $('#memFree').html(free);
-          $('#now').html(new Date().toLocaleTimeString());
-          for (var i = 0; i < json.length; i++) {
-            var r = json[i];
-            var rId = r.id;
-            var rDate = r.date;
-            var rLevel = r.level;
-            var rSrc = r.name + ':' + r.lineNumber;
-            var msg = r.message;
-            let buildStart = '<tbody class="table-oddRow"><tr class="table-hasExpend">';
-            rDate = rDate.substring(0, 19);
-            let build1 = '';
-            if (rLevel === 'WARN') {
-              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #f8ba0b; font-weight: bold">' + rLevel + '</span></td>';
-            } else if (rLevel === 'INFO') {
-              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #00bbff; font-weight: bold">' + rLevel + '</span></td>';
-            } else if (rLevel === 'ERROR') {
-              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #dd1144" font-weight: bold">' + rLevel + '</span></td>';
-            } else {
-              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #1ea0c3" font-weight: bold">' + rLevel + '</span></td>';
-            }
-            let build2 = '<td style="width: 135px; vertical-align: top"><span style="color: #4caf50; font-weight: bold">' + rDate + '</span></td>';
-            let build3 = '<td style="vertical-align: top"><span style="word-wrap: break-word; white-space: normal; word-break: break-all"><span style="color: #4caf50; font-weight: bold">' + rSrc + '</span><br>' + msg + '</span></td>';
-            let buildEnd = '</tr></tbody>';
-            var res = buildStart + build1 + build2 + build3 + buildEnd;
-            if (r.throwable !== undefined) {
-              res += r.throwable.class + ': ' + r.throwable.message + '<br>';
-              for (var j = 0; j < r.throwable.stackTrace.length; j++) {
-                res += r.throwable.stackTrace[j] + '<br>';
-              }
-            }
-            $('#tabOthersPanel_log #logList').prepend(res);
-            last = rId;
-          }
-        },
-      })
-    } else {
-      $.ajax({
-        url: Label.servePath + '/admin/logs',
-        cache: false,
-        timeout: 3000,
-        success: function (result) {
-          var json = result.result;
-          var r = json[json.length - 1];
+  getLog: () => {
+    $('#tabOthersPanel_log #logList').html("");
+    $.ajax({
+      url: Label.servePath + '/admin/logs',
+      cache: false,
+      timeout: 2000,
+      success: function (result) {
+        var json = result.result;
+        let free = (result.freeMemNow / (1024 * 1024)).toFixed(2) + ' MB';
+        $('#memFree').html(free);
+        $('#now').html(new Date().toLocaleTimeString());
+        for (var i = 0; i < json.length; i++) {
+          var r = json[i];
           var rId = r.id;
-          let free = (result.freeMemNow / (1024 * 1024)).toFixed(2) + ' MB';
-          $('#memFree').html(free);
-          $('#now').html(new Date().toLocaleTimeString());
-          if (rId !== last) {
-            var rDate = r.date;
-            var rLevel = r.level;
-            var rSrc = r.name + ':' + r.lineNumber;
-            var msg = r.message;
-            let buildStart = '<tbody class="table-oddRow"><tr class="table-hasExpend">';
-            rDate = rDate.substring(0, 19);
-            let build1 = '';
-            if (rLevel === 'WARN') {
-              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #f8ba0b; font-weight: bold">' + rLevel + '</span></td>';
-            } else if (rLevel === 'INFO') {
-              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #00bbff; font-weight: bold">' + rLevel + '</span></td>';
-            } else if (rLevel === 'ERROR') {
-              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #dd1144" font-weight: bold">' + rLevel + '</span></td>';
-            } else {
-              build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #1ea0c3" font-weight: bold">' + rLevel + '</span></td>';
-            }
-            let build2 = '<td style="width: 135px; vertical-align: top"><span style="color: #4caf50; font-weight: bold">' + rDate + '</span></td>';
-            let build3 = '<td style="vertical-align: top"><span style="word-wrap: break-word; white-space: normal; word-break: break-all"><span style="color: #4caf50; font-weight: bold">' + rSrc + '</span><br>' + msg + '</span></td>';
-            let buildEnd = '</tr></tbody>';
-            var res = buildStart + build1 + build2 + build3 + buildEnd;
-            if (r.throwable !== undefined) {
-              res += r.throwable.class + ': ' + r.throwable.message + '<br>';
-              for (var j = 0; j < r.throwable.stackTrace.length; j++) {
-                res += r.throwable.stackTrace[j] + '<br>';
-              }
-            }
-            $('#tabOthersPanel_log #logList').prepend(res);
+          var rDate = r.date;
+          var rLevel = r.level;
+          var rSrc = r.name + ':' + r.lineNumber;
+          var msg = r.message;
+          let buildStart = '<tbody class="table-oddRow"><tr class="table-hasExpend">';
+          rDate = rDate.substring(0, 19);
+          let build1 = '';
+          if (rLevel === 'WARN') {
+            build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #f8ba0b; font-weight: bold">' + rLevel + '</span></td>';
+          } else if (rLevel === 'INFO') {
+            build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #00bbff; font-weight: bold">' + rLevel + '</span></td>';
+          } else if (rLevel === 'ERROR') {
+            build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #dd1144" font-weight: bold">' + rLevel + '</span></td>';
+          } else {
+            build1 = '<td style="width: 40px; vertical-align: top"><span style="color: #1ea0c3" font-weight: bold">' + rLevel + '</span></td>';
           }
+          let build2 = '<td style="width: 135px; vertical-align: top"><span style="color: #4caf50; font-weight: bold">' + rDate + '</span></td>';
+          let build3 = '<td style="vertical-align: top"><span style="word-wrap: break-word; white-space: normal; word-break: break-all"><span style="color: #4caf50; font-weight: bold">' + rSrc + '</span><br>' + msg + '</span></td>';
+          let buildEnd = '</tr></tbody>';
+          var res = buildStart + build1 + build2 + build3 + buildEnd;
+          if (r.throwable !== undefined) {
+            res += r.throwable.class + ': ' + r.throwable.message + '<br>';
+            for (var j = 0; j < r.throwable.stackTrace.length; j++) {
+              res += r.throwable.stackTrace[j] + '<br>';
+            }
+          }
+          $('#tabOthersPanel_log #logList').prepend(res);
           last = rId;
-        },
-      })
-    }
+        }
+      }
+    });
   },
+
   /*
    * @description 移除未使用的存档
    */

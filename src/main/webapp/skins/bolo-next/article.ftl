@@ -60,11 +60,13 @@
                                     ${article.articleUpdateDate?string("yyyy-MM-dd")}
                                 </time>
                             </span>
+                        <#if interactive == "on">
                         <span class="post-comments-count">
                                 &nbsp; | &nbsp;
                                 <a href="${servePath}${article.articlePermalink}#comments">
                                     ${article.articleCommentCount} ${cmtLabel}</a>
                             </span>
+                        </#if>
                         &nbsp; | &nbsp; ${viewsLabel}
                         ${article.articleViewCount}°C
                     </div>
@@ -108,7 +110,9 @@
                 </footer>
             </article>
         </div>
+        <#if interactive == "on">
         <@comments commentList=articleComments article=article></@comments>
+        </#if>
         <#if 0 != relevantArticlesDisplayCount>
             <div id="relevantArticles"></div>
         </#if>

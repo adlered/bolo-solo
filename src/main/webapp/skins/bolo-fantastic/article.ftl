@@ -99,6 +99,7 @@
                                             </#if>
                                         </div>
                                     </div>
+                                    <#if interactive == "on">
                                     <div class="card">
                                         <div class="card-content">
                                             <h3 class="title is-5 has-text-weight-normal">评论</h3>
@@ -107,6 +108,7 @@
                                             </@comments>
                                         </div>
                                     </div>
+                                    </#if>
                                 </div>
                                 <div class="column is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd  is-hidden-touch  has-order-3 column-right <%= sticky_class(position) %>">
                                 <#include "toc-post.ftl">

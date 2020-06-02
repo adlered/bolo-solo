@@ -51,10 +51,12 @@
                     </time>
                 </span>
                     <span>
+                        <#if interactive == "on">
                     &nbsp; | &nbsp;
                     <a href="${servePath}${article.articlePermalink}#comments">
                         ${article.articleCommentCount} ${cmtLabel}</a>
                 </span>
+                </#if>
                     &nbsp; | &nbsp;${viewsLabel} ${article.articleViewCount}°C
                 </div>
             </header>

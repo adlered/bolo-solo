@@ -35,6 +35,7 @@ import org.b3log.latke.util.Requests;
 import org.b3log.latke.util.Stopwatchs;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.bolo.prop.MailService;
+import org.b3log.solo.bolo.waf.WAF;
 import org.b3log.solo.event.B3ArticleSender;
 import org.b3log.solo.event.B3ArticleUpdater;
 import org.b3log.solo.event.PluginRefresher;
@@ -73,11 +74,11 @@ public final class SoloServletListener extends AbstractServletListener {
     /**
      * Bolo version.
      */
-    public static final String BOLO_VERSION = "v1.7 稳定版";
+    public static final String BOLO_VERSION = "v1.8 稳定版";
     /**
      * Solo version.
      */
-    public static String VERSION = "4.0.0";
+    public static String VERSION = "4.1.0";
 
     /**
      * Bean manager.
@@ -150,6 +151,8 @@ public final class SoloServletListener extends AbstractServletListener {
         cronMgmtService.start();
 
         MailService.loadMailSettings();
+
+        WAF.set();
 
         new Thread(new Runnable() {
             @Override

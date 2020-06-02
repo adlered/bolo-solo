@@ -27,10 +27,12 @@
             </h1>
             <span class="sub-title">${blogSubtitle}</span>
         </div>
+        <#if interactive == "on">
         <form class="right" action="${servePath}/search">
             <input id="search" type="text" name="keyword" />
             <input type="submit" value="" class="none" />
         </form>
+        </#if>
         <div class="clear"></div>
     </div>
 </div>
@@ -64,11 +66,13 @@
                 <span class="tip">
                     ${statistic.statisticPublishedBlogArticleCount}
                 </span>
+                <#if interactive == "on">
                 &nbsp;&nbsp;
                 ${commentCount1Label}
                 <span class="tip">
                     ${statistic.statisticPublishedBlogCommentCount}
                 </span>
+                </#if>
             </div>
         </div>
         <div class="clear"></div>

@@ -44,7 +44,7 @@ public final class Images {
     /**
      * Community file service URL.
      */
-    public static String COMMUNITY_FILE_URL = "https://img.hacpai.com";
+    public static String COMMUNITY_FILE_URL = "https://b3logfile.com";
 
     /**
      * Qiniu image processing.

@@ -84,7 +84,9 @@
             <#include "../../common-template/toc.ftl"/>
         </div>
     </#if>
+    <#if interactive == "on">
     <@comments commentList=articleComments article=article></@comments>
+    </#if>
     <div class="article__bottom">
         <div class="wrapper">
             <div class="fn__flex">

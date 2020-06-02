@@ -27,10 +27,12 @@
             <span>${articleLabel}</span>
             ${statistic.statisticPublishedBlogArticleCount}
         </div>
+        <#if interactive == "on">
         <div>
             <span>${commentLabel}</span>
             ${statistic.statisticPublishedBlogCommentCount}
         </div>
+        </#if>
         <div>
             <span>${viewLabel}</span>
             ${statistic.statisticBlogViewCount}
@@ -44,13 +46,18 @@
             </a>
             <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="${servePath}/links.html"
                title="${linkLabel} - ${blogTitle}">
-                <i class="mdui-list-item-icon iconfont solo-list"></i>
+                <i class="mdui-list-item-icon iconfont solo-about"></i>
                 <div class="mdui-list-item-content">${linkLabel}</div>
             </a>
             <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="${servePath}/tags.html"
                title="${tagLabel} - ${blogTitle}">
                 <i class="mdui-list-item-icon iconfont solo-tags"></i>
                 <div class="mdui-list-item-content">${tagLabel}</div>
+            </a>
+            <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="${servePath}/archives.html"
+               title="${archiveLabel} - ${blogTitle}">
+                <i class="mdui-list-item-icon iconfont solo-list"></i>
+                <div class="mdui-list-item-content">时间线</div>
             </a>
             <#list pageNavigations as page>
                 <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="${page.pagePermalink}"
@@ -70,19 +77,22 @@
         <div class="nexmoe-widget-wrap">
             <h3 class="nexmoe-widget-title">功能按钮</h3>
             <div class="nexmoe-widget nexmoe-social features">
+                <#if interactive == "on">
                 <a href="${servePath}/search" title="搜索">
                     <i class="mdui-list-item-icon iconfont solo-search"></i>
                     <div class="mdui-list-item-content">搜索</div>
                 </a>
+                </#if>
                 <a href="${servePath}/rss.xml" title="RSS">
                     <i class="mdui-list-item-icon iconfont solo-rss"></i>
                 </a>
+                <#if interactive == "on">
                 <#if isLoggedIn>
                     <a href="${servePath}/admin-index.do#main" target="_blank"
                        title="${adminLabel}">
                         <i class="mdui-list-item-icon iconfont solo-spin"></i>
                     </a>
-                    <a href="${logoutURL}" title="${logoutLabel}">
+                    <a href="javascript:location.href='${logoutURL}'" title="${logoutLabel}">
                         <i class="mdui-list-item-icon iconfont solo-logout"></i>
                     </a>
                 <#else>
@@ -90,6 +100,7 @@
                         <i class="mdui-list-item-icon iconfont solo-login"></i>
                         <div class="mdui-list-item-content"> ${startToUseLabel}</div>
                     </a>
+                </#if>
                 </#if>
             </div>
         </div>
@@ -177,7 +188,7 @@
     <div class="nexmoe-copyright">
         © ${year} <a href="${servePath}">${blogTitle}</a> <br/>
         ${footerContent} <br>
-        Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a> <br>
+        Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">Bolo</a> <br>
         Theme <a rel="friend" href="https://github.com/InkDP/solo-nexmoe" target="_blank">${skinDirName}</a>
         by <a rel="friend" href="https://www.inkdp.cn" target="_blank">InkDP</a>
     </div>

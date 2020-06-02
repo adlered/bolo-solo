@@ -17,15 +17,21 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 -->
+<style>
+    #broadcast {
+        display: block;
+        height: 550px;
+        width: 100%;
+    }
+</style>
 <div id="notice">
     <div class="module-panel">
         <div class="module-header">
-            <h2><a href="https://github.com/adlered/bolo-solo" target="_blank">实时公告</a></h2>
-            <h6>公告栏仅用于显示 Bolo 的重要动态，不会用于加载恶意脚本、恶意广告等操作。</h6>
+            <h2><a href="https://github.com/adlered/bolo-solo" target="_blank">公告</a></h2>
         </div>
         <div class="module-body padding12">
             <div id="noticeList" style="background: none;">
-                <iframe src="https://ftp.stackoverflow.wiki/bolo/notice.html" height="400px" width="100%" frameborder="no" border="0" scrolling="auto"></iframe>
+                <iframe id="broadcast" src="https://ftp.stackoverflow.wiki/bolo/notice.html" frameborder="no" border="0" scrolling="auto"></iframe>
             </div>
         </div>
     </div>
@@ -59,8 +65,7 @@
 
     function showTips() {
         var config = {
-            content: "新增 <b>联系方式自定义</b>、<b>其他-日志浏览</b> 功能<br>" +
-                "更方便实用，快来体验吧！<br>" +
+            content: "欢迎使用菠萝博客 V1.8 稳定版，体验各项功能吧！<br>支持从各大平台的备份文件将文章导入到菠萝博客了，快来试试~<br>" +
                 "<a href='javascript:neverShowTips()'>不再提醒</a>",
             type: "html",
             alignTo: ["right","top"],

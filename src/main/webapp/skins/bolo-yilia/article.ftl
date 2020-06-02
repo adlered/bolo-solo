@@ -64,6 +64,7 @@
                 </#list>
             </div>
             <span>&nbsp;&nbsp;&nbsp;</span>
+            <#if interactive == "on">
             <#if article.articleCommentCount != 0>
                 <a href="${servePath}${article.articlePermalink}#comments"
                    class="vditor-tooltipped__n vditor-tooltipped link fn__flex-center"
@@ -71,6 +72,7 @@
                     ${article.articleCommentCount}
                     <span class="icon-chat"></span>
                 </a>
+            </#if>
             </#if>
             <#if article.articleViewCount != 0>
                 <a class="vditor-tooltipped__n vditor-tooltipped link fn__flex-center"
@@ -139,7 +141,9 @@
         </#if>
         <br>
     </article>
+    <#if interactive == "on">
     <@comments commentList=articleComments article=article></@comments>
+    </#if>
 
     <#include "footer.ftl">
 

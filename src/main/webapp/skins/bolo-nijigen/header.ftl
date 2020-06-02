@@ -35,9 +35,11 @@
                     <#if page.pageIcon != ''><img class="page-icon" src="${page.pageIcon}"></#if>${page.pageTitle}
                 </a>
             </#list>
+            <#if interactive == "on">
             <a href="${servePath}/dynamic.html" rel="section">
                 <i class="icon__refresh"></i> ${dynamicLabel}
             </a>
+            </#if>
             <a href="${servePath}/tags.html" rel="section">
                 <i class="icon__tags"></i> ${allTagsLabel}
             </a>
@@ -53,6 +55,7 @@
         </nav>
 
         <div class="header__login">
+            <#if interactive == "on">
              <#if isLoggedIn>
                  <a href="${servePath}/admin-index.do#main" title="${adminLabel}">
                      <i class="icon__setting"></i> ${adminLabel}
@@ -65,6 +68,7 @@
                         <i class="icon__login"></i> ${startToUseLabel}
                     </a>
              </#if>
+            </#if>
         </div>
     </div>
 </header>
@@ -74,6 +78,7 @@
     <i class="icon__more" onclick="$(this).next().slideToggle()"></i>
     <main class="module__list">
         <ul>
+            <#if interactive == "on">
         <#if isLoggedIn>
             <li>
                 <a href="${servePath}/admin-index.do#main" title="${adminLabel}">
@@ -92,6 +97,7 @@
                     </a>
                 </li>
         </#if>
+            </#if>
         <#list pageNavigations as page>
             <li>
                 <a href="${page.pagePermalink}" target="${page.pageOpenTarget}" rel="section">
@@ -99,11 +105,13 @@
                 </a>
             </li>
         </#list>
+            <#if interactive == "on">
             <li>
                 <a href="${servePath}/dynamic.html" rel="section">
                     <i class="icon__refresh"></i> ${dynamicLabel}
                 </a>
             </li>
+            </#if>
             <li>
                 <a href="${servePath}/tags.html" rel="section">
                     <i class="icon__tags"></i> ${allTagsLabel}

@@ -38,8 +38,10 @@
                 <h3>${article.articleTitle}</h3>
             </a>
             <div class="post-meta">
-                <span><i class="iconfont icon-attention"></i>${article.articleViewCount} 热度</span>
-                <span class="comments-number"><i class="iconfont icon-mark"></i><a href="javascript:void(0);">${article.articleCommentCount} 条评论</a></span>
+                <span><i class="iconfont icon-attention"></i>${article.articleViewCount} 浏览</span>
+                <#if interactive == "on">
+                    <span class="comments-number"><i class="iconfont icon-mark"></i><a href="javascript:void(0);">${article.articleCommentCount} 条评论</a></span>
+                </#if>
                 <#if article.articleCategory != "">
                 <span><i class="iconfont icon-file"></i><a href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a></span>
                 </#if>

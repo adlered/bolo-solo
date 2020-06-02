@@ -24,11 +24,11 @@
     </div>
     &copy; ${year}
     <a href="${servePath}">${blogTitle}</a>
-    ${footerContent}  <span class="fn__none--m">&nbsp; • &nbsp;</span>
+    ${footerContent}  <span class="fn__none--m"></span>
     <div class="fn__none"></div>
 
     <div class="fn__right">
-        Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a>
+        Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">Bolo</a>
         <div class="fn__none"></div>
         &nbsp; &heartsuit;  &nbsp;
         Theme ${skinDirName}

@@ -24,6 +24,7 @@
         <@head title="${adminConsoleLabel} - ${blogTitle}">
             <link type="text/css" rel="stylesheet" href="${staticServePath}/scss/admin.css?${staticResourceVersion}" />
             <meta name="robots" content="fn__none" />
+            <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         </@head>
     </head>
     <body onhashchange="admin.setCurByHash();">
@@ -32,7 +33,7 @@
         <div id="allPanel">
             <div id="top">
                 <a href="${servePath}" target="_blank" class="hover">
-                    Bolo🍍
+                    ${blogTitle}
                 </a>
                 <span class="icon-unordered-list top__menu fn__none"
                       onclick="admin.toggleMenu()"></span>
@@ -49,13 +50,14 @@
                     <li>
                         <div id="tabs_main">
                             <a href="#main">
-                                <span class="icon-refresh"></span> ${adminIndexLabel}
+                                <i class="fa fa-home"></i>
+                                ${adminIndexLabel}
                             </a>
                         </div>
                     </li>
                     <li>
                         <div id="tabArticleTitle" class="tab-current" onclick="admin.collapseNav(this)">
-                            <span class="icon-article"></span>
+                            <i class="fa fa-align-left"></i>
                             ${articleLabel}
                             <span class="icon-chevron-up fn__right"></span>
                         </div>
@@ -80,30 +82,26 @@
                     <li>
                         <div id="tabs_comment-list">
                             <a href="#comment-list">
-                                <span class="icon-cmts"></span> ${commentListLabel}
+                                <i class="fa fa-commenting"></i>
+                                ${commentListLabel}
                             </a>
                         </div>
                     </li>
                     <li>
                         <div id="tabToolsTitle" onclick="admin.collapseNav(this)">
-                            <span class="icon-setting"></span>
+                            <i class="fa fa-gear"></i>
                             ${ToolLabel}
                             <span class="icon-chevron-down fn__right"></span>
                         </div>
                         <ul class="fn__none" id="tabTools">
                             <li>
-                                <div id="tabs_tool-box">
-                                    <a href="#tools/tool-box">${toolBoxLabel}</a>
+                                <div id="tabs_preference">
+                                    <a href="#tools/preference">${preferenceLabel}</a>
                                 </div>
                             </li>
                             <li>
                                 <div id="tabs_usite">
                                     <a href="#tools/usite">${usiteLabel}</a>
-                                </div>
-                            </li>
-                            <li>
-                                <div id="tabs_preference">
-                                    <a href="#tools/preference">${preferenceLabel}</a>
                                 </div>
                             </li>
                             <li>
@@ -137,8 +135,13 @@
                                 </div>
                             </li>
                             <li>
+                                <div id="tabs_tool-box">
+                                    <a href="#tools/tool-box">${toolBoxLabel}</a>
+                                </div>
+                            </li>
+                            <li>
                                 <div id="tabs_others">
-                                    <a href="#tools/others/tag">${othersLabel}</a>
+                                    <a href="#tools/others/data">${functionalLabel}</a>
                                 </div>
                             </li>
                         </ul>
@@ -146,7 +149,16 @@
                     <li>
                         <div id="tabs_about">
                             <a href="#about">
-                                <span class="icon-info"></span> ${aboutLabel}
+                                <i class="fa fa-info-circle"></i>
+                                ${aboutLabel}
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <a href="http://programmingwithlove.stackoverflow.wiki/bolodoc" target="_blank">
+                                <i class="fa fa-question-circle"></i>
+                                ${helpLabel}
                             </a>
                         </div>
                     </li>
@@ -176,11 +188,11 @@
                 var boloVersion = '${boloVersion}';
             </script>
             <div class="footer">
-                Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a> <span id="version">${boloVersion}</span>
+                Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">Bolo</a> <span id="version">${boloVersion}</span>
             </div>
         </div>
         <script src="${staticServePath}/js/lib/compress/admin-lib.min.js"></script>
-        <script src="${staticServePath}/js/bolo/vditor/1_9_1/index.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vditor@3.2.6/dist/index.min.js"></script>
         <script src="${staticServePath}/js/common.js"></script>
         <#if "" == miniPostfix>
         <script src="${staticServePath}/js/admin/admin.js"></script>

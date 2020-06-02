@@ -243,6 +243,14 @@ public class PreferenceConsole {
      *         "syncGitHub": boolean,
      *         "pullGitHub": boolean,
      *         "customVars" "", // 支持配置自定义参数 https://github.com/b3log/solo/issues/12535
+     *         "showCodeBlockLn": boolean, // 支持代码块行号显示 https://github.com/88250/solo/issues/4
+     *         "footnotes": boolean, // Markdown 支持改进 https://github.com/88250/solo/issues/54
+     *         "showToC": boolean, // Markdown 支持改进 https://github.com/88250/solo/issues/54
+     *         "autoSpace": boolean, // Markdown 支持改进 https://github.com/88250/solo/issues/54
+     *         "fixTermTypo": boolean, // Markdown 支持改进 https://github.com/88250/solo/issues/54
+     *         "chinesePunct": boolean, // Markdown 支持改进 https://github.com/88250/solo/issues/54
+     *         "inlineMathAllowDigitAfterOpenMarker": boolean, // Markdown 支持改进 https://github.com/88250/solo/issues/54
+     *         "editorMode": "", // 支持配置编辑器模式 https://github.com/88250/solo/issues/95
      *     }
      * }
      * </pre>

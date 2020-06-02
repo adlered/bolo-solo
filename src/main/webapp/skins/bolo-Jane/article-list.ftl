@@ -53,8 +53,10 @@
             </#list>
             </span>
             <div class="fn__right">
+                <#if interactive == "on">
                 <a class="ft__red" href="${servePath}${article.articlePermalink}#comments"><#if article.articleCommentCount gt 0>${article.articleCommentCount} </#if>${commentLabel}</a>
                 •
+                </#if>
                 <a class="ft__red" href="${servePath}${article.articlePermalink}">${article.articleViewCount} ${viewLabel}</a>
             </div>
         </div>

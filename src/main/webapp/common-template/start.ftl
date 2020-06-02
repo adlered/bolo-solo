@@ -137,7 +137,7 @@
         <div class="container">
             <div class="copyright">
                 <span id="description"></span>
-                Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a> ${boloVersion}
+                Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">Bolo</a> ${boloVersion}
                 <br>
                 由 <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝 Sir</a> 挑选优美的「无版权背景图」
             </div>

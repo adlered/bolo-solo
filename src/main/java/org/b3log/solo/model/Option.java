@@ -26,7 +26,7 @@ import org.json.JSONObject;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
  * @author <a href="https://github.com/hzchendou">hzchendou</a>
- * @version 1.6.0.2, Aug 18, 2019
+ * @version 1.6.0.6, Apr 6, 2020
  * @since 0.6.0
  */
 public final class Option {
@@ -52,6 +52,18 @@ public final class Option {
     public static final String OPTION_CATEGORY = "optionCategory";
 
     // oId constants
+
+    /**
+     * Key of editor mode. 支持配置编辑器模式 https://github.com/88250/solo/issues/95
+     * <ul>
+     *     <li>wysiwyg：所见即所得</li>
+     *     <li>ir：即时渲染</li>
+     *     <li>sv：分屏预览</li>
+     * </ul>
+     * 模式细节介绍详见 <a href="https://github.com/Vanessa219/vditor">Vditor</a> 编辑器文档。
+     */
+    public static final String ID_C_EDITOR_MODE = "editorMode";
+
     /**
      * Key of hljs theme. 在设置中可选择语法高亮主题 https://github.com/b3log/solo/issues/12722
      */
@@ -333,14 +345,39 @@ public final class Option {
     public static final String ID_C_TUCHUANG_CONFIG = "tuChuangConfig";
 
     /**
-     * Key of replyRemind
+     * Key of replyRemind.
      */
     public static final String ID_C_REPLY_REMIND = "replyRemind";
 
     /**
-     * Key of KanBanNiang selector
+     * Key of KanBanNiang selector.
      */
     public static final String ID_C_KANBANNIANG_SELECTOR = "kanbanniangSelector";
+
+    /**
+     * Key of spam words.
+     */
+    public static final String ID_C_SPAM = "spam";
+
+    /**
+     * Key of interactive switch.
+     */
+    public static final String ID_C_INTERACTIVE = "interactive";
+
+    /**
+     * Key of WAF.
+     */
+    public static final String ID_C_WAF_POWER = "wafPower";
+
+    /**
+     * Key of WAF current limit by second.
+     */
+    public static final String ID_C_WAF_CURRENT_LIMIT_SECOND = "wafCurrentLimitSecond";
+
+    /**
+     * Key of WAF current limit by times.
+     */
+    public static final String ID_C_WAF_CURRENT_LIMIT_TIMES = "wafCurrentLimitTimes";
 
     /**
      * Private constructor.
@@ -524,12 +561,12 @@ public final class Option {
         /**
          * Default HacPai username.
          */
-        public static final String DEFAULT_HACPAI_USER = "none";
+        public static final String DEFAULT_HACPAI_USER = "BoloDefault";
 
         /**
          * Default B3log key.
          */
-        public static final String DEFAULT_B3LOG_KEY = "000000";
+        public static final String DEFAULT_B3LOG_KEY = "123456";
 
         /**
          * Default max archive.

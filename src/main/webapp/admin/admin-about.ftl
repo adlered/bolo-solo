@@ -39,7 +39,7 @@
                     })
                     .then((value) => {
                         if (null !== value) {
-                            window.open('https://github.com/adlered/bolo-solo#%E8%BD%BB%E6%9D%BE%E8%BF%81%E7%A7%BB%E8%BF%81%E7%A7%BB%E8%87%B3-bolo--%E8%BF%81%E5%9B%9E%E8%87%B3-solo');
+                            window.open('https://doc.stackoverflow.wiki/web/#/7?page_id=83');
                         }
                     });
                 }
@@ -60,11 +60,14 @@
                 var version = '${boloVersion}';
             </script>
             <b><p id="updateCheck">正在检查版本更新...</p></b>
-            <br><br>
         </div>
-        <span class="fn__clear" />
-        <br><br>
     </div>
+    <span class="fn__clear">
+        <div style="margin: 25px 25px 0px 25px">
+            <iframe src="https://doc.stackoverflow.wiki/web/#/7?page_id=91" frameborder="no" border="0" scrolling="auto" style="display: block; height: 550px; width: 100%;"></iframe>
+        </div>
+    </span>
+    <br><br>
 </div>
 
 ${plugins}

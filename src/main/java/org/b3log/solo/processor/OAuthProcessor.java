@@ -136,6 +136,10 @@ public class OAuthProcessor {
                     JSONObject user = userQueryService.getUserByName(username);
                     String cUser = user.optString(User.USER_NAME);
                     String cPass = user.optString(UserExt.USER_B3_KEY);
+                    // 非管理员不允许登录
+                    if (!Role.ADMIN_ROLE.equals(user.getString(User.USER_ROLE))) {
+                        context.sendRedirect(Latkes.getServePath() + "/start?status=error");
+                    }
                     // 同时兼容明文和密文密码
                     if ((username.equals(cUser) && password.equals(cPass)) || (username.equals(cUser) && md5.equals(cPass))) {
                         Solos.login(user, context.getResponse());

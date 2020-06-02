@@ -16,11 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 /**
- * @fileoverview Page util, load heighlight and process comment.
+ * @fileoverview Page util, load highlight and process comment.
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 2.4.0.1, Aug 6, 2019
+ * @version 2.5.0.0, Jan 15, 2020
  */
 var Page = function (tips) {
     this.currentCommentId = '';
@@ -140,7 +140,7 @@ $.extend(Page.prototype, {
         if (!$('#soloEditorComment').hasClass('vditor')) {
             var that = this;
             Util.addScript(
-                'https://cdn.jsdelivr.net/npm/vditor@1.9.1/dist/index.min.js',
+                'https://cdn.jsdelivr.net/npm/vditor@3.2.6/dist/index.min.js',
                 'vditorScript');
             var toolbar = [
                 'emoji',
@@ -148,45 +148,41 @@ $.extend(Page.prototype, {
                 'bold',
                 'italic',
                 'strike',
-                '|',
-                'line',
-                'quote',
+                'link',
                 '|',
                 'list',
                 'ordered-list',
                 'check',
-                '|',
+                'outdent',
+                'indent',
+                'quote',
+                'line',
                 'code',
                 'inline-code',
+                'table',
+                'insert-before',
+                'insert-after',
                 '|',
                 'undo',
                 'redo',
-                '|',
-                'link',
-                'table',
-                '|',
+                'edit-mode',
                 'both',
                 'preview',
                 'format',
                 '|',
-                'devtools',
                 'fullscreen',
-                'info',
+                'devtools',
                 'help',
             ], resizeEnable = true;
             if ($(window).width() < 768) {
                 toolbar = [
                     'emoji',
-                    'line',
-                    'quote',
-                    'list',
-                    'ordered-list',
-                    'check',
                     'link',
+                    'upload',
+                    'insert-after',
+                    'edit-mode',
                     'preview',
-                    'format',
-                    'info',
-                    'help',
+                    'fullscreen',
                 ];
                 resizeEnable = false
             }
@@ -223,8 +219,10 @@ $.extend(Page.prototype, {
                 },
                 lang: Label.langLabel,
                 toolbar: toolbar,
+                after: () => {
+                    vditor.focus()
+                }
             });
-            vditor.focus()
         }
 
         if ($editor.css('bottom') === '-300px' || commentId) {
@@ -237,7 +235,7 @@ $.extend(Page.prototype, {
 
             this.currentCommentId = commentId;
             $('#soloEditorReplyTarget').text(name ? '@' + name : '');
-            if (typeof vditor !== 'undefined') {
+            if (typeof vditor !== 'undefined' && vditor.vditor.wysiwyg) {
                 vditor.focus()
             }
         } else {
@@ -321,7 +319,8 @@ $.extend(Page.prototype, {
      * @param {String} headTitle 站外相关文章标题
      */
     loadExternalRelevantArticles: function (tags, headTitle) {
-        var tips = this.tips;
+        $('#externalRelevantArticles').remove();
+        /* var tips = this.tips;
         try {
             $.ajax({
                 url: 'https://rhythm.b3log.org/get-articles-by-tags.do?tags=' + tags
@@ -360,7 +359,7 @@ $.extend(Page.prototype, {
             })
         } catch (e) {
             // 忽略相关文章加载异常：load script error
-        }
+        } */
     },
     /*
      * @description 提交评论

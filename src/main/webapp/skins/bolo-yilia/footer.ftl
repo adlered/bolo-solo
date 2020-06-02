@@ -28,8 +28,10 @@
             ${viewCount1Label}${statistic.statisticBlogViewCount}
             &nbsp;
             ${articleCount1Label}${statistic.statisticPublishedBlogArticleCount}
+            <#if interactive == "on">
             &nbsp;
             ${commentCount1Label}${statistic.statisticPublishedBlogCommentCount}
+            </#if>
             &nbsp;
             ${onlineVisitor1Label}${onlineVisitorCnt}
         </span>
@@ -39,7 +41,7 @@
         <a href="${servePath}">${blogTitle}</a>
         ${footerContent}
         <span class="fn-right">
-            Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a>
+            Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">Bolo</a>
         </span>
     </div>
     <span onclick="Util.goTop()" class="icon-goup"></span>

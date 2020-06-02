@@ -36,13 +36,15 @@
                 </span>
 
                 <span>
-                    <i class="nexmoefont iconfont solo-heat"></i>${article.articleViewCount} °C
+                    <i class="nexmoefont iconfont solo-heat"></i>${article.articleViewCount} 浏览
                 </span>
 
+                <#if interactive == "on">
                 <#if article.articleCommentCount != 0>
                     <span>
                         <i class="nexmoefont iconfont solo-comment"></i>${article.articleCommentCount}
                     </span>
+                </#if>
                 </#if>
 
                 <#if article.articleCategory != "">

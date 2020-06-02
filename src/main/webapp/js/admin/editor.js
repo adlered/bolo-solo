@@ -41,6 +41,7 @@ $.extend(SoloEditor.prototype, {
    * @description 初始化编辑器
    */
   init: function () {
+
     // 编辑器常用表情使用社区端的设置
     $.ajax({
       url: 'https://hacpai.com/apis/vcomment/users/emotions',
@@ -60,9 +61,14 @@ $.extend(SoloEditor.prototype, {
         }
       },
     })
-    this.editor = new Vditor(this.conf.id, {
+
+    const options = {
+      outline: this.conf.outline || false,
+      mode: Label.editorMode,
       typewriterMode: this.conf.typewriterMode,
-      cache: true,
+      cache: {
+        enable: true,
+      },
       tab: '\t',
       preview: {
         delay: 500,
@@ -72,25 +78,29 @@ $.extend(SoloEditor.prototype, {
           enable: !Label.luteAvailable,
           style: Label.hljsStyle,
         },
-        parse: function(element) {
+        parse: function (element) {
           if (element.style.display === 'none') {
             return
           }
-          Util.parseLanguage()
+          Util.parseMarkdown()
         },
       },
       upload: {
         max: 10 * 1024 * 1024,
         url: Label.uploadURL,
+        linkToImgUrl: Label.servePath + '/upload/fetch',
         token: Label.uploadToken,
         filename: function (name) {
-          return  name.replace(/[^(a-zA-Z0-9\u4e00-\u9fa5\.)]/g, '').
-            replace(/[\?\\/:|<>\*\[\]\(\)\$%\{\}@~]/g, '').
-            replace('/\\s/g', '')
-        }
+          return name.replace(/[^(a-zA-Z0-9\u4e00-\u9fa5\.)]/g, '').
+          replace(/[\?\\/:|<>\*\[\]\(\)\$%\{\}@~]/g, '').
+          replace('/\\s/g', '')
+        },
       },
       height: this.conf.height,
-      counter: 102400,
+      counter: {
+        enable: true,
+        max: 102400,
+      },
       resize: {
         enable: this.conf.resize,
       },
@@ -99,10 +109,89 @@ $.extend(SoloEditor.prototype, {
         emojiTail: `<a href="https://hacpai.com/settings/function" target="_blank">设置常用表情</a>`,
         emoji: Label.emoji,
       },
-    })
+      toolbarConfig: {
+        pin: true,
+      },
+      toolbar:[
+        "emoji",
+        "headings",
+        "bold",
+        "link",
+        "|",
+        "list",
+        "ordered-list",
+        "check",
+        "outdent",
+        "indent",
+        "|",
+        "quote",
+        "code",
+        "insert-before",
+        "insert-after",
+        "|",
+        "upload",
+        "record",
+        "table",
+        "|",
+        "undo",
+        "redo",
+        "|",
+        "fullscreen",
+        "edit-mode",
+        {
+          name: "more",
+          toolbar: [
+            "italic",
+            "strike",
+            "line",
+            "inline-code",
+            "both",
+            "code-theme",
+            "content-theme",
+            "export",
+            "outline",
+            "preview",
+            "format",
+            "devtools",
+            "info",
+            "help",
+          ],
+        }],
+      after: () => {
+        if (typeof this.conf.fun === 'function') {
+          this.conf.fun()
+        }
+      },
+    }
 
-    if (typeof this.conf.fun === 'function') {
-      this.conf.fun()
+    if ($(window).width() < 768) {
+      options.toolbar = [
+        'emoji',
+        'link',
+        'upload',
+        'edit-mode',
+        {
+          name: 'more',
+          toolbar: [
+            'insert-after',
+            'fullscreen',
+            'preview',
+            'format',
+            'info',
+            'help',
+          ],
+        },
+      ]
+      options.resize.enable = false
+      options.toolbarConfig.pin = true
+    }
+
+    if (typeof Vditor === 'undefined') {
+      Util.loadVditor(() => {
+        this.editor = new Vditor(this.conf.id, options)
+      })
+    } else {
+      this.editor = new Vditor(this.conf.id, options)
     }
   },
   /*

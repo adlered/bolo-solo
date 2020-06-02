@@ -23,7 +23,7 @@
             &copy; ${year}
             <a href="${servePath}">${blogTitle}</a>
             ${footerContent} &nbsp;•&nbsp;
-            Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a>
+            Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">Bolo</a>
             <br>
             Theme ${skinDirName}
             <sup>[<a href="https://github.com/TryGhost/Casper" target="_blank">ref</a>]</sup>
@@ -43,7 +43,7 @@
             </a>
             <br>
             ${statistic.statisticPublishedBlogArticleCount} ${articleLabel} &nbsp;
-            ${statistic.statisticPublishedBlogCommentCount} ${commentLabel} &nbsp;
+            <#if interactive == "on">${statistic.statisticPublishedBlogCommentCount} ${commentLabel} &nbsp;</#if>
             ${statistic.statisticBlogViewCount} ${viewLabel} &nbsp;
             ${onlineVisitorCnt} ${onlineVisitorLabel}
         </div>

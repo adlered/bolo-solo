@@ -34,7 +34,7 @@ import java.util.Map;
  **/
 public class RamAppender extends AppenderSkeleton {
     // 定长列表
-    public static FixSizeLinkedList<Map<String,Object>> list = new FixSizeLinkedList<>(22);
+    public static FixSizeLinkedList<Map<String,Object>> list = new FixSizeLinkedList<>(100);
 
     public static FixSizeLinkedList<Map<String, Object>> getList() {
         return list;
@@ -46,12 +46,11 @@ public class RamAppender extends AppenderSkeleton {
     protected void append(LoggingEvent loggingEvent) {
         final Map<String,Object> map = new HashMap<>();
         map.put("name", loggingEvent.getLoggerName());
-        map.put("date", new SimpleDateFormat("yyyy-MM-dd HH:ss:SS").format(new Date(loggingEvent.getTimeStamp())));
+        map.put("date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date(loggingEvent.getTimeStamp())));
         map.put("level", loggingEvent.getLevel().toString());
         map.put("message", "" + loggingEvent.getMessage());
         map.put("methodName", loggingEvent.getLocationInformation().getMethodName());
         map.put("lineNumber", loggingEvent.getLocationInformation().getLineNumber());
-        map.put("freeMemory", Runtime.getRuntime().freeMemory());
 
         map.put("id", id);
         if (id == Long.MAX_VALUE) {
@@ -60,7 +59,7 @@ public class RamAppender extends AppenderSkeleton {
         ++id;
 
         map.put("throwable", null);
-        if(loggingEvent.getThrowableInformation()!=null && loggingEvent.getThrowableInformation().getThrowable()!=null){
+        if (loggingEvent.getThrowableInformation()!=null && loggingEvent.getThrowableInformation().getThrowable()!=null) {
             Throwable t = loggingEvent.getThrowableInformation().getThrowable();
             Map<String, Object> throwableMap = new HashMap<>();
             throwableMap.put("message", t.getMessage());

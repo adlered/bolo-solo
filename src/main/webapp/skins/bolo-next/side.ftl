@@ -70,6 +70,7 @@
         </div>
 
         <div class="links-of-author">
+            <#if interactive == "on">
             <#if isLoggedIn>
             <span class="links-of-author-item">
                 <a href="${servePath}/admin-index.do#main" title="${adminLabel}">
@@ -88,7 +89,8 @@
                     ${startToUseLabel}
                 </a>
             </span>
-            </#if> 
+            </#if>
+            </#if>
         </div>
 
         <#if noticeBoard??>

@@ -25,6 +25,7 @@ import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.handler.Handler;
+import org.b3log.solo.bolo.waf.WAF;
 import org.b3log.solo.service.InitService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -53,6 +54,16 @@ public class InitCheckHandler implements Handler {
         final String requestURI = context.requestURI();
         final boolean isSpiderBot = (boolean) context.attr(Keys.HttpRequest.IS_SEARCH_ENGINE_BOT);
         LOGGER.log(Level.TRACE, "Request [URI={0}]", requestURI);
+
+        /**
+         * Bolo WAF
+         */
+        String requestIP = context.remoteAddr();
+        if (!WAF.in(requestIP, requestURI)) {
+            context.sendError(HttpServletResponse.SC_GONE);
+
+            return;
+        }
 
         // 禁止直接获取 robots.txt https://github.com/b3log/solo/issues/12543
         if (requestURI.startsWith("/robots.txt") && !isSpiderBot) {

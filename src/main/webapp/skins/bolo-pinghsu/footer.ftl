@@ -29,11 +29,13 @@
             </a>
         </#list>
         <a class="ft__link" rel="alternate" href="${servePath}/rss.xml" rel="section">RSS</a>
+        <#if interactive == "on">
         <#if isLoggedIn>
         <a class="ft__link" href="${servePath}/admin-index.do#main" title="${adminLabel}">${adminLabel}</a>
         <a class="ft__link" href="${logoutURL}">${logoutLabel}</a>
         <#else>
         <a class="ft__link" href="${servePath}/start">${startToUseLabel}</a>
+        </#if>
         </#if>
     </nav>
     <div class="footer__border mobile__none"></div>
@@ -61,16 +63,16 @@
             <a class="ft__link" href="${servePath}/archives.html">
             ${statistic.statisticPublishedBlogArticleCount}
             ${articleLabel}
-            </a> &nbsp; &nbsp;
+            </a><#if interactive == "on"> &nbsp; &nbsp;
             ${statistic.statisticPublishedBlogCommentCount}
-            ${commentLabel} <br>
+            ${commentLabel} </#if><br>
             ${statistic.statisticBlogViewCount} <span class="ft-gray">${viewLabel}</span> &nbsp; &nbsp;
             ${onlineVisitorCnt} <span class="ft-gray">${onlineVisitorLabel}</span> <br>
             &copy; ${year}
             <a class="ft__link" href="${servePath}">${blogTitle}</a>
             ${footerContent}
             <br>
-            Powered by <a class="ft__link" href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客 Bolo</a>
+            Powered by <a class="ft__link" href="https://github.com/adlered/bolo-solo" target="_blank">Bolo</a>
             <br>
             Theme ${skinDirName}
             <sup>[<a class="ft__link" target="_blank" href="https://github.com/chakhsu/pinghsu">ref</a>]</sup>

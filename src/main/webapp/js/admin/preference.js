@@ -20,12 +20,13 @@
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
- * @version 1.3.0.3, Aug 18, 2019
+ * @version 1.3.0.5, Apr 6, 2020
  */
 
 /* preference 相关操作 */
 admin.preference = {
   locale: '',
+  editorMode: '',
   /*
    * 初始化
    */
@@ -59,6 +60,30 @@ admin.preference = {
           }
         });
 
+        if (preference.wafCurrentLimitTimes === "" || preference.wafCurrentLimitTimes === undefined) {
+          $("#wafCurrentLimitTimes").val("180")
+        } else {
+          $("#wafCurrentLimitTimes").val(preference.wafCurrentLimitTimes)
+        }
+
+        if (preference.wafCurrentLimitSecond === "" || preference.wafCurrentLimitSecond === undefined) {
+          $("#wafCurrentLimitSecond").val("180")
+        } else {
+          $("#wafCurrentLimitSecond").val(preference.wafCurrentLimitSecond)
+        }
+
+        if (preference.wafPower === "" || preference.wafPower === undefined) {
+          $("#wafPower").val("on")
+        } else {
+          $("#wafPower").val(preference.wafPower)
+        }
+
+        if (preference.interactive === "" || preference.interactive === undefined) {
+          $("#interactiveSwitch").val("on")
+        } else {
+          $("#interactiveSwitch").val(preference.interactive)
+        }
+        $('#spam').val(preference.spam)
         $('#kanbanniangSelector').val(preference.kanbanniangSelector)
         $('#replyRemind').val(preference.replyRemind)
         $('#sourceTC').text(preference.tuChuangConfig)
@@ -102,6 +127,9 @@ admin.preference = {
         'true' === preference.commentable ? $('#commentable').attr('checked', 'checked') : $('commentable').removeAttr('checked')
         'true' === preference.syncGitHub ? $('#syncGitHub').attr('checked', 'checked') : $('syncGitHub').removeAttr('checked')
         'true' === preference.pullGitHub ? $('#pullGitHub').attr('checked', 'checked') : $('pullGitHub').removeAttr('checked')
+
+        $("input:radio[value='" + preference.editorMode + "']").attr('checked','true');
+        admin.preference.editorMode = preference.editorMode
 
         admin.preference.locale = preference.localeString
 
@@ -187,6 +215,12 @@ admin.preference = {
           Label.nonNegativeIntegerOnlyLabel)
       $('#externalRelevantArticlesDisplayCount').focus()
       return false
+    } else if (
+        (!/^\d+$/.test($('#wafCurrentLimitTimes').val())) || $('#wafCurrentLimitTimes').val() < 2 || $('#wafCurrentLimitTimes').val() > 2147483647 ||
+        (!/^\d+$/.test($('#wafCurrentLimitSecond').val())) || $('#wafCurrentLimitSecond').val() < 2 || $('#wafCurrentLimitSecond').val() > 2147483647
+    ) {
+      $('#tipMsg').text('访问频率次数与时间必须在 2-2147483647 之间!')
+      return false
     }
     return true
   },
@@ -215,8 +249,17 @@ admin.preference = {
         'signHTML': $('#preferenceSign3').val(),
       }]
 
+    if ($("#interactiveSwitch").val() === null) {
+      $("#interactiveSwitch").val("on");
+    }
+
     var requestJSONObject = {
       'preference': {
+        'wafCurrentLimitTimes': $("#wafCurrentLimitTimes").val(),
+        'wafCurrentLimitSecond': $("#wafCurrentLimitSecond").val(),
+        'wafPower': $("#wafPower").val(),
+        'interactive': $("#interactiveSwitch").val(),
+        'spam': $('#spam').val(),
         'kanbanniangSelector': $('#kanbanniangSelector').val(),
         'replyRemind': $('#replyRemind').val(),
         'tuChuangConfig': $('#sourceTC').text(),
@@ -262,6 +305,7 @@ admin.preference = {
         'commentable': $('#commentable').prop('checked'),
         'customVars': $('#customVars').val(),
         'maxArchive': $('#maxArchive').val(),
+        'editorMode': $("input[name='editorMode']:checked").val(),
       },
     }
 
@@ -277,7 +321,7 @@ admin.preference = {
           return
         }
 
-        if ($('#localeString').val() !== admin.preference.locale) {
+        if ($('#localeString').val() !== admin.preference.locale || $("input[name='editorMode']:checked").val() !== admin.preference.editorMode) {
           window.location.reload()
         }
 

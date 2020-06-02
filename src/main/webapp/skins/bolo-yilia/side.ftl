@@ -53,10 +53,12 @@
                 </li>
                 <li>
                     <a href="${servePath}/links.html">${linkLabel}</a>
+                    <#if interactive == "on">
                     &nbsp; &nbsp;
                     <a href="${servePath}/search?keyword=">
                         Search
                     </a>
+                    </#if>
                 </li>
             </ul>
         </nav>
@@ -65,13 +67,14 @@
         <#if noticeBoard??>
         <div class="vditor-reset">${noticeBoard}</div>
         </#if>
+        <#if interactive == "on">
         <#if isLoggedIn>
         <a href="${servePath}/admin-index.do#main" title="${adminLabel}" class="icon-setting"></a>
         &nbsp; &nbsp; 
         <a title="${logoutLabel}" class="icon-logout" href="${logoutURL}"></a>
         <#else>
         <a href="${servePath}/start" title="${startToUseLabel}" class="icon-login"></a>
-        </#if> &nbsp; &nbsp; 
+        </#if></#if> &nbsp; &nbsp;
         <a rel="alternate" href="${servePath}/rss.xml" title="${subscribeLabel}" class="icon-rss"></a>
     </footer>
     <#if article?? && article.articleToC?? && article.articleToC?size &gt; 0>

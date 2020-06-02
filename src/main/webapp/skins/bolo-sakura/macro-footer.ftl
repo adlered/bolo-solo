@@ -36,8 +36,11 @@
             ${statistic.statisticBlogViewCount}
             <span>${articleLabel}</span>
             ${statistic.statisticPublishedBlogArticleCount}
+            <#if interactive == "on">
             <span>${commentLabel}</span>
-            ${statistic.statisticPublishedBlogCommentCount}<br>
+            ${statistic.statisticPublishedBlogCommentCount}
+            </#if>
+            <br>
             ${footerContent}
         </div>
         <div class="footer-device">

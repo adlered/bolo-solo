@@ -33,6 +33,7 @@
     </section>
     </#if>
 
+    <#if interactive == "on">
     <section class="module">
         <header class="module__header">
             <form class="form" action="${servePath}/search">
@@ -41,6 +42,7 @@
             </form>
         </header>
     </section>
+    </#if>
 
     <div class="module item">
         <header class="module__header ft__center">
@@ -85,6 +87,7 @@
         </div>
     </#if>
 
+    <#if interactive == "on">
     <#if 0 != mostCommentArticles?size>
         <div class="module item">
             <header class="module__header">${mostCommentArticlesLabel}</header>
@@ -101,6 +104,7 @@
                 </ul>
             </main>
         </div>
+    </#if>
     </#if>
 
     <#if 0 != mostViewCountArticles?size>
@@ -128,10 +132,12 @@
                 ${statistic.statisticPublishedBlogArticleCount}
                 ${articleLabel}
                 </a>
+                <#if interactive == "on">
                 <a href="${servePath}/dynamic.html" class="fn__flex-1 ft__center">
                 ${statistic.statisticPublishedBlogCommentCount}
                 ${commentLabel}
                 </a>
+                </#if>
             </div>
             <br/>
             <div class="fn__flex">

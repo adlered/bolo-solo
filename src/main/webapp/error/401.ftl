@@ -23,6 +23,6 @@
 <h2>401 未登录管理员账号!</h2>
 <img class="img-error" src="${staticServePath}/images/401.png" alt="401" title="401 Unauthorized!" />
 <div class="a-error">
-    <a href="${loginURL}">登录</a> | <a href="${servePath}">返回主页</a>
+    <a href="${loginURL}">管理登录</a> | <a href="${servePath}">返回主页</a>
 </div>
 </@commonPage>

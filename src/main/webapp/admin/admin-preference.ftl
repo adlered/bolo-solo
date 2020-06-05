@@ -414,11 +414,6 @@
         <div>
             ${BloggerMailboxDescribeLabel}
         </div>
-        <label for="spam">${CommentSpamLabel}</label>
-        <input id="spam" type="text" />
-        <div>
-            ${CommentSpamDescribeLabel}
-        </div>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>
@@ -504,6 +499,12 @@
         <label>${frequencyLimitLabel}</label>
         <br>
         <input id="wafCurrentLimitTimes" type="text" style="width: 100px"> ${securitySetTimesLabel} <input id="wafCurrentLimitSecond" type="text" style="width: 100px"> ${securitySetSecondLabel}
+        <br><br>
+        <label for="spam">${CommentSpamLabel}</label>
+        <input id="spam" type="text" />
+        <div>
+            ${CommentSpamDescribeLabel}
+        </div>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>

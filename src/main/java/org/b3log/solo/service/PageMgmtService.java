@@ -191,13 +191,6 @@ public class PageMgmtService {
             page.put(Page.PAGE_ORDER, maxOrder + 1);
 
             final String permalink = page.optString(Page.PAGE_PERMALINK);
-            if (permalinkQueryService.exist(permalink)) {
-                if (transaction.isActive()) {
-                    transaction.rollback();
-                }
-
-                throw new ServiceException(langPropsService.get("duplicatedPermalinkLabel"));
-            }
 
             page.put(Page.PAGE_PERMALINK, permalink);
             page.put(Page.PAGE_ICON, page.optString(Page.PAGE_ICON));

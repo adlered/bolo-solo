@@ -209,7 +209,7 @@ public class PageConsole {
 
             final JSONObject jsonObject = new JSONObject().put(Keys.STATUS_CODE, false);
             renderer.setJSONObject(jsonObject);
-            jsonObject.put(Keys.MSG, langPropsService.get("updateFailLabel"));
+            jsonObject.put(Keys.MSG, e.getMessage());
         }
     }
 

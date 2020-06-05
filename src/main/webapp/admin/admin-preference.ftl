@@ -25,8 +25,8 @@
             </div>
         </li>
         <li>
-            <div id="tabPreference_imageBed">
-                <a href="#tools/preference/imageBed">${imageBedLabel}</a>
+            <div id="tabPreference_setting">
+                <a href="#tools/preference/setting">${paramSettingsLabel}</a>
             </div>
         </li>
         <li>
@@ -35,8 +35,8 @@
             </div>
         </li>
         <li>
-            <div id="tabPreference_setting">
-                <a href="#tools/preference/setting">${paramSettingsLabel}</a>
+            <div id="tabPreference_imageBed">
+                <a href="#tools/preference/imageBed">${imageBedLabel}</a>
             </div>
         </li>
         <li>
@@ -50,13 +50,13 @@
             </div>
         </li>
         <li>
-            <div id="tabPreference_b3logEcology">
-                <a href="#tools/preference/b3logEcology">${b3logEcologyLabel}</a>
+            <div id="tabPreference_interactive">
+                <a href="#tools/preference/interactive">${interactiveLabel}</a>
             </div>
         </li>
         <li>
-            <div id="tabPreference_interactive">
-                <a href="#tools/preference/interactive">${interactiveLabel}</a>
+            <div id="tabPreference_b3logEcology">
+                <a href="#tools/preference/b3logEcology">${b3logEcologyLabel}</a>
             </div>
         </li>
         <li>

@@ -312,7 +312,7 @@ public class CommentMgmtService {
                 newUser.put(User.USER_NAME, commentName);
                 newUser.put(User.USER_URL, commentURL);
                 newUser.put(User.USER_ROLE, Role.VISITOR_ROLE);
-                newUser.put(UserExt.USER_AVATAR, "https://pic.stackoverflow.wiki/uploadImages/123/113/181/232/2019/12/05/20/41/2740ebc7-da8d-4220-90c5-557f7151d7bc.png");
+                newUser.put(UserExt.USER_AVATAR, "https://pic.stackoverflow.wiki/uploadImages/114/246/231/87/2020/06/06/02/26/65e10ea4-41e0-4da8-82fa-a00da2770ce2.png");
                 newUser.put(UserExt.USER_B3_KEY, "000000");
                 newUser.put(UserExt.USER_GITHUB_ID, "000000");
                 userRepository.add(newUser);

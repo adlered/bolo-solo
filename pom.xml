@@ -17,7 +17,7 @@
     <artifactId>bolo</artifactId>
     <packaging>war</packaging>
     <name>Bolo</name>
-    <version>v1.8-stable</version>
+    <version>v1.9-stable</version>
     <description>
         本地化、稳定精致的 Java 博客系统 - 菠萝博客，基于 Solo。
     </description>
@@ -66,7 +66,7 @@
         <developer>
             <id>adlered@stackoverflow.wiki</id>
             <name>Adler Chan</name>
-            <email>adlered@outlook.com</email>
+            <email>404x@139.com</email>
             <url>https://www.stackoverflow.wiki</url>
             <roles>
                 <role>Re-builder</role>

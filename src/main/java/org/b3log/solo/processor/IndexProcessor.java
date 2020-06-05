@@ -169,7 +169,7 @@ public class IndexProcessor {
     @RequestProcessing(value = "/start", method = HttpMethod.GET)
     public void showStart(final RequestContext context) {
         if (initService.isInited() && null != Solos.getCurrentUser(context.getRequest(), context.getResponse())) {
-            context.sendRedirect(Latkes.getServePath());
+            context.sendRedirect(Latkes.getServePath() + "/admin-index.do#main");
 
             return;
         }
@@ -213,6 +213,7 @@ public class IndexProcessor {
      * @param context the specified context
      */
     @RequestProcessing(value = "/root", method = HttpMethod.GET)
+    @Deprecated
     public void showRoot(final RequestContext context) {
         if (initService.isInited() && null != Solos.getCurrentUser(context.getRequest(), context.getResponse())) {
             context.sendRedirect(Latkes.getServePath() + "/admin-index.do#main");

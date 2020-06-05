@@ -108,7 +108,6 @@ public class WAF {
                         requestURL.contains("/favicon.ico") ||
                         requestURL.contains("/error") ||
                         requestURL.contains("/images") ||
-                        requestURL.contains("/root") ||
                         requestURL.contains("/article/commentSync/getList")
         )) {
 

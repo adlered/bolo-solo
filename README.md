@@ -1,5 +1,5 @@
 <p align = "center">
-<img alt="Bolo" src="bolo-circle.png" height="200px" width="200px">
+<img alt="Bolo" src="/pic/bolo-circle.png" height="200px" width="200px">
 <br><br>
 基于 Java 的菠萝博客系统，简单易部署，提问秒响应，专为程序员设计。
 <br><br>
@@ -38,4 +38,4 @@
 
 参与内测，找 Bug 领红包，安装遇到问题，讨论相关话题，请加入菠萝博客用户讨论群：  
 
-<img src="/pic/qqgroup.png" width="256px">
+<img src="/pic/qqgroup.jpg" width="256px">

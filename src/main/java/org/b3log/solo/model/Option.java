@@ -412,7 +412,7 @@ public final class Option {
         /**
          * Default favicon URL.
          */
-        public static final String DEFAULT_FAVICON_URL = "https://pic.stackoverflow.wiki/uploadImages/114/244/224/38/2019/11/30/01/04/1cb648c8-f9f8-430f-8616-43f7b0e2333a.png";
+        public static final String DEFAULT_FAVICON_URL = "https://pic.stackoverflow.wiki/uploadImages/114/246/231/87/2020/06/06/16/41/3e4a3ce8-8882-4258-9860-a337bf859605.png";
 
         /**
          * Default custom vars.

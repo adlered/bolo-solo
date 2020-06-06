@@ -24,7 +24,7 @@
     <div class="module-body padding12 fn__flex">
         <div class="about-logo">
             <a href="https://github.com/adlered/bolo-solo" target="_blank">
-                <img width="128" src="https://pic.stackoverflow.wiki/uploadImages/114/246/231/87/2020/06/06/02/18/e7faddcd-ca08-41fa-abf1-cd6b2bc5c33a.png" alt="Bolo 重塑经典，致敬 Solo" title="Bolo 重塑经典，致敬 Solo" />
+                <img width="128" src="https://pic.stackoverflow.wiki/uploadImages/114/246/231/87/2020/06/06/16/41/3e4a3ce8-8882-4258-9860-a337bf859605.png" alt="Bolo 重塑经典，致敬 Solo" title="Bolo 重塑经典，致敬 Solo" />
             </a>
         </div>
         <div class="about__panel">

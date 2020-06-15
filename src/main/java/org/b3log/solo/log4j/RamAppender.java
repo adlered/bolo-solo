@@ -59,7 +59,7 @@ public class RamAppender extends AppenderSkeleton {
         ++id;
 
         map.put("throwable", null);
-        if (loggingEvent.getThrowableInformation()!=null && loggingEvent.getThrowableInformation().getThrowable()!=null) {
+        if (loggingEvent.getThrowableInformation() != null && loggingEvent.getThrowableInformation().getThrowable() != null) {
             Throwable t = loggingEvent.getThrowableInformation().getThrowable();
             Map<String, Object> throwableMap = new HashMap<>();
             throwableMap.put("message", t.getMessage());

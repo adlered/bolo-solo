@@ -244,12 +244,14 @@ public class CommentProcessor {
             filterCommentList = new ArrayList<>();
         }
         for (String i : filterCommentList) {
-            if (filterComment.contains(i)) {
-                LOGGER.log(Level.ERROR, "Can not add comment on article because it has spam words");
-                jsonObject.put(Keys.STATUS_CODE, false);
-                jsonObject.put(Keys.MSG, "系统维护中，请 00:00 后再试！");
+            if (!i.isEmpty()) {
+                if (filterComment.contains(i)) {
+                    LOGGER.log(Level.ERROR, "Can not add comment on article because it has spam words");
+                    jsonObject.put(Keys.STATUS_CODE, false);
+                    jsonObject.put(Keys.MSG, "系统维护中，请 00:00 后再试！");
 
-                return ;
+                    return;
+                }
             }
         }
 

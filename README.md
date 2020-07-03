@@ -1,7 +1,7 @@
 <p align = "center">
 <img alt="Bolo" src="/pic/bolo-circle.png" height="200px" width="200px">
 <br><br>
-基于 Java 的菠萝博客系统，简单易部署，提问秒响应，专为程序员设计。
+基于 Java 的菠萝博客系统，简单易部署，主题多而精致&每月更新一款，专为程序员设计。
 <br><br>
 <img src="http://img.shields.io/badge/license-AGPLv3-orange.svg?style=flat-square">
 <img src="https://img.shields.io/github/last-commit/adlered/bolo-solo.svg?style=flat-square">
@@ -25,6 +25,8 @@
 
 ****
 
+## 欣赏
+
 ![Sakura 皮肤 - 主页](/preview/1.png)
 ![Sakura 皮肤 - 文章页](/preview/2.png)
 ![Fantastic 皮肤 - 主页](/preview/3.png)
@@ -32,10 +34,4 @@
 
 ## 文档
 
-### [开始使用：菠萝博客用户指南](https://programmingwithlove.stackoverflow.wiki/bolodoc)
-
-## 用户讨论群
-
-参与内测，找 Bug 领红包，安装遇到问题，讨论相关话题，请加入菠萝博客用户讨论群：  
-
-<img src="/pic/qqgroup.jpg" width="256px">
+#### [👉 安装教程 | 从Solo迁移 | Bolo介绍 | 常见问题 👈](https://programmingwithlove.stackoverflow.wiki/bolodoc)

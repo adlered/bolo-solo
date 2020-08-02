@@ -116,18 +116,24 @@
             document.getElementById('status').innerHTML = '用户名或密码错误';
         }
         if (status === '-1') {
-            document.getElementById('status').innerHTML = '您的博客尚未初始化<br>请在输入框中设定管理后台用户名和密码<br>点击“开始初始化”按钮初始化你的菠萝博客';
+            document.getElementById('status').innerHTML = '部署成功！欢迎使用菠萝博客 ❤️<br>您的博客尚未初始化<br>请在输入框中设定管理后台用户名和密码<br>点击“开始初始化”按钮初始化你的菠萝博客';
             document.getElementById('loginBtn').innerHTML = '开始初始化';
             document.getElementById('password').setAttribute("type", "text");
         }
         document.getElementById('loginBtn').onclick = function () {
             if (document.getElementById('username').value !== '' && document.getElementById('password').value !== '') {
                 if (status === '-1') {
-                    document.getElementById('loginBtn').innerHTML = '<i class="fa fa-spinner fa-pulse"></i> 正在初始化，请稍候';
+                    let pwdRegex = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}');
+                    if (!pwdRegex.test(document.getElementById('password').value)) {
+                        alert("密码强度过低！请使用8-30位密码，必须包含字母和数字。");
+                    } else {
+                        document.getElementById('loginBtn').innerHTML = '<i class="fa fa-spinner fa-pulse"></i> 正在初始化，请稍候';
+                        document.getElementById('loginForm').submit();
+                    }
                 } else {
                     document.getElementById('loginBtn').innerHTML = '<i class="fa fa-spinner fa-pulse"></i> 登录中';
+                    document.getElementById('loginForm').submit();
                 }
-                document.getElementById('loginForm').submit();
             } else {
                 document.getElementById('status').innerHTML = '请填写用户名和密码！';
             }

@@ -108,14 +108,18 @@ public class UserConsole {
 
         try {
             final JSONObject requestJSONObject = context.requestJSON();
+            userMgmtService.updateUser(requestJSONObject, false);
+
             final String password = requestJSONObject.optString(UserExt.USER_B3_KEY);
             if (password.isEmpty()) {
+                // 密码为空，不更新密码
                 String srcPassword = userQueryService.getUserByName(requestJSONObject.optString("userName")).optString(UserExt.USER_B3_KEY);
                 requestJSONObject.put(UserExt.USER_B3_KEY, srcPassword);
             } else {
+                // 更新密码
                 requestJSONObject.put(UserExt.USER_B3_KEY, MD5Utils.stringToMD5(password));
             }
-            userMgmtService.updateUser(requestJSONObject);
+            userMgmtService.updateUser(requestJSONObject, true);
 
             ret.put(Keys.STATUS_CODE, true);
             ret.put(Keys.MSG, langPropsService.get("updateSuccLabel"));

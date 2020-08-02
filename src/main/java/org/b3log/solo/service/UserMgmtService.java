@@ -176,7 +176,7 @@ public class UserMgmtService {
      *                          "userGitHubId": "" // optional
      * @throws ServiceException service exception
      */
-    public void updateUser(final JSONObject requestJSONObject) throws ServiceException {
+    public void updateUser(final JSONObject requestJSONObject, boolean changePassword) throws ServiceException {
         final Transaction transaction = userRepository.beginTransaction();
 
         try {
@@ -206,8 +206,12 @@ public class UserMgmtService {
             final String userAvatar = requestJSONObject.optString(UserExt.USER_AVATAR);
             oldUser.put(UserExt.USER_AVATAR, userAvatar);
 
-            final String userB3Key = requestJSONObject.optString(UserExt.USER_B3_KEY);
-            oldUser.put(UserExt.USER_B3_KEY, userB3Key);
+            if (changePassword) {
+                final String userB3Key = requestJSONObject.optString(UserExt.USER_B3_KEY);
+                if (userB3Key != null && !userB3Key.isEmpty()) {
+                    oldUser.put(UserExt.USER_B3_KEY, userB3Key);
+                }
+            }
 
             final String userGitHubId = requestJSONObject.optString(UserExt.USER_GITHUB_ID);
             if (StringUtils.isNotBlank(userGitHubId)) {

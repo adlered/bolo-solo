@@ -230,11 +230,12 @@ a[class*=" icon-"]:hover {
 }
 
 #tipMsg, #loadMsg {
-  color: #31708f;
-  background-color: #d9edf7;
-  border-radius: 4px;
+  color: #4a4949de;
+  background-color: #1b1b1b08;
   line-height: 40px;
+  border-radius: 100px;
   display: inline-block;
+  padding: 0px 10px;
 }
 
 .footer {

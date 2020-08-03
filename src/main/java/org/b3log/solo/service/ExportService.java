@@ -262,7 +262,7 @@ public class ExportService {
     /**
      * Exports public articles to admin's HacPai account.
      */
-    public void exportHacPai() {
+    public void exportHacPai(boolean manual) {
         LOGGER.log(Level.INFO, "Backup public articles to HacPai....");
         try {
             final JSONObject preference = optionQueryService.getPreference();
@@ -270,12 +270,14 @@ public class ExportService {
                 return;
             }
 
-            if (!preference.optBoolean(Option.ID_C_SYNC_GITHUB)) {
-                return;
-            }
+            if (!manual) {
+                if (!preference.optBoolean(Option.ID_C_SYNC_GITHUB)) {
+                    return;
+                }
 
-            if (Latkes.RuntimeMode.PRODUCTION != Latkes.getRuntimeMode()) {
-                return;
+                if (Latkes.RuntimeMode.PRODUCTION != Latkes.getRuntimeMode()) {
+                    return;
+                }
             }
 
             final JSONObject mds = exportHexoMDs();

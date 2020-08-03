@@ -103,7 +103,7 @@ public class BackupService {
         }
 
         try {
-            exportService.exportHacPai();
+            exportService.exportHacPai(true);
 
             context.renderJSON().renderCode(200);
             context.renderJSON().renderMsg("Exported backup to HacPai manual successfully.");

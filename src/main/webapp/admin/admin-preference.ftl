@@ -178,11 +178,11 @@
         </select>
         <label for="feedOutputCnt">${feedOutputCnt1Label}</label>
         <input id="feedOutputCnt" class="normalInput" type="text"/>
-        <label for="faviconURL">Favicon (网站图标)</label>
+        <label for="faviconURL">Favicon (网站图标)：</label>
         <input id="faviconURL" class="normalInput" type="text"/>
         <label for="customVars">${customVars1Label}</label>
         <input id="customVars" class="normalInput" type="text"/>
-        <label for="kanbanniangSelector">固定看板娘</label>
+        <label for="kanbanniangSelector">固定看板娘：</label>
         <select id="kanbanniangSelector">
             <option value="" selected>不固定，随机</option>
         </select>

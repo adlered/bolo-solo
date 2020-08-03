@@ -192,7 +192,7 @@
             </div>
         </div>
         <script src="${staticServePath}/js/lib/compress/admin-lib.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vditor@3.2.6/dist/index.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vditor@3.4.1/dist/index.min.js"></script>
         <script src="${staticServePath}/js/common.js"></script>
         <#if "" == miniPostfix>
         <script src="${staticServePath}/js/admin/admin.js"></script>

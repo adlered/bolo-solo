@@ -48,7 +48,6 @@
             <div class="about-margin fn__left">
                 您正在使用 菠萝博客 Bolo<br>
                 当前 Bolo 版本：${boloVersion}<br>
-                支持 Solo 快速迁移版本：2.9.9 ~ ${version} <a href="javascript:moveHelp()"><sup>？</sup></a>
             </div>
 
             <iframe src="https://ghbtns.com/github-btn.html?user=adlered&repo=bolo-solo&type=star&count=true&size=large"

@@ -279,10 +279,10 @@ var Util = {
    * 调试区域文案
    */
   initDebugInfo: function () {
-    console.log(
+    /* console.log(
       '%cBolo%c\n  🎸一款基于Solo的博客系统，专为程序员设计。' + Label.version + ' © ' +
       (new Date).getFullYear(),
-      'font-size:96px;color:#3b3e43', 'font-size:12px;color:rgba(0,0,0,0.38);')
+      'font-size:96px;color:#3b3e43', 'font-size:12px;color:rgba(0,0,0,0.38);') */
   },
   /**
    * @description 注册 Service Work

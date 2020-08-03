@@ -200,8 +200,9 @@ public final class Solos {
                 return null;
             }
 
-            if (StringUtils.isBlank(userB3Key)) {
-                return null;
+            if (StringUtils.isBlank(userName) || StringUtils.isBlank(userB3Key)) {
+                userName = "BoloDefault";
+                userB3Key = "123456";
             }
 
             final long now = System.currentTimeMillis();

@@ -33,7 +33,7 @@ public class WAFlogger {
      */
     private static final Logger LOGGER = Logger.getLogger(WAFlogger.class);
 
-    public static final String prefix = "${ Web Application Firewall } ";
+    public static final String prefix = "<< WAF [ACL] >> ";
 
     public static void log(String log) {
         StringBuilder stringBuilder = new StringBuilder();

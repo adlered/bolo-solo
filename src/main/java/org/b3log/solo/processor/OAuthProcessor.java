@@ -127,7 +127,7 @@ public class OAuthProcessor {
                 final JSONObject initReq = new JSONObject();
                 initReq.put(User.USER_NAME, username);
                 initReq.put(UserExt.USER_B3_KEY, password);
-                initReq.put(UserExt.USER_AVATAR, "https://pic.stackoverflow.wiki/uploadImages/114/244/224/38/2019/11/30/01/04/1cb648c8-f9f8-430f-8616-43f7b0e2333a.png");
+                initReq.put(UserExt.USER_AVATAR, "https://pic.stackoverflow.wiki/uploadImages/117/136/73/84/2020/08/03/19/59/2c12286b-91a0-478e-ba47-edaa21f19476.png");
                 initReq.put(UserExt.USER_GITHUB_ID, "000000");
                 initService.init(initReq);
                 context.sendRedirect(Latkes.getServePath() + "/");

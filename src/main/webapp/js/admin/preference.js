@@ -83,12 +83,19 @@ admin.preference = {
         } else {
           $("#interactiveSwitch").val(preference.interactive)
         }
+
+        if(preference.adminActiveSentToMailbox === "" || preference.adminActiveSentToMailbox === undefined) {
+          $("#adminActiveSentToMailbox").val("on")
+        } else {
+          $("#adminActiveSentToMailbox").val(preference.adminActiveSentToMailbox)
+        }
+
         $('#spam').val(preference.spam)
         $('#kanbanniangSelector').val(preference.kanbanniangSelector)
         $('#replyRemind').val(preference.replyRemind)
         $('#sourceTC').text(preference.tuChuangConfig)
-        sltd = $('#sourceTC').text().split('<<>>')[0];
-        $('#tcS').val(sltd);
+        sltd = $('#sourceTC').text().split('<<>>')[0]
+        $('#tcS').val(sltd)
         $('#hacpaiUser').val(preference.hacpaiUser)
         $('#b3logKey').val(preference.b3logKey)
         $('#mailBox').val(preference.mailBox)
@@ -255,6 +262,7 @@ admin.preference = {
 
     var requestJSONObject = {
       'preference': {
+        'adminActiveSentToMailbox': $("#adminActiveSentToMailbox").val(),
         'wafCurrentLimitTimes': $("#wafCurrentLimitTimes").val(),
         'wafCurrentLimitSecond': $("#wafCurrentLimitSecond").val(),
         'wafPower': $("#wafPower").val(),

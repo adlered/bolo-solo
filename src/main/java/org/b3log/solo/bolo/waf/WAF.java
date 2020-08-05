@@ -73,9 +73,7 @@ public class WAF {
     public static void set() {
         try {
             String wafPower = Options.get(Option.ID_C_WAF_POWER);
-            if (wafPower.equals("on")) {
-                WAF.restart();
-            } else if (wafPower.equals("off")) {
+            if (wafPower.equals("off")) {
                 WAF.off();
             } else {
                 WAF.restart();

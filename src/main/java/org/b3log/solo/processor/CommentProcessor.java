@@ -36,6 +36,7 @@ import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.JsonRenderer;
 import org.b3log.solo.bolo.prop.CommentMailService;
 import org.b3log.solo.bolo.prop.MailService;
+import org.b3log.solo.bolo.prop.Options;
 import org.b3log.solo.bolo.tool.AntiXSS;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Comment;
@@ -171,6 +172,9 @@ public class CommentProcessor {
      */
     @RequestProcessing(value = "/article/comments", method = HttpMethod.POST)
     public void addArticleComment(final RequestContext context) {
+        // 为 false 时不发送提醒邮件至管理员邮箱
+        boolean sendEmailToAdmin = true;
+
         final JSONObject requestJSONObject = context.requestJSON();
         requestJSONObject.put(Common.TYPE, Article.ARTICLE);
 
@@ -216,6 +220,15 @@ public class CommentProcessor {
                 jsonObject.put(Keys.MSG, "你输入了管理员的昵称，但并没有登录！");
 
                 return ;
+            } else {
+                // 管理员回复不发送邮件提醒
+                try {
+                    String adminActiveSentToMailbox = Options.get(Option.ID_C_ADMIN_ACTIVE_SENT_TO_MAILBOX);
+                    if (adminActiveSentToMailbox.equals("off")) {
+                        sendEmailToAdmin = false;
+                    }
+                } catch (Exception ignored) {
+                }
             }
         }
 
@@ -277,28 +290,30 @@ public class CommentProcessor {
                         username,
                         blogTitle
                 );
-            } catch (JSONException JSONE) {
+            } catch (JSONException jsonException) {
                 LOGGER.log(Level.DEBUG, "No originalCommentId for [from=" + commentId + ", to=" + originalCommentId + "]");
             }
 
             // 提醒博主
-            String replyRemindMailBoxAddress = "";
-            try {
-                replyRemindMailBoxAddress = optionRepository.get(Option.ID_C_REPLY_REMIND).optString(Option.OPTION_VALUE);
-            } catch (NullPointerException e) {
-            }
-            String user = requestJSONObject.getString("commentName");
-            String comment = requestJSONObject.getString("commentContent");
-            try {
-                CommentMailService.remindAdmin(
-                        replyRemindMailBoxAddress,
-                        blogSite,
-                        user,
-                        comment,
-                        blogTitle
-                );
-            } catch (JSONException JSONE) {
-                LOGGER.log(Level.DEBUG, "Send admin mail remind failed [replyRemindMailBoxAddress=" + replyRemindMailBoxAddress + "]");
+            if (sendEmailToAdmin) {
+                String replyRemindMailBoxAddress = "";
+                try {
+                    replyRemindMailBoxAddress = optionRepository.get(Option.ID_C_REPLY_REMIND).optString(Option.OPTION_VALUE);
+                } catch (NullPointerException e) {
+                }
+                String user = requestJSONObject.getString("commentName");
+                String comment = requestJSONObject.getString("commentContent");
+                try {
+                    CommentMailService.remindAdmin(
+                            replyRemindMailBoxAddress,
+                            blogSite,
+                            user,
+                            comment,
+                            blogTitle
+                    );
+                } catch (JSONException jsonException) {
+                    LOGGER.log(Level.DEBUG, "Send admin mail remind failed [replyRemindMailBoxAddress=" + replyRemindMailBoxAddress + "]");
+                }
             }
 
             final Map<String, Object> dataModel = new HashMap<>();

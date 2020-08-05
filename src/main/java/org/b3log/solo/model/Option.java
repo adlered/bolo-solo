@@ -380,6 +380,11 @@ public final class Option {
     public static final String ID_C_WAF_CURRENT_LIMIT_TIMES = "wafCurrentLimitTimes";
 
     /**
+     * Key of admin Active Sent To Mailbox.
+     */
+    public static final String ID_C_ADMIN_ACTIVE_SENT_TO_MAILBOX =  "adminActiveSentToMailbox";
+
+    /**
      * Private constructor.
      */
     private Option() {

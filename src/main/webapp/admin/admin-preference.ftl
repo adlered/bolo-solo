@@ -414,6 +414,13 @@
         <div>
             ${BloggerMailboxDescribeLabel}
         </div>
+        <label for="adminActiveSentToMailbox">管理员的评论动态也发送至博主邮箱：</label>
+        <br>
+        <select id="adminActiveSentToMailbox">
+            <option value="on" selected="">${enableLabel}</option>
+            <option value="off">${disableLabel}</option>
+        </select>
+        <br><br>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>

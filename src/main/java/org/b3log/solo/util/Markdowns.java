@@ -168,7 +168,7 @@ public final class Markdowns {
                         LOGGER.log(Level.DEBUG, "Lute-HTTP To HTML successful.");
                     }
                 } catch (final Exception e) {
-                    LOGGER.log(Level.WARN, "Failed to use [Lute] for markdown [md=" + StringUtils.substring(markdownText, 0, 256) + "]: " + e.getMessage());
+                    LOGGER.log(Level.WARN, "Failed to use [Lute] for markdown, Using FlexMark Instead [md=" + StringUtils.substring(markdownText, 0, 256) + "]: " + e.getMessage());
                 }
             }
 

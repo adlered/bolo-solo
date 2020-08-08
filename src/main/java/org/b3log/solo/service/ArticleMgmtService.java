@@ -475,10 +475,12 @@ public class ArticleMgmtService {
 
             // Bolo category
             String category = String.valueOf(article.get(CATEGORY_REF));
-            final JSONObject categoryTag = new JSONObject();
-            categoryTag.put(Category.CATEGORY + "_" + Keys.OBJECT_ID, category);
-            categoryTag.put(Tag.TAG + "_" + Keys.OBJECT_ID, article.optString(Keys.OBJECT_ID));
-            categoryMgmtService.addCategoryTag(categoryTag);
+            if (!category.equals("null")) {
+                final JSONObject categoryTag = new JSONObject();
+                categoryTag.put(Category.CATEGORY + "_" + Keys.OBJECT_ID, category);
+                categoryTag.put(Tag.TAG + "_" + Keys.OBJECT_ID, article.optString(Keys.OBJECT_ID));
+                categoryMgmtService.addCategoryTag(categoryTag);
+            }
             article.remove(CATEGORY_REF);
 
             articleRepository.add(article);

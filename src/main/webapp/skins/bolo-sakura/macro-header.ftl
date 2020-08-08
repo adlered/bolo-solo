@@ -75,9 +75,8 @@
     <header class="site-header no-select is-homepage" role="banner">
         <div class="site-top">
             <div class="site-branding">
-                <span class="site-title"><span class="logolink moe-mashiro"><a href="${servePath}/" alt="${blogTitle}"><ruby><span
-                                        class="sakuraso">${blogSubtitle}</span><span class="no">の</span><span
-                                        class="shironeko">${blogTitle}</span><rp></rp><rt class="chinese-font">${blogSubtitle}</rt><rp></rp></ruby></a></span></span>
+                <span class="site-title"><span class="logolink moe-mashiro"><a href="${servePath}/" alt="${blogTitle}" style="width: 330px;"><ruby>
+                                <span class="no">#</span>&nbsp;<span class="shironeko">${blogTitle}</span><rp></rp><rt class="chinese-font">${blogSubtitle}</rt><rp></rp></ruby></a></span></span>
             </div>
             <div class="lower-cantiner">
                 <div class="lower">

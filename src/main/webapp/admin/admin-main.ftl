@@ -30,12 +30,25 @@
             <h2><a href="https://github.com/adlered/bolo-solo" target="_blank">数据</a></h2>
         </div>
         <div class="module-body padding12">
-            <div style="height: 200px;  width: 350px;">
+            <div style="height: 200px;  width: 49%; display: inline-table;">
                 <h5 class="bar-title">每月文章数量统计</h5>
                 <canvas id="categoryCountChart"></canvas>
                 <script type="text/javascript">
                     var options = {};
                     var ctx = document.getElementById("categoryCountChart").getContext("2d");
+                    var currentWeekChart = new Chart(ctx, {
+                        type: 'line',
+                        data: data1,
+                        options: options
+                    });
+                </script>
+            </div>
+            <div style="height: 200px;  width: 49%; display: inline-table;">
+                <h5 class="bar-title">每月文章数量统计2</h5>
+                <canvas id="categoryCountChart2"></canvas>
+                <script type="text/javascript">
+                    var options = {};
+                    var ctx = document.getElementById("categoryCountChart2").getContext("2d");
                     var currentWeekChart = new Chart(ctx, {
                         type: 'line',
                         data: data1,

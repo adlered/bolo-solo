@@ -111,7 +111,7 @@ public class UpgradeService {
                     V420_430.perform();
                     break;
                 default:
-                    LOGGER.log(Level.INFO, "Version " + currentVer + " loaded in compatibility mode. (unresolvable)");
+                    LOGGER.log(Level.INFO, "Version " + currentVer + " loaded in compatibility mode.");
                     SoloServletListener.VERSION = currentVer;
             }
         } catch (final Exception e) {

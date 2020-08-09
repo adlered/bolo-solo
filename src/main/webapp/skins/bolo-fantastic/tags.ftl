@@ -54,7 +54,7 @@
                     <div class="columns">
                         <div
                                 class="column is-12-tablet is-12-desktop is-12-widescreen has-order-2 column-main">
-                            <div class="level">
+                            <div class="level" style="display: block;">
                                 <div class="columns">
                                     <div
                                             class="column is-12-tablet is-12-desktop is-8-widescreen is-8-fullhd has-order-2 column-main">

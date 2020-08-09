@@ -37,7 +37,7 @@
                     var options = {};
                     var ctx = document.getElementById("categoryCountChart").getContext("2d");
                     var currentWeekChart = new Chart(ctx, {
-                        type: 'bar',
+                        type: 'line',
                         data: data1,
                         options: options
                     });

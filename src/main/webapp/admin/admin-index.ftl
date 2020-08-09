@@ -23,6 +23,7 @@
     <head>
         <@head title="${adminConsoleLabel} - ${blogTitle}">
             <link type="text/css" rel="stylesheet" href="${staticServePath}/scss/admin.css?${staticResourceVersion}" />
+            <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.css" />
             <meta name="robots" content="fn__none" />
             <link href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         </@head>
@@ -219,7 +220,9 @@
         <#else>
         <script src="${staticServePath}/js/admin/admin.min.js?${staticResourceVersion}"></script>
         </#if>
-        <#include "admin-label.ftl">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+</html>
+<#include "admin-label.ftl">
         ${plugins}
         <script>
             admin.inited();

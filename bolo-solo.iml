@@ -145,5 +145,7 @@
     <orderEntry type="library" name="Maven: org.zeroturnaround:zt-zip:1.14" level="project" />
     <orderEntry type="library" name="Maven: rome:rome:0.9" level="project" />
     <orderEntry type="library" name="Maven: jdom:jdom:1.0" level="project" />
+    <orderEntry type="library" name="wtinychart" level="application" />
+    <orderEntry type="library" name="chart.js" level="application" />
   </component>
 </module>

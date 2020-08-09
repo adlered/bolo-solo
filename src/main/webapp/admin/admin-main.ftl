@@ -27,7 +27,7 @@
 <div id="notice">
     <div class="module-panel">
         <div class="module-header">
-            <h2><a href="https://github.com/adlered/bolo-solo" target="_blank">统计板</a></h2>
+            <h2><a href="https://github.com/adlered/bolo-solo" target="_blank">数据</a></h2>
         </div>
         <div class="module-body padding12">
             <div style="height: 200px;  width: 350px;">

@@ -41,9 +41,11 @@ import org.b3log.latke.servlet.renderer.AbstractFreeMarkerRenderer;
 import org.b3log.latke.util.Execs;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.SoloServletListener;
+import org.b3log.solo.model.ArchiveDate;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.model.UserExt;
+import org.b3log.solo.repository.ArchiveDateRepository;
 import org.b3log.solo.repository.CategoryRepository;
 import org.b3log.solo.service.DataModelService;
 import org.b3log.solo.service.ExportService;
@@ -113,8 +115,17 @@ public class AdminConsole {
     @Inject
     private EventManager eventManager;
 
+    /**
+     * Category repository.
+     */
     @Inject
     private CategoryRepository categoryRepository;
+
+    /**
+     * Archive Date Repository.
+     */
+    @Inject
+    private ArchiveDateRepository archiveDateRepository;
 
     /**
      * Shows administrator index with the specified context.
@@ -168,6 +179,19 @@ public class AdminConsole {
                 dataModel.put(Common.UPLOAD_URL, upload.optString(Common.UPLOAD_URL));
                 dataModel.put(Common.UPLOAD_MSG, upload.optString(Common.UPLOAD_MSG));
             }
+            // 统计表信息
+            final List<JSONObject> archiveDates = new ArrayList<>();
+            final List<JSONObject> archiveDates2 = archiveDateRepository.getArchiveDates();
+            for (int i = 0; i < 12; i++) {
+                try {
+                    JSONObject archiveDate = archiveDates2.get(i);
+                    archiveDates.add(archiveDate);
+                } catch (Exception e) {
+                    break;
+                }
+            }
+            dataModel.put(ArchiveDate.ARCHIVE_DATES, archiveDates);
+
             dataModelService.fillFaviconURL(dataModel, preference);
             dataModelService.fillUsite(dataModel);
             dataModelService.fillCommon(context, dataModel, preference);

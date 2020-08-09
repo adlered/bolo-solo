@@ -188,6 +188,25 @@
             <script type="text/javascript">
                 var boloVersion = '${boloVersion}';
             </script>
+            <script type="text/javascript">
+                var data1 = {
+                    labels: [
+                        <#list archiveDates as archiveDate>
+                        "${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}",
+                        </#list>
+                    ],
+                    datasets: [{
+                        label: '文章数量',
+                        backgroundColor: 'rgb(78,165,137)',
+                        borderColor: 'rgb(78,165,137)',
+                        data: [
+                            <#list archiveDates as archiveDate>
+                            ${archiveDate.archiveDatePublishedArticleCount},
+                            </#list>
+                        ],
+                    }]
+                };
+            </script>
             <div class="footer">
                 Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">Bolo</a> <span id="version">${boloVersion}</span>
             </div>

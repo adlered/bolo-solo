@@ -31,32 +31,19 @@
         </div>
         <div class="module-body padding12">
             <div style="height: 200px;  width: 350px;">
-                <h5 class="bar-title">当前周用户注册数一览表</h5>
-                <canvas id="currentWeekChart"></canvas>
+                <h5 class="bar-title">每月文章数量统计</h5>
+                <canvas id="categoryCountChart"></canvas>
+                <script type="text/javascript">
+                    var options = {};
+                    var ctx = document.getElementById("categoryCountChart").getContext("2d");
+                    var currentWeekChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: data1,
+                        options: options
+                    });
+                </script>
             </div>
         </div>
-        <script type="text/javascript">
-        $(function() {
-            var data = {
-                labels: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
-                datasets: [
-                    {
-                        label: "用户数量",
-                        backgroundColor: "rgba(0, 0, 0, 0.1)",//线条填充色
-                        pointBackgroundColor:"rgba(255,48,48,0.2)",//定点填充色
-                        data: [65, 59, 80, 81, 56, 55, 40]
-                    }
-                ]
-            };
-            var options = {};
-            var ctx = document.getElementById("currentWeekChart").getContext("2d");
-            var currentWeekChart = new Chart(ctx,{
-                type: 'line',
-                data: data,
-                options:options
-            });
-        })
-        </script>
     </div>
     <div class="module-panel">
         <div class="module-header">

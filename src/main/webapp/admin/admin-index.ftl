@@ -191,32 +191,15 @@
             <script type="text/javascript">
                 var data1 = {
                     labels: [
-                        <#list archiveDates as archiveDate>
+                        <#list archiveDates?reverse as archiveDate>
                         "${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}",
                         </#list>
                     ],
                     datasets: [{
                         label: '文章数量',
-                        backgroundColor: 'rgb(78,165,137)',
-                        borderColor: 'rgb(78,165,137)',
-                        data: [
-                            <#list archiveDates as archiveDate>
-                            ${archiveDate.archiveDatePublishedArticleCount},
-                            </#list>
-                        ],
-                    }]
-                };
-
-                var data2 = {
-                    labels: [
-                        <#list archiveDates as archiveDate>
-                        "${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}",
-                        </#list>
-                    ],
-                    datasets: [{
-                        label: '文章数量',
-                        backgroundColor: 'rgb(255,162,236)',
-                        borderColor: 'rgb(255,162,236)',
+                        fill: false,
+                        backgroundColor: 'rgb(17,177,109)',
+                        borderColor: 'rgb(17,177,109)',
                         data: [
                             <#list archiveDates as archiveDate>
                             ${archiveDate.archiveDatePublishedArticleCount},

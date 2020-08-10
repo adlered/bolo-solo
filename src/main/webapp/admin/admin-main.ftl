@@ -27,14 +27,28 @@
 <div id="notice">
     <div class="module-panel">
         <div class="module-header">
-            <h2><a href="https://github.com/adlered/bolo-solo" target="_blank">数据</a></h2>
+            <h2>数据</h2>
+            <h6>Powered by Chart.js</h6>
         </div>
         <div class="module-body padding12">
-            <div style="height: 200px;  width: 49%; display: inline-table;">
-                <h5 class="bar-title">每月文章数量统计</h5>
+            <div style="width: 49%; display: inline-table;">
                 <canvas id="categoryCountChart"></canvas>
                 <script type="text/javascript">
-                    var options = {};
+                    var options = {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: '每月文章数量统计'
+                        },
+                        tooltips: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true
+                        }
+                    };
                     var ctx = document.getElementById("categoryCountChart").getContext("2d");
                     var currentWeekChart = new Chart(ctx, {
                         type: 'line',
@@ -43,24 +57,11 @@
                     });
                 </script>
             </div>
-            <div style="height: 200px;  width: 49%; display: inline-table;">
-                <h5 class="bar-title">每月文章数量统计2</h5>
-                <canvas id="categoryCountChart2"></canvas>
-                <script type="text/javascript">
-                    var options = {};
-                    var ctx = document.getElementById("categoryCountChart2").getContext("2d");
-                    var currentWeekChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: data2,
-                        options: options
-                    });
-                </script>
-            </div>
         </div>
     </div>
     <div class="module-panel">
         <div class="module-header">
-            <h2><a href="https://github.com/adlered/bolo-solo" target="_blank">公告</a></h2>
+            <h2>公告</h2>
         </div>
         <div class="module-body padding12">
             <div id="noticeList" style="background: none;">

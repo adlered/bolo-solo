@@ -634,6 +634,32 @@ public class DataModelService {
     }
 
     /**
+     * Fill Admin-Index Charts.
+     *
+     * @param context    the specified HTTP servlet request context
+     * @param dataModel  the specified data model
+     */
+    public void fillCharts(final RequestContext context, final Map<String, Object> dataModel) {
+        // 每月文章数量统计
+        try {
+            final List<JSONObject> archiveDates = new ArrayList<>();
+            final List<JSONObject> archiveDates2 = archiveDateRepository.getArchiveDates();
+            for (int i = 0; i < 12; i++) {
+                try {
+                    JSONObject archiveDate = archiveDates2.get(i);
+                    archiveDates.add(archiveDate);
+                } catch (Exception e) {
+                    break;
+                }
+            }
+            dataModel.put(ArchiveDate.ARCHIVE_DATES, archiveDates);
+        } catch (Exception ignored) {
+        }
+
+
+    }
+
+    /**
      * Fills footer.ftl.
      *
      * @param context    the specified HTTP servlet request context

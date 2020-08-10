@@ -34,7 +34,7 @@
             <div style="width: 49%; display: inline-table;">
                 <canvas id="categoryCountChart"></canvas>
                 <script type="text/javascript">
-                    var options = {
+                    let options = {
                         responsive: true,
                         title: {
                             display: true,
@@ -49,10 +49,29 @@
                             intersect: true
                         }
                     };
-                    var ctx = document.getElementById("categoryCountChart").getContext("2d");
-                    var currentWeekChart = new Chart(ctx, {
+                    let ctx = document.getElementById("categoryCountChart").getContext("2d");
+                    var categoryCountChart = new Chart(ctx, {
                         type: 'line',
                         data: data1,
+                        options: options
+                    });
+                </script>
+            </div>
+
+            <div style="width: 49%; display: inline-table;">
+                <canvas id="tagsTop5Chart"></canvas>
+                <script type="text/javascript">
+                    let options = {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: '标签 Top5'
+                        }
+                    };
+                    let ctx = document.getElementById("tagsTop5Chart").getContext("2d");
+                    var tagsTop5Chart = new Chart(ctx, {
+                        type: 'pie',
+                        data: data2,
                         options: options
                     });
                 </script>

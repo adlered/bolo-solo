@@ -180,7 +180,7 @@ public class AdminConsole {
                 dataModel.put(Common.UPLOAD_MSG, upload.optString(Common.UPLOAD_MSG));
             }
 
-            dataModelService.fillCharts(context, dataModel);
+            dataModelService.fillCharts(context, dataModel, preference);
             dataModelService.fillFaviconURL(dataModel, preference);
             dataModelService.fillUsite(dataModel);
             dataModelService.fillCommon(context, dataModel, preference);

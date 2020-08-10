@@ -191,8 +191,8 @@
             <script type="text/javascript">
                 var data1 = {
                     labels: [
-                        <#list archiveDates?reverse as archiveDate>
-                        "${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}",
+                        <#list latestArchives?reverse as archiveDate>
+                            "${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}",
                         </#list>
                     ],
                     datasets: [{
@@ -201,11 +201,36 @@
                         backgroundColor: 'rgb(17,177,109)',
                         borderColor: 'rgb(17,177,109)',
                         data: [
-                            <#list archiveDates as archiveDate>
-                            ${archiveDate.archiveDatePublishedArticleCount},
+                            <#list latestArchives?reverse as archiveDate>
+                                ${archiveDate.archiveDatePublishedArticleCount},
                             </#list>
                         ],
                     }]
+                };
+
+                var data2 = {
+                    datasets: [
+                        {
+                            data: [
+                                <#list tagsTop5 as tag>
+                                    ${tag.tagPublishedRefCount},
+                                </#list>
+                            ],
+                            backgroundColor: [
+                                'rgb(254,67,101)',
+                                'rgb(252,157,154)',
+                                'rgb(249,205,173)',
+                                'rgb(200,200,169)',
+                                'rgb(131,175,155)',
+                            ],
+                        }
+                    ],
+
+                    labels: [
+                        <#list tagsTop5 as tag>
+                            "${tag.tagTitle}",
+                        </#list>
+                    ]
                 };
             </script>
             <div class="footer">

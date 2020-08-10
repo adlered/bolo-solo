@@ -639,18 +639,89 @@ public class DataModelService {
      * @param context    the specified HTTP servlet request context
      * @param dataModel  the specified data model
      */
-    public void fillCharts(final RequestContext context, final Map<String, Object> dataModel) {
+    public void fillCharts(final RequestContext context, final Map<String, Object> dataModel, final JSONObject preference) {
         // 每月文章数量统计
         try {
             List<JSONObject> archiveDates = archiveDateRepository.getArchiveDates();
-            if (archiveDates.size() > 12) {
-                archiveDates = archiveDates.subList(0, 12);
+            List<JSONObject> archiveDates2 = new ArrayList<>();
+            dataModel.put(ArchiveDate.ARCHIVE_DATES, archiveDates2);
+            if (archiveDates.isEmpty()) {
+                return;
             }
-            dataModel.put(ArchiveDate.ARCHIVE_DATES, archiveDates);
+
+            int maxArchiveResult = -1;
+
+            try {
+                BeanManager beanManager = BeanManager.getInstance();
+                OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+                JSONObject maxArchiveOpt = optionRepository.get(Option.ID_C_MAX_ARCHIVE);
+                String maxArchive = (String) maxArchiveOpt.get(Option.OPTION_VALUE);
+                maxArchiveResult = Integer.parseInt(maxArchive);
+            } catch (NullPointerException | NumberFormatException NPE) {
+            }
+
+            // 合法性检查
+            if (maxArchiveResult < -1 || maxArchiveResult > archiveDates.size()) {
+                maxArchiveResult = -1;
+            }
+
+            if (maxArchiveResult == -1) {
+                maxArchiveResult = archiveDates.size();
+            }
+
+            if (maxArchiveResult != 0) {
+                archiveDates2.add(archiveDates.get(0));
+
+                if (1 < archiveDates.size()) { // XXX: Workaround, remove the duplicated archive dates
+                    for (int i = 1; i < maxArchiveResult; i++) {
+                        final JSONObject archiveDate = archiveDates.get(i);
+
+                        final long time = archiveDate.getLong(ArchiveDate.ARCHIVE_TIME);
+                        final String dateString = DateFormatUtils.format(time, "yyyy/MM");
+
+                        final JSONObject last = archiveDates2.get(archiveDates2.size() - 1);
+                        final String lastDateString = DateFormatUtils.format(last.getLong(ArchiveDate.ARCHIVE_TIME), "yyyy/MM");
+
+                        if (!dateString.equals(lastDateString)) {
+                            archiveDates2.add(archiveDate);
+                        } else {
+                            LOGGER.log(Level.DEBUG, "Found a duplicated archive date [{0}]", dateString);
+                        }
+                    }
+                }
+            }
+
+            final String localeString = preference.getString(Option.ID_C_LOCALE_STRING);
+            final String language = Locales.getLanguage(localeString);
+
+            for (final JSONObject archiveDate : archiveDates2) {
+                final long time = archiveDate.getLong(ArchiveDate.ARCHIVE_TIME);
+                final String dateString = DateFormatUtils.format(time, "yyyy/MM");
+                final String[] dateStrings = dateString.split("/");
+                final String year = dateStrings[0];
+                final String month = dateStrings[1];
+
+                archiveDate.put(ArchiveDate.ARCHIVE_DATE_YEAR, year);
+
+                archiveDate.put(ArchiveDate.ARCHIVE_DATE_MONTH, month);
+                if ("en".equals(language)) {
+                    final String monthName = Dates.EN_MONTHS.get(month);
+
+                    archiveDate.put(Common.MONTH_NAME, monthName);
+                }
+            }
+
+            if (archiveDates2.size() > 12) {
+                archiveDates2 = archiveDates2.subList(0, 12);
+            }
+
+            dataModel.put("latestArchives", archiveDates2);
         } catch (Exception ignored) {
         }
 
         // 标签 Top5
+        // tagPublishedRefCount 总计
+        // tagTitle 标签名称
         try {
             List<JSONObject> tags = tagQueryService.getTags();
             Collections.sort(tags, Comparator.comparingInt(o -> Integer.parseInt(o.optString(Tag.TAG_T_PUBLISHED_REFERENCE_COUNT))));
@@ -658,7 +729,7 @@ public class DataModelService {
             if (tags.size() > 5) {
                 tags = tags.subList(0, 5);
             }
-            dataModel.put("TagsTop5", tags);
+            dataModel.put("tagsTop5", tags);
         } catch (Exception ignored) {
         }
     }

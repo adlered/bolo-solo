@@ -50,8 +50,8 @@
                     var options = {};
                     var ctx = document.getElementById("categoryCountChart2").getContext("2d");
                     var currentWeekChart = new Chart(ctx, {
-                        type: 'line',
-                        data: data1,
+                        type: 'bar',
+                        data: data2,
                         options: options
                     });
                 </script>

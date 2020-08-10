@@ -642,21 +642,25 @@ public class DataModelService {
     public void fillCharts(final RequestContext context, final Map<String, Object> dataModel) {
         // 每月文章数量统计
         try {
-            final List<JSONObject> archiveDates = new ArrayList<>();
-            final List<JSONObject> archiveDates2 = archiveDateRepository.getArchiveDates();
-            for (int i = 0; i < 12; i++) {
-                try {
-                    JSONObject archiveDate = archiveDates2.get(i);
-                    archiveDates.add(archiveDate);
-                } catch (Exception e) {
-                    break;
-                }
+            List<JSONObject> archiveDates = archiveDateRepository.getArchiveDates();
+            if (archiveDates.size() > 12) {
+                archiveDates = archiveDates.subList(0, 12);
             }
             dataModel.put(ArchiveDate.ARCHIVE_DATES, archiveDates);
         } catch (Exception ignored) {
         }
 
-
+        // 标签 Top5
+        try {
+            List<JSONObject> tags = tagQueryService.getTags();
+            Collections.sort(tags, Comparator.comparingInt(o -> Integer.parseInt(o.optString(Tag.TAG_T_PUBLISHED_REFERENCE_COUNT))));
+            Collections.reverse(tags);
+            if (tags.size() > 5) {
+                tags = tags.subList(0, 5);
+            }
+            dataModel.put("TagsTop5", tags);
+        } catch (Exception ignored) {
+        }
     }
 
     /**

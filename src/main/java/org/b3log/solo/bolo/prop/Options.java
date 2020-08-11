@@ -134,8 +134,8 @@ public class Options {
                 new Object[] { Option.ID_C_SKIN_DIR_NAME, Option.CATEGORY_C_SKIN, Option.DefaultPreference.DEFAULT_SKIN_DIR_NAME },
                 new Object[] { Option.ID_C_MOBILE_SKIN_DIR_NAME, Option.CATEGORY_C_SKIN, Option.DefaultPreference.DEFAULT_MOBILE_SKIN_DIR_NAME },
                 // Bolo 字段
-                new Object[] { Option.ID_C_HACPAI_USER, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_B3LOG_USERNAME },
-                new Object[] { Option.ID_C_B3LOG_KEY, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_B3LOG_PASSWORD },
+                new Object[] { Option.ID_C_HACPAI_USER, Option.CATEGORY_C_PREFERENCE, "" },
+                new Object[] { Option.ID_C_B3LOG_KEY, Option.CATEGORY_C_PREFERENCE, "" },
                 new Object[] { Option.ID_C_MAX_ARCHIVE, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_MAX_ARCHIVE },
                 new Object[] { Option.ID_C_MAIL_BOX, Option.CATEGORY_C_PREFERENCE, "" },
                 new Object[] { Option.ID_C_MAIL_USERNAME, Option.CATEGORY_C_PREFERENCE, "" },

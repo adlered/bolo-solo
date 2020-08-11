@@ -357,16 +357,20 @@ public class ArticleMgmtService {
             article.remove(Common.POST_TO_COMMUNITY);
 
             // Bolo category
-            String category = String.valueOf(article.get(CATEGORY_REF));
-            final JSONObject categoryTag = new JSONObject();
-            categoryTag.put(Category.CATEGORY + "_" + Keys.OBJECT_ID, category);
-            categoryTag.put(Tag.TAG + "_" + Keys.OBJECT_ID, article.optString(Keys.OBJECT_ID));
-
             try {
-                categoryTagRepository.removeByTagId(article.optString(Keys.OBJECT_ID));
-            } catch (JSONException e) {}
-            categoryMgmtService.addCategoryTag(categoryTag);
-            article.remove(CATEGORY_REF);
+                String category = String.valueOf(article.get(CATEGORY_REF));
+                final JSONObject categoryTag = new JSONObject();
+                categoryTag.put(Category.CATEGORY + "_" + Keys.OBJECT_ID, category);
+                categoryTag.put(Tag.TAG + "_" + Keys.OBJECT_ID, article.optString(Keys.OBJECT_ID));
+                try {
+                    categoryTagRepository.removeByTagId(article.optString(Keys.OBJECT_ID));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                categoryMgmtService.addCategoryTag(categoryTag);
+                article.remove(CATEGORY_REF);
+            } catch (Exception ignored) {
+            }
 
             articleRepository.update(articleId, article);
             article.put(Common.POST_TO_COMMUNITY, postToCommunity);
@@ -474,14 +478,15 @@ public class ArticleMgmtService {
             article.remove(Common.POST_TO_COMMUNITY);
 
             // Bolo category
-            String category = String.valueOf(article.get(CATEGORY_REF));
-            if (!category.equals("null")) {
+            try {
+                String category = String.valueOf(article.get(CATEGORY_REF));
                 final JSONObject categoryTag = new JSONObject();
                 categoryTag.put(Category.CATEGORY + "_" + Keys.OBJECT_ID, category);
                 categoryTag.put(Tag.TAG + "_" + Keys.OBJECT_ID, article.optString(Keys.OBJECT_ID));
                 categoryMgmtService.addCategoryTag(categoryTag);
+                article.remove(CATEGORY_REF);
+            } catch (Exception ignored) {
             }
-            article.remove(CATEGORY_REF);
 
             articleRepository.add(article);
             transaction.commit();

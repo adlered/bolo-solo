@@ -12,6 +12,10 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="bolo-solo" />
+          <element id="library" level="application" name="typing" />
+          <element id="library" level="application" name="font-awesome" />
+          <element id="library" level="application" name="wtinychart" />
+          <element id="library" level="application" name="chart.js" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.b3log:latke-core:2.5.8" />

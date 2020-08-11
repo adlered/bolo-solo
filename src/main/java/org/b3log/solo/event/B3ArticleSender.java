@@ -121,6 +121,16 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
             String userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
             JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
             String userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+            if (StringUtils.isBlank(userName) || StringUtils.isBlank(userB3Key)) {
+                userName = "BoloDefault";
+                userB3Key = "123456";
+            }
+
+            if ("BoloDefault".equals(userName)) {
+                LOGGER.log(Level.INFO, "Article [title={0}] Is using the B3log default account, skipped push to Rhy", title);
+
+                return ;
+            }
 
             final JSONObject client = new JSONObject().
                     put("title", preference.getString(Option.ID_C_BLOG_TITLE)).

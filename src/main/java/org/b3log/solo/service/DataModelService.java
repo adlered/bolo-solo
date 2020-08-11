@@ -841,7 +841,7 @@ public class DataModelService {
                 OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
                 JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
                 userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
-                if (userName.equals("BoloDefault")) {
+                if ("BoloDefault".equals(userName)) {
                     userName = "";
                 }
             } catch (NullPointerException NPE) {

@@ -17,6 +17,7 @@
  */
 package org.b3log.solo.log4j;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.spi.LoggingEvent;
 import org.b3log.solo.bolo.tool.FixSizeLinkedList;
@@ -48,7 +49,7 @@ public class RamAppender extends AppenderSkeleton {
         map.put("name", loggingEvent.getLoggerName());
         map.put("date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date(loggingEvent.getTimeStamp())));
         map.put("level", loggingEvent.getLevel().toString());
-        map.put("message", "" + loggingEvent.getMessage());
+        map.put("message", StringEscapeUtils.escapeHtml(loggingEvent.getMessage().toString()));
         map.put("methodName", loggingEvent.getLocationInformation().getMethodName());
         map.put("lineNumber", loggingEvent.getLocationInformation().getLineNumber());
 

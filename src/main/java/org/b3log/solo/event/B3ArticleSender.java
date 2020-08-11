@@ -38,6 +38,7 @@ import org.b3log.solo.model.UserExt;
 import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.service.ArticleQueryService;
 import org.b3log.solo.service.OptionQueryService;
+import org.b3log.solo.service.UserQueryService;
 import org.b3log.solo.util.Solos;
 import org.json.JSONObject;
 
@@ -116,15 +117,9 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
                     put("content", originalArticle.getString(Article.ARTICLE_CONTENT));
             final JSONObject author = articleQueryService.getAuthor(originalArticle);
 
-            OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-            JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
-            String userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
-            JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
-            String userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
-            if (StringUtils.isBlank(userName) || StringUtils.isBlank(userB3Key)) {
-                userName = "BoloDefault";
-                userB3Key = "123456";
-            }
+            UserQueryService userQueryService = beanManager.getReference(UserQueryService.class);
+            String userName = userQueryService.getB3username();
+            String userB3Key = userQueryService.getB3password();
 
             if ("BoloDefault".equals(userName)) {
                 LOGGER.log(Level.INFO, "Article [title={0}] Is using the B3log default account, skipped push to Rhy", title);

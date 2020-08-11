@@ -157,11 +157,10 @@ public class B3Receiver {
 
             final String b3Key = client.optString(UserExt.USER_B3_KEY);
 
-            // Bolo b3key 校验
+            // Bolo B3key 校验
             final BeanManager beanManager = BeanManager.getInstance();
-            OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-            JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
-            String key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
+            UserQueryService userQueryService = beanManager.getReference(UserQueryService.class);
+            String key = userQueryService.getB3password();
 
             if (!StringUtils.equals(key, b3Key)) {
                 ret.put(Keys.CODE, 1);

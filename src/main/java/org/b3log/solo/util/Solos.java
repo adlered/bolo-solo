@@ -45,6 +45,7 @@ import org.b3log.solo.model.Option;
 import org.b3log.solo.model.UserExt;
 import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.repository.UserRepository;
+import org.b3log.solo.service.UserQueryService;
 import org.json.JSONObject;
 
 import javax.servlet.ServletOutputStream;
@@ -186,24 +187,10 @@ public final class Solos {
                 return null;
             }
 
-            String userName = "";
-            String userB3Key = "";
-
-            try {
-                BeanManager beanManager = BeanManager.getInstance();
-                OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-                JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
-                userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
-                JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
-                userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
-            } catch (NullPointerException NPE) {
-                return null;
-            }
-
-            if (StringUtils.isBlank(userName) || StringUtils.isBlank(userB3Key)) {
-                userName = "BoloDefault";
-                userB3Key = "123456";
-            }
+            final BeanManager beanManager = BeanManager.getInstance();
+            UserQueryService userQueryService = beanManager.getReference(UserQueryService.class);
+            String userName = userQueryService.getB3username();
+            String userB3Key = userQueryService.getB3password();
 
             final long now = System.currentTimeMillis();
             if (3600000 >= now - uploadTokenTime) {
@@ -240,7 +227,6 @@ public final class Solos {
             final JSONObject data = result.optJSONObject(Common.DATA);
             uploadTokenTime = now;
             // 自定义图床字段
-            final BeanManager beanManager = BeanManager.getInstance();
             final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
             String config = "hacpai";
             try {

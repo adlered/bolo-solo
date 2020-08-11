@@ -32,7 +32,9 @@ import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Paginator;
 import org.b3log.latke.util.URLs;
+import org.b3log.solo.model.Option;
 import org.b3log.solo.model.UserExt;
+import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.repository.UserRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -65,6 +67,12 @@ public class UserQueryService {
      */
     @Inject
     private UserMgmtService userMgmtService;
+
+    /**
+     * Option repository.
+     */
+    @Inject
+    private OptionRepository optionRepository;
 
     /**
      * Gets a user by the specified GitHub id.
@@ -223,5 +231,37 @@ public class UserQueryService {
         to = URLs.encode(to + redirectURL);
 
         return Latkes.getContextPath() + "/start?referer=" + to;
+    }
+
+    /**
+     * Get B3log Username. If it's not exists, will returns default account config.
+     *
+     * @return B3log Username
+     */
+    public String getB3username() {
+        String b3name = "";
+        try {
+            b3name = optionRepository.get(Option.ID_C_HACPAI_USER).optString(Option.OPTION_VALUE);
+        } catch (Exception e) {
+            b3name = "BoloDefault";
+        }
+
+        return b3name;
+    }
+
+    /**
+     * Get B3log Passwrd. If it's not exists, will returns default account config.
+     *
+     * @return B3log Password
+     */
+    public String getB3password() {
+        String b3pass = "";
+        try {
+            b3pass = optionRepository.get(Option.ID_C_B3LOG_KEY).optString(Option.OPTION_VALUE);
+        } catch (Exception e) {
+            b3pass = "123456";
+        }
+
+        return b3pass;
     }
 }

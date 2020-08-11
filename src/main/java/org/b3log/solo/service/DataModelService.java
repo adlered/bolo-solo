@@ -838,9 +838,8 @@ public class DataModelService {
             String userName = "";
             try {
                 BeanManager beanManager = BeanManager.getInstance();
-                OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-                JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
-                userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
+                UserQueryService userQueryService = beanManager.getReference(UserQueryService.class);
+                userName = userQueryService.getB3username();
                 if ("BoloDefault".equals(userName)) {
                     userName = "";
                 }

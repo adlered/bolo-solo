@@ -300,16 +300,14 @@ public class ExportService {
             FileUtils.deleteQuietly(localFile);
             FileUtils.deleteQuietly(zipFile);
 
-            BeanManager beanManager = BeanManager.getInstance();
-            OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-            String userName = "";
-            String userB3Key = "";
-            try {
-                JSONObject hacpaiUserOpt = optionRepository.get(Option.ID_C_HACPAI_USER);
-                userName = (String) hacpaiUserOpt.get(Option.OPTION_VALUE);
-                JSONObject b3logKeyOpt = optionRepository.get(Option.ID_C_B3LOG_KEY);
-                userB3Key = (String) b3logKeyOpt.get(Option.OPTION_VALUE);
-            } catch (Exception e) {
+            final BeanManager beanManager = BeanManager.getInstance();
+            UserQueryService userQueryService = beanManager.getReference(UserQueryService.class);
+            String userName = userQueryService.getB3username();
+            String userB3Key = userQueryService.getB3password();
+            if ("BoloDefault".equals(userName)) {
+                LOGGER.log(Level.INFO, "Backup public articles to HacPai skipped because using the default B3 account.");
+
+                return;
             }
 
             final String clientTitle = preference.optString(Option.ID_C_BLOG_TITLE);

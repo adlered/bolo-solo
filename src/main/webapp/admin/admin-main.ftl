@@ -70,7 +70,7 @@
                     };
                     let ctx = document.getElementById("tagsTop5Chart").getContext("2d");
                     var tagsTop5Chart = new Chart(ctx, {
-                        type: 'pie',
+                        type: 'doughnut',
                         data: data2,
                         options: options
                     });

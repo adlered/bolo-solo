@@ -245,6 +245,9 @@ public class UserQueryService {
         } catch (Exception e) {
             b3name = Option.DefaultPreference.DEFAULT_B3LOG_USERNAME;
         }
+        if (b3name.isEmpty()) {
+            b3name = Option.DefaultPreference.DEFAULT_B3LOG_USERNAME;
+        }
 
         return b3name;
     }
@@ -259,6 +262,9 @@ public class UserQueryService {
         try {
             b3pass = optionRepository.get(Option.ID_C_B3LOG_KEY).optString(Option.OPTION_VALUE);
         } catch (Exception e) {
+            b3pass = Option.DefaultPreference.DEFAULT_B3LOG_PASSWORD;
+        }
+        if (b3pass.isEmpty()) {
             b3pass = Option.DefaultPreference.DEFAULT_B3LOG_PASSWORD;
         }
 

@@ -31,9 +31,11 @@
             <h6>Powered by Chart.js</h6>
         </div>
         <div class="module-body padding12">
-            <div style="width: 49%; display: inline-table;">
-                <canvas id="categoryCountChart"></canvas>
+            <div style="width: 33%; display: inline-table;">
+                <canvas id="articleCountChart"></canvas>
                 <script type="text/javascript">
+                    Chart.defaults.global.animation.duration = 2000;
+
                     let options = {
                         responsive: true,
                         title: {
@@ -49,7 +51,7 @@
                             intersect: true
                         }
                     };
-                    let ctx = document.getElementById("categoryCountChart").getContext("2d");
+                    let ctx = document.getElementById("articleCountChart").getContext("2d");
                     var categoryCountChart = new Chart(ctx, {
                         type: 'line',
                         data: data1,
@@ -58,7 +60,7 @@
                 </script>
             </div>
 
-            <div style="width: 49%; display: inline-table;">
+            <div style="width: 33%; display: inline-table;">
                 <canvas id="tagsTop5Chart"></canvas>
                 <script type="text/javascript">
                     let options = {
@@ -72,6 +74,60 @@
                     var tagsTop5Chart = new Chart(ctx, {
                         type: 'doughnut',
                         data: data2,
+                        options: options
+                    });
+                </script>
+            </div>
+
+            <div style="width: 33%; display: inline-table;">
+                <canvas id="categoryCountChart"></canvas>
+                <script type="text/javascript">
+                    function getRandomColor() { var letters = '0123456789ABCDEF'.split(''); var color = '#'; for (var i = 0; i < 6; i++ ) { color += letters[Math.floor(Math.random() * 16)]; } return color; }
+                    let data3 = {
+                        datasets: [
+                            {
+                                label: [
+                                    "文章数量"
+                                ],
+                                data: [
+                                    <#list categories as category>
+                                    <#if category.categoryPublishedArticleCount != 0>
+                                    ${category.categoryPublishedArticleCount},
+                                    </#if>
+                                    </#list>
+                                ],
+                                backgroundColor: [
+                                    <#list categories as category>
+                                    <#if category.categoryPublishedArticleCount != 0>
+                                    Chart.helpers.color(getRandomColor()).alpha(0.5).rgbString(),
+                                    </#if>
+                                    </#list>
+                                ],
+                            }
+                        ],
+
+                        labels: [
+                            <#list categories as category>
+                            <#if category.categoryPublishedArticleCount != 0>
+                            "${category.categoryTitle}",
+                            </#if>
+                            </#list>
+                        ]
+                    };
+                    let options = {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: '分类使用率'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    };
+                    let ctx = document.getElementById("categoryCountChart").getContext("2d");
+                    var tagsTop5Chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: data3,
                         options: options
                     });
                 </script>

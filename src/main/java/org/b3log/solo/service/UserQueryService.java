@@ -243,7 +243,7 @@ public class UserQueryService {
         try {
             b3name = optionRepository.get(Option.ID_C_HACPAI_USER).optString(Option.OPTION_VALUE);
         } catch (Exception e) {
-            b3name = "BoloDefault";
+            b3name = Option.DefaultPreference.DEFAULT_B3LOG_USERNAME;
         }
 
         return b3name;
@@ -259,7 +259,7 @@ public class UserQueryService {
         try {
             b3pass = optionRepository.get(Option.ID_C_B3LOG_KEY).optString(Option.OPTION_VALUE);
         } catch (Exception e) {
-            b3pass = "123456";
+            b3pass = Option.DefaultPreference.DEFAULT_B3LOG_PASSWORD;
         }
 
         return b3pass;

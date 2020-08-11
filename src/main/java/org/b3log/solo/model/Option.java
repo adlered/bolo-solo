@@ -578,6 +578,16 @@ public final class Option {
          */
         public static final String DEFAULT_MAX_ARCHIVE = "-1";
 
+        /**
+         * Default B3log username.
+         */
+        public static final String DEFAULT_B3LOG_USERNAME = "BoloDefault";
+
+        /**
+         * Default B3log password.
+         */
+        public static final String DEFAULT_B3LOG_PASSWORD = "123456";
+
         static {
             final JSONArray signs = new JSONArray();
             for (int i = 0; i < 4; i++) {

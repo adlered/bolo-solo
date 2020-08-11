@@ -121,7 +121,7 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
             String userName = userQueryService.getB3username();
             String userB3Key = userQueryService.getB3password();
 
-            if ("BoloDefault".equals(userName)) {
+            if (Option.DefaultPreference.DEFAULT_B3LOG_USERNAME.equals(userName)) {
                 LOGGER.log(Level.INFO, "Article [title={0}] Is using the B3log default account, skipped push to Rhy", title);
 
                 return ;

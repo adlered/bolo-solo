@@ -304,7 +304,7 @@ public class ExportService {
             UserQueryService userQueryService = beanManager.getReference(UserQueryService.class);
             String userName = userQueryService.getB3username();
             String userB3Key = userQueryService.getB3password();
-            if ("BoloDefault".equals(userName)) {
+            if (Option.DefaultPreference.DEFAULT_B3LOG_USERNAME.equals(userName)) {
                 LOGGER.log(Level.INFO, "Backup public articles to HacPai skipped because using the default B3 account.");
 
                 return;

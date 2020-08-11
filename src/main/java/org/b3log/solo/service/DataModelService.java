@@ -840,7 +840,7 @@ public class DataModelService {
                 BeanManager beanManager = BeanManager.getInstance();
                 UserQueryService userQueryService = beanManager.getReference(UserQueryService.class);
                 userName = userQueryService.getB3username();
-                if ("BoloDefault".equals(userName)) {
+                if (Option.DefaultPreference.DEFAULT_B3LOG_USERNAME.equals(userName)) {
                     userName = "";
                 }
             } catch (NullPointerException NPE) {

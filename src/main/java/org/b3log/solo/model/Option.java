@@ -562,17 +562,6 @@ public final class Option {
         public static final int DEFAULT_FEED_OUTPUT_CNT = 10;
 
         // Bolo
-
-        /**
-         * Default HacPai username.
-         */
-        public static final String DEFAULT_HACPAI_USER = "";
-
-        /**
-         * Default B3log key.
-         */
-        public static final String DEFAULT_B3LOG_KEY = "";
-
         /**
          * Default max archive.
          */

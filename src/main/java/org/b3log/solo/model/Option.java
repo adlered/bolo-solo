@@ -26,7 +26,7 @@ import org.json.JSONObject;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding</a>
  * @author <a href="https://github.com/hzchendou">hzchendou</a>
- * @version 1.6.0.6, Apr 6, 2020
+ * @version 1.7.0.0, June 13, 2020
  * @since 0.6.0
  */
 public final class Option {
@@ -301,6 +301,11 @@ public final class Option {
      * Key of statistic blog comment(published article) count.
      */
     public static final String ID_T_STATISTIC_PUBLISHED_BLOG_COMMENT_COUNT = "statisticPublishedBlogCommentCount";
+
+    /**
+     * Key of GitHub PAT (personal access token).
+     */
+    public static final String ID_C_GITHUB_PAT = "githubPAT";
 
     // Bolo
 

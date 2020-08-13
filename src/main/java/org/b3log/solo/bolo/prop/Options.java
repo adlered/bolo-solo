@@ -73,6 +73,7 @@ public class Options {
                 Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE,
                 Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT,
                 Option.ID_C_ALLOW_VISIT_DRAFT_VIA_PERMALINK,
+                Option.ID_C_GITHUB_PAT,
                 // Bolo 字段
                 Option.ID_C_MAX_ARCHIVE,
                 Option.ID_C_MAIL_BOX,
@@ -133,6 +134,7 @@ public class Options {
                 new Object[] { Option.ID_C_FOOTER_CONTENT, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_FOOTER_CONTENT },
                 new Object[] { Option.ID_C_SKIN_DIR_NAME, Option.CATEGORY_C_SKIN, Option.DefaultPreference.DEFAULT_SKIN_DIR_NAME },
                 new Object[] { Option.ID_C_MOBILE_SKIN_DIR_NAME, Option.CATEGORY_C_SKIN, Option.DefaultPreference.DEFAULT_MOBILE_SKIN_DIR_NAME },
+                new Object[] { Option.ID_C_GITHUB_PAT, Option.CATEGORY_C_PREFERENCE, "" },
                 // Bolo 字段
                 new Object[] { Option.ID_C_HACPAI_USER, Option.CATEGORY_C_PREFERENCE, "" },
                 new Object[] { Option.ID_C_B3LOG_KEY, Option.CATEGORY_C_PREFERENCE, "" },

@@ -99,6 +99,7 @@ public class CronMgmtService {
                 // 关闭 GitHub 项目同步拉取
                 // articleMgmtService.refreshGitHub();
                 // userMgmtService.refreshUSite();
+                exportService.exportGitHub();
             } catch (final Exception e) {
                 LOGGER.log(Level.ERROR, "Executes cron failed", e);
             } finally {

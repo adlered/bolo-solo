@@ -32,7 +32,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * The common auth check before advice for admin console.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @version 1.0.1.3, Feb 7, 2019
  * @since 2.9.5
  */

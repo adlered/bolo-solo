@@ -38,7 +38,8 @@ import org.json.JSONObject;
 /**
  * Preference console request processing.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="https://github.com/hzchendou">hzchendou</a>
  * @version 1.2.0.25, Jun 13, 2019
  * @since 0.4.0

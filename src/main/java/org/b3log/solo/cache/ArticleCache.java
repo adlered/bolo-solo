@@ -29,7 +29,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Article cache.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @version 1.2.1.0, Sep 20, 2019
  * @since 2.3.0
  */

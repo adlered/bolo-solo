@@ -50,7 +50,8 @@ import java.util.Set;
 /**
  * Category console request processing.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="https://hacpai.com/member/lzh984294471">lzh984294471</a>
  * @version 1.1.3.6, Sep 1, 2019
  * @since 2.0.0

@@ -39,7 +39,8 @@ import java.util.Set;
 /**
  * Upgrade script from v2.9.9 to v3.0.0.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @version 1.0.0.0, Feb 28, 2019
  * @since 3.0.0
  */

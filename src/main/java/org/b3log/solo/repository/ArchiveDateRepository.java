@@ -34,7 +34,8 @@ import java.util.List;
 /**
  * Archive date repository.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @version 1.0.0.5, Sep 11, 2019
  * @since 0.3.1
  */

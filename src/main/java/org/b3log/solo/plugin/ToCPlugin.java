@@ -38,7 +38,8 @@ import java.util.Map;
 /**
  * ToC event handler.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @version 2.0.0.0, Jul 29, 2019
  * @since 0.6.7
  */
@@ -63,7 +64,8 @@ public class ToCPlugin extends NotInteractivePlugin {
 /**
  * ToC event handler.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="http://www.annpeter.cn">Ann Peter</a>
  * @author <a href="http://vanessa.b3log.org">Vanessa</a>
  * @version 2.0.0.0, Jul 29, 2019

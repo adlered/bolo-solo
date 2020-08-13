@@ -24,7 +24,8 @@ import org.json.JSONObject;
 /**
  * This class defines option model relevant keys.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="https://github.com/hzchendou">hzchendou</a>
  * @version 1.7.0.0, June 13, 2020
  * @since 0.6.0
@@ -398,7 +399,8 @@ public final class Option {
     /**
      * Default preference.
      *
-     * @author <a href="http://88250.b3log.org">Liang Ding</a>
+     * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
      * @version 2.3.0.3, Sep 18, 2019
      * @since 0.3.1
      */

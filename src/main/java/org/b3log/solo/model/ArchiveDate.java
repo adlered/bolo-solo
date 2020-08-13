@@ -20,7 +20,8 @@ package org.b3log.solo.model;
 /**
  * This class defines all archive date model relevant keys.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @version 1.0.0.5, Jan 28, 2019
  */
 public final class ArchiveDate {

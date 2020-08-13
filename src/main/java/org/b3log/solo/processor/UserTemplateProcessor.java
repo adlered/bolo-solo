@@ -49,7 +49,8 @@ import java.util.Map;
  * User can add a template (for example "links.ftl") then visits the page ("links.html").
  * </p>
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @version 1.0.0.10, Jan 5, 2019
  * @since 0.4.5
  */

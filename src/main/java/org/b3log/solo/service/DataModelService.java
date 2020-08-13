@@ -59,7 +59,8 @@ import static org.b3log.solo.model.Article.ARTICLE_CONTENT;
 /**
  * Data model service.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
  * @version 1.7.0.11, Sep 17, 2019
  * @since 0.3.1

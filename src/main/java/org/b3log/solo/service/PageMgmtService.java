@@ -35,7 +35,8 @@ import org.json.JSONObject;
 /**
  * Page management service.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="http://vanessa.b3log.org">Vanessa</a>
  * @version 1.1.0.19, Jun 6, 2019
  * @since 0.4.0

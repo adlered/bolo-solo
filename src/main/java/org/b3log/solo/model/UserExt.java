@@ -22,7 +22,8 @@ import org.apache.commons.lang.StringUtils;
 /**
  * This class defines ext of user model relevant keys.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @version 1.3.0.0, Feb 8, 2019
  * @see org.b3log.latke.model.User
  * @since 0.4.1

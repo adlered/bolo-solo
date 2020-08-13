@@ -38,7 +38,8 @@ import java.util.List;
 /**
  * Plugin query service.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @version 1.0.0.0, Oct 27, 2011
  * @since 0.4.0
  */

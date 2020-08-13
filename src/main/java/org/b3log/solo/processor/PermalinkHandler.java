@@ -42,7 +42,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Article permalink  handler.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @version 1.0.0.2, May 18, 2019
  * @since 3.2.0
  */

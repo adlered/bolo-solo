@@ -28,7 +28,8 @@ import org.json.JSONObject;
 /**
  * Upgrade script from v3.7.0 to v3.8.0.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @version 1.0.0.0, Jan 16, 2020
  * @since 3.8.0
  */

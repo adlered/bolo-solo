@@ -35,7 +35,8 @@ import java.sql.Statement;
 /**
  * Upgrade script from v3.3.0 to v3.4.0.
  *
- * @author <a href="http://88250.b3log.org">Liang Ding</a>
+ * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
+ * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @version 1.0.0.0, Mar 19, 2019
  * @since 3.4.0
  */

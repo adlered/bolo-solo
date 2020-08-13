@@ -33,17 +33,17 @@
 
 #### Sakura 皮肤
 
-<img src="/preview/1.png" width="600" height="400"/>
-<img src="/preview/2.png" width="600" height="400"/>
+<img src="/preview/1.png" width="900" height="600"/>
+<img src="/preview/2.png" width="900" height="600"/>
 
 #### Fantastic 皮肤
 
-<img src="/preview/3.png" width="600" height="400"/>
-<img src="/preview/4.png" width="600" height="400"/>
+<img src="/preview/3.png" width="900" height="600"/>
+<img src="/preview/4.png" width="900" height="600"/>
 
 #### 后台主页
 
-<img src="/preview/5.png" width="600" height="400"/>
+<img src="/preview/5.png" width="900" height="600"/>
 
 ## 为什么选择 bolo
 

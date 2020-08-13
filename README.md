@@ -32,13 +32,15 @@
 ## 欣赏
 
 #### Sakura 皮肤
-<img src="/preview/1.png" width="600" height="400"/>
 
+<img src="/preview/1.png" width="600" height="400"/>
+<br>
 <img src="/preview/2.png" width="1024" height="768"/>
 
 #### Fantastic 皮肤
-<img src="/preview/3.png" width="600" height="400"/>
 
+<img src="/preview/3.png" width="600" height="400"/>
+<br>
 <img src="/preview/4.png" width="1024" height="768"/>
 
 ## 为什么选择 bolo

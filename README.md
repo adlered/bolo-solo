@@ -41,6 +41,10 @@
 <img src="/preview/3.png" width="600" height="400"/>
 <img src="/preview/4.png" width="600" height="400"/>
 
+#### 后台主页
+
+<img src="/preview/5.png" width="600" height="400"/>
+
 ## 为什么选择 bolo
 
 1. 完整的教程文档，完善的交流答疑

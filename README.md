@@ -45,7 +45,7 @@
 
 <img src="/preview/5.png" width="800" height="500"/>
 
-## 为什么选择 bolo
+## 为什么选择 Bolo
 
 1. 完整的教程文档，完善的交流答疑
 2. 精美皮肤常更新
@@ -59,6 +59,6 @@
 10. 轻型防火墙功能，阻止恶意访问，保证博客正常运行
 11. 如果你是 Solo 用户，Bolo V2.0 及以上版本还内置了一键迁移工具；如果你对 Bolo 不满意，还可以一键迁回至 Solo
 
-## 文档
+## 博客安装使用教程文档
 
 #### [👉 安装教程 | 从Solo迁移 | Bolo介绍 | 常见问题 👈](https://programmingwithlove.stackoverflow.wiki/bolodoc)

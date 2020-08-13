@@ -29,7 +29,6 @@ import org.jsoup.safety.Whitelist;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @version 1.5.0.2, Sep 12, 2019
  * @since 0.3.1
  */
 public final class Article {

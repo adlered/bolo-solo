@@ -19,7 +19,6 @@
  * main for admin
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 1.0.0.3, May 28, 2013
  */
 
 /* main 相关操作 */

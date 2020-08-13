@@ -19,7 +19,6 @@
  * @fileoverview 注册 Service Work，目前为空，只为触发添加到桌面。
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 0.1.0.0, Jan 13, 2019
  */
 
 self.addEventListener('fetch', function (event) {

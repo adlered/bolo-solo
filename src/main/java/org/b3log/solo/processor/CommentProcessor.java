@@ -66,7 +66,6 @@ import java.util.*;
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="https://hacpai.com/member/armstrong">ArmstrongCN</a>
- * @version 1.4.0.0, Apr 18, 2019
  * @since 0.3.1
  */
 @RequestProcessor

@@ -61,7 +61,6 @@ import java.util.List;
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="https://github.com/feroozkhanchintu">feroozkhanchintu</a>
  * @author <a href="https://github.com/nanolikeyou">nanolikeyou</a>
- * @version 2.0.0.3, Jul 29, 2019
  * @since 0.3.1
  */
 @RequestProcessor

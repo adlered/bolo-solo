@@ -45,7 +45,6 @@ import java.util.List;
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="https://hacpai.com/member/lzh984294471">lzh984294471</a>
- * @version 1.0.1.4, Sep 1, 2019
  * @since 2.0.0
  */
 @Service

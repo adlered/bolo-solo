@@ -63,7 +63,6 @@ import java.util.*;
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="http://zephyr.b3log.org">Zephyr</a>
- * @version 1.4.5.8, Sep 11, 2019
  * @since 0.3.1
  */
 @RequestProcessor

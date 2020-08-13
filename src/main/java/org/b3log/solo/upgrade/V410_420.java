@@ -29,7 +29,6 @@ import org.json.JSONObject;
  * Upgrade script from v4.1.0 to v4.2.0.
  *
  * @author <a href="https://github.com/adlered">adlered</a>
- * @version 1.0.0.0, Aug 3, 2020
  * @since 4.2.0
  */
 public final class V410_420 {

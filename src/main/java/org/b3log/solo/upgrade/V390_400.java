@@ -30,7 +30,6 @@ import org.json.JSONObject;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @version 1.0.0.0, Feb 21, 2020
  * @since 4.0.0
  */
 public final class V390_400 {

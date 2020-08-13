@@ -44,7 +44,6 @@ import org.json.JSONObject;
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="https://hacpai.com/member/DASHU">DASHU</a>
- * @version 1.2.1.7, Mar 29, 2019
  * @since 0.4.0
  */
 @RequestProcessor

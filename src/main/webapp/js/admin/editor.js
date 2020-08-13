@@ -19,7 +19,6 @@
  * @fileoverview editor
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 1.3.0.1, Aug 6, 2019
  */
 
 admin.editors = {}

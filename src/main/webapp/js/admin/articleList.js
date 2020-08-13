@@ -21,7 +21,6 @@
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @version 1.3.0.0, Sep 14, 2019
  */
 
 /* article-list 相关操作 */

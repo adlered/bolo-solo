@@ -64,7 +64,6 @@ import java.util.ResourceBundle;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @version 1.9.0.2, Sep 22, 2019
  * @since 2.8.0
  */
 public final class Solos {

@@ -19,7 +19,6 @@
  * @fileoverview util and every page should be used.
  *
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- * @version 0.4.0.0, Jul 26, 2017
  */
 
 /**

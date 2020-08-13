@@ -35,7 +35,6 @@ import java.sql.Statement;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @version 1.0.0.0, Oct 23, 2019
  * @since 3.6.6
  */
 public final class V365_366 {

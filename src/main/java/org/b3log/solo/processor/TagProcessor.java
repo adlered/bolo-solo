@@ -48,7 +48,6 @@ import java.util.Map;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @version 1.1.1.8, Jan 5, 2019
  * @since 0.3.1
  */
 @RequestProcessor

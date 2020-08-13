@@ -61,7 +61,6 @@ import java.util.Map;
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="https://hacpai.com/member/DASHU">DASHU</a>
  * @author <a href="https://vanessa.b3log.org">Vanessa</a>
- * @version 1.2.4.17, Jul 17, 2019
  * @since 0.3.1
  */
 @RequestProcessor

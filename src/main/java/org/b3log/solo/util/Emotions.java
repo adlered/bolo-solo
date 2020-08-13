@@ -31,7 +31,6 @@ import java.util.regex.Pattern;
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="http://vanessa.b3log.org">Vanessa</a>
- * @version 1.1.1.1, Sep 11, 2019
  * @since 1.4.0
  */
 public final class Emotions {

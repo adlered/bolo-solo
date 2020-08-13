@@ -31,7 +31,6 @@ import org.json.JSONObject;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @version 1.0.0.0, Mar 6, 2019
  * @since 3.3.0
  */
 public final class V320_330 {

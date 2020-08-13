@@ -51,7 +51,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
  * @author <a href="https://hacpai.com/member/DASHU">DASHU</a>
  * @author <a href="https://github.com/nanolikeyou">nanolikeyou</a>
- * @version 1.1.0.19, Jun 6, 2019
  * @since 0.4.0
  */
 @Service

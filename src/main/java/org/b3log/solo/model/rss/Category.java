@@ -24,7 +24,6 @@ import org.apache.commons.lang.StringEscapeUtils;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @version 1.1.1.0, Jul 5, 2018
  * @since 0.3.1
  */
 public final class Category {

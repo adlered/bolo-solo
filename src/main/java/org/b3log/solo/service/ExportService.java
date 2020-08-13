@@ -63,7 +63,6 @@ import java.util.stream.Collectors;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @version 1.1.1.4, Dec 15, 2019
  * @since 2.5.0
  */
 @Service

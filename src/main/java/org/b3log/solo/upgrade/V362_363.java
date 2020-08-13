@@ -38,7 +38,6 @@ import java.util.List;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @version 1.0.0.0, Jul 13, 2019
  * @since 3.6.3
  */
 public final class V362_363 {

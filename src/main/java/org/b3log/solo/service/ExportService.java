@@ -276,7 +276,7 @@ public class ExportService {
                 return;
             }
 
-            LOGGER.log(Level.INFO, "Backup public articles to your GitHub repo [solo-blog]....");
+            LOGGER.log(Level.INFO, "Backup public articles to your GitHub repo [bolo-blog]....");
 
             final JSONObject mds = exportHexoMDs();
             JdbcRepository.dispose();
@@ -308,7 +308,7 @@ public class ExportService {
             }
 
             final String loginName = gitHubUser.optString("login");
-            final String repoName = "solo-blog";
+            final String repoName = "bolo-blog";
 
             boolean ok = GitHubs.createOrUpdateGitHubRepo(pat, loginName, repoName, "✍️ " + clientTitle + " - " + clientSubtitle, Latkes.getServePath());
             if (!ok) {
@@ -322,7 +322,7 @@ public class ExportService {
                 ok = GitHubs.updateFile(pat, loginName, repoName, "backup.zip", zipData);
             }
             if (ok) {
-                LOGGER.log(Level.INFO, "Exported public articles to your repo [solo-blog]");
+                LOGGER.log(Level.INFO, "Exported public articles to your repo [bolo-blog]");
             }
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Exports public articles to your repo failed: " + e.getMessage());
@@ -487,14 +487,14 @@ public class ExportService {
                 "<p align=\"center\">" +
                 "<a title=\"${title}\" target=\"_blank\" href=\"https://github.com/${repoFullName}\"><img src=\"https://img.shields.io/github/last-commit/${repoFullName}.svg?style=flat-square&color=FF9900\"></a>\n" +
                 "<a title=\"GitHub repo size in bytes\" target=\"_blank\" href=\"https://github.com/${repoFullName}\"><img src=\"https://img.shields.io/github/repo-size/${repoFullName}.svg?style=flat-square\"></a>\n" +
-                "<a title=\"Solo Version\" target=\"_blank\" href=\"https://github.com/88250/solo/releases\"><img src=\"https://img.shields.io/badge/solo-${soloVer}-f1e05a.svg?style=flat-square&color=blueviolet\"></a>\n" +
+                "<a title=\"Bolo Version\" target=\"_blank\" href=\"https://github.com/adlered/bolo-solo\"><img src=\"https://img.shields.io/badge/solo-${soloVer}-f1e05a.svg?style=flat-square&color=blueviolet\"></a>\n" +
                 "<a title=\"Hits\" target=\"_blank\" href=\"https://github.com/88250/hits\"><img src=\"https://hits.b3log.org/${repoFullName}.svg\"></a>" +
                 "</p>\n" +
                 "\n" +
                 "${body}\n\n" +
                 "---\n" +
                 "\n" +
-                "本仓库通过 [Solo](https://github.com/88250/solo) 自动进行同步更新 ❤️ ";
+                "本仓库通过 [Bolo](https://github.com/adlered/bolo-solo) 自动进行同步更新 ❤️ ";
         ret = ret.replace("${title}", blogTitle).
                 replace("${subtitle}", blogSubTitle).
                 replace("${favicon}", favicon).

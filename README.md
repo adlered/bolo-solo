@@ -17,10 +17,9 @@
 <img src="https://img.shields.io/github/issues/adlered/bolo-solo?style=flat-square">
 <img src="https://img.shields.io/github/issues-closed-raw/adlered/bolo-solo?style=flat-square">
 <br>
-<img src="https://img.shields.io/github/followers/adlered?style=social">
-<img src="https://img.shields.io/github/forks/adlered/bolo-solo?style=social">
-<img src="https://img.shields.io/github/stars/adlered/bolo-solo?style=social">
-<img src="https://img.shields.io/github/watchers/adlered/bolo-solo?style=social">
+<img src="https://img.shields.io/github/forks/adlered/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/stars/adlered/bolo-solo?style=flat-square">
+<img src="https://img.shields.io/github/watchers/adlered/bolo-solo?style=flat-square">
 </p>
 
 ****

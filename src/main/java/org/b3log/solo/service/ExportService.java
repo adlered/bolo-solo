@@ -487,7 +487,7 @@ public class ExportService {
                 "<p align=\"center\">" +
                 "<a title=\"${title}\" target=\"_blank\" href=\"https://github.com/${repoFullName}\"><img src=\"https://img.shields.io/github/last-commit/${repoFullName}.svg?style=flat-square&color=FF9900\"></a>\n" +
                 "<a title=\"GitHub repo size in bytes\" target=\"_blank\" href=\"https://github.com/${repoFullName}\"><img src=\"https://img.shields.io/github/repo-size/${repoFullName}.svg?style=flat-square\"></a>\n" +
-                "<a title=\"Bolo Version\" target=\"_blank\" href=\"https://github.com/adlered/bolo-solo\"><img src=\"https://img.shields.io/badge/solo-${soloVer}-f1e05a.svg?style=flat-square&color=blueviolet\"></a>\n" +
+                "<a title=\"Bolo Version\" target=\"_blank\" href=\"https://github.com/adlered/bolo-solo\"><img src=\"https://img.shields.io/badge/bolo-${soloVer}-f1e05a.svg?style=flat-square&color=blueviolet\"></a>\n" +
                 "<a title=\"Hits\" target=\"_blank\" href=\"https://github.com/88250/hits\"><img src=\"https://hits.b3log.org/${repoFullName}.svg\"></a>" +
                 "</p>\n" +
                 "\n" +

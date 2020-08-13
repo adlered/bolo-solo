@@ -127,6 +127,7 @@ admin.preference = {
         $('#randomArticlesDisplayCount').
           val(preference.randomArticlesDisplayCount)
         $('#customVars').val(preference.customVars)
+        $('#githubPAT').val(preference.githubPAT)
         $('#maxArchive').val(preference.maxArchive)
 
         'true' === preference.enableArticleUpdateHint ? $('#enableArticleUpdateHint').attr('checked', 'checked') : $('#enableArticleUpdateHint').removeAttr('checked')
@@ -312,6 +313,7 @@ admin.preference = {
         'pullGitHub': $('#pullGitHub').prop('checked'),
         'commentable': $('#commentable').prop('checked'),
         'customVars': $('#customVars').val(),
+        'githubPAT': $('#githubPAT').val(),
         'maxArchive': $('#maxArchive').val(),
         'editorMode': $("input[name='editorMode']:checked").val(),
       },

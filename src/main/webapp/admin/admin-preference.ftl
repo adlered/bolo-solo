@@ -249,6 +249,7 @@
         <select id="tcS" disabled>
             <option selected></option>
             <option value="hacpai">黑客派图床（默认）</option>
+            <option value="local">本地图床</option>
             <option value="qiniu">七牛云</option>
             <option value="aliyun">阿里云</option>
             <option value="upyun">又拍云</option>
@@ -341,6 +342,12 @@
                         $('#td6').show(); $('#tc6').show();
                         $('#td6').html('<b>协议（填写英文小写 http 或 https，以你的设定为准）</b>');
                         break;
+                    case 'local':
+                        $('#td1').show();
+                        $('#td1').html('本地图床适用于带宽较大的服务器（或设有CDN加速），如果你希望将上传的图片保存到服务器的指定目录，请使用本地图床功能。如需更换本地图床位置，请将原位置的所有图片直接移动到新的目录，更改本配置下的本地图床位置即可。');
+                        $('#td2').show(); $('#tc2').show();
+                        $('#td2').html('<b>图片存储目录（Windows例：D:\imageBed，Linux例：/home/adler/imageBed，如目录不存在将会尝试自动创建）</b>');
+                        break;
                 }
                 var stc = $('#sourceTC').text().split('<<>>');
                 for (var i = 1; i < stc.length; i++) {
@@ -381,6 +388,9 @@
                     case 'upyun':
                         $('#sourceTC').text('upyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
                         break;
+                    case 'local':
+                        $('#sourceTC').text('local<<>>' + $('#tc2').val());
+                        break;
                 }
                 alert('配置已保存，设置将在重启服务端后生效。');
                 admin.preference.update();
@@ -388,7 +398,7 @@
         </script>
         <div><b>请注意！如使用自定义图床中出现 "413 Request Entity Too Large" 等类似报错，请调整 Nginx / Tomcat 的数据包大小限制。</b>
             <br>
-            配置图床期间出现疑问或问题，请联系作者微信：1101635162</div>
+            配置图床期间出现疑问或问题，请在用户交流群中提问。</div>
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_mailAndRemind" class="fn__none form">

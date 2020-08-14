@@ -397,11 +397,11 @@
                 admin.preference.update();
             }
 
-            function checkImageBedConfig() {
+            function checkImageBedConfig(path) {
                 let flag = false;
                 $.ajax({
                     type: 'GET',
-                    url: 'pic/local/check',
+                    url: 'pic/local/check?path=' + path,
                     async: false,
                     success: function (res) {
                         result = res.msg;

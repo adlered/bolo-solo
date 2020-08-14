@@ -348,7 +348,7 @@
                         $('#td2').show(); $('#tc2').show();
                         $('#td2').html('<b>图片存储目录（Windows例：D:/imageBed，Linux例：/home/adler/imageBed，如目录不存在将会尝试自动创建）</b>');
                         $('#td3').show();
-                        $('#td3').html('<button onclick="checkImageBedConfigAndAlert()">测试目录是否可写</button>');
+                        $('#td3').html('<button onclick="checkImageBedConfigAndAlert()">💿 测试本地图床配置是否可用</button>');
                         break;
                 }
                 var stc = $('#sourceTC').text().split('<<>>');
@@ -395,7 +395,7 @@
                             $('#sourceTC').text('local<<>>' + $('#tc2').val());
                             break;
                     }
-                    alert('配置已保存，设置将在重启服务端后生效。');
+                    alert('配置已保存，图床设置将在重启服务端后生效。');
                     admin.preference.update();
                 } else {
                     alert('配置保存失败，请检查本地图床设定的目录！');

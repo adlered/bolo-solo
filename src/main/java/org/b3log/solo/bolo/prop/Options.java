@@ -155,9 +155,13 @@ public class Options {
         return optList;
     }
 
-    public static String get(String key) throws RepositoryException {
-        final BeanManager beanManager = BeanManager.getInstance();
-        OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-        return optionRepository.get(key).optString(Option.OPTION_VALUE);
+    public static String get(String key) {
+        try {
+            final BeanManager beanManager = BeanManager.getInstance();
+            OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+            return optionRepository.get(key).optString(Option.OPTION_VALUE);
+        } catch (Exception e) {
+            return "";
+        }
     }
 }

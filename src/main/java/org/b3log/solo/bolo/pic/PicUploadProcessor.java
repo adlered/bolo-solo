@@ -122,7 +122,7 @@ public class PicUploadProcessor {
         }
 
         String path = context.param("path");
-        if (path ==  null) {
+        if (path ==  null || "undefined".equals(path)) {
             context.renderJSON().renderCode(500);
             context.renderJSON().renderMsg("测试失败！目录格式错误。");
 

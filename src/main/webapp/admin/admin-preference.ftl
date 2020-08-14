@@ -398,7 +398,7 @@
             }
 
             function checkImageBedConfig() {
-                var flag = false;
+                let flag = false;
                 $.ajax({
                     type: 'GET',
                     url: 'pic/local/check',

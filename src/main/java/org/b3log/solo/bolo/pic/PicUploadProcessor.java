@@ -32,10 +32,6 @@ import org.b3log.solo.util.Solos;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -125,45 +121,36 @@ public class PicUploadProcessor {
             return;
         }
 
-        String config;
-        try {
-            config = optionRepository.get(Option.ID_C_TUCHUANG_CONFIG).optString(Option.OPTION_VALUE);
-        } catch (Exception e) {
-            config = "hacpai";
-        }
-        String type = config.split("<<>>")[0];
-        if ("local".equals(type)) {
-            String path = config.split("<<>>")[1];
-            File pathFile = new File(path);
-            // 检查目录是否存在，如果不存在则创建
-            if (!pathFile.exists()) {
-                if(!pathFile.mkdirs()) {
-                    context.renderJSON().renderCode(500);
-                    context.renderJSON().renderMsg("创建目录失败！目录格式错误或没有权限。");
-
-                    return;
-                }
-            }
-            // 判断目录是否可写
-            try {
-                File tmpFile = new File(pathFile.getAbsolutePath() + "/" + "temp_bolo_solo.tmp");
-                tmpFile.createNewFile();
-                System.out.println(tmpFile.getAbsoluteFile());
-                tmpFile.delete();
-
-                context.renderJSON().renderCode(200);
-                context.renderJSON().renderMsg("测试成功 :)");
-
-                return;
-            } catch (Exception e) {
-                context.renderJSON().renderCode(500);
-                context.renderJSON().renderMsg("测试失败！目录没有写入权限。");
-
-                return;
-            }
-        } else {
+        String path = context.param("path");
+        if (path ==  null) {
             context.renderJSON().renderCode(500);
-            context.renderJSON().renderMsg("当前配置不是本地图床！");
+            context.renderJSON().renderMsg("测试失败！目录格式错误。");
+
+            return;
+        }
+        File pathFile = new File(path);
+        // 检查目录是否存在，如果不存在则创建
+        if (!pathFile.exists()) {
+            if (!pathFile.mkdirs()) {
+                context.renderJSON().renderCode(500);
+                context.renderJSON().renderMsg("创建目录失败！目录格式错误或没有权限。");
+
+                return;
+            }
+        }
+        // 判断目录是否可写
+        try {
+            File tmpFile = new File(pathFile.getAbsolutePath() + "/" + "temp_bolo_solo.tmp");
+            tmpFile.createNewFile();
+            tmpFile.delete();
+
+            context.renderJSON().renderCode(200);
+            context.renderJSON().renderMsg("测试成功 :)");
+
+            return;
+        } catch (Exception e) {
+            context.renderJSON().renderCode(500);
+            context.renderJSON().renderMsg("测试失败！目录没有写入权限。");
 
             return;
         }

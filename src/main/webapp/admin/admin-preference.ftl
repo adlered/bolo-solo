@@ -371,6 +371,7 @@
             }
 
             function save() {
+
                 sel = $('#tcS').val();
                 switch (sel) {
                     case 'hacpai':
@@ -394,6 +395,20 @@
                 }
                 alert('配置已保存，设置将在重启服务端后生效。');
                 admin.preference.update();
+            }
+
+            function checkImageBedConfig() {
+                var flag = false;
+                $.ajax({
+                    type: 'GET',
+                    url: 'pic/local/check',
+                    async: false,
+                    success: function (res) {
+                        result = res.msg;
+                        flag = result.indexOf(":)") !== -1;
+                    }
+                })
+                return flag;
             }
         </script>
         <div><b>请注意！如使用自定义图床中出现 "413 Request Entity Too Large" 等类似报错，请调整 Nginx / Tomcat 的数据包大小限制。</b>

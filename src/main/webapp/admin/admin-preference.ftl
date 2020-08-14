@@ -346,7 +346,7 @@
                         $('#td1').show();
                         $('#td1').html('本地图床适用于带宽较大的服务器（或设有CDN加速），如果你希望将上传的图片保存到服务器的指定目录，请使用本地图床功能。如需更换本地图床位置，请将原位置的所有图片直接移动到新的目录，更改本配置下的本地图床位置即可。');
                         $('#td2').show(); $('#tc2').show();
-                        $('#td2').html('<b>图片存储目录（Windows例：D:\imageBed，Linux例：/home/adler/imageBed，如目录不存在将会尝试自动创建）</b>');
+                        $('#td2').html('<b>图片存储目录（Windows例：D:/imageBed，Linux例：/home/adler/imageBed，如目录不存在将会尝试自动创建）</b>');
                         break;
                 }
                 var stc = $('#sourceTC').text().split('<<>>');

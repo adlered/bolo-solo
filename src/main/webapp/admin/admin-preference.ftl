@@ -347,6 +347,8 @@
                         $('#td1').html('本地图床适用于带宽较大的服务器（或设有CDN加速），如果你希望将上传的图片保存到服务器的指定目录，请使用本地图床功能。如需更换本地图床位置，请将原位置的所有图片直接移动到新的目录，更改本配置下的本地图床位置即可。');
                         $('#td2').show(); $('#tc2').show();
                         $('#td2').html('<b>图片存储目录（Windows例：D:/imageBed，Linux例：/home/adler/imageBed，如目录不存在将会尝试自动创建）</b>');
+                        $('#td3').show();
+                        $('#td3').html('<button onclick="checkImageBedConfigAndAlert()">测试目录是否可写</button>');
                         break;
                 }
                 var stc = $('#sourceTC').text().split('<<>>');
@@ -371,37 +373,40 @@
             }
 
             function save() {
-
-                sel = $('#tcS').val();
-                switch (sel) {
-                    case 'hacpai':
-                        $('#sourceTC').text('hacpai');
-                        break;
-                    case 'picuang':
-                        $('#sourceTC').text('picuang<<>>' + $('#tc2').val());
-                        break;
-                    case 'qiniu':
-                        $('#sourceTC').text('qiniu<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
-                        break;
-                    case 'aliyun':
-                        $('#sourceTC').text('aliyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val() + '<<>>' + $('#tc7').val() + '<<>>' + $('#tc8').val());
-                        break;
-                    case 'upyun':
-                        $('#sourceTC').text('upyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
-                        break;
-                    case 'local':
-                        $('#sourceTC').text('local<<>>' + $('#tc2').val());
-                        break;
+                if (checkImageBedConfig()) {
+                    sel = $('#tcS').val();
+                    switch (sel) {
+                        case 'hacpai':
+                            $('#sourceTC').text('hacpai');
+                            break;
+                        case 'picuang':
+                            $('#sourceTC').text('picuang<<>>' + $('#tc2').val());
+                            break;
+                        case 'qiniu':
+                            $('#sourceTC').text('qiniu<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
+                            break;
+                        case 'aliyun':
+                            $('#sourceTC').text('aliyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val() + '<<>>' + $('#tc7').val() + '<<>>' + $('#tc8').val());
+                            break;
+                        case 'upyun':
+                            $('#sourceTC').text('upyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
+                            break;
+                        case 'local':
+                            $('#sourceTC').text('local<<>>' + $('#tc2').val());
+                            break;
+                    }
+                    alert('配置已保存，设置将在重启服务端后生效。');
+                    admin.preference.update();
+                } else {
+                    alert('配置保存失败，请检查本地图床设定的目录！');
                 }
-                alert('配置已保存，设置将在重启服务端后生效。');
-                admin.preference.update();
             }
 
-            function checkImageBedConfig(path) {
+            function checkImageBedConfig() {
                 let flag = false;
                 $.ajax({
                     type: 'GET',
-                    url: 'pic/local/check?path=' + path,
+                    url: 'pic/local/check?path=' + $('#tc2').val(),
                     async: false,
                     success: function (res) {
                         result = res.msg;
@@ -409,6 +414,17 @@
                     }
                 })
                 return flag;
+            }
+
+            function checkImageBedConfigAndAlert() {
+                $.ajax({
+                    type: 'GET',
+                    url: 'pic/local/check?path=' + $('#tc2').val(),
+                    async: false,
+                    success: function (res) {
+                        alert(res.msg);
+                    }
+                })
             }
         </script>
         <div><b>请注意！如使用自定义图床中出现 "413 Request Entity Too Large" 等类似报错，请调整 Nginx / Tomcat 的数据包大小限制。</b>

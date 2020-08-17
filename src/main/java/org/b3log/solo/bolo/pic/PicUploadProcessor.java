@@ -174,7 +174,7 @@ public class PicUploadProcessor {
             if ("local".equals(type)) {
                 String userInputFilename = context.pathVar("imageFilename");
                 userInputFilename = URLEncoder.encode(userInputFilename, "UTF-8");
-                userInputFilename = userInputFilename.replaceAll("%", "-%-");
+                userInputFilename = userInputFilename.replaceAll("%", "");
                 String filePath = config.split("<<>>")[1] + "/" + userInputFilename;
                 FileInputStream fileInputStream = new FileInputStream(filePath);
                 int fileSize = fileInputStream.available();

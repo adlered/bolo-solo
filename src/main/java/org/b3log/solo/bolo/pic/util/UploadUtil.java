@@ -31,6 +31,7 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
 import com.upyun.RestManager;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -45,6 +46,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
+import org.b3log.latke.Latkes;
 import org.json.JSONObject;
 
 import javax.net.ssl.SSLContext;
@@ -70,6 +72,17 @@ public class UploadUtil {
         String result = "";
         String type = config.split("<<>>")[0];
         switch (type) {
+            case "local":
+                String path = config.split("<<>>")[1];
+                File localImageBedDir = new File(path);
+                if (!localImageBedDir.exists()) {
+                    localImageBedDir.mkdirs();
+                }
+                String localFilename = RandomStringUtils.randomAlphanumeric(3) + "_" +  file.getName();
+                File localNewFile =  new File(localImageBedDir + "/" +  localFilename);
+                FileUtils.copyFile(file, localNewFile);
+                result = Latkes.getServePath() + "/image/" + localFilename;
+                break;
             case "picuang":
                 String site = config.split("<<>>")[1];
                 CloseableHttpClient httpClient = createSSLClientDefault();
@@ -134,9 +147,9 @@ public class UploadUtil {
                 String filename;
                 try {
                     String subDir = config.split("<<>>")[7];
-                    filename = subDir + "/" + RandomStringUtils.randomAlphanumeric(10);
+                    filename = subDir + "/" + RandomStringUtils.randomAlphanumeric(3) + "_" +  file.getName();
                 } catch (Exception e) {
-                    filename = RandomStringUtils.randomAlphanumeric(10);
+                    filename = RandomStringUtils.randomAlphanumeric(3) + "_" +  file.getName();
                 }
                 OSS ossClient = new OSSClientBuilder().build(endPoint, accessKeyID, accessKeySecret);
                 PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, filename, file);
@@ -154,7 +167,7 @@ public class UploadUtil {
                 String pwd = config.split("<<>>")[3];
                 String upDomain = config.split("<<>>")[4];
                 String upTreaty = config.split("<<>>")[5];
-                String filenm = RandomStringUtils.randomAlphanumeric(10);
+                String filenm = RandomStringUtils.randomAlphanumeric(3) + "_" +  file.getName();
 
                 RestManager manager = new RestManager(zoneName, name, pwd);
                 manager.setApiDomain(RestManager.ED_AUTO);

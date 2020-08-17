@@ -21,6 +21,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.b3log.latke.ioc.Inject;
+import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
@@ -31,7 +32,11 @@ import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.util.Solos;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
+import java.io.*;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -151,6 +156,39 @@ public class PicUploadProcessor {
         } catch (Exception e) {
             context.renderJSON().renderCode(500);
             context.renderJSON().renderMsg("测试失败！目录没有写入权限。");
+
+            return;
+        }
+    }
+
+    /**
+     * 获取本地图床存储位置的图片，并返回
+     *
+     * @param context RT
+     */
+    @RequestProcessing(value = "/image/{imageFilename}", method = HttpMethod.GET)
+    public void getLocalImage(final RequestContext context) {
+        try {
+            final HttpServletResponse response = context.getResponse();
+            String config = optionRepository.get(Option.ID_C_TUCHUANG_CONFIG).optString(Option.OPTION_VALUE);
+            String type = config.split("<<>>")[0];
+            if ("local".equals(type)) {
+                String userInputFilename = context.pathVar("imageFilename");
+                userInputFilename = URLEncoder.encode(userInputFilename, "UTF-8");
+                String filePath = config.split("<<>>")[1] + "/" + userInputFilename;
+                FileInputStream fileInputStream = new FileInputStream(filePath);
+                int fileSize = fileInputStream.available();
+                byte[] data = new byte[fileSize];
+                fileInputStream.read(data);
+                fileInputStream.close();
+                String contentType = Files.probeContentType(Paths.get(filePath));
+                response.setContentType(contentType);
+                OutputStream outputStream = response.getOutputStream();
+                outputStream.write(data);
+                outputStream.close();
+            }
+        } catch (Exception e) {
+            context.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
             return;
         }

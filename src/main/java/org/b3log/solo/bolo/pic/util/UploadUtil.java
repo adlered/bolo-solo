@@ -81,6 +81,7 @@ public class UploadUtil {
                 }
                 String localFilename = RandomStringUtils.randomAlphanumeric(3) + "_" +  file.getName();
                 localFilename = URLEncoder.encode(localFilename, "UTF-8");
+                localFilename = localFilename.replaceAll("%", "-%-");
                 File localNewFile =  new File(path + "/" +  localFilename);
                 FileUtils.copyFile(file, localNewFile);
                 result = Latkes.getServePath() + "/image/" + localFilename;

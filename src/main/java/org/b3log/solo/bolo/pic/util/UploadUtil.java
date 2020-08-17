@@ -52,6 +52,7 @@ import org.json.JSONObject;
 import javax.net.ssl.SSLContext;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -79,6 +80,7 @@ public class UploadUtil {
                     localImageBedDir.mkdirs();
                 }
                 String localFilename = RandomStringUtils.randomAlphanumeric(3) + "_" +  file.getName();
+                localFilename = URLEncoder.encode(localFilename, "UTF-8");
                 File localNewFile =  new File(localImageBedDir + "/" +  localFilename);
                 FileUtils.copyFile(file, localNewFile);
                 result = Latkes.getServePath() + "/image/" + localFilename;

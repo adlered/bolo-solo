@@ -48,6 +48,11 @@ public class UpgradeService {
     private OptionQueryService optionQueryService;
 
     /**
+     * IF IT IS TRUE, FAST MIGRATION PROGRAM WILL BE BOOT UP.
+     */
+    public static boolean boloFastMigration = false;
+
+    /**
      * Upgrades if need.
      */
     public void upgrade() {
@@ -56,6 +61,20 @@ public class UpgradeService {
             if (null == preference) {
                 return;
             }
+
+            // 快速迁移检测程序
+            final JSONObject skin = optionQueryService.getSkin();
+            if (null == skin) {
+                boloFastMigration = true;
+                LOGGER.info("No skin dir name has set, enabling Bolo Fast Migration.");
+            } else {
+                final String currentSkinDirName = skin.optString(Option.ID_C_SKIN_DIR_NAME);
+                if (!currentSkinDirName.contains("bolo")) {
+                    boloFastMigration = true;
+                    LOGGER.info("Not a bolo skin has set, enabling Bolo Fast Migration.");
+                }
+            }
+
 
             final String currentVer = preference.getString(Option.ID_C_VERSION); // 数据库中的版本
             if (SoloServletListener.VERSION.equals(currentVer)) {

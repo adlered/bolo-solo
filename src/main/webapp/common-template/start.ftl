@@ -112,30 +112,39 @@
     </div>
     <script>
         status = '${data}';
-        if (status === '0') {
-            document.getElementById('status').innerHTML = '用户名或密码错误';
-        }
-        if (status === '-1') {
-            document.getElementById('status').innerHTML = '部署成功！欢迎使用菠萝博客 ❤️<br>您的博客尚未初始化<br>请在输入框中设定管理后台用户名和密码<br>点击“开始初始化”按钮初始化你的菠萝博客';
-            document.getElementById('loginBtn').innerHTML = '开始初始化';
-            document.getElementById('password').setAttribute("type", "text");
-        }
-        document.getElementById('loginBtn').onclick = function () {
-            if (document.getElementById('username').value !== '' && document.getElementById('password').value !== '') {
-                if (status === '-1') {
-                    let pwdRegex = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}');
-                    if (!pwdRegex.test(document.getElementById('password').value)) {
-                        alert("密码强度过低！请使用8-30位密码，必须包含字母和数字。");
+        if (status === '2') {
+            document.getElementById('status').innerHTML = '检测到您是Solo用户 ❤️<br>请按照以下步骤进行快速迁移：<br>1. 备份您的数据库<br>2. 在上方填写您想设定的管理员用户名和密码<br>3. 点击开始迁移按钮，稍等片刻即可';
+            document.getElementById('loginBtn').innerHTML = '开始迁移';
+            document.getElementsByClassName("navbar")[0].remove();
+            setTimeout(function () {
+                document.getElementsByClassName("footer")[1].remove();
+            }, 1000);
+        } else {
+            if (status === '0') {
+                document.getElementById('status').innerHTML = '用户名或密码错误';
+            }
+            if (status === '-1') {
+                document.getElementById('status').innerHTML = '部署成功！欢迎使用菠萝博客 ❤️<br>您的博客尚未初始化<br>请在输入框中设定管理后台用户名和密码<br>点击“开始初始化”按钮初始化你的菠萝博客';
+                document.getElementById('loginBtn').innerHTML = '开始初始化';
+                document.getElementById('password').setAttribute("type", "text");
+            }
+            document.getElementById('loginBtn').onclick = function () {
+                if (document.getElementById('username').value !== '' && document.getElementById('password').value !== '') {
+                    if (status === '-1') {
+                        let pwdRegex = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}');
+                        if (!pwdRegex.test(document.getElementById('password').value)) {
+                            alert("密码强度过低！请使用8-30位密码，必须包含字母和数字。");
+                        } else {
+                            document.getElementById('loginBtn').innerHTML = '<i class="fa fa-spinner fa-pulse"></i> 正在初始化，请稍候';
+                            document.getElementById('loginForm').submit();
+                        }
                     } else {
-                        document.getElementById('loginBtn').innerHTML = '<i class="fa fa-spinner fa-pulse"></i> 正在初始化，请稍候';
+                        document.getElementById('loginBtn').innerHTML = '<i class="fa fa-spinner fa-pulse"></i> 登录中';
                         document.getElementById('loginForm').submit();
                     }
                 } else {
-                    document.getElementById('loginBtn').innerHTML = '<i class="fa fa-spinner fa-pulse"></i> 登录中';
-                    document.getElementById('loginForm').submit();
+                    document.getElementById('status').innerHTML = '请填写用户名和密码！';
                 }
-            } else {
-                document.getElementById('status').innerHTML = '请填写用户名和密码！';
             }
         }
     </script>

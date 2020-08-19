@@ -72,32 +72,34 @@ public class SkinMgmtService {
      */
     public void loadSkins(final JSONObject skin) throws Exception {
         final Set<String> skinDirNames = Skins.getSkinDirNames();
-        final String currentSkinDirName = skin.optString(Option.ID_C_SKIN_DIR_NAME);
-        if (!skinDirNames.contains(currentSkinDirName)) {
-            LOGGER.log(Level.WARN, "Not found skin [dirName={0}] configured, try to use default skin [dirName="
-                    + Option.DefaultPreference.DEFAULT_SKIN_DIR_NAME + "] instead", currentSkinDirName);
-            if (!skinDirNames.contains(Option.DefaultPreference.DEFAULT_SKIN_DIR_NAME)) {
-                LOGGER.log(Level.ERROR, "Not found default skin [dirName=" + Option.DefaultPreference.DEFAULT_SKIN_DIR_NAME
-                        + "], please redeploy your Solo and make sure contains the default skin.");
-                System.exit(-1);
+        if (!UpgradeService.boloFastMigration) {
+            final String currentSkinDirName = skin.optString(Option.ID_C_SKIN_DIR_NAME);
+            if (!skinDirNames.contains(currentSkinDirName)) {
+                LOGGER.log(Level.WARN, "Not found skin [dirName={0}] configured, try to use default skin [dirName="
+                        + Option.DefaultPreference.DEFAULT_SKIN_DIR_NAME + "] instead", currentSkinDirName);
+                if (!skinDirNames.contains(Option.DefaultPreference.DEFAULT_SKIN_DIR_NAME)) {
+                    LOGGER.log(Level.ERROR, "Not found default skin [dirName=" + Option.DefaultPreference.DEFAULT_SKIN_DIR_NAME
+                            + "], please redeploy your Solo and make sure contains the default skin.");
+                    System.exit(-1);
+                }
+
+                skin.put(Option.ID_C_SKIN_DIR_NAME, Option.DefaultPreference.DEFAULT_SKIN_DIR_NAME);
+                updateSkin(skin);
             }
 
-            skin.put(Option.ID_C_SKIN_DIR_NAME, Option.DefaultPreference.DEFAULT_SKIN_DIR_NAME);
-            updateSkin(skin);
-        }
+            final String currentMobileSkinDirName = skin.optString(Option.ID_C_MOBILE_SKIN_DIR_NAME);
+            if (!skinDirNames.contains(currentMobileSkinDirName)) {
+                LOGGER.log(Level.WARN, "Not found mobile skin [dirName={0}] configured, try to use default mobile skin [dirName="
+                        + Option.DefaultPreference.DEFAULT_MOBILE_SKIN_DIR_NAME + "] instead", currentMobileSkinDirName);
+                if (!skinDirNames.contains(Option.DefaultPreference.DEFAULT_MOBILE_SKIN_DIR_NAME)) {
+                    LOGGER.log(Level.ERROR, "Not found default mobile skin [dirName=" + Option.DefaultPreference.DEFAULT_MOBILE_SKIN_DIR_NAME
+                            + "], please redeploy your Solo and make sure contains the default mobile skin.");
+                    System.exit(-1);
+                }
 
-        final String currentMobileSkinDirName = skin.optString(Option.ID_C_MOBILE_SKIN_DIR_NAME);
-        if (!skinDirNames.contains(currentMobileSkinDirName)) {
-            LOGGER.log(Level.WARN, "Not found mobile skin [dirName={0}] configured, try to use default mobile skin [dirName="
-                    + Option.DefaultPreference.DEFAULT_MOBILE_SKIN_DIR_NAME + "] instead", currentMobileSkinDirName);
-            if (!skinDirNames.contains(Option.DefaultPreference.DEFAULT_MOBILE_SKIN_DIR_NAME)) {
-                LOGGER.log(Level.ERROR, "Not found default mobile skin [dirName=" + Option.DefaultPreference.DEFAULT_MOBILE_SKIN_DIR_NAME
-                        + "], please redeploy your Solo and make sure contains the default mobile skin.");
-                System.exit(-1);
+                skin.put(Option.ID_C_MOBILE_SKIN_DIR_NAME, Option.DefaultPreference.DEFAULT_MOBILE_SKIN_DIR_NAME);
+                updateSkin(skin);
             }
-
-            skin.put(Option.ID_C_MOBILE_SKIN_DIR_NAME, Option.DefaultPreference.DEFAULT_MOBILE_SKIN_DIR_NAME);
-            updateSkin(skin);
         }
     }
 

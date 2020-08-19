@@ -40,10 +40,7 @@ import org.b3log.solo.bolo.tool.FixSizeLinkedList;
 import org.b3log.solo.log4j.RamAppender;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
-import org.b3log.solo.service.DataModelService;
-import org.b3log.solo.service.InitService;
-import org.b3log.solo.service.OptionQueryService;
-import org.b3log.solo.service.StatisticMgmtService;
+import org.b3log.solo.service.*;
 import org.b3log.solo.util.Skins;
 import org.b3log.solo.util.Solos;
 import org.json.JSONObject;
@@ -192,6 +189,8 @@ public class IndexProcessor {
             dataModel.put(Common.DATA, 0);
         } else if (!initService.isInited()) {
             dataModel.put(Common.DATA, -1);
+        } else if (UpgradeService.boloFastMigration) {
+            dataModel.put(Common.DATA, 2);
         } else {
             dataModel.put(Common.DATA, 1);
         }

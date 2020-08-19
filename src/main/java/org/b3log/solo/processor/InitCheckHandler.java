@@ -27,6 +27,7 @@ import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.handler.Handler;
 import org.b3log.solo.bolo.waf.WAF;
 import org.b3log.solo.service.InitService;
+import org.b3log.solo.service.UpgradeService;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -90,6 +91,10 @@ public class InitCheckHandler implements Handler {
         if (!initReported) {
             LOGGER.log(Level.DEBUG, "Bolo has not been initialized, so redirects to /start");
             initReported = true;
+        }
+
+        if (UpgradeService.boloFastMigration) {
+            LOGGER.log(Level.DEBUG, "Bolo Fast Migrating is enabled, so redirects to /start");
         }
 
         context.attr(Keys.HttpRequest.REQUEST_URI, Latkes.getContextPath() + "/start");

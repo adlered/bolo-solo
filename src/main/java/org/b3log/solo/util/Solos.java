@@ -119,18 +119,20 @@ public final class Solos {
 
         FAVICON_API = solo.getString("faviconAPI");
 
-        try {
-            Markdowns.LUTE_ENGINE_URL = solo.getString("luteHttp");
-            String luteHttp2 = System.getProperty("lute_http");
-            if (luteHttp2 != null && !luteHttp2.isEmpty()) {
-                Markdowns.LUTE_ENGINE_URL = luteHttp2;
-                Markdowns.LUTE_AVAILABLE = true;
+        if (!Markdowns.LUTE_AVAILABLE) {
+            try {
+                Markdowns.LUTE_ENGINE_URL = solo.getString("luteHttp");
+                String luteHttp2 = System.getProperty("lute_http");
+                if (luteHttp2 != null && !luteHttp2.isEmpty()) {
+                    Markdowns.LUTE_ENGINE_URL = luteHttp2;
+                    Markdowns.LUTE_AVAILABLE = true;
+                }
+                if (Markdowns.LUTE_AVAILABLE) {
+                    LOGGER.log(Level.INFO, "lute_http configure detected [url=" + Markdowns.LUTE_ENGINE_URL + "]");
+                }
+            } catch (final Exception e) {
+                // ignored
             }
-            if (Markdowns.LUTE_AVAILABLE) {
-                LOGGER.log(Level.INFO, "lute_http configure detected [url=" + Markdowns.LUTE_ENGINE_URL + "]");
-            }
-        } catch (final Exception e) {
-            // ignored
         }
     }
 

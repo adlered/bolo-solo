@@ -113,7 +113,7 @@
     <script>
         status = '${data}';
         if (status === '2') {
-            document.getElementById('status').innerHTML = '检测到您是Solo用户 ❤️<br>请按照以下步骤进行快速迁移：<br>1. 备份您的数据库<br>2. 在上方填写您想设定的管理员用户名和密码<br>3. 点击开始迁移按钮，稍等片刻即可';
+            document.getElementById('status').innerHTML = '检测到您是Solo用户 ❤️<br>请按照以下步骤进行快速迁移：<br><b>1. 备份您的数据库</b><br><b>2. 在上方填写您想设定的管理员用户名和密码</b><br><b>3. 点击开始迁移按钮，稍等片刻即可</b>';
             document.getElementById('loginBtn').innerHTML = '开始迁移';
             document.getElementsByClassName("navbar")[0].remove();
             setTimeout(function () {

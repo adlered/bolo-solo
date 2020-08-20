@@ -69,7 +69,8 @@ public class UpgradeService {
                 LOGGER.info("No skin dir name has set, enabling Bolo Fast Migration.");
             } else {
                 final String currentSkinDirName = skin.optString(Option.ID_C_SKIN_DIR_NAME);
-                if (!currentSkinDirName.contains("bolo")) {
+                final String currentMobileSkinDirName = skin.optString(Option.ID_C_MOBILE_SKIN_DIR_NAME);
+                if (!currentSkinDirName.contains("bolo") && !currentMobileSkinDirName.contains("bolo")) {
                     boloFastMigration = true;
                     LOGGER.info("Not a bolo skin has set, enabling Bolo Fast Migration.");
                 }

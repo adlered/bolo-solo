@@ -36,6 +36,7 @@ import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.util.Requests;
 import org.b3log.latke.util.URLs;
 import org.b3log.solo.bolo.tool.MD5Utils;
+import org.b3log.solo.model.Option;
 import org.b3log.solo.model.UserExt;
 import org.b3log.solo.service.*;
 import org.b3log.solo.util.GitHubs;
@@ -122,7 +123,13 @@ public class OAuthProcessor {
         String password = request.getParameter("password");
         String md5 = MD5Utils.stringToMD5(password);
         try {
-            if (!initService.isInited()) {
+            if (UpgradeService.boloFastMigration) {
+                // 快速迁移程序
+                final JSONObject preference = optionQueryService.getPreference();
+                final String currentVer = preference.getString(Option.ID_C_VERSION);
+                fastMigrate(currentVer);
+                context.sendRedirect(Latkes.getServePath() + "/");
+            } else if (!initService.isInited()) {
                 LOGGER.log(Level.INFO, "Bolo initializing...");
                 final JSONObject initReq = new JSONObject();
                 initReq.put(User.USER_NAME, username);
@@ -155,5 +162,9 @@ public class OAuthProcessor {
         } catch (final Exception e) {
             LOGGER.log(Level.WARN, "Can not write cookie", e);
         }
+    }
+
+    private void fastMigrate(String currentVer) {
+
     }
 }

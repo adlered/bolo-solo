@@ -121,7 +121,13 @@
             }, 1000);
             document.getElementById('loginBtn').onclick = function () {
                 if (document.getElementById('username').value !== '' && document.getElementById('password').value !== '') {
-
+                    let pwdRegex = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z]).{8,30}');
+                    if (!pwdRegex.test(document.getElementById('password').value)) {
+                        alert("密码强度过低！请使用8-30位密码，必须包含字母和数字。");
+                    } else {
+                        document.getElementById('loginBtn').innerHTML = '<i class="fa fa-spinner fa-pulse"></i> 正在快速迁移中，请稍候';
+                        document.getElementById('loginForm').submit();
+                    }
                 } else {
                     alert('请填写用户名和密码！');
                 }

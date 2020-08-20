@@ -28,6 +28,7 @@ import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.model.Role;
 import org.b3log.latke.model.User;
+import org.b3log.latke.repository.jdbc.util.Connections;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
@@ -47,6 +48,9 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStreamWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -127,7 +131,7 @@ public class OAuthProcessor {
                 // 快速迁移程序
                 final JSONObject preference = optionQueryService.getPreference();
                 final String currentVer = preference.getString(Option.ID_C_VERSION);
-                fastMigrate(currentVer);
+                fastMigrate(currentVer, username, md5);
                 context.sendRedirect(Latkes.getServePath() + "/");
             } else if (!initService.isInited()) {
                 LOGGER.log(Level.INFO, "Bolo initializing...");
@@ -164,7 +168,36 @@ public class OAuthProcessor {
         }
     }
 
-    private void fastMigrate(String currentVer) {
+    private void fastMigrate(String currentVer, String username, String password) throws SQLException {
+        int version = Integer.parseInt(currentVer.replaceAll("\\.", ""));
+        if (version <= 420) {
+            // 低版本，正常迁移
+            migrateLow(version, username, password);
+        } else {
+            // 高版本，先加表
+            migrateHigh(version);
+            migrateLow(version, username, password);
+        }
+    }
 
+    private void migrateLow(int version, String username, String password) throws SQLException {
+        Connection connection = Connections.getConnection();
+        Statement statement = connection.createStatement();
+        String tablePrefix = Latkes.getLocalProperty("jdbc.tablePrefix") + "_";
+        // 清空表
+        statement.executeUpdate("DELETE FROM `" + tablePrefix + "category`;");
+        statement.executeUpdate("DELETE FROM `" + tablePrefix + "category_tag`;");
+        statement.executeUpdate("DELETE FROM `" + tablePrefix + "user` WHERE userRole = 'adminRole';");
+        statement.executeUpdate("INSERT INTO `" + tablePrefix + "user` ( `oId`, `userName`, `userURL`, `userRole`, `userAvatar`, `userB3Key`, `userGitHubId` ) VALUES ( 'default', '" + username + "', '" + Latkes.getServePath() + "', 'adminRole', 'https://pic.stackoverflow.wiki/uploadImages/117/136/73/84/2020/08/03/19/59/2c12286b-91a0-478e-ba47-edaa21f19476.png', '" + password + "', 'none' );");
+        statement.close();
+        connection.commit();
+        connection.close();
+    }
+
+    private void migrateHigh(int version) {
+        // 高版本降级到4.2.0
+
+
+        version = 420;
     }
 }

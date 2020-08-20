@@ -73,7 +73,12 @@ public class InitCheckHandler implements Handler {
             return;
         }
 
-        if (UpgradeService.boloFastMigration) {
+        if (StringUtils.startsWith(requestURI, Latkes.getContextPath() + "/oauth/bolo")) {
+            // Do initialization
+            context.handle();
+
+            return;
+        } else if (UpgradeService.boloFastMigration) {
             context.attr(Keys.HttpRequest.REQUEST_URI, Latkes.getContextPath() + "/start");
             context.handle();
             LOGGER.log(Level.DEBUG, "Bolo Fast Migrating is enabled, so redirects to /start");
@@ -84,13 +89,6 @@ public class InitCheckHandler implements Handler {
         final BeanManager beanManager = BeanManager.getInstance();
         final InitService initService = beanManager.getReference(InitService.class);
         if (initService.isInited()) {
-            context.handle();
-
-            return;
-        }
-
-        if (StringUtils.startsWith(requestURI, Latkes.getContextPath() + "/oauth/bolo")) {
-            // Do initialization
             context.handle();
 
             return;

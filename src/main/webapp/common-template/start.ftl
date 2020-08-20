@@ -113,6 +113,7 @@
     <script>
         status = '${data}';
         if (status === '2') {
+            document.getElementsByTagName("title")[0].innerText = '快速迁移到 Bolo';
             document.getElementById('status').innerHTML = '检测到您是Solo用户 ❤️<br>请按照以下步骤进行快速迁移：<br><b>1. 备份您的数据库</b><br><b>2. 在上方填写您想设定的管理员用户名和密码</b><br><b>3. 点击开始迁移按钮，稍等片刻即可</b>';
             document.getElementById('loginBtn').innerHTML = '开始迁移';
             document.getElementsByClassName("navbar")[0].remove();
@@ -137,6 +138,7 @@
                 document.getElementById('status').innerHTML = '用户名或密码错误';
             }
             if (status === '-1') {
+                document.getElementsByTagName("title")[0].innerText = '欢迎使用 Bolo';
                 document.getElementById('status').innerHTML = '部署成功！欢迎使用菠萝博客 ❤️<br>您的博客尚未初始化<br>请在输入框中设定管理后台用户名和密码<br>点击“开始初始化”按钮初始化你的菠萝博客';
                 document.getElementById('loginBtn').innerHTML = '开始初始化';
                 document.getElementById('password').setAttribute("type", "text");

@@ -76,7 +76,6 @@ public class InitCheckHandler implements Handler {
         if (UpgradeService.boloFastMigration) {
             context.attr(Keys.HttpRequest.REQUEST_URI, Latkes.getContextPath() + "/start");
             context.handle();
-
             LOGGER.log(Level.DEBUG, "Bolo Fast Migrating is enabled, so redirects to /start");
 
             return;

@@ -119,6 +119,13 @@
             setTimeout(function () {
                 document.getElementsByClassName("footer")[1].remove();
             }, 1000);
+            document.getElementById('loginBtn').onclick = function () {
+                if (document.getElementById('username').value !== '' && document.getElementById('password').value !== '') {
+
+                } else {
+                    alert('请填写用户名和密码！');
+                }
+            }
         } else {
             if (status === '0') {
                 document.getElementById('status').innerHTML = '用户名或密码错误';

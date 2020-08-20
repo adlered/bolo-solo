@@ -29,6 +29,8 @@ import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.model.Role;
 import org.b3log.latke.model.User;
+import org.b3log.latke.repository.RepositoryException;
+import org.b3log.latke.repository.Transaction;
 import org.b3log.latke.repository.jdbc.util.Connections;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.servlet.HttpMethod;
@@ -40,6 +42,7 @@ import org.b3log.latke.util.URLs;
 import org.b3log.solo.bolo.tool.MD5Utils;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.model.UserExt;
+import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.service.*;
 import org.b3log.solo.util.GitHubs;
 import org.b3log.solo.util.Solos;
@@ -52,6 +55,9 @@ import java.io.OutputStreamWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -169,7 +175,7 @@ public class OAuthProcessor {
         }
     }
 
-    private void fastMigrate(String currentVer, String username, String password, final RequestContext context) throws Exception {
+    private void fastMigrate(String currentVer, String username, String password, final RequestContext context) throws SQLException, RepositoryException {
         int version = Integer.parseInt(currentVer.replaceAll("\\.", ""));
         if (version <= 420) {
             // 低版本，正常迁移
@@ -181,15 +187,27 @@ public class OAuthProcessor {
         }
     }
 
-    private void migrateLow(int version, String username, String password, final RequestContext context) throws Exception {
+    private void migrateLow(int version, String username, String password, final RequestContext context) throws SQLException {
         Connection connection = Connections.getConnection();
         Statement statement = connection.createStatement();
         String tablePrefix = Latkes.getLocalProperty("jdbc.tablePrefix") + "_";
         // 清空表
-        statement.executeUpdate("DELETE FROM `" + tablePrefix + "category`;");
-        statement.executeUpdate("DELETE FROM `" + tablePrefix + "category_tag`;");
-        statement.executeUpdate("DELETE FROM `" + tablePrefix + "user` WHERE userRole = 'adminRole';");
-        statement.executeUpdate("INSERT INTO `" + tablePrefix + "user` ( `oId`, `userName`, `userURL`, `userRole`, `userAvatar`, `userB3Key`, `userGitHubId` ) VALUES ( 'default', '" + username + "', '" + Latkes.getServePath() + "', 'adminRole', 'https://pic.stackoverflow.wiki/uploadImages/117/136/73/84/2020/08/03/19/59/2c12286b-91a0-478e-ba47-edaa21f19476.png', '" + password + "', 'none' );");
+        try {
+            statement.executeUpdate("DELETE FROM `" + tablePrefix + "category`;");
+        } catch (Exception ignored) {
+        }
+        try {
+            statement.executeUpdate("DELETE FROM `" + tablePrefix + "category_tag`;");
+        } catch (Exception ignored) {
+        }
+        try {
+            statement.executeUpdate("DELETE FROM `" + tablePrefix + "user` WHERE userRole = 'adminRole';");
+        } catch (Exception ignored) {
+        }
+        try {
+            statement.executeUpdate("INSERT INTO `" + tablePrefix + "user` ( `oId`, `userName`, `userURL`, `userRole`, `userAvatar`, `userB3Key`, `userGitHubId` ) VALUES ( 'default', '" + username + "', '" + Latkes.getServePath() + "', 'adminRole', 'https://pic.stackoverflow.wiki/uploadImages/117/136/73/84/2020/08/03/19/59/2c12286b-91a0-478e-ba47-edaa21f19476.png', '" + password + "', 'none' );");
+        } catch (Exception ignored) {
+        }
         statement.close();
         connection.commit();
         connection.close();
@@ -198,7 +216,10 @@ public class OAuthProcessor {
         BeanManager beanManager = BeanManager.getInstance();
         JSONObject skin = optionQueryService.getSkin();
         final SkinMgmtService skinMgmtService = beanManager.getReference(SkinMgmtService.class);
-        skinMgmtService.loadSkins(skin);
+        try {
+            skinMgmtService.loadSkins(skin);
+        } catch (Exception ignored) {
+        }
         // 升级
         final UpgradeService upgradeService = beanManager.getReference(UpgradeService.class);
         upgradeService.upgrade();
@@ -206,14 +227,66 @@ public class OAuthProcessor {
         context.sendRedirect(Latkes.getServePath() + "/");
     }
 
-    private void migrateHigh(int version) throws SQLException {
+    private void migrateHigh(int version) throws SQLException, RepositoryException {
         // 高版本降级到4.2.0
         Connection connection = Connections.getConnection();
         Statement statement = connection.createStatement();
         String tablePrefix = Latkes.getLocalProperty("jdbc.tablePrefix") + "_";
         // 降级表到4.2.0
-
-
+        // 添加列
+        try {
+            statement.executeUpdate("ALTER TABLE `" + tablePrefix + "article` ADD COLUMN `articleCommentCount` int(11) NOT NULL COMMENT '文章评论计数' DEFAULT 0;");
+        } catch (Exception ignored) {
+        }
+        try {
+            statement.executeUpdate("ALTER TABLE `" + tablePrefix + "article` ADD COLUMN `articleViewCount` int(11) NOT NULL COMMENT '文章浏览计数' DEFAULT 0;");
+        } catch (Exception ignored) {
+        }
+        try {
+            statement.executeUpdate("ALTER TABLE `" + tablePrefix + "article` ADD COLUMN `articleCommentable` char(1) NOT NULL COMMENT '文章是否可以评论' DEFAULT '1';");
+        } catch (Exception ignored) {
+        }
+        // comment表
+        try {
+            statement.executeUpdate("CREATE TABLE `b3_solo_comment` ( `oId` varchar(19) NOT NULL COMMENT '主键', `commentContent` text NOT NULL COMMENT '评论内容', `commentCreated` bigint(20) NOT NULL COMMENT '评论时间戳', `commentName` varchar(50) NOT NULL COMMENT '评论人名称', `commentOnId` varchar(19) NOT NULL COMMENT '评论的文章/页面的 id', `commentSharpURL` varchar(255) NOT NULL COMMENT '评论访问路径，带 # 锚点', `commentThumbnailURL` text NOT NULL COMMENT '评论人头像图片链接地址', `commentURL` varchar(255) NOT NULL COMMENT '评论人链接地址', `commentOriginalCommentId` varchar(19) DEFAULT NULL COMMENT '评论回复时原始的评论 id，即父评论 id', `commentOriginalCommentName` varchar(50) DEFAULT NULL COMMENT '评论回复时原始的评论人名称，即父评论人名称', PRIMARY KEY (`oId`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='评论表';");
+        } catch (Exception ignored) {
+        }
+        statement.close();
+        connection.commit();
+        connection.close();
+        // 降级版本，添加设定
+        BeanManager beanManager = BeanManager.getInstance();
+        OptionRepository optionRepository = (OptionRepository)beanManager.getReference(OptionRepository.class);
+        Transaction transaction = optionRepository.beginTransaction();
+        JSONObject versionOpt = optionRepository.get("version");
+        versionOpt.put("optionValue", "4.2.0");
+        try {
+            optionRepository.update("version", versionOpt, new String[0]);
+        } catch (Exception ignored) {
+        }
+        List<Object[]> optList = new ArrayList<>();
+        Collections.addAll(optList,
+                    new Object[] { Option.ID_C_MOST_COMMENT_ARTICLE_DISPLAY_CNT, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_MOST_COMMENT_ARTICLE_DISPLAY_COUNT },
+                    new Object[] { Option.ID_C_MOST_VIEW_ARTICLE_DISPLAY_CNT, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_MOST_VIEW_ARTICLES_DISPLAY_COUNT },
+                    new Object[] { Option.ID_C_RECENT_COMMENT_DISPLAY_CNT, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_RECENT_COMMENT_DISPLAY_COUNT },
+                    new Object[] { Option.ID_C_COMMENTABLE, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_COMMENTABLE }
+                );
+        for (Object[] i : optList) {
+            saveOption(i, optionRepository);
+        }
+        transaction.commit();
         version = 420;
+    }
+
+    private void saveOption(Object[] opt, OptionRepository optionRepository) {
+        final JSONObject optOpt = new JSONObject();
+        optOpt
+                .put(Keys.OBJECT_ID, opt[0])
+                .put(Option.OPTION_CATEGORY, opt[1])
+                .put(Option.OPTION_VALUE, opt[2]);
+        try {
+            optionRepository.add(optOpt);
+        } catch (Exception ignored) {
+        }
     }
 }

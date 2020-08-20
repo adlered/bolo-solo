@@ -848,7 +848,13 @@ public class DataModelService {
             dataModel.put(Option.ID_C_HACPAI_USER, userName);
             // 交互式开关是否开启
             try {
-                dataModel.put(Option.ID_C_INTERACTIVE, Options.get(Option.ID_C_INTERACTIVE));
+                String interactive = Options.get(Option.ID_C_INTERACTIVE);
+                if (!interactive.isEmpty()) {
+                    dataModel.put(Option.ID_C_INTERACTIVE, interactive);
+                } else {
+                    dataModel.put(Option.ID_C_INTERACTIVE, "on");
+                }
+
             } catch (Exception e) {
                 dataModel.put(Option.ID_C_INTERACTIVE, "on");
             }

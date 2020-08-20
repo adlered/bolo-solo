@@ -23,6 +23,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.b3log.latke.Keys;
 import org.b3log.latke.Latkes;
+import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
@@ -131,7 +132,7 @@ public class OAuthProcessor {
                 // 快速迁移程序
                 final JSONObject preference = optionQueryService.getPreference();
                 final String currentVer = preference.getString(Option.ID_C_VERSION);
-                fastMigrate(currentVer, username, md5);
+                fastMigrate(currentVer, username, md5, context);
                 context.sendRedirect(Latkes.getServePath() + "/");
             } else if (!initService.isInited()) {
                 LOGGER.log(Level.INFO, "Bolo initializing...");
@@ -168,19 +169,19 @@ public class OAuthProcessor {
         }
     }
 
-    private void fastMigrate(String currentVer, String username, String password) throws SQLException {
+    private void fastMigrate(String currentVer, String username, String password, final RequestContext context) throws Exception {
         int version = Integer.parseInt(currentVer.replaceAll("\\.", ""));
         if (version <= 420) {
             // 低版本，正常迁移
-            migrateLow(version, username, password);
+            migrateLow(version, username, password, context);
         } else {
             // 高版本，先加表
             migrateHigh(version);
-            migrateLow(version, username, password);
+            migrateLow(version, username, password, context);
         }
     }
 
-    private void migrateLow(int version, String username, String password) throws SQLException {
+    private void migrateLow(int version, String username, String password, final RequestContext context) throws Exception {
         Connection connection = Connections.getConnection();
         Statement statement = connection.createStatement();
         String tablePrefix = Latkes.getLocalProperty("jdbc.tablePrefix") + "_";
@@ -192,10 +193,25 @@ public class OAuthProcessor {
         statement.close();
         connection.commit();
         connection.close();
+        // 改皮肤
+        UpgradeService.boloFastMigration = false;
+        BeanManager beanManager = BeanManager.getInstance();
+        JSONObject skin = optionQueryService.getSkin();
+        final SkinMgmtService skinMgmtService = beanManager.getReference(SkinMgmtService.class);
+        skinMgmtService.loadSkins(skin);
+        // 升级
+        final UpgradeService upgradeService = beanManager.getReference(UpgradeService.class);
+        upgradeService.upgrade();
+        // 跳转
+        context.sendRedirect(Latkes.getServePath() + "/");
     }
 
-    private void migrateHigh(int version) {
+    private void migrateHigh(int version) throws SQLException {
         // 高版本降级到4.2.0
+        Connection connection = Connections.getConnection();
+        Statement statement = connection.createStatement();
+        String tablePrefix = Latkes.getLocalProperty("jdbc.tablePrefix") + "_";
+        // 降级表到4.2.0
 
 
         version = 420;

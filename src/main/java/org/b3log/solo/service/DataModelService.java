@@ -631,6 +631,12 @@ public class DataModelService {
             hljsTheme = Option.DefaultPreference.DEFAULT_HLJS_THEME;
         }
         dataModel.put(Option.ID_C_HLJS_THEME, hljsTheme);
+
+        String showCodeBlockLn = preference.optString(Option.ID_C_SHOW_CODE_BLOCK_LN);
+        if (StringUtils.isBlank(showCodeBlockLn)) {
+            showCodeBlockLn = Option.DefaultPreference.DEFAULT_SHOW_CODE_BLOCK_LN;
+        }
+        dataModel.put(Option.ID_C_SHOW_CODE_BLOCK_LN, showCodeBlockLn);
     }
 
     /**

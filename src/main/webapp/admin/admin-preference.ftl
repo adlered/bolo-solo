@@ -231,10 +231,18 @@
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
 
-        <label>${editorModeLabel}</label>
+        <h3>${editorModeLabel}</h3>
+        <br>
         <label><input name="editorMode" type="radio" value="wysiwyg">&nbsp;${editorModeWYSIWYGLabel} </label>
         <label><input name="editorMode" type="radio" value="ir">&nbsp;${editorModeIRLabel} </label>
         <label><input name="editorMode" type="radio" value="sv" checked>&nbsp;${editorModeSVLabel} </label>
+        <br><br><br>
+        <h3>${othersLabel}</h3>
+        <br>
+        <label class="checkbox">
+            <input id="showCodeBlockLn" type="checkbox" class="normalInput"/>
+            <span>&nbsp;${showCodeBlockLnLabel}</span>
+        </label>
 
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>

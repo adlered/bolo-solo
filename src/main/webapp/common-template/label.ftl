@@ -25,6 +25,7 @@
         hljsStyle: '${hljsTheme}',
         langLabel: "${langLabel}",
         version: "${version}",
+        showCodeBlockLn: ${showCodeBlockLn},
     }
     Util.init()
 </script>

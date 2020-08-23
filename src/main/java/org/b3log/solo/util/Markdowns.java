@@ -115,6 +115,16 @@ public final class Markdowns {
      */
     private static boolean LUTE_OK = false;
 
+    public static boolean SHOW_CODE_BLOCK_LN = false;
+
+    /**
+     * Clears cache.
+     */
+    public static void clearCache() {
+        MD_CACHE.clear();
+    }
+
+
     /**
      * Cleans the specified HTML.
      *
@@ -272,7 +282,7 @@ public final class Markdowns {
     private static String toHtmlByLute(final String markdownText) throws Exception {
         final URL url = new URL(LUTE_ENGINE_URL);
         final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestProperty("X-CodeSyntaxHighlightLineNum", String.valueOf(false));
+        conn.setRequestProperty("X-CodeSyntaxHighlightLineNum", String.valueOf(Markdowns.SHOW_CODE_BLOCK_LN));
         conn.setRequestProperty("X-Footnotes", String.valueOf(false));
         conn.setRequestProperty("X-ToC", String.valueOf(false));
         conn.setRequestProperty("X-AutoSpace", String.valueOf(false));

@@ -130,6 +130,7 @@ admin.preference = {
         $('#githubPAT').val(preference.githubPAT)
         $('#maxArchive').val(preference.maxArchive)
 
+        'true' === preference.showCodeBlockLn ? $('#showCodeBlockLn').attr('checked', 'checked') : $('#showCodeBlockLn').removeAttr('checked')
         'true' === preference.enableArticleUpdateHint ? $('#enableArticleUpdateHint').attr('checked', 'checked') : $('#enableArticleUpdateHint').removeAttr('checked')
         'true' === preference.allowVisitDraftViaPermalink ? $('#allowVisitDraftViaPermalink').attr('checked', 'checked') : $('allowVisitDraftViaPermalink').removeAttr('checked')
         'true' === preference.commentable ? $('#commentable').attr('checked', 'checked') : $('commentable').removeAttr('checked')
@@ -310,6 +311,7 @@ admin.preference = {
         'feedOutputCnt': $('#feedOutputCnt').val(),
         'faviconURL': $('#faviconURL').val(),
         'syncGitHub': $('#syncGitHub').prop('checked'),
+        'showCodeBlockLn': $('#showCodeBlockLn').prop('checked'),
         'pullGitHub': $('#pullGitHub').prop('checked'),
         'commentable': $('#commentable').prop('checked'),
         'customVars': $('#customVars').val(),

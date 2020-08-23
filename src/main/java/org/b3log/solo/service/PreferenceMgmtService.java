@@ -32,6 +32,7 @@ import org.b3log.solo.bolo.prop.Options;
 import org.b3log.solo.bolo.waf.WAF;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.OptionRepository;
+import org.b3log.solo.util.Markdowns;
 import org.json.JSONObject;
 
 import java.util.*;
@@ -103,6 +104,11 @@ public class PreferenceMgmtService {
             }
 
             transaction.commit();
+
+            final String showCodeBlockLnVal = preference.optString(Option.ID_C_SHOW_CODE_BLOCK_LN);
+            Markdowns.SHOW_CODE_BLOCK_LN = "true".equalsIgnoreCase(showCodeBlockLnVal);
+
+            Markdowns.clearCache();
 
             WAF.set();
 

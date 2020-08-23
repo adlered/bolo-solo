@@ -54,6 +54,11 @@ public final class Option {
     // oId constants
 
     /**
+     * Key of code block line num show flag. 支持代码块行号显示 https://github.com/88250/solo/issues/4
+     */
+    public static final String ID_C_SHOW_CODE_BLOCK_LN = "showCodeBlockLn";
+
+    /**
      * Key of editor mode. 支持配置编辑器模式 https://github.com/88250/solo/issues/95
      * <ul>
      *     <li>wysiwyg：所见即所得</li>
@@ -403,6 +408,11 @@ public final class Option {
      * @since 0.3.1
      */
     public static final class DefaultPreference {
+
+        /**
+         * Default show code block line num.
+         */
+        public static final String DEFAULT_SHOW_CODE_BLOCK_LN = "false";
 
         /**
          * Default hljs theme.

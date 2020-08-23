@@ -172,17 +172,20 @@ var Util = {
           'vditorPreviewScript')
     }
 
-    Vditor.codeRender(document.body, Label.langLabel)
-    if (Label.luteAvailable) {
-      Vditor.mathRenderByLute(document.body)
-    } else {
-      Vditor.mathRender(document.body)
-    }
+    Vditor.highlightRender({
+      enable: !Label.luteAvailable,
+      lineNumber: Label.showCodeBlockLn,
+      style: Label.hljsStyle,
+    }, document);
 
-    Vditor.abcRender()
-    Vditor.chartRender()
-    Vditor.mediaRender(document.body)
-    Vditor.mermaidRender(document.body)
+    Vditor.codeRender(document.body, Label.langLabel);
+    Vditor.graphvizRender(document.body);
+    Vditor.mathRender(document.body);
+    Vditor.abcRender();
+    Vditor.chartRender();
+    Vditor.mindmapRender();
+    Vditor.mediaRender(document.body);
+    Vditor.mermaidRender(document.body);
   },
   /**
    * @description IE6/7，跳转到 kill-browser 页面

@@ -22,7 +22,7 @@
 <img src="https://img.shields.io/github/watchers/adlered/bolo-solo?style=flat-square">
 <br>
 Supported by JetBrain's!
-<a href="https://www.jetbrains.com/?from=bolo-solo"><img src="/pic/jetbrains.png" width="50px" height="50px"></a>
+<a href="https://www.jetbrains.com/?from=bolo-solo"><img src="/pic/jetbrains.png" width="146px" height="158px"></a>
 </p>
 
 ****

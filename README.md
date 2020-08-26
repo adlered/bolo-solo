@@ -30,23 +30,10 @@
 
 ## 欣赏
 
-### 🌸 Sakura 皮肤
-
-<img src="/preview/1.png" width="800" height="500"/>
-<img src="/preview/2.png" width="800" height="500"/>
-
-****
-
-### ✨ Fantastic 皮肤
-
-<img src="/preview/3.png" width="800" height="500"/>
-<img src="/preview/4.png" width="800" height="500"/>
-
-****
-
-### 🏠 后台主页
-
-<img src="/preview/5.png" width="800" height="500"/>
+<img src="/preview/fantastic.png"/>
+<img src="/preview/sakura.png"/>
+<img src="/preview/search.png"/>
+<img src="/preview/login.png"/>
 
 ## 为什么选择 Bolo
 

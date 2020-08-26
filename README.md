@@ -20,6 +20,9 @@
 <img src="https://img.shields.io/github/forks/adlered/bolo-solo?style=flat-square">
 <img src="https://img.shields.io/github/stars/adlered/bolo-solo?style=flat-square">
 <img src="https://img.shields.io/github/watchers/adlered/bolo-solo?style=flat-square">
+<br>
+Supported by JetBrain's!
+<a href="https://www.jetbrains.com/?from=bolo-solo"><img src="/pic/jetbrains.png" width="50px" height="50px"></a>
 </p>
 
 ****

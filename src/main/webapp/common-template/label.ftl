@@ -26,6 +26,7 @@
         langLabel: "${langLabel}",
         version: "${version}",
         showCodeBlockLn: ${showCodeBlockLn},
+        hacpaiDomain: "${hacpaiDomain}",
     }
     Util.init()
 </script>

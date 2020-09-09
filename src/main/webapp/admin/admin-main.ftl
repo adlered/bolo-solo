@@ -174,7 +174,7 @@
 
     function showTips() {
         var config = {
-            content: "欢迎使用菠萝博客 V2.0 稳定版！<br>" +
+            content: "欢迎使用菠萝博客 " + boloVersion + "！<br>" +
                 "<a href='javascript:neverShowTips()'>不再提醒</a>",
             type: "html",
             alignTo: ["right","top"],

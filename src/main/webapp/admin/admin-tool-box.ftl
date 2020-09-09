@@ -99,7 +99,7 @@
                             手动上传公开文章备份至黑客派
                         </td>
                         <td>
-                            手动将你的<b>公开</b>文章备份上传至黑客派，并参与<a target="_blank" href="https://hacpai.com/top/solo">博客排行榜</a>排名。
+                            手动将你的<b>公开</b>文章备份上传至黑客派，并参与<a target="_blank" href="https://${hacpaiDomain}/top/solo">博客排行榜</a>排名。
                         </td>
                         <td style="padding-right: 20px;">
                             <button onclick="backup()" style="float:right">确定备份</button>

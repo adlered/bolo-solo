@@ -130,7 +130,7 @@
         但需要该文章为本人编写，从博客平台编写且将文章推送到黑客派中过。
         <br><br>
         <b>1. 输入黑客派文章号：</b><br>
-        https://hacpai.com/article/ <input id="remoteArticleID" type="text" style="width: 200px">
+        https://${hacpaiDomain}/article/ <input id="remoteArticleID" type="text" style="width: 200px">
         <br>
         <b>2.选择本地文章：</b>
         <br>

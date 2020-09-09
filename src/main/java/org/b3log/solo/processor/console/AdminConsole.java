@@ -41,6 +41,7 @@ import org.b3log.latke.servlet.renderer.AbstractFreeMarkerRenderer;
 import org.b3log.latke.util.Execs;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.SoloServletListener;
+import org.b3log.solo.bolo.Global;
 import org.b3log.solo.model.ArchiveDate;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
@@ -224,6 +225,9 @@ public class AdminConsole {
         // Bolo version
         dataModel.put(Common.BOLO_VERSION, SoloServletListener.BOLO_VERSION);
 
+        // 黑客派域名设定
+        dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
+
         fireFreeMarkerActionEvent(templateName, dataModel);
     }
 
@@ -259,6 +263,9 @@ public class AdminConsole {
         }
 
         dataModel.put("timeZoneIdOptions", timeZoneIdOptions.toString());
+
+        // 黑客派域名设定
+        dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
         fireFreeMarkerActionEvent(templateName, dataModel);
     }
 

@@ -501,8 +501,8 @@
                     <li>
                         1. 使用 Bolo 的编辑器的黑客派图床（<b>其它图床不受影响</b>）<br>
                         2. 与黑客派社区同步发送的文章<s>和评论</s>（黑客派已废弃评论推送接口，文章推送 / 同步不受影响）<br>
-                        3. 同步你在黑客派中的GitHub、QQ等链接（<b>也可以在工具-联系方式选项直接设置，无需配置 B3log Key。</b>如果要通过黑客派同步：<a href="https://hacpai.com/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>
-                        4. 使用自动备份全部文章至黑客派功能（<a href="https://hacpai.com/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br>
+                        3. 同步你在黑客派中的GitHub、QQ等链接（<b>也可以在工具-联系方式选项直接设置，无需配置 B3log Key。</b>如果要通过黑客派同步：<a href="https://${hacpaiDomain}/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>
+                        4. 使用自动备份全部文章至黑客派功能（<a href="https://${hacpaiDomain}/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br>
                         5. 黑客派图床有防盗链功能，仅允许在博客内显示图片，<b>推荐使用自定义图床</b>。<br><br>
                     </li>
                 </ul>
@@ -511,8 +511,8 @@
                 <summary>如何取得 B3log Key？</summary>
                 <ul>
                     <li>
-                        1. <a href="https://hacpai.com/register?r=adlered" target="_blank">在这里</a>注册一个黑客派用户（在<a href="https://hacpai.com/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>
-                        2. <a href="https://hacpai.com/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key<br>
+                        1. <a href="https://${hacpaiDomain}/register?r=adlered" target="_blank">在这里</a>注册一个黑客派用户（在<a href="https://${hacpaiDomain}/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>
+                        2. <a href="https://${hacpaiDomain}/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key<br>
                     </li>
                 </ul>
             </details>

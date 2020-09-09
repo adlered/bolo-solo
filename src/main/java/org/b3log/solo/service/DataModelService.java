@@ -868,6 +868,8 @@ public class DataModelService {
             } catch (Exception e) {
                 dataModel.put(Option.ID_C_INTERACTIVE, "on");
             }
+            // 黑客派域名设定
+            dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
             final String skinDirName = (String) context.attr(Keys.TEMAPLTE_DIR_NAME);
             dataModel.put(Option.ID_C_SKIN_DIR_NAME, skinDirName);
             Keys.fillRuntime(dataModel);

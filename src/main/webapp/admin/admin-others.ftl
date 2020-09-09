@@ -126,10 +126,10 @@
         <p><b>文章导入功能可能存在数据风险，请谨慎使用。</b></p>
     </div>
     <div id="tabOthersPanel_commentSync" class="fn__none form">
-        你可以手动从黑客派拉取文章中的评论到本地博客的某篇文章中。<br>
-        但需要该文章为本人编写，从博客平台编写且将文章推送到黑客派中过。
+        你可以手动从链滴拉取文章中的评论到本地博客的某篇文章中。<br>
+        但需要该文章为本人编写，从博客平台编写且将文章推送到链滴中过。
         <br><br>
-        <b>1. 输入黑客派文章号：</b><br>
+        <b>1. 输入链滴文章号：</b><br>
         https://${hacpaiDomain}/article/ <input id="remoteArticleID" type="text" style="width: 200px">
         <br>
         <b>2.选择本地文章：</b>

@@ -60,7 +60,7 @@ $.extend(SoloEditor.prototype, {
         }
       },
       error: function (response, ajaxOptions, thrownError) {
-        $("#tipMsg").text("无法从黑客派社区获取常用Emoji，自动生成中...");
+        $("#tipMsg").text("无法从链滴社区获取常用Emoji，自动生成中...");
         Label.emoji = {}
         let defaultEmojiData = JSON.parse('[{"+1":"👍"},{"-1":"👎"},{"confused":"😕"},{"eyes":"👀"},{"heart":"❤️"},{"tada":"🎉"},{"smile":"😄"},{"rocket":"🚀"}]')
         if (Array.isArray(defaultEmojiData)) {

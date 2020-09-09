@@ -256,7 +256,7 @@
         <label for="tcS">图床选择</label>
         <select id="tcS" disabled>
             <option selected></option>
-            <option value="hacpai">黑客派图床（默认）</option>
+            <option value="hacpai">链滴图床（默认）</option>
             <option value="local">本地图床</option>
             <option value="qiniu">七牛云</option>
             <option value="aliyun">阿里云</option>
@@ -292,7 +292,7 @@
                 switch (sel) {
                     case 'hacpai':
                         $('#td1').show();
-                        $('#td1').text('使用黑客派默认图床，请在偏好设置中配置黑客派的用户名和 B3log Key。');
+                        $('#td1').text('使用链滴默认图床，请在偏好设置中配置链滴的用户名和 B3log Key。');
                         break;
                     case 'picuang':
                         $('#td1').show();
@@ -486,8 +486,8 @@
             <div>
                 <b>请注意！此项设置需要重启服务端后生效。</b>
                 <br><br>
-                菠萝博客为您提供了一个公共账号，无需自行注册账号，即可直接使用黑客派的图床服务；<br>
-                使用公共账号的图床需要将<b>自定义图床</b>修改为黑客派，并将 "黑客派用户名" 及 "B3log Key" 字段留空。
+                菠萝博客为您提供了一个公共账号，无需自行注册账号，即可直接使用链滴的图床服务；<br>
+                使用公共账号的图床需要将<b>自定义图床</b>修改为链滴，并将 "链滴用户名" 及 "B3log Key" 字段留空。
                 <br><br>
             </div>
             <style>
@@ -499,11 +499,11 @@
                 <summary>设置以后，我可以做什么？</summary>
                 <ul>
                     <li>
-                        1. 使用 Bolo 的编辑器的黑客派图床（<b>其它图床不受影响</b>）<br>
-                        2. 与黑客派社区同步发送的文章<s>和评论</s>（黑客派已废弃评论推送接口，文章推送 / 同步不受影响）<br>
-                        3. 同步你在黑客派中的GitHub、QQ等链接（<b>也可以在工具-联系方式选项直接设置，无需配置 B3log Key。</b>如果要通过黑客派同步：<a href="https://${hacpaiDomain}/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>
-                        4. 使用自动备份全部文章至黑客派功能（<a href="https://${hacpaiDomain}/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br>
-                        5. 黑客派图床有防盗链功能，仅允许在博客内显示图片，<b>推荐使用自定义图床</b>。<br><br>
+                        1. 使用 Bolo 的编辑器的链滴图床（<b>其它图床不受影响</b>）<br>
+                        2. 与链滴社区同步发送的文章<s>和评论</s>（链滴已废弃评论推送接口，文章推送 / 同步不受影响）<br>
+                        3. 同步你在链滴中的GitHub、QQ等链接（<b>也可以在工具-联系方式选项直接设置，无需配置 B3log Key。</b>如果要通过链滴同步：<a href="https://${hacpaiDomain}/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>
+                        4. 使用自动备份全部文章至链滴功能（<a href="https://${hacpaiDomain}/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br>
+                        5. 链滴图床有防盗链功能，仅允许在博客内显示图片，<b>推荐使用自定义图床</b>。<br><br>
                     </li>
                 </ul>
             </details>
@@ -511,7 +511,7 @@
                 <summary>如何取得 B3log Key？</summary>
                 <ul>
                     <li>
-                        1. <a href="https://${hacpaiDomain}/register?r=adlered" target="_blank">在这里</a>注册一个黑客派用户（在<a href="https://${hacpaiDomain}/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>
+                        1. <a href="https://${hacpaiDomain}/register?r=adlered" target="_blank">在这里</a>注册一个链滴用户（在<a href="https://${hacpaiDomain}/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>
                         2. <a href="https://${hacpaiDomain}/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key<br>
                     </li>
                 </ul>

@@ -38,7 +38,7 @@
             <button onclick="admin.usite.update()" class="fn__right">${updateLabel}</button>
         </div>
         <div class="fn__clear">
-            <label>联系方式将以图标的方式显示在你的博客主页中，立即生效。<br>每个皮肤支持显示的联系方式数量不等，部分较少见的联系方式可能不会显示。<br>如要通过设定的 黑客派用户名 及 B3log Key 从黑客派更新联系方式，请通过联机工具 - 立即从黑客派获取联系方式 进行获取。</label>
+            <label>联系方式将以图标的方式显示在你的博客主页中，立即生效。<br>每个皮肤支持显示的联系方式数量不等，部分较少见的联系方式可能不会显示。<br>如要通过设定的 链滴用户名 及 B3log Key 从链滴更新联系方式，请通过联机工具 - 立即从链滴获取联系方式 进行获取。</label>
         </div>
         <table id="tfhover" class="tftable" border="1">
             <tr>

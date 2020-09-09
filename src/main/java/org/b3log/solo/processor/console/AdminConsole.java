@@ -225,7 +225,7 @@ public class AdminConsole {
         // Bolo version
         dataModel.put(Common.BOLO_VERSION, SoloServletListener.BOLO_VERSION);
 
-        // 黑客派域名设定
+        // 链滴域名设定
         dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
 
         fireFreeMarkerActionEvent(templateName, dataModel);
@@ -264,7 +264,7 @@ public class AdminConsole {
 
         dataModel.put("timeZoneIdOptions", timeZoneIdOptions.toString());
 
-        // 黑客派域名设定
+        // 链滴域名设定
         dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
         fireFreeMarkerActionEvent(templateName, dataModel);
     }

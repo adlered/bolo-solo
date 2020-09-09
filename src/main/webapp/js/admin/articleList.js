@@ -79,7 +79,7 @@ admin.articleList = {
   },
 
   /**
-   * 同步到黑客派社区
+   * 同步到链滴社区
    * @param id 文章 id
    */
   syncToHacpai: function (id) {

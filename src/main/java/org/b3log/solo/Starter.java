@@ -22,6 +22,7 @@ import org.b3log.latke.Latkes;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.util.Strings;
+import org.b3log.solo.bolo.Global;
 import org.b3log.solo.util.Markdowns;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.util.log.Log;
@@ -131,7 +132,7 @@ public final class Starter {
         try {
             Latkes.init();
         } catch (final Exception e) {
-            logger.log(Level.ERROR, "Latke init failed, please configure latke.props or run with args, visit https://hacpai.com/article/1492881378588 for more details");
+            logger.log(Level.ERROR, "Latke init failed, please configure latke.props or run with args, visit https://" + Global.HACPAI_DOMAIN + "/article/1492881378588 for more details");
 
             System.exit(-1);
         }

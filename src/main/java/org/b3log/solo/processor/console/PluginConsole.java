@@ -41,7 +41,7 @@ import java.util.Map;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @author <a href="https://hacpai.com/member/mainlove">Love Yao</a>
+ * @author <a href="https://ld246.com/member/mainlove">Love Yao</a>
  * @since 0.4.0
  */
 @RequestProcessor

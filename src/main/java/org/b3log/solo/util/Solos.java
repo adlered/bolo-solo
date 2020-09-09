@@ -39,6 +39,7 @@ import org.b3log.latke.util.CollectionUtils;
 import org.b3log.latke.util.Crypts;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.SoloServletListener;
+import org.b3log.solo.bolo.Global;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
@@ -173,7 +174,7 @@ public final class Solos {
     private static long uploadTokenCheckTime;
     private static long uploadTokenTime;
     private static String uploadToken = "";
-    private static String uploadURL = "https://hacpai.com/upload/client";
+    private static String uploadURL = "https://" + Global.HACPAI_DOMAIN + "/upload/client";
     private static String uploadMsg = "";
 
     /**
@@ -210,7 +211,7 @@ public final class Solos {
             }
 
             final JSONObject requestJSON = new JSONObject().put(User.USER_NAME, userName).put(UserExt.USER_B3_KEY, userB3Key);
-            final HttpResponse res = HttpRequest.post("https://hacpai.com/apis/upload/token").trustAllCerts(true).
+            final HttpResponse res = HttpRequest.post("https://" + Global.HACPAI_DOMAIN + "/apis/upload/token").trustAllCerts(true).
                     body(requestJSON.toString()).connectionTimeout(3000).timeout(7000).header("User-Agent", Solos.USER_AGENT).send();
             uploadTokenCheckTime = now;
             if (HttpServletResponse.SC_OK != res.statusCode()) {

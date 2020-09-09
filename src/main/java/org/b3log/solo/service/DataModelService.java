@@ -40,6 +40,7 @@ import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.util.*;
 import org.b3log.solo.SoloServletListener;
+import org.b3log.solo.bolo.Global;
 import org.b3log.solo.bolo.prop.Options;
 import org.b3log.solo.model.*;
 import org.b3log.solo.repository.*;
@@ -637,6 +638,9 @@ public class DataModelService {
             showCodeBlockLn = Option.DefaultPreference.DEFAULT_SHOW_CODE_BLOCK_LN;
         }
         dataModel.put(Option.ID_C_SHOW_CODE_BLOCK_LN, showCodeBlockLn);
+
+        // 黑客派域名设定
+        dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
     }
 
     /**

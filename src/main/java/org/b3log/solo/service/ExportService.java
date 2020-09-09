@@ -39,6 +39,7 @@ import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Execs;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.SoloServletListener;
+import org.b3log.solo.bolo.Global;
 import org.b3log.solo.model.*;
 import org.b3log.solo.repository.*;
 import org.b3log.solo.util.GitHubs;
@@ -445,7 +446,7 @@ public class ExportService {
             stat.put("skin", optionQueryService.getOptionById(Option.ID_C_SKIN_DIR_NAME).optString(Option.OPTION_VALUE));
             stat.put("mobileSkin", optionQueryService.getOptionById(Option.ID_C_MOBILE_SKIN_DIR_NAME).optString(Option.OPTION_VALUE));
 
-            final HttpResponse response = HttpRequest.post("https://hacpai.com/github/repos").
+            final HttpResponse response = HttpRequest.post("https://" + Global.HACPAI_DOMAIN + "/github/repos").
                     connectionTimeout(7000).timeout(60000).trustAllCerts(true).header("User-Agent", Solos.USER_AGENT).
                     form("userName", userName,
                             "userB3Key", userB3Key,

@@ -59,6 +59,17 @@ $.extend(SoloEditor.prototype, {
           })
         }
       },
+      error: function (response, ajaxOptions, thrownError) {
+        $("#tipMsg").text("无法从链滴社区获取常用Emoji，自动生成中...");
+        Label.emoji = {}
+        let defaultEmojiData = JSON.parse('[{"+1":"👍"},{"-1":"👎"},{"confused":"😕"},{"eyes":"👀"},{"heart":"❤️"},{"tada":"🎉"},{"smile":"😄"},{"rocket":"🚀"}]')
+        if (Array.isArray(defaultEmojiData)) {
+          defaultEmojiData.forEach(item => {
+            const key = Object.keys(item)[0]
+            Label.emoji[key] = item[key]
+          })
+        }
+      }
     })
 
     const options = {

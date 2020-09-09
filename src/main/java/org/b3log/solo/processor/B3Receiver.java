@@ -39,7 +39,7 @@ import org.json.JSONObject;
 import java.util.Date;
 
 /**
- * Receiving articles and comments from B3log community. Visits <a href="https://hacpai.com/b3log">B3log 构思</a> for more details.
+ * Receiving articles and comments from B3log community. Visits <a href="https://ld246.com/b3log">B3log 构思</a> for more details.
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>

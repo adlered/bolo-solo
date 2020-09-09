@@ -24,6 +24,7 @@ import org.b3log.latke.Keys;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.model.User;
+import org.b3log.solo.bolo.Global;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.UserExt;
 import org.json.JSONArray;
@@ -54,7 +55,7 @@ public final class GitHubs {
      */
     public static JSONArray getGitHubRepos(final String githubUserId) {
         try {
-            final HttpResponse res = HttpRequest.get("https://hacpai.com/github/repos?id=" + githubUserId).trustAllCerts(true).
+            final HttpResponse res = HttpRequest.get("https://" + Global.HACPAI_DOMAIN + "/github/repos?id=" + githubUserId).trustAllCerts(true).
                     connectionTimeout(3000).timeout(7000).header("User-Agent", Solos.USER_AGENT).send();
             if (HttpServletResponse.SC_OK != res.statusCode()) {
                 return null;

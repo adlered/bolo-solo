@@ -56,7 +56,7 @@ import java.util.Map;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @author <a href="https://hacpai.com/member/DASHU">DASHU</a>
+ * @author <a href="https://ld246.com/member/DASHU">DASHU</a>
  * @author <a href="https://vanessa.b3log.org">Vanessa</a>
  * @since 0.3.1
  */

@@ -172,7 +172,7 @@ public class CommentQueryService {
                 final JSONObject article = articleRepository.get(onId);
                 if (null == article) {
                     // 某种情况下导致的数据不一致：文章已经被删除了，但是评论还在
-                    // 为了保持数据一致性，需要删除该条评论 https://hacpai.com/article/1556060195022
+                    // 为了保持数据一致性，需要删除该条评论 https://ld246.com/article/1556060195022
                     final Transaction transaction = commentRepository.beginTransaction();
                     final String commentId = comment.optString(Keys.OBJECT_ID);
                     commentRepository.remove(commentId);

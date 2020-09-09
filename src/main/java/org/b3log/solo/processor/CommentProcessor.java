@@ -34,6 +34,7 @@ import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.JsonRenderer;
+import org.b3log.solo.bolo.Global;
 import org.b3log.solo.bolo.prop.CommentMailService;
 import org.b3log.solo.bolo.prop.MailService;
 import org.b3log.solo.bolo.prop.Options;
@@ -65,7 +66,7 @@ import java.util.*;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @author <a href="https://hacpai.com/member/armstrong">ArmstrongCN</a>
+ * @author <a href="https://ld246.com/member/armstrong">ArmstrongCN</a>
  * @since 0.3.1
  */
 @RequestProcessor
@@ -420,7 +421,7 @@ public class CommentProcessor {
         String authorId = article.optString(Article.ARTICLE_AUTHOR_ID);
         final JSONObject authorRet = userQueryService.getUser(authorId);
         String username = authorRet.getJSONObject(User.USER).optString("userName");
-        String fetchURL = "https://hacpai.com/apis/vcomment?aid=" + remoteaid + "&p=1&un=" + username;
+        String fetchURL = "https://" + Global.HACPAI_DOMAIN + "/apis/vcomment?aid=" + remoteaid + "&p=1&un=" + username;
         // 从远程拉取评论列表
         final HttpResponse res = HttpRequest.get(fetchURL).trustAllCerts(true).
                 connectionTimeout(3000).timeout(7000).header("User-Agent", Solos.USER_AGENT)

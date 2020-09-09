@@ -52,7 +52,7 @@ import java.util.Set;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @author <a href="https://hacpai.com/member/lzh984294471">lzh984294471</a>
+ * @author <a href="https://ld246.com/member/lzh984294471">lzh984294471</a>
  * @since 2.0.0
  */
 @RequestProcessor

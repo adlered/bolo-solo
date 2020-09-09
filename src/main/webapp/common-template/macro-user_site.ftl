@@ -20,8 +20,8 @@
 <#macro userSite dir>
     <#if usite??>
         <#if hacpaiUser != ''>
-            <a href="https://hacpai.com/member/${adminUser.userName}"
-               <#if dir==''>title<#else>aria-label</#if>="https://hacpai.com/member/${adminUser.userName}"
+            <a href="https://${hacpaiDomain}/member/${adminUser.userName}"
+               <#if dir==''>title<#else>aria-label</#if>="https://${hacpaiDomain}/member/${adminUser.userName}"
                class="<#if dir!=''>vditor-tooltipped__${dir} vditor-tooltipped  </#if>user__site"
                target="_blank" rel="noopener nofollow">
                 <svg viewBox="0 0 32 32" width="100%" height="100%">

@@ -32,10 +32,11 @@
 
 ## 🌸 欣赏
 
-<img src="/preview/fantastic.png"/>
-<img src="/preview/sakura.png"/>
-<img src="/preview/search.png"/>
-<img src="/preview/login.png"/>
+<img src="/preview/new/main.png"/>
+<img src="/preview/new/main2.png"/>
+<img src="/preview/new/search.png"/>
+<img src="/preview/new/login.png"/>
+<img src="/preview/new/manage.png"/>
 
 ## 为什么选择 Bolo
 

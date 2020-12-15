@@ -412,6 +412,23 @@ public final class Solos {
     }
 
     /**
+     * Checks whether the current request is made by logged in administrator or an author.
+     *
+     * @param context the specified request context
+     * @return {@code true} if the current request is made by logged in
+     * administrator, author, returns {@code false} otherwise
+     */
+    public static boolean isAdminOrAuthorLoggedIn(final RequestContext context) {
+        final JSONObject user = getCurrentUser(context.getRequest(), context.getResponse());
+        if (null == user) {
+            return false;
+        }
+
+        return (Role.ADMIN_ROLE.equals(user.optString(User.USER_ROLE)) ||
+                Role.DEFAULT_ROLE.equals(user.optString(User.USER_ROLE)));
+    }
+
+    /**
      * Checks whether need password to view the specified article with the specified request.
      * <p>
      * Checks session, if not represents, checks article property {@link Article#ARTICLE_VIEW_PWD view password}.

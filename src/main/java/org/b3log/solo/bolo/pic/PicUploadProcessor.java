@@ -72,7 +72,7 @@ public class PicUploadProcessor {
     @RequestProcessing(value = "/pic/upload", method = {HttpMethod.POST})
     public void uploadPicture(final RequestContext context) {
         synchronized (this) {
-            if (!Solos.isAdminLoggedIn(context)) {
+            if (!Solos.isAdminOrAuthorLoggedIn(context)) {
                 context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 
                 return;

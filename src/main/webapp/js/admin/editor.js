@@ -96,7 +96,7 @@ $.extend(SoloEditor.prototype, {
         },
       },
       upload: {
-        max: 1024 * 1024 * 1024,
+        max: 100 * 1024 * 1024 * 1024,
         url: Label.uploadURL,
         linkToImgUrl: Label.servePath + '/upload/fetch',
         token: Label.uploadToken,

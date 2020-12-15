@@ -21,6 +21,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.b3log.latke.ioc.Inject;
+import org.b3log.latke.logging.Logger;
 import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
@@ -29,6 +30,7 @@ import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.solo.bolo.pic.util.UploadUtil;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.OptionRepository;
+import org.b3log.solo.service.ArchiveDateMgmtService;
 import org.b3log.solo.util.Solos;
 
 import javax.servlet.http.HttpServletResponse;
@@ -52,6 +54,11 @@ import java.util.Map;
 public class PicUploadProcessor {
 
     /**
+     * Logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(PicUploadProcessor.class);
+
+    /**
      * Option repository.
      */
     @Inject
@@ -71,6 +78,7 @@ public class PicUploadProcessor {
                 return;
             }
 
+            LOGGER.info("Uploading image [temp=" + new File("temp/").getAbsolutePath() + "]");
             DiskFileItemFactory factory = new DiskFileItemFactory();
             factory.setRepository(new File("temp/"));
             ServletFileUpload upload = new ServletFileUpload(factory);

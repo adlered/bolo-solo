@@ -27,14 +27,17 @@ import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
+import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.pic.util.UploadUtil;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.service.ArchiveDateMgmtService;
 import org.b3log.solo.util.Solos;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -78,7 +81,6 @@ public class PicUploadProcessor {
                 return;
             }
 
-            LOGGER.info("Uploading image [temp=" + new File("temp/").getAbsolutePath() + "]");
             DiskFileItemFactory factory = new DiskFileItemFactory();
             factory.setRepository(new File("temp/"));
             ServletFileUpload upload = new ServletFileUpload(factory);
@@ -95,7 +97,12 @@ public class PicUploadProcessor {
                     } catch (Exception e) {
                         config = "hacpai";
                     }
-                    File file = new File("temp/" + name);
+                    final ServletContext servletContext = SoloServletListener.getServletContext();
+                    final String assets = "/";
+                    String path = servletContext.getResource(assets).getPath();
+                    path = URLDecoder.decode(path);
+                    LOGGER.info("Uploading image [temp=" + path + name + "]");
+                    File file = new File(path + name);
                     item.write(file);
                     item.delete();
                     try {

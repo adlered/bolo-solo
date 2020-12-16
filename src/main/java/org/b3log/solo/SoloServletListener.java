@@ -102,9 +102,9 @@ public final class SoloServletListener extends AbstractServletListener {
         final String jdbcURL = Latkes.getLocalProperty("jdbc.URL");
         final boolean luteAvailable = Markdowns.LUTE_AVAILABLE;
 
-        LOGGER.log(Level.INFO, "Bolo is booting [Solo source ver=" + VERSION + ", servletContainer=" + Latkes.getServletInfo(servletContextEvent.getServletContext())
-                + ", os=" + Latkes.getOperatingSystemName() + ", isDocker=" + Latkes.isDocker() + ", luteAvailable=" + luteAvailable + ", pid=" + Latkes.currentPID()
-                + ", runtimeDatabase=" + runtimeDatabase + ", runtimeMode=" + runtimeMode + ", jdbc.username=" + jdbcUsername + ", jdbc.URL=" + jdbcURL + "]");
+        LOGGER.log(Level.INFO, "Bolo 正在启动 [基于 Solo 原始版本=" + VERSION + ", Servlet 容器=" + Latkes.getServletInfo(servletContextEvent.getServletContext())
+                + ", 操作系统=" + Latkes.getOperatingSystemName() + ", 是否为 Docker 运行=" + Latkes.isDocker() + ", 已配置 Lute 服务器=" + luteAvailable + ", 进程号(PID)=" + Latkes.currentPID()
+                + ", 数据库=" + runtimeDatabase + ", 运行模式=" + runtimeMode + ", 数据库用户名=" + jdbcUsername + ", 数据库连接地址=" + jdbcURL + "]");
 
         validateSkin();
 
@@ -141,7 +141,7 @@ public final class SoloServletListener extends AbstractServletListener {
         pluginManager.load();
 
         if (initService.isInited()) {
-            LOGGER.info("Bolo is running");
+            LOGGER.info("欢迎使用 Bolo");
         }
 
         Stopwatchs.end();
@@ -169,7 +169,7 @@ public final class SoloServletListener extends AbstractServletListener {
         final CronMgmtService cronMgmtService = beanManager.getReference(CronMgmtService.class);
         cronMgmtService.stop();
 
-        LOGGER.info("Destroyed the context");
+        LOGGER.info("正在终止 Bolo");
     }
 
     @Override
@@ -216,7 +216,7 @@ public final class SoloServletListener extends AbstractServletListener {
     private void loadPreference() {
         Stopwatchs.start("Load Preference");
 
-        LOGGER.debug("Loading preference....");
+        LOGGER.debug("加载配置中...");
 
         final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);
         JSONObject skin;
@@ -336,7 +336,7 @@ public final class SoloServletListener extends AbstractServletListener {
         final String skinDirName = Option.DefaultPreference.DEFAULT_SKIN_DIR_NAME;
         final String skinName = Latkes.getSkinName(skinDirName);
         if (StringUtils.isBlank(skinName)) {
-            LOGGER.log(Level.ERROR, "Can't load the default skins, please make sure skin [" + skinDirName + "] is under skins directory and structure correctly");
+            LOGGER.log(Level.ERROR, "无法加载默认皮肤, 请确保皮肤 [" + skinDirName + "] 在 skins 文件夹内并且结构正确");
 
             System.exit(-1);
         }

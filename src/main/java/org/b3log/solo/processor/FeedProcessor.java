@@ -128,7 +128,7 @@ public class FeedProcessor {
 
             renderer.setContent(feed.toString());
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Get blog article feed error", e);
+            LOGGER.log(Level.ERROR, "无法获取博客文章订阅", e);
 
             context.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
         }
@@ -213,7 +213,7 @@ public class FeedProcessor {
 
             renderer.setContent(channel.toString());
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Get blog article rss error", e);
+            LOGGER.log(Level.ERROR, "无法获取博客文章 RSS 订阅", e);
 
             context.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
         }

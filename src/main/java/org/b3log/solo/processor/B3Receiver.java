@@ -140,7 +140,7 @@ public class B3Receiver {
         context.renderJSON(ret);
 
         final JSONObject requestJSONObject = context.requestJSON();
-        LOGGER.log(Level.INFO, "Adds an article from Sym [" + requestJSONObject.toString() + "]");
+        LOGGER.log(Level.INFO, "社区端推送了一篇文章 [" + requestJSONObject.toString() + "]");
 
         try {
             final JSONObject client = requestJSONObject.optJSONObject("client");
@@ -192,7 +192,7 @@ public class B3Receiver {
                 article.put(Article.ARTICLE_CONTENT, content);
                 final JSONObject addRequest = new JSONObject().put(Article.ARTICLE, article);
                 articleMgmtService.addArticle(addRequest);
-                LOGGER.log(Level.INFO, "Added an article [" + title + "] via Sym");
+                LOGGER.log(Level.INFO, "社区端推送的文章已收录 [" + title + "]");
 
                 return;
             }
@@ -205,7 +205,7 @@ public class B3Receiver {
             oldArticle.put(Common.POST_TO_COMMUNITY, false); // Do not send to rhythm
             final JSONObject updateRequest = new JSONObject().put(Article.ARTICLE, oldArticle);
             articleMgmtService.updateArticle(updateRequest);
-            LOGGER.log(Level.INFO, "Updated an article [" + title + "] via Sym");
+            LOGGER.log(Level.INFO, "社区端对文章的修改已同步 [" + title + "]");
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, e.getMessage(), e);
             ret.put(Keys.CODE, 1).put(Keys.MSG, e.getMessage());

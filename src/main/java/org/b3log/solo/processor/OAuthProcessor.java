@@ -141,7 +141,7 @@ public class OAuthProcessor {
                 fastMigrate(currentVer, username, md5, context);
                 context.sendRedirect(Latkes.getServePath() + "/");
             } else if (!initService.isInited()) {
-                LOGGER.log(Level.INFO, "Bolo initializing...");
+                LOGGER.log(Level.INFO, "Bolo 正在初始化...");
                 final JSONObject initReq = new JSONObject();
                 initReq.put(User.USER_NAME, username);
                 initReq.put(UserExt.USER_B3_KEY, password);
@@ -161,7 +161,7 @@ public class OAuthProcessor {
                     // 同时兼容明文和密文密码
                     if ((username.equals(cUser) && password.equals(cPass)) || (username.equals(cUser) && md5.equals(cPass))) {
                         Solos.login(user, context.getResponse());
-                        LOGGER.log(Level.INFO, "Logged in [name={0}, remoteAddr={1}] with Bolo auth", username, Requests.getRemoteAddr(request));
+                        LOGGER.log(Level.INFO, "管理员已登录 [用户名={0}, IP地址={1}]", username, Requests.getRemoteAddr(request));
                         context.sendRedirect(Latkes.getServePath() + "/admin-index.do#main");
                     } else {
                         context.sendRedirect(Latkes.getServePath() + "/start?status=error");
@@ -171,7 +171,7 @@ public class OAuthProcessor {
                 }
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.WARN, "Can not write cookie", e);
+            LOGGER.log(Level.WARN, "无法写入 Cookie", e);
         }
     }
 

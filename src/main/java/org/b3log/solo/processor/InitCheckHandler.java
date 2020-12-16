@@ -81,7 +81,7 @@ public class InitCheckHandler implements Handler {
         } else if (UpgradeService.boloFastMigration) {
             context.attr(Keys.HttpRequest.REQUEST_URI, Latkes.getContextPath() + "/start");
             context.handle();
-            LOGGER.log(Level.DEBUG, "Bolo Fast Migrating is enabled, so redirects to /start");
+            LOGGER.log(Level.DEBUG, "Bolo 快速迁移已激活, 正在将用户引导至 /start");
 
             return;
         }
@@ -95,7 +95,7 @@ public class InitCheckHandler implements Handler {
         }
 
         if (!initReported) {
-            LOGGER.log(Level.DEBUG, "Bolo has not been initialized, so redirects to /start");
+            LOGGER.log(Level.DEBUG, "Bolo 尚未初始化, 正在将用户引导至 /start");
             initReported = true;
         }
 

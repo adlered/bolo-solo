@@ -66,7 +66,7 @@ public class PluginRefresher extends AbstractEventListener<List<AbstractPlugin>>
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Process plugin loaded event error", e);
+            LOGGER.log(Level.ERROR, "处理插件加载事项失败", e);
         }
     }
 

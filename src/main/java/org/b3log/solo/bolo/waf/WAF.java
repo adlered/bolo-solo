@@ -52,7 +52,7 @@ public class WAF {
             }
 
             WAFstorage.currentLimiter = new SimpleCurrentLimiter(second, times);
-            WAFlogger.log("WAF is on. [second=" + second + ", times=" + times + "]");
+            WAFlogger.log("防火墙已启动. [周期时间=" + second + ", 正常次数=" + times + "]");
         }
     }
 
@@ -61,7 +61,7 @@ public class WAF {
             POWER = false;
 
             WAFstorage.currentLimiter = null;
-            WAFlogger.log("WAF is off.");
+            WAFlogger.log("防火墙已关闭.");
         }
     }
 
@@ -117,7 +117,7 @@ public class WAF {
 
                 return true;
             } else {
-                WAFlogger.logWarn("REQUEST DENIED! " + requestIP + " >>> " + requestURL);
+                WAFlogger.logWarn("请求可疑，已拦截 " + requestIP + " >>> " + requestURL);
 
                 return false;
             }

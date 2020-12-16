@@ -80,19 +80,19 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
             final JSONObject originalArticle = data.getJSONObject(Article.ARTICLE);
             final String title = originalArticle.getString(Article.ARTICLE_TITLE);
             if (Article.ARTICLE_STATUS_C_PUBLISHED != originalArticle.optInt(Article.ARTICLE_STATUS)) {
-                LOGGER.log(Level.INFO, "Ignored push a draft [title={0}] to Rhy", title);
+                LOGGER.log(Level.INFO, "已忽略至社区的文章推送 [title={0}]", title);
 
                 return;
             }
 
             if (StringUtils.isNotBlank(originalArticle.optString(Article.ARTICLE_VIEW_PWD))) {
-                LOGGER.log(Level.INFO, "Article [title={0}] is a password article, ignored push to Rhy", title);
+                LOGGER.log(Level.INFO, "文章 [title={0}] 带有密码, 将不会推送至社区", title);
 
                 return;
             }
 
             if (!originalArticle.optBoolean(Common.POST_TO_COMMUNITY)) {
-                LOGGER.log(Level.INFO, "Article [title={0}] push flag [postToCommunity] is [false], ignored push to Rhy", title);
+                LOGGER.log(Level.INFO, "文章 [title={0}] 推送标记 [postToCommunity] 为 [false], 不会推送至社区", title);
 
                 return;
             }
@@ -122,7 +122,7 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
             String userB3Key = userQueryService.getB3password();
 
             if (Option.DefaultPreference.DEFAULT_B3LOG_USERNAME.equals(userName)) {
-                LOGGER.log(Level.INFO, "Article [title={0}] Is using the B3log default account, skipped push to Rhy", title);
+                LOGGER.log(Level.INFO, "文章 [title={0}] 正在使用默认社区账号, 将不会推送至社区", title);
 
                 return ;
             }
@@ -141,9 +141,9 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
                     connectionTimeout(3000).timeout(7000).trustAllCerts(true).
                     contentTypeJson().header("User-Agent", Solos.USER_AGENT).send();
 
-            LOGGER.log(Level.INFO, "Pushed an article [title={0}] to Rhy, response [{1}]", title, response.toString());
+            LOGGER.log(Level.INFO, "文章 [title={0}] 已推送至社区, 响应为 [{1}]", title, response.toString());
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Pushes an article to Rhy failed: " + e.getMessage());
+            LOGGER.log(Level.ERROR, "文章推送至社区失败: " + e.getMessage());
         }
     }
 

@@ -143,7 +143,7 @@ public class CategoryProcessor {
             jsonObject.put(Keys.RESULTS, result);
         } catch (final Exception e) {
             jsonObject.put(Keys.STATUS_CODE, false);
-            LOGGER.log(Level.ERROR, "Gets article paged failed", e);
+            LOGGER.log(Level.ERROR, "获取文章分页失败", e);
         } finally {
             Stopwatchs.end();
         }
@@ -246,7 +246,7 @@ public class CategoryProcessor {
             dataModel.put(Pagination.PAGINATION_FIRST_PAGE_NUM, 1);
             dataModel.put(Pagination.PAGINATION_LAST_PAGE_NUM, 1);
 
-            LOGGER.log(Level.WARN, "No category of \"" + categoryURI + "\" has found. Showing blank.");
+            LOGGER.log(Level.WARN, "分类请求地址位于 \"" + categoryURI + "\" 没有分类, 将展示空白页面.");
         }
         dataModel.put(Pagination.PAGINATION_PAGE_COUNT, pageCount);
         dataModel.put(Pagination.PAGINATION_PAGE_NUMS, pageNums);

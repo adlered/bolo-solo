@@ -101,7 +101,7 @@ public class PicUploadProcessor {
                     final String assets = "/";
                     String path = servletContext.getResource(assets).getPath();
                     path = URLDecoder.decode(path);
-                    LOGGER.info("Uploading image [temp=" + path + name + "]");
+                    LOGGER.info("图片上传中 [临时位置=" + path + name + "]");
                     File file = new File(path + name);
                     item.write(file);
                     item.delete();

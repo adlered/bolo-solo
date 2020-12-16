@@ -107,7 +107,7 @@ public class ErrorProcessor {
                 dataModel.put(Keys.MSG, msg);
                 dataModel.put(Common.LOGIN_URL, userQueryService.getLoginURL(Common.ADMIN_INDEX_URI));
             } catch (final Exception e) {
-                LOGGER.log(Level.ERROR, "Shows error page failed", e);
+                LOGGER.log(Level.ERROR, "无法显示错误页面", e);
 
                 context.sendError(HttpServletResponse.SC_NOT_FOUND);
             }

@@ -132,7 +132,7 @@ public final class Starter {
         try {
             Latkes.init();
         } catch (final Exception e) {
-            logger.log(Level.ERROR, "Latke init failed, please configure latke.props or run with args, visit https://" + Global.HACPAI_DOMAIN + "/article/1492881378588 for more details");
+            logger.log(Level.ERROR, "Bolo 初始化失败, 请配置好 latke.properties 或 运行时参数, 获取帮助可到 https://" + Global.HACPAI_DOMAIN + "/article/1492881378588");
 
             System.exit(-1);
         }
@@ -188,7 +188,7 @@ public final class Starter {
         try {
             server.start();
         } catch (final Exception e) {
-            logger.log(Level.ERROR, "Server start failed", e);
+            logger.log(Level.ERROR, "服务启动失败", e);
 
             System.exit(-1);
         }
@@ -197,7 +197,7 @@ public final class Starter {
             try {
                 server.stop();
             } catch (final Exception e) {
-                logger.log(Level.ERROR, "Server stop failed", e);
+                logger.log(Level.ERROR, "服务停止失败", e);
 
                 System.exit(-1);
             }

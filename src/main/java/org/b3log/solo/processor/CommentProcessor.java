@@ -235,7 +235,7 @@ public class CommentProcessor {
 
         String ip = context.remoteAddr();
         if (!simpleCurrentLimiter.access(ip)) {
-            LOGGER.log(Level.ERROR, "Can not add comment on article");
+            LOGGER.log(Level.ERROR, "由于评论速率限制，评论失败");
             jsonObject.put(Keys.STATUS_CODE, false);
             jsonObject.put(Keys.MSG, langPropsService.get("addTimeoutLabel"));
 
@@ -260,7 +260,7 @@ public class CommentProcessor {
         for (String i : filterCommentList) {
             if (!i.isEmpty()) {
                 if (filterComment.contains(i)) {
-                    LOGGER.log(Level.ERROR, "Can not add comment on article because it has spam words");
+                    LOGGER.log(Level.ERROR, "有敏感词，评论被拦截");
                     jsonObject.put(Keys.STATUS_CODE, false);
                     jsonObject.put(Keys.MSG, "系统维护中，请 00:00 后再试！");
 
@@ -346,7 +346,7 @@ public class CommentProcessor {
             renderer.setJSONObject(addResult);
         } catch (final Exception e) {
 
-            LOGGER.log(Level.ERROR, "Can not add comment on article", e);
+            LOGGER.log(Level.ERROR, "评论无法添加", e);
             jsonObject.put(Keys.STATUS_CODE, false);
             jsonObject.put(Keys.MSG, langPropsService.get("addFailLabel"));
         }

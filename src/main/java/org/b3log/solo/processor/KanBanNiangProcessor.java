@@ -89,7 +89,7 @@ public class KanBanNiangProcessor {
             String path = "";
             File file = null;
             try {
-                LOGGER.log(Level.INFO, "Downloading KanBanNiang resources online...");
+                LOGGER.log(Level.INFO, "正在下载看板娘在线资源...");
                 final ServletContext servletContext = SoloServletListener.getServletContext();
                 final String assets = "/plugins/kanbanniang/assets/";
                 path = servletContext.getResource(assets).getPath();
@@ -116,15 +116,15 @@ public class KanBanNiangProcessor {
                     }
                 }
                 System.out.println();
-                LOGGER.log(Level.INFO, "Unpacking KanBanNiang resources...");
+                LOGGER.log(Level.INFO, "正在解压看板娘在线资源...");
                 fileOutputStream.close();
                 inputStream.close();
                 ZipUtil.unpack(file, new File(path));
                 file.delete();
-                LOGGER.log(Level.INFO, "KanBanNiang is ready.");
+                LOGGER.log(Level.INFO, "看板娘已就绪，时刻为您服务!");
             } catch (Exception e) {
                 file.delete();
-                LOGGER.log(Level.ERROR, "KanBanNiang resources download failed. Reason: " + e.toString());
+                LOGGER.log(Level.ERROR, "看板娘在线资源下载失败. 原因: " + e.toString());
             }
         }
     }
@@ -172,7 +172,7 @@ public class KanBanNiangProcessor {
                 renderer.setJSONObject(index);
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Returns a random KanBanNiang model failed.");
+            LOGGER.log(Level.ERROR, "无法获取看板娘模型.");
         }
     }
 
@@ -212,7 +212,7 @@ public class KanBanNiangProcessor {
                 renderer.setJSONObject(index);
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Returns a random KanBanNiang model failed.");
+            LOGGER.log(Level.ERROR, "无法获取看板娘模型.");
         }
     }
 

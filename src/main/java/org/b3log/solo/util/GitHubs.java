@@ -68,7 +68,7 @@ public final class GitHubs {
             final JSONObject data = result.optJSONObject(Common.DATA);
             return data.optJSONArray("githubrepos");
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets GitHub repos failed", e);
+            LOGGER.log(Level.ERROR, "无法获取您的 GitHub 仓库列表", e);
 
             return null;
         }
@@ -93,7 +93,7 @@ public final class GitHubs {
             response.charset("UTF-8");
             String responseBody = response.bodyText();
             if (200 != statusCode && 409 != statusCode) {
-                LOGGER.log(Level.ERROR, "Get git tree of file [" + filePath + "] failed: " + responseBody);
+                LOGGER.log(Level.ERROR, "获取 git tree 文件 [" + filePath + "] 失败: " + responseBody);
                 return false;
             }
 
@@ -118,12 +118,12 @@ public final class GitHubs {
             response.charset("UTF-8");
             responseBody = response.bodyText();
             if (200 != statusCode && 201 != statusCode) {
-                LOGGER.log(Level.ERROR, "Updates repo [" + repoName + "] file [" + filePath + "] failed: " + responseBody);
+                LOGGER.log(Level.ERROR, "更新仓库 [" + repoName + "] 中的文件 [" + filePath + "] 失败: " + responseBody);
                 return false;
             }
             return true;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Updates repo [" + repoName + "] file [" + filePath + "] failed: " + e.getMessage());
+            LOGGER.log(Level.ERROR, "更新仓库 [" + repoName + "] 中的文件 [" + filePath + "] 失败: " + e.getMessage());
             return false;
         }
     }
@@ -152,7 +152,7 @@ public final class GitHubs {
             response.charset("UTF-8");
             String responseBody = response.bodyText();
             if (201 != statusCode && 422 != statusCode) {
-                LOGGER.log(Level.ERROR, "Creates GitHub repo [" + repoName + "] failed: " + responseBody);
+                LOGGER.log(Level.ERROR, "创建 GitHub 仓库 [" + repoName + "] 失败: " + responseBody);
                 return false;
             }
             if (201 == statusCode) {
@@ -164,12 +164,12 @@ public final class GitHubs {
             statusCode = response.statusCode();
             responseBody = response.bodyText();
             if (200 != statusCode) {
-                LOGGER.log(Level.ERROR, "Updates GitHub repo [" + repoName + "] failed: " + responseBody);
+                LOGGER.log(Level.ERROR, "更新 GitHub 仓库 [" + repoName + "] 失败: " + responseBody);
                 return false;
             }
             return true;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Creates or updates GitHub repo failed: " + e.getMessage());
+            LOGGER.log(Level.ERROR, "无法创建或更新 GitHub 仓库: " + e.getMessage());
             return false;
         }
     }
@@ -190,7 +190,7 @@ public final class GitHubs {
             response.charset("UTF-8");
             return new JSONObject(response.bodyText());
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets GitHub user info failed: " + e.getMessage());
+            LOGGER.log(Level.ERROR, "获取 GitHub 用户信息失败: " + e.getMessage());
             return null;
         }
     }

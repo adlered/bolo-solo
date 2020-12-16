@@ -64,14 +64,14 @@ public class MailProcessor {
 
             context.renderJSON().renderCode(200);
             context.renderJSON().renderMsg("Mail has sent.");
-            LOGGER.log(Level.INFO, "Mail has sent [subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
+            LOGGER.log(Level.INFO, "邮件已发送 [主题=" + subject + ", 发件人=" + from + ", 收件人=" + to + ", 内容=" + html + "]");
 
             return;
         } catch (SendMailException SME) {
-            LOGGER.log(Level.ERROR, "Send mail failed! Please check your MailBox Settings.");
+            LOGGER.log(Level.ERROR, "邮件发送失败! 请检查您的邮箱设定.");
 
             context.renderJSON().renderCode(500);
-            context.renderJSON().renderMsg("Send mail failed! Please check your MailBox Settings.");
+            context.renderJSON().renderMsg("邮件发送失败! 请检查您的邮箱设定.");
 
             return;
         }
@@ -100,9 +100,9 @@ public class MailProcessor {
                             .to(to)
                             .html(html)
                             .send();
-                    LOGGER.log(Level.INFO, "Mail has sent [subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
+                    LOGGER.log(Level.INFO, "邮件已发送 [主题=" + subject + ", 发件人=" + from + ", 收件人=" + to + ", 内容=" + html + "]");
                 } catch (SendMailException SME) {
-                    LOGGER.log(Level.INFO, "Mail sent failed [cause=" + SME.getCause() + ", subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
+                    LOGGER.log(Level.INFO, "邮件发送失败 [原因=" + SME.getCause() + ", 主题=" + subject + ", 发件人=" + from + ", 收件人=" + to + ", 内容=" + html + "]");
                 }
             }
         }).start();

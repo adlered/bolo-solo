@@ -90,7 +90,7 @@ public class MailService {
             transaction.commit();
         } catch (RepositoryException RE) {
         }
-        LOGGER.log(Level.INFO, "Generate user comment context [commentId: " + commentId + ", commentUser: " + commentUser + ", email: " + commentEmail + "]");
+        LOGGER.log(Level.INFO, "已生成用户评论序列化文本 [评论号: " + commentId + ", 评论用户: " + commentUser + ", 邮箱: " + commentEmail + "]");
     }
 
     /**
@@ -119,7 +119,7 @@ public class MailService {
         } catch (RepositoryException RE) {
         }
 
-        LOGGER.log(Level.INFO, "All comment mail context cleared successfully.");
+        LOGGER.log(Level.INFO, "邮件缓存已清空.");
 
         context.renderJSON().renderCode(200);
         context.renderJSON().renderMsg("All comment mail context cleared successfully.");
@@ -219,27 +219,27 @@ public class MailService {
                 if (!mailUsername.isEmpty() && !mailPassword.isEmpty()) {
                     if (mailBox.equals("QQ")) {
                         OhMyEmail.config(OhMyEmail.SMTP_QQ(false), mailUsername, mailPassword);
-                        LOGGER.log(Level.INFO, "Mailbox Settings loaded successfully " + getMailSet());
+                        LOGGER.log(Level.INFO, "邮箱设定已加载 " + getMailSet());
 
                         return;
                     } else if (mailBox.equals("QQ_ENT")) {
                         OhMyEmail.config(OhMyEmail.SMTP_ENT_QQ(false), mailUsername, mailPassword);
-                        LOGGER.log(Level.INFO, "Mailbox Settings loaded successfully " + getMailSet());
+                        LOGGER.log(Level.INFO, "邮箱设定已加载 " + getMailSet());
 
                         return;
                     } else if (mailBox.equals("163")) {
                         OhMyEmail.config(OhMyEmail.SMTP_163(false), mailUsername, mailPassword);
-                        LOGGER.log(Level.INFO, "Mailbox Settings loaded successfully " + getMailSet());
+                        LOGGER.log(Level.INFO, "邮箱设定已加载 " + getMailSet());
 
                         return;
                     }
                 }
             }
-            LOGGER.log(Level.WARN, "Cannot load Mailbox Settings, please check " + getMailSet());
+            LOGGER.log(Level.WARN, "无法加载邮箱设定，请检查 " + getMailSet());
         } catch (RepositoryException RE) {
-            LOGGER.log(Level.WARN, "Cannot load Mailbox Settings, please check " + getMailSet());
+            LOGGER.log(Level.WARN, "无法加载邮箱设定，请检查 " + getMailSet());
         } catch (NullPointerException NPE) {
-            LOGGER.log(Level.WARN, "Cannot load Mailbox Settings, please check.");
+            LOGGER.log(Level.WARN, "无法加载邮箱设定，请检查.");
         }
     }
 
@@ -257,9 +257,9 @@ public class MailService {
             String mailUsername = optionRepository.get(Option.ID_C_MAIL_USERNAME).optString(Option.OPTION_VALUE);
             String mailPassword = optionRepository.get(Option.ID_C_MAIL_PASSWORD).optString(Option.OPTION_VALUE);
 
-            return "[mailBox=" + mailBox + ", mailUsername=" + mailUsername + ", mailPassword=" + mailPassword + "]";
+            return "[邮件服务提供商=" + mailBox + ", 邮件服务器用户名=" + mailUsername + ", 邮件服务器密码=" + mailPassword + "]";
         } catch (RepositoryException RE) {
-            LOGGER.log(Level.WARN, "Cannot load Mailbox Settings, please check.");
+            LOGGER.log(Level.WARN, "无法加载邮箱设定，请检查.");
 
             return "";
         }

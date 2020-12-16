@@ -275,7 +275,7 @@ public class ArticleProcessor {
 
             context.sendRedirect(Latkes.getServePath() + "/console/article-pwd?articleId=" + article.optString(Keys.OBJECT_ID) + "&msg=1");
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Processes article view password form submits failed", e);
+            LOGGER.log(Level.ERROR, "文章密码确认失败", e);
 
             context.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
@@ -382,7 +382,7 @@ public class ArticleProcessor {
         try {
             content = articleQueryService.getArticleContent(context, articleId);
         } catch (final ServiceException e) {
-            LOGGER.log(Level.ERROR, "Can not get article content", e);
+            LOGGER.log(Level.ERROR, "无法获取文章内容", e);
             return;
         }
 
@@ -424,7 +424,7 @@ public class ArticleProcessor {
             jsonObject.put(Keys.RESULTS, result);
         } catch (final Exception e) {
             jsonObject.put(Keys.STATUS_CODE, false);
-            LOGGER.log(Level.ERROR, "Gets article paged failed", e);
+            LOGGER.log(Level.ERROR, "获取文章分页失败", e);
         } finally {
             Stopwatchs.end();
         }
@@ -477,7 +477,7 @@ public class ArticleProcessor {
             jsonObject.put(Keys.RESULTS, result);
         } catch (final Exception e) {
             jsonObject.put(Keys.STATUS_CODE, false);
-            LOGGER.log(Level.ERROR, "Gets article paged failed", e);
+            LOGGER.log(Level.ERROR, "获取文章分页失败", e);
         } finally {
             Stopwatchs.end();
         }
@@ -529,7 +529,7 @@ public class ArticleProcessor {
             jsonObject.put(Keys.RESULTS, result);
         } catch (final Exception e) {
             jsonObject.put(Keys.STATUS_CODE, false);
-            LOGGER.log(Level.ERROR, "Gets article paged failed", e);
+            LOGGER.log(Level.ERROR, "获取文章分页失败", e);
         } finally {
             Stopwatchs.end();
         }
@@ -579,7 +579,7 @@ public class ArticleProcessor {
             jsonObject.put(Keys.RESULTS, result);
         } catch (final Exception e) {
             jsonObject.put(Keys.STATUS_CODE, false);
-            LOGGER.log(Level.ERROR, "Gets article paged failed", e);
+            LOGGER.log(Level.ERROR, "获取文章分页失败", e);
         } finally {
             Stopwatchs.end();
         }

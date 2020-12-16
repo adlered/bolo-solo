@@ -165,10 +165,9 @@ var Util = {
    * @returns {undefined}
    */
   parseMarkdown: function () {
-
-    if (typeof Vditor === 'undefined') {
+    if (typeof Vditor !== 'function') {
       Util.addScript(
-          'https://cdn.jsdelivr.net/npm/vditor@3.6.5/dist/method.min.js',
+          'https://cdn.jsdelivr.net/npm/vditor@3.6.6/dist/method.min.js',
           'vditorPreviewScript')
     }
 
@@ -186,6 +185,7 @@ var Util = {
     Vditor.mindmapRender();
     Vditor.mediaRender(document.body);
     Vditor.mermaidRender(document.body);
+    Vditor.flowchartRender(document.body);
   },
   /**
    * @description IE6/7，跳转到 kill-browser 页面

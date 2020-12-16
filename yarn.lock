@@ -788,10 +788,10 @@ detect-file@^1.0.0:
   resolved "https://registry.npm.taobao.org/detect-file/download/detect-file-1.0.0.tgz#f0d66d03672a825cb1b73bdb3fe62310c8e552b7"
   integrity sha1-8NZtA2cqglyxtzvbP+YjEMjlUrc=
 
-diff-match-patch@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.npm.taobao.org/diff-match-patch/download/diff-match-patch-1.0.4.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdiff-match-patch%2Fdownload%2Fdiff-match-patch-1.0.4.tgz#6ac4b55237463761c4daf0dc603eb869124744b1"
-  integrity sha1-asS1UjdGN2HE2vDcYD64aRJHRLE=
+diff-match-patch@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/diff-match-patch/-/diff-match-patch-1.0.5.tgz#abb584d5f10cd1196dfc55aa03701592ae3f7b37"
+  integrity sha512-IayShXAgj/QMXgB0IWmKx+rOPuGMhqm5w6jvFxmVenXKIzRqTAAsbBPT3kWQeGANj3jGgvcvv4yK6SxqYmikgw==
 
 dir-glob@^3.0.1:
   version "3.0.1"
@@ -3342,12 +3342,12 @@ value-or-function@^3.0.0:
   resolved "https://registry.npm.taobao.org/value-or-function/download/value-or-function-3.0.0.tgz#1c243a50b595c1be54a754bfece8563b9ff8d813"
   integrity sha1-HCQ6ULWVwb5Up1S/7OhWO5/42BM=
 
-vditor@3.2.6:
-  version "3.2.6"
-  resolved "https://registry.npm.taobao.org/vditor/download/vditor-3.2.6.tgz#432703a94fc21e6b29d596075894007ebfe260e6"
-  integrity sha1-QycDqU/CHmsp1ZYHWJQAfr/iYOY=
+vditor@3.6.6:
+  version "3.6.6"
+  resolved "https://registry.yarnpkg.com/vditor/-/vditor-3.6.6.tgz#210255dbf76a504ce085d207ccbae577b89d42c5"
+  integrity sha512-qG4HlI4+krRqPW7NFDdDczS4OsYGIdiHlJ3BHbIoPp9SO7RK5O75y+rI4zGW7EN1lPye40Jwo3zmsPbPhn5nsA==
   dependencies:
-    diff-match-patch "^1.0.4"
+    diff-match-patch "^1.0.5"
 
 verror@1.10.0:
   version "1.10.0"

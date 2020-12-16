@@ -55,10 +55,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.OutputStreamWriter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Solo utilities.
@@ -127,12 +124,25 @@ public final class Solos {
                 if (luteHttp2 != null && !luteHttp2.isEmpty()) {
                     Markdowns.LUTE_ENGINE_URL = luteHttp2;
                     Markdowns.LUTE_AVAILABLE = true;
+                } else {
+                    throw new Exception("No Lute-Http Service at local.");
                 }
                 if (Markdowns.LUTE_AVAILABLE) {
                     LOGGER.log(Level.INFO, "lute_http configure detected [url=" + Markdowns.LUTE_ENGINE_URL + "]");
                 }
             } catch (final Exception e) {
-                // ignored
+                // 使用公益Lute-Http服务(Bolo专享)
+                final String LUTE_URL = "http://lute.stackoverflow.wiki:8249";
+                Markdowns.LUTE_ENGINE_URL = LUTE_URL;
+                Markdowns.LUTE_AVAILABLE = true;
+                try {
+                    Markdowns.toHtmlByLute("#test");
+                    LOGGER.log(Level.INFO, "您没有配置Lute-HTTP渲染器，已为您连接Bolo专属公益Lute-HTTP服务，您可以获得更佳的渲染体验；禁用公益服务器请在偏好设置中修改。");
+                } catch (Exception exception) {
+                    LOGGER.log(Level.INFO, "公益Lute-HTTP服务未就绪，将禁用Lute渲染，使用自带渲染器。");
+                    Markdowns.LUTE_ENGINE_URL = solo.getString("luteHttp");
+                    Markdowns.LUTE_AVAILABLE = false;
+                }
             }
         }
     }

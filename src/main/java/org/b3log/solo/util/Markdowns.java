@@ -281,7 +281,7 @@ public final class Markdowns {
         return langPropsService.get("contentRenderFailedLabel");
     }
 
-    private static String toHtmlByLute(final String markdownText) throws Exception {
+    public static String toHtmlByLute(final String markdownText) throws Exception {
         final URL url = new URL(LUTE_ENGINE_URL);
         final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestProperty("X-CodeSyntaxHighlightLineNum", String.valueOf(Markdowns.SHOW_CODE_BLOCK_LN));

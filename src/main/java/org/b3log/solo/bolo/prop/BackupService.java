@@ -94,6 +94,28 @@ public class BackupService {
     @Inject
     private ImportService importService;
 
+    @RequestProcessing(value = "/prop/backup/github/do/upload", method = {HttpMethod.GET})
+    public void uploadBackupToGithub(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
+
+        try {
+            exportService.exportGitHub();
+
+            context.renderJSON().renderCode(200);
+            context.renderJSON().renderMsg("Exported backup to GitHub manual successfully.");
+
+            return ;
+        } catch (final Exception e) {
+            context.sendError(500);
+
+            return ;
+        }
+    }
+
     @RequestProcessing(value = "/prop/backup/hacpai/do/upload", method = {HttpMethod.GET})
     public void uploadBackupToHacpai(final RequestContext context) {
         if (!Solos.isAdminLoggedIn(context)) {

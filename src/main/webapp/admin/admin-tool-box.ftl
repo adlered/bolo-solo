@@ -40,6 +40,23 @@
                 }
             });
         }
+        function backupToGithub() {
+            $.ajax({
+                type: 'GET',
+                url: 'prop/backup/github/do/upload',
+                async: false,
+                success: function (res) {
+                    alert("备份成功！");
+                },
+                error: function (e) {
+                    if (e.status === 404) {
+                        alert("抱歉，当前 Bolo 版本不支持该功能！小提示：重启服务端，等待 5 分钟后，Bolo 会自动备份文章到链滴（功能开启的情况下）。");
+                    } else {
+                        alert("备份失败！请检查偏好设置，并确定链滴用户名和 B3log Key 设置正确。");
+                    }
+                }
+            });
+        }
         function refreshUsite() {
             $.ajax({
                 type: 'GET',
@@ -116,6 +133,19 @@
                         </td>
                         <td style="padding-right: 20px;">
                             <button onclick="refreshUsite()" style="float:right">开始获取</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody class="table-oddRow">
+                    <tr class="table-hasExpend">
+                        <td style="padding-left: 20px; padding-right: 20px;">
+                            手动上传文章备份至GitHub
+                        </td>
+                        <td>
+                            手动将你的<b>公开</b>文章备份上传至GitHub
+                        </td>
+                        <td style="padding-right: 20px;">
+                            <button onclick="backupToGithub()" style="float:right">确定备份</button>
                         </td>
                     </tr>
                     </tbody>

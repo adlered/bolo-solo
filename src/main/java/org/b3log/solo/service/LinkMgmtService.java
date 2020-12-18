@@ -67,7 +67,7 @@ public class LinkMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Removes a link[id=" + linkId + "] failed", e);
+            LOGGER.log(Level.ERROR, "更新链接 [id=" + linkId + "] 失败", e);
             throw new ServiceException(e);
         }
     }
@@ -138,7 +138,7 @@ public class LinkMgmtService {
                     transaction.rollback();
                 }
 
-                LOGGER.log(Level.WARN, "Cant not find the target link of source link[order={0}]", srcLinkOrder);
+                LOGGER.log(Level.WARN, "找不到目标链接的原链接 [order={0}]", srcLinkOrder);
                 return;
             }
 
@@ -155,7 +155,7 @@ public class LinkMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Changes link's order failed", e);
+            LOGGER.log(Level.ERROR, "修改链接顺序失败", e);
 
             throw new ServiceException(e);
         }
@@ -194,7 +194,7 @@ public class LinkMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Adds a link failed", e);
+            LOGGER.log(Level.ERROR, "添加链接失败", e);
             throw new ServiceException(e);
         }
     }

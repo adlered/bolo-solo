@@ -263,7 +263,7 @@ public final class SoloServletListener extends AbstractServletListener {
             final B3ArticleUpdater articleUpdater = beanManager.getReference(B3ArticleUpdater.class);
             eventManager.registerListener(articleUpdater);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Register event handlers failed", e);
+            LOGGER.log(Level.ERROR, "注册事件处理程序失败", e);
 
             System.exit(-1);
         }

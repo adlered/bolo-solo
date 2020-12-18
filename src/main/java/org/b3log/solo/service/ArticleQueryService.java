@@ -166,7 +166,7 @@ public class ArticleQueryService {
             final List<JSONObject> articles = CollectionUtils.jsonArrayToList(result.optJSONArray(Keys.RESULTS));
             ret.put(Article.ARTICLES, (Object) articles);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Searches articles error", e);
+            LOGGER.log(Level.ERROR, "文章搜索出错", e);
         }
 
         return ret;
@@ -277,7 +277,7 @@ public class ArticleQueryService {
 
             return ret;
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets category articles error", e);
+            LOGGER.log(Level.ERROR, "获取存档文章列表失败", e);
 
             throw new ServiceException(e);
         }
@@ -330,7 +330,7 @@ public class ArticleQueryService {
 
             return recentArticle.getLong(Article.ARTICLE_UPDATED);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets recent article time failed", e);
+            LOGGER.log(Level.ERROR, "获取最近发布文章失败", e);
 
             return 0;
         }
@@ -366,7 +366,7 @@ public class ArticleQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets author of article [id={0}] failed", article.optString(Keys.OBJECT_ID));
+            LOGGER.log(Level.ERROR, "无法找到文章 [id={0}] 的作者", article.optString(Keys.OBJECT_ID));
 
             throw new ServiceException(e);
         }
@@ -395,7 +395,7 @@ public class ArticleQueryService {
             }
         }
 
-        LOGGER.log(Level.WARN, "Can not find the sign [id={0}], returns a default sign [id=1]", signId);
+        LOGGER.log(Level.WARN, "无法获取文章状态号 [id={0}], 以默认状态号 [id=1] 继续", signId);
 
         return defaultSign;
     }
@@ -424,7 +424,7 @@ public class ArticleQueryService {
         try {
             return articleRepository.getRecentArticles(fetchSize);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets recent articles failed", e);
+            LOGGER.log(Level.ERROR, "无法获取最近发布的文章", e);
 
             return Collections.emptyList();
         }
@@ -497,7 +497,7 @@ public class ArticleQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets an article failed", e);
+            LOGGER.log(Level.ERROR, "无法获取文章", e);
             throw new ServiceException(e);
         }
     }
@@ -607,7 +607,7 @@ public class ArticleQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets articles failed", e);
+            LOGGER.log(Level.ERROR, "获取文章列表失败", e);
 
             return null;
         }
@@ -661,7 +661,7 @@ public class ArticleQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets articles by tag [id=" + tagId + "] failed", e);
+            LOGGER.log(Level.ERROR, "无法通过标签找到文章 [id=" + tagId + "]", e);
             throw new ServiceException(e);
         }
     }
@@ -708,7 +708,7 @@ public class ArticleQueryService {
         } catch (final Exception e) {
             pairs = new HashMap<>();
 
-            LOGGER.log(Level.ERROR, "Gets articles by archive date [id=" + archiveDateId + "] failed", e);
+            LOGGER.log(Level.ERROR, "无法通过存档日志获取文章 [id=" + archiveDateId + "]", e);
             throw new ServiceException(e);
         }
     }
@@ -746,7 +746,7 @@ public class ArticleQueryService {
 
             return ret;
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets articles randomly failed[fetchSize=" + fetchSize + "]", e);
+            LOGGER.log(Level.ERROR, "随机获取文章列表失败 [fetchSize=" + fetchSize + "]", e);
             throw new ServiceException(e);
         }
     }
@@ -821,7 +821,7 @@ public class ArticleQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets relevant articles failed", e);
+            LOGGER.log(Level.ERROR, "获取相关文章失败", e);
 
             return Collections.emptyList();
         }
@@ -847,7 +847,7 @@ public class ArticleQueryService {
         try {
             return articleRepository.getNextArticle(articleId);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets the next article failed[articleId=" + articleId + "]", e);
+            LOGGER.log(Level.ERROR, "找不到下一篇文章 [articleId=" + articleId + "]", e);
             throw new ServiceException(e);
         }
     }
@@ -872,7 +872,7 @@ public class ArticleQueryService {
         try {
             return articleRepository.getPreviousArticle(articleId);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets the previous article failed[articleId=" + articleId + "]", e);
+            LOGGER.log(Level.ERROR, "找不到上一篇文章 [articleId=" + articleId + "]", e);
             throw new ServiceException(e);
         }
     }
@@ -890,7 +890,7 @@ public class ArticleQueryService {
         try {
             return articleRepository.get(articleId);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets an article [id=" + articleId + "] failed", e);
+            LOGGER.log(Level.ERROR, "获取文章 [id=" + articleId + "] 失败", e);
 
             return null;
         }
@@ -918,7 +918,7 @@ public class ArticleQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets articles by author id failed [authorId=" + authorId + ", currentPageNum=" + currentPageNum + ", pageSize=" + pageSize + "]", e);
+            LOGGER.log(Level.ERROR, "通过作者获取文章列表失败 [authorId=" + authorId + ", currentPageNum=" + currentPageNum + ", pageSize=" + pageSize + "]", e);
 
             throw new ServiceException(e);
         }
@@ -960,7 +960,7 @@ public class ArticleQueryService {
 
             return article.getString(Article.ARTICLE_CONTENT);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets article content failed[articleId=" + articleId + "]", e);
+            LOGGER.log(Level.ERROR, "获取文章内容失败 [articleId=" + articleId + "]", e);
 
             throw new ServiceException(e);
         }

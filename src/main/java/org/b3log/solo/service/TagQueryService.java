@@ -96,7 +96,7 @@ public class TagQueryService {
 
             return ret;
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets an article failed", e);
+            LOGGER.log(Level.ERROR, "获取文章失败", e);
             throw new ServiceException(e);
         }
     }
@@ -110,7 +110,7 @@ public class TagQueryService {
         try {
             return tagRepository.count();
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets tags failed", e);
+            LOGGER.log(Level.ERROR, "获取标签失败", e);
 
             return 0;
         }
@@ -140,7 +140,7 @@ public class TagQueryService {
 
             return ret;
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets tags failed", e);
+            LOGGER.log(Level.ERROR, "获取标签失败", e);
 
             throw new ServiceException(e);
         }

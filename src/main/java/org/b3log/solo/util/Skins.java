@@ -93,7 +93,7 @@ public final class Skins {
         try {
             return Skins.TEMPLATE_CFG.getTemplate(templateName);
         } catch (final IOException e) {
-            LOGGER.log(Level.ERROR, "Gets console template [" + templateName + "] failed", e);
+            LOGGER.log(Level.ERROR, "获取 console template [" + templateName + "] 失败", e);
 
             return null;
         }
@@ -171,7 +171,7 @@ public final class Skins {
 
             dataModel.putAll(langs); // Fills the current skin's language configurations
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Fills skin langs failed", e);
+            LOGGER.log(Level.ERROR, "填充 skin langs 失败", e);
 
             throw new ServiceException(e);
         } finally {

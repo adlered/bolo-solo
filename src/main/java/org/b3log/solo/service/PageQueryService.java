@@ -144,7 +144,7 @@ public class PageQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets pages failed", e);
+            LOGGER.log(Level.ERROR, "获取页面失败", e);
 
             throw new ServiceException(e);
         }

@@ -94,7 +94,7 @@ public class CategoryQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets most tag category error", e);
+            LOGGER.log(Level.ERROR, "无法获取使用最多的标签", e);
 
             return Collections.emptyList();
         }
@@ -122,7 +122,7 @@ public class CategoryQueryService {
                 ret.add(tag);
             }
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets category [id=" + categoryId + "] tags error", e);
+            LOGGER.log(Level.ERROR, "无法获取分类 [id=" + categoryId + "] 的标签", e);
         }
 
         return ret;
@@ -144,7 +144,7 @@ public class CategoryQueryService {
 
             return ret;
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets category [URI=" + categoryURI + "] failed", e);
+            LOGGER.log(Level.ERROR, "获取分类 [URI=" + categoryURI + "] 失败", e);
 
             throw new ServiceException(e);
         }
@@ -163,7 +163,7 @@ public class CategoryQueryService {
 
             return ret;
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets category [title=" + categoryTitle + "] failed", e);
+            LOGGER.log(Level.ERROR, "获取分类 [title=" + categoryTitle + "] 失败", e);
 
             throw new ServiceException(e);
         }
@@ -216,7 +216,7 @@ public class CategoryQueryService {
         try {
             result = categoryRepository.get(query);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets categories failed", e);
+            LOGGER.log(Level.ERROR, "获取分类列表失败", e);
 
             throw new ServiceException(e);
         }
@@ -256,7 +256,7 @@ public class CategoryQueryService {
 
             return ret;
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets a category [categoryId=" + categoryId + "] failed", e);
+            LOGGER.log(Level.ERROR, "获取分类 [categoryId=" + categoryId + "] 失败", e);
 
             throw new ServiceException(e);
         }
@@ -288,7 +288,7 @@ public class CategoryQueryService {
 
             return categoryTagRepository.count(query) > 0;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Check category tag [tagTitle=" + tagTitle + ", categoryId=" + categoryId + "] failed", e);
+            LOGGER.log(Level.ERROR, "获取分类标签 [tagTitle=" + tagTitle + ", categoryId=" + categoryId + "] 失败", e);
 
             return true;
         }

@@ -123,7 +123,7 @@ public final class V299_300 {
 
             LOGGER.log(Level.INFO, "从版本 [2.9.9] 平滑更新至版本 [3.0.0] 成功");
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Upgrade failed!", e);
+            LOGGER.log(Level.ERROR, "更新失败!", e);
 
             throw new Exception("Upgrade failed from version [2.9.9] to version [3.0.0]");
         }

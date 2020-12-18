@@ -56,7 +56,7 @@ public class OptionQueryService {
         try {
             return getOptions(Option.CATEGORY_C_SKIN);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets skin failed", e);
+            LOGGER.log(Level.ERROR, "获取皮肤失败", e);
 
             return null;
         }
@@ -71,7 +71,7 @@ public class OptionQueryService {
         try {
             return getOptions(Option.CATEGORY_C_PREFERENCE);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets preference failed", e);
+            LOGGER.log(Level.ERROR, "获取设定失败", e);
 
             return null;
         }
@@ -88,7 +88,7 @@ public class OptionQueryService {
 
             return opt.optBoolean(Option.OPTION_VALUE);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Checks allow comment failed", e);
+            LOGGER.log(Level.ERROR, "检查评论开放情况失败", e);
 
             return false;
         }

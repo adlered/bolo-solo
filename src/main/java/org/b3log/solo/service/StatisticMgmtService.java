@@ -190,7 +190,7 @@ public class StatisticMgmtService {
                 response.addCookie(c);
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.WARN, "Parses cookie failed, clears the cookie[name=visited]");
+            LOGGER.log(Level.WARN, "解析 Cookie 失败, 正在清除 Cookie [name=visited]");
 
             final Cookie c = new Cookie("visited", null);
             c.setMaxAge(0);
@@ -244,7 +244,7 @@ public class StatisticMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Updates blog view count failed", e);
+            LOGGER.log(Level.ERROR, "更新博客浏览计数失败", e);
 
             return;
         }

@@ -64,7 +64,7 @@ public final class V368_370 {
 
             LOGGER.log(Level.INFO, "从版本 [" + fromVer + "] 平滑更新至版本 [" + toVer + "] 成功");
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Upgrade failed!", e);
+            LOGGER.log(Level.ERROR, "更新失败!", e);
 
             throw new Exception("Upgrade failed from version [" + fromVer + "] to version [" + toVer + "]");
         }

@@ -94,7 +94,7 @@ public class BlogProcessor {
         try (final InputStream tplStream = BlogProcessor.class.getResourceAsStream("/manifest.json.tpl")) {
             PWA_MANIFESTO_JSON = IOUtils.toString(tplStream, "UTF-8");
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Loads PWA manifest.json template failed", e);
+            LOGGER.log(Level.ERROR, "加载 PWA manifest.json 模板失败", e);
         }
     }
 

@@ -87,7 +87,7 @@ public class StatisticQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets statistic failed", e);
+            LOGGER.log(Level.ERROR, "获取浏览计数失败", e);
 
             return null;
         }

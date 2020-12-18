@@ -84,7 +84,7 @@ public class UserQueryService {
         try {
             return userRepository.getFirst(new Query().setFilter(new PropertyFilter(UserExt.USER_GITHUB_ID, FilterOperator.EQUAL, githubId)));
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets a user by GitHub id [" + githubId + "] failed", e);
+            LOGGER.log(Level.ERROR, "无法通过 GitHub ID [" + githubId + "] 读取用户信息", e);
 
             return null;
         }
@@ -99,7 +99,7 @@ public class UserQueryService {
         try {
             return userRepository.getAdmin();
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets admin failed", e);
+            LOGGER.log(Level.ERROR, "找不到管理员用户", e);
             return null;
         }
     }
@@ -114,7 +114,7 @@ public class UserQueryService {
         try {
             return userRepository.getByUserName(userName);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets a user by username [" + userName + "] failed", e);
+            LOGGER.log(Level.ERROR, "无法通过用户名找到用户 [" + userName + "]", e);
 
             return null;
         }
@@ -156,7 +156,7 @@ public class UserQueryService {
         try {
             result = userRepository.get(query);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets users failed", e);
+            LOGGER.log(Level.ERROR, "获取用户列表失败", e);
 
             throw new ServiceException(e);
         }
@@ -194,7 +194,7 @@ public class UserQueryService {
         try {
             user = userRepository.get(userId);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets a user failed", e);
+            LOGGER.log(Level.ERROR, "无法获取到用户", e);
 
             return null;
         }

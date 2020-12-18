@@ -123,7 +123,7 @@ public class PluginQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets plugins failed", e);
+            LOGGER.log(Level.ERROR, "获取插件列表失败", e);
 
             throw new ServiceException(e);
         }
@@ -144,13 +144,13 @@ public class PluginQueryService {
         try {
             ret = pluginRepository.get(pluginId);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "get plugin[" + pluginId + "] fail");
+            LOGGER.log(Level.ERROR, "获取插件 [" + pluginId + "] 失败");
             throw new ServiceException("get plugin[" + pluginId + "] fail");
 
         }
 
         if (ret == null) {
-            LOGGER.log(Level.ERROR, "can not find plugin[" + pluginId + "]");
+            LOGGER.log(Level.ERROR, "找不到插件 [" + pluginId + "]");
             throw new ServiceException("can not find plugin[" + pluginId + "]");
         }
 

@@ -266,7 +266,7 @@ public final class Solos {
                     put(Common.UPLOAD_URL, uploadURL).
                     put(Common.UPLOAD_MSG, uploadMsg);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets Hacpai upload token failed, Wrong Hacpai Username / B3log key.");
+            LOGGER.log(Level.ERROR, "获取 Hacpai upload token 失败, Wrong Hacpai Username / B3log key.");
 
             return null;
         }
@@ -342,7 +342,7 @@ public final class Solos {
                 }
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.TRACE, "Parses cookie failed, clears the cookie [name=" + COOKIE_NAME + "]");
+            LOGGER.log(Level.TRACE, "Parses cookie 失败, clears the cookie [name=" + COOKIE_NAME + "]");
 
             final Cookie cookie = new Cookie(COOKIE_NAME, null);
             cookie.setMaxAge(0);
@@ -374,7 +374,7 @@ public final class Solos {
             cookie.setHttpOnly(COOKIE_HTTP_ONLY);
             response.addCookie(cookie);
         } catch (final Exception e) {
-            LOGGER.log(Level.WARN, "Can not write cookie", e);
+            LOGGER.log(Level.WARN, "无法写入 Cookie", e);
         }
     }
 

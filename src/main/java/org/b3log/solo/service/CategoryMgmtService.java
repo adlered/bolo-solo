@@ -87,7 +87,7 @@ public class CategoryMgmtService {
                     transaction.rollback();
                 }
 
-                LOGGER.log(Level.WARN, "Cant not find the target category of source category [order={0}]", srcCategoryOrder);
+                LOGGER.log(Level.WARN, "找不到源分类的目标分类 [顺序={0}]", srcCategoryOrder);
 
                 return;
             }
@@ -105,7 +105,7 @@ public class CategoryMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Changes category's order failed", e);
+            LOGGER.log(Level.ERROR, "修改分类顺序失败", e);
 
             throw new ServiceException(e);
         }
@@ -139,7 +139,7 @@ public class CategoryMgmtService {
             final JSONObject relation = relations.optJSONObject(0);
             categoryTagRepository.remove(relation.optString(Keys.OBJECT_ID));
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Adds a category-tag relation failed", e);
+            LOGGER.log(Level.ERROR, "添加分类与标签关系失败", e);
 
             throw new ServiceException(e);
         }
@@ -198,7 +198,7 @@ public class CategoryMgmtService {
 
             return ret;
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Adds a category failed", e);
+            LOGGER.log(Level.ERROR, "添加分类失败", e);
 
             throw new ServiceException(e);
         }
@@ -220,7 +220,7 @@ public class CategoryMgmtService {
 
             categoryRepository.update(categoryId, category);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Updates a category [id=" + categoryId + "] failed", e);
+            LOGGER.log(Level.ERROR, "更新分类信息失败 [id=" + categoryId + "]", e);
 
             throw new ServiceException(e);
         }
@@ -238,7 +238,7 @@ public class CategoryMgmtService {
             categoryTagRepository.removeByCategoryId(categoryId);
             categoryRepository.remove(categoryId);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Remove a category [id=" + categoryId + "] failed", e);
+            LOGGER.log(Level.ERROR, "删除分类信息失败 [id=" + categoryId + "]", e);
 
             throw new ServiceException(e);
         }
@@ -255,7 +255,7 @@ public class CategoryMgmtService {
         try {
             categoryTagRepository.removeByCategoryId(categoryId);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Remove category-tag [categoryId=" + categoryId + "] failed", e);
+            LOGGER.log(Level.ERROR, "删除分类与标签关系失败 [categoryId=" + categoryId + "]", e);
 
             throw new ServiceException(e);
         }

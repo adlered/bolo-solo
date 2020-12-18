@@ -106,7 +106,7 @@ public class LinkQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets links failed", e);
+            LOGGER.log(Level.ERROR, "获取链接列表失败", e);
             throw new ServiceException(e);
         }
     }
@@ -142,7 +142,7 @@ public class LinkQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets a link failed", e);
+            LOGGER.log(Level.ERROR, "获取链接失败", e);
 
             throw new ServiceException(e);
         }

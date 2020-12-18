@@ -195,7 +195,7 @@ public class PermalinkQueryService {
             return isReservedLink(permalink) || null != articleRepository.getByPermalink(permalink)
                     || null != pageRepository.getByPermalink(permalink) || permalink.endsWith(".ftl");
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Determines whether the permalink[" + permalink + "] exists failed, returns true", e);
+            LOGGER.log(Level.ERROR, "检查永久链接是否存在 [" + permalink + "] 失败, 返回真", e);
 
             return true;
         }

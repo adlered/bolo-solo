@@ -163,13 +163,13 @@ public class InitService {
         try {
             inited = null != optionRepository.get(Option.ID_C_VERSION);
             if (!inited && !printedInitMsg) {
-                LOGGER.log(Level.WARN, "Bolo has not been initialized, please open your browser to init Bolo");
+                LOGGER.log(Level.WARN, "欢迎使用 Bolo! 您还没有初始化博客系统, 请打开浏览器访问 Bolo, 让我们开始吧!");
                 printedInitMsg = true;
             }
 
             return inited;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Check init failed", e);
+            LOGGER.log(Level.ERROR, "检查初始化情况失败", e);
 
             System.exit(-1);
             return false;
@@ -188,7 +188,7 @@ public class InitService {
                 return;
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Check tables failed, please make sure database existed and database configuration [jdbc.*] in local.props is correct [msg=" + e.getMessage() + "]");
+            LOGGER.log(Level.ERROR, "检查数据库失败, 请确定您的数据库已存在并且数据库设置 [jdbc.*] 位于 local.properties 已配置正确 [msg=" + e.getMessage() + "]");
 
             System.exit(-1);
         }
@@ -235,7 +235,7 @@ public class InitService {
 
             transaction.commit();
         } catch (final Throwable e) {
-            LOGGER.log(Level.ERROR, "Initializes Solo failed", e);
+            LOGGER.log(Level.ERROR, "初始化 Bolo 失败", e);
 
             System.exit(-1);
         } finally {
@@ -322,7 +322,7 @@ public class InitService {
             archiveDate(article);
             articleRepository.add(article);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Adds an article failed", e);
+            LOGGER.log(Level.ERROR, "收录文章失败", e);
 
             throw new RepositoryException(e);
         }

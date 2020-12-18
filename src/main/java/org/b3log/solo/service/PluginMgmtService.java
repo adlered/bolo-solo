@@ -107,7 +107,7 @@ public class PluginMgmtService {
                             plugin.setSetting(new JSONObject(setting));
                         }
                     } catch (final JSONException e) {
-                        LOGGER.log(Level.WARN, "the formatter of the old config failed to convert to json", e);
+                        LOGGER.log(Level.WARN, "无法将旧配置转换为 JSON 格式", e);
                     }
                 }
             }
@@ -122,7 +122,7 @@ public class PluginMgmtService {
             }
 
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Refresh plugins failed", e);
+            LOGGER.log(Level.ERROR, "刷新插件失败", e);
         }
     }
 
@@ -188,7 +188,7 @@ public class PluginMgmtService {
                         transaction.rollback();
                     }
 
-                    LOGGER.log(Level.ERROR, "Set plugin status error", e);
+                    LOGGER.log(Level.ERROR, "设定插件开关出错", e);
 
                     ret.put(Keys.STATUS_CODE, false);
                     ret.put(Keys.MSG, langs.get("setFailLabel"));
@@ -235,7 +235,7 @@ public class PluginMgmtService {
                     if (transaction.isActive()) {
                         transaction.rollback();
                     }
-                    LOGGER.log(Level.ERROR, "Set plugin status error", e);
+                    LOGGER.log(Level.ERROR, "设定插件开关出错", e);
                     ret.put(Keys.STATUS_CODE, false);
                     ret.put(Keys.MSG, langs.get("setFailLabel"));
 

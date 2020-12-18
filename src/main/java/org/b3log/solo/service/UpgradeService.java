@@ -72,7 +72,7 @@ public class UpgradeService {
                 final String currentMobileSkinDirName = skin.optString(Option.ID_C_MOBILE_SKIN_DIR_NAME);
                 if (!currentSkinDirName.contains("bolo") && !currentMobileSkinDirName.contains("bolo")) {
                     boloFastMigration = true;
-                    LOGGER.info("Not a bolo skin has set, enabling Bolo Fast Migration.");
+                    LOGGER.info("检测到您从 Solo 迁移而来, 已启动快速迁移程序, 请访问 Bolo 主页继续进行操作.");
                 }
             }
 
@@ -137,8 +137,8 @@ public class UpgradeService {
                 }
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Upgrade failed, please contact the Bolo developers or reports this "
-                    + "issue: https://github.com/adlered/bolo-solo/issues/new", e);
+            LOGGER.log(Level.ERROR, "更新失败, 请联系 Bolo 开发者或反馈问题至 "
+                    + "Issue: https://github.com/adlered/bolo-solo/issues/new", e);
             System.exit(-1);
         }
     }

@@ -81,7 +81,7 @@ public class PreferenceMgmtService {
         while (keys.hasNext()) {
             final String key = keys.next();
             if (preference.isNull(key)) {
-                LOGGER.log(Level.ERROR, "A value is null of preference [key=" + key + "]");
+                LOGGER.log(Level.ERROR, "配置项 [key=" + key + "] 的值为 null");
             }
         }
 
@@ -118,11 +118,11 @@ public class PreferenceMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Updates preference failed", e);
+            LOGGER.log(Level.ERROR, "更新偏好设置失败", e);
             throw new ServiceException(langPropsService.get("updateFailLabel"));
         }
 
-        LOGGER.log(Level.DEBUG, "Updates preference successfully");
+        LOGGER.log(Level.DEBUG, "更新 preference successfully");
     }
 
     private void emptyPreferenceOptSave(final String optID, final String val) throws Exception {

@@ -87,7 +87,7 @@ public class CronMgmtService {
             try {
                 StatisticMgmtService.removeExpiredOnlineVisitor();
             } catch (final Exception e) {
-                LOGGER.log(Level.ERROR, "Executes cron failed", e);
+                LOGGER.log(Level.ERROR, "执行定时任务 失败", e);
             } finally {
                 Stopwatchs.release();
             }
@@ -101,7 +101,7 @@ public class CronMgmtService {
                 // userMgmtService.refreshUSite();
                 exportService.exportGitHub();
             } catch (final Exception e) {
-                LOGGER.log(Level.ERROR, "Executes cron failed", e);
+                LOGGER.log(Level.ERROR, "执行定时任务 失败", e);
             } finally {
                 Stopwatchs.release();
             }
@@ -112,7 +112,7 @@ public class CronMgmtService {
             try {
                 exportService.exportHacPai(false);
             } catch (final Exception e) {
-                LOGGER.log(Level.ERROR, "Executes cron failed", e);
+                LOGGER.log(Level.ERROR, "执行定时任务 失败", e);
             } finally {
                 Stopwatchs.release();
             }

@@ -180,7 +180,7 @@ public final class Markdowns {
                         LOGGER.log(Level.DEBUG, "成功通过 Lute 生成文章.");
                     }
                 } catch (final Exception e) {
-                    LOGGER.log(Level.WARN, "Failed to use [Lute] for markdown, Using FlexMark Instead [md=" + StringUtils.substring(markdownText, 0, 256) + "]: " + e.getMessage());
+                    LOGGER.log(Level.WARN, "无法使用 [Lute] 渲染您的文章, 请检查您的网络连接, 正在使用自带文章渲染器替代 [md=" + StringUtils.substring(markdownText, 0, 256) + "]: " + e.getMessage());
                 }
             }
 
@@ -271,7 +271,7 @@ public final class Markdowns {
                 }
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Markdown failed [md=" + markdownText + "]", e);
+            LOGGER.log(Level.ERROR, "Markdown 失败 [md=" + markdownText + "]", e);
         } finally {
             pool.shutdownNow();
 

@@ -210,7 +210,7 @@ public class CommentQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets comments failed", e);
+            LOGGER.log(Level.ERROR, "获取评论失败", e);
 
             throw new ServiceException(e);
         }
@@ -258,7 +258,7 @@ public class CommentQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets comments failed", e);
+            LOGGER.log(Level.ERROR, "获取评论失败", e);
             throw new ServiceException(e);
         }
     }

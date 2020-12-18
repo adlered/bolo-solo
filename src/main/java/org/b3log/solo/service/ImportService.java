@@ -76,7 +76,7 @@ public class ImportService {
             final ServletContext servletContext = SoloServletListener.getServletContext();
             final String markdownsPath = servletContext.getRealPath("markdowns");
             new File(markdownsPath).mkdirs();
-            LOGGER.debug("Import directory [" + markdownsPath + "]");
+            LOGGER.debug("导入directory [" + markdownsPath + "]");
 
             final JSONObject admin = userQueryService.getAdmin();
             if (null == admin) { // Not init yet
@@ -111,7 +111,7 @@ public class ImportService {
                     LOGGER.info("Imported article [" + article.optString(Article.ARTICLE_TITLE) + "]");
                     succCnt++;
                 } catch (final Exception e) {
-                    LOGGER.log(Level.ERROR, "Import file [" + fileName + "] failed", e);
+                    LOGGER.log(Level.ERROR, "导入文件 [" + fileName + "] 失败", e);
 
                     failCnt++;
                     failSet.add(fileName);
@@ -143,7 +143,7 @@ public class ImportService {
     public String importMarkdownsSync() {
         final ServletContext servletContext = SoloServletListener.getServletContext();
         final String markdownsPath = servletContext.getRealPath("markdowns");
-        LOGGER.debug("Import directory [" + markdownsPath + "]");
+        LOGGER.debug("导入directory [" + markdownsPath + "]");
 
         final JSONObject admin = userQueryService.getAdmin();
         if (null == admin) { // Not init yet
@@ -178,7 +178,7 @@ public class ImportService {
                 LOGGER.info("Imported article [" + article.optString(Article.ARTICLE_TITLE) + "]");
                 succCnt++;
             } catch (final Exception e) {
-                LOGGER.log(Level.ERROR, "Import file [" + fileName + "] failed", e);
+                LOGGER.log(Level.ERROR, "导入文件 [" + fileName + "] 失败", e);
 
                 failCnt++;
                 failSet.add(fileName);
@@ -304,7 +304,7 @@ public class ImportService {
                         "yyyy/MM/dd HH:mm", "yyyy-MM-dd HH:mm", "dd/MM/yyyy HH:mm",
                         "dd-MM-yyyy HH:mm", "yyyyMMdd HH:mm"});
             } catch (final Exception e) {
-                LOGGER.log(Level.ERROR, "Parse date [" + date + "] failed", e);
+                LOGGER.log(Level.ERROR, "解析日期 [" + date + "] 失败", e);
 
                 throw new RuntimeException(e);
             }

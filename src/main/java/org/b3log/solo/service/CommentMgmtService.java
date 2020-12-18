@@ -182,7 +182,7 @@ public class CommentMgmtService {
 
             String commentName = requestJSONObject.getString(Comment.COMMENT_NAME);
             if (MAX_COMMENT_NAME_LENGTH < commentName.length() || MIN_COMMENT_NAME_LENGTH > commentName.length()) {
-                LOGGER.log(Level.WARN, "Comment name is too long [{0}]", commentName);
+                LOGGER.log(Level.WARN, "评论用户名字过长 [{0}]", commentName);
                 ret.put(Keys.MSG, langPropsService.get("nameTooLongLabel"));
 
                 return ret;
@@ -202,7 +202,7 @@ public class CommentMgmtService {
             String commentContent = requestJSONObject.optString(Comment.COMMENT_CONTENT);
 
             if (MAX_COMMENT_CONTENT_LENGTH < commentContent.length() || MIN_COMMENT_CONTENT_LENGTH > commentContent.length()) {
-                LOGGER.log(Level.WARN, "Comment conent length is invalid[{0}]", commentContent.length());
+                LOGGER.log(Level.WARN, "评论正文长度不正确 [{0}]", commentContent.length());
                 ret.put(Keys.MSG, langPropsService.get("commentContentCannotEmptyLabel"));
 
                 return ret;
@@ -213,7 +213,7 @@ public class CommentMgmtService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.WARN, "Checks add comment request[" + requestJSONObject.toString() + "] failed", e);
+            LOGGER.log(Level.WARN, "评论 [" + requestJSONObject.toString() + "] 发表失败", e);
 
             ret.put(Keys.STATUS_CODE, false);
             ret.put(Keys.MSG, langPropsService.get("addFailLabel"));
@@ -300,7 +300,7 @@ public class CommentMgmtService {
 
                     ret.put(Common.IS_REPLY, true);
                 } else {
-                    LOGGER.log(Level.WARN, "Not found orginal comment[id={0}] of reply[name={1}, content={2}]",
+                    LOGGER.log(Level.WARN, "找不到回复 [id={0}] 的原评论 [name={1}, content={2}]",
                             originalCommentId, commentName, commentContent);
                 }
             }
@@ -363,7 +363,7 @@ public class CommentMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Removes a comment of an article failed", e);
+            LOGGER.log(Level.ERROR, "更新文章评论失败", e);
             throw new ServiceException(e);
         }
     }

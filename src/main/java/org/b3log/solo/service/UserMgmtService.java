@@ -135,13 +135,13 @@ public class UserMgmtService {
             res.charset("UTF-8");
             final JSONObject result = new JSONObject(res.bodyText());
             if (0 != result.optInt(Keys.STATUS_CODE)) {
-                LOGGER.log(Level.DEBUG, "Updates usite option failed: Invalid Username or B3log Key.");
+                LOGGER.log(Level.DEBUG, "更新 usite option 失败: Invalid Username or B3log Key.");
 
                 return;
             }
             usite = result.optJSONObject(Common.DATA);
         } catch (final Exception e) {
-            LOGGER.log(Level.DEBUG, "Gets usite failed", e);
+            LOGGER.log(Level.DEBUG, "获取 usite 失败", e);
 
             return;
         }
@@ -157,7 +157,7 @@ public class UserMgmtService {
             optionMgmtService.addOrUpdateOption(usiteOpt);
             LOGGER.log(Level.INFO, "已从链滴社区同步您的联系方式信息: " + usite.toString());
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Updates usite option failed", e);
+            LOGGER.log(Level.ERROR, "更新联系方式选项失败", e);
 
             return;
         }
@@ -224,7 +224,7 @@ public class UserMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Updates a user failed", e);
+            LOGGER.log(Level.ERROR, "更新用户失败", e);
             throw new ServiceException(e);
         }
     }
@@ -262,7 +262,7 @@ public class UserMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Updates a user failed", e);
+            LOGGER.log(Level.ERROR, "更新用户失败", e);
             throw new ServiceException(e);
         }
     }
@@ -330,7 +330,7 @@ public class UserMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Adds a user failed", e);
+            LOGGER.log(Level.ERROR, "添加用户失败", e);
             throw new ServiceException(e);
         }
     }
@@ -352,7 +352,7 @@ public class UserMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Removes a user [id=" + userId + "] failed", e);
+            LOGGER.log(Level.ERROR, "更新用户 [id=" + userId + "] 失败", e);
             throw new ServiceException(e);
         }
     }

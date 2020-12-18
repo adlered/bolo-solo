@@ -96,7 +96,7 @@ public class TagMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Removes unused tags failed", e);
+            LOGGER.log(Level.ERROR, "更新未使用的标签失败", e);
 
             throw new ServiceException(e);
         }

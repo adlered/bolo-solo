@@ -100,7 +100,7 @@ public final class Images {
 
             return COMMUNITY_FILE_URL + "/bing/" + DateFormatUtils.format(time, "yyyyMMdd") + ".jpg";
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Generates random image URL failed", e);
+            LOGGER.log(Level.ERROR, "Generates random image URL 失败", e);
 
             return COMMUNITY_FILE_URL + "/bing/20171104.jpg";
         }

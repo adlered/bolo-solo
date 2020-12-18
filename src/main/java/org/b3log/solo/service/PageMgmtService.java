@@ -161,7 +161,7 @@ public class PageMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Removes a page[id=" + pageId + "] failed", e);
+            LOGGER.log(Level.ERROR, "更新页面 [id=" + pageId + "] 失败", e);
 
             throw new ServiceException(e);
         }
@@ -240,7 +240,7 @@ public class PageMgmtService {
                     transaction.rollback();
                 }
 
-                LOGGER.log(Level.WARN, "Cant not find the target page of source page[order={0}]", srcPageOrder);
+                LOGGER.log(Level.WARN, "找不到目标页面的原页面 [order={0}]", srcPageOrder);
                 return;
             }
 
@@ -255,7 +255,7 @@ public class PageMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Changes page's order failed", e);
+            LOGGER.log(Level.ERROR, "修改页面排序失败", e);
 
             throw new ServiceException(e);
         }

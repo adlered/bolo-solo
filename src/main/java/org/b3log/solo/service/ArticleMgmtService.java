@@ -624,7 +624,7 @@ public class ArticleMgmtService {
 
             archiveDateArticleRepository.remove(archiveDateArticleRelation.getString(Keys.OBJECT_ID));
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Unarchive date for article[id=" + articleId + "] failed", e);
+            LOGGER.log(Level.ERROR, "无法删除文章 [id=" + articleId + "] 的存档日期", e);
 
             throw new ServiceException(e);
         }

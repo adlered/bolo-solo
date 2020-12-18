@@ -184,7 +184,7 @@ public class ExportService {
     public byte[] exportSQL() {
         final Latkes.RuntimeDatabase runtimeDatabase = Latkes.getRuntimeDatabase();
         if (Latkes.RuntimeDatabase.H2 != runtimeDatabase && Latkes.RuntimeDatabase.MYSQL != runtimeDatabase) {
-            LOGGER.log(Level.ERROR, "Just support MySQL/H2 export now");
+            LOGGER.log(Level.ERROR, "仅支持 MySQL/H2 数据库进行导出");
 
             return null;
         }
@@ -205,7 +205,7 @@ public class ExportService {
                     sql = Execs.exec("mysqldump -u" + dbUser + " --databases " + db, 60 * 1000 * 5);
                 }
             } catch (final Exception e) {
-                LOGGER.log(Level.ERROR, "Export failed, please check command \"mysqldump\" is on your system", e);
+                LOGGER.log(Level.ERROR, "导出失败, 请检查您的系统中有 \"mysqldump\" 命令", e);
 
                 return null;
             }
@@ -222,14 +222,14 @@ public class ExportService {
 
                 sql = sqlBuilder.toString();
             } catch (final Exception e) {
-                LOGGER.log(Level.ERROR, "Export failed", e);
+                LOGGER.log(Level.ERROR, "导出失败", e);
 
                 return null;
             }
         }
 
         if (StringUtils.isBlank(sql)) {
-            LOGGER.log(Level.ERROR, "Export failed, executing export script returns empty");
+            LOGGER.log(Level.ERROR, "导出失败, 执行导出脚本返回为空");
 
             return null;
         }
@@ -256,7 +256,7 @@ public class ExportService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Export failed", e);
+            LOGGER.log(Level.ERROR, "导出失败", e);
 
             return null;
         }
@@ -326,7 +326,7 @@ public class ExportService {
                 LOGGER.log(Level.INFO, "你的公开文章已导出至 GitHub 仓库 [bolo-blog]");
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Exports public articles to your repo failed: " + e.getMessage());
+            LOGGER.log(Level.ERROR, "导入公开文章至仓库失败: " + e.getMessage());
         }
     }
 
@@ -463,7 +463,7 @@ public class ExportService {
             response.charset("UTF-8");
             LOGGER.info("Backup public articles to HacPai completed: " + response.bodyText());
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Exports articles to github repo failed:" + e.getMessage());
+            LOGGER.log(Level.ERROR, "导入文章至 GitHub 仓库失败:" + e.getMessage());
         }
     }
 
@@ -522,7 +522,7 @@ public class ExportService {
                 new File(dir).mkdirs();
                 FileUtils.writeStringToFile(new File(dir + filename), text, "UTF-8");
             } catch (final Exception e) {
-                LOGGER.log(Level.ERROR, "Write markdown file failed", e);
+                LOGGER.log(Level.ERROR, "写入 Markdown 文件失败", e);
             }
         });
     }
@@ -638,7 +638,7 @@ public class ExportService {
         try {
             return repository.get(new Query()).optJSONArray(Keys.RESULTS);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets data from repository [" + repository.getName() + "] failed", e);
+            LOGGER.log(Level.ERROR, "无法从源获取数据 [" + repository.getName() + "]", e);
 
             return new JSONArray();
         }

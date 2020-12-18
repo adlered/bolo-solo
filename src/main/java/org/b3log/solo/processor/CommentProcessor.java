@@ -313,7 +313,7 @@ public class CommentProcessor {
                             blogTitle
                     );
                 } catch (JSONException jsonException) {
-                    LOGGER.log(Level.DEBUG, "Send admin mail remind failed [replyRemindMailBoxAddress=" + replyRemindMailBoxAddress + "]");
+                    LOGGER.log(Level.DEBUG, "发送管理员提醒邮件失败 [管理员邮箱=" + replyRemindMailBoxAddress + "]");
                 }
             }
 

@@ -47,7 +47,7 @@ public final class V410_420 {
         final String fromVer = "4.1.0";
         final String toVer = "4.2.0";
 
-        LOGGER.log(Level.INFO, "Upgrading from version [" + fromVer + "] to version [" + toVer + "]....");
+        LOGGER.log(Level.INFO, "Bolo 正在从 [" + fromVer + "] 平滑更新至版本 [" + toVer + "]....");
 
         final BeanManager beanManager = BeanManager.getInstance();
         final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
@@ -61,7 +61,7 @@ public final class V410_420 {
 
             transaction.commit();
 
-            LOGGER.log(Level.INFO, "Upgraded from version [" + fromVer + "] to version [" + toVer + "] successfully");
+            LOGGER.log(Level.INFO, "从版本 [" + fromVer + "] 平滑更新至版本 [" + toVer + "] 成功");
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Upgrade failed!", e);
 

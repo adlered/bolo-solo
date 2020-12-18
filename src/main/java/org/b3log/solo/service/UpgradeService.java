@@ -132,7 +132,7 @@ public class UpgradeService {
                         V420_430.perform();
                         break;
                     default:
-                        LOGGER.log(Level.INFO, "Version " + currentVer + " loaded in compatibility mode.");
+                        LOGGER.log(Level.INFO, "您的原始版本 " + currentVer + " 成功以兼容模式运行.");
                         SoloServletListener.VERSION = currentVer;
                 }
             }

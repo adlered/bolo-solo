@@ -165,11 +165,11 @@ public class CategoryMgmtService {
 
             categoryRepository.update(categoryId, category);
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.INFO, "Adds a category-tag relation failed", e);
+            LOGGER.log(Level.INFO, "添加分类与标签关系失败", e);
 
             throw new ServiceException(e);
         } catch (NullPointerException NPE) {
-            LOGGER.log(Level.INFO, "Category not set.");
+            LOGGER.log(Level.INFO, "文章未设置分类.");
         }
     }
 

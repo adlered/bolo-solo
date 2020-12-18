@@ -190,7 +190,7 @@ public class CommentMgmtService {
 
             final JSONObject commenter = userRepository.getByUserName(commentName);
             if (null == commenter) {
-                LOGGER.log(Level.INFO, "Newing user [" + commentName + "] ...");
+                LOGGER.log(Level.INFO, "正在创建新用户 [" + commentName + "] ...");
             }
 
             final String commentURL = requestJSONObject.optString(Comment.COMMENT_URL);

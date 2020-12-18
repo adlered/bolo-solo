@@ -108,10 +108,10 @@ public class SitemapProcessor {
 
             String content = sitemap.toString();
             content = XMLs.format(content);
-            LOGGER.log(Level.INFO, "Generated sitemap");
+            LOGGER.log(Level.INFO, "Sitemap 已生成");
             renderer.setContent(content);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Generates sitemap failed", e);
+            LOGGER.log(Level.ERROR, "Sitemap 生成失败", e);
 
             context.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
         }

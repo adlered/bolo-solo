@@ -174,10 +174,10 @@ public final class Markdowns {
                 try {
                     html = toHtmlByLute(markdownText);
                     if (!LUTE_OK) {
-                        LOGGER.log(Level.INFO, "Lute-HTTP To HTML successful.");
+                        LOGGER.log(Level.INFO, "成功通过 Lute 生成文章.");
                         LUTE_OK = true;
                     } else {
-                        LOGGER.log(Level.DEBUG, "Lute-HTTP To HTML successful.");
+                        LOGGER.log(Level.DEBUG, "成功通过 Lute 生成文章.");
                     }
                 } catch (final Exception e) {
                     LOGGER.log(Level.WARN, "Failed to use [Lute] for markdown, Using FlexMark Instead [md=" + StringUtils.substring(markdownText, 0, 256) + "]: " + e.getMessage());

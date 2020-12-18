@@ -277,7 +277,7 @@ public class ExportService {
                 return;
             }
 
-            LOGGER.log(Level.INFO, "Backup public articles to your GitHub repo [bolo-blog]....");
+            LOGGER.log(Level.INFO, "正在将公开文章备份至你的 GitHub 仓库 [bolo-blog]....");
 
             final JSONObject mds = exportHexoMDs();
             JdbcRepository.dispose();
@@ -323,7 +323,7 @@ public class ExportService {
                 ok = GitHubs.updateFile(pat, loginName, repoName, "backup.zip", zipData);
             }
             if (ok) {
-                LOGGER.log(Level.INFO, "Exported public articles to your repo [bolo-blog]");
+                LOGGER.log(Level.INFO, "你的公开文章已导出至 GitHub 仓库 [bolo-blog]");
             }
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Exports public articles to your repo failed: " + e.getMessage());
@@ -334,7 +334,7 @@ public class ExportService {
      * Exports public articles to admin's HacPai account.
      */
     public void exportHacPai(boolean manual) {
-        LOGGER.log(Level.INFO, "Backup public articles to HacPai....");
+        LOGGER.log(Level.INFO, "正在将公开文章备份至链滴社区...");
         try {
             final JSONObject preference = optionQueryService.getPreference();
             if (null == preference) {
@@ -376,7 +376,7 @@ public class ExportService {
             String userName = userQueryService.getB3username();
             String userB3Key = userQueryService.getB3password();
             if (Option.DefaultPreference.DEFAULT_B3LOG_USERNAME.equals(userName)) {
-                LOGGER.log(Level.INFO, "Backup public articles to HacPai skipped because using the default B3 account.");
+                LOGGER.log(Level.INFO, "您正在使用自带的 B3log 账户, 已跳过公开文章的备份.");
 
                 return;
             }

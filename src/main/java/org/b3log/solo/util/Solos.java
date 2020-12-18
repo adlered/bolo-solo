@@ -128,7 +128,7 @@ public final class Solos {
                     throw new Exception("No Lute-Http Service at local.");
                 }
                 if (Markdowns.LUTE_AVAILABLE) {
-                    LOGGER.log(Level.INFO, "lute_http configure detected [url=" + Markdowns.LUTE_ENGINE_URL + "]");
+                    LOGGER.log(Level.INFO, "已检测到 Lute 服务器配置 [url=" + Markdowns.LUTE_ENGINE_URL + "]");
                 }
             } catch (final Exception e) {
                 // 使用公益Lute-Http服务(Bolo专享)

@@ -116,7 +116,7 @@ public class UserMgmtService {
         String userName = userQueryService.getB3username();
         String userB3Key = userQueryService.getB3password();
         if (Option.DefaultPreference.DEFAULT_B3LOG_USERNAME.equals(userName)) {
-            LOGGER.log(Level.INFO, "Usite refresh skipped because using the default B3 account.");
+            LOGGER.log(Level.INFO, "您正在使用 B3log 默认账号, 将不会自动同步联系方式.");
 
             return;
         }
@@ -155,7 +155,7 @@ public class UserMgmtService {
         usiteOpt.put(Option.OPTION_VALUE, usite.toString());
         try {
             optionMgmtService.addOrUpdateOption(usiteOpt);
-            LOGGER.log(Level.INFO, "Usite refresh from HacPai successful: " + usite.toString());
+            LOGGER.log(Level.INFO, "已从链滴社区同步您的联系方式信息: " + usite.toString());
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Updates usite option failed", e);
 

@@ -56,7 +56,7 @@ public final class V299_300 {
      * @throws Exception upgrade fails
      */
     public static void perform() throws Exception {
-        LOGGER.log(Level.INFO, "Upgrading from version [2.9.9] to version [3.0.0]....");
+        LOGGER.log(Level.INFO, "Bolo 正在从 [2.9.9] 平滑更新至版本 [3.0.0]....");
 
         final BeanManager beanManager = BeanManager.getInstance();
         final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
@@ -121,7 +121,7 @@ public final class V299_300 {
             connection.commit();
             connection.close();
 
-            LOGGER.log(Level.INFO, "Upgraded from version [2.9.9] to version [3.0.0] successfully");
+            LOGGER.log(Level.INFO, "从版本 [2.9.9] 平滑更新至版本 [3.0.0] 成功");
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Upgrade failed!", e);
 

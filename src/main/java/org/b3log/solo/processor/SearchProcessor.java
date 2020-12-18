@@ -117,7 +117,7 @@ public class SearchProcessor {
 
             renderer.setContent(content);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Shows opensearch.xml failed", e);
+            LOGGER.log(Level.ERROR, "无法显示 opensearch.xml", e);
         }
     }
 
@@ -158,7 +158,7 @@ public class SearchProcessor {
             pagination.put(Pagination.PAGINATION_CURRENT_PAGE_NUM, pageNum);
             dataModel.put(Pagination.PAGINATION, pagination);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Search articles failed");
+            LOGGER.log(Level.ERROR, "文章搜索失败");
 
             dataModel.put(Article.ARTICLES, Collections.emptyList());
         } finally {

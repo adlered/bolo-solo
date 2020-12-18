@@ -57,7 +57,7 @@ public final class V300_310 {
      * @throws Exception upgrade fails
      */
     public static void perform() throws Exception {
-        LOGGER.log(Level.INFO, "Upgrading from version [3.0.0] to version [3.1.0]....");
+        LOGGER.log(Level.INFO, "Bolo 正在从 [3.0.0] 平滑更新至版本 [3.1.0]....");
 
         final BeanManager beanManager = BeanManager.getInstance();
         final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);

@@ -80,7 +80,7 @@ public class ArchiveDateMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Gets archive dates failed", e);
+            LOGGER.log(Level.ERROR, "无法读取归档", e);
         }
     }
 }

@@ -170,7 +170,7 @@ public class CategoryProcessor {
             String categoryURI = context.pathVar("categoryURI");
             categoryURI = URLs.encode(categoryURI);
             final int currentPageNum = Paginator.getPage(request);
-            LOGGER.log(Level.DEBUG, "Category [URI={0}, currentPageNum={1}]", categoryURI, currentPageNum);
+            LOGGER.log(Level.DEBUG, "分类 [URI={0}, currentPageNum={1}]", categoryURI, currentPageNum);
             // 读取category表，无关键操作
             final JSONObject category = categoryQueryService.getByURI(categoryURI);
             if (null == category) {

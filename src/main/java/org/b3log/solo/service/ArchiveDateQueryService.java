@@ -78,7 +78,7 @@ public class ArchiveDateQueryService {
         try {
             return archiveDateRepository.getArchiveDates();
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets archive dates failed", e);
+            LOGGER.log(Level.ERROR, "读取归档失败", e);
             throw new ServiceException("Gets archive dates failed");
         }
     }
@@ -114,7 +114,7 @@ public class ArchiveDateQueryService {
 
             return ret;
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets archive date[string=" + archiveDateString + "] failed", e);
+            LOGGER.log(Level.ERROR, "读取归档 [string=" + archiveDateString + "] 失败", e);
             throw new ServiceException("Gets archive date[string=" + archiveDateString + "] failed");
         }
     }

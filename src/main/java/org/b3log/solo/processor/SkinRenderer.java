@@ -81,7 +81,7 @@ public final class SkinRenderer extends AbstractFreeMarkerRenderer {
         if (null == ret) {
             // Bolo 默认皮肤名称，如果迁移过来的可能还是 solo-nexmoe，更新一下，防止错误
             try {
-                LOGGER.log(Level.INFO, "It seems like we can't found the skin for mobile. Restoring this setting default, please refresh your page, it should be OK.");
+                LOGGER.log(Level.INFO, "无法找到您指定的移动端皮肤. 正在恢复至默认皮肤设定, 请刷新页面后重试.");
                 final BeanManager beanManager = BeanManager.getInstance();
                 final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
                 final Transaction transaction = optionRepository.beginTransaction();

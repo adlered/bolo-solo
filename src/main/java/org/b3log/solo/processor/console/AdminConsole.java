@@ -186,7 +186,7 @@ public class AdminConsole {
             dataModelService.fillUsite(dataModel);
             dataModelService.fillCommon(context, dataModel, preference);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Admin index render failed", e);
+            LOGGER.log(Level.ERROR, "后台页面渲染出错", e);
         }
 
         fireFreeMarkerActionEvent(templateName, dataModel);
@@ -352,7 +352,7 @@ public class AdminConsole {
                 outputStream.flush();
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Export failed", e);
+            LOGGER.log(Level.ERROR, "导出失败", e);
             context.renderJSON().renderMsg("Export failed, please check log");
 
             return;
@@ -421,7 +421,7 @@ public class AdminConsole {
                 outputStream.flush();
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Export failed", e);
+            LOGGER.log(Level.ERROR, "导出失败", e);
             context.renderJSON().renderMsg("Export failed, please check log");
 
             return;

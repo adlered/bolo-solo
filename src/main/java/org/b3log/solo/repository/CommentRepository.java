@@ -147,7 +147,7 @@ public class CommentRepository extends AbstractRepository {
             remove(commentId);
         }
 
-        LOGGER.log(Level.DEBUG, "Removed comments[onId={0}, removedCnt={1}]", onId, comments.size());
+        LOGGER.log(Level.DEBUG, "评论已移除 [onId={0}, removedCnt={1}]", onId, comments.size());
 
         return comments.size();
     }
@@ -159,7 +159,7 @@ public class CommentRepository extends AbstractRepository {
      * @throws RepositoryException repository exception
      */
     private void removeForUnpublishedArticles(final List<JSONObject> comments) throws RepositoryException {
-        LOGGER.debug("Removing unpublished articles' comments....");
+        LOGGER.debug("正在删除私有文章的全部评论...");
         final Iterator<JSONObject> iterator = comments.iterator();
 
         while (iterator.hasNext()) {
@@ -170,6 +170,6 @@ public class CommentRepository extends AbstractRepository {
             }
         }
 
-        LOGGER.debug("Removed unpublished articles' comments....");
+        LOGGER.debug("私有文章的全部评论已删除...");
     }
 }

@@ -214,7 +214,7 @@ public class ArticleMgmtService {
             final JSONObject data = new JSONObject().put(ARTICLE, article);
             B3ArticleSender.pushArticleToRhy(data);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Pushes an article [id=" + articleId + "] to community failed", e);
+            LOGGER.log(Level.ERROR, "文章推送至社区失败 [id=" + articleId + "]", e);
         }
     }
 
@@ -253,7 +253,7 @@ public class ArticleMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Cancels publish article failed", e);
+            LOGGER.log(Level.ERROR, "无法取消文章发布", e);
 
             throw new ServiceException(e);
         }
@@ -281,7 +281,7 @@ public class ArticleMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Can't put the article[oId{0}] to top", articleId);
+            LOGGER.log(Level.ERROR, "无法将文章 [oId{0}] 置顶", articleId);
             throw new ServiceException(e);
         }
     }
@@ -390,7 +390,7 @@ public class ArticleMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Updates an article failed", e);
+            LOGGER.log(Level.ERROR, "更新文章失败", e);
 
             throw e;
         } catch (final Exception e) {
@@ -398,7 +398,7 @@ public class ArticleMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Updates an article failed", e);
+            LOGGER.log(Level.ERROR, "更新文章失败", e);
 
             throw new ServiceException(e.getMessage());
         }
@@ -527,7 +527,7 @@ public class ArticleMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.ERROR, "Removes an article[id=" + articleId + "] failed", e);
+            LOGGER.log(Level.ERROR, "删除文章 [id=" + articleId + "] 失败", e);
             throw new ServiceException(e);
         }
     }
@@ -557,7 +557,7 @@ public class ArticleMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.WARN, "Updates article random value failed");
+            LOGGER.log(Level.WARN, "无法为文章抽取随机文章号");
 
             throw new ServiceException(e);
         }
@@ -579,7 +579,7 @@ public class ArticleMgmtService {
                 return;
             }
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Gets article [id=" + articleId + "] failed", e);
+            LOGGER.log(Level.ERROR, "读取文章 [id=" + articleId + "] 失败", e);
 
             return;
         }
@@ -596,7 +596,7 @@ public class ArticleMgmtService {
                 transaction.rollback();
             }
 
-            LOGGER.log(Level.WARN, "Updates article view count failed");
+            LOGGER.log(Level.WARN, "更新文章浏览总数失败");
 
             throw new ServiceException(e);
         }
@@ -890,10 +890,10 @@ public class ArticleMgmtService {
             // 测试时间戳是否合法
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String newDate = simpleDateFormat.format(new Date(newCreated));
-            LOGGER.log(Level.INFO, "New article date: " + newDate);
+            LOGGER.log(Level.INFO, "文章发布日期修改: " + newDate);
             article.put(ARTICLE_CREATED, newCreated);
         } catch (Exception e) {
-            LOGGER.log(Level.ERROR, "Customize article create time: timestamp syntax error, using earlier...");
+            LOGGER.log(Level.ERROR, "自定义文章发布日期: 时间戳格式错误, 恢复至上一个正常发布时间...");
             article.put(ARTICLE_CREATED, created);
         }
         article.put(ARTICLE_COMMENT_COUNT, oldArticle.getInt(ARTICLE_COMMENT_COUNT));

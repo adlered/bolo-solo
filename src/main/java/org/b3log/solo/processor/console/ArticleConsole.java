@@ -530,7 +530,7 @@ public class ArticleConsole {
             }
 
             // 打印请求日志，如果发生特殊情况丢失数据，至少还可以根据日志寻回内容
-            LOGGER.log(Level.INFO, "Updates an article request [" + requestJSONObject.toString() + "]");
+            LOGGER.log(Level.INFO, "文章已更新 [" + requestJSONObject.toString() + "]");
 
             articleMgmtService.updateArticle(requestJSONObject);
 
@@ -587,7 +587,7 @@ public class ArticleConsole {
             requestJSONObject.getJSONObject(Article.ARTICLE).put(Article.ARTICLE_AUTHOR_ID, currentUser.getString(Keys.OBJECT_ID));
 
             // 打印请求日志，如果发生特殊情况丢失数据，至少还可以根据日志寻回内容
-            LOGGER.log(Level.INFO, "Adds an article request [" + requestJSONObject.toString() + "]");
+            LOGGER.log(Level.INFO, "文章已收录 [" + requestJSONObject.toString() + "]");
 
             final String articleId = articleMgmtService.addArticle(requestJSONObject);
             ret.put(Keys.OBJECT_ID, articleId);

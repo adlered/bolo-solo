@@ -90,7 +90,7 @@ public class PermalinkHandler implements Handler {
                 return;
             }
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Processes article permalink handler failed", e);
+            LOGGER.log(Level.ERROR, "文章链接处理失败", e);
             context.sendError(HttpServletResponse.SC_NOT_FOUND);
 
             return;

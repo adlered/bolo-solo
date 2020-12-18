@@ -56,7 +56,7 @@ public final class V361_362 {
         final String fromVer = "3.6.1";
         final String toVer = "3.6.2";
 
-        LOGGER.log(Level.INFO, "Upgrading from version [" + fromVer + "] to version [" + toVer + "]....");
+        LOGGER.log(Level.INFO, "Bolo 正在从 [" + fromVer + "] 平滑更新至版本 [" + toVer + "]....");
 
         final BeanManager beanManager = BeanManager.getInstance();
         final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
@@ -81,13 +81,13 @@ public final class V361_362 {
                     final String commentId = comment.optString(Keys.OBJECT_ID);
                     comment.put(Comment.COMMENT_CONTENT, commentContent);
                     commentRepository.update(commentId, comment);
-                    LOGGER.log(Level.INFO, "Migrated comment [id=" + commentId + "]'s content emoji");
+                    LOGGER.log(Level.INFO, "已将评论 [id=" + commentId + "] 中的 Emoji 生成");
                 }
             }
 
             transaction.commit();
 
-            LOGGER.log(Level.INFO, "Upgraded from version [" + fromVer + "] to version [" + toVer + "] successfully");
+            LOGGER.log(Level.INFO, "从版本 [" + fromVer + "] 平滑更新至版本 [" + toVer + "] 成功");
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Upgrade failed!", e);
 

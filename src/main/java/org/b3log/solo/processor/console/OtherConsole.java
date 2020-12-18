@@ -89,7 +89,7 @@ public class OtherConsole {
             jsonObject.put(Keys.STATUS_CODE, true);
             jsonObject.put(Keys.MSG, langPropsService.get("removeSuccLabel"));
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Removes unused archives failed", e);
+            LOGGER.log(Level.ERROR, "移除未使用标签失败", e);
 
             jsonObject.put(Keys.MSG, langPropsService.get("removeFailLabel"));
         }
@@ -121,7 +121,7 @@ public class OtherConsole {
             jsonObject.put(Keys.STATUS_CODE, true);
             jsonObject.put(Keys.MSG, langPropsService.get("removeSuccLabel"));
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Removes unused tags failed", e);
+            LOGGER.log(Level.ERROR, "移除未使用标签失败", e);
 
             jsonObject.put(Keys.MSG, langPropsService.get("removeFailLabel"));
         }

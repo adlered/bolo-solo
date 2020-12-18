@@ -115,7 +115,7 @@ public class TagProcessor {
         try {
             String tagTitle = context.pathVar("tagTitle");
             final int currentPageNum = Paginator.getPage(request);
-            LOGGER.log(Level.DEBUG, "Tag [title={0}, currentPageNum={1}]", tagTitle, currentPageNum);
+            LOGGER.log(Level.DEBUG, "标签 [title={0}, currentPageNum={1}]", tagTitle, currentPageNum);
             final JSONObject result = tagQueryService.getTagByTitle(tagTitle);
             if (null == result) {
                 context.sendError(HttpServletResponse.SC_NOT_FOUND);

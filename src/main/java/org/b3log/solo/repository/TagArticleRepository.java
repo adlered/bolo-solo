@@ -97,7 +97,7 @@ public class TagArticleRepository extends AbstractRepository {
         try {
             return (int) count(query);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets tag [" + tagId + "]'s article count failed", e);
+            LOGGER.log(Level.ERROR, "获取标签 [" + tagId + "] 的文章总数失败", e);
 
             return -1;
         }
@@ -125,7 +125,7 @@ public class TagArticleRepository extends AbstractRepository {
                     "AND t.tag_oId = ?", Article.ARTICLE_STATUS_C_PUBLISHED, tagId);
             return result.get(0).optInt("C");
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets tag [" + tagId + "]'s published article count failed", e);
+            LOGGER.log(Level.ERROR, "获取标签 [" + tagId + "] 的公开文章总数失败", e);
 
             return -1;
         }

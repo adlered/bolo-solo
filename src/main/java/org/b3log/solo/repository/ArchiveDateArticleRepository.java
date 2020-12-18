@@ -73,7 +73,7 @@ public class ArchiveDateArticleRepository extends AbstractRepository {
             final List<JSONObject> articlesCountResult = select(queryCount.append(queryStr.toString()).toString());
             return articlesCountResult == null ? 0 : articlesCountResult.get(0).optInt("C");
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets archivedate [" + archiveDateId + "]'s published article count failed", e);
+            LOGGER.log(Level.ERROR, "获取发布时间为 [" + archiveDateId + "] 的公开文章总数失败", e);
 
             return -1;
         }

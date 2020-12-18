@@ -112,7 +112,7 @@ public class SkinConsole {
                 final JSONObject s = new JSONObject();
                 final String name = Latkes.getSkinName(dirName);
                 if (null == name) {
-                    LOGGER.log(Level.WARN, "The directory [{0}] does not contain any skin, ignored it", dirName);
+                    LOGGER.log(Level.WARN, "文件夹 [{0}] 不包含任何皮肤文件, 已将它忽略", dirName);
 
                     continue;
                 }

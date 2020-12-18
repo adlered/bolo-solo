@@ -84,7 +84,7 @@ public class TagConsole {
             jsonObject.put(Tag.TAGS, tagQueryService.getTags());
             jsonObject.put(Keys.STATUS_CODE, true);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets tags failed", e);
+            LOGGER.log(Level.ERROR, "获取标签失败", e);
 
             jsonObject.put(Keys.STATUS_CODE, false);
         }
@@ -131,7 +131,7 @@ public class TagConsole {
 
             jsonObject.put(Keys.STATUS_CODE, true);
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets unused tags failed", e);
+            LOGGER.log(Level.ERROR, "无法获取未使用的标签", e);
 
             jsonObject.put(Keys.STATUS_CODE, false);
         }

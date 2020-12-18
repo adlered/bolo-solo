@@ -106,7 +106,7 @@ public class UserTemplateProcessor {
     public void showPage(final RequestContext context) {
         final String requestURI = context.requestURI();
         final String templateName = context.pathVar("name") + ".ftl";
-        LOGGER.log(Level.DEBUG, "Shows page [requestURI={0}, templateName={1}]", requestURI, templateName);
+        LOGGER.log(Level.DEBUG, "展示页面 [requestURI={0}, templateName={1}]", requestURI, templateName);
 
         final HttpServletRequest request = context.getRequest();
         final HttpServletResponse response = context.getResponse();
@@ -178,14 +178,14 @@ public class UserTemplateProcessor {
             Collections.addAll(usiteList, "usiteUserId", "usiteWeiBo", "usiteQQMusic", "usiteStackOverflow", "usiteDribbble", "usiteGitHub", "usiteMedium", "usiteTwitter", "usiteQQ", "usiteLinkedIn", "usiteSteam", "oId", "usiteInstagram", "usiteCodePen", "usiteWYMusic", "usiteWeChat", "usiteZhiHu", "usiteBehance", "usiteTelegram", "usiteFacebook");
             for (String i : usiteList) {
                 if (!usiteObject.has(i)) {
-                    LOGGER.log(Level.ERROR, "Updates usite option failed: Invalid JSON Object.");
+                    LOGGER.log(Level.ERROR, "更新联系信息失败: 错误的 JSON 格式.");
                     context.renderJSON().renderCode(500);
 
                     return;
                 }
             }
         } catch (Exception e) {
-            LOGGER.log(Level.ERROR, "Updates usite option failed", e);
+            LOGGER.log(Level.ERROR, "更新联系信息失败", e);
             context.renderJSON().renderCode(500);
 
             return;
@@ -194,12 +194,12 @@ public class UserTemplateProcessor {
         usiteOpt.put(Option.OPTION_VALUE, usite);
         try {
             optionMgmtService.addOrUpdateOption(usiteOpt);
-            LOGGER.log(Level.INFO, "Usite refresh from Local successful: " + usite);
+            LOGGER.log(Level.INFO, "联系信息配置刷新成功: " + usite);
             context.renderJSON().renderCode(200);
 
             return;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Updates usite option failed", e);
+            LOGGER.log(Level.ERROR, "联系信息配置刷新失败", e);
             context.renderJSON().renderCode(500);
 
             return;

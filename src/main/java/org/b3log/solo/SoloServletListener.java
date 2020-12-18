@@ -102,7 +102,7 @@ public final class SoloServletListener extends AbstractServletListener {
         final String jdbcURL = Latkes.getLocalProperty("jdbc.URL");
         final boolean luteAvailable = Markdowns.LUTE_AVAILABLE;
 
-        LOGGER.log(Level.INFO, "Bolo 正在启动 [基于 Solo 原始版本=" + VERSION + ", Servlet 容器=" + Latkes.getServletInfo(servletContextEvent.getServletContext())
+        LOGGER.log(Level.INFO, "Bolo 正在启动 [Bolo 版本=" + BOLO_VERSION + ", 基于 Solo 原始版本=" + VERSION + ", Servlet 容器=" + Latkes.getServletInfo(servletContextEvent.getServletContext())
                 + ", 操作系统=" + Latkes.getOperatingSystemName() + ", 是否为 Docker 运行=" + Latkes.isDocker() + ", 已配置 Lute 服务器=" + luteAvailable + ", 进程号(PID)=" + Latkes.currentPID()
                 + ", 数据库=" + runtimeDatabase + ", 运行模式=" + runtimeMode + ", 数据库用户名=" + jdbcUsername + ", 数据库连接地址=" + jdbcURL + "]");
 

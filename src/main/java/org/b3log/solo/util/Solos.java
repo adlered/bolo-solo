@@ -137,9 +137,9 @@ public final class Solos {
                 Markdowns.LUTE_AVAILABLE = true;
                 try {
                     Markdowns.toHtmlByLute("#test");
-                    LOGGER.log(Level.INFO, "您没有配置 Lute-HTTP 渲染器，已为您连接 Bolo 专属公益 Lute-HTTP 服务，您可以获得更佳的渲染体验；禁用公益服务器请在偏好设置中修改。");
+                    LOGGER.log(Level.INFO, "您没有配置 Lute 渲染器，已为您连接 Bolo 专属公益 Lute 服务，您可以获得更佳的文章渲染体验，支持更多数学公式；禁用公益服务器请在偏好设置中修改。");
                 } catch (Exception exception) {
-                    LOGGER.log(Level.INFO, "公益 Lute-HTTP 服务未就绪，将禁用 Lute 渲染，使用自带渲染器。");
+                    LOGGER.log(Level.INFO, "公益 Lute 服务未就绪，将禁用 Lute 渲染，使用自带渲染器。");
                     Markdowns.LUTE_ENGINE_URL = solo.getString("luteHttp");
                     Markdowns.LUTE_AVAILABLE = false;
                 }

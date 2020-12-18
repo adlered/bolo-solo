@@ -71,7 +71,7 @@ public class MailProcessor {
             LOGGER.log(Level.ERROR, "邮件发送失败! 请检查您的邮箱设定.");
 
             context.renderJSON().renderCode(500);
-            context.renderJSON().renderMsg("邮件发送失败! 请检查您的邮箱设定.");
+            context.renderJSON().renderMsg("Send mail failed! Please check your MailBox Settings.");
 
             return;
         }

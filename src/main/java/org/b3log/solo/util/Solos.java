@@ -137,9 +137,9 @@ public final class Solos {
                 Markdowns.LUTE_AVAILABLE = true;
                 try {
                     Markdowns.toHtmlByLute("#test");
-                    LOGGER.log(Level.INFO, "您没有配置Lute-HTTP渲染器，已为您连接Bolo专属公益Lute-HTTP服务，您可以获得更佳的渲染体验；禁用公益服务器请在偏好设置中修改。");
+                    LOGGER.log(Level.INFO, "You have not configured Lute renderer, but have you connect to Bolo exclusive Lute public service, so you can get a better text analysis experience. To disable public Lute server, modify it in the preferences.");
                 } catch (Exception exception) {
-                    LOGGER.log(Level.INFO, "公益Lute-HTTP服务未就绪，将禁用Lute渲染，使用自带渲染器。");
+                    LOGGER.log(Level.INFO, "The connection to the public welfare Lute service failed. Lute rendering will be disabled and the built-in renderer will be used.");
                     Markdowns.LUTE_ENGINE_URL = solo.getString("luteHttp");
                     Markdowns.LUTE_AVAILABLE = false;
                 }

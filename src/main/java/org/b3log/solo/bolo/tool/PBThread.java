@@ -64,7 +64,7 @@ public class PBThread implements Runnable {
                     String articleTitle = article.optString("articleTitle");
                     String articleContent = article.optString("articleContent");
 
-                    LOGGER.log(Level.INFO, "Processing article: " + oId + " : " + articleTitle);
+                    LOGGER.log(Level.INFO, "Processing article [oId=" + oId + ", articleTitle=" + articleTitle + "]");
 
                     Pattern pattern_1 = Pattern.compile(suffix_1);
                     Pattern pattern_2 = Pattern.compile(suffix_2);

@@ -59,6 +59,10 @@
                 ]
             }</script>
         <style type="text/css">
+            tr th, tr td {
+                border: 1px solid #1d1f21;
+            }
+
             .site-top .lower nav {
                 display: block !important;
             }

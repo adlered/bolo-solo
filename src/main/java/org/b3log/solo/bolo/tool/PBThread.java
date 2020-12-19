@@ -124,14 +124,14 @@ public class PBThread implements Runnable {
 
                         // 过滤文件名
                         String date = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
-                        String regEx = ".+/(.+)$";
+                        String regEx = "\\w+\\.(\\w+)";
                         Pattern p = Pattern.compile(regEx);
-                        Matcher m = p.matcher(oldUrl);
+                        Matcher m = p.matcher(oldUrl.replaceAll("https://img.hacpai.com", "").replaceAll("https://b3logfile.com", ""));
                         String filename;
                         if (!m.find()) {
                             filename = date + ".jpg";
                         } else {
-                            filename = m.group(1);
+                            filename = m.group();
                         }
 
                         file = File.createTempFile("file", ".jpg");

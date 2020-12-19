@@ -75,6 +75,17 @@ public class PBThread implements Runnable {
                         urlList.add(matcher_2.group().replaceAll("\\]\\(", "").replaceAll("\\)", ""));
                     }
 
+                    // 逐个处理图片
+                    ArrayList<String> newUrlList = new ArrayList<>();
+                    for (int i = 0; i < urlList.size(); i++) {
+                        String url = urlList.get(i);
+                        String newUrl = "None";
+                        // 处理
+                        // 保存
+                        newUrlList.add(newUrl);
+                        LOGGER.log(Level.INFO, url + " >>> " + newUrl);
+                    }
+
                 }
 
             } catch (Exception e) {

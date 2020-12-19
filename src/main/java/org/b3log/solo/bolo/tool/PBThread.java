@@ -11,6 +11,8 @@ import org.b3log.latke.util.CollectionUtils;
 import org.b3log.solo.repository.ArticleRepository;
 import org.json.JSONObject;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -82,12 +84,39 @@ public class PBThread implements Runnable {
                     // 逐个处理图片
                     ArrayList<String> newUrlList = new ArrayList<>();
                     for (int i = 0; i < urlList.size(); i++) {
-                        String url = urlList.get(i);
+                        String oldUrl = urlList.get(i);
                         String newUrl = "None";
                         // 处理
+                        final URL url = new URL(oldUrl);
+                        final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        if (oldUrl.indexOf("hacpai.com") != -1) {
+                            conn.setRequestProperty(":authority:", "img.hacpai.com");
+                            conn.setRequestProperty(":path:", oldUrl.replaceAll("https://img.hacpai.com", ""));
+                        } else {
+                            conn.setRequestProperty(":authority:", "b3logfile.com");
+                            conn.setRequestProperty(":path:", oldUrl.replaceAll("https://b3logfile.com", ""));
+                        }
+                        conn.setRequestProperty(":method:", "GET");
+                        conn.setRequestProperty(":scheme:", "HTTPS");
+                        conn.setRequestProperty("accept", "image/avif,image/webp,image/apng,image/*,*/*;q=0.8");
+                        conn.setRequestProperty("accept-encoding", "gzip, deflate, br");
+                        conn.setRequestProperty("accept-language", "zh-CN,zh;q=0.9,en;q=0.8");
+                        conn.setRequestProperty("cache-control", "no-cache");
+                        conn.setRequestProperty("pragma", "no-cache");
+                        conn.setRequestProperty("referer", "http://localhost:8080/");
+                        conn.setRequestProperty("sec-fetch-dest", "image");
+                        conn.setRequestProperty("sec-fetch-mode", "no-cors");
+                        conn.setRequestProperty("sec-fetch-site", "cross-site");
+                        conn.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36");
+                        conn.setConnectTimeout(100);
+                        conn.setReadTimeout(3000);
+                        conn.setDoOutput(true);
+                        conn.getInputStream();
+
+
                         // 保存
                         newUrlList.add(newUrl);
-                        LOGGER.log(Level.INFO, url + " >>> " + newUrl);
+                        LOGGER.log(Level.INFO, oldUrl + " >>> " + newUrl);
                     }
 
                 }

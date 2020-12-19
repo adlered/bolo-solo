@@ -45,7 +45,7 @@ public class PBThread implements Runnable {
             status = STATUS_RUNNING;
 
             // 开始处理图片
-            LOGGER.log(Level.INFO, "图片开始处理");
+            LOGGER.log(Level.INFO, "Converting images...");
 
             try {
                 final BeanManager beanManager = BeanManager.getInstance();
@@ -60,7 +60,11 @@ public class PBThread implements Runnable {
                 String prefix_2 = ")";
                 // 解剖每个文章并重新上传组合
                 for (JSONObject article : articlesResult) {
+                    String oId = article.optString("oId");
+                    String articleTitle = article.optString("articleTitle");
                     String articleContent = article.optString("articleContent");
+
+                    LOGGER.log(Level.INFO, "Processing article: " + oId + " : " + articleTitle);
 
                     Pattern pattern_1 = Pattern.compile(suffix_1);
                     Pattern pattern_2 = Pattern.compile(suffix_2);
@@ -101,7 +105,7 @@ public class PBThread implements Runnable {
             // 关闭线程
             lock = false;
             status = STATUS_SPARE;
-            LOGGER.log(Level.INFO, "图片处理完毕");
+            LOGGER.log(Level.INFO, "Image convert completed.");
         }
     }
 }

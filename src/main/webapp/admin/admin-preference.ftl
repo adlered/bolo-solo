@@ -190,6 +190,12 @@
         </select>
         <label>
             <div class="fn__flex-inline">
+                ${welfareLabel}
+                <input id="welfareLuteService" type="checkbox" class="normalInput"/>
+            </div>
+        </label>
+        <label>
+            <div class="fn__flex-inline">
                 ${enableArticleUpdateHint1Label}
                 <input id="enableArticleUpdateHint" type="checkbox" class="normalInput"/>
             </div>

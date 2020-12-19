@@ -186,6 +186,11 @@ public final class Option {
     public static final String ID_C_META_DESCRIPTION = "metaDescription";
 
     /**
+     * Key of welfare lute service.
+     */
+    public static final String ID_C_WELFARE_LUTE_SERVICE = "welfareLuteService";
+
+    /**
      * Key of article update hint flag.
      */
     public static final String ID_C_ENABLE_ARTICLE_UPDATE_HINT = "enableArticleUpdateHint";
@@ -495,6 +500,11 @@ public final class Option {
          * @see java.util.TimeZone#getAvailableIDs()
          */
         public static final String DEFAULT_TIME_ZONE = "Asia/Shanghai";
+
+        /**
+         * Default welfare lute service.
+         */
+        public static final String DEFAULT_WELFARE_LUTE_SERVICE = "false";
 
         /**
          * Default enable article update hint.

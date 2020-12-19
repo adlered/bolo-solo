@@ -136,6 +136,7 @@ admin.preference = {
         'true' === preference.commentable ? $('#commentable').attr('checked', 'checked') : $('commentable').removeAttr('checked')
         'true' === preference.syncGitHub ? $('#syncGitHub').attr('checked', 'checked') : $('syncGitHub').removeAttr('checked')
         'true' === preference.pullGitHub ? $('#pullGitHub').attr('checked', 'checked') : $('pullGitHub').removeAttr('checked')
+        'true' === preference.welfareLuteService ? $('#welfareLuteService').attr('checked', 'checked') : $('#welfareLuteService').removeAttr('checked')
 
         $("input:radio[value='" + preference.editorMode + "']").attr('checked','true');
         admin.preference.editorMode = preference.editorMode
@@ -264,6 +265,8 @@ admin.preference = {
 
     var requestJSONObject = {
       'preference': {
+        'welfareLuteService': $("#welfareLuteService").
+          prop('checked'),
         'adminActiveSentToMailbox': $("#adminActiveSentToMailbox").val(),
         'wafCurrentLimitTimes': $("#wafCurrentLimitTimes").val(),
         'wafCurrentLimitSecond': $("#wafCurrentLimitSecond").val(),

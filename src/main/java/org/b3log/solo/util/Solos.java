@@ -40,6 +40,7 @@ import org.b3log.latke.util.Crypts;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.Global;
+import org.b3log.solo.bolo.prop.Options;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
@@ -131,19 +132,33 @@ public final class Solos {
                     LOGGER.log(Level.INFO, "lute_http configure detected [url=" + Markdowns.LUTE_ENGINE_URL + "]");
                 }
             } catch (final Exception e) {
-                // 使用公益Lute-Http服务(Bolo专享)
-                final String LUTE_URL = "http://lute.stackoverflow.wiki:8249";
-                Markdowns.LUTE_ENGINE_URL = LUTE_URL;
-                Markdowns.LUTE_AVAILABLE = true;
-                try {
-                    Markdowns.toHtmlByLute("#test");
-                    LOGGER.log(Level.INFO, "You have not configured Lute renderer, but have you connect to Bolo exclusive Lute public service, so you can get a better text analysis experience. To disable public Lute server, modify it in the preferences.");
-                } catch (Exception exception) {
-                    LOGGER.log(Level.INFO, "The connection to the public welfare Lute service failed. Lute rendering will be disabled and the built-in renderer will be used.");
-                    Markdowns.LUTE_ENGINE_URL = solo.getString("luteHttp");
-                    Markdowns.LUTE_AVAILABLE = false;
-                }
+                enableWelfareLuteService();
             }
+        }
+    }
+
+    public static void enableWelfareLuteService() {
+        ResourceBundle solo;
+        try {
+            solo = ResourceBundle.getBundle("solo");
+        } catch (final MissingResourceException e) {
+            solo = ResourceBundle.getBundle("b3log"); // 2.8.0 向后兼容
+        }
+        boolean status = Boolean.parseBoolean(Options.get(Option.ID_C_WELFARE_LUTE_SERVICE));
+        // 使用公益Lute-Http服务(Bolo专享)
+        final String LUTE_URL = "http://lute.stackoverflow.wiki:8249";
+        Markdowns.LUTE_ENGINE_URL = LUTE_URL;
+        Markdowns.LUTE_AVAILABLE = status;
+        if (status) {
+            try {
+                Markdowns.toHtmlByLute("#test");
+                LOGGER.log(Level.INFO, "You have not configured Lute renderer, but have you connect to Bolo exclusive Lute public service, so you can get a better text analysis experience. To disable public Lute server, modify it in the preferences.");
+            } catch (Exception exception) {
+                LOGGER.log(Level.INFO, "The connection to the public welfare Lute service failed. Lute rendering will be disabled and the built-in renderer will be used.");
+                Markdowns.LUTE_AVAILABLE = false;
+            }
+        } else {
+            LOGGER.log(Level.INFO, "Welfare Lute Service has disabled.");
         }
     }
 

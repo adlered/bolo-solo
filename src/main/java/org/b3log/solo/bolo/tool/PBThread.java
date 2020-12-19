@@ -8,12 +8,18 @@ import org.b3log.latke.logging.Logger;
 import org.b3log.latke.repository.Query;
 import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.util.CollectionUtils;
+import org.b3log.solo.bolo.pic.util.UploadUtil;
+import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.ArticleRepository;
+import org.b3log.solo.repository.OptionRepository;
 import org.json.JSONObject;
 
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -52,6 +58,7 @@ public class PBThread implements Runnable {
             try {
                 final BeanManager beanManager = BeanManager.getInstance();
                 final ArticleRepository articleRepository = beanManager.getReference(ArticleRepository.class);
+                final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
                 final Query query = new Query();
                 final List<JSONObject> articlesResult = articleRepository.getList(query);
 
@@ -87,17 +94,13 @@ public class PBThread implements Runnable {
                         String oldUrl = urlList.get(i);
                         String newUrl = "None";
                         // 处理
+                        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+                        BufferedOutputStream stream = null;
+                        InputStream inputStream = null;
+                        File file = null;
+
                         final URL url = new URL(oldUrl);
                         final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                        if (oldUrl.indexOf("hacpai.com") != -1) {
-                            conn.setRequestProperty(":authority:", "img.hacpai.com");
-                            conn.setRequestProperty(":path:", oldUrl.replaceAll("https://img.hacpai.com", ""));
-                        } else {
-                            conn.setRequestProperty(":authority:", "b3logfile.com");
-                            conn.setRequestProperty(":path:", oldUrl.replaceAll("https://b3logfile.com", ""));
-                        }
-                        conn.setRequestProperty(":method:", "GET");
-                        conn.setRequestProperty(":scheme:", "HTTPS");
                         conn.setRequestProperty("accept", "image/avif,image/webp,image/apng,image/*,*/*;q=0.8");
                         conn.setRequestProperty("accept-encoding", "gzip, deflate, br");
                         conn.setRequestProperty("accept-language", "zh-CN,zh;q=0.9,en;q=0.8");
@@ -111,17 +114,54 @@ public class PBThread implements Runnable {
                         conn.setConnectTimeout(100);
                         conn.setReadTimeout(3000);
                         conn.setDoOutput(true);
-                        conn.getInputStream();
 
+                        inputStream = conn.getInputStream();
+                        byte[] buffer = new byte[1024];
+                        int len = 0;
+                        while ((len = inputStream.read(buffer)) != -1) {
+                            outStream.write(buffer, 0, len);
+                        }
+
+                        // 过滤文件名
+                        String date = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+                        String regEx = ".+/(.+)$";
+                        Pattern p = Pattern.compile(regEx);
+                        Matcher m = p.matcher(oldUrl);
+                        String filename;
+                        if (!m.find()) {
+                            filename = date + ".jpg";
+                        } else {
+                            filename = m.group(1);
+                        }
+
+                        file = File.createTempFile("file", ".jpg");
+                        FileOutputStream fileOutputStream = new FileOutputStream(file);
+                        stream = new BufferedOutputStream(fileOutputStream);
+                        stream.write(outStream.toByteArray());
+
+                        String config;
+                        try {
+                            config = optionRepository.get(Option.ID_C_TUCHUANG_CONFIG).optString(Option.OPTION_VALUE);
+                        } catch (Exception e) {
+                            config = "hacpai";
+                        }
+                        try {
+                            newUrl = UploadUtil.upload(config, file);
+                        } catch (Exception e) {
+                            newUrl = oldUrl;
+                        }
 
                         // 保存
                         newUrlList.add(newUrl);
                         LOGGER.log(Level.INFO, oldUrl + " >>> " + newUrl);
                     }
 
+                    System.out.println();
+
                 }
 
             } catch (Exception e) {
+                e.printStackTrace();
                 LOGGER.log(Level.ERROR, "Cannot get articles.");
                 lock = false;
                 status = STATUS_ERROR;

@@ -103,6 +103,10 @@ public class KanBanNiangProcessor {
                 URLConnection connection = url.openConnection();
                 float size = (connection.getContentLength() / 1024 / 1024);
                 System.out.println("KanBanNiang resources total size: " + size + " MB ");
+                for (int i = 0; i < ((int) size); i++) {
+                    System.out.print(i + "MB ");
+                }
+                System.out.println();
                 InputStream inputStream = connection.getInputStream();
                 long sizeKB = 0;
                 int length = 0;
@@ -110,9 +114,10 @@ public class KanBanNiangProcessor {
                 while ((length = inputStream.read(bytes)) != -1) {
                     sizeKB++;
                     fileOutputStream.write(bytes, 0, length);
-                    if (sizeKB % 1024 == 0) {
-                        int percent = (int) (((sizeKB / 1024) / size) * 100);
-                        System.out.print(percent + "% ");
+                    if (sizeKB % 256 == 0) {
+                        System.out.print("▉");
+                    } else if (sizeKB == connection.getContentLength() / 1024) {
+                        System.out.print(" √");
                     }
                 }
                 System.out.println();

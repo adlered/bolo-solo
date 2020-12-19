@@ -117,7 +117,7 @@ public class KanBanNiangProcessor {
                     if (sizeKB % 256 == 0) {
                         System.out.print("▉");
                     } else if (sizeKB == connection.getContentLength() / 1024) {
-                        System.out.print(" √");
+                        System.out.print(" :)");
                     }
                 }
                 System.out.println();

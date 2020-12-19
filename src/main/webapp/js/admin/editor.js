@@ -98,7 +98,6 @@ $.extend(SoloEditor.prototype, {
       upload: {
         max: 100 * 1024 * 1024 * 1024,
         url: Label.uploadURL,
-        linkToImgUrl: Label.servePath + '/upload/fetch',
         token: Label.uploadToken,
         filename: function (name) {
           return name.replace(/[^(a-zA-Z0-9\u4e00-\u9fa5\.)]/g, '').

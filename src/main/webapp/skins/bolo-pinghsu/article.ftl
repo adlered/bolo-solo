@@ -57,7 +57,7 @@
             </#if>
             <time>
                 <#setting locale="en_US">
-                ${article.articleCreateDate?string["MMM d, yyyy"]}
+                ${article.articleCreateDate?string("yyyy-MM-dd")}/${article.articleUpdateDate?string("yyyy-MM-dd")}
             </time>
             <#if article.articleCategory != "">
                 in <a href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a>

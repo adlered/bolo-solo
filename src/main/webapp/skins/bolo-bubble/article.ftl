@@ -47,7 +47,7 @@
         <div class="ft__center">
             <div class="article__meta">
                 <time>
-                    ${article.articleCreateDate?string("yyyy-MM-dd")}
+                    ${article.articleCreateDate?string("yyyy-MM-dd")}/${article.articleUpdateDate?string("yyyy-MM-dd")}
                 </time>
                 /
                 <#list article.articleTags?split(",") as articleTag>

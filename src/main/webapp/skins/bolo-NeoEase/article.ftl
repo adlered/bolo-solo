@@ -53,7 +53,7 @@
                         </h2>
                         <div class="left article-element">
                             <span class="date-ico" title="${dateLabel}">
-                                ${article.articleCreateDate?string("yyyy-MM-dd HH:mm:ss")}
+                                ${article.articleCreateDate?string("yyyy-MM-dd")}/${article.articleUpdateDate?string("yyyy-MM-dd")}
                             </span>
                             <span class="user-ico" title="${authorLabel}">
                                 <a rel="nofollow" href="${servePath}/authors/${article.authorId}">${article.authorName}</a>

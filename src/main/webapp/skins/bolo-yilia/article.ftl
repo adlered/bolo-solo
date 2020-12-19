@@ -49,7 +49,7 @@
                     </sup>
                 </#if>
             </h2>
-            <time><span class="icon-date"></span> ${article.articleCreateDate?string("yyyy-MM-dd")}</time>
+            <time><span class="icon-date"></span> ${article.articleCreateDate?string("yyyy-MM-dd")}/${article.articleUpdateDate?string("yyyy-MM-dd")}</time>
         </header>
         <div class="article__footer fn__flex">
             <span class="icon-tag fn__flex-center"></span>

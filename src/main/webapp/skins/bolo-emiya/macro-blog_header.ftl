@@ -75,7 +75,7 @@
         <div class="custom_header__articleMeta">
           <h1 class="articleMeta__title">${article.articleTitle}</h1>
           <div class="articleMeta__info">
-            <span class="author">@${article.authorName} &nbsp;${article.articleCreateDate?string("yyyy-MM-dd")}</span>
+            <span class="author">@${article.authorName} &nbsp;${article.articleCreateDate?string("yyyy-MM-dd")}/${article.articleUpdateDate?string("yyyy-MM-dd")}</span>
             <#if interactive == "on">
             <span class="comments">
               <a href="${servePath}${article.articlePermalink}#comments">${article.articleCommentCount} ${commentLabel}</a>

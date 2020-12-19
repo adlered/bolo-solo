@@ -200,6 +200,20 @@ admin.others = {
         }
       }
     });
+  },
+  /*
+   * 提交链滴图床转换请求。
+   * XXX: Not used this function yet.
+   */
+  pbstart: function () {
+    $.ajax({
+      url: Label.servePath + "/PBC/run",
+      type: "GET",
+      cache: false,
+      success: function (result, textStatus) {
+        $("#tipMsg").text("请求已提交");
+      }
+    });
   }
 };
 

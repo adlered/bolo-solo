@@ -75,10 +75,24 @@
         <p>由于链滴图床有访问频率限制，您的图片转换将在后台静默执行，您<b>可以关闭当前页面</b>，但请<b>不要停止 Bolo</b>并且<b>不要重复执行该功能</b></p>
         <p>当您的转换任务在下方从 “工作中” 变更为 “空闲” 时，即转换成功</p><br>
         <span>当前状态：
-            <span style="color: green; font-weight: bold">空闲</span>
+            <span id="status">获取中</span>
         </span><br><br>
-        <button>开始转换</button>
+        <button onclick="admin.others.pbstart();">开始转换</button>
     </div>
+    <script>
+        $(function () {
+            setInterval(function () {
+                $.ajax({
+                    url: Label.servePath + "/PBC/status",
+                    type: "GET",
+                    cache: false,
+                    success: function (result, textStatus) {
+                        $("#status").html(result.msg);
+                    }
+                });
+            }, 2000)
+        });
+    </script>
     <div id="tabOthersPanel_log" class="fn__none form">
         <div class="fn__clear">
             <button onclick="admin.others.getLog()" class="fn__right">${RefreshLabel}</button>

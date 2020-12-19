@@ -69,11 +69,12 @@ public class PBThread implements Runnable {
 
                     ArrayList<String> urlList = new ArrayList<>();
                     while (matcher_1.find()) {
-                        urlList.add(matcher_1.group());
+                        urlList.add(matcher_1.group().replaceAll("\\]\\(", "").replaceAll("\\)", ""));
                     }
                     while (matcher_2.find()) {
-                        urlList.add(matcher_2.group());
+                        urlList.add(matcher_2.group().replaceAll("\\]\\(", "").replaceAll("\\)", ""));
                     }
+
                 }
 
             } catch (Exception e) {

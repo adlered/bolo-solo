@@ -126,8 +126,11 @@
         <p><b>文章导入功能可能存在数据风险，请谨慎使用。</b></p>
     </div>
     <div id="tabOthersPanel_commentSync" class="fn__none form">
+        <br>
         你可以手动从链滴拉取文章中的评论到本地博客的某篇文章中。<br>
-        但需要该文章为本人编写，从博客平台编写且将文章推送到链滴中过。
+        每条评论只能同步一次，如要将评论导入两次，请先删除第一次导入的评论。<br>
+        请勿滥用该功能、自欺欺人哦~<br>
+        如果评论过多，可能需要较长时间，请不要多次点击同步按钮，稍安勿躁。<br>
         <br><br>
         <b>1. 输入链滴文章号：</b><br>
         https://${hacpaiDomain}/article/ <input id="remoteArticleID" type="text" style="width: 200px">
@@ -136,6 +139,12 @@
         <br>
         <select id="localArticleList">
         </select>
+        <br><br>
+        <b>3. 填入您在链滴社区的 Cookie 中 "symphony" 选项的值</b>
+        <br>
+        请您打开<a href="https://ld246.com" target="_blank">链滴社区</a>并登录, 使用谷歌浏览器右键选择"检查元素", 在"Application"标签页选择"Cookies"-"https://ld246.com", 将右侧"symphony"的值填入.
+        <br>
+        <input id="symphony" type="text">
         <br><br>
         <script type="text/javascript">
             $.ajax({
@@ -155,8 +164,9 @@
             function commentSync() {
                 let locale = $("#localArticleList").val();
                 let remote = $("#remoteArticleID").val();
+                let symphony = $("#symphony").val();
                 $.ajax({
-                    url: Label.servePath + '/article/commentSync/' + locale + '/' + remote,
+                    url: Label.servePath + '/article/commentSync/' + locale + '/' + remote + "/" + symphony,
                     type: 'GET',
                     async: false,
                     success: function(res) {

@@ -18,6 +18,7 @@
 package org.b3log.solo.processor;
 
 import freemarker.template.Template;
+import jodd.http.Cookie;
 import jodd.http.HttpRequest;
 import jodd.http.HttpResponse;
 import org.apache.commons.lang.time.DateFormatUtils;
@@ -50,6 +51,7 @@ import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.service.*;
 import org.b3log.solo.util.Skins;
 import org.b3log.solo.util.Solos;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -405,7 +407,7 @@ public class CommentProcessor {
      *
      * @param context
      */
-    @RequestProcessing(value = "/article/commentSync/{localaid}/{remoteaid}", method = HttpMethod.GET)
+    @RequestProcessing(value = "/article/commentSync/{localaid}/{remoteaid}/{symphony}", method = HttpMethod.GET)
     public void commentSync(final RequestContext context) {
         if (!Solos.isAdminLoggedIn(context)) {
             context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
@@ -416,39 +418,67 @@ public class CommentProcessor {
         final Transaction transaction = commentRepository.beginTransaction();
         long localaid = Long.parseLong(context.pathVar("localaid"));
         long remoteaid = Long.parseLong(context.pathVar("remoteaid"));
+        String symphony = context.pathVar("symphony");
+
+        System.out.println("===> PAGE 1 <===");
+        int pageCount = syncComment(
+                localaid,
+                remoteaid,
+                symphony,
+                1,
+                context
+        );
+        if (pageCount == -1) {
+            return;
+        } else if (pageCount > 1) {
+            for (int i = 2; i <= pageCount; i++) {
+                System.out.println("===> PAGE " + i + " <===");
+                syncComment(
+                        localaid,
+                        remoteaid,
+                        symphony,
+                        i,
+                        context
+                );
+            }
+        }
+
+        transaction.commit();
+        context.renderJSON().renderMsg("评论同步成功。");
+    }
+
+    private int syncComment(long localaid, long remoteaid, String symphony, int page, RequestContext context) {
         // 获取本地文章信息
         final JSONObject article = articleQueryService.getArticleById(String.valueOf(localaid));
-        String authorId = article.optString(Article.ARTICLE_AUTHOR_ID);
-        final JSONObject authorRet = userQueryService.getUser(authorId);
-        String username = authorRet.getJSONObject(User.USER).optString("userName");
-        String fetchURL = "https://" + Global.HACPAI_DOMAIN + "/apis/vcomment?aid=" + remoteaid + "&p=1&un=" + username;
+        String fetchURL = "https://" + Global.HACPAI_DOMAIN + "/api/v2/article/" + remoteaid + "?p=" + page;
         // 从远程拉取评论列表
         final HttpResponse res = HttpRequest.get(fetchURL).trustAllCerts(true).
-                connectionTimeout(3000).timeout(7000).header("User-Agent", Solos.USER_AGENT)
-                .send();
+                connectionTimeout(3000).timeout(7000).header("User-Agent", Solos.USER_AGENT).
+                cookies(new Cookie("symphony=" + symphony)).
+                send();
         if (200 != res.statusCode()) {
-            return;
+            return -1;
         }
         res.charset("UTF-8");
         final JSONObject result = new JSONObject(res.bodyText());
-        String html = "";
+        JSONArray rslt;
         try {
-            html = result.optJSONObject("data").optString("html");
+            rslt = result.optJSONObject("data").optJSONObject("article").optJSONArray("articleComments");
         } catch (Exception e) {
             context.renderJSON().renderMsg("评论同步失败！");
 
-            return;
+            return -1;
         }
-        Document document = Jsoup.parse(html);
-        Elements elements = document.getElementsByTag("li");
-        for (Element element : elements) {
-            String id = element.attr("id");
-            if (!id.isEmpty()) {
-                String link = element.getElementsByClass("vcomment__avatarlink").get(0).attr("href");
-                String avatar = element.getElementsByClass("vcomment__avatar").get(0).attr("src");
-                String comment = element.getElementsByClass("vditor-reset").get(0).html();
-                String author = element.getElementsByClass("vditor-reset").get(0).attr("data-author");
-                String srcLink = element.getElementsByClass("vditor-reset").get(0).attr("data-link");
+        for (Object o : rslt) {
+            try {
+                JSONObject object = (JSONObject) o;
+                System.out.println("Import content: " + object.opt("commentContent"));
+                String link = object.optString("commentArticlePermalink");
+                String avatar = object.optString("commentAuthorThumbnailURL");
+                String comment = object.optString("commentContent");
+                String author = object.optString("commentAuthorName");
+                String originalId = object.optString("commentOriginalCommentId");
+                String id = object.optString("oId");
                 final JSONObject commentObject = new JSONObject();
                 commentObject.put(Comment.COMMENT_ORIGINAL_COMMENT_ID, "");
                 commentObject.put(Comment.COMMENT_ORIGINAL_COMMENT_NAME, "");
@@ -464,13 +494,11 @@ public class CommentProcessor {
                 try {
                     commentRepository.add(commentObject);
                     articleMgmtService.incArticleCommentCount(article.optString(Keys.OBJECT_ID));
-                } catch (RepositoryException repositoryException) {
-                    repositoryException.printStackTrace();
+                } catch (RepositoryException ignored) {
                 }
+            } catch (Exception ignored) {
             }
         }
-        transaction.commit();
-
-        context.renderJSON().renderMsg("评论同步成功。");
+        return Integer.parseInt(result.optJSONObject("data").optJSONObject("pagination").optString("paginationPageCount"));
     }
 }

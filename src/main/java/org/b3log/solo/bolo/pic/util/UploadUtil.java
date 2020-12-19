@@ -58,6 +58,8 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,9 +81,17 @@ public class UploadUtil {
                 if (!localImageBedDir.exists()) {
                     localImageBedDir.mkdirs();
                 }
-                String localFilename = RandomStringUtils.randomAlphanumeric(3) + "_" +  file.getName();
-                localFilename = URLEncoder.encode(localFilename, "UTF-8");
-                localFilename = localFilename.replaceAll("%", "");
+
+                // 组建目录
+                String date = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+                String localFilename;
+                try {
+                    localFilename = date + file.getName().substring(file.getName().lastIndexOf("."));
+                } catch (Exception e) {
+                    localFilename = date;
+                }
+
+                // 传入文件
                 File localNewFile =  new File(path + "/" +  localFilename);
                 FileUtils.copyFile(file, localNewFile);
                 result = Latkes.getServePath() + "/image/" + localFilename;

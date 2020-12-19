@@ -21,6 +21,7 @@
   <#list pageNavigations as page>
   <li><a href="${page.pagePermalink}" target="${page.pageOpenTarget}">${page.pageTitle}</a></li>
   </#list>
+  <li><a href="${servePath}/links.html">${linkLabel}</a></li>
   <#if interactive == "on">
   <#if isLoggedIn>
   <li><a href="${servePath}/admin-index.do#main">${adminLabel}</a></li>

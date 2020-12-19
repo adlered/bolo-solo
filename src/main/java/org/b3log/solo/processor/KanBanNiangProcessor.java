@@ -86,12 +86,11 @@ public class KanBanNiangProcessor {
             String path = "";
             File file = null;
             try {
-                LOGGER.log(Level.INFO, "Downloading KanBanNiang resources online...");
+                LOGGER.log(Level.INFO, "KanBanNiang downloading ...");
                 final ServletContext servletContext = SoloServletListener.getServletContext();
                 final String assets = "/plugins/kanbanniang/assets/";
                 path = servletContext.getResource(assets).getPath();
                 path = URLDecoder.decode(path);
-                System.out.println("KanBanNiang resources dir: " + path);
                 String downloadURL = "https://ftp.stackoverflow.wiki/bolo/kanbanniang/KBNModel.zip";
                 file = new File(path + "KBNModel.zip");
                 FileOutputStream fileOutputStream = new FileOutputStream(file);
@@ -99,9 +98,13 @@ public class KanBanNiangProcessor {
                 SslUtils.ignoreSsl();
                 URLConnection connection = url.openConnection();
                 float size = (connection.getContentLength() / 1024 / 1024);
-                System.out.println("KanBanNiang resources total size: " + size + " MB ");
-                for (int i = 0; i < ((int) size); i++) {
-                    System.out.print(i + "MB ");
+                System.out.println("KanBanNiang resource total size: " + size + " MB ");
+                for (int i = 0; i <= (Math.round(size)); i++) {
+                    String formatSize = String.valueOf(i);
+                    if (formatSize.length() == 1) {
+                        formatSize = "0" + formatSize;
+                    }
+                    System.out.print(formatSize + "MB ");
                 }
                 System.out.println();
                 InputStream inputStream = connection.getInputStream();
@@ -111,15 +114,14 @@ public class KanBanNiangProcessor {
                 while ((length = inputStream.read(bytes)) != -1) {
                     sizeKB++;
                     fileOutputStream.write(bytes, 0, length);
-                    if (sizeKB % 256 == 0) {
+                    if (sizeKB % 205 == 0) {
                         System.out.print("▉");
                         Thread.sleep(128);
                     } else if (sizeKB == connection.getContentLength() / 1024) {
-                        System.out.print(" OK");
+                        System.out.println(" OK");
                     }
                 }
-                System.out.println();
-                LOGGER.log(Level.INFO, "Unpacking KanBanNiang resources...");
+                LOGGER.log(Level.INFO, "Unpacking KanBanNiang ...");
                 fileOutputStream.close();
                 inputStream.close();
                 ZipUtil.unpack(file, new File(path));

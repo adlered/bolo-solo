@@ -429,6 +429,7 @@ public class CommentProcessor {
                 context
         );
         if (pageCount == -1) {
+            context.renderJSON().renderMsg("评论同步失败，无法连接到链滴服务器或 Cookie 错误。");
             return;
         } else if (pageCount > 1) {
             for (int i = 2; i <= pageCount; i++) {
@@ -465,8 +466,6 @@ public class CommentProcessor {
         try {
             rslt = result.optJSONObject("data").optJSONObject("article").optJSONArray("articleComments");
         } catch (Exception e) {
-            context.renderJSON().renderMsg("评论同步失败！");
-
             return -1;
         }
         for (Object o : rslt) {

@@ -7,8 +7,10 @@ import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.repository.Query;
 import org.b3log.latke.repository.RepositoryException;
+import org.b3log.latke.repository.Transaction;
 import org.b3log.latke.util.CollectionUtils;
 import org.b3log.solo.bolo.pic.util.UploadUtil;
+import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.ArticleRepository;
 import org.b3log.solo.repository.OptionRepository;
@@ -23,6 +25,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static org.b3log.solo.model.Article.ARTICLE_VIEW_COUNT;
 
 public class PBThread implements Runnable {
 
@@ -150,18 +154,31 @@ public class PBThread implements Runnable {
                         } catch (Exception e) {
                             newUrl = oldUrl;
                         }
-
                         if (newUrl.isEmpty()) {
                             newUrl = oldUrl;
                         }
+                        newUrl = newUrl.replaceAll("0:0:0:0:0:0:0:1", "localhost");
 
                         // 保存
                         newUrlList.add(newUrl);
                         LOGGER.log(Level.INFO, oldUrl + " >>> " + newUrl);
                     }
 
-                    System.out.println();
+                    // 替换原文中链接
+                    for (int i = 0; i < urlList.size(); i++) {
+                        articleContent = articleContent.replace(urlList.get(i), newUrlList.get(i));
+                    }
 
+                    final Transaction transaction = articleRepository.beginTransaction();
+                    try {
+                        article.put(Article.ARTICLE_CONTENT, articleContent);
+                        articleRepository.update(oId, article, Article.ARTICLE_CONTENT);
+                        transaction.commit();
+                    } catch (final Exception e) {
+                        if (transaction.isActive()) {
+                            transaction.rollback();
+                        }
+                    }
                 }
 
             } catch (Exception e) {

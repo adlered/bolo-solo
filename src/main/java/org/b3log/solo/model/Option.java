@@ -509,7 +509,7 @@ public final class Option {
         /**
          * Default enable article update hint.
          */
-        public static final String DEFAULT_ENABLE_ARTICLE_UPDATE_HINT = "true";
+        public static final String DEFAULT_ENABLE_ARTICLE_UPDATE_HINT = "false";
 
         /**
          * Default notice board.

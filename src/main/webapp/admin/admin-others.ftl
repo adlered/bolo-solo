@@ -30,6 +30,11 @@
             </div>
         </li>
         <li>
+            <div id="tabOthers_move">
+                <a href="#tools/others/move">图床迁移</a>
+            </div>
+        </li>
+        <li>
             <div id="tabOthers_log">
                 <a href="#tools/others/log">${viewLogLabel}</a>
             </div>
@@ -57,6 +62,22 @@
         </#if>
         <button class="fn__margin12" onclick="admin.others.exportJSON();">${exportJSONLabel}</button>
         <button class="fn__margin12" onclick="admin.others.exportHexo();">${exportHexoLabel}</button>
+    </div>
+    <div id="tabOthersPanel_move" class="fn__none">
+        <h4>一键将您博客上使用黑客派（链滴）图床上的图片转换至当前设定的图床</h4>
+        <br>
+        <p>Bolo 默认将您在编辑器中上传的图床上传至链滴图床（URL 为 ld246.com 或 hacpai.com），但链滴图床的限制较多，可能会偶现无法打开的情况。</p>
+        <p>如果您希望获得更好的图床体验，请：</p><br>
+        <p><b>1.</b> 在偏好设定中将您的自定义图床修改为其它图床（例又拍云、阿里云或本地图床）</p>
+        <p><b>2.</b> 通过本功能一键将您旧文章中使用链滴图床的图片一键上传至您指定新图床的图片，并替换链接</p>
+        <p><b>3.</b> 享受数据掌握在自己手中的安全感</p><br>
+        <h4>使用前请注意</h4>
+        <p>由于链滴图床有访问频率限制，您的图片转换将在后台静默执行，您<b>可以关闭当前页面</b>，但请<b>不要停止 Bolo</b>并且<b>不要重复执行该功能</b></p>
+        <p>当您的转换任务在下方从 “工作中” 变更为 “空闲” 时，即转换成功</p><br>
+        <span>当前状态：
+            <span style="color: green; font-weight: bold">空闲</span>
+        </span><br><br>
+        <button>开始转换</button>
     </div>
     <div id="tabOthersPanel_log" class="fn__none form">
         <div class="fn__clear">

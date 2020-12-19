@@ -32,7 +32,7 @@
                 <#if article.articlePutTop>
                     置顶帖！
                 </#if>
-                <i class="iconfont icon-time"></i>${article.articleUpdateDate?string("yyyy年MM月dd日 HH:mm:ss")}
+                <i class="iconfont icon-time"></i>${article.articleCreateDate?string("yyyy年MM月dd日 HH:mm:ss")}
             </div>
             <a href="${servePath}${article.articlePermalink}" class="post-title">
                 <h3>${article.articleTitle}</h3>

@@ -49,7 +49,7 @@
                 </div>
                 <div class="nexmoe-post-meta">
                 <span>
-                    <i class="nexmoefont iconfont solo-calendarl"></i>${article.articleUpdateDate?string("yyyy年MM月dd日")}
+                    <i class="nexmoefont iconfont solo-calendarl"></i>${article.articleCreateDate?string("yyyy年MM月dd日")}
                 </span><span>
                     <i class="nexmoefont iconfont solo-heat"></i>${article.articleViewCount} 浏览
                 </span><#if article.articleCategory != ""><span>

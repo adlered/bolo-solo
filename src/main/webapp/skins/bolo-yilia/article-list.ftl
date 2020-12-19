@@ -37,7 +37,7 @@
                     </sup>
                 </#if>
             </h2>
-            <time><span class="icon-date"></span> ${article.articleUpdateDate?string("yyyy-MM-dd")}</time>
+            <time><span class="icon-date"></span> ${article.articleCreateDate?string("yyyy-MM-dd")}</time>
         </header>
         <#if article.articleAbstractText == ''>
             <a class="abstract" href="${servePath}${article.articlePermalink}">

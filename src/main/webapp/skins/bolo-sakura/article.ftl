@@ -39,7 +39,7 @@
                 <p class="entry-census"><span><a href="${servePath}/"><img
                                     src="${article.authorThumbnailURL}"></a></span><span><a
                                 href="https://2heng.xin/author/Mashiro/">${article.authorName}</a></span><span
-                            class="bull">·</span>${article.articleUpdateDate?string("yyyy-MM-dd")}<span
+                            class="bull">·</span>${article.articleCreateDate?string("yyyy-MM-dd")}<span
                             class="bull">·</span>${article.articleViewCount} 次阅读<#if interactive == "on"><span
                             class="bull">·</span>${article.articleCommentCount} ${commentLabel}</#if></p>
                 <#if article.articleCategory??>

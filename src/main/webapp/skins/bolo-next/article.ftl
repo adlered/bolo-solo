@@ -57,7 +57,7 @@
                                     ${postTimeLabel}
                                 </#if>
                                 <time>
-                                    ${article.articleUpdateDate?string("yyyy-MM-dd")}
+                                    ${article.articleCreateDate?string("yyyy-MM-dd")}
                                 </time>
                             </span>
                         <#if interactive == "on">

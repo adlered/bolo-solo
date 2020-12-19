@@ -43,9 +43,9 @@
     <div class="left article-element">
         <span class="date-ico" title="${dateLabel}">
             <#if article.hasUpdated>
-            ${article.articleUpdateDate?string("yyyy-MM-dd HH:mm:ss")}
+            ${article.articleCreateDate?string("yyyy-MM-dd HH:mm:ss")}
             <#else>
-            ${article.articleUpdateDate?string("yyyy-MM-dd HH:mm:ss")}
+            ${article.articleCreateDate?string("yyyy-MM-dd HH:mm:ss")}
             </#if>
         </span>
         <span class="user-ico" title="${authorLabel}">

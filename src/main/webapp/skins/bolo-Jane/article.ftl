@@ -52,7 +52,7 @@
 
         <div class="ft__gray fn__clear">
             <time>
-            ${article.articleUpdateDate?string("yyyy-MM-dd")}
+            ${article.articleCreateDate?string("yyyy-MM-dd")}
             </time>
             &nbsp;
             <span class="mobile__none">

@@ -40,7 +40,7 @@
                                 <div class="blog-slider__content">
                                     <div>
                                         <span class="blog-slider__code"
-                                            style="display:inline-block">${article.articleUpdateDate?string("yyyy年MM月dd日")}</span>
+                                            style="display:inline-block">${article.articleCreateDate?string("yyyy年MM月dd日")}</span>
                                         <#if article.categoryURI??>
                                             <span><a class="has-link-black-ter"
                                                     href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a></span>
@@ -76,7 +76,7 @@
                             <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
                                 <div class="level-left">
                                     <time
-                                        class="level-item has-text-grey">${article.articleUpdateDate?string("yyyy年MM月dd日")}</time>
+                                        class="level-item has-text-grey">${article.articleCreateDate?string("yyyy年MM月dd日")}</time>
                                     <#if article.articleCategory != "">
                                         <a class="has-link-black-ter"
                                             href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a>

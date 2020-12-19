@@ -64,7 +64,7 @@
                                             <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
                                                 <div class="level-left">
                                                     <div class="level-item has-text-grey">
-                                                        ${article.articleUpdateDate?string("yyyy年MM月dd日")}
+                                                        ${article.articleCreateDate?string("yyyy年MM月dd日")}
                                                     </div>
                                                     <div class="level-item has-text-grey">
                                                         ${article.articleCategory}

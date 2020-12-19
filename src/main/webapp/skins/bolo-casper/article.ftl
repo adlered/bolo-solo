@@ -51,7 +51,7 @@
         <div class="ft__center">
             <div class="item__meta">
                 <time>
-                    ${article.articleUpdateDate?string("yyyy-MM-dd")}
+                    ${article.articleCreateDate?string("yyyy-MM-dd")}
                 </time>
                 /
                 <#list article.articleTags?split(",") as articleTag>

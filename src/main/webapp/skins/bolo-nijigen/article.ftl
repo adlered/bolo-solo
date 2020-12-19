@@ -43,9 +43,9 @@
             <div class="article-list">
                 <div class="item item--active">
                     <time class="vditor-tooltipped vditor-tooltipped__n item__date"
-                          aria-label="${article.articleUpdateDate?string("yyyy")}${yearLabel}">
-                    ${article.articleUpdateDate?string("MM")}${monthLabel}
-                        <span class="item__day">${article.articleUpdateDate?string("dd")}</span>
+                          aria-label="${article.articleCreateDate?string("yyyy")}${yearLabel}">
+                    ${article.articleCreateDate?string("MM")}${monthLabel}
+                        <span class="item__day">${article.articleCreateDate?string("dd")}</span>
                     </time>
 
                     <h2 class="item__title">
@@ -61,7 +61,7 @@
 
                     <div class="item__date--m fn__none">
                         <i class="icon__date"></i>
-                    ${article.articleUpdateDate?string("yyyy-MM-dd")}
+                    ${article.articleCreateDate?string("yyyy-MM-dd")}
                     </div>
 
                     <div class="ft__center">

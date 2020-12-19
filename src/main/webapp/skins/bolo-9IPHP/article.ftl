@@ -56,7 +56,7 @@
                                       aria-label="<#if article.articleCreateDate?datetime != article.articleUpdateDate?datetime>${updateDateLabel}<#else>${createDateLabel}</#if>">
                                     <i class="icon-date"></i>
                                     <time>
-                                    ${article.articleUpdateDate?string("yyyy-MM-dd")}
+                                    ${article.articleCreateDate?string("yyyy-MM-dd")}
                                     </time>
                                 </span>
                         &nbsp; | &nbsp;

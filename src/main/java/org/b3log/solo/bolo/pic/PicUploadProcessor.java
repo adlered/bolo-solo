@@ -203,7 +203,7 @@ public class PicUploadProcessor {
                 outputStream.close();
             }
         } catch (Exception e) {
-            context.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            context.sendError(HttpServletResponse.SC_NOT_FOUND);
 
             return;
         }

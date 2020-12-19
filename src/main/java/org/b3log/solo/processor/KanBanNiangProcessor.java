@@ -42,10 +42,7 @@ import org.zeroturnaround.zip.ZipUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
@@ -116,8 +113,9 @@ public class KanBanNiangProcessor {
                     fileOutputStream.write(bytes, 0, length);
                     if (sizeKB % 256 == 0) {
                         System.out.print("▉");
+                        Thread.sleep(128);
                     } else if (sizeKB == connection.getContentLength() / 1024) {
-                        System.out.print(" :)");
+                        System.out.print(" OK");
                     }
                 }
                 System.out.println();

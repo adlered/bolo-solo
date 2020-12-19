@@ -134,7 +134,7 @@ public class PBThread implements Runnable {
                             filename = m.group();
                         }
 
-                        file = File.createTempFile("file", ".jpg");
+                        file = File.createTempFile(filename.split("\\.")[0], "." + filename.split("\\.")[1]);
                         FileOutputStream fileOutputStream = new FileOutputStream(file);
                         stream = new BufferedOutputStream(fileOutputStream);
                         stream.write(outStream.toByteArray());
@@ -148,6 +148,10 @@ public class PBThread implements Runnable {
                         try {
                             newUrl = UploadUtil.upload(config, file);
                         } catch (Exception e) {
+                            newUrl = oldUrl;
+                        }
+
+                        if (newUrl.isEmpty()) {
                             newUrl = oldUrl;
                         }
 

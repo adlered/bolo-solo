@@ -162,6 +162,11 @@ public class PBThread implements Runnable {
                         // 保存
                         newUrlList.add(newUrl);
                         LOGGER.log(Level.INFO, oldUrl + " >>> " + newUrl);
+                        LOGGER.log(Level.INFO, "Avoid HacPai download limiting, will sleep for 60s/image.");
+                        try {
+                            Thread.sleep(1000 * 60);
+                        } catch (InterruptedException ignored) {
+                        }
                     }
 
                     // 替换原文中链接

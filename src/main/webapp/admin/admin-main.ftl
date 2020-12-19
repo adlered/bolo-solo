@@ -174,7 +174,7 @@
 
     function showTips() {
         var config = {
-            content: "欢迎使用菠萝博客 " + boloVersion + "！<br>" +
+            content: "欢迎使用菠萝博客 " + boloVersion + "！为老用户开发的新功能：<br>如果你想将现有文章中使用黑客派（链滴）图床的图片一键转换至其他图床<br>可以通过 <b>通用-实用功能-图床迁移</b> 进行操作哦。<br>" +
                 "<a href='javascript:neverShowTips()'>不再提醒</a>",
             type: "html",
             alignTo: ["right","top"],

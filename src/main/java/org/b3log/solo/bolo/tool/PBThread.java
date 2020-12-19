@@ -1,8 +1,20 @@
 package org.b3log.solo.bolo.tool;
 
+import org.b3log.latke.Keys;
+import org.b3log.latke.ioc.BeanManager;
+import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
-import org.b3log.solo.bolo.pic.PicUploadProcessor;
+import org.b3log.latke.repository.Query;
+import org.b3log.latke.repository.RepositoryException;
+import org.b3log.latke.util.CollectionUtils;
+import org.b3log.solo.repository.ArticleRepository;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PBThread implements Runnable {
 
@@ -19,7 +31,6 @@ public class PBThread implements Runnable {
     private boolean lock = false;
 
     public PBThread() {
-
     }
 
     public String getStatus() {
@@ -35,9 +46,44 @@ public class PBThread implements Runnable {
 
             // 开始处理图片
             LOGGER.log(Level.INFO, "图片开始处理");
+
             try {
-                Thread.sleep(10000);
-            } catch (InterruptedException ignored) {
+                final BeanManager beanManager = BeanManager.getInstance();
+                final ArticleRepository articleRepository = beanManager.getReference(ArticleRepository.class);
+                final Query query = new Query();
+                final List<JSONObject> articlesResult = articleRepository.getList(query);
+
+                // 两个前缀
+                String suffix_1 = "(\\]\\(https://img.hacpai.com).*?\\)";
+                String prefix_1 = ")";
+                String suffix_2 = "(\\]\\(https://b3logfile.com).*?\\)";
+                String prefix_2 = ")";
+                // 解剖每个文章并重新上传组合
+                for (JSONObject article : articlesResult) {
+                    String articleContent = article.optString("articleContent");
+
+                    Pattern pattern_1 = Pattern.compile(suffix_1);
+                    Pattern pattern_2 = Pattern.compile(suffix_2);
+                    Matcher matcher_1 = pattern_1.matcher(articleContent);
+                    Matcher matcher_2 = pattern_2.matcher(articleContent);
+
+                    ArrayList<String> urlList = new ArrayList<>();
+                    while (matcher_1.find()) {
+                        urlList.add(matcher_1.group());
+                    }
+                    while (matcher_2.find()) {
+                        urlList.add(matcher_2.group());
+                    }
+                }
+
+            } catch (Exception e) {
+                LOGGER.log(Level.ERROR, "Cannot get articles.");
+                lock = false;
+                status = STATUS_ERROR;
+                try {
+                    Thread.sleep(1000 * 60);
+                } catch (InterruptedException ignored) {
+                }
             }
 
             // 关闭线程

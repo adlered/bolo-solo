@@ -531,7 +531,7 @@ a:hover {
 .logo a .cover .name {
     display: block;
     height: 100%;
-    font-size: 28px;
+    font-size: 16px;
     font-family: HomizioNova,"Microsoft Yahei"
 }
 
@@ -1079,7 +1079,7 @@ pre .javascript .function,pre .keyword {
     bottom: -2px;
     color: #444;
     border-bottom: 2px solid #ff5e52;
-    font-weight: 400
+    font-weight: 100;
 }
 
 .widget .widget-hd .logout {

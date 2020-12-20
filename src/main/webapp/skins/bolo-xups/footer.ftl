@@ -33,7 +33,7 @@
     &copy; ${.now?string('yyyy')} ${blogTitle!}
     Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">Bolo</a>
     <br>
-    Theme xups by <a href="https://github.com/adlered" target="_blank">adlered</a>
+    Theme 极简 · xups by <a href="https://github.com/adlered" target="_blank">adlered</a>
     <br/>
 
     ${footerContent}

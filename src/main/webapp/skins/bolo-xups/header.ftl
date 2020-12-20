@@ -35,7 +35,12 @@
             </li>
             <#list pageNavigations as page>
                 <li class="item current">
-                    <a href="${page.pagePermalink}" target="${page.pageOpenTarget}">&nbsp;<#if page.pageIcon != ''><img src="${page.pageIcon}"></#if> ${page.pageTitle}</a>
+                    <a href="${page.pagePermalink}" target="${page.pageOpenTarget}">
+                        <#if page.pageIcon != ''>
+                            <img src="${page.pageIcon}" width="15px" height="16px">
+                        </#if>
+                        ${page.pageTitle}
+                    </a>
                 </li>
             </#list>
         </ul>

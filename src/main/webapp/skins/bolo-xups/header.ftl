@@ -38,9 +38,13 @@
         <div class="profile clearfix">
             <div class="feeds fl">
                 <p class="links">
-                    <a href="https://github.com/jangdelong" target="_blank">Github</a>
-                    |
-                    <a href="https://pages.coding.me" target="_blank">Hosted by Coding Pages</a>
+                    <#if isLoggedIn>
+                        <a href="${servePath}/admin-index.do#main">${adminLabel}</a>
+                        |
+                        <a href="${logoutURL}">${logoutLabel}</a>
+                    <#else>
+                        <a href="${servePath}/start">${startToUseLabel}</a>
+                    </#if>
                 </p>
                 <p class="sns">
                     <a href="http://weibo.com/jangdelong" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
@@ -56,7 +60,7 @@
                 </p>
             </div>
             <div class="avatar fr">
-                <img src="${gravatar}" alt="avatar" title="Jelon" >
+                <img src="${adminUser.userAvatar}" alt="avatar" title="Jelon" >
             </div>
         </div>
     </section>

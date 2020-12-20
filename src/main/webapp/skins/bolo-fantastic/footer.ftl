@@ -22,7 +22,7 @@
         <div class="level">
             <div class="level-start has-text-centered-mobile">
                 <p class="is-size-6">
-                    &copy; ${.now?string('yyyy')} ${blogTitle!}&nbsp;
+                    &copy; ${.now?string('yyyy')} ${blogTitle!}
                     Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">Bolo</a>
                     <br>
                     &nbsp;&nbsp;&nbsp;Theme <a href="https://github.com/csfwff/bolo-fantastic">Fantastic</a> by

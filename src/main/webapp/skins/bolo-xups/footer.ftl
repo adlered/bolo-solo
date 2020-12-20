@@ -19,17 +19,17 @@
 -->
 <!-- 博客底部 -->
 <footer class="footer">
-    &copy;
+    &copy; ${.now?string('yyyy')} ${blogTitle!}
+    Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">Bolo</a>
+    <br>
+    Theme xups by <a href="https://github.com/adlered" target="_blank">adlered</a>
+    <br/>
 
-    2016-2020
-
-
-    <a href="/">Jelon Loves You</a>
+    ${footerContent}
 </footer>
 <div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
-
-<!--博客js脚本 -->
-<!-- 这里放网站js脚本 -->
 </body>
+
 <#include "../../common-template/label.ftl">
+
 ${plugins}

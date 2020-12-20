@@ -50,14 +50,11 @@ see <https://www.gnu.org/licenses/>. -->
                     </p>
                     <div class="post-content">
                         <div class="post-excerpt">
-                            <#if article.articleAbstractText?length gt 180>
-                                ${article.articleAbstractText[0..180]} ......
+                            <#if article.articleAbstractText?length gt 230>
+                                ${article.articleAbstractText[0..230]} ......
                             <#else>
                                 ${article.articleAbstractText}
                             </#if>
-                            <p class="more">
-                                <a href="${servePath}${article.articlePermalink}">阅读剩下更多</a>
-                            </p>
                         </div>
                         <div class="post-thumbnail" data-img="">
                             <a

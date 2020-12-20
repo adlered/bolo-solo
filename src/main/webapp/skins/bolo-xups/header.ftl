@@ -29,11 +29,15 @@
                 </div>
             </a>
         </div>
-        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             <li class="item current">
                 <a href="${servePath}/" title="首页" class="fa fa-home">&nbsp;首页</a>
             </li>
+            <#list pageNavigations as page>
+                <li class="item current">
+                    <a href="${page.pagePermalink}" target="${page.pageOpenTarget}">&nbsp;<#if page.pageIcon != ''><img src="${page.pageIcon}"></#if> ${page.pageTitle}</a>
+                </li>
+            </#list>
         </ul>
         <div class="profile clearfix">
             <div class="feeds fl">

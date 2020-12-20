@@ -24,8 +24,8 @@
         <div class="logo">
             <a href="/">
                 <div class="cover">
-                    <span class="name">Jelon</span>
-                    <span class="description">个人博客小站</span>
+                    <span class="name">${blogTitle}</span>
+                    <span class="description">${blogSubtitle}</span>
                 </div>
             </a>
         </div>

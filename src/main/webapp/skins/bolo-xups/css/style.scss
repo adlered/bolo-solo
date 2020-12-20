@@ -15,28 +15,5 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-/**
- * @fileoverview util and every page should be used.
- *
- * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
- */
-
-/**
- * @description 皮肤脚本
- * @static
- */
-var Skin = {
-    init: function () {
-        Skin._initToc()
-    },
-    _initToc: function () {
-        $('.entry-content p img:eq(0)').hide();
-    },
-    _initShare: function () {
-    },
-    initArticle: function () {
-        Skin._initShare()
-        Skin._initToc()
-    },
-}
-Skin.init()
+@import "../../../scss/nprogress";
+@import "vditor/src/assets/scss/index";

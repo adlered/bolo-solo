@@ -38,6 +38,11 @@
 
     ${footerContent}
 </footer>
+<script type="text/javascript" src="${staticServePath}/js/lib/jquery/jquery.min.js" charset="utf-8"></script>
+<script src="${staticServePath}/js/common${miniPostfix}.js?${staticResourceVersion}"></script>
+<script type="text/javascript" src="${staticServePath}/skins/${skinDirName}/js/common.js?${staticResourceVersion}"
+        charset="utf-8"></script>
+
 <div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
 </body>
 

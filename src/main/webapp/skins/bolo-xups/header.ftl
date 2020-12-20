@@ -38,12 +38,14 @@
         <div class="profile clearfix">
             <div class="feeds fl">
                 <p class="links">
-                    <#if isLoggedIn>
-                        <a href="${servePath}/admin-index.do#main">${adminLabel}</a>
-                        |
-                        <a href="${logoutURL}">${logoutLabel}</a>
-                    <#else>
-                        <a href="${servePath}/start">${startToUseLabel}</a>
+                    <#if interactive == "on">
+                        <#if isLoggedIn>
+                            <a href="${servePath}/admin-index.do#main">${adminLabel}</a>
+                            |
+                            <a href="${logoutURL}">${logoutLabel}</a>
+                        <#else>
+                            <a href="${servePath}/start">${startToUseLabel}</a>
+                        </#if>
                     </#if>
                 </p>
                 <p class="sns">

@@ -117,36 +117,6 @@ img,legend {
     border: 0
 }
 
-@font-face {
-    font-family:HomizioNova;src:url(./fonts/homizio-nova/light.ttf),url(./fonts/homizio-nova/light.otf);font-weight:400;font-style:normal
-}
-
-@font-face {
-    font-family:HomizioNova;src:url(./fonts/homizio-nova/light_italic.ttf),url(./fonts/homizio-nova/light_italic.otf);font-weight:400;font-style:italic
-}
-
-@font-face {
-    font-family:HomizioNova;src:url(./fonts/homizio-nova/regular.ttf),url(./fonts/homizio-nova/regular.otf);font-weight:700;font-style:normal
-}
-
-@font-face {
-    font-family:HomizioNova;src:url(./fonts/homizio-nova/italic.ttf),url(./fonts/homizio-nova/italic.otf);font-weight:700;font-style:italic
-}
-
-@font-face {
-    font-family:icomoon;src:url(./fonts/icomoon/icomoon.eot?e2xg5y),url(./fonts/icomoon/icomoon.eot?e2xg5y);src:url(./fonts/icomoon/icomoon.eot?#iefixe2xg5y) format('embedded-opentype'),url(./fonts/icomoon/icomoon.woff?e2xg5y) format('woff'),url(./fonts/icomoon/icomoon.ttf?e2xg5y) format('truetype'),url(./fonts/icomoon/icomoon.svg?e2xg5y#icomoon) format('svg'),url(./fonts/icomoon/icomoon.eot?#iefixe2xg5y) format('embedded-opentype'),url(./fonts/icomoon/icomoon.woff?e2xg5y) format('woff'),url(./fonts/icomoon/icomoon.ttf?e2xg5y) format('truetype'),url(./fonts/icomoon/icomoon.svg?e2xg5y#icomoon) format('svg');font-weight:400;font-style:normal
-}[class*=" icon-"],[class^=icon-] {
-     font-family: icomoon;
-     speak: none;
-     font-style: normal;
-     font-weight: 400;
-     font-variant: normal;
-     text-transform: none;
-     line-height: 1;
-     -webkit-font-smoothing: antialiased;
-     -moz-osx-font-smoothing: grayscale
- }
-
 .icon-home:before {
     content: "\e900"
 }

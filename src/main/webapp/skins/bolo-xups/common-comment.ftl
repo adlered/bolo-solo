@@ -19,32 +19,17 @@
 -->
 <#setting locale="en_US">
 <li id="${comment.oId}" class="item">
-    <div class="fn__clear">
-        <div class="item__name">
-            <#if "http://" == comment.commentURL>
-                <span class="ft__fade">${comment.commentName}</span>
-            <#else>
-            <a class="ft__link" href="${comment.commentURL}" target="_blank">${comment.commentName}</a>
-            </#if>
-
+    <div class="user-comment">
+        <div class="user-comment-header">
+            <a class="post-name" href="${comment.commentURL}" target="_blank">${comment.commentName}</a>
             <#if comment.isReply>
-            @ <a href="${servePath}${article.permalink}#${comment.commentOriginalCommentId}"
-                 onmouseover="page.showComment(this, '${comment.commentOriginalCommentId}', 6);"
-                 onmouseout="page.hideComment('${comment.commentOriginalCommentId}')"
-            >${comment.commentOriginalCommentName}</a>
+                @<a href="${servePath}${article.permalink}#${comment.commentOriginalCommentId}"><span class="post-name">${comment.commentOriginalCommentName}</span></a>
+            </#if>
+            <span class="post-time">${comment.commentDate2?string["MMM d, yyyy"]}</span>
+            <#if article?? && article.commentable>
+                <span class="reply" onclick="page.toggleEditor('${comment.oId}', '${comment.commentName}')">回复</span>
             </#if>
         </div>
-    </div>
-    <div class="vditor-reset">
-    ${comment.commentContent}
-    </div>
-    <div class="item__meta fn__clear">
-        <time>
-        ${comment.commentDate2?string["MMM d, yyyy"]}
-        </time>
-        <#if article?? && article.commentable>
-            <a class="fn__right fn__none item__reply"
-               href="javascript:page.toggleEditor('${comment.oId}', '${comment.commentName}')">Reply</a>
-        </#if>
+        <div class="user-comment-body">${comment.commentContent}</div>
     </div>
 </li>

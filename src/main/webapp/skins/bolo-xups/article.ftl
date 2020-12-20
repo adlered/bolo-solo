@@ -26,7 +26,7 @@
     <@head title="${article.articleTitle} - ${blogTitle}" description="${article.articleAbstract?html}">
         <link rel="stylesheet"
               href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}"/>
-        <link rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/style.css?${staticResourceVersion}" />
+        <link rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/style.css?${staticResourceVersion}"/>
     </@head>
 </head>
 <body>
@@ -63,54 +63,9 @@
             </article>
 
             <!-- 文章评论 -->
-            <section class="box" id="JELON__commentBox">
-                <div class="com-text">
-                    <div class="main">
-                        <#if interactive == "on">
-                            <@comments commentList=articleComments article=article></@comments>
-                        </#if>
-                    </div>
-                </div>
-            </section>
-
-            <div id="comments" class="comment">
-
-                <section class="list-wrap" id="JELON__commentList">
-                    <header class="list-header">
-                        总共
-                        <span class="comments-num" id="JELON__commentsNum">4</span> 条评论
-                    </header>
-                    <ul class="list">
-                        <li class="item">
-                            <div class="user-avatar">
-                                <a target="_blank" href="https://github.com/wangzhhuan"
-                                ><img
-                                            src="https://avatars0.githubusercontent.com/u/72487622?v=4"
-                                            alt="user-avatar"
-                                    /></a>
-                            </div>
-                            <div class="user-comment">
-                                <div
-                                        class="user-comment-header"
-                                        id="JELON__comment_704787684_reactions"
-                                >
-                  <span class="post-name">wangzhhuan</span
-                  ><span class="post-time">2020-10-07 16:43</span
-                                    ><span class="like" onclick="JELON.Actions.like(704787684)"
-                                    >点赞</span
-                                    ><span class="like-num">1</span
-                                    ><span
-                                            class="reply"
-                                            onclick="JELON.Actions.reply('wangzhhuan', ' 和肉体和 ')"
-                                    >回复</span
-                                    >
-                                </div>
-                                <div class="user-comment-body"><p>和肉体和</p></div>
-                            </div>
-                        </li>
-                    </ul>
-                </section>
-            </div>
+            <#if interactive == "on">
+                <@comments commentList=articleComments article=article></@comments>
+            </#if>
         </div>
     </section>
 </div>

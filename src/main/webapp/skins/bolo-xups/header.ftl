@@ -22,7 +22,7 @@
 <header class="header">
     <section class="container header-main">
         <div class="logo">
-            <a href="/">
+            <a href="${servePath}/">
                 <div class="cover">
                     <span class="name">${blogTitle}</span>
                     <span class="description">${blogSubtitle}</span>
@@ -31,43 +31,20 @@
         </div>
         <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
-
-            <li rel="/index.html" class="item current">
-                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            <li class="item current">
+                <a href="${servePath}/" title="首页" class="fa fa-home">&nbsp;首页</a>
             </li>
-
-            <li rel="/index.html" class="item ">
-                <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
-            </li>
-
-            <li rel="/index.html" class="item ">
-                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
-            </li>
-
-            <li rel="/index.html" class="item ">
-                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
-            </li>
-
         </ul>
         <div class="profile clearfix">
             <div class="feeds fl">
-
-
                 <p class="links">
-
                     <a href="https://github.com/jangdelong" target="_blank">Github</a>
                     |
-
                     <a href="https://pages.coding.me" target="_blank">Hosted by Coding Pages</a>
-
-
                 </p>
                 <p class="sns">
-
                     <a href="http://weibo.com/jangdelong" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
-
                     <a href="https://juejin.im/user/3984285869282919" class="qqweibo" target="_blank"><b>■</b> 掘金</a>
-
                     <a href="javascript: void(0);" class="wechat">
                         <b>■</b>
                         公众号
@@ -77,10 +54,9 @@
                         </span>
                     </a>
                 </p>
-
             </div>
             <div class="avatar fr">
-                <img src="/img/jelon.jpg" alt="avatar" title="Jelon" >
+                <img src="${gravatar}" alt="avatar" title="Jelon" >
             </div>
         </div>
     </section>

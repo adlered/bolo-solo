@@ -17,94 +17,71 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 -->
+<!-- 博客头部 -->
+<body class="home">
 <header class="header">
-    <div class="wrapper">
-        <a href="${servePath}" rel="start" class="header__logo">
-            <img src="${adminUser.userAvatar}"/>
-        ${blogTitle}
-        </a>
-
-        <nav class="header__nav mobile__none">
-            <a href="${servePath}/tags.html" rel="section">
-                Tags
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">Jelon</span>
+                    <span class="description">个人博客小站</span>
+                </div>
             </a>
-            <a href="${servePath}/archives.html">
-                Archives
-            </a>
-            <a rel="archive" href="${servePath}/links.html">
-                Links
-            </a>
-            <#if interactive == "on">
-            <a href="${servePath}/search" class="search">
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
-                    <path fill="#444" d="M19.385 11.846c0-4.156-3.382-7.538-7.538-7.538s-7.538 3.382-7.538 7.538 3.382 7.538 7.538 7.538 7.538-3.382 7.538-7.538zM28 25.846c0 1.178-0.976 2.154-2.154 2.154-0.572 0-1.127-0.236-1.514-0.639l-5.772-5.755c-1.969 1.363-4.325 2.087-6.714 2.087-6.546 0-11.846-5.3-11.846-11.846s5.3-11.846 11.846-11.846 11.846 5.3 11.846 11.846c0 2.389-0.724 4.745-2.087 6.714l5.772 5.772c0.387 0.387 0.623 0.942 0.623 1.514z"></path>
-                </svg>
-            </a>
-            </#if>
-        </nav>
-
-        <div class="header__bar fn__none" onclick="$(this).next().slideToggle()">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                <path fill="#444" d="M0 3h20v2h-20v-2zM0 9h20v2h-20v-2zM0 15h20v2h-20v-2z"></path>
-            </svg>
         </div>
-        <main class="header__menu fn__none">
-            <ul>
-                <#if interactive == "on">
-            <#if isLoggedIn>
-                <li>
-                    <a href="${servePath}/admin-index.do#main" title="${adminLabel}">
-                        <i class="icon__setting"></i> ${adminLabel}
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+
+            <li rel="/index.html" class="item current">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+
+            <li rel="/index.html" class="item ">
+                <a href="/lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
+            </li>
+
+            <li rel="/index.html" class="item ">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+
+            <li rel="/index.html" class="item ">
+                <a href="/comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+
+
+                <p class="links">
+
+                    <a href="https://github.com/jangdelong" target="_blank">Github</a>
+                    |
+
+                    <a href="https://pages.coding.me" target="_blank">Hosted by Coding Pages</a>
+
+
+                </p>
+                <p class="sns">
+
+                    <a href="http://weibo.com/jangdelong" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
+
+                    <a href="https://juejin.im/user/3984285869282919" class="qqweibo" target="_blank"><b>■</b> 掘金</a>
+
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
                     </a>
-                </li>
-                <li>
-                    <a href="${logoutURL}">
-                        <i class="icon__logout"></i> ${logoutLabel}
-                    </a>
-                </li>
-            <#else>
-                <li>
-                    <a href="${servePath}/start">
-                        <i class="icon__login"></i> ${startToUseLabel}
-                    </a>
-                </li>
-            </#if>
-                </#if>
-            <#list pageNavigations as page>
-                <li>
-                    <a href="${page.pagePermalink}" target="${page.pageOpenTarget}" rel="section">
-                        ${page.pageTitle}
-                    </a>
-                </li>
-            </#list>
-                <li>
-                    <a href="${servePath}/tags.html" rel="section">
-                        Tags
-                    </a>
-                </li>
-                <li>
-                    <a href="${servePath}/archives.html">
-                        Archives
-                    </a>
-                </li>
-                <li>
-                    <a rel="archive" href="${servePath}/links.html">
-                        Links
-                    </a>
-                </li>
-                <#if interactive == "on">
-                <li>
-                    <a href="${servePath}/search">
-                        Search
-                    </a>
-                </li>
-                </#if>
-                <li>
-                    <a rel="alternate" href="${servePath}/rss.xml" rel="section">
-                        RSS
-                    </a>
-                </li>
-            </ul>
-        </main>
-    </div>
+                </p>
+
+            </div>
+            <div class="avatar fr">
+                <img src="/img/jelon.jpg" alt="avatar" title="Jelon" >
+            </div>
+        </div>
+    </section>
 </header>

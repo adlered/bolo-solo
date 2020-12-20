@@ -26,133 +26,206 @@
     <@head title="${article.articleTitle} - ${blogTitle}" description="${article.articleAbstract?html}">
         <link rel="stylesheet"
               href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}"/>
-        <#if previousArticlePermalink??>
-            <link rel="prev" title="${previousArticleTitle}" href="${servePath}${previousArticlePermalink}">
-        </#if>
-        <#if nextArticlePermalink??>
-            <link rel="next" title="${nextArticleTitle}" href="${servePath}${nextArticlePermalink}">
-        </#if>
     </@head>
 </head>
 <body>
 <#include "header.ftl">
-<main id="pjax" class="fn__flex-1">
-    <#if pjax><!---- pjax {#pjax} start ----></#if>
-    <div class="post wrapper wrapper--miner">
-        <h2 class="item__title">
-            <a rel="bookmark" href="${servePath}${article.articlePermalink}">
-                ${article.articleTitle}
-            </a>
-            <#if article.articlePutTop>
-                <sup>
-                    ${topArticleLabel}
-                </sup>
-            </#if>
-        </h2>
-        <div class="ft__fade item__meta">
-            <#if article.articleCreateDate?datetime != article.articleUpdateDate?datetime>
-                Updated on
-            <#else>
-                Published on
-            </#if>
-            <time>
-                <#setting locale="en_US">
-                ${article.articleCreateDate?string("yyyy-MM-dd")}/${article.articleUpdateDate?string("yyyy-MM-dd")}
-            </time>
-            <#if article.articleCategory != "">
-                in <a href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a>
-            </#if>
-            with ${article.articleViewCount} views
-            <#if interactive == "on">
-            <#if article.articleCommentCount != 0>
-                and <a href="#comments">${article.articleCommentCount} comments</a>
-            </#if>
-            </#if>
-        </div>
-        <div class="item__tags">
-            <#list article.articleTags?split(",") as articleTag>
-                <a rel="tag" class="tag tag--${articleTag_index}" href="${servePath}/tags/${articleTag?url('UTF-8')}">
-                    <b># ${articleTag}</b>
-                </a>
-            </#list>
-        </div>
-        <div class="vditor-reset">
-            ${article.articleContent}
-            <#if "" != article.articleSign.signHTML?trim>
-                <div>
-                    ${article.articleSign.signHTML}
-                </div>
-            </#if>
-        </div>
-        <script>
-            var loggedIn = ${article.logged};
-        </script>
-    </div>
-    <div class="post__toc">
-        <#if article?? && article.articleToC?? && article.articleToC?size &gt; 0>
-            <#include "../../common-template/toc.ftl"/>
-        </#if>
-    </div>
-    <div class="body--gray post__gray">
-        <div class="wrapper comment">
-            <#if interactive == "on">
-            <@comments commentList=articleComments article=article></@comments>
-            </#if>
 
-            <div class="post__list fn__flex">
-                <div class="fn__flex-1">
-                    <div id="externalRelevantArticles"></div>
+<div class="container body clearfix">
+    <section class="content">
+        <div class="content-article widget">
+            <!-- 文章页 -->
+            <!-- 文章 -->
+            <article class="post article">
+                <header class="text-center">
+                    <h3 class="post-title"><span>${article.articleTitle}</span></h3>
+                </header>
+                <p class="post-meta text-center">
+                    ${article.authorName} 发表于
+                    ${article.articleCreateDate?string("yyyy-MM-dd")}
+                    <br>
+                    更新日期 ${article.articleUpdateDate?string("yyyy-MM-dd")}
+                </p>
+                <div class="post-content">
+                    <div class="vditor-reset">
+                        ${article.articleContent}
+                        <#if "" != article.articleSign.signHTML?trim>
+                            <div>
+                                ${article.articleSign.signHTML}
+                            </div>
+                        </#if>
+                    </div>
+                    <script>
+                        var loggedIn = ${article.logged};
+                    </script>
                 </div>
-                <div class="post__list-mid fn__flex-1">
-                    <div id="randomArticles"></div>
-                </div>
-                <div class="fn__flex-1">
-                    <div id="relevantArticles"></div>
-                </div>
+            </article>
+
+            <!-- 文章评论 -->
+            <#if interactive == "on">
+                <@comments commentList=articleComments article=article></@comments>
+
+            <div id="comments" class="comment">
+
+                <section class="list-wrap" id="JELON__commentList">
+                    <header class="list-header">
+                        总共
+                        <span class="comments-num" id="JELON__commentsNum">4</span> 条评论
+                    </header>
+                    <ul class="list">
+                        <li class="item">
+                            <div class="user-avatar">
+                                <a target="_blank" href="https://github.com/wangzhhuan"
+                                ><img
+                                            src="https://avatars0.githubusercontent.com/u/72487622?v=4"
+                                            alt="user-avatar"
+                                    /></a>
+                            </div>
+                            <div class="user-comment">
+                                <div
+                                        class="user-comment-header"
+                                        id="JELON__comment_704787684_reactions"
+                                >
+                  <span class="post-name">wangzhhuan</span
+                  ><span class="post-time">2020-10-07 16:43</span
+                                    ><span class="like" onclick="JELON.Actions.like(704787684)"
+                                    >点赞</span
+                                    ><span class="like-num">1</span
+                                    ><span
+                                            class="reply"
+                                            onclick="JELON.Actions.reply('wangzhhuan', ' 和肉体和 ')"
+                                    >回复</span
+                                    >
+                                </div>
+                                <div class="user-comment-body"><p>和肉体和</p></div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="user-avatar">
+                                <a target="_blank" href="https://github.com/jangdelong"
+                                ><img
+                                            src="https://avatars3.githubusercontent.com/u/5547151?v=4"
+                                            alt="user-avatar"
+                                    /></a>
+                            </div>
+                            <div class="user-comment">
+                                <div
+                                        class="user-comment-header"
+                                        id="JELON__comment_705559686_reactions"
+                                >
+                  <span class="post-name">jangdelong</span
+                  ><span class="post-time">2020-10-08 21:14</span
+                                    ><span class="like" onclick="JELON.Actions.like(705559686)"
+                                    >点赞</span
+                                    ><span class="like-num">1</span
+                                    ><span
+                                            class="reply"
+                                            onclick="JELON.Actions.reply('jangdelong', '  @wangzhhuan        和肉体和      ?? ')"
+                                    >回复</span
+                                    >
+                                </div>
+                                <div class="user-comment-body">
+                                    <p>
+                                        <a
+                                                class="user-mention"
+                                                data-hovercard-type="user"
+                                                data-hovercard-url="/users/wangzhhuan/hovercard"
+                                                data-octo-click="hovercard-link-click"
+                                                data-octo-dimensions="link_type:self"
+                                                href="https://github.com/wangzhhuan"
+                                        >@wangzhhuan</a
+                                        >
+                                    </p>
+                                    <blockquote>
+                                        <p>&nbsp;&nbsp;和肉体和&nbsp;</p>
+                                    </blockquote>
+                                    <p>??</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="user-avatar">
+                                <a target="_blank" href="https://github.com/lihansen12345"
+                                ><img
+                                            src="https://avatars0.githubusercontent.com/u/67905541?v=4"
+                                            alt="user-avatar"
+                                    /></a>
+                            </div>
+                            <div class="user-comment">
+                                <div
+                                        class="user-comment-header"
+                                        id="JELON__comment_732840469_reactions"
+                                >
+                  <span class="post-name">lihansen12345</span
+                  ><span class="post-time">2020-11-24 19:11</span
+                                    ><span class="like" onclick="JELON.Actions.like(732840469)"
+                                    >点赞</span
+                                    ><span class="like-num">2</span
+                                    ><span
+                                            class="reply"
+                                            onclick="JELON.Actions.reply('lihansen12345', ' 可以直接在这里发布吧 ')"
+                                    >回复</span
+                                    >
+                                </div>
+                                <div class="user-comment-body"><p>可以直接在这里发布吧</p></div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="user-avatar">
+                                <a target="_blank" href="https://github.com/jangdelong"
+                                ><img
+                                            src="https://avatars3.githubusercontent.com/u/5547151?v=4"
+                                            alt="user-avatar"
+                                    /></a>
+                            </div>
+                            <div class="user-comment">
+                                <div
+                                        class="user-comment-header"
+                                        id="JELON__comment_733319527_reactions"
+                                >
+                  <span class="post-name">jangdelong</span
+                  ><span class="post-time">2020-11-25 07:58</span
+                                    ><span class="like" onclick="JELON.Actions.like(733319527)"
+                                    >点赞</span
+                                    ><span class="like-num">0</span
+                                    ><span
+                                            class="reply"
+                                            onclick="JELON.Actions.reply('jangdelong', '  @lihansen12345        可以直接在这里发布吧      可以的 ')"
+                                    >回复</span
+                                    >
+                                </div>
+                                <div class="user-comment-body">
+                                    <p>
+                                        <a
+                                                class="user-mention"
+                                                data-hovercard-type="user"
+                                                data-hovercard-url="/users/lihansen12345/hovercard"
+                                                data-octo-click="hovercard-link-click"
+                                                data-octo-dimensions="link_type:self"
+                                                href="https://github.com/lihansen12345"
+                                        >@lihansen12345</a
+                                        >
+                                    </p>
+                                    <blockquote>
+                                        <p>&nbsp;&nbsp;可以直接在这里发布吧&nbsp;</p>
+                                    </blockquote>
+                                    <p>可以的</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="page-nav">
+                        <a href="javascript: void(0);" class="item current">1</a>
+                    </div>
+                </section>
             </div>
+            </#if>
         </div>
-    </div>
+    </section>
+</div>
 
-    <div class="post__fix">
-        <div class="wrapper">
-            <span class="post__share mobile__none">
-                Share
-                <span class="tag tag--4" data-type="weibo">WeiBo</span>
-                <span class="tag tag--5" data-type="twitter">Twitter</span>
-                <span class="tag tag--6" data-type="qqz">QZone</span>
-                <span class="post__code tag tag--7"
-                      data-type="wechat"
-                      data-title="${article.articleTitle}"
-                      data-blogtitle="${blogTitle}"
-                      data-url="${servePath}${article.articlePermalink}"
-                      data-avatar="${article.authorThumbnailURL}">WeChat</span>
-            </span>
-            <span class="post__arrow">
-                <#if previousArticlePermalink??>
-                    <a href="${servePath}${previousArticlePermalink}" rel="prev"
-                       class="vditor-tooltipped__n vditor-tooltipped"
-                       pjax-title="${previousArticleTitle}"
-                       aria-label="${previousArticleLabel}: ${previousArticleTitle}">←</a>
-                </#if>
-
-                <#if nextArticlePermalink??>
-                    <a href="${servePath}${nextArticlePermalink}" rel="next"
-                       class="vditor-tooltipped__n vditor-tooltipped"
-                       pjax-title="${nextArticleTitle}"
-                       aria-label="${nextArticleLabel}: ${nextArticleTitle}">→</a>
-                </#if>
-                <a href="javascript:Util.goTop()" class="vditor-tooltipped__n vditor-tooltipped"
-                   aria-label="${goTopLabel}">↑</a>
-                <a href="javascript:Util.goBottom()" class="vditor-tooltipped__n vditor-tooltipped"
-                   aria-label="${goBottomLabel}">↓</a>
-            </span>
-        </div>
-    </div>
-    <#if pjax><!---- pjax {#pjax} end ----></#if>
-</main>
 <#include "footer.ftl">
 
-<#if pjax><!---- pjax {#pjax} start ----></#if>
 <@comment_script oId=article.oId commentable=article.commentable>
     page.tips.externalRelevantArticlesDisplayCount = "${externalRelevantArticlesDisplayCount}";
     <#if 0 != randomArticlesDisplayCount>
@@ -167,6 +240,5 @@
     </#if>
 Skin.initArticle()
 </@comment_script>
-<#if pjax><!---- pjax {#pjax} end ----></#if>
 </body>
 </html>

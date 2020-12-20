@@ -30,7 +30,7 @@
         <ul class="widget-bd">
             <#list mostUsedCategories as category>
                 <li>
-                    <a href="${servePath}/category/${category.categoryURI}">
+                    <a href="javascript:void(0)">
                         ${category.categoryTitle}
                     </a>
                     <span class="badge">(${category.categoryPublishedArticleCount})</span>
@@ -45,7 +45,7 @@
         <!-- 文章标签 -->
         <div class="widget-bd tag-wrap">
             <#list mostUsedTags as tag>
-                <a class="tag-item" href="${servePath}/tags/${tag.tagTitle?url('UTF-8')}" title="${tag.tagTitle}">${tag.tagTitle} (${tag.tagPublishedRefCount!})</a>
+                <a class="tag-item" href="javascript:void(0)" title="${tag.tagTitle}">${tag.tagTitle} (${tag.tagPublishedRefCount!})</a>
             </#list>
         </div>
     </section>

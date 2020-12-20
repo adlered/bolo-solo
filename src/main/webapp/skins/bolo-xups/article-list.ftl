@@ -26,7 +26,7 @@ see <https://www.gnu.org/licenses/>. -->
                         <!-- 标签这有且只能显示一个 -->
                         <#if article.articleCategory != "">
                             <a class="cat-link"
-                               href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a>
+                               href="javascript:void(0)">${article.articleCategory}</a>
                         <#else>
                             <a class="cat-link">无</a>
                         </#if>
@@ -44,7 +44,7 @@ see <https://www.gnu.org/licenses/>. -->
                         <span class="post-tags">
                         标签：
                         <#list article.articleTags?split(",") as articleTag>
-                            <a href="${servePath}/tags/${articleTag?url('UTF-8')}">${articleTag}</a>&nbsp;
+                            <a href="javascript:void(0)">${articleTag}</a>&nbsp;
                         </#list>
                         </span>
                     </p>

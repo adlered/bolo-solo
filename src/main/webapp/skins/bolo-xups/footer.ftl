@@ -19,6 +19,17 @@
 -->
 <!-- 博客底部 -->
 <footer class="footer">
+    ${statistic.statisticPublishedBlogArticleCount}
+    ${articleLabel}
+    <#if interactive == "on"> &nbsp; &nbsp;
+    ${statistic.statisticPublishedBlogCommentCount}
+    ${commentLabel} </#if>
+    <br>
+    ${statistic.statisticBlogViewCount}
+    ${viewLabel} &nbsp; &nbsp;
+    ${onlineVisitorCnt}
+    ${onlineVisitorLabel}
+    <br><br>
     &copy; ${.now?string('yyyy')} ${blogTitle!}
     Powered by <a href="https://github.com/AdlerED/bolo-solo" target="_blank">Bolo</a>
     <br>

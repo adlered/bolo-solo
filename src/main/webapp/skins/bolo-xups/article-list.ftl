@@ -24,9 +24,11 @@ see <https://www.gnu.org/licenses/>. -->
                 <article class="post">
                     <header>
                         <!-- 标签这有且只能显示一个 -->
-                        <#if article.categoryURI??>
+                        <#if article.articleCategory != "">
                             <a class="cat-link"
                                href="${servePath}/category/${article.categoryURI}">${article.articleCategory}</a>
+                        <#else>
+                            <a class="cat-link">无</a>
                         </#if>
                         <!-- 文章标题 -->
                         <h3 class="post-title">
@@ -36,77 +38,63 @@ see <https://www.gnu.org/licenses/>. -->
                         </h3>
                     </header>
                     <p class="post-meta">
-                        Jelon 发表于
-                        <time datetime="2020-08-13T00:00:00.000Z">2020-08-13</time>
+                        ${article.authorName} 发表于
+                        ${article.articleCreateDate?string("yyyy年MM月dd日 HH:mm:ss")}
                         &nbsp;&nbsp;
                         <span class="post-tags">
-            标签：
-
-            <a href="/tags/LeetCode/" title="LeetCode">LeetCode</a> /
-
-            <a href="/tags/算法/" title="算法">算法</a>
-          </span>
+                        标签：
+                        <#list article.articleTags?split(",") as articleTag>
+                            <a href="${servePath}/tags/${articleTag?url('UTF-8')}">${articleTag}</a>&nbsp;
+                        </#list>
+                        </span>
                     </p>
+                    <div class="post-content">
+                        <div class="post-excerpt">
+                            <#if article.articleAbstractText?length gt 180>
+                                ${article.articleAbstractText[0..180]} ......
+                            <#else>
+                                ${article.articleAbstractText}
+                            </#if>
+                            <p class="more">
+                                <a href="${servePath}${article.articlePermalink}">阅读剩下更多</a>
+                            </p>
+                        </div>
+                        <div class="post-thumbnail" data-img="">
+                            <a
+                                    href="${servePath}${article.articlePermalink}"
+                                    title="${article.articleTitle!}"
+                            >
+                                <img class="thumbnail" src="${article.articleImg1URL}"/>
+                            </a>
+                        </div>
+                    </div>
                 </article>
             </#if>
         </#list>
-        <article class="post">
-            <header>
-                <!-- 标签这有且只能显示一个 -->
-                <a class="cat-link" href="/categories/算法练习/">算法练习</a>
-                <!-- 文章标题 -->
-                <h3 class="post-title">
-                    <a href="https://jelon.info/posts/leetcode-93/">
-                        【每日一题】93. 复原IP地址
-                    </a>
-                </h3>
-            </header>
-            <p class="post-meta">
-                Jelon 发表于
-                <time datetime="2020-08-13T00:00:00.000Z">2020-08-13</time>
-                &nbsp;&nbsp;
-                <span class="post-tags">
-            标签：
 
-            <a href="/tags/LeetCode/" title="LeetCode">LeetCode</a> /
-
-            <a href="/tags/算法/" title="算法">算法</a>
-          </span>
-            </p>
-
-            <div class="post-content">
-                <div class="post-excerpt">
-                    给定一个只包含数字的字符串，复原它并返回所有可能的 IP
-                    地址格式。有效的 IP 地址正好由四个整数（每个整数位于 0 到 255
-                    之间组成），整数之间用 '.' 分隔...
-
-                    <p class="more">
-                        <a href="https://jelon.info/posts/leetcode-93/">阅读剩下更多</a>
-                    </p>
-                </div>
-                <div class="post-thumbnail" data-img="">
-                    <a
-                            href="https://jelon.info/posts/leetcode-93/"
-                            title="【每日一题】93. 复原IP地址"
-                    >
-                        <img
-                                class="thumbnail"
-                                src="/img/default.png"
-                                data-echo="/img/thumbnail/3.jpg"
-                                alt="默认配图"
-                        />
-                    </a>
-                </div>
-            </div>
-        </article>
-
+        <#if 0 != paginationPageCount>
         <nav class="page-navigator">
-        <span class="page-number current">1</span
-        ><a class="page-number" href="/page/2/">2</a
-            ><a class="page-number" href="/page/3/">3</a
-            ><span class="space">&hellip;</span
-            ><a class="page-number" href="/page/13/">13</a
-            ><a class="extend next" rel="next" href="/page/2/">下页</a>
+            <#if 1 != paginationPageNums?first>
+                <a href="${servePath}${path}?p=${paginationPreviousPageNum}"
+                   aria-label="${previousPageLabel}"
+                   class="pagination__item vditor-tooltipped__n vditor-tooltipped">&laquo;</a>
+                <a class="pagination__item" href="${servePath}${path}">1</a>
+                <span class="space">&hellip;</span>
+            </#if>
+            <#list paginationPageNums as paginationPageNum>
+                <#if paginationPageNum == paginationCurrentPageNum>
+                    <span class="page-number current">${paginationPageNum}</span>
+                <#else>
+                    <a class="page-number" href="${servePath}${path}?p=${paginationPageNum}">${paginationPageNum}</a>
+                </#if>
+            </#list>
+            <#if paginationPageNums?last != paginationPageCount>
+                <span class="space">&hellip;</span>
+                <a href="${servePath}${path}?p=${paginationPageCount}" class="pagination__item">${paginationPageCount}</a>
+                <a href="${servePath}${path}?p=${paginationNextPageNum}" aria-label="${nextPagePabel}"
+                   class="pagination__item vditor-tooltipped__n vditor-tooltipped">&raquo;</a>
+            </#if>
         </nav>
+        </#if>
     </div>
 </section>

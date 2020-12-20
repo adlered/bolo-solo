@@ -47,16 +47,51 @@
                     </#if>
                 </p>
                 <p class="sns">
-                    <a href="http://weibo.com/jangdelong" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
-                    <a href="https://juejin.im/user/3984285869282919" class="qqweibo" target="_blank"><b>■</b> 掘金</a>
-                    <a href="javascript: void(0);" class="wechat">
-                        <b>■</b>
-                        公众号
-                        <span class="popover">
-                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
-                            <i class="arrow"></i>
-                        </span>
-                    </a>
+                    <#include "../../common-template/macro-user_site.ftl"/>
+                    <#if usite??>
+                        <#if hacpaiUser != ''>
+                            <a href="https://${hacpaiDomain}/member/${adminUser.userName}" target="_blank">
+                                <b style="color: #3be5d3">■</b>
+                                链滴社区
+                            </a>
+                        </#if>
+                        <#if usite.usiteGitHub != ''>
+                            <a href="https://github.com/${usite.usiteGitHub}" target="_blank">
+                                <b style="color: #3b83ee">■</b>
+                                GitHub
+                            </a>
+                        </#if>
+                        <#if usite.usiteWeiBo != ''>
+                            <a href="https://weibo.com/${usite.usiteWeiBo}" target="_blank">
+                                <b style="color: #ee743b">■</b>
+                                新浪微博
+                            </a>
+                        </#if>
+                        <#if usite.usiteZhiHu != ''>
+                            <a href="https://www.zhihu.com/people/${usite.usiteZhiHu}" target="_blank">
+                                <b style="color: #35cd90">■</b>
+                                知乎
+                            </a>
+                        </#if>
+                        <#if usite.usiteQQ != ''>
+                            <a href="tencent://message/?uin=${usite.usiteQQ}" target="_blank">
+                                <b style="color: #cd3535">■</b>
+                                腾讯QQ
+                            </a>
+                        </#if>
+                        <#if usite.usiteWeChat != ''>
+                            <a href="javascript:alert('微信号：${usite.usiteWeChat}')" target="_blank">
+                                <b style="color: #a7ec6b">■</b>
+                                微信
+                            </a>
+                        </#if>
+                        <#if usite.usiteWYMusic != ''>
+                            <a target="_blank" href="https://music.163.com/#/user/home?id=${usite.usiteWYMusic}" target="_blank">
+                                <b style="color: #d745f8">■</b>
+                                网易云音乐
+                            </a>
+                        </#if>
+                    </#if>
                 </p>
             </div>
             <div class="avatar fr">

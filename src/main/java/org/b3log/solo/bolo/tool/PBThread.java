@@ -26,6 +26,7 @@ import org.b3log.latke.repository.Query;
 import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.repository.Transaction;
 import org.b3log.latke.util.CollectionUtils;
+import org.b3log.solo.bolo.SslUtils;
 import org.b3log.solo.bolo.pic.util.UploadUtil;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Option;
@@ -121,6 +122,7 @@ public class PBThread implements Runnable {
                         File file = null;
 
                         final URL url = new URL(oldUrl);
+                        SslUtils.ignoreSsl();
                         final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         conn.setRequestProperty("accept", "image/avif,image/webp,image/apng,image/*,*/*;q=0.8");
                         conn.setRequestProperty("accept-encoding", "gzip, deflate, br");

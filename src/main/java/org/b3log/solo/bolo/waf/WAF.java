@@ -106,7 +106,8 @@ public class WAF {
                         requestURL.contains("/favicon.ico") ||
                         requestURL.contains("/error") ||
                         requestURL.contains("/images") ||
-                        requestURL.contains("/article/commentSync/getList")
+                        requestURL.contains("/article/commentSync/getList") ||
+                        requestURL.contains("/PBC/status")
         )) {
 
             WAFrule rule = new WAFrule();

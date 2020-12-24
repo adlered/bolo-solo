@@ -59,7 +59,6 @@
     <div>
         <label>${createDateLabel} (可选，自动请留空）：</label>
         <input id="createDate" type="text"/>
-        <label style="margin-top: 10px"><b>创建</b>日期并非<b>更新</b>日期，请留意。更新日期为文章最新修改时间；博客中会显示文章更新时间，而非创建日期。</label>
     </div>
     <div class="comment-content">
         <label>${abstract1Label}</label>

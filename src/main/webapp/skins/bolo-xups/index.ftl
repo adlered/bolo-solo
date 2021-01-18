@@ -24,7 +24,7 @@
     <@head title="${blogTitle}">
         <link rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}"/>
         <link rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/style.css?${staticResourceVersion}" />
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://ftp.stackoverflow.wiki/bolo/start/css/font-awesome.min.css" rel="stylesheet">
     </@head>
 </head>
 <body class="body--gray">

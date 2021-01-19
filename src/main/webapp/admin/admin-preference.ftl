@@ -387,33 +387,29 @@
             }
 
             function save() {
-                if (checkImageBedConfig()) {
-                    sel = $('#tcS').val();
-                    switch (sel) {
-                        case 'hacpai':
-                            $('#sourceTC').text('hacpai');
-                            break;
-                        case 'picuang':
-                            $('#sourceTC').text('picuang<<>>' + $('#tc2').val());
-                            break;
-                        case 'qiniu':
-                            $('#sourceTC').text('qiniu<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
-                            break;
-                        case 'aliyun':
-                            $('#sourceTC').text('aliyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val() + '<<>>' + $('#tc7').val() + '<<>>' + $('#tc8').val());
-                            break;
-                        case 'upyun':
-                            $('#sourceTC').text('upyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
-                            break;
-                        case 'local':
-                            $('#sourceTC').text('local<<>>' + $('#tc2').val());
-                            break;
-                    }
-                    alert('配置已保存，图床设置将在重启服务端后生效。');
-                    admin.preference.update();
-                } else {
-                    alert('配置保存失败，请检查本地图床设定的目录！');
+                sel = $('#tcS').val();
+                switch (sel) {
+                    case 'hacpai':
+                        $('#sourceTC').text('hacpai');
+                        break;
+                    case 'picuang':
+                        $('#sourceTC').text('picuang<<>>' + $('#tc2').val());
+                        break;
+                    case 'qiniu':
+                        $('#sourceTC').text('qiniu<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
+                        break;
+                    case 'aliyun':
+                        $('#sourceTC').text('aliyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val() + '<<>>' + $('#tc7').val() + '<<>>' + $('#tc8').val());
+                        break;
+                    case 'upyun':
+                        $('#sourceTC').text('upyun<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());
+                        break;
+                    case 'local':
+                        $('#sourceTC').text('local<<>>' + $('#tc2').val());
+                        break;
                 }
+                alert('配置已保存，图床设置将在重启服务端后生效。');
+                admin.preference.update();
             }
 
             function checkImageBedConfig() {

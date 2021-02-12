@@ -57,6 +57,9 @@ public final class V431_432 {
         try {
             final Transaction transaction = optionRepository.beginTransaction();
 
+            // 将明文密码和一次MD5加密的密码强制转为二次加密的MD5密码，确保安全性
+            JSONObject user = userQueryService.getAdmin();
+
             final JSONObject versionOpt = optionRepository.get(Option.ID_C_VERSION);
             versionOpt.put(Option.OPTION_VALUE, toVer);
             optionRepository.update(Option.ID_C_VERSION, versionOpt);

@@ -26,26 +26,26 @@ import org.b3log.solo.repository.OptionRepository;
 import org.json.JSONObject;
 
 /**
- * Upgrade script from v4.3.0 to v4.3.1.
+ * Upgrade script from v4.3.1 to v4.3.2.
  *
  * @author <a href="https://github.com/adlered">adlered</a>
- * @since 4.3.1
+ * @since 4.3.2
  */
-public final class V430_431 {
+public final class V431_432 {
 
     /**
      * Logger.
      */
-    private static final Logger LOGGER = Logger.getLogger(V430_431.class);
+    private static final Logger LOGGER = Logger.getLogger(V431_432.class);
 
     /**
-     * Performs upgrade from v4.3.0 to v4.3.1.
+     * Performs upgrade from v4.3.1 to v4.3.2.
      *
      * @throws Exception upgrade fails
      */
     public static void perform() throws Exception {
-        final String fromVer = "4.3.0";
-        final String toVer = "4.3.1";
+        final String fromVer = "4.3.1";
+        final String toVer = "4.3.2";
 
         LOGGER.log(Level.INFO, "Upgrading from version [" + fromVer + "] to version [" + toVer + "]....");
 

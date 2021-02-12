@@ -43,4 +43,8 @@ public class MD5Utils {
         }
         return md5code;
     }
+
+    public static String stringToMD5Twice(String plainText) {
+        return stringToMD5(stringToMD5(plainText));
+    }
 }

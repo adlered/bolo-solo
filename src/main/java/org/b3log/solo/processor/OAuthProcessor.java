@@ -132,13 +132,13 @@ public class OAuthProcessor {
         HttpServletRequest request = context.getRequest();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String md5 = MD5Utils.stringToMD5(password);
+        password = MD5Utils.stringToMD5Twice(password);
         try {
             if (UpgradeService.boloFastMigration) {
                 // 快速迁移程序
                 final JSONObject preference = optionQueryService.getPreference();
                 final String currentVer = preference.getString(Option.ID_C_VERSION);
-                fastMigrate(currentVer, username, md5, context);
+                fastMigrate(currentVer, username, password, context);
                 context.sendRedirect(Latkes.getServePath() + "/");
             } else if (!initService.isInited()) {
                 LOGGER.log(Level.INFO, "Bolo initializing...");
@@ -158,8 +158,8 @@ public class OAuthProcessor {
                     if (!Role.ADMIN_ROLE.equals(user.getString(User.USER_ROLE)) && !Role.DEFAULT_ROLE.equals(user.getString(User.USER_ROLE))) {
                         context.sendRedirect(Latkes.getServePath() + "/start?status=error");
                     }
-                    // 同时兼容明文和密文密码
-                    if ((username.equals(cUser) && password.equals(cPass)) || (username.equals(cUser) && md5.equals(cPass))) {
+                    // 用户名密码校验
+                    if (username.equals(cUser) && password.equals(cPass)) {
                         Solos.login(user, context.getResponse());
                         LOGGER.log(Level.INFO, "Logged in [name={0}, remoteAddr={1}] with Bolo auth", username, Requests.getRemoteAddr(request));
                         context.sendRedirect(Latkes.getServePath() + "/admin-index.do#main");

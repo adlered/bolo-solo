@@ -132,6 +132,8 @@ public class UpgradeService {
                         V420_430.perform();
                     case "4.3.0":
                         V430_431.perform();
+                    case "4.3.1":
+                        V431_432.perform();
                         break;
                     default:
                         LOGGER.log(Level.INFO, "Version " + currentVer + " loaded in compatibility mode.");

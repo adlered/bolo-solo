@@ -23,6 +23,7 @@ import org.b3log.latke.logging.Logger;
 import org.b3log.latke.repository.Transaction;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.OptionRepository;
+import org.b3log.solo.service.UserQueryService;
 import org.json.JSONObject;
 
 /**
@@ -51,6 +52,7 @@ public final class V431_432 {
 
         final BeanManager beanManager = BeanManager.getInstance();
         final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+        final UserQueryService userQueryService = beanManager.getReference(UserQueryService.class);
 
         try {
             final Transaction transaction = optionRepository.beginTransaction();

@@ -17,14 +17,21 @@
  */
 package org.b3log.solo.upgrade;
 
+import org.b3log.latke.Keys;
 import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
-import org.b3log.latke.repository.Transaction;
+import org.b3log.latke.model.Role;
+import org.b3log.latke.model.User;
+import org.b3log.latke.repository.*;
+import org.b3log.solo.bolo.tool.MD5Utils;
 import org.b3log.solo.model.Option;
+import org.b3log.solo.model.UserExt;
 import org.b3log.solo.repository.OptionRepository;
-import org.b3log.solo.service.UserQueryService;
+import org.b3log.solo.repository.UserRepository;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * Upgrade script from v4.3.1 to v4.3.2.
@@ -52,13 +59,35 @@ public final class V431_432 {
 
         final BeanManager beanManager = BeanManager.getInstance();
         final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-        final UserQueryService userQueryService = beanManager.getReference(UserQueryService.class);
-
+        final UserRepository userRepository = beanManager.getReference(UserRepository.class);
         try {
             final Transaction transaction = optionRepository.beginTransaction();
 
             // 将明文密码和一次MD5加密的密码强制转为二次加密的MD5密码，确保安全性
-            JSONObject user = userQueryService.getAdmin();
+            Query query = new Query().setFilter(CompositeFilterOperator.or(
+                    new PropertyFilter(User.USER_ROLE, FilterOperator.EQUAL, Role.ADMIN_ROLE),
+                    new PropertyFilter(User.USER_ROLE, FilterOperator.EQUAL, Role.DEFAULT_ROLE)
+            ));
+            List<JSONObject> users = userRepository.getList(query);
+            for (JSONObject user : users) {
+                String username = user.optString(User.USER_NAME);
+                String password = user.optString(UserExt.USER_B3_KEY);
+                String userRole = user.optString(User.USER_ROLE);
+                String id = user.optString(Keys.OBJECT_ID);
+
+                // 密码判断
+                if (password.length() == 32) {
+                    // 一次加密的MD5，进行一次MD5加密
+                    password = MD5Utils.stringToMD5(password);
+                } else {
+                    // 明文密码，进行两次MD5加密
+                    password = MD5Utils.stringToMD5Twice(password);
+                }
+                user.put(UserExt.USER_B3_KEY, password);
+
+                userRepository.update(id, user);
+                System.out.println("[Upgrade] " + username + " / " + password + " / " + userRole);
+            }
 
             final JSONObject versionOpt = optionRepository.get(Option.ID_C_VERSION);
             versionOpt.put(Option.OPTION_VALUE, toVer);

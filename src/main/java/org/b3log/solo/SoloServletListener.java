@@ -141,7 +141,17 @@ public final class SoloServletListener extends AbstractServletListener {
         pluginManager.load();
 
         if (initService.isInited()) {
-            LOGGER.info("Bolo is running");
+            LOGGER.info("\n" +
+                    "███████████████████████████████████████████████████████████████████████\n" +
+                    "█                                      █                              █\n" +
+                    "█  ██████╗  ██████╗ ██╗      ██████╗   █                              █\n" +
+                    "█  ██╔══██╗██╔═══██╗██║     ██╔═══██╗  █ Welcome to Bolo :)           █\n" +
+                    "█  ██████╔╝██║   ██║██║     ██║   ██║  █                              █\n" +
+                    "█  ██╔══██╗██║   ██║██║     ██║   ██║  █ github.com/adlered/bolo-solo █\n" +
+                    "█  ██████╔╝╚██████╔╝███████╗╚██████╔╝  █ Current Version: V2.3        █\n" +
+                    "█  ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝   █                              █\n" +
+                    "█                                      █                              █\n" +
+                    "███████████████████████████████████████████████████████████████████████\n");
         }
 
         Stopwatchs.end();

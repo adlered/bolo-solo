@@ -443,7 +443,7 @@ public class InitService {
         admin.put(User.USER_URL, Latkes.getServePath());
         admin.put(User.USER_ROLE, Role.ADMIN_ROLE);
         admin.put(UserExt.USER_AVATAR, requestJSONObject.optString(UserExt.USER_AVATAR));
-        admin.put(UserExt.USER_B3_KEY, MD5Utils.stringToMD5(requestJSONObject.optString(UserExt.USER_B3_KEY)));
+        admin.put(UserExt.USER_B3_KEY, MD5Utils.stringToMD5Twice(requestJSONObject.optString(UserExt.USER_B3_KEY)));
         admin.put(UserExt.USER_GITHUB_ID, requestJSONObject.optString(UserExt.USER_GITHUB_ID));
         userRepository.add(admin);
 

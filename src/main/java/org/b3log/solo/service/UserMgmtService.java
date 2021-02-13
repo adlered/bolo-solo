@@ -35,6 +35,7 @@ import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.bolo.Global;
+import org.b3log.solo.bolo.tool.MD5Utils;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.model.UserExt;
@@ -319,7 +320,7 @@ public class UserMgmtService {
             user.put(UserExt.USER_GITHUB_ID, userGitHubId);
 
             final String userB3Key = requestJSONObject.optString(UserExt.USER_B3_KEY);
-            user.put(UserExt.USER_B3_KEY, userB3Key);
+            user.put(UserExt.USER_B3_KEY, MD5Utils.stringToMD5Twice(userB3Key));
 
             userRepository.add(user);
             transaction.commit();

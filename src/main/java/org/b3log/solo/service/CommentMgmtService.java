@@ -35,6 +35,7 @@ import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Ids;
 import org.b3log.latke.util.Strings;
+import org.b3log.solo.bolo.tool.MD5Utils;
 import org.b3log.solo.event.EventTypes;
 import org.b3log.solo.model.*;
 import org.b3log.solo.repository.ArticleRepository;
@@ -202,7 +203,7 @@ public class CommentMgmtService {
             String commentContent = requestJSONObject.optString(Comment.COMMENT_CONTENT);
 
             if (MAX_COMMENT_CONTENT_LENGTH < commentContent.length() || MIN_COMMENT_CONTENT_LENGTH > commentContent.length()) {
-                LOGGER.log(Level.WARN, "Comment conent length is invalid[{0}]", commentContent.length());
+                LOGGER.log(Level.WARN, "Comment content length is invalid[{0}]", commentContent.length());
                 ret.put(Keys.MSG, langPropsService.get("commentContentCannotEmptyLabel"));
 
                 return ret;
@@ -313,7 +314,7 @@ public class CommentMgmtService {
                 newUser.put(User.USER_URL, commentURL);
                 newUser.put(User.USER_ROLE, Role.VISITOR_ROLE);
                 newUser.put(UserExt.USER_AVATAR, "https://pic.stackoverflow.wiki/uploadImages/114/246/231/87/2020/06/06/02/26/65e10ea4-41e0-4da8-82fa-a00da2770ce2.png");
-                newUser.put(UserExt.USER_B3_KEY, "000000");
+                newUser.put(UserExt.USER_B3_KEY, MD5Utils.stringToMD5Twice("000000"));
                 newUser.put(UserExt.USER_GITHUB_ID, "000000");
                 userRepository.add(newUser);
                 setCommentThumbnailURL(comment);

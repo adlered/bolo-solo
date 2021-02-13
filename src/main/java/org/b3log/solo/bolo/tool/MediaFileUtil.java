@@ -183,7 +183,7 @@ public class MediaFileUtil {
         public int fileType;
         public String mimeType;
 
-        MediaFileType(int fileType, String mimeType) {
+        public MediaFileType(int fileType, String mimeType) {
             this.fileType = fileType;
             this.mimeType = mimeType;
         }

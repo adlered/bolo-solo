@@ -142,8 +142,6 @@ public class BlogProcessor {
     @RequestProcessing(value = "/favicon/{width}/{height}")
     public void getFavicon(final RequestContext context) {
         synchronized (this) {
-            File faviconFile;
-
             final JSONObject preference = optionQueryService.getPreference();
             if (null == preference) {
                 return;
@@ -157,20 +155,33 @@ public class BlogProcessor {
                 // 非http或https开头，默认匹配本地
                 favicon = Latkes.getServePath() + "/" + favicon;
             }
+
             // 下载 favicon
             try {
+                File faviconFile;
+
+                // 分析文件类型
+                MediaFileUtil.MediaFileType mediaFileType = MediaFileUtil.getFileType(favicon);
+                if (mediaFileType == null) {
+                    // 后缀名无法分析文件类型时，默认返回png
+                    mediaFileType = new MediaFileUtil.MediaFileType(
+                            33,
+                            "image/png"
+                    );
+                }
+
+                // 分析临时目录
                 final ServletContext servletContext = SoloServletListener.getServletContext();
                 final String assets = "/";
                 String path = servletContext.getResource(assets).getPath();
                 path = URLDecoder.decode(path);
-
-                MediaFileUtil.MediaFileType mediaFileType = MediaFileUtil.getFileType(favicon);
-
                 String sourceFilePath = path + "tmp_favicon";
-                faviconFile = new File(sourceFilePath);
 
+                // 创建临时文件，并定义输出流
+                faviconFile = new File(sourceFilePath);
                 FileOutputStream fileOutputStream = new FileOutputStream(faviconFile);
 
+                // 下载favicon
                 URL url = new URL(favicon);
                 SslUtils.ignoreSsl();
                 URLConnection connection = url.openConnection();
@@ -178,12 +189,13 @@ public class BlogProcessor {
                 int length = 0;
                 byte[] bytes = new byte[1024];
                 while ((length = inputStream.read(bytes)) != -1) {
+                    // 将互联网图片通过输出流写入到临时文件tmp_favicon
                     fileOutputStream.write(bytes, 0, length);
                 }
                 fileOutputStream.close();
                 inputStream.close();
 
-                // 处理图片
+                // 获取图片宽高参数
                 int width = Integer.parseInt(context.pathVar("width"));
                 int height = Integer.parseInt(context.pathVar("height"));
 
@@ -201,7 +213,6 @@ public class BlogProcessor {
                 outputStream.close();
 
                 faviconFile.delete();
-
             } catch (Exception e) {
                 e.printStackTrace();
 

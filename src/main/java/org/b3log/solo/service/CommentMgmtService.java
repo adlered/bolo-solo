@@ -314,7 +314,7 @@ public class CommentMgmtService {
                 newUser.put(User.USER_URL, commentURL);
                 newUser.put(User.USER_ROLE, Role.VISITOR_ROLE);
                 newUser.put(UserExt.USER_AVATAR, "https://pic.stackoverflow.wiki/uploadImages/114/246/231/87/2020/06/06/02/26/65e10ea4-41e0-4da8-82fa-a00da2770ce2.png");
-                newUser.put(UserExt.USER_B3_KEY, MD5Utils.stringToMD5Twice("000000"));
+                newUser.put(UserExt.USER_B3_KEY, "0a45c98b7f065e77accc819d08882200");
                 newUser.put(UserExt.USER_GITHUB_ID, "000000");
                 userRepository.add(newUser);
                 setCommentThumbnailURL(comment);

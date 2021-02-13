@@ -75,6 +75,7 @@ public final class SoloServletListener extends AbstractServletListener {
      * Bolo version.
      */
     public static final String BOLO_VERSION = "v2.3 稳定版";
+    public static final String BOLO_VERSION_EN = "v2.3 Stable";
     /**
      * Solo version.
      */
@@ -141,28 +142,26 @@ public final class SoloServletListener extends AbstractServletListener {
         pluginManager.load();
 
         if (initService.isInited()) {
-            String header = "" +
-                    "███████████████████████████████████████████████████████████████████████\n" +
-                    "█                                      █                              █\n" +
-                    "█  ██████╗  ██████╗ ██╗      ██████╗   █                              █\n" +
-                    "█  ██╔══██╗██╔═══██╗██║     ██╔═══██╗  █ Welcome to Bolo :)           █\n" +
-                    "█  ██████╔╝██║   ██║██║     ██║   ██║  █                              █\n" +
-                    "█  ██╔══██╗██║   ██║██║     ██║   ██║  █ github.com/adlered/bolo-solo █\n" +
-                    "█  ██████╔╝╚██████╔╝███████╗╚██████╔╝  █ Current Version: V2.3        █\n" +
-                    "█  ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝   █                              █\n" +
-                    "█                                      █                              █\n" +
-                    "███████████████████████████████████████████████████████████████████████\n";
-            System.out.println("");
-            char[] headerChars = header.toCharArray();
-            for (char headerChar : headerChars) {
-                System.out.print(headerChar);
+            String header = "\n" +
+                    "████████████████████████████████████████████████████████████████████████\n" +
+                    "█                                      █                               █\n" +
+                    "█  ██████╗  ██████╗ ██╗      ██████╗   █                               █\n" +
+                    "█  ██╔══██╗██╔═══██╗██║     ██╔═══██╗  █  Welcome to Bolo :)           █\n" +
+                    "█  ██████╔╝██║   ██║██║     ██║   ██║  █                               █\n" +
+                    "█  ██╔══██╗██║   ██║██║     ██║   ██║  █  github.com/adlered/bolo-solo █\n" +
+                    "█  ██████╔╝╚██████╔╝███████╗╚██████╔╝  █  Current Version: " + BOLO_VERSION_EN + " █\n" +
+                    "█  ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝   █                               █\n" +
+                    "█                                      █                               █\n" +
+                    "████████████████████████████████████████████████████████████████████████\n ";
+            String[] headerChars = header.split("\n");
+            for (String headerChar : headerChars) {
+                System.out.println(headerChar);
                 try {
                     Thread.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            System.out.println("");
         }
 
         Stopwatchs.end();

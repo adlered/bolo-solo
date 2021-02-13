@@ -157,7 +157,7 @@ public final class SoloServletListener extends AbstractServletListener {
             for (String headerChar : headerChars) {
                 System.out.println(headerChar);
                 try {
-                    Thread.sleep(1);
+                    Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

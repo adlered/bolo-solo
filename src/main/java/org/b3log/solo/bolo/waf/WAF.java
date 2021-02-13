@@ -57,7 +57,6 @@ public class WAF {
             POWER = false;
 
             WAFstorage.currentLimiter = null;
-            WAFlogger.log("Power off");
         }
     }
 

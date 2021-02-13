@@ -228,7 +228,6 @@ public class MailService {
                     return;
                 }
             }
-            LOGGER.log(Level.WARN, "Cannot load Mailbox Settings, please check " + getMailSet());
         } catch (RepositoryException RE) {
             LOGGER.log(Level.WARN, "Cannot load Mailbox Settings, please check " + getMailSet());
         } catch (NullPointerException NPE) {

@@ -122,7 +122,7 @@ public class WAF {
 
                 return true;
             } else {
-                WAFlogger.logWarn("Illegal access " + requestIP + " was denied to " + requestURL);
+                WAFlogger.logWarn("Illegal access from " + requestIP + " was denied to " + requestURL);
 
                 return false;
             }

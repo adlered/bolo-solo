@@ -152,15 +152,16 @@ public final class SoloServletListener extends AbstractServletListener {
                 "█  ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝   █                               █\n" +
                 "█                                      █                               █\n" +
                 "████████████████████████████████████████████████████████████████████████\n" +
+                " \n" +
                 "┌\n" +
-                "├　HTTP Server Running On:　" + Latkes.getServePath() + "\n" +
-                "├　JVM Memory:　" + (Runtime.getRuntime().maxMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024 + "MB / " + Runtime.getRuntime().maxMemory() / 1024 / 1024 + "MB\n" +
+                "├　　HTTP Server Running On:　" + Latkes.getServePath() + "\n" +
+                "├　　JVM Memory:　" + (Runtime.getRuntime().maxMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024 + "MB / " + Runtime.getRuntime().maxMemory() / 1024 / 1024 + "MB\n" +
                 "└\n ";
         String[] headerChars = header.split("\n");
         for (String headerChar : headerChars) {
             System.out.println(headerChar);
             try {
-                Thread.sleep(50);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

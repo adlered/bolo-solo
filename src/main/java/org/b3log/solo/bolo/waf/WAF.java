@@ -17,14 +17,10 @@
  */
 package org.b3log.solo.bolo.waf;
 
-import org.b3log.latke.repository.RepositoryException;
-import org.b3log.latke.servlet.RequestContext;
+import org.b3log.latke.Latkes;
 import org.b3log.solo.bolo.prop.Options;
 import org.b3log.solo.model.Option;
-import org.b3log.solo.util.Solos;
 import pers.adlered.simplecurrentlimiter.main.SimpleCurrentLimiter;
-
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * <h3>bolo-solo</h3>
@@ -89,25 +85,33 @@ public class WAF {
             return true;
         }
 
+        String contextPath = Latkes.getContextPath();
+        requestURL = requestURL.replaceFirst("^" + contextPath, "");
+        if (requestURL.isEmpty()) {
+            requestURL = "/";
+        }
+
         if (!(
-                requestURL.contains("/articles/random") ||
-                        requestURL.contains("/manifest.json") ||
+                requestURL.startsWith("/articles/random") ||
+                        requestURL.startsWith("/manifest.json") ||
                         requestURL.endsWith("/relevant/articles") ||
-                        requestURL.contains("/opensearch.xml") ||
-                        requestURL.contains("/waf/denied") ||
+                        requestURL.startsWith("/opensearch.xml") ||
+                        requestURL.startsWith("/waf/denied") ||
                         requestIP.equals("0:0:0:0:0:0:0:1") ||
                         requestIP.equals("127.0.0.1") ||
-                        requestURL.contains("/admin") ||
-                        requestURL.contains("/console") ||
-                        requestURL.contains("/plugins") ||
-                        requestURL.contains("/bolo") ||
-                        requestURL.contains("/logout") ||
-                        requestURL.contains("/start") ||
-                        requestURL.contains("/favicon.ico") ||
-                        requestURL.contains("/error") ||
-                        requestURL.contains("/images") ||
-                        requestURL.contains("/article/commentSync/getList") ||
-                        requestURL.contains("/PBC/status")
+                        requestURL.startsWith("/admin") ||
+                        requestURL.startsWith("/console") ||
+                        requestURL.startsWith("/plugins") ||
+                        requestURL.startsWith("/bolo") ||
+                        requestURL.startsWith("/logout") ||
+                        requestURL.startsWith("/start") ||
+                        requestURL.startsWith("/favicon.ico") ||
+                        requestURL.startsWith("/error") ||
+                        requestURL.startsWith("/images") ||
+                        requestURL.startsWith("/article/commentSync/getList") ||
+                        requestURL.startsWith("/PBC/status") ||
+                        requestURL.startsWith("/favicon") ||
+                        requestURL.startsWith("/oauth/bolo/login")
         )) {
 
             WAFrule rule = new WAFrule();

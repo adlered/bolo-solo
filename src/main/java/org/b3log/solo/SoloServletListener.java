@@ -141,7 +141,7 @@ public final class SoloServletListener extends AbstractServletListener {
         pluginManager.load();
 
         if (initService.isInited()) {
-            LOGGER.info("\n" +
+            String header = "" +
                     "███████████████████████████████████████████████████████████████████████\n" +
                     "█                                      █                              █\n" +
                     "█  ██████╗  ██████╗ ██╗      ██████╗   █                              █\n" +
@@ -151,7 +151,18 @@ public final class SoloServletListener extends AbstractServletListener {
                     "█  ██████╔╝╚██████╔╝███████╗╚██████╔╝  █ Current Version: V2.3        █\n" +
                     "█  ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝   █                              █\n" +
                     "█                                      █                              █\n" +
-                    "███████████████████████████████████████████████████████████████████████\n");
+                    "███████████████████████████████████████████████████████████████████████\n";
+            System.out.println("");
+            char[] headerChars = header.toCharArray();
+            for (char headerChar : headerChars) {
+                System.out.print(headerChar);
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("");
         }
 
         Stopwatchs.end();

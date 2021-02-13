@@ -41,36 +41,14 @@ $.extend(SoloEditor.prototype, {
    */
   init: function () {
 
-    // 编辑器常用表情使用社区端的设置
-    $.ajax({
-      url: 'https://' + Label.hacpaiDomain + '/apis/vcomment/users/emotions',
-      type: 'GET',
-      cache: true,
-      async: false,
-      xhrFields: {
-        withCredentials: true,
-      },
-      success: function (result) {
-        Label.emoji = {}
-        if (Array.isArray(result.data)) {
-          result.data.forEach(item => {
-            const key = Object.keys(item)[0]
-            Label.emoji[key] = item[key]
-          })
-        }
-      },
-      error: function (response, ajaxOptions, thrownError) {
-        $("#tipMsg").text("无法从链滴社区获取常用Emoji，自动生成中...");
-        Label.emoji = {}
-        let defaultEmojiData = JSON.parse('[{"+1":"👍"},{"-1":"👎"},{"confused":"😕"},{"eyes":"👀"},{"heart":"❤️"},{"tada":"🎉"},{"smile":"😄"},{"rocket":"🚀"}]')
-        if (Array.isArray(defaultEmojiData)) {
-          defaultEmojiData.forEach(item => {
-            const key = Object.keys(item)[0]
-            Label.emoji[key] = item[key]
-          })
-        }
-      }
-    })
+    Label.emoji = {}
+    let defaultEmojiData = JSON.parse('[{"smile":"😄"},{"laughing":"😆"},{"smirk":"😏"},{"heart_eyes":"😍"},{"kissing_heart":"😘"},{"flushed":"😳"},{"grin":"😁"},{"stuck_out_tongue_closed_eyes":"😝"},{"sleeping":"😴"},{"anguished":"😧"},{"open_mouth":"😮"},{"expressionless":"😑"},{"unamused":"😒"},{"sweat_smile":"😅"},{"weary":"😩"},{"sob":"😭"},{"joy":"😂"},{"astonished":"😲"},{"scream":"😱"},{"tired_face":"😫"},{"rage":"😡"},{"triumph":"😤"},{"yum":"😋"},{"mask":"😷"},{"sunglasses":"😎"},{"dizzy_face":"😵"},{"imp":"👿"},{"smiling_imp":"😈"},{"innocent":"😇"},{"alien":"👽"},{"yellow_heart":"💛"},{"blue_heart":"💙"},{"purple_heart":"💜"},{"green_heart":"💚"},{"broken_heart":"💔"},{"anger":"💢"},{"exclamation":"❗"},{"question":"❓"},{"zzz":"💤"},{"notes":"🎶"},{"poop":"💩"},{"+1":"👍"},{"-1":"👎"},{"ok_hand":"👌"},{"punch":"👊"},{"v":"✌"},{"point_up":"☝"},{"point_down":"👇"},{"pray":"🙏"},{"clap":"👏"},{"muscle":"💪"},{"ok_woman":"🙆"},{"no_good":"🙅"},{"raising_hand":"🙋"},{"massage":"💆"},{"haircut":"💇"},{"nail_care":"💅"},{"see_no_evil":"🙈"},{"feet":"🐾"},{"trollface":"https://cdn.jsdelivr.net/npm/vditor/dist/images/emoji/trollface.png"},{"snowman":"⛄"},{"zap":"⚡"},{"cat":"🐱"},{"dog":"🐶"},{"mouse":"🐭"},{"hamster":"🐹"},{"rabbit":"🐰"},{"frog":"🐸"},{"koala":"🐨"},{"pig":"🐷"},{"monkey":"🐒"},{"racehorse":"🐎"},{"camel":"🐫"},{"sheep":"🐑"},{"elephant":"🐘"},{"panda_face":"🐼"},{"snake":"🐍"},{"hatched_chick":"🐥"},{"hatching_chick":"🐣"},{"turtle":"🐢"},{"bug":"🐛"},{"honeybee":"🐝"},{"beetle":"🐞"},{"snail":"🐌"},{"octopus":"🐙"},{"whale":"🐳"},{"dolphin":"🐬"},{"dragon":"🐉"},{"goat":"🐐"},{"paw_prints":"🐾"},{"tulip":"🌷"},{"four_leaf_clover":"🍀"},{"rose":"🌹"},{"mushroom":"🍄"},{"seedling":"🌱"},{"shell":"🐚"},{"crescent_moon":"🌙"},{"partly_sunny":"⛅"},{"octocat":"https://cdn.jsdelivr.net/npm/vditor/dist/images/emoji/octocat.png"},{"jack_o_lantern":"🎃"},{"ghost":"👻"},{"santa":"🎅"},{"tada":"🎉"},{"camera":"📷"},{"loudspeaker":"📢"},{"hourglass":"⌛"},{"lock":"🔒"},{"bulb":"💡"},{"hammer":"🔨"},{"moneybag":"💰"},{"smoking":"🚬"},{"bomb":"💣"},{"gun":"🔫"},{"hocho":"🔪"},{"pill":"💊"},{"syringe":"💉"},{"scissors":"✂"},{"swimmer":"🏊"},{"black_joker":"🃏"},{"coffee":"☕"},{"tea":"🍵"},{"sake":"🍶"},{"beer":"🍺"},{"wine_glass":"🍷"},{"pizza":"🍕"},{"hamburger":"🍔"},{"poultry_leg":"🍗"},{"meat_on_bone":"🍖"},{"dango":"🍡"},{"doughnut":"🍩"},{"icecream":"🍦"},{"shaved_ice":"🍧"},{"cake":"🍰"},{"cookie":"🍪"},{"lollipop":"🍭"},{"apple":"🍎"},{"green_apple":"🍏"},{"tangerine":"🍊"},{"lemon":"🍋"},{"cherries":"🍒"},{"grapes":"🍇"},{"watermelon":"🍉"},{"strawberry":"🍓"},{"peach":"🍑"},{"banana":"🍌"},{"pear":"🍐"},{"pineapple":"🍍"},{"sweet_potato":"🍠"},{"eggplant":"🍆"},{"tomato":"🍅"},{"doge":"https://cdn.jsdelivr.net/npm/vditor/dist/images/emoji/doge.png"},{"huaji":"https://cdn.jsdelivr.net/npm/vditor/dist/images/emoji/huaji.gif"}]')
+    if (Array.isArray(defaultEmojiData)) {
+      defaultEmojiData.forEach(item => {
+        const key = Object.keys(item)[0]
+        Label.emoji[key] = item[key]
+      })
+    }
 
     const options = {
       outline: this.conf.outline || false,

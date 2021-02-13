@@ -209,6 +209,9 @@ public class CommentProcessor {
         final JsonRenderer renderer = new JsonRenderer();
         context.setRenderer(renderer);
         renderer.setJSONObject(jsonObject);
+        if (!jsonObject.optBoolean("sc")) {
+            return ;
+        }
 
         // 禁止冒用管理员评论
         JSONObject admin = new JSONObject();

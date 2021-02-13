@@ -156,10 +156,10 @@ public class BlogProcessor {
                 favicon = Latkes.getServePath() + "/" + favicon;
             }
 
+            File faviconFile = null;
+
             // 下载 favicon
             try {
-                File faviconFile;
-
                 // 分析文件类型
                 MediaFileUtil.MediaFileType mediaFileType = MediaFileUtil.getFileType(favicon);
                 if (mediaFileType == null) {
@@ -199,8 +199,11 @@ public class BlogProcessor {
                 int width = Integer.parseInt(context.pathVar("width"));
                 int height = Integer.parseInt(context.pathVar("height"));
 
-                final HttpServletResponse response = context.getResponse();
+                // 裁剪图片
                 EditIMG.createThumbnail(faviconFile, faviconFile, width, height, MediaFileUtil.getSuffixByFileType(mediaFileType));
+                
+                // 将裁剪后的图片输出至浏览器
+                final HttpServletResponse response = context.getResponse();
                 FileInputStream fileInputStream = new FileInputStream(faviconFile);
                 int fileSize = fileInputStream.available();
                 byte[] data = new byte[fileSize];
@@ -211,14 +214,16 @@ public class BlogProcessor {
                 OutputStream outputStream = response.getOutputStream();
                 outputStream.write(data);
                 outputStream.close();
-
-                faviconFile.delete();
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.log(Level.ERROR, "Unable to resolve favicon", e);
 
                 context.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
                 return;
+            } finally {
+                if (faviconFile != null) {
+                    faviconFile.delete();
+                }
             }
         }
     }

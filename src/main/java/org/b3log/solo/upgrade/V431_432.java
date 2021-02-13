@@ -66,7 +66,8 @@ public final class V431_432 {
             // 将明文密码和一次MD5加密的密码强制转为二次加密的MD5密码，确保安全性
             Query query = new Query().setFilter(CompositeFilterOperator.or(
                     new PropertyFilter(User.USER_ROLE, FilterOperator.EQUAL, Role.ADMIN_ROLE),
-                    new PropertyFilter(User.USER_ROLE, FilterOperator.EQUAL, Role.DEFAULT_ROLE)
+                    new PropertyFilter(User.USER_ROLE, FilterOperator.EQUAL, Role.DEFAULT_ROLE),
+                    new PropertyFilter(User.USER_ROLE, FilterOperator.EQUAL, Role.VISITOR_ROLE)
             ));
             List<JSONObject> users = userRepository.getList(query);
             for (JSONObject user : users) {

@@ -152,7 +152,7 @@ public final class Solos {
         if (status) {
             try {
                 Markdowns.toHtmlByLute("#test");
-                LOGGER.log(Level.INFO, "You have not configured Lute renderer, but have you connect to Bolo exclusive Lute public service, so you can get a better text analysis experience. To disable public Lute server, modify it in the preferences.");
+                LOGGER.log(Level.INFO, "You have connected to Bolo Public Welfare Lute-Markdown Service, enjoy much better markdown experience.");
             } catch (Exception exception) {
                 LOGGER.log(Level.INFO, "The connection to the public welfare Lute service failed. Lute rendering will be disabled and the built-in renderer will be used.");
                 Markdowns.LUTE_AVAILABLE = false;

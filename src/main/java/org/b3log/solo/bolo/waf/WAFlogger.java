@@ -33,7 +33,7 @@ public class WAFlogger {
      */
     private static final Logger LOGGER = Logger.getLogger(WAFlogger.class);
 
-    public static final String prefix = "<< WAF [ACL] >> ";
+    public static final String prefix = "[WAF] ";
 
     public static void log(String log) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -45,7 +45,7 @@ public class WAFlogger {
     public static void logTrace(String requestIP, String requestURL) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(prefix);
-        stringBuilder.append(requestIP + " >>> " + requestURL);
+        stringBuilder.append(requestIP + " accessed " + requestURL);
         LOGGER.log(Level.INFO, stringBuilder.toString());
     }
 

@@ -152,7 +152,11 @@ public final class SoloServletListener extends AbstractServletListener {
                     "█  ██████╔╝╚██████╔╝███████╗╚██████╔╝  █  Current Version: " + BOLO_VERSION_EN + " █\n" +
                     "█  ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝   █                               █\n" +
                     "█                                      █                               █\n" +
-                    "████████████████████████████████████████████████████████████████████████\n ";
+                    "████████████████████████████████████████████████████████████████████████\n" +
+                    "┌\n" +
+                    "├ HTTP Server Running On: " + Latkes.getServePath() + "\n" +
+                    "├ JVM Memory: " + (Runtime.getRuntime().maxMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024 + "MB / " + Runtime.getRuntime().maxMemory() / 1024 / 1024 + "MB\n" +
+                    "└\n ";
             String[] headerChars = header.split("\n");
             for (String headerChar : headerChars) {
                 System.out.println(headerChar);
@@ -171,9 +175,7 @@ public final class SoloServletListener extends AbstractServletListener {
         cronMgmtService.start();
 
         MailService.loadMailSettings();
-
         WAF.set();
-
         new Thread(new Runnable() {
             @Override
             public void run() {

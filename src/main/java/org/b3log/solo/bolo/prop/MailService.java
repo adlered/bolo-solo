@@ -219,20 +219,13 @@ public class MailService {
                 if (!mailUsername.isEmpty() && !mailPassword.isEmpty()) {
                     if (mailBox.equals("QQ")) {
                         OhMyEmail.config(OhMyEmail.SMTP_QQ(false), mailUsername, mailPassword);
-                        LOGGER.log(Level.INFO, "Mailbox Settings loaded successfully " + getMailSet());
-
-                        return;
                     } else if (mailBox.equals("QQ_ENT")) {
                         OhMyEmail.config(OhMyEmail.SMTP_ENT_QQ(false), mailUsername, mailPassword);
-                        LOGGER.log(Level.INFO, "Mailbox Settings loaded successfully " + getMailSet());
-
-                        return;
                     } else if (mailBox.equals("163")) {
                         OhMyEmail.config(OhMyEmail.SMTP_163(false), mailUsername, mailPassword);
-                        LOGGER.log(Level.INFO, "Mailbox Settings loaded successfully " + getMailSet());
-
-                        return;
                     }
+                    LOGGER.log(Level.INFO, "Mailbox Settings loaded " + getMailSet());
+                    return;
                 }
             }
             LOGGER.log(Level.WARN, "Cannot load Mailbox Settings, please check " + getMailSet());

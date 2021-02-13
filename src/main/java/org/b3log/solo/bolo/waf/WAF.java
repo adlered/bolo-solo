@@ -52,7 +52,7 @@ public class WAF {
             }
 
             WAFstorage.currentLimiter = new SimpleCurrentLimiter(second, times);
-            WAFlogger.log("WAF is on. [second=" + second + ", times=" + times + "]");
+            WAFlogger.log("Power on [second=" + second + ", times=" + times + "]");
         }
     }
 
@@ -61,7 +61,7 @@ public class WAF {
             POWER = false;
 
             WAFstorage.currentLimiter = null;
-            WAFlogger.log("WAF is off.");
+            WAFlogger.log("Power off");
         }
     }
 
@@ -118,7 +118,7 @@ public class WAF {
 
                 return true;
             } else {
-                WAFlogger.logWarn("REQUEST DENIED! " + requestIP + " >>> " + requestURL);
+                WAFlogger.logWarn("Illegal access " + requestIP + " was denied to " + requestURL);
 
                 return false;
             }

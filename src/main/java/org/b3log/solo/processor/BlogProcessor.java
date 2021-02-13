@@ -118,9 +118,17 @@ public class BlogProcessor {
         PWA_MANIFESTO_JSON = StringUtils.replace(PWA_MANIFESTO_JSON, "${description}", description);
         final JSONObject jsonObject = new JSONObject(PWA_MANIFESTO_JSON);
         PWA_MANIFESTO_JSON = StringUtils.replace(PWA_MANIFESTO_JSON, "${shortName}", name);
-        final String favicon = preference.optString(Option.ID_C_FAVICON_URL);
-        PWA_MANIFESTO_JSON = StringUtils.replace(PWA_MANIFESTO_JSON, "${faviconURL}", favicon);
         renderer.setJSONObject(jsonObject);
+    }
+
+    /**
+     * Get an edited image by source image URL.
+     *
+     * @param context the specified context
+     */
+    @RequestProcessing(value = "/image/edit/{imageURL}/{width}/{height}")
+    public void editImage(final RequestContext context) {
+
     }
 
     /**

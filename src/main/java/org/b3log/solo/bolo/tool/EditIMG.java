@@ -50,7 +50,7 @@ public class EditIMG {
         try {
             ImageIO.write(buffer, suffix, dstFile);
         } catch (Exception ex) {
-            throw new Exception(" ImageIo.write error in CreatThum.: "
+            throw new Exception("ImageIo.write error in CreatThum: "
                     + ex.getMessage());
         }
     }

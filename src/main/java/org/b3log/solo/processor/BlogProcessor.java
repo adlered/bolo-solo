@@ -32,13 +32,26 @@ import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.JsonRenderer;
 import org.b3log.solo.SoloServletListener;
+import org.b3log.solo.bolo.SslUtils;
+import org.b3log.solo.bolo.tool.EditIMG;
+import org.b3log.solo.bolo.tool.MediaFileUtil;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.service.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.InputStream;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Blog processor.
@@ -118,19 +131,85 @@ public class BlogProcessor {
         PWA_MANIFESTO_JSON = StringUtils.replace(PWA_MANIFESTO_JSON, "${description}", description);
         final JSONObject jsonObject = new JSONObject(PWA_MANIFESTO_JSON);
         PWA_MANIFESTO_JSON = StringUtils.replace(PWA_MANIFESTO_JSON, "${shortName}", name);
-        final String favicon = preference.optString(Option.ID_C_FAVICON_URL);
-        PWA_MANIFESTO_JSON = StringUtils.replace(PWA_MANIFESTO_JSON, "${faviconURL}", favicon);
         renderer.setJSONObject(jsonObject);
     }
 
     /**
-     * Get an edited image by source image URL.
+     * Get an edited image by the website favicon.
      *
      * @param context the specified context
      */
-    @RequestProcessing(value = "/image/edit/{imageURL}/{width}/{height}")
-    public void editImage(final RequestContext context) {
+    @RequestProcessing(value = "/favicon/{width}/{height}")
+    public void getFavicon(final RequestContext context) {
+        synchronized (this) {
+            File faviconFile;
 
+            final JSONObject preference = optionQueryService.getPreference();
+            if (null == preference) {
+                return;
+            }
+            String favicon = preference.optString(Option.ID_C_FAVICON_URL);
+            // 正则表达式
+            String regUrl = "^([hH][tT]{2}[pP]://|[hH][tT]{2}[pP][sS]://)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\\\\/])+$";
+            Pattern p = Pattern.compile(regUrl);
+            Matcher m = p.matcher(favicon);
+            if (!m.matches()) {
+                // 非http或https开头，默认匹配本地
+                favicon = Latkes.getServePath() + "/" + favicon;
+            }
+            // 下载 favicon
+            try {
+                final ServletContext servletContext = SoloServletListener.getServletContext();
+                final String assets = "/";
+                String path = servletContext.getResource(assets).getPath();
+                path = URLDecoder.decode(path);
+
+                MediaFileUtil.MediaFileType mediaFileType = MediaFileUtil.getFileType(favicon);
+
+                String sourceFilePath = path + "tmp_favicon";
+                faviconFile = new File(sourceFilePath);
+
+                FileOutputStream fileOutputStream = new FileOutputStream(faviconFile);
+
+                URL url = new URL(favicon);
+                SslUtils.ignoreSsl();
+                URLConnection connection = url.openConnection();
+                InputStream inputStream = connection.getInputStream();
+                int length = 0;
+                byte[] bytes = new byte[1024];
+                while ((length = inputStream.read(bytes)) != -1) {
+                    fileOutputStream.write(bytes, 0, length);
+                }
+                fileOutputStream.close();
+                inputStream.close();
+
+                // 处理图片
+                int width = Integer.parseInt(context.pathVar("width"));
+                int height = Integer.parseInt(context.pathVar("height"));
+
+                final HttpServletResponse response = context.getResponse();
+                EditIMG.createThumbnail(faviconFile, faviconFile, width, height, MediaFileUtil.getSuffixByFileType(mediaFileType));
+                FileInputStream fileInputStream = new FileInputStream(faviconFile);
+                int fileSize = fileInputStream.available();
+                byte[] data = new byte[fileSize];
+                fileInputStream.read(data);
+                fileInputStream.close();
+                String contentType = mediaFileType.mimeType;
+                response.setContentType(contentType);
+                OutputStream outputStream = response.getOutputStream();
+                outputStream.write(data);
+                outputStream.close();
+
+                faviconFile.delete();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+                context.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+
+                return;
+            }
+        }
     }
 
     /**

@@ -469,6 +469,26 @@ admin.article = {
       typewriterMode: false,
     })
 
+    // 监听编辑器黑暗模式
+    darkmode = false;
+    setInterval(function() {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        if (!darkmode) {
+          console.log("Dark Mode.");
+          darkmode = true;
+          admin.editors.articleEditor.editor.setTheme("dark");
+          admin.editors.abstractEditor.editor.setTheme("dark");
+        }
+      } else {
+        if (darkmode) {
+          console.log("Light Mode.");
+          darkmode = false;
+          admin.editors.articleEditor.editor.setTheme("light");
+          admin.editors.abstractEditor.editor.setTheme("light");
+        }
+      }
+    }, 1000);
+
     // thumbnail
     $('#articleThumbnailBtn').click(function () {
       $.ajax({// Gets all tags

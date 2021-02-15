@@ -1106,7 +1106,11 @@ button#submitArticle:hover {
   }
 
   #tabs li li>div>a {
-    background-color: #1b1b1f;
+    background-color: #171717;
+  }
+
+  #tabs li li>div>a:hover, #tabs li li>div>a.tab-current {
+    background-color: #1d1d1d;
   }
 
   #tabs a:hover, #tabs a.tab-current, #tabs #tabToolsTitle.tab-current, #tabs #tabArticleTitle.tab-current, #tabs #tabToolsTitle:hover, #tabs #tabArticleTitle:hover {

@@ -1071,3 +1071,51 @@ button#submitArticle:hover {
     z-index: 78;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .module-panel {
+    background-color: #1b1b1b;
+  }
+
+  .module-header {
+    background: #272626;
+    border-bottom: 1px solid #182026;
+  }
+
+  #tabsPanel {
+    background-color: #000000;
+  }
+
+  #top {
+    background-color: #383838;
+  }
+
+  #top>.fn__right a {
+    color: #c7c3c3;
+    border: 1px solid #353535;
+    background-color: #272222;
+  }
+
+  #top>a {
+    background: #464646;
+    color: #ffffff;
+  }
+
+  #tabs {
+    background-color: #161617;
+  }
+
+  #tabs li li>div>a {
+    background-color: #1b1b1f;
+  }
+
+  #tabs a:hover, #tabs a.tab-current, #tabs #tabToolsTitle.tab-current, #tabs #tabArticleTitle.tab-current, #tabs #tabToolsTitle:hover, #tabs #tabArticleTitle:hover {
+    background-color: #1d1d1f;
+  }
+
+  .form input[type='text'], .form input[type='password'], .form textarea, .form select {
+    border: 1px solid #2b2a2a;
+    color: #bbb;
+    background-color: #2b2b2b;
+  }
+}

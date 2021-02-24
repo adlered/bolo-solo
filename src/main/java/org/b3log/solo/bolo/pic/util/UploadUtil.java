@@ -98,9 +98,10 @@ public class UploadUtil {
                 break;
             case "picuang":
                 String site = config.split("<<>>")[1];
+                String password = config.split("<<>>")[2];
                 CloseableHttpClient httpClient = createSSLClientDefault();
                 try {
-                    HttpPost httpPost = new HttpPost(site + "/upload");
+                    HttpPost httpPost = new HttpPost(site + "/upload/auth?password=" + password);
                     FileBody bin = new FileBody(file);
                     StringBody comment = new StringBody("file", ContentType.TEXT_PLAIN);
                     HttpEntity reqEntity = MultipartEntityBuilder.create().addPart("file", bin).addPart("comment", comment).build();

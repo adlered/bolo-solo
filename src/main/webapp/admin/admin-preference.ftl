@@ -305,10 +305,12 @@
                         $('#td1').html('Picuang 是 Bolo 博客作者开发的一款在自己服务器上搭建的公开图床，<a target="_blank" href="https://github.com/adlered/Picuang">项目地址</a>');
                         $('#td2').show(); $('#tc2').show();
                         $('#td2').html('<b>图床地址</b>');
-                        $('#td3').show();
-                        $('#td3').text('图床地址需带上 HTTP/HTTPS 协议地址，例：https://pic.stackoverflow.wiki')
+                        $('#td3').show(); $('#tc3').show();
+                        $('#td3').html('<b>管理员密码</b>');
                         $('#td4').show();
-                        $('#td4').text('图床必须允许匿名用户上传才可以使用。');
+                        $('#td4').text('图床地址需带上 HTTP/HTTPS 协议地址，例：https://pic.stackoverflow.wiki')
+                        $('#td5').show();
+                        $('#td5').text('图床支持匿名模式、仅管理员上传模式上传图片，如上传失败，请检查密码是否出错。');
                         break;
                     case 'qiniu':
                         $('#td1').show();
@@ -393,7 +395,7 @@
                         $('#sourceTC').text('hacpai');
                         break;
                     case 'picuang':
-                        $('#sourceTC').text('picuang<<>>' + $('#tc2').val());
+                        $('#sourceTC').text('picuang<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val());
                         break;
                     case 'qiniu':
                         $('#sourceTC').text('qiniu<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val());

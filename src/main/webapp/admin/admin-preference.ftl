@@ -308,9 +308,10 @@
                         $('#td3').show(); $('#tc3').show();
                         $('#td3').html('<b>管理员密码</b>');
                         $('#td4').show();
-                        $('#td4').text('图床地址需带上 HTTP/HTTPS 协议地址，例：https://pic.stackoverflow.wiki')
-                        $('#td5').show();
-                        $('#td5').text('图床支持匿名模式、仅管理员上传模式上传图片，如上传失败，请检查密码是否出错。');
+                        $('#td4').html('' +
+                            '<p style="font-weight: bold; color: #cd3535">兼容性：支持 Picuang V2.4 及以上版本</p>' +
+                            '图床地址需带上 HTTP/HTTPS 协议地址，例：https://pic.stackoverflow.wiki<br>' +
+                            '图床支持匿名模式、仅管理员上传模式上传图片，如上传失败，请检查密码是否出错。')
                         break;
                     case 'qiniu':
                         $('#td1').show();

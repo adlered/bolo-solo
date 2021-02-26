@@ -34,7 +34,6 @@
         <button id="font_plus" title="放大字体"><i class="fas fa-plus"></i></button>
         <button id="font_minus" title="缩小字体"><i class="fas fa-minus"></i></button>
 
-        <button class="translate_chn_to_cht" id="translateLink" title="简繁转换">繁</button>
         <button id="darkmode" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button>
     </div>
     <div id="rightside-config-show">

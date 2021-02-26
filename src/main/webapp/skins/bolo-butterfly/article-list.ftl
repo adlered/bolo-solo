@@ -208,7 +208,7 @@
                         <span class="pagination__item pagination__item--active">${paginationPageNum}</span>
                     <#else>
                         <a class="pagination__item"
-                           href="${servePath}${path}${pagingSep}${paginationPageNum}">${paginationPageNum}</a>
+                           href="${servePath}${path}?p=${paginationPageNum}">${paginationPageNum}</a>
                     </#if>
                 </#list>
                 <#if paginationPageNums?last != paginationPageCount>

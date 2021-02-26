@@ -31,7 +31,8 @@
 </head>
 <body>
 <#include "header.ftl">
-
+<div id="pjax">
+    <#if pjax><!---- pjax {#pjax} start ----></#if>
 <div class="container body clearfix">
     <section class="content">
         <div class="content-article widget">
@@ -69,9 +70,13 @@
         </div>
     </section>
 </div>
+    <#if pjax><!---- pjax {#pjax} end ----></#if>
+</div>
 
 <#include "footer.ftl">
 
+<div id="pjax">
+    <#if pjax><!---- pjax {#pjax} start ----></#if>
 <@comment_script oId=article.oId commentable=article.commentable>
     page.tips.externalRelevantArticlesDisplayCount = "${externalRelevantArticlesDisplayCount}";
     <#if 0 != randomArticlesDisplayCount>
@@ -86,5 +91,7 @@
     </#if>
     Skin.initArticle()
 </@comment_script>
+</div>
+<#if pjax><!---- pjax {#pjax} end ----></#if>
 </body>
 </html>

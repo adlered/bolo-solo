@@ -28,6 +28,7 @@
 var Skin = {
     init: function () {
         Skin._initToc()
+        Util.initPjax()
     },
     _initToc: function () {
         $('.entry-content p img:eq(0)').hide();

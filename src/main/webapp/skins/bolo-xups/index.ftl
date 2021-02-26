@@ -30,14 +30,16 @@
 <body class="body--gray">
 <#include "header.ftl">
 <main id="pjax" class="fn__flex-1">
-    <#if pjax><!---- pjax {#pjax} start ----></#if>
     <div class="wrapper wrapper--min">
+        <div id="pjax">
+            <#if pjax><!---- pjax {#pjax} start ----></#if>
         <div class="container body clearfix">
             <#include "article-list.ftl">
             <#include "side.ftl">
         </div>
+            <#if pjax><!---- pjax {#pjax} end ----></#if>
+        </div>
     </div>
-    <#if pjax><!---- pjax {#pjax} end ----></#if>
 </main>
 <#include "footer.ftl">
 </body>

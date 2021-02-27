@@ -120,13 +120,8 @@
                 <div class="item-headline"><i
                             class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div>
                 <div class="announcement_content">
+                    ${noticeBoard}
                 </div>
-            </div>
-        </div>
-        <div class="card-widget card-recent-post">
-            <div class="card-content">
-                <div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div>
-
             </div>
         </div>
         <div class="card-widget card-tags">

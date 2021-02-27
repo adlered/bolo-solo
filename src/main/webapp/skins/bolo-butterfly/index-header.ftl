@@ -21,8 +21,8 @@
         <div id="site_subtitle">
             <span id="subtitle"></span>
         </div>
-        <div class="header__desc">
-            ${noticeBoard}
+        <div class="header__desc" style="text-align: center; color: #cecccb">
+            ${blogSubtitle}
         </div>
         <div id="site_social_icons">
             <a class="social-icon" href="https://github.com/lonuslan" target="_blank" title="Github">

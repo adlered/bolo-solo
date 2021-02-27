@@ -34,7 +34,9 @@
                             </time>
                             <span class="article-meta"><span class="article-meta__separator">|</span>
                             <i class="fas fa-boxes article-meta__icon"></i>
-                            <a class="article-meta__categories" href="">${article.articleViewCount} ${viewLabel}</a>
+                            <a class="article-meta__categories">${article.articleViewCount} ${viewLabel}</a>
+                            <span class="article-meta__separator">|</span>
+                            <a class="article-meta__categories">${article.articleCommentCount} ${commentLabel}</a>
                             </span>
                             <span class="article-meta tags">
                                 <span class="article-meta__separator">|</span>

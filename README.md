@@ -34,21 +34,21 @@
 
 ### 全新主题，支持黑暗模式
 
-<img src="/preview/1.png"/>
-<img src="/preview/2.png"/>
-<img src="/preview/3.png"/>
+<img src="/preview/p1.png"/>
+<img src="/preview/p2.png"/>
+<img src="/preview/p3.png"/>
 
 ### 后台管理，酷炫统计表，完整黑暗模式支持
 
-<img src="/preview/4.png"/>
+<img src="/preview/p4.png"/>
 
 ### 搜索界面，一搜即达
 
-<img src="/preview/5.png"/>
+<img src="/preview/p5.png"/>
 
 ### 登录界面，定期自动更新主题美图
 
-<img src="/preview/6.png"/>
+<img src="/preview/p6.png"/>
 
 ## 为什么选择 Bolo
 

@@ -44,7 +44,7 @@
                 <div class="ft__center">
                     <div class="article__meta">
                         <time>
-                            ${article.articleUpdateDate?string("yyyy-MM-dd")}
+                            ${article.articleCreateDate?string("yyyy-MM-dd")} / ${article.articleUpdateDate?string("yyyy-MM-dd")}
                         </time>
                         /
                         <#list article.articleTags?split(",") as articleTag>
@@ -63,14 +63,6 @@
                     <#include "../../common-template/share.ftl">
                 </div>
                 <div class="wrapper">
-                    <#--            <section class="vditor-reset articles article__content">-->
-                    <#--                ${article.articleContent}-->
-                    <#--                <#if "" != article.articleSign.signHTML?trim>-->
-                    <#--                    <div>-->
-                    <#--                        ${article.articleSign.signHTML}-->
-                    <#--                    </div>-->
-                    <#--                </#if>-->
-                    <#--            </section>-->
                     <section id="article-container">
                         ${article.articleContent}
                         <#if "" != article.articleSign.signHTML?trim>
@@ -80,27 +72,14 @@
                         </#if>
                     </section>
                 </div>
-
             </div>
+
             <#if article?? && article.articleToC?? && article.articleToC?size &gt; 0>
                 <div class="post__toc">
                     <#include "../../common-template/toc.ftl"/>
                 </div>
             </#if>
 
-
-            <div class="wrapper">
-                <div id="gitalk-container"></div>
-                <div id="vcomment"
-                     style="    margin-bottom: 40px; margin-top: 80px;
-        border: 1px solid rgba(255,255,255,0.8);
-        border-radius: 5px;
-        background: rgba(255,255,255,0.9);
-        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-        padding: 20px;"
-                     data-name="${article.authorName}" data-postId="${article.oId}"></div>
-                <div id="b3logsolocomments"></div>
-            </div>
             <div class="article__bottom">
                 <div class="wrapper">
                     <div class="fn__flex">

@@ -34,14 +34,14 @@
                             </time>
                             <span class="article-meta"><span class="article-meta__separator">|</span>
                             <i class="fas fa-boxes article-meta__icon"></i>
-                            <a class="article-meta__categories" href="">${viewLabel}</a>
+                            <a class="article-meta__categories" href="">${article.articleViewCount} ${viewLabel}</a>
                             </span>
                             <span class="article-meta tags">
                                 <span class="article-meta__separator">|</span>
                                 <#list article.articleTags?split(",") as articleTag>
                                 <i class="fas fa-tag article-meta__icon"></i>
                                 <a class="article-meta__tags" href="${servePath}/tags/${articleTag?url('UTF-8')}">${articleTag}</a>
-                                <span class="article-meta__link">•</span>
+                                <span class="article-meta__link"> </span>
                                 </#list>
                             </span>
                         </div>

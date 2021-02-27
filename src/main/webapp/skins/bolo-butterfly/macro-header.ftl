@@ -11,6 +11,6 @@
     See the Mulan PSL v2 for more details.
 
 -->
-<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/css/all.css" rel="stylesheet">
+<link href="https://ftp.stackoverflow.wiki/bolo/fontawesome-free-5.14.0-web/css/all.css" rel="stylesheet">
 
 

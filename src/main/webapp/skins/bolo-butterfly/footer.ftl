@@ -37,4 +37,30 @@
 <script type="text/javascript"
         src="${staticServePath}/skins/${skinDirName}/js/circleMagic.min.js?${staticResourceVersion}"
         charset="utf-8"></script>
+<script>
+    $(function() {
+        let darkmode = 0;
+        let theme = Cookies.get("theme");
+        if (theme === "light") {
+            darkmode = 0;
+        } else {
+            darkmode = 1;
+        }
+        setInterval(function() {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                if (darkmode === 0) {
+                    $("#darkmode").click();
+                    darkmode = 1;
+                    console.log("切换至黑暗主题");
+                }
+            } else {
+                if (darkmode === 1) {
+                    $("#darkmode").click();
+                    darkmode = 0;
+                    console.log("切换至明亮主题");
+                }
+            }
+        }, 1000);
+    });
+</script>
 ${plugins}

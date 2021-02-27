@@ -24,13 +24,6 @@
         <div class="header__desc" style="text-align: center; color: #cecccb">
             ${blogSubtitle}
         </div>
-        <div id="site_social_icons">
-            <a class="social-icon" href="https://github.com/lonuslan" target="_blank" title="Github">
-                <i class="fab fa-github"></i></a>
-            <a class="social-icon" href="mailto:L158943041@gmail.com" target="_blank" title="Email">
-                <i class="fas fa-envelope"></i>
-            </a>
-        </div>
     </div>
     <div id="scroll_down"><i class="fas fa-angle-down scroll-down-effects"></i></div>
 </div>

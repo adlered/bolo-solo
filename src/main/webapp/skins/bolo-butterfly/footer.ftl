@@ -19,9 +19,9 @@
         <a href="${servePath}">${blogTitle}</a>
         ${footerContent}
         <span class="footer__heart">❤️</span>
-        Powered by <a href="https://solo.b3log.org/" target="_blank">Solo</a>
-        Theme ✨ Solo-Butterfly
-        <sup>[<a href="https://github.com/lonuslan/solo-blog" target="_blank">ref</a>]</sup>
+        Powered by <a href="https://github.com/adlered/bolo-solo" target="_blank">Bolo</a>
+        Theme ✨ Bolo-Butterfly
+        <sup>[<a href="https://github.com/adlered/bolo-solo" target="_blank">ref</a>]</sup>
         Modified by <a href="https://github.com/lonuslan" target="_blank">Lonus Lan</a> <br>
     </div>
 </footer>

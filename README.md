@@ -72,4 +72,4 @@
 
 ## 博客安装使用教程文档
 
-### [👉 安装教程 | 从Solo迁移 | Bolo介绍 | 常见问题 👈](https://programmingwithlove.stackoverflow.wiki/bolodoc)
+### [👉 安装教程 | 从Solo迁移 | Bolo介绍 | 常见问题 👈](https://doc.stackoverflow.wiki/web/#/7?page_id=46)

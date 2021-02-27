@@ -108,11 +108,52 @@
                     <button class="button--animated" id="bookmark-it" title="加入书签"><i
                                 class="fas fa-bookmark"></i><span>加入书签</span></button>
                 </div>
-                <div class="card-info-social-icons is-center"><a class="social-icon"
-                                                                 href="https://github.com/lonuslan" target="_blank"
-                                                                 title="Github"><i class="fab fa-github"></i></a><a
-                            class="social-icon" href="mailto:L158943041@gmail.com" target="_blank" title="Email"><i
-                                class="fas fa-envelope"></i></a></div>
+                <#if usite??>
+                <div class="card-info-social-icons is-center">
+                    <#if usite.usiteQQ !=''>
+                        <a class="social-icon" target="_blank" title="QQ"
+                           href="tencent://message/?uin=${usite.usiteQQ}">
+                            <i class="fab fa-qq"></i>
+                        </a>
+                    </#if>
+                    <#if usite.usiteWeChat !=''>
+                        <a class="social-icon" target="_blank" title="WeChat"
+                           href="javascript:alert('我的微信号：${usite.usiteWeChat}')">
+                            <i class="fab fa-weixin"></i>
+                        </a>
+                    </#if>
+                    <#if usite.usiteWeiBo !=''>
+                        <a class="social-icon" target="_blank" title="Weibo"
+                           href="https://weibo.com/${usite.usiteWeiBo}">
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                    </#if>
+                    <#if usite.usiteGitHub !=''>
+                        <a class="social-icon" target="_blank" title="Github"
+                           href="https://github.com/${usite.usiteGitHub}">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </#if>
+                    <#if usite.usiteTwitter !=''>
+                        <a class="social-icon" target="_blank" title="Twitter"
+                           href="https://twitter.com/${usite.usiteTwitter}">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </#if>
+                    <#if usite.usiteFacebook !=''>
+                        <a class="social-icon" target="_blank" title="Facebook"
+                           href="https://www.facebook.com/${usite.usiteFacebook}">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </#if>
+                    <#if usite.usiteTelegram !=''>
+                        <a class="social-icon" target="_blank" title="Telegram"
+                           href="https://telegram.me/${usite.usiteTelegram}">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </#if>
+                </div>
+                </#if>
             </div>
         </div>
         <div class="card-widget card-announcement">

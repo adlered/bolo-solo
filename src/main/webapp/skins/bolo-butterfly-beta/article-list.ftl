@@ -41,8 +41,10 @@
                             <span class="article-meta"><span class="article-meta__separator">|</span>
                             <i class="fas fa-boxes article-meta__icon"></i>
                             <a class="article-meta__categories">${article.articleViewCount} ${viewLabel}</a>
+                            <#if interactive == "on">
                             <span class="article-meta__separator">|</span>
                             <a class="article-meta__categories">${article.articleCommentCount} ${commentLabel}</a>
+                            </#if>
                             </span>
                             <span class="article-meta tags">
                                 <span class="article-meta__separator">|</span>
@@ -174,6 +176,7 @@
                 border-color: #49b1f5;
             }
         </style>
+        <#if interactive == "on">
         <div class="card-widget card-webinfo">
             <div class="card-content">
                 <form class="bar5" action="${servePath}/search">
@@ -183,6 +186,7 @@
                 </form>
             </div>
         </div>
+        </#if>
         <div class="card-widget card-announcement">
             <div class="card-content">
                 <div class="item-headline"><i

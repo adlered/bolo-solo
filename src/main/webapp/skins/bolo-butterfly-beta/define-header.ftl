@@ -91,6 +91,7 @@
                             </#list>
                         </ul>
                     </div>
+                    <#if interactive == "on">
                     <div class="menus_item">
                         <a class="site-page">
                             <i class="fa-fw fas fa-list"></i>
@@ -134,6 +135,7 @@
                                 </#if>
                         </ul>
                     </div>
+                    </#if>
                 </div>
                 <span class="toggle-menu close">
                     <a class="site-page">

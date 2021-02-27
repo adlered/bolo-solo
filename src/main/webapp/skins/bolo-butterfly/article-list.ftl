@@ -194,43 +194,28 @@
                 <div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div>
                 <div class="webinfo">
                     <div class="webinfo-item">
-                        <div class="webinfo-article-name">文章数目 :</div>
+                        <div class="webinfo-article-name">${articleViewCountLabel}</div>
                         <div class="webinfo-article-count">${statistic.statisticPublishedBlogArticleCount}</div>
                     </div>
                     <div class="webinfo-item">
-                        <div class="webinfo-runtime-name">已运行时间 :</div>
-                        <div class="webinfo-runtime-count" id="webinfo-runtime-count" publish_date="2020-1-1">0
-                            天
-                        </div>
+                        <div class="webinfo-runtime-name">${viewCount1Label}</div>
+                        <div class="webinfo-runtime-count">${statistic.statisticBlogViewCount}</div>
                     </div>
                     <div class="webinfo-item">
-                        <div class="webinfo-site-uv-name">本站在线访客数 :</div>
-                        <div class="webinfo-site-uv-count" id="busuanzi_value_site_uv">
-                            ${viewCount1Label}${statistic.statisticBlogViewCount}
-                            &nbsp;
-                            ${articleCount1Label}${statistic.statisticPublishedBlogArticleCount}
-                            <#if interactive == "on">
-                                &nbsp;
-                                ${commentCount1Label}${statistic.statisticPublishedBlogCommentCount}
-                            </#if>
-                            &nbsp;
-                            ${onlineVisitor1Label}${onlineVisitorCnt}
-                        </div>
+                        <div class="webinfo-runtime-name">${articleCount1Label}</div>
+                        <div class="webinfo-runtime-count">${statistic.statisticPublishedBlogArticleCount}</div>
                     </div>
+                    <#if interactive == "on">
                     <div class="webinfo-item">
-                        <div class="webinfo-site-name">本站总访问量 :</div>
-                        <div class="webinfo-site-pv-count" id="busuanzi_value_site_pv">
-                            <span data-uvstaturl="${servePath}">${statistic.statisticBlogViewCount}</span>
-                        </div>
+                        <div class="webinfo-runtime-name">${commentCount1Label}</div>
+                        <div class="webinfo-runtime-count">${statistic.statisticPublishedBlogCommentCount}</div>
+                    </div>
+                    </#if>
+                    <div class="webinfo-item">
+                        <div class="webinfo-runtime-name">${onlineVisitor1Label}</div>
+                        <div class="webinfo-runtime-count">${onlineVisitorCnt}</div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="card-widget card-webinfo">
-            <div class="card-content">
-                <a target="_blank" href="https://www.vultr.com/?ref=7843474">
-                    <img class="adimg" src="https://img.lonuslan.com/img/banner_300x250.webp"/>
-                </a>
             </div>
         </div>
     </div>

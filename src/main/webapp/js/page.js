@@ -404,13 +404,13 @@ $.extend(Page.prototype, {
                     }
                     that.toggleEditor();
                     vditor.setValue('');
-                    that.addCommentAjax(result.cmtTpl)
                     swal({
                         title: "",
                         text: "评论已推送!",
                         icon: "success",
                         button: "好",
                     });
+                    that.addCommentAjax(result.cmtTpl)
                 },
             })
         } else {

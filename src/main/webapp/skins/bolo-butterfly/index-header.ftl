@@ -15,7 +15,7 @@
 <div class="full_page header" id="page-header">
     <#--    <#include "define-header.ftl">-->
     <div id="site-info">
-        <h1 id="site_title">Hi I'm LonusLan
+        <h1 id="site_title">${blogTitle}
             <span class="styles_wave__1DWv- styles_headline__2NyAR">👋🏼</span>
         </h1>
         <div id="site_subtitle">

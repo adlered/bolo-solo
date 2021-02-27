@@ -14,6 +14,11 @@
 <div id="mobile-sidebar">
     <div id="menu_mask"></div>
     <div id="mobile-sidebar-menus">
+        <span class="toggle-menu close" style="font-size: 20px; padding-left: 5px">
+            <a class="site-page">
+                <i class="fa-fw fas fa-arrow-circle-left"></i>
+            </a>
+        </span>
         <div class="mobile_author_icon"><img class="avatar-img"
                                              src="${adminUser.userAvatar}"
                                              onerror="onerror=null;src='${staticServePath}/skins/${skinDirName}/images/friend_404.gif'" alt="avatar">

@@ -86,6 +86,14 @@
 
             <div class="article__bottom">
                 <div class="wrapper">
+                    <div class="fn__flex">
+                        <#if 0 != externalRelevantArticlesDisplayCount>
+                            <div class="item" id="externalRelevantArticles"></div>
+                        </#if>
+                        <div class="item" id="randomArticles"></div>
+                        <div class="item" id="relevantArticles"></div>
+                    </div>
+
                     <#if interactive == "on">
                         <section class="comments">
                             <ul class="commentwrap">

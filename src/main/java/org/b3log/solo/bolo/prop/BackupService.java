@@ -35,18 +35,12 @@ import org.b3log.latke.util.Ids;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.tool.DeleteFolder;
 import org.b3log.solo.model.Article;
-import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.UserRepository;
-import org.b3log.solo.service.ExportService;
-import org.b3log.solo.service.ImportService;
-import org.b3log.solo.service.InitService;
-import org.b3log.solo.service.OptionQueryService;
+import org.b3log.solo.service.*;
 import org.b3log.solo.util.Solos;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.zeroturnaround.zip.ZipUtil;
 import pers.adlered.blog_platform_export_tool.module.TranslateResult;
-import pers.adlered.blog_platform_export_tool.util.XML;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -77,6 +71,12 @@ public class BackupService {
     private ExportService exportService;
 
     /**
+     * Article Mgmt Service.
+     */
+    @Inject
+    private ArticleMgmtService articleMgmtService;
+
+    /**
      * User repository.
      */
     @Inject
@@ -93,6 +93,33 @@ public class BackupService {
      */
     @Inject
     private ImportService importService;
+
+    @RequestProcessing(value = "/sync/github/repo/do/get", method = HttpMethod.GET)
+    public void syncGitHubRepos(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
+
+        try {
+            String githubId = context.param("githubId");
+            if (githubId.isEmpty()) {
+                throw new NullPointerException();
+            }
+
+            articleMgmtService.refreshGitHub(githubId);
+
+            context.renderJSON().renderCode(200);
+            context.renderJSON().renderMsg("Sync github repos to article successfully. [githubId=" + githubId + "]");
+
+            return ;
+        } catch (final Exception e) {
+            context.sendError(500);
+
+            return ;
+        }
+    }
 
     @RequestProcessing(value = "/prop/backup/github/do/upload", method = {HttpMethod.GET})
     public void uploadBackupToGithub(final RequestContext context) {

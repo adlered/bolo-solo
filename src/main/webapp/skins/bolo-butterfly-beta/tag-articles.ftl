@@ -38,9 +38,7 @@
             ${tag.tagPublishedRefCount} ${cntArticleLabel}
         </div>
         <main class="layout_page" id="content-inner">
-            <article id="post">
-                <#include "article-list.ftl">
-            </article>
+            <#include "article-list.ftl">
         </main>
     </div>
     <#if pjax><!---- pjax {#pjax} end ----></#if>

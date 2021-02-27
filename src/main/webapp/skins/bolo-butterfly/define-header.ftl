@@ -43,10 +43,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script>
 <script src="https://cdn.jsdelivr.net/npm/typed.js"></script>
-<#--<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>-->
 <script src="${staticServePath}/skins/${skinDirName}/js/GlobalConfig.js"></script>
-<#--<script src="${staticServePath}/skins/${skinDirName}/js/main.js"></script>-->
-<#--<script src="${staticServePath}/skins/${skinDirName}/js/tw_cn.js"></script>-->
 <script src="${staticServePath}/skins/${skinDirName}/js/utils.js"></script>
 <script src="${staticServePath}/skins/${skinDirName}/js/activate-power-mode.js"></script>
 <#macro header type>

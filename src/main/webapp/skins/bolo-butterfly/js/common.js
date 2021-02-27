@@ -8078,7 +8078,10 @@
                 y = $("#menu_mask");
 
             function b(e) {
-                if (sidebarPaddingR(), $("body").css("overflow", "hidden"), y.fadeIn(), "menu" === e) {
+                if ("closeMenu" === e) {
+                    m.removeClass("open").addClass("close"), g.css("transform", "translate3d(0%,0,0)");
+                }
+                if (sidebarPaddingR(), y.fadeIn(), "menu" === e) {
                     m.removeClass("close").addClass("open"), g.css("transform", "translate3d(-100%,0,0)");
                     var t = g.children();
                     for (let e = 0; e <= t.length; e++) {
@@ -8101,7 +8104,11 @@
                 }))
             }
             m.on("click", (function() {
-                b("menu")
+                if(m.hasClass("close")) {
+                    b("menu")
+                } else {
+                    b("closeMenu")
+                }
             })), v.on("click", (function() {
                 b("toc")
             })), y.on("click touchstart", (function(e) {

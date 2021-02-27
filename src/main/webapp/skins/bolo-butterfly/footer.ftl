@@ -37,6 +37,4 @@
 <script type="text/javascript"
         src="${staticServePath}/skins/${skinDirName}/js/circleMagic.min.js?${staticResourceVersion}"
         charset="utf-8"></script>
-<#--<script type="text/javascript" src="${staticServePath}/skins/${skinDirName}/js/main.js?${staticResourceVersion}">-->
-<#--</script>-->
 ${plugins}

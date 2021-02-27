@@ -50,6 +50,18 @@
                             class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div>
             <div class="menus_item"><a class="site-page" href="${servePath}/links.html"><i
                             class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div>
+                <#list pageNavigations as page>
+                    <div class="menus_item">
+                    <a class="site-page" href="${page.pagePermalink}" target="${page.pageOpenTarget}">
+                                <#if page.pageIcon != ''>
+                                    <i class="fa-fw fas">
+                                        <img class="page-icon" src="${page.pageIcon}">
+                                    </i>
+                                </#if>
+                                <span> ${page.pageTitle}</span>
+                            </a>
+                    </div>
+                </#list>
         </div>
     </div>
 </div>

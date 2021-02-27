@@ -27,7 +27,6 @@
         <#if nextArticlePermalink??>
             <link rel="next" title="${nextArticleTitle}" href="${servePath}${nextArticlePermalink}">
         </#if>
-        <script src="${staticServePath}/js/lib/jquery/jquery.min.js" charset="utf-8"></script>
     </@head>
 </head>
 <body class="fn__flex-column">
@@ -110,6 +109,7 @@
     </svg>
 </#if>
 <#if pjax><!---- pjax {#pjax} start ----></#if>
+<script src="${staticServePath}/js/lib/jquery/jquery.min.js" charset="utf-8"></script>
 <@comment_script oId=article.oId commentable=article.commentable>
     page.tips.externalRelevantArticlesDisplayCount = "${externalRelevantArticlesDisplayCount}";
     <#if 0 != randomArticlesDisplayCount>

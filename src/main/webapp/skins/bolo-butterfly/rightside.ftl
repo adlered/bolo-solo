@@ -39,8 +39,6 @@
     <div id="rightside-config-show">
         <button id="rightside_config" title="设置"><i class="fas fa-cog"></i></button>
 
-        <a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fas fa-comments"></i></a>
-
         <button class="close" id="mobile-toc-button" title="目录"><i class="fas fa-list-ul"></i></button>
         <button id="go-up" title="回到顶部"><i class="fas fa-arrow-up"></i></button>
     </div>

@@ -12,6 +12,7 @@
 
 -->
 <#include "../../common-template/macro-common_head.ftl">
+<#include "macro-comments.ftl">
 <#include "../../common-template/macro-comment_script.ftl">
 
 <!DOCTYPE html>
@@ -82,14 +83,13 @@
 
             <div class="article__bottom">
                 <div class="wrapper">
-                    <div class="fn__flex">
-                        <#if 0 != externalRelevantArticlesDisplayCount>
-                            <div class="item" id="externalRelevantArticles"></div>
-                        </#if>
-                        <div class="item" id="randomArticles"></div>
-                        <div class="item" id="relevantArticles"></div>
-                    </div>
-                    <#include "define-comment.ftl">
+                    <#if interactive == "on">
+                        <section class="comments">
+                            <ul class="commentwrap">
+                                <@comments commentList=articleComments article=article count=article.articleCommentCount></@comments>
+                            </ul>
+                        </section>
+                    </#if>
                 </div>
             </div>
         </article>
@@ -108,14 +108,15 @@
 <#if pjax><!---- pjax {#pjax} start ----></#if>
 <@comment_script oId=article.oId commentable=article.commentable>
     page.tips.externalRelevantArticlesDisplayCount = "${externalRelevantArticlesDisplayCount}";
-    <#if 0 != externalRelevantArticlesDisplayCount>
-        page.loadExternalRelevantArticles("<#list article.articleTags?split(",") as articleTag>${articleTag}<#if articleTag_has_next>,</#if></#list>");
-    </#if>
     <#if 0 != randomArticlesDisplayCount>
-        page.loadRandomArticles();
+        page.loadRandomArticles('<h3>${randomArticlesLabel}</h3>');
+    </#if>
+    <#if 0 != externalRelevantArticlesDisplayCount>
+        page.loadExternalRelevantArticles("<#list article.articleTags?split(",") as articleTag>${articleTag}<#if articleTag_has_next>,</#if></#list>",
+        '<h3>${externalRelevantArticlesLabel}</h3>');
     </#if>
     <#if 0 != relevantArticlesDisplayCount>
-        page.loadRelevantArticles('${article.oId}', '<h4>${relevantArticles1Label}</h4>');
+        page.loadRelevantArticles('${article.oId}', '<h3>${relevantArticlesLabel}</h3>');
     </#if>
     Skin.initArticle()
 </@comment_script>

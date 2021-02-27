@@ -32,22 +32,6 @@
                     ${links?size} ${linkLabel}
                 </div>
                 <div class="articles vditor-reset link_main">
-                    <br>
-                    <#--            <#if 0 != links?size>-->
-                    <#--                <#list links as link>-->
-                    <#--                    <div class="other__item">-->
-                    <#--                        <img id="friend_link_icon" src="${link.linkIcon}">-->
-                    <#--                        <a rel="friend" href="${link.linkAddress}" target="_blank">-->
-                    <#--&lt;#&ndash;                            <img id="friend_link_icon" src="${link.linkIcon}">&ndash;&gt;-->
-                    <#--                            ${link.linkTitle}-->
-                    <#--                        </a>-->
-                    <#--                        <div>${link.linkDescription}</div>-->
-                    <#--                    </div>-->
-                    <#--                </#list>-->
-                    <#--            </#if>-->
-                    <#--            <br><br>-->
-                    <h2 id="">Lonus Lan 的贵宾席</h2>
-                    <br>
                     <div class="flink-list">
                         <#if 0 != links?size>
                             <#list links as link>
@@ -69,35 +53,6 @@
                             </#list>
                         </#if>
                     </div>
-
-                    <#--        描述性文字  -->
-                    <div class="link_des">
-                        <h2 id="">申请友链</h2>
-                        <ol>
-                            <li>如果您觉得本站还不错，欢迎您添加本站为您的友链。</li>
-                            <li>进入下方评论区按照下面的格式留言吧。</li>
-                            <li>请耐心等待博主审核。</li>
-                        </ol>
-                        <blockquote>
-                            <ol>
-                                <li>
-                                    <p>关于修改信息</p>
-                                    <p>如果你已经审核通过，但是需要更改当时的信息，那么你可以再次进入评论区重新发表评论，并备注修改信息，等待博主审核通过就可以修改你的信息了！</p>
-                                </li>
-                                <li>
-                                    <p>关于清理友链</p>
-                                    <p>我会不定期访问您的友链，如果出现网站无法访问、404、友链入口难以发现、删除本站友链等情况我会直接将你的网站在此站上移除，如需再次添加友链，请重新申请。</p>
-                                </li>
-                            </ol>
-                        </blockquote>
-                        <h3>我的信息</h3>
-                        <pre>
-                    <code>name: lonuslan<br>link: https://www.lonuslan.com/<br>avatar: https://img.lonuslan.com/lonuslan/20200414/SPGX7UvyK7aT.png<br>descr: May the god bless you!
-                    </code>
-                    </pre>
-                    </div>
-                    <#include "define-comment.ftl">
-                </div>
             </div>
         </article>
     </main>

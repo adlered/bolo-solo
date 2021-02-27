@@ -94,8 +94,7 @@
                     </div>
                     <div class="menus_item">
                         <a class="site-page">
-                            <i class=""></i>
-                            <span class="footer__heart"> ❤️</span>
+                            <span class="footer__heart">❤️更多</span>
                             <i class="fas fa-chevron-down menus-expand"></i>
                         </a>
                         <ul class="menus_item_child">
@@ -113,55 +112,6 @@
                             </#list>
                         </ul>
                     </div>
-<#--                    <div class="menus_item">-->
-                    <#--                        <a class="site-page">-->
-                    <#--                            <i class="fa-fw fas fa-list"></i>-->
-                    <#--                            <span> 喜欢</span>-->
-                    <#--                            <i class="fas fa-chevron-down menus-expand"></i>-->
-                    <#--                        </a>-->
-                    <#--                        <ul class="menus_item_child">-->
-                    <#--                            <li>-->
-                    <#--                                <a class="site-page" href="http://localhost:4000/music/">-->
-                    <#--                                    <i class="fa-fw fas fa-music"></i>-->
-                    <#--                                    <span> 音乐</span>-->
-                    <#--                                </a>-->
-                    <#--                            </li>-->
-                    <#--                            <li>-->
-                    <#--                                <a class="site-page" href="http://localhost:4000/movies/">-->
-                    <#--                                    <i class="fa-fw fas fa-video"></i>-->
-                    <#--                                    <span> 电影</span>-->
-                    <#--                                </a>-->
-                    <#--                            </li>-->
-                    <#--                        </ul>-->
-                    <#--                    </div>-->
-                    <div class="menus_item">
-                        <a class="site-page">
-                            <i class="fa-fw fas fa-tools"></i>
-                            <span> 工具箱</span>
-                            <i class="fas fa-chevron-down menus-expand"></i>
-                        </a>
-                        <ul class="menus_item_child">
-                            <li>
-                                <a class="site-page" target="_blank" rel="noopener" href="https://valine.lonuslan.com/">
-                                    <i class="fa-fw fas fa-comments"></i>
-                                    <span> 评论后台管理</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="site-page" target="_blank" rel="noopener" href="https://imgcdn.lonuslan.com/">
-                                    <i class="fa-fw fas fa-file-image"></i>
-                                    <span> 图片上传</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="site-page" target="_blank" rel="noopener"
-                                   href="http://mf.aidso.cn:3312/vhost/index.php">
-                                    <i class="fa-fw fas fa-cloud"></i>
-                                    <span> 图片后台主机管理</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                     <div class="menus_item">
                         <a class="site-page">
                             <i class="fa-fw fas fa-list"></i>
@@ -169,18 +119,6 @@
                             <i class="fas fa-chevron-down menus-expand"></i>
                         </a>
                         <ul class="menus_item_child">
-<#--                            <li>-->
-                            <#--                                <a class="site-page" href="http://localhost:4000/music/">-->
-                            <#--                                    <i class="fa-fw fas fa-music"></i>-->
-                            <#--                                    <span> 音乐</span>-->
-                            <#--                                </a>-->
-                            <#--                            </li>-->
-                            <#--                            <li>-->
-                            <#--                                <a class="site-page" href="http://localhost:4000/movies/">-->
-                            <#--                                    <i class="fa-fw fas fa-video"></i>-->
-                            <#--                                    <span> 电影</span>-->
-                            <#--                                </a>-->
-                            <#--                            </li>-->
                                 <#if isLoggedIn>
                                     <li>
                                         <a class="site-page" href="${servePath}/admin-index.do#main">

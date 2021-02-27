@@ -42,39 +42,14 @@
         <div class="menus_items">
             <div class="menus_item"><a class="site-page" href="${servePath}"><i
                             class="fa-fw fas fa-home"></i><span> 主页</span></a></div>
-            <div class="menus_item"><a class="site-page" href="${servePath}/archives/"><i
+            <div class="menus_item"><a class="site-page" href="${servePath}/timeaxis"><i
                             class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div>
-            <div class="menus_item"><a class="site-page" href="${servePath}/tags/"><i
+            <div class="menus_item"><a class="site-page" href="${servePath}/tags.html"><i
                             class="fa-fw fas fa-tags"></i><span> 标签</span></a></div>
-            <div class="menus_item"><a class="site-page" href="${servePath}/categories/"><i
+            <div class="menus_item"><a class="site-page" href="${servePath}/categories.html"><i
                             class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div>
-            <div class="menus_item"><a class="site-page" href="${servePath}/link/"><i
+            <div class="menus_item"><a class="site-page" href="${servePath}/links.html"><i
                             class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div>
-            <div class="menus_item"><a class="site-page" href="${servePath}/about/"><i
-                            class="fa-fw fas fa-heart"></i><span> 关于</span></a></div>
-            <div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 喜欢</span><i
-                            class="fas fa-chevron-down menus-expand"></i></a>
-                <ul class="menus_item_child">
-                    <li><a class="site-page" href="https://coding.lonuslan.com/music/"><i
-                                    class="fa-fw fas fa-music"></i><span> 音乐</span></a></li>
-                    <li><a class="site-page" href="https://coding.lonuslan.com/movies/"><i
-                                    class="fa-fw fas fa-video"></i><span> 电影</span></a></li>
-                </ul>
-            </div>
-            <div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-tools"></i><span> 工具箱</span><i
-                            class="fas fa-chevron-down menus-expand"></i></a>
-                <ul class="menus_item_child">
-                    <li><a class="site-page" target="_blank" rel="noopener" href="https://valine.lonuslan.com/"><i
-                                    class="fa-fw fas fa-comments"></i><span> 评论后台管理</span></a></li>
-                    <li><a class="site-page" target="_blank" rel="noopener" href="https://imgcdn.lonuslan.com/"><i
-                                    class="fa-fw fas fa-file-image"></i><span> 图片上传</span></a></li>
-                    <li><a class="site-page" target="_blank" rel="noopener"
-                           href="http://mf.aidso.cn:3312/vhost/index.php"><i class="fa-fw fas fa-cloud"></i><span> 图片后台主机管理</span></a>
-                    </li>
-                    <li><a class="site-page" target="_blank" rel="noopener" href="https://monitor.lonuslan.com/"><i
-                                    class="fa-fw fas fa-hourglass"></i><span> 后台状态监控</span></a></li>
-                </ul>
-            </div>
         </div>
     </div>
 </div>

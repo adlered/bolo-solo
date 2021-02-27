@@ -32,11 +32,23 @@
 
 ## 🌸 欣赏
 
-<img src="/preview/new/main.png"/>
-<img src="/preview/new/main2.png"/>
-<img src="/preview/new/search.png"/>
-<img src="/preview/new/login.png"/>
-<img src="/preview/new/manage.png"/>
+### 全新主题，支持黑暗模式
+
+<img src="/preview/1.png"/>
+<img src="/preview/2.png"/>
+<img src="/preview/3.png"/>
+
+### 后台管理，酷炫统计表，完整黑暗模式支持
+
+<img src="/preview/4.png"/>
+
+### 搜索界面，一搜即达
+
+<img src="/preview/5.png"/>
+
+### 登录界面，定期自动更新主题美图
+
+<img src="/preview/6.png"/>
 
 ## 为什么选择 Bolo
 
@@ -52,6 +64,8 @@
 10. 轻型防火墙功能，阻止恶意访问，保证博客正常运行
 11. 如果你是 Solo 用户，Bolo V2.0 及以上版本还内置了一键迁移工具；如果你对 Bolo 不满意，还可以一键迁回至 Solo
 12. 强大的 Markdown 编辑器（使用 Vditor）支持大纲、数学公式、脑图、图表、流程图、甘特图、时序图、五线谱、多媒体、语音阅读、标题锚点、代码高亮及复制、graphviz 渲染
+13. 支持黑暗模式
+14. 看板娘+，在线更新海量看板娘资源，i了i了
 
 ## 博客安装使用教程文档
 

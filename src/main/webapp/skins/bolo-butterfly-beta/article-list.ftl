@@ -158,6 +158,25 @@
                 </#if>
             </div>
         </div>
+        <style>
+            .bar5 input {
+                border: 1px solid #eeeeee;
+                padding: 10px;
+                width: 100%;
+            }
+            .bar5 input:focus {
+                border-color: #49b1f5;
+            }
+        </style>
+        <div class="card-widget card-webinfo">
+            <div class="card-content">
+                <form class="bar5" action="${servePath}/search">
+                    <div class="input">
+                        <input type="text" name="keyword" placeholder="输入关键字搜索">
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="card-widget card-announcement">
             <div class="card-content">
                 <div class="item-headline"><i

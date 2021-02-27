@@ -31,6 +31,9 @@
     </@head>
 </head>
 <body class="fn__flex-column">
+<script>
+    var loggedIn = ${article.logged};
+</script>
 <div id="pjax" class="fn__flex-1">
     <#if pjax><!---- pjax {#pjax} start ----></#if>
     <#include "define-header.ftl">

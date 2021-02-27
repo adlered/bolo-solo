@@ -27,6 +27,7 @@
         <#if nextArticlePermalink??>
             <link rel="next" title="${nextArticleTitle}" href="${servePath}${nextArticlePermalink}">
         </#if>
+        <script src="${staticServePath}/js/lib/jquery/jquery.min.js" charset="utf-8"></script>
     </@head>
 </head>
 <body class="fn__flex-column">

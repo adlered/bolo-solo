@@ -11,36 +11,12 @@
     See the Mulan PSL v2 for more details.
 
 -->
-<#--            <div id="site-info">-->
-<#--                <h1 id="site_title">-->
-<#--                    <a href="${servePath}" rel="start">${blogTitle}</a>-->
-<#--                    <span class="styles_wave__1DWv- styles_headline__2NyAR">👋🏼</span>-->
-<#--                </h1>-->
-<#--                <div id="site_subtitle">-->
-<#--                    <span id="subtitle" class="elements">${blogSubtitle}</span>-->
-<#--                    &lt;#&ndash;                <span class="typed-cursor">|</span>&ndash;&gt;-->
-<#--                </div>-->
-<#--                <div class="header__desc">-->
-<#--                    ${noticeBoard}-->
-<#--                </div>-->
-<#--                &lt;#&ndash;            <div id="site_social_icons">&ndash;&gt;-->
-<#--                &lt;#&ndash;                <a class="social-icon" href="https://github.com/lonuslan" target="_blank" title="Github">&ndash;&gt;-->
-<#--                &lt;#&ndash;                    <i class="fab fa-github"></i>&ndash;&gt;-->
-<#--                &lt;#&ndash;                </a>&ndash;&gt;-->
-<#--                &lt;#&ndash;                <a class="social-icon" href="mailto:L158943041@gmail.com" target="_blank" title="Email">&ndash;&gt;-->
-<#--                &lt;#&ndash;                    <i class="fas fa-envelope"></i>&ndash;&gt;-->
-<#--                &lt;#&ndash;                </a>&ndash;&gt;-->
-<#--                &lt;#&ndash;            </div>&ndash;&gt;-->
-<#--            </div>-->
-<#--            <div id="scroll_down"><i class="fas fa-angle-down scroll-down-effects"></i></div>-->
-<#--<#include "loadingBox.ftl">-->
 <#include "macro-header.ftl">
 <div id="web_bg" data-type="color"></div>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap">
 <link media="all" href="${staticServePath}/skins/${skinDirName}/css/main.css?${staticResourceVersion}"
       rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script>
 <script src="https://cdn.jsdelivr.net/npm/typed.js"></script>
 <script src="${staticServePath}/skins/${skinDirName}/js/GlobalConfig.js"></script>

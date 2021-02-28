@@ -117,7 +117,7 @@ public class UserConsole {
                 requestJSONObject.put(UserExt.USER_B3_KEY, srcPassword);
             } else {
                 // 更新密码
-                requestJSONObject.put(UserExt.USER_B3_KEY, MD5Utils.stringToMD5(password));
+                requestJSONObject.put(UserExt.USER_B3_KEY, MD5Utils.stringToMD5Twice(password));
             }
             userMgmtService.updateUser(requestJSONObject, true);
 

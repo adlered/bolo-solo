@@ -169,9 +169,11 @@
         </div>
         <style>
             .bar5 input {
-                border: 1px solid #eeeeee;
+                border: 1px solid #aaa8a8;
                 padding: 10px;
                 width: 100%;
+                background: transparent;
+                border-radius: 5px;
             }
             .bar5 input:focus {
                 border-color: #49b1f5;

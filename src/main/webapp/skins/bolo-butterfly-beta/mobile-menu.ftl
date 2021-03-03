@@ -51,6 +51,17 @@
         </div>
         <hr>
         <div class="menus_items">
+            <#if interactive == "on">
+                <#if isLoggedIn>
+                    <div class="menus_item"><a class="site-page" href="${servePath}/admin-index.do#main"><i
+                                    class="fa-fw fas fa-user"></i><span> ${adminLabel}</span></a></div>
+                    <div class="menus_item"><a class="site-page" href="${logoutURL}"><i
+                                    class="fa-fw fas fa-minus"></i><span> ${logoutLabel}</span></a></div>
+                <#else>
+                    <div class="menus_item"><a class="site-page" href="${servePath}/start"><i
+                                    class="fa-fw fas fa-user"></i><span> ${startToUseLabel}</span></a></div>
+                </#if>
+            </#if>
             <div class="menus_item"><a class="site-page" href="${servePath}"><i
                             class="fa-fw fas fa-home"></i><span> 主页</span></a></div>
             <div class="menus_item"><a class="site-page" href="${servePath}/timeaxis"><i

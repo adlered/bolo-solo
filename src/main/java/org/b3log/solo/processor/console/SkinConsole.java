@@ -118,6 +118,8 @@ public class SkinConsole {
                 }
 
                 s.put(Option.ID_C_SKIN_DIR_NAME, dirName);
+                // 显示皮肤简介
+                s.put("skinName", name);
                 skinArray.put(s);
             }
             skin.put("skins", skinArray.toString());

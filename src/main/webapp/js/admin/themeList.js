@@ -54,7 +54,7 @@ admin.themeList = {
 
           skinsHTML += '<div class="fn__left skinItem' + selectedClass +
             '"><div class="ft__center">' + skins[i].skinDirName
-            + '</div><img class="skinPreview" src="'
+            + '<br><span class="skinDesc">' + skins[i].skinName + '</span></div><img class="skinPreview" src="'
             + Label.staticServePath + '/skins/' + skins[i].skinDirName
             + '/preview.png"/><div>'
 

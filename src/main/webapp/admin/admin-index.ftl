@@ -157,7 +157,7 @@
                     </li>
                     <li>
                         <div>
-                            <a href="http://programmingwithlove.stackoverflow.wiki/bolodoc" target="_blank">
+                            <a href="https://doc.stackoverflow.wiki/web/#/7?page_id=46" target="_blank">
                                 <i class="fa fa-question-circle"></i>
                                 ${helpLabel}
                             </a>

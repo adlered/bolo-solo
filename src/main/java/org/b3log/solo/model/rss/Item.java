@@ -73,32 +73,26 @@ public final class Item {
      * End author element.
      */
     private static final String END_AUTHOR_ELEMENT = "</author>";
-
-    /**
-     * Categories.
-     */
-    private Set<Category> categories = new HashSet<>();
-
     /**
      * Start guid element.
      */
     private static final String START_GUID_ELEMENT = "<guid>";
-
     /**
      * End guid element.
      */
     private static final String END_GUID_ELEMENT = "</guid>";
-
     /**
      * Start pubDate element.
      */
     private static final String START_PUB_DATE_ELEMENT = "<pubDate>";
-
     /**
      * End pubDate element.
      */
     private static final String END_PUB_DATE_ELEMENT = "</pubDate>";
-
+    /**
+     * Categories.
+     */
+    private final Set<Category> categories = new HashSet<>();
     /**
      * Guid.
      */

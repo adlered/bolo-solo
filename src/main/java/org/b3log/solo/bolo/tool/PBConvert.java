@@ -17,12 +17,10 @@
  */
 package org.b3log.solo.bolo.tool;
 
-import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
-import org.b3log.solo.repository.ArticleRepository;
 import org.b3log.solo.util.Solos;
 
 import javax.servlet.http.HttpServletResponse;

@@ -170,7 +170,7 @@ public final class Feed {
     /**
      * Entries.
      */
-    private List<Entry> entries = new ArrayList<>();
+    private final List<Entry> entries = new ArrayList<>();
 
     /**
      * Gets the id.

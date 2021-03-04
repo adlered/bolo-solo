@@ -23,10 +23,8 @@ import org.apache.commons.lang.StringUtils;
 import org.b3log.latke.Keys;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
-import org.b3log.latke.model.User;
 import org.b3log.solo.bolo.Global;
 import org.b3log.solo.model.Common;
-import org.b3log.solo.model.UserExt;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -46,6 +44,12 @@ public final class GitHubs {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(GitHubs.class);
+
+    /**
+     * Private constructor.
+     */
+    private GitHubs() {
+    }
 
     /**
      * Gets GitHub repos.
@@ -194,11 +198,5 @@ public final class GitHubs {
             LOGGER.log(Level.ERROR, "Gets GitHub user info failed: " + e.getMessage());
             return null;
         }
-    }
-
-    /**
-     * Private constructor.
-     */
-    private GitHubs() {
     }
 }

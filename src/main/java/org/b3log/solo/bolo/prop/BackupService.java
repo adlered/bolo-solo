@@ -18,14 +18,11 @@
 package org.b3log.solo.bolo.prop;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.b3log.latke.Keys;
 import org.b3log.latke.ioc.Inject;
-import org.b3log.latke.logging.Level;
-import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.repository.Transaction;
 import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
@@ -45,6 +42,7 @@ import pers.adlered.blog_platform_export_tool.module.TranslateResult;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static pers.adlered.blog_platform_export_tool.Launcher.run;
@@ -113,11 +111,11 @@ public class BackupService {
             context.renderJSON().renderCode(200);
             context.renderJSON().renderMsg("Sync github repos to article successfully. [githubId=" + githubId + "]");
 
-            return ;
+            return;
         } catch (final Exception e) {
             context.sendError(500);
 
-            return ;
+            return;
         }
     }
 
@@ -135,11 +133,11 @@ public class BackupService {
             context.renderJSON().renderCode(200);
             context.renderJSON().renderMsg("Exported backup to GitHub manual successfully.");
 
-            return ;
+            return;
         } catch (final Exception e) {
             context.sendError(500);
 
-            return ;
+            return;
         }
     }
 
@@ -157,11 +155,11 @@ public class BackupService {
             context.renderJSON().renderCode(200);
             context.renderJSON().renderMsg("Exported backup to HacPai manual successfully.");
 
-            return ;
+            return;
         } catch (final Exception e) {
             context.sendError(500);
 
-            return ;
+            return;
         }
     }
 
@@ -217,7 +215,7 @@ public class BackupService {
                     article.put(Article.ARTICLE_VIEW_PWD, "");
                     final String articleImg1URL = Article.getArticleImg1URL(article);
                     article.put(Article.ARTICLE_IMG1_URL, articleImg1URL);
-                    long contentLength = content.getBytes("UTF-8").length;
+                    long contentLength = content.getBytes(StandardCharsets.UTF_8).length;
                     System.out.println("========== 正在导入 ==========");
                     System.out.println("文章标题：" + i.getTitle());
                     System.out.println("文章长度：" + contentLength);
@@ -245,7 +243,7 @@ public class BackupService {
     }
 
     @RequestProcessing(value = "/import/markdown", method = {HttpMethod.POST})
-    public void importFromMarkdown (final RequestContext context) {
+    public void importFromMarkdown(final RequestContext context) {
         if (!Solos.isAdminLoggedIn(context)) {
             context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 

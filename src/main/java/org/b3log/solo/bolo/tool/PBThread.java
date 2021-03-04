@@ -17,15 +17,11 @@
  */
 package org.b3log.solo.bolo.tool;
 
-import org.b3log.latke.Keys;
 import org.b3log.latke.ioc.BeanManager;
-import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.repository.Query;
-import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.repository.Transaction;
-import org.b3log.latke.util.CollectionUtils;
 import org.b3log.solo.bolo.SslUtils;
 import org.b3log.solo.bolo.pic.util.UploadUtil;
 import org.b3log.solo.model.Article;
@@ -43,8 +39,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static org.b3log.solo.model.Article.ARTICLE_VIEW_COUNT;
 
 public class PBThread implements Runnable {
 

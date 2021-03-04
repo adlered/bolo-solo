@@ -17,8 +17,6 @@
  */
 package org.b3log.solo.model;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * This class defines ext of user model relevant keys.
  *
@@ -55,6 +53,12 @@ public final class UserExt {
     public static final String USER_GITHUB_ID = "userGitHubId";
 
     /**
+     * Private constructor.
+     */
+    private UserExt() {
+    }
+
+    /**
      * Checks whether the specified name is invalid.
      * <p>
      * A valid user name:
@@ -70,9 +74,7 @@ public final class UserExt {
      */
     public static boolean invalidUserName(final String name) {
         final int length = name.length();
-        if (length < MIN_USER_NAME_LENGTH || length > MAX_USER_NAME_LENGTH) {
-            return true;
-        }
+        return length < MIN_USER_NAME_LENGTH || length > MAX_USER_NAME_LENGTH;
 
         /* char c;
         for (int i = 0; i < length; i++) {
@@ -85,12 +87,5 @@ public final class UserExt {
         } */
 
         // return StringUtils.containsIgnoreCase(name, "admin");
-        return false;
-    }
-
-    /**
-     * Private constructor.
-     */
-    private UserExt() {
     }
 }

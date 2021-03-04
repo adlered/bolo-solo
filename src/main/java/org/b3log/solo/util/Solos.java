@@ -30,11 +30,7 @@ import org.b3log.latke.logging.Logger;
 import org.b3log.latke.model.Pagination;
 import org.b3log.latke.model.Role;
 import org.b3log.latke.model.User;
-import org.b3log.latke.repository.RepositoryException;
-import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
-import org.b3log.latke.servlet.annotation.RequestProcessing;
-import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.util.CollectionUtils;
 import org.b3log.latke.util.Crypts;
 import org.b3log.latke.util.Strings;
@@ -50,13 +46,14 @@ import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.service.UserQueryService;
 import org.json.JSONObject;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.OutputStreamWriter;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 /**
  * Solo utilities.
@@ -68,45 +65,46 @@ import java.util.*;
 public final class Solos {
 
     /**
-     * Logger.
-     */
-    private static final Logger LOGGER = Logger.getLogger(Solos.class);
-
-    /**
      * Favicon API.
      */
     public static final String FAVICON_API;
-
     /**
      * Solo User-Agent.
      */
     public static final String USER_AGENT = "Solo/" + SoloServletListener.VERSION + "; +https://github.com/b3log/solo";
-
-    /**
-     * Cookie expiry in 30 days.
-     */
-    private static final int COOKIE_EXPIRY = 60 * 60 * 24 * 30;
-
     /**
      * Cookie name.
      */
     public static final String COOKIE_NAME;
-
     /**
      * Cookie secret.
      */
     public static final String COOKIE_SECRET;
-
     /**
      * Cookie HTTP only.
      */
     public static final boolean COOKIE_HTTP_ONLY;
-
     /**
-     * Option repository.
+     * Logger.
      */
-    @Inject
-    private OptionRepository optionRepository;
+    private static final Logger LOGGER = Logger.getLogger(Solos.class);
+    /**
+     * Cookie expiry in 30 days.
+     */
+    private static final int COOKIE_EXPIRY = 60 * 60 * 24 * 30;
+    /**
+     * Default page size.
+     */
+    private static final int DEFAULT_PAGE_SIZE = 15;
+    /**
+     * Default window size.
+     */
+    private static final int DEFAULT_WINDOW_SIZE = 20;
+    private static long uploadTokenCheckTime;
+    private static long uploadTokenTime;
+    private static String uploadToken = "";
+    private static String uploadURL = "https://" + Global.HACPAI_DOMAIN + "/upload/client";
+    private static String uploadMsg = "";
 
     static {
         ResourceBundle solo;
@@ -137,6 +135,33 @@ public final class Solos {
         }
     }
 
+    static {
+        String cookieNameConf = Latkes.getLatkeProperty("cookieName");
+        if (StringUtils.isBlank(cookieNameConf)) {
+            cookieNameConf = "solo";
+        }
+        COOKIE_NAME = cookieNameConf;
+
+        String cookieSecret = Latkes.getLatkeProperty("cookieSecret");
+        if (StringUtils.isBlank(cookieSecret)) {
+            cookieSecret = RandomStringUtils.randomAlphanumeric(8);
+        }
+        COOKIE_SECRET = cookieSecret;
+
+        COOKIE_HTTP_ONLY = Boolean.valueOf(Latkes.getLocalProperty("cookieHttpOnly"));
+    }
+
+    /**
+     * Option repository.
+     */
+    @Inject
+    private OptionRepository optionRepository;
+    /**
+     * Private constructor.
+     */
+    private Solos() {
+    }
+
     public static void enableWelfareLuteService() {
         ResourceBundle solo;
         try {
@@ -162,22 +187,6 @@ public final class Solos {
         }
     }
 
-    static {
-        String cookieNameConf = Latkes.getLatkeProperty("cookieName");
-        if (StringUtils.isBlank(cookieNameConf)) {
-            cookieNameConf = "solo";
-        }
-        COOKIE_NAME = cookieNameConf;
-
-        String cookieSecret = Latkes.getLatkeProperty("cookieSecret");
-        if (StringUtils.isBlank(cookieSecret)) {
-            cookieSecret = RandomStringUtils.randomAlphanumeric(8);
-        }
-        COOKIE_SECRET = cookieSecret;
-
-        COOKIE_HTTP_ONLY = Boolean.valueOf(Latkes.getLocalProperty("cookieHttpOnly"));
-    }
-
     /**
      * Constructs a successful result.
      *
@@ -195,12 +204,6 @@ public final class Solos {
     public static JSONObject newFail() {
         return new JSONObject().put(Keys.CODE, -1).put(Keys.MSG, "System is abnormal, please try again later");
     }
-
-    private static long uploadTokenCheckTime;
-    private static long uploadTokenTime;
-    private static String uploadToken = "";
-    private static String uploadURL = "https://" + Global.HACPAI_DOMAIN + "/upload/client";
-    private static String uploadMsg = "";
 
     /**
      * Gets upload token.
@@ -572,16 +575,6 @@ public final class Solos {
     }
 
     /**
-     * Default page size.
-     */
-    private static final int DEFAULT_PAGE_SIZE = 15;
-
-    /**
-     * Default window size.
-     */
-    private static final int DEFAULT_WINDOW_SIZE = 20;
-
-    /**
      * Gets the request page number from the specified path.
      *
      * @param path the specified path
@@ -641,11 +634,5 @@ public final class Solos {
         }
 
         return Integer.valueOf(windowSize);
-    }
-
-    /**
-     * Private constructor.
-     */
-    private Solos() {
     }
 }

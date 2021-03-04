@@ -19,7 +19,6 @@ package org.b3log.solo.bolo.tool;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Locale;
 
 
 /**
@@ -65,11 +64,11 @@ public class MediaFileUtil {
     private static final int LAST_IMAGE_FILE_TYPE = FILE_TYPE_WBMP;
     private static final int FIRST_PLAYLIST_FILE_TYPE = FILE_TYPE_M3U;
     private static final int LAST_PLAYLIST_FILE_TYPE = FILE_TYPE_WPL;
-    public static String sFileExtensions;
     private static final HashMap<String, MediaFileType> sFileTypeMap
             = new HashMap<String, MediaFileType>();
     private static final HashMap<String, Integer> sMimeTypeMap
             = new HashMap<String, Integer>();
+    public static String sFileExtensions;
 
     static {
         addFileType("MP3", FILE_TYPE_MP3, "audio/mpeg");

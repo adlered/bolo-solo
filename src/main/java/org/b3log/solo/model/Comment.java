@@ -95,6 +95,12 @@ public final class Comment {
     public static final String COMMENT_ON_ID = "commentOnId";
 
     /**
+     * Private constructor.
+     */
+    private Comment() {
+    }
+
+    /**
      * Gets comment sharp URL with the specified page and comment id.
      *
      * @param page      the specified page
@@ -116,11 +122,5 @@ public final class Comment {
      */
     public static String getCommentSharpURLForArticle(final JSONObject article, final String commentId) throws JSONException {
         return article.getString(Article.ARTICLE_PERMALINK) + "#" + commentId;
-    }
-
-    /**
-     * Private constructor.
-     */
-    private Comment() {
     }
 }

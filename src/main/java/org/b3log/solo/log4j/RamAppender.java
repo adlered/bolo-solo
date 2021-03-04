@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * <h3>bolo-solo</h3>
  * <p>追加到内存的 Appender，用于在线调试后台日志</p>
@@ -35,17 +36,16 @@ import java.util.Map;
  **/
 public class RamAppender extends AppenderSkeleton {
     // 定长列表
-    public static FixSizeLinkedList<Map<String,Object>> list = new FixSizeLinkedList<>(100);
+    public static FixSizeLinkedList<Map<String, Object>> list = new FixSizeLinkedList<>(100);
+    public static long id = 0;
 
     public static FixSizeLinkedList<Map<String, Object>> getList() {
         return list;
     }
 
-    public static long id = 0;
-
     @Override
     protected void append(LoggingEvent loggingEvent) {
-        final Map<String,Object> map = new HashMap<>();
+        final Map<String, Object> map = new HashMap<>();
         map.put("name", loggingEvent.getLoggerName());
         map.put("date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date(loggingEvent.getTimeStamp())));
         map.put("level", loggingEvent.getLevel().toString());

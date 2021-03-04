@@ -41,6 +41,37 @@ import javax.servlet.http.HttpServletResponse;
 public class MailProcessor {
     private static final Logger LOGGER = Logger.getLogger(MailProcessor.class);
 
+    /**
+     * 发送普通邮件
+     *
+     * @param subject
+     * @param from
+     * @param to
+     * @param html
+     * @throws SendMailException
+     */
+    public static void localSendMailMethod(String subject, String from, String to, String html) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OhMyEmail.subject(subject)
+                            .from(from)
+                            .to(to)
+                            .html(html)
+                            .send();
+                    LOGGER.log(Level.INFO, "Mail has sent [subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
+                } catch (SendMailException SME) {
+                    LOGGER.log(Level.INFO, "Mail sent failed [cause=" + SME.getCause() + ", subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
+                }
+            }
+        }).start();
+    }
+
+    /*
+        === 静态方法区 ===
+     */
+
     @RequestProcessing(value = "/prop/mail/send", method = {HttpMethod.GET})
     public void sendMail(final RequestContext context) {
         if (!Solos.isAdminLoggedIn(context)) {
@@ -75,36 +106,5 @@ public class MailProcessor {
 
             return;
         }
-    }
-
-    /*
-        === 静态方法区 ===
-     */
-
-    /**
-     * 发送普通邮件
-     *
-     * @param subject
-     * @param from
-     * @param to
-     * @param html
-     * @throws SendMailException
-     */
-    public static void localSendMailMethod(String subject, String from, String to, String html) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OhMyEmail.subject(subject)
-                            .from(from)
-                            .to(to)
-                            .html(html)
-                            .send();
-                    LOGGER.log(Level.INFO, "Mail has sent [subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
-                } catch (SendMailException SME) {
-                    LOGGER.log(Level.INFO, "Mail sent failed [cause=" + SME.getCause() + ", subject=" + subject + ", from=" + from + ", to=" + to + ", html=" + html + "]");
-                }
-            }
-        }).start();
     }
 }

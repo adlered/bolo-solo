@@ -52,7 +52,6 @@ import org.json.JSONObject;
 import javax.net.ssl.SSLContext;
 import java.io.File;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -92,7 +91,7 @@ public class UploadUtil {
                 }
 
                 // 传入文件
-                File localNewFile =  new File(path + "/" +  localFilename);
+                File localNewFile = new File(path + "/" + localFilename);
                 FileUtils.copyFile(file, localNewFile);
                 result = Latkes.getServePath() + "/image/" + localFilename;
                 break;
@@ -113,7 +112,7 @@ public class UploadUtil {
                             String str = EntityUtils.toString(resEntity);
                             EntityUtils.consume(resEntity);
                             JSONObject jsonObject = new JSONObject(str);
-                            result = site + (String) jsonObject.get("msg");
+                            result = site + jsonObject.get("msg");
                         } else {
                             throw new NullPointerException();
                         }
@@ -161,9 +160,9 @@ public class UploadUtil {
                 String filename;
                 try {
                     String subDir = config.split("<<>>")[7];
-                    filename = subDir + "/" + RandomStringUtils.randomAlphanumeric(3) + "_" +  file.getName();
+                    filename = subDir + "/" + RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
                 } catch (Exception e) {
-                    filename = RandomStringUtils.randomAlphanumeric(3) + "_" +  file.getName();
+                    filename = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
                 }
                 OSS ossClient = new OSSClientBuilder().build(endPoint, accessKeyID, accessKeySecret);
                 PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, filename, file);
@@ -171,7 +170,7 @@ public class UploadUtil {
                     ossClient.putObject(putObjectRequest);
                     ossClient.shutdown();
                     result = aliTreaty + "://" + bucketDomain + "/" + filename;
-                } catch (OSSException| ClientException e) {
+                } catch (OSSException | ClientException e) {
                     throw new NullPointerException();
                 }
                 break;
@@ -181,7 +180,7 @@ public class UploadUtil {
                 String pwd = config.split("<<>>")[3];
                 String upDomain = config.split("<<>>")[4];
                 String upTreaty = config.split("<<>>")[5];
-                String filenm = RandomStringUtils.randomAlphanumeric(3) + "_" +  file.getName();
+                String filenm = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
 
                 RestManager manager = new RestManager(zoneName, name, pwd);
                 manager.setApiDomain(RestManager.ED_AUTO);
@@ -196,6 +195,7 @@ public class UploadUtil {
 
     /**
      * 设置可访问https
+     *
      * @return
      */
     public static CloseableHttpClient createSSLClientDefault() {
@@ -206,7 +206,7 @@ public class UploadUtil {
                     return true;
                 }
             }).build();
-            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext,SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 
             return HttpClients.custom().setSSLSocketFactory(sslsf).build();
         } catch (KeyManagementException e) {

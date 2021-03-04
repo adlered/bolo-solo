@@ -17,8 +17,6 @@
  */
 package org.b3log.solo.bolo.waf;
 
-import pers.adlered.simplecurrentlimiter.main.SimpleCurrentLimiter;
-
 /**
  * <h3>bolo-solo</h3>
  * <p>rules of WAF.</p>

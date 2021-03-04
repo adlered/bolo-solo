@@ -182,21 +182,18 @@ public final class Article {
     public static final String ARTICLE_T_TOC = "articleToC";
 
     //// Other constants
-
-    /**
-     * Article abstract length.
-     */
-    private static final int ARTICLE_ABSTRACT_LENGTH = 500;
-
     /**
      * Width of article first image.
      */
     public static final int ARTICLE_THUMB_IMG_WIDTH = 1280;
-
     /**
      * Height of article first image.
      */
     public static final int ARTICLE_THUMB_IMG_HEIGHT = 720;
+    /**
+     * Article abstract length.
+     */
+    private static final int ARTICLE_ABSTRACT_LENGTH = 500;
 
     /**
      * Private constructor.

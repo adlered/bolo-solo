@@ -17,17 +17,11 @@
  */
 package org.b3log.solo.bolo.prop;
 
-import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.servlet.annotation.RequestProcessor;
-import org.b3log.solo.model.Option;
-import org.b3log.solo.service.OptionQueryService;
-import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * <h3>bolo-solo</h3>

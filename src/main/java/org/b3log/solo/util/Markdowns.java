@@ -47,6 +47,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -109,13 +110,17 @@ public final class Markdowns {
      * Whether Lute is available.
      */
     public static boolean LUTE_AVAILABLE = false;
-
+    public static boolean SHOW_CODE_BLOCK_LN = false;
     /**
      * Lute status
      */
     private static boolean LUTE_OK = false;
 
-    public static boolean SHOW_CODE_BLOCK_LN = false;
+    /**
+     * Private constructor.
+     */
+    private Markdowns() {
+    }
 
     /**
      * Clears cache.
@@ -123,7 +128,6 @@ public final class Markdowns {
     public static void clearCache() {
         MD_CACHE.clear();
     }
-
 
     /**
      * Cleans the specified HTML.
@@ -301,7 +305,7 @@ public final class Markdowns {
 
         String ret;
         try (final InputStream inputStream = conn.getInputStream()) {
-            ret = IOUtils.toString(inputStream, "UTF-8");
+            ret = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         }
 
         conn.disconnect();
@@ -342,11 +346,5 @@ public final class Markdowns {
         final JSONObject value = new JSONObject();
         value.put("data", html);
         MD_CACHE.put(hash, value);
-    }
-
-    /**
-     * Private constructor.
-     */
-    private Markdowns() {
     }
 }

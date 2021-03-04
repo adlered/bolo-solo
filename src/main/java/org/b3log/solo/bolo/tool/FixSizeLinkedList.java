@@ -29,7 +29,7 @@ import java.util.LinkedList;
  **/
 public class FixSizeLinkedList<T> extends LinkedList<T> {
     // 定义缓存的容量
-    private int capacity;
+    private final int capacity;
 
     public FixSizeLinkedList(int capacity) {
         super();

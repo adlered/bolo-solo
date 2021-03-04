@@ -94,38 +94,6 @@ public class MailService {
     }
 
     /**
-     * 清空指定用户评论的邮件提醒服务列表
-     */
-    @RequestProcessing(value = "/prop/mail/clear", method = {HttpMethod.GET})
-    public void clearCommentMailContext(final RequestContext context) {
-        if (!Solos.isAdminLoggedIn(context)) {
-            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-
-            return;
-        }
-
-        final BeanManager beanManager = BeanManager.getInstance();
-        final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
-
-        // Clear ALL context
-        try {
-            final Transaction transaction = optionRepository.beginTransaction();
-
-            final JSONObject mailUserContextOpt = optionRepository.get(Option.ID_C_MAIL_USER_CONTEXT);
-            mailUserContextOpt.put(Option.OPTION_VALUE, "");
-            optionRepository.update(Option.ID_C_MAIL_USER_CONTEXT, mailUserContextOpt);
-
-            transaction.commit();
-        } catch (RepositoryException RE) {
-        }
-
-        LOGGER.log(Level.INFO, "All comment mail context cleared successfully.");
-
-        context.renderJSON().renderCode(200);
-        context.renderJSON().renderMsg("All comment mail context cleared successfully.");
-    }
-
-    /**
      * 通过评论 Id 获取指定用户邮箱地址
      *
      * @param commentId
@@ -255,5 +223,37 @@ public class MailService {
 
             return "";
         }
+    }
+
+    /**
+     * 清空指定用户评论的邮件提醒服务列表
+     */
+    @RequestProcessing(value = "/prop/mail/clear", method = {HttpMethod.GET})
+    public void clearCommentMailContext(final RequestContext context) {
+        if (!Solos.isAdminLoggedIn(context)) {
+            context.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+
+            return;
+        }
+
+        final BeanManager beanManager = BeanManager.getInstance();
+        final OptionRepository optionRepository = beanManager.getReference(OptionRepository.class);
+
+        // Clear ALL context
+        try {
+            final Transaction transaction = optionRepository.beginTransaction();
+
+            final JSONObject mailUserContextOpt = optionRepository.get(Option.ID_C_MAIL_USER_CONTEXT);
+            mailUserContextOpt.put(Option.OPTION_VALUE, "");
+            optionRepository.update(Option.ID_C_MAIL_USER_CONTEXT, mailUserContextOpt);
+
+            transaction.commit();
+        } catch (RepositoryException RE) {
+        }
+
+        LOGGER.log(Level.INFO, "All comment mail context cleared successfully.");
+
+        context.renderJSON().renderCode(200);
+        context.renderJSON().renderMsg("All comment mail context cleared successfully.");
     }
 }

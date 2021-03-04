@@ -54,14 +54,17 @@ import java.util.*;
 public final class Skins {
 
     /**
-     * Logger.
-     */
-    private static final Logger LOGGER = Logger.getLogger(Skins.class);
-
-    /**
      * FreeMarker configuration.
      */
     public static final Configuration TEMPLATE_CFG;
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(Skins.class);
+    /**
+     * Properties map.
+     */
+    private static final Map<String, Map<String, String>> LANG_MAP = new HashMap<>();
 
     static {
         TEMPLATE_CFG = new Configuration(Configuration.VERSION_2_3_29);
@@ -71,11 +74,6 @@ public final class Skins {
         TEMPLATE_CFG.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         TEMPLATE_CFG.setLogTemplateExceptions(false);
     }
-
-    /**
-     * Properties map.
-     */
-    private static final Map<String, Map<String, String>> LANG_MAP = new HashMap<>();
 
     /**
      * Private constructor.

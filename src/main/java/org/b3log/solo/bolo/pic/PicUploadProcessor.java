@@ -22,7 +22,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Logger;
-import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
@@ -31,12 +30,13 @@ import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.pic.util.UploadUtil;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.OptionRepository;
-import org.b3log.solo.service.ArchiveDateMgmtService;
 import org.b3log.solo.util.Solos;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.file.Files;
@@ -141,7 +141,7 @@ public class PicUploadProcessor {
         }
 
         String path = context.param("path");
-        if (path ==  null || "undefined".equals(path)) {
+        if (path == null || "undefined".equals(path)) {
             context.renderJSON().renderCode(500);
             context.renderJSON().renderMsg("测试失败！目录格式错误。");
 

@@ -28,14 +28,11 @@ import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.ioc.Singleton;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
-import org.b3log.latke.model.User;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
-import org.b3log.solo.model.UserExt;
-import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.service.ArticleQueryService;
 import org.b3log.solo.service.OptionQueryService;
 import org.b3log.solo.service.UserQueryService;
@@ -60,15 +57,6 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(B3ArticleSender.class);
-
-    @Override
-    public void action(final Event<JSONObject> event) {
-        final JSONObject data = event.getData();
-        LOGGER.log(Level.DEBUG, "Processing an event [type={0}, data={1}] in listener [className={2}]",
-                event.getType(), data, B3ArticleSender.class.getName());
-
-        pushArticleToRhy(data);
-    }
 
     /**
      * Pushes the specified article data to B3log Rhythm.
@@ -124,7 +112,7 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
             if (Option.DefaultPreference.DEFAULT_B3LOG_USERNAME.equals(userName)) {
                 LOGGER.log(Level.INFO, "Article [title={0}] Is using the B3log default account, skipped push to Rhy", title);
 
-                return ;
+                return;
             }
 
             final JSONObject client = new JSONObject().
@@ -150,6 +138,15 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
     static boolean isLocalServer() {
         return StringUtils.containsIgnoreCase(Latkes.getServePath(), "localhost") || Strings.isIPv4(Latkes.getServerHost()) ||
                 (StringUtils.isNotBlank(Latkes.getServerPort())) && !"80".equals(Latkes.getServerPort()) && !"443".equals(Latkes.getServerPort());
+    }
+
+    @Override
+    public void action(final Event<JSONObject> event) {
+        final JSONObject data = event.getData();
+        LOGGER.log(Level.DEBUG, "Processing an event [type={0}, data={1}] in listener [className={2}]",
+                event.getType(), data, B3ArticleSender.class.getName());
+
+        pushArticleToRhy(data);
     }
 
     /**

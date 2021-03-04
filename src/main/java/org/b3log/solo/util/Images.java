@@ -47,6 +47,12 @@ public final class Images {
     public static String COMMUNITY_FILE_URL = "https://b3logfile.com";
 
     /**
+     * Private constructor.
+     */
+    private Images() {
+    }
+
+    /**
      * Qiniu image processing.
      *
      * @param html the specified content HTML
@@ -130,11 +136,5 @@ public final class Images {
         }
 
         return ret;
-    }
-
-    /**
-     * Private constructor.
-     */
-    private Images() {
     }
 }

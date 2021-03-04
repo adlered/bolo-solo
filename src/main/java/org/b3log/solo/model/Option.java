@@ -397,7 +397,7 @@ public final class Option {
     /**
      * Key of admin Active Sent To Mailbox.
      */
-    public static final String ID_C_ADMIN_ACTIVE_SENT_TO_MAILBOX =  "adminActiveSentToMailbox";
+    public static final String ID_C_ADMIN_ACTIVE_SENT_TO_MAILBOX = "adminActiveSentToMailbox";
 
     /**
      * Private constructor.
@@ -409,7 +409,7 @@ public final class Option {
      * Default preference.
      *
      * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
- * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
+     * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
      * @since 0.3.1
      */
     public static final class DefaultPreference {

@@ -28,12 +28,13 @@ import org.b3log.latke.logging.Logger;
  * @date : 2020-05-31
  **/
 public class WAFlogger {
+
+    public static final String prefix = "[WAF] ";
+
     /**
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(WAFlogger.class);
-
-    public static final String prefix = "[WAF] ";
 
     public static void log(String log) {
         StringBuilder stringBuilder = new StringBuilder();

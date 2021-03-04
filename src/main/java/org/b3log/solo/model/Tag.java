@@ -69,6 +69,12 @@ public final class Tag {
     public static final int MAX_LENGTH = 16;
 
     /**
+     * Private constructor.
+     */
+    private Tag() {
+    }
+
+    /**
      * Formats the specified tags.
      * <ul>
      * <li>Trims every tag</li>
@@ -141,11 +147,5 @@ public final class Tag {
         }
 
         return false;
-    }
-
-    /**
-     * Private constructor.
-     */
-    private Tag() {
     }
 }

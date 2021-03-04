@@ -17,19 +17,14 @@
  */
 package org.b3log.solo.bolo;
 
+import javax.net.ssl.*;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 /**
  * java 信任SSL证书
- * @author Administrator
  *
+ * @author Administrator
  */
 public class SslUtils {
 
@@ -44,9 +39,10 @@ public class SslUtils {
 
     /**
      * 忽略HTTPS请求的SSL证书，必须在openConnection之前调用
+     *
      * @throws Exception
      */
-    public static void ignoreSsl() throws Exception{
+    public static void ignoreSsl() throws Exception {
         HostnameVerifier hv = new HostnameVerifier() {
             public boolean verify(String urlHostName, SSLSession session) {
                 return true;
@@ -56,7 +52,7 @@ public class SslUtils {
         HttpsURLConnection.setDefaultHostnameVerifier(hv);
     }
 
-    static class miTM implements TrustManager,X509TrustManager {
+    static class miTM implements TrustManager, X509TrustManager {
         public X509Certificate[] getAcceptedIssuers() {
             return null;
         }

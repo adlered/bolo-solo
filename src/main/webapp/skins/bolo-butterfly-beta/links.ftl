@@ -43,11 +43,9 @@
                             <#list links as link>
                                 <div class="flink-list-item"
                                      style="--primary-color:linear-gradient( 135deg, #FFF886 10%, #F072B6 100%);
-                     border-width:1px;border-style:solid;
-                     animation:link_custom1 1s infinite alternate;--primary-rotate:0deg;">
+                     border-width:1px;border-style:solid;">
                                     <a href="${link.linkAddress}" title="${link.linkTitle}" target="_blank">
                                         <img class="rauto"
-                                             style="animation:auto_rotate_left .5s linear infinite;"
                                              data-lazy-src="https://blog.lete114.top/img/Lete.png"
                                              onerror="null"
                                              alt="${link.linkIcon}"

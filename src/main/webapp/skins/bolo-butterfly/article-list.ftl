@@ -43,6 +43,7 @@
                             <a class="article-meta__categories">${article.articleViewCount} ${viewLabel}</a>
                             <#if interactive == "on">
                             <span class="article-meta__separator">|</span>
+                            <i class="fas fa-comment"></i>
                             <a class="article-meta__categories">${article.articleCommentCount} ${commentLabel}</a>
                             </#if>
                             </span>

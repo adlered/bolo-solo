@@ -25,21 +25,6 @@
         <link rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}"/>
     </@head>
 </head>
-<#--<body class="fn__flex-column">-->
-<#--<div id="pjax" class="fn__flex-1">-->
-<#--    <#if pjax><!---- pjax {#pjax} start --&ndash;&gt;</#if>-->
-<#--&lt;#&ndash;    <#include "macro-header.ftl">&ndash;&gt;-->
-<#--    <#include "define-header.ftl">-->
-<#--    <@header type='index'></@header>-->
-<#--    <div class="wrapper_main web-topage">-->
-<#--        <#include "article-list.ftl">-->
-<#--    </div>-->
-<#--    <#if pjax><!---- pjax {#pjax} end --&ndash;&gt;</#if>-->
-<#--</div>-->
-<#--<#include "define-header.ftl">-->
-
-<#--<#include "footer.ftl">-->
-<#--</body>-->
 <body>
 <#include "index-header.ftl">
 <@header type='index'></@header>

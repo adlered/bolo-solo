@@ -31,19 +31,19 @@
         </div>
         <div class="mobile_post_data">
             <div class="mobile_data_item is-center">
-                <div class="mobile_data_link"><a href="${servePath}/archives/">
+                <div class="mobile_data_link"><a href="${servePath}/archives.html">
                         <div class="headline">文章</div>
                         <div class="length_num">${statistic.statisticPublishedBlogArticleCount}</div>
                     </a></div>
             </div>
             <div class="mobile_data_item is-center">
-                <div class="mobile_data_link"><a href="${servePath}/tags/">
+                <div class="mobile_data_link"><a href="${servePath}/tags.html">
                         <div class="headline">标签</div>
                         <div class="length_num">${mostUsedTags?size}</div>
                     </a></div>
             </div>
             <div class="mobile_data_item is-center">
-                <div class="mobile_data_link"><a href="${servePath}/categories/">
+                <div class="mobile_data_link"><a href="${servePath}/categories.html">
                         <div class="headline">分类</div>
                         <div class="length_num">${mostUsedCategories?size}</div>
                     </a></div>

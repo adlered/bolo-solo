@@ -210,6 +210,11 @@ $link: rgb(119, 182, 255) !default;
 //  }
 //}
 //
+article svg {
+  height: auto;
+  width: auto;
+}
+
 .wrapper {
   max-width: 800px;
   margin: 0 auto;

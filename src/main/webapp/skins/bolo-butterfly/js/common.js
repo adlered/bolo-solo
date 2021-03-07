@@ -7199,7 +7199,17 @@
                         enable: e.hljsEnable,
                         lineNumber: e.lineNumber,
                         style: e.hljsStyle
-                    }, document), Vditor.codeRender(document.body, e.lang), Vditor.graphvizRender(document.body), Vditor.mathRender(document.body), Vditor.abcRender(), Vditor.chartRender(), Vditor.mindmapRender(), Vditor.mediaRender(document.body), Vditor.mermaidRender(document.body), e.speech && document.querySelectorAll(".vditor-reset").forEach((function(t) {
+                    }, document),
+                        Vditor.codeRender(document.body, e.lang),
+                        Vditor.graphvizRender(document.body),
+                        Vditor.mathRender(document.body),
+                        Vditor.abcRender(),
+                        Vditor.chartRender(),
+                        Vditor.mindmapRender(),
+                        Vditor.mediaRender(document.body),
+                        Vditor.mermaidRender(document.body),
+                        Vditor.flowchartRender(document.body),
+                    e.speech && document.querySelectorAll(".vditor-reset").forEach((function(t) {
                         Vditor.speechRender(t, e.lang)
                     }))
                 },

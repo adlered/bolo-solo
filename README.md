@@ -1,7 +1,7 @@
 <p align = "center">
 <img alt="Bolo" src="/pic/bolo-circle.png" height="200px" width="200px">
 <br><br>
-基于 Java 的菠萝博客系统，简单易部署，主题多而精致&每月更新一款，专为程序员设计。
+基于 Java 的菠萝博客系统，简单易部署，精致主题，贴心服务，专为程序员设计。
 <br><br>
 <img src="http://img.shields.io/badge/license-AGPLv3-orange.svg?style=flat-square">
 <img src="https://img.shields.io/github/last-commit/adlered/bolo-solo.svg?style=flat-square">

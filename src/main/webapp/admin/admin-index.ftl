@@ -266,8 +266,7 @@
         <script src="${staticServePath}/js/admin/admin.min.js?${staticResourceVersion}"></script>
         </#if>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-</html>
-<#include "admin-label.ftl">
+        <#include "admin-label.ftl">
         ${plugins}
         <script>
             admin.inited();

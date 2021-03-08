@@ -283,6 +283,7 @@ public class ArticleMgmtService {
                 article.put(Article.ARTICLE_VIEW_PWD, "");
                 article.put(Article.ARTICLE_STATUS, Article.ARTICLE_STATUS_C_PUBLISHED);
                 article.put(Common.POST_TO_COMMUNITY, false);
+                article.put(Article.ARTICLE_COMMENTABLE, false);
 
                 final JSONObject addArticleReq = new JSONObject();
                 addArticleReq.put(Article.ARTICLE, article);

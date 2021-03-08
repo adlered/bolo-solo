@@ -29,7 +29,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.TimeZone;
 
 /**
  * GitHub utilities.
@@ -59,19 +61,45 @@ public final class GitHubs {
      */
     public static JSONArray getGitHubRepos(final String githubUserId) {
         try {
-            final HttpResponse res = HttpRequest.get("https://" + Global.HACPAI_DOMAIN + "/github/repos?id=" + githubUserId).
-                    trustAllCerts(true).followRedirects(true).
-                    connectionTimeout(3000).timeout(7000).header("User-Agent", Solos.USER_AGENT).send();
+            final HttpResponse res = HttpRequest.get("https://api.github.com/users/" + githubUserId + "/repos").
+                    connectionTimeout(20000).timeout(60000).header("User-Agent", Solos.USER_AGENT).send();
             if (HttpServletResponse.SC_OK != res.statusCode()) {
                 return null;
             }
             res.charset("UTF-8");
-            final JSONObject result = new JSONObject(res.bodyText());
-            if (0 != result.optInt(Keys.STATUS_CODE)) {
-                return null;
+            final JSONArray result = new JSONArray(res.bodyText());
+
+            String pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+            SimpleDateFormat simpleDateFormat =
+                    new SimpleDateFormat(pattern);
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+            // 组建兼容 JSONArray
+            JSONArray compatibleResult = new JSONArray();
+            for (int i = 0; i < result.length(); i++) {
+                JSONObject resultObject = result.optJSONObject(i);
+                JSONObject compatibleObject = new JSONObject();
+
+                compatibleObject.put("githubrepoId", resultObject.optString("id"));
+                compatibleObject.put("githubrepoStatus", 0);
+                compatibleObject.put("oId", "" + System.currentTimeMillis());
+                compatibleObject.put("githubrepoDescription", resultObject.optString("description"));
+                compatibleObject.put("githubrepoHomepage", resultObject.optString("homepage"));
+                compatibleObject.put("githubrepoForksCount", resultObject.optLong("forks_count"));
+                compatibleObject.put("githubrepoOwnerId", resultObject.optJSONObject("owner").optString("id"));
+                compatibleObject.put("githubrepoStargazersCount", resultObject.optLong("stargazers_count"));
+                compatibleObject.put("githubrepoWatchersCount", resultObject.optLong("watchers_count"));
+                compatibleObject.put("githubrepoOwnerLogin", resultObject.optJSONObject("owner").optString("login"));
+                compatibleObject.put("githubrepoHTMLURL", resultObject.optString("html_url"));
+                compatibleObject.put("githubrepoLanguage", resultObject.optString("language"));
+                compatibleObject.put("githubrepoUpdated", simpleDateFormat.parse(resultObject.optString("updated_at")).getTime());
+                compatibleObject.put("githubrepoName", resultObject.optString("name"));
+                compatibleObject.put("githubrepoFullName", resultObject.optString("full_name"));
+
+                compatibleResult.put(compatibleObject);
             }
-            final JSONObject data = result.optJSONObject(Common.DATA);
-            return data.optJSONArray("githubrepos");
+
+            return compatibleResult;
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Gets GitHub repos failed", e);
 

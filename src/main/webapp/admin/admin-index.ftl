@@ -136,13 +136,13 @@
                                 </div>
                             </li>
                             <li>
-                                <div id="tabs_tool-box">
-                                    <a href="#tools/tool-box">${toolBoxLabel}</a>
+                                <div id="tabs_others">
+                                    <a href="#tools/others/data">${functionalLabel}</a>
                                 </div>
                             </li>
                             <li>
-                                <div id="tabs_others">
-                                    <a href="#tools/others/data">${functionalLabel}</a>
+                                <div id="tabs_tool-box">
+                                    <a href="#tools/tool-box">${toolBoxLabel}</a>
                                 </div>
                             </li>
                         </ul>

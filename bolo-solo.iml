@@ -34,6 +34,7 @@
     <orderEntry type="library" name="font-awesome" level="application" />
     <orderEntry type="library" name="wtinychart" level="application" />
     <orderEntry type="library" name="chart.js" level="application" />
+    <orderEntry type="library" name="font-awesome" level="application" />
     <orderEntry type="library" name="Maven: org.b3log:latke-core:2.5.8" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.28" level="project" />
     <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.29" level="project" />
@@ -116,8 +117,8 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-server:9.4.12.v20180830" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-http:9.4.12.v20180830" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-io:9.4.12.v20180830" level="project" />
-    <orderEntry type="library" name="Maven: org.jodd:jodd-http:5.0.13" level="project" />
-    <orderEntry type="library" name="Maven: org.jodd:jodd-core:5.0.13" level="project" />
+    <orderEntry type="library" name="Maven: org.jodd:jodd-http:6.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.jodd:jodd-util:6.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.owasp.encoder:encoder:1.2.2" level="project" />
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.18" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
@@ -147,6 +148,5 @@
     <orderEntry type="library" name="Maven: org.zeroturnaround:zt-zip:1.14" level="project" />
     <orderEntry type="library" name="Maven: rome:rome:0.9" level="project" />
     <orderEntry type="library" name="Maven: jdom:jdom:1.0" level="project" />
-    <orderEntry type="library" name="font-awesome" level="application" />
   </component>
 </module>

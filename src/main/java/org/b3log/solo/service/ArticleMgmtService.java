@@ -319,6 +319,7 @@ public class ArticleMgmtService {
                 pageRepository.update(page.optString(Keys.OBJECT_ID), page);
             }
             transaction.commit();
+            LOGGER.log(Level.INFO, "My github repos page has been generated.");
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Updates github repos page failed", e);
         }

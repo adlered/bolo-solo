@@ -169,10 +169,10 @@
                     <tbody class="table-oddRow">
                     <tr class="table-hasExpend">
                         <td style="padding-left: 20px; padding-right: 20px;">
-                            更新“我的开源”页面（测试）
+                            更新“我的开源”页面
                         </td>
                         <td>
-                            输入你的GitHub ID，Bolo将会自动将你的仓库列表生成为一个“我的开源”文章。（由于API有限制，操作可能不会成功，请以实际文章是否生成为准）
+                            输入你的GitHub ID，Bolo 将会自动将你的仓库列表生成为一个 “我在 GitHub 上的开源项目” 文章，生成一个导航，并展示在你的博客中。
                         </td>
                         <td style="padding-right: 20px;">
                             <input id="githubId" placeholder="GitHub ID" style="margin-left: 15px;">

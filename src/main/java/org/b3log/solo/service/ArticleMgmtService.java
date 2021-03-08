@@ -242,21 +242,18 @@ public class ArticleMgmtService {
         }
 
         final StringBuilder contentBuilder = new StringBuilder();
-        contentBuilder.append("<!-- 该页面会被定时任务自动覆盖，所以请勿手工更新 -->\n");
-        contentBuilder.append("<!-- 如果你有更漂亮的排版方式，请发 issue 告诉我们 -->\n\n");
         for (int i = 0; i < gitHubRepos.length(); i++) {
             final JSONObject repo = gitHubRepos.optJSONObject(i);
             final String url = repo.optString("githubrepoHTMLURL");
             final String desc = repo.optString("githubrepoDescription");
             final String name = repo.optString("githubrepoName");
             final String stars = repo.optString("githubrepoStargazersCount");
-            final String watchers = repo.optString("githubrepoWatchersCount");
             final String forks = repo.optString("githubrepoForksCount");
             final String lang = repo.optString("githubrepoLanguage");
             final String hp = repo.optString("githubrepoHomepage");
 
-            String stat = "<span style=\"font-size: 12px;\">[🤩`{watchers}`]({url}/watchers \"关注数\")&nbsp;&nbsp;[⭐️`{stars}`]({url}/stargazers \"收藏数\")&nbsp;&nbsp;[🖖`{forks}`]({url}/network/members \"分叉数\")";
-            stat = stat.replace("{watchers}", watchers).replace("{stars}", stars).replace("{url}", url).replace("{forks}", forks);
+            String stat = "<span style=\"font-size: 12px;\">[⭐️`{stars}`]({url}/stargazers \"收藏数\")&nbsp;&nbsp;[🖖`{forks}`]({url}/network/members \"分叉数\")";
+            stat = stat.replace("{stars}", stars).replace("{url}", url).replace("{forks}", forks);
             if (StringUtils.isNotBlank(hp)) {
                 stat += "&nbsp;&nbsp;[\uD83C\uDFE0`{hp}`]({hp} \"项目主页\")";
                 stat = stat.replace("{hp}", hp);
@@ -270,9 +267,17 @@ public class ArticleMgmtService {
         final String content = contentBuilder.toString();
 
         try {
-            final String permalink = "/my-github-repos";
+            final String permalink = "/github";
             JSONObject article = articleRepository.getByPermalink(permalink);
             if (null == article) {
+                try {
+                    // 新建文章时，删除有可能存在的旧 permalink （用户手动删除文章后残留）
+                    JSONObject page = pageRepository.getByPermalink(permalink);
+                    final Transaction transaction = pageRepository.beginTransaction();
+                    pageRepository.remove(page.optString("oId"));
+                    transaction.commit();
+                } catch (NullPointerException ignored) {
+                }
                 article = new JSONObject();
                 article.put(Article.ARTICLE_AUTHOR_ID, admin.optString(Keys.OBJECT_ID));
                 article.put(Article.ARTICLE_TITLE, "我在 GitHub 上的开源项目");

@@ -30,6 +30,7 @@ import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.TimeZone;
 
@@ -74,7 +75,7 @@ public final class GitHubs {
                     new SimpleDateFormat(pattern);
             simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-            // 组建兼容 JSONArray
+            // 重组兼容 JSONArray
             JSONArray compatibleResult = new JSONArray();
             for (int i = 0; i < result.length(); i++) {
                 JSONObject resultObject = result.optJSONObject(i);
@@ -99,7 +100,23 @@ public final class GitHubs {
                 compatibleResult.put(compatibleObject);
             }
 
-            return compatibleResult;
+            // 排序
+            ArrayList<String> tempResultList = new ArrayList<>();
+            for (int i = 0; i < compatibleResult.length(); i++) {
+                JSONObject compatibleObject = compatibleResult.optJSONObject(i);
+                tempResultList.add(compatibleObject.toString());
+            }
+            tempResultList.sort((o1, o2) -> {
+                int o1star = new JSONObject(o1).optInt("githubrepoStargazersCount");
+                int o2star = new JSONObject(o2).optInt("githubrepoStargazersCount");
+                return o2star - o1star;
+            });
+            JSONArray sortedCompatibleResult = new JSONArray();
+            for (String json : tempResultList) {
+                sortedCompatibleResult.put(new JSONObject(json));
+            }
+
+            return sortedCompatibleResult;
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Gets GitHub repos failed", e);
 

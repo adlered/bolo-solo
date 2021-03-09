@@ -400,6 +400,16 @@ public final class Option {
     public static final String ID_C_ADMIN_ACTIVE_SENT_TO_MAILBOX = "adminActiveSentToMailbox";
 
     /**
+     * Key of enable auto flush github.
+     */
+    public static final String ID_C_ENABLE_AUTO_FLUSH_GITHUB = "enableAutoFlushGitHub";
+
+    /**
+     * Key of my github id.
+     */
+    public static final String ID_C_MY_GITHUB_ID = "myGitHubID";
+
+    /**
      * Private constructor.
      */
     private Option() {

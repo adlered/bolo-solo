@@ -91,7 +91,9 @@ public class Options {
                 Option.ID_C_WAF_CURRENT_LIMIT_SECOND,
                 Option.ID_C_WAF_CURRENT_LIMIT_TIMES,
                 Option.ID_C_ADMIN_ACTIVE_SENT_TO_MAILBOX,
-                Option.ID_C_WELFARE_LUTE_SERVICE
+                Option.ID_C_WELFARE_LUTE_SERVICE,
+                Option.ID_C_ENABLE_AUTO_FLUSH_GITHUB,
+                Option.ID_C_MY_GITHUB_ID
         );
         return optionList;
     }
@@ -153,7 +155,9 @@ public class Options {
                 new Object[]{Option.ID_C_WAF_CURRENT_LIMIT_SECOND, Option.CATEGORY_C_PREFERENCE, "180"},
                 new Object[]{Option.ID_C_WAF_CURRENT_LIMIT_TIMES, Option.CATEGORY_C_PREFERENCE, "180"},
                 new Object[]{Option.ID_C_ADMIN_ACTIVE_SENT_TO_MAILBOX, Option.CATEGORY_C_PREFERENCE, "on"},
-                new Object[]{Option.ID_C_WELFARE_LUTE_SERVICE, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_WELFARE_LUTE_SERVICE}
+                new Object[]{Option.ID_C_WELFARE_LUTE_SERVICE, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_WELFARE_LUTE_SERVICE},
+                new Object[]{Option.ID_C_ENABLE_AUTO_FLUSH_GITHUB, Option.CATEGORY_C_PREFERENCE, "false"},
+                new Object[]{Option.ID_C_MY_GITHUB_ID, Option.CATEGORY_C_PREFERENCE, ""}
         );
         return optList;
     }

@@ -129,7 +129,9 @@ admin.preference = {
         $('#customVars').val(preference.customVars)
         $('#githubPAT').val(preference.githubPAT)
         $('#maxArchive').val(preference.maxArchive)
+        $('#myGitHubID').val(preference.myGitHubID)
 
+        'true' === preference.enableAutoFlushGitHub ? $('#enableAutoFlushGitHub').attr('checked', 'checked') : $('#enableAutoFlushGitHub').removeAttr('checked')
         'true' === preference.showCodeBlockLn ? $('#showCodeBlockLn').attr('checked', 'checked') : $('#showCodeBlockLn').removeAttr('checked')
         'true' === preference.enableArticleUpdateHint ? $('#enableArticleUpdateHint').attr('checked', 'checked') : $('#enableArticleUpdateHint').removeAttr('checked')
         'true' === preference.allowVisitDraftViaPermalink ? $('#allowVisitDraftViaPermalink').attr('checked', 'checked') : $('allowVisitDraftViaPermalink').removeAttr('checked')
@@ -265,8 +267,11 @@ admin.preference = {
 
     var requestJSONObject = {
       'preference': {
+        'enableAutoFlushGitHub': $("#enableAutoFlushGitHub").
+        prop('checked'),
         'welfareLuteService': $("#welfareLuteService").
           prop('checked'),
+        'myGitHubID': $("#myGitHubID").val(),
         'adminActiveSentToMailbox': $("#adminActiveSentToMailbox").val(),
         'wafCurrentLimitTimes': $("#wafCurrentLimitTimes").val(),
         'wafCurrentLimitSecond': $("#wafCurrentLimitSecond").val(),

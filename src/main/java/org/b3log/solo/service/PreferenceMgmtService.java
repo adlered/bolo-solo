@@ -72,6 +72,12 @@ public class PreferenceMgmtService {
     private LangPropsService langPropsService;
 
     /**
+     * Crontab management service.
+     */
+    @Inject
+    private CronMgmtService cronMgmtService;
+
+    /**
      * Updates the preference with the specified preference.
      *
      * @param preference the specified preference
@@ -113,6 +119,7 @@ public class PreferenceMgmtService {
             WAF.set();
             MailService.loadMailSettings();
             Solos.enableWelfareLuteService();
+            cronMgmtService.restart();
         } catch (final Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();

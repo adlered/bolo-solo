@@ -47,7 +47,7 @@ public class CronMgmtService {
     /**
      * Cron thread pool.
      */
-    private static final ScheduledExecutorService SCHEDULED_EXECUTOR_SERVICE = Executors.newScheduledThreadPool(1);
+    private static ScheduledExecutorService SCHEDULED_EXECUTOR_SERVICE = Executors.newScheduledThreadPool(1);
 
     /**
      * User query service.
@@ -83,8 +83,8 @@ public class CronMgmtService {
      * Start all cron tasks.
      */
     public void start() {
+        LOGGER.log(Level.INFO, "Executing crontab tasks...");
         final JSONObject preference = optionQueryService.getPreference();
-
         long delay = 10000;
 
         SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
@@ -139,6 +139,16 @@ public class CronMgmtService {
      * Stop all cron tasks.
      */
     public void stop() {
+        LOGGER.log(Level.INFO, "Crontab tasks has been stopped.");
         SCHEDULED_EXECUTOR_SERVICE.shutdown();
+    }
+
+    /**
+     * Restart cron tasks.
+     */
+    public void restart() {
+        stop();
+        SCHEDULED_EXECUTOR_SERVICE = Executors.newScheduledThreadPool(1);
+        start();
     }
 }

@@ -184,9 +184,9 @@
         <input id="customVars" class="normalInput" type="text"/>
         <label for="githubPAT">${githubPATLabel}</label>
         <input id="githubPAT" class="normalInput" type="text"/>
-        <label for="kanbanniangSelector">固定看板娘：</label>
+        <label for="kanbanniangSelector">${selectedKanBanNiangLabel}</label>
         <select id="kanbanniangSelector">
-            <option value="" selected>不固定，随机</option>
+            <option value="" selected>随机 Random</option>
         </select>
         <label>
             <div class="fn__flex-inline">

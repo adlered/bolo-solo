@@ -30,11 +30,6 @@
             </div>
         </li>
         <li>
-            <div id="tabOthers_move">
-                <a href="#tools/others/move">图床迁移</a>
-            </div>
-        </li>
-        <li>
             <div id="tabOthers_log">
                 <a href="#tools/others/log">${viewLogLabel}</a>
             </div>
@@ -47,6 +42,16 @@
         <li>
             <div id="tabOthers_commentSync">
                 <a href="#tools/others/commentSync">${syncLabel}</a>
+            </div>
+        </li>
+        <li>
+            <div id="tabOthers_myGitHub">
+                <a href="#tools/others/myGitHub">${myGitHubLabel}</a>
+            </div>
+        </li>
+        <li>
+            <div id="tabOthers_move">
+                <a href="#tools/others/move">${picBedMigrationLabel}</a>
             </div>
         </li>
     </ul>
@@ -93,7 +98,7 @@
                         $("#status").html(result.msg);
                     }
                 });
-            }, 2000)
+            }, 10000)
         });
     </script>
     <div id="tabOthersPanel_log" class="fn__none form">
@@ -214,6 +219,12 @@
             }
         </script>
         <button onclick="commentSync()">开始同步</button>
+    </div>
+    <div id="tabOthersPanel_myGitHub" class="fn__none">
+        <h4>向访客展示我的 GitHub 贡献</h4>
+        <br>
+        <p>Bolo 可以为你自动生成一篇 “我在 GitHub 上的开源项目” 文章，记载了你在 GitHub 上公开仓库的贡献数据，并呈现给博客的访客。</p>
+
     </div>
 </div>
 ${plugins}

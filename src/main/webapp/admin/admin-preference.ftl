@@ -272,7 +272,7 @@
         <label for="tcS">图床选择</label>
         <select id="tcS" disabled>
             <option selected></option>
-            <option value="local">本地图床 (默认)</option>
+            <option value="local">本地图床</option>
             <option value="qiniu">七牛云</option>
             <option value="aliyun">阿里云</option>
             <option value="upyun">又拍云</option>

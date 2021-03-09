@@ -83,7 +83,7 @@ public class CronMgmtService {
      * Start all cron tasks.
      */
     public void start() {
-        LOGGER.log(Level.INFO, "Executing crontab tasks...");
+        LOGGER.log(Level.INFO, "Executing crontab tasks ...");
         final JSONObject preference = optionQueryService.getPreference();
         long delay = 10000;
 

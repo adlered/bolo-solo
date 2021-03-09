@@ -600,7 +600,7 @@
         <label for="myGitHubID">${myGitHubIDLabel}</label>
         <input id="myGitHubID" type="text"/>
         <br><br>
-        <p>自动刷新频次：每小时一次；可通过高级功能手动刷新。</p>
+        <p>自动刷新频次：每24小时一次；可通过高级功能手动刷新。</p>
         <br><br>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>

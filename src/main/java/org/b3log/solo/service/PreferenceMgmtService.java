@@ -115,6 +115,7 @@ public class PreferenceMgmtService {
             final String showCodeBlockLnVal = preference.optString(Option.ID_C_SHOW_CODE_BLOCK_LN);
             Markdowns.SHOW_CODE_BLOCK_LN = "true".equalsIgnoreCase(showCodeBlockLnVal);
 
+            LOGGER.log(Level.INFO, "Reloading settings ...");
             Markdowns.clearCache();
             WAF.set();
             MailService.loadMailSettings();

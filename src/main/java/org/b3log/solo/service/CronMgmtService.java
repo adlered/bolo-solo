@@ -22,6 +22,8 @@ import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Stopwatchs;
+import org.b3log.solo.model.Option;
+import org.json.JSONObject;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -81,6 +83,8 @@ public class CronMgmtService {
      * Start all cron tasks.
      */
     public void start() {
+        final JSONObject preference = optionQueryService.getPreference();
+
         long delay = 10000;
 
         SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
@@ -96,9 +100,20 @@ public class CronMgmtService {
 
         SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
             try {
-                // 关闭 GitHub 项目同步拉取
-                // articleMgmtService.refreshGitHub();
-                // userMgmtService.refreshUSite();
+                boolean enableAutoFlushGitHub;
+                String myGitHubID;
+                try {
+                    enableAutoFlushGitHub = preference.getBoolean(Option.ID_C_ENABLE_AUTO_FLUSH_GITHUB);
+                    myGitHubID = preference.getString(Option.ID_C_MY_GITHUB_ID);
+                } catch (NullPointerException e) {
+                    enableAutoFlushGitHub = false;
+                    myGitHubID = "";
+                }
+                if (enableAutoFlushGitHub) {
+                    if (!myGitHubID.isEmpty()) {
+                        articleMgmtService.refreshGitHub(myGitHubID);
+                    }
+                }
                 exportService.exportGitHub();
             } catch (final Exception e) {
                 LOGGER.log(Level.ERROR, "Executes cron failed", e);

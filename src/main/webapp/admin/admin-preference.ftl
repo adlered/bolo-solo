@@ -186,7 +186,7 @@
         <input id="githubPAT" class="normalInput" type="text"/>
         <label for="kanbanniangSelector">${selectedKanBanNiangLabel}</label>
         <select id="kanbanniangSelector">
-            <option value="" selected>随机 Random</option>
+            <option value="" selected>${randomLabel}</option>
         </select>
         <label>
             <div class="fn__flex-inline">

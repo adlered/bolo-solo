@@ -57,8 +57,8 @@
         </select>
     </div>
     <div>
-        <label>${createDateLabel} (可选，自动请留空）：</label>
-        <input id="createDate" type="text"/>
+        <label>${createDateLabel}</label>
+        <input id="createDate" type="datetime-local"/>
     </div>
     <div class="comment-content">
         <label>${abstract1Label}</label>

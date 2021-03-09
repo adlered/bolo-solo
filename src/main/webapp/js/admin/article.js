@@ -95,13 +95,18 @@ admin.article = {
 
         // Article create date
         function getNowFormatDate(date) {
-          var seperator1 = "-";
-          var seperator2 = ":";
-          var month = date.getMonth() + 1<10? "0"+(date.getMonth() + 1):date.getMonth() + 1;
-          var strDate = date.getDate()<10? "0" + date.getDate():date.getDate();
-          var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-              + " " + date.getHours() + seperator2 + date.getMinutes() + seperator2 + date.getSeconds();
-          return currentdate;
+          var y = date.getFullYear();
+          var m = date.getMonth() + 1;
+          m = m < 10 ? ('0' + m) : m;
+          var d = date.getDate();
+          d = d < 10 ? ('0' + d) : d;
+          var h = date.getHours();
+          h = h < 10 ? ('0' + h) : h;
+          var minute = date.getMinutes();
+          minute = minute < 10 ? ('0' + minute) : minute;
+          var second = date.getSeconds();
+          second = second < 10 ? ('0' + second) : second;
+          return y + '-' + m + '-' + d + 'T' + h + ':' + minute + ':' + second;
         }
 
         var createDate = new Date();

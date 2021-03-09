@@ -47,6 +47,8 @@ import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
 import org.b3log.latke.Latkes;
+import org.b3log.latke.logging.Level;
+import org.b3log.latke.logging.Logger;
 import org.json.JSONObject;
 
 import javax.net.ssl.SSLContext;
@@ -70,6 +72,12 @@ import java.util.Map;
  * @date : 2020-03-06 14:35
  **/
 public class UploadUtil {
+
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(UploadUtil.class);
+
     public static String upload(String config, File file) throws Exception {
         String result = "";
         String type = config.split("<<>>")[0];
@@ -94,6 +102,7 @@ public class UploadUtil {
                 File localNewFile = new File(path + "/" + localFilename);
                 FileUtils.copyFile(file, localNewFile);
                 result = Latkes.getServePath() + "/image/" + localFilename;
+                LOGGER.log(Level.INFO, "An image has been uploaded to local [path=" + localNewFile.getAbsolutePath() + "]");
                 break;
             case "picuang":
                 String site = config.split("<<>>")[1];

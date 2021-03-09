@@ -590,6 +590,7 @@
         <h4>向访客展示我的 GitHub 贡献</h4>
         <br>
         <p>Bolo 可以为你自动生成一篇 “我在 GitHub 上的开源项目” 文章，记载了你在 GitHub 上公开仓库的贡献数据，并呈现给博客的访客。</p>
+        <p>请填写正确的 GitHub ID，例如您的 GitHub 资料地址是 https://github.com/adlered，则您的 GitHub ID 为 adlered。</p>
         <br>
         <label class="checkbox">
             <input id="enableAutoFlushGitHub" type="checkbox" class="normalInput"/>
@@ -598,6 +599,8 @@
         <br>
         <label for="myGitHubID">${myGitHubIDLabel}</label>
         <input id="myGitHubID" type="text"/>
+        <br><br>
+        <p>自动刷新频次：每小时一次；可通过高级功能手动刷新。</p>
         <br><br>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>

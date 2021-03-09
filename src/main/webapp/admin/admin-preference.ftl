@@ -64,6 +64,11 @@
                 <a href="#tools/preference/security">${securityLabel}</a>
             </div>
         </li>
+        <li>
+            <div id="tabPreference_myGitHub">
+                <a href="#tools/preference/myGitHub">${myGitHubLabel}</a>
+            </div>
+        </li>
     </ul>
 </div>
 <div id="tabPreferencePanel" class="sub-tabs-main">
@@ -565,6 +570,22 @@
         <div>
             ${CommentSpamDescribeLabel}
         </div>
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
+    </div>
+    <div id="tabPreferencePanel_myGitHub" class="fn__none">
+        <div class="fn__clear">
+            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        </div>
+        <div class="fn__clear"></div>
+        <h4>向访客展示我的 GitHub 贡献</h4>
+        <br>
+        <p>Bolo 可以为你自动生成一篇 “我在 GitHub 上的开源项目” 文章，记载了你在 GitHub 上公开仓库的贡献数据，并呈现给博客的访客。</p>
+        <label class="checkbox">
+            <input id="enableAutoFlushGitHub" type="checkbox" class="normalInput"/>
+            <br>
+            <span>&nbsp;${autoFlushGitHubLabel}</span>
+        </label>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>

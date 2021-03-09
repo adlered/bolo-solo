@@ -174,7 +174,7 @@
 
     function showTips() {
         var config = {
-            content: "欢迎使用菠萝博客 " + boloVersion + "！本次更新增加了自动生成“我在 GitHub 上的开源项目”文章功能，快到<b>实用功能</b>中试试看吧！<br>" +
+            content: "欢迎使用菠萝博客 " + boloVersion + "！本次更新增加了自动生成“我在 GitHub 上的开源项目”文章功能，快到<b>偏好设置-我的 GitHub</b>中试试看吧！<br>" +
                 "<a href='javascript:neverShowTips()'>不再提醒</a>",
             type: "html",
             alignTo: ["right","top"],

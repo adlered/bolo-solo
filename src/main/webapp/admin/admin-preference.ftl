@@ -272,12 +272,12 @@
         <label for="tcS">图床选择</label>
         <select id="tcS" disabled>
             <option selected></option>
-            <option value="hacpai">链滴图床（默认）</option>
-            <option value="local">本地图床</option>
+            <option value="local">本地图床 (默认)</option>
             <option value="qiniu">七牛云</option>
             <option value="aliyun">阿里云</option>
             <option value="upyun">又拍云</option>
             <option value="picuang">基于 Picuang 的自搭建图床</option>
+            <option value="hacpai">链滴图床</option>
         </select>
         <div class="fn__clear" id="changeCfgBtn">
             <button onclick="unlock()" class="fn__left">允许修改图床配置</button>

@@ -146,7 +146,7 @@ public class Options {
                 new Object[]{Option.ID_C_MAIL_BOX, Option.CATEGORY_C_PREFERENCE, ""},
                 new Object[]{Option.ID_C_MAIL_USERNAME, Option.CATEGORY_C_PREFERENCE, ""},
                 new Object[]{Option.ID_C_MAIL_PASSWORD, Option.CATEGORY_C_PREFERENCE, ""},
-                new Object[]{Option.ID_C_TUCHUANG_CONFIG, Option.CATEGORY_C_PREFERENCE, "hacpai"},
+                new Object[]{Option.ID_C_TUCHUANG_CONFIG, Option.CATEGORY_C_PREFERENCE, "local<<>>./uploadedImages/"},
                 new Object[]{Option.ID_C_REPLY_REMIND, Option.CATEGORY_C_PREFERENCE, ""},
                 new Object[]{Option.ID_C_KANBANNIANG_SELECTOR, Option.CATEGORY_C_PREFERENCE, ""},
                 new Object[]{Option.ID_C_SPAM, Option.CATEGORY_C_PREFERENCE, ""},

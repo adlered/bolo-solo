@@ -55,11 +55,6 @@
             </div>
         </li>
         <li>
-            <div id="tabPreference_b3logEcology">
-                <a href="#tools/preference/b3logEcology">${b3logEcologyLabel}</a>
-            </div>
-        </li>
-        <li>
             <div id="tabPreference_security">
                 <a href="#tools/preference/security">${securityLabel}</a>
             </div>
@@ -67,6 +62,11 @@
         <li>
             <div id="tabPreference_myGitHub">
                 <a href="#tools/preference/myGitHub">${myGitHubLabel}</a>
+            </div>
+        </li>
+        <li>
+            <div id="tabPreference_b3logEcology">
+                <a href="#tools/preference/b3logEcology">${b3logEcologyLabel}</a>
             </div>
         </li>
     </ul>

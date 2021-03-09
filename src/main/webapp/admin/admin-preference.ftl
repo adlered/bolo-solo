@@ -98,7 +98,9 @@
         </div>
     </div>
     <div id="tabPreferencePanel_setting" class="fn__none form">
-        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear">
+            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        </div>
         <div class="fn__clear"></div>
         <label for="localeString">${localeString1Label}</label>
         <select id="localeString">
@@ -227,7 +229,9 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_signs" class="fn__none form">
-        <button onclick="admin.preference.update()" class="fn__right">${updateLabel}</button>
+        <div class="fn__clear">
+            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        </div>
         <div class="fn__clear"></div>
         <button id="preferenceSignButton1">${signLabel}1</button>
         <textarea rows="8" id="preferenceSign1"></textarea>
@@ -239,7 +243,9 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_markdown" class="fn__none form">
-        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear">
+            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        </div>
         <div class="fn__clear"></div>
 
         <h3>${editorModeLabel}</h3>
@@ -259,7 +265,6 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_imageBed" class="fn__none form">
-        <div class="fn__clear"></div>
         <div class="fn__clear"></div>
         <div style="display: none">
             元数据：<span id="sourceTC"></span>
@@ -451,7 +456,9 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_mailAndRemind" class="fn__none form">
-        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear">
+            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        </div>
         <div class="fn__clear"></div>
         <label for="mailBox">${mailBoxLabel}</label>
         <select id="mailBox">
@@ -486,7 +493,9 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_b3logEcology" class="fn__none form">
-        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear">
+            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        </div>
         <div class="fn__clear"></div>
         <label for="hacpaiUser">${hacpaiUser1Label}</label>
         <input id="hacpaiUser" type="text"/>
@@ -573,7 +582,7 @@
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>
-    <div id="tabPreferencePanel_myGitHub" class="fn__none">
+    <div id="tabPreferencePanel_myGitHub" class="fn__none form">
         <div class="fn__clear">
             <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         </div>
@@ -581,11 +590,15 @@
         <h4>向访客展示我的 GitHub 贡献</h4>
         <br>
         <p>Bolo 可以为你自动生成一篇 “我在 GitHub 上的开源项目” 文章，记载了你在 GitHub 上公开仓库的贡献数据，并呈现给博客的访客。</p>
+        <br>
         <label class="checkbox">
             <input id="enableAutoFlushGitHub" type="checkbox" class="normalInput"/>
-            <br>
             <span>&nbsp;${autoFlushGitHubLabel}</span>
         </label>
+        <br>
+        <label for="myGitHubID">${myGitHubIDLabel}</label>
+        <input id="myGitHubID" type="text"/>
+        <br><br>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>

@@ -497,6 +497,8 @@
             <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
+        <h4 style="color: #00a7e0">如果您不是 Solo 用户 或 链滴社区的成员，建议您忽略本选项卡。</h4>
+        <br>
         <label for="hacpaiUser">${hacpaiUser1Label}</label>
         <input id="hacpaiUser" type="text"/>
         <label for="b3logKey">${b3logKey1Label}</label>
@@ -505,7 +507,7 @@
             <div>
                 <b>请注意！此项设置需要重启服务端后生效。</b>
                 <br><br>
-                菠萝博客为您提供了一个公共账号，无需自行注册账号，即可直接使用链滴的图床服务；<br>
+                菠萝博客为您提供了一个公共账号，无需自行注册账号，即可直接使用链滴社区的图床服务；<br>
                 使用公共账号的图床需要将<b>自定义图床</b>修改为链滴，并将 "链滴用户名" 及 "B3log Key" 字段留空。
                 <br><br>
             </div>
@@ -518,11 +520,11 @@
                 <summary>设置以后，我可以做什么？</summary>
                 <ul>
                     <li>
-                        1. 使用 Bolo 的编辑器的链滴图床（<b>其它图床不受影响</b>）<br>
-                        2. 与链滴社区同步发送的文章<s>和评论</s>（链滴已废弃评论推送接口，文章推送 / 同步不受影响）<br>
-                        3. 同步你在链滴中的GitHub、QQ等链接（<b>也可以在工具-联系方式选项直接设置，无需配置 B3log Key。</b>如果要通过链滴同步：<a href="https://${hacpaiDomain}/settings" target="_blank">在这里</a>设置你的多种个人联系方式，将自动同步至 Bolo（24小时），然后显示在你的主页）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>
-                        4. 使用自动备份全部文章至链滴功能（<a href="https://${hacpaiDomain}/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br>
-                        5. 链滴图床有防盗链功能，仅允许在博客内显示图片，<b>推荐使用自定义图床</b>。<br><br>
+                        1. 使用自定义图床中的链滴社区图床<br>
+                        2. 与链滴社区同步发送的文章<br>
+                        3. 同步你在链滴中的GitHub、QQ等链接（<b>也可以在工具-联系方式选项直接设置，无需配置 B3log Key。</b>如果要通过链滴同步：<a href="https://${hacpaiDomain}/settings" target="_blank">在这里</a>设置你的多种个人联系方式，然后手动通过高级功能中的选项同步）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>
+                        4. 使用自动备份全部文章至链滴社区功能（<a href="https://${hacpaiDomain}/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br>
+                        5. 链滴社区图床有防盗链功能，仅允许在博客内显示图片，限制较多：<b>推荐您使用其它自定义图床</b>。<br><br>
                     </li>
                 </ul>
             </details>

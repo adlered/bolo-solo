@@ -39,6 +39,7 @@ import org.b3log.solo.bolo.Global;
 import org.b3log.solo.bolo.prop.CommentMailService;
 import org.b3log.solo.bolo.prop.MailService;
 import org.b3log.solo.bolo.prop.Options;
+import org.b3log.solo.bolo.prop.ServerJiangService;
 import org.b3log.solo.bolo.tool.AntiXSS;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Comment;
@@ -302,6 +303,7 @@ public class CommentProcessor {
 
             // 提醒博主
             if (sendEmailToAdmin) {
+                // 邮件提醒
                 String replyRemindMailBoxAddress = "";
                 try {
                     replyRemindMailBoxAddress = optionRepository.get(Option.ID_C_REPLY_REMIND).optString(Option.OPTION_VALUE);
@@ -320,6 +322,13 @@ public class CommentProcessor {
                 } catch (JSONException jsonException) {
                     LOGGER.log(Level.DEBUG, "Send admin mail remind failed [replyRemindMailBoxAddress=" + replyRemindMailBoxAddress + "]");
                 }
+                // Server酱提醒
+                ServerJiangService.remindAdmin(
+                        blogSite,
+                        user,
+                        comment,
+                        blogTitle
+                );
             }
 
             final Map<String, Object> dataModel = new HashMap<>();

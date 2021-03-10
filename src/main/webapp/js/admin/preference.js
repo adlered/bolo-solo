@@ -90,6 +90,7 @@ admin.preference = {
           $("#adminActiveSentToMailbox").val(preference.adminActiveSentToMailbox)
         }
 
+        $('#sendKey').val(preference.sendKey)
         $('#spam').val(preference.spam)
         $('#kanbanniangSelector').val(preference.kanbanniangSelector)
         $('#replyRemind').val(preference.replyRemind)
@@ -261,6 +262,7 @@ admin.preference = {
         prop('checked'),
         'welfareLuteService': $("#welfareLuteService").
           prop('checked'),
+        'sendKey': $("#sendKey").val(),
         'myGitHubID': $("#myGitHubID").val(),
         'adminActiveSentToMailbox': $("#adminActiveSentToMailbox").val(),
         'wafCurrentLimitTimes': $("#wafCurrentLimitTimes").val(),

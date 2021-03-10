@@ -405,6 +405,11 @@ public final class Option {
     public static final String ID_C_MY_GITHUB_ID = "myGitHubID";
 
     /**
+     * Key of server jiang send key.
+     */
+    public static final String ID_C_SEND_KEY = "sendKey";
+
+    /**
      * Private constructor.
      */
     private Option() {

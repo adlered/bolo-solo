@@ -134,7 +134,6 @@ public class PreferenceConsole {
      *         "articleListDisplayCount": int,
      *         "articleListPaginationWindowSize": int,
      *         "mostCommentArticleDisplayCount": int,
-     *         "externalRelevantArticlesDisplayCount": int,
      *         "relevantArticlesDisplayCount": int,
      *         "randomArticlesDisplayCount": int,
      *         "blogTitle": "",
@@ -217,7 +216,6 @@ public class PreferenceConsole {
      *         "articleListDisplayCount": int,
      *         "articleListPaginationWindowSize": int,
      *         "mostCommentArticleDisplayCount": int,
-     *         "externalRelevantArticlesDisplayCount": int,
      *         "relevantArticlesDisplayCount": int,
      *         "randomArticlesDisplayCount": int,
      *         "blogTitle": "",
@@ -297,15 +295,7 @@ public class PreferenceConsole {
         final StringBuilder errMsgBuilder = new StringBuilder('[' + langPropsService.get("paramSettingsLabel"));
         errMsgBuilder.append(" - ");
 
-        String input = preference.optString(Option.ID_C_EXTERNAL_RELEVANT_ARTICLES_DISPLAY_CNT);
-        if (!isNonNegativeInteger(input)) {
-            errMsgBuilder.append(langPropsService.get("externalRelevantArticlesDisplayCntLabel")).append("]  ")
-                    .append(langPropsService.get("nonNegativeIntegerOnlyLabel"));
-            responseObject.put(Keys.MSG, errMsgBuilder.toString());
-            return true;
-        }
-
-        input = preference.optString(Option.ID_C_RELEVANT_ARTICLES_DISPLAY_CNT);
+        String input = preference.optString(Option.ID_C_RELEVANT_ARTICLES_DISPLAY_CNT);
         if (!isNonNegativeInteger(input)) {
             errMsgBuilder.append(langPropsService.get("relevantArticlesDisplayCntLabel")).append("]  ")
                     .append(langPropsService.get("nonNegativeIntegerOnlyLabel"));

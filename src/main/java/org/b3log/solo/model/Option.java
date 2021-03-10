@@ -116,11 +116,6 @@ public final class Option {
     public static final String ID_C_RANDOM_ARTICLES_DISPLAY_CNT = "randomArticlesDisplayCount";
 
     /**
-     * Key of external relevant articles display count.
-     */
-    public static final String ID_C_EXTERNAL_RELEVANT_ARTICLES_DISPLAY_CNT = "externalRelevantArticlesDisplayCount";
-
-    /**
      * Key of recent article display count.
      */
     public static final String ID_C_RECENT_ARTICLE_DISPLAY_CNT = "recentArticleDisplayCount";

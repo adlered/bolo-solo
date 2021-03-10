@@ -120,8 +120,6 @@ admin.preference = {
         $('#noticeBoard').val(preference.noticeBoard)
         $('#footerContent').val(preference.footerContent)
         $('#htmlHead').val(preference.htmlHead)
-        $('#externalRelevantArticlesDisplayCount').
-          val(preference.externalRelevantArticlesDisplayCount)
         $('#relevantArticlesDisplayCount').
           val(preference.relevantArticlesDisplayCount)
         $('#randomArticlesDisplayCount').
@@ -219,14 +217,6 @@ admin.preference = {
           Label.nonNegativeIntegerOnlyLabel)
       $('#relevantArticlesDisplayCount').focus()
       return false
-    } else if (!/^\d+$/.test(
-      $('#externalRelevantArticlesDisplayCount').val())) {
-      $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
-          Label.externalRelevantArticlesDisplayCntLabel + '] ' +
-          Label.nonNegativeIntegerOnlyLabel)
-      $('#externalRelevantArticlesDisplayCount').focus()
-      return false
     } else if (
         (!/^\d+$/.test($('#wafCurrentLimitTimes').val())) || $('#wafCurrentLimitTimes').val() < 2 || $('#wafCurrentLimitTimes').val() > 2147483647 ||
         (!/^\d+$/.test($('#wafCurrentLimitSecond').val())) || $('#wafCurrentLimitSecond').val() < 2 || $('#wafCurrentLimitSecond').val() > 2147483647
@@ -303,8 +293,6 @@ admin.preference = {
         'noticeBoard': $('#noticeBoard').val(),
         'footerContent': $('#footerContent').val(),
         'htmlHead': $('#htmlHead').val(),
-        'externalRelevantArticlesDisplayCount': $(
-          '#externalRelevantArticlesDisplayCount').val(),
         'relevantArticlesDisplayCount': $('#relevantArticlesDisplayCount').
           val(),
         'randomArticlesDisplayCount': $('#randomArticlesDisplayCount').val(),

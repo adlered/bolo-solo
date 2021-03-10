@@ -107,70 +107,10 @@
             <option value="zh_CN">简体中文</option>
             <option value="en_US">English(US)</option>
         </select>
-        <label for="timeZoneId">${timeZoneId1Label}</label>
-        <select id="timeZoneId">
-        ${timeZoneIdOptions}
-        </select>
-        <label for="articleListDisplay">${articleListDisplay1Label}</label>
-        <select id="articleListDisplay">
-            <option value="titleOnly">${titleOnlyLabel}</option>
-            <option value="titleAndAbstract">${titleAndAbstractLabel}</option>
-            <option value="titleAndContent">${titleAndContentLabel}</option>
-        </select>
-        <label for="hljsTheme">
-            <a href="https://xyproto.github.io/splash/docs/longer/all.html" target="_blank">${previewLabel}</a>${hljsThemeLabel}
-        </label>
-        <select id="hljsTheme">
-            <option value="abap">abap</option>
-            <option value="algol">algol</option>
-            <option value="algol_nu">algol_nu</option>
-            <option value="arduino">arduino</option>
-            <option value="autumn">autumn</option>
-            <option value="borland">borland</option>
-            <option value="bw">bw</option>
-            <option value="colorful">colorful</option>
-            <option value="dracula">dracula</option>
-            <option value="emacs">emacs</option>
-            <option value="friendly">friendly</option>
-            <option value="fruity">fruity</option>
-            <option value="github">github</option>
-            <option value="igor">igor</option>
-            <option value="lovelace">lovelace</option>
-            <option value="manni">manni</option>
-            <option value="monokai">monokai</option>
-            <option value="monokailight">monokailight</option>
-            <option value="murphy">murphy</option>
-            <option value="native">native</option>
-            <option value="paraiso-dark">paraiso-dark</option>
-            <option value="paraiso-light">paraiso-light</option>
-            <option value="pastie">pastie</option>
-            <option value="perldoc">perldoc</option>
-            <option value="pygments">pygments</option>
-            <option value="rainbow_dash">rainbow_dash</option>
-            <option value="rrt">rrt</option>
-            <option value="solarized-dark">solarized-dark</option>
-            <option value="solarized-dark256">solarized-dark256</option>
-            <option value="solarized-light">solarized-light</option>
-            <option value="swapoff">swapoff</option>
-            <option value="tango">tango</option>
-            <option value="trac">trac</option>
-            <option value="vim">vim</option>
-            <option value="vs">vs</option>
-            <option value="xcode">xcode</option>
-        </select>
         <label for="articleListDisplayCount">${pageSize1Label}</label>
         <input id="articleListDisplayCount" class="normalInput" type="text"/>
-        <label for="feedOutputMode">${feedOutputModel1Label}</label>
-        <select id="feedOutputMode">
-            <option value="abstract">${abstractLabel}</option>
-            <option value="fullContent">${fullContentLabel}</option>
-        </select>
-        <label for="feedOutputCnt">${feedOutputCnt1Label}</label>
-        <input id="feedOutputCnt" class="normalInput" type="text"/>
         <label for="faviconURL">Favicon (网站图标)：</label>
         <input id="faviconURL" class="normalInput" type="text"/>
-        <label for="customVars">${customVars1Label}</label>
-        <input id="customVars" class="normalInput" type="text"/>
         <label for="githubPAT">${githubPATLabel}</label>
         <input id="githubPAT" class="normalInput" type="text"/>
         <label for="kanbanniangSelector">${selectedKanBanNiangLabel}</label>
@@ -210,6 +150,57 @@
         <br><br>
         <details>
             <summary>高级设置</summary>
+            <label for="timeZoneId">${timeZoneId1Label}</label>
+            <select id="timeZoneId">
+                ${timeZoneIdOptions}
+            </select>
+            <label for="articleListDisplay">${articleListDisplay1Label}</label>
+            <select id="articleListDisplay">
+                <option value="titleOnly">${titleOnlyLabel}</option>
+                <option value="titleAndAbstract">${titleAndAbstractLabel}</option>
+                <option value="titleAndContent">${titleAndContentLabel}</option>
+            </select>
+            <label for="hljsTheme">
+                <a href="https://xyproto.github.io/splash/docs/longer/all.html" target="_blank">${previewLabel}</a>${hljsThemeLabel}
+            </label>
+            <select id="hljsTheme">
+                <option value="abap">abap</option>
+                <option value="algol">algol</option>
+                <option value="algol_nu">algol_nu</option>
+                <option value="arduino">arduino</option>
+                <option value="autumn">autumn</option>
+                <option value="borland">borland</option>
+                <option value="bw">bw</option>
+                <option value="colorful">colorful</option>
+                <option value="dracula">dracula</option>
+                <option value="emacs">emacs</option>
+                <option value="friendly">friendly</option>
+                <option value="fruity">fruity</option>
+                <option value="github">github</option>
+                <option value="igor">igor</option>
+                <option value="lovelace">lovelace</option>
+                <option value="manni">manni</option>
+                <option value="monokai">monokai</option>
+                <option value="monokailight">monokailight</option>
+                <option value="murphy">murphy</option>
+                <option value="native">native</option>
+                <option value="paraiso-dark">paraiso-dark</option>
+                <option value="paraiso-light">paraiso-light</option>
+                <option value="pastie">pastie</option>
+                <option value="perldoc">perldoc</option>
+                <option value="pygments">pygments</option>
+                <option value="rainbow_dash">rainbow_dash</option>
+                <option value="rrt">rrt</option>
+                <option value="solarized-dark">solarized-dark</option>
+                <option value="solarized-dark256">solarized-dark256</option>
+                <option value="solarized-light">solarized-light</option>
+                <option value="swapoff">swapoff</option>
+                <option value="tango">tango</option>
+                <option value="trac">trac</option>
+                <option value="vim">vim</option>
+                <option value="vs">vs</option>
+                <option value="xcode">xcode</option>
+            </select>
             <label for="maxArchive">${maxArchiveLabel}</label>
             <input id="maxArchive" class="normalInput" type="text"/>
             <label for="mostUsedTagDisplayCount">${indexTagDisplayCnt1Label}</label>
@@ -226,8 +217,15 @@
             <input id="randomArticlesDisplayCount" class="normalInput" type="text"/>
             <label for="relevantArticlesDisplayCount">${relevantArticlesDisplayCnt1Label}</label>
             <input id="relevantArticlesDisplayCount" class="normalInput" type="text"/>
-            <label for="externalRelevantArticlesDisplayCount">${externalRelevantArticlesDisplayCnt1Label}</label>
-            <input id="externalRelevantArticlesDisplayCount" class="normalInput" type="text"/>
+            <label for="feedOutputMode">${feedOutputModel1Label}</label>
+            <select id="feedOutputMode">
+                <option value="abstract">${abstractLabel}</option>
+                <option value="fullContent">${fullContentLabel}</option>
+            </select>
+            <label for="feedOutputCnt">${feedOutputCnt1Label}</label>
+            <input id="feedOutputCnt" class="normalInput" type="text"/>
+            <label for="customVars">${customVars1Label}</label>
+            <input id="customVars" class="normalInput" type="text"/>
         </details>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>

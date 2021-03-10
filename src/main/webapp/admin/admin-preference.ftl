@@ -495,9 +495,9 @@
         <br>
         <label for="sendKey">${sendKeyLabel}</label>
         <input id="sendKey" type="text"/>
-        <div>
+        <a href="https://doc.stackoverflow.wiki/web/#/7?page_id=177" target="_blank">
             ${usageLabel}
-        </div>
+        </a>
         <br><br>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>

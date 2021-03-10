@@ -76,8 +76,9 @@ public final class SoloServletListener extends AbstractServletListener {
     /**
      * Bolo version.
      */
-    public static final String BOLO_VERSION = "v2.4 稳定版";
-    public static final String BOLO_VERSION_EN = "v2.4 Stable";
+    public static final String BOLO_VERSION_SOURCE = "2.4";
+    public static final String BOLO_VERSION = "v" + BOLO_VERSION_SOURCE + " 稳定版";
+    public static final String BOLO_VERSION_EN = "v" + BOLO_VERSION_SOURCE + " Stable";
     /**
      * Solo version.
      */
@@ -98,16 +99,6 @@ public final class SoloServletListener extends AbstractServletListener {
         beanManager = BeanManager.getInstance();
         routeConsoleProcessors();
         Stopwatchs.start("Context Initialized");
-
-        final Latkes.RuntimeDatabase runtimeDatabase = Latkes.getRuntimeDatabase();
-        final Latkes.RuntimeMode runtimeMode = Latkes.getRuntimeMode();
-        final String jdbcUsername = Latkes.getLocalProperty("jdbc.username");
-        final String jdbcURL = Latkes.getLocalProperty("jdbc.URL");
-        final boolean luteAvailable = Markdowns.LUTE_AVAILABLE;
-
-        LOGGER.log(Level.INFO, "Bolo is booting [Solo source ver=" + VERSION + ", servletContainer=" + Latkes.getServletInfo(servletContextEvent.getServletContext())
-                + ", os=" + Latkes.getOperatingSystemName() + ", isDocker=" + Latkes.isDocker() + ", luteAvailable=" + luteAvailable + ", pid=" + Latkes.currentPID()
-                + ", runtimeDatabase=" + runtimeDatabase + ", runtimeMode=" + runtimeMode + ", jdbc.username=" + jdbcUsername + ", jdbc.URL=" + jdbcURL + "]");
 
         validateSkin();
 

@@ -192,7 +192,6 @@ public class MailService {
                     } else if (mailBox.equals("163")) {
                         OhMyEmail.config(OhMyEmail.SMTP_163(false), mailUsername, mailPassword);
                     }
-                    LOGGER.log(Level.INFO, "Mailbox Settings loaded " + getMailSet());
                     return;
                 }
             }

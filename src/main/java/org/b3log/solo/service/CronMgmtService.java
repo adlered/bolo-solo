@@ -83,7 +83,6 @@ public class CronMgmtService {
      * Start all cron tasks.
      */
     public void start() {
-        LOGGER.log(Level.INFO, "Executing crontab tasks ...");
         final JSONObject preference = optionQueryService.getPreference();
         long delay = 10000;
 
@@ -132,14 +131,12 @@ public class CronMgmtService {
                 Stopwatchs.release();
             }
         }, delay + 1000 * 60 * 10, 1000 * 60 * 60 * 24, TimeUnit.MILLISECONDS);
-        delay += 2000;
     }
 
     /**
      * Stop all cron tasks.
      */
     public void stop() {
-        LOGGER.log(Level.INFO, "Crontab tasks has been stopped.");
         SCHEDULED_EXECUTOR_SERVICE.shutdown();
     }
 

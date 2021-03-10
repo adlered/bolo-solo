@@ -169,12 +169,7 @@ public final class SoloServletListener extends AbstractServletListener {
 
         MailService.loadMailSettings();
         WAF.set();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                KanBanNiangProcessor.downloadKBNResource();
-            }
-        }).start();
+        new Thread(KanBanNiangProcessor::downloadKBNResource).start();
 
         final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);
         final JSONObject preference = optionQueryService.getPreference();

@@ -36,8 +36,8 @@ public class WAF {
         if (!POWER) {
             POWER = true;
 
-            int second = 0;
-            int times = 0;
+            int second;
+            int times;
 
             try {
                 second = Integer.parseInt(Options.get(Option.ID_C_WAF_CURRENT_LIMIT_SECOND));
@@ -48,7 +48,6 @@ public class WAF {
             }
 
             WAFstorage.currentLimiter = new SimpleCurrentLimiter(second, times);
-            WAFlogger.log("Power on [second=" + second + ", times=" + times + "]");
         }
     }
 
@@ -114,9 +113,8 @@ public class WAF {
         )) {
 
             WAFrule rule = new WAFrule();
-            String str = requestIP;
 
-            if (rule.access(str)) {
+            if (rule.access(requestIP)) {
                 WAFlogger.logTrace(requestIP, requestURL);
 
                 return true;

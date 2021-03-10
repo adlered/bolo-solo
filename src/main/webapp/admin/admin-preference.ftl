@@ -493,11 +493,12 @@
         </div>
         <h3><i class="fa fa-hashtag"></i> ${serverJiangRemindLabel}</h3>
         <br>
-        <label for="sendKey">${sendKeyLabel}</label>
-        <input id="sendKey" type="text"/>
-        <a href="https://doc.stackoverflow.wiki/web/#/7?page_id=177" target="_blank">
+        <a style="font-size: 15px; font-weight: bold; color: #ff6060; text-decoration: underline;" href="https://doc.stackoverflow.wiki/web/#/7?page_id=177" target="_blank">
             ${usageLabel}
         </a>
+        <br>
+        <label for="sendKey">${sendKeyLabel}</label>
+        <input id="sendKey" type="text"/>
         <br><br>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>

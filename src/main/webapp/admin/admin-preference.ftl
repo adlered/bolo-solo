@@ -109,7 +109,7 @@
         </select>
         <label for="articleListDisplayCount">${pageSize1Label}</label>
         <input id="articleListDisplayCount" class="normalInput" type="text"/>
-        <label for="faviconURL">Favicon (网站图标)：</label>
+        <label for="faviconURL">${faviconLabel}</label>
         <input id="faviconURL" class="normalInput" type="text"/>
         <label for="githubPAT">${githubPATLabel}</label>
         <input id="githubPAT" class="normalInput" type="text"/>

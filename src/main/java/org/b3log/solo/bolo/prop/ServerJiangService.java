@@ -43,7 +43,7 @@ public class ServerJiangService {
                     "评论链接：" + blogSite + "  \n" +
                     "评论内容：  \n" + comment;
             if (!send(title, desp, sendKey)) {
-                LOGGER.log(Level.ERROR, "Server Jiang Remind send failed, please check your \"sendKey\" option.");
+                LOGGER.log(Level.ERROR, "Server Jiang Remind send failed, please check your \"sendKey\" option. Free accounts can only send 5 times a day, maybe the limit is reached?");
             } else {
                 LOGGER.log(Level.INFO, "Server Jiang Remind sent. [title=" + title + ", desp=" + desp + "]");
             }

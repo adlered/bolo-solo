@@ -277,8 +277,6 @@ public class ExportService {
                 return;
             }
 
-            LOGGER.log(Level.INFO, "Backup public articles to your GitHub repo [bolo-blog] ...");
-
             final JSONObject mds = exportHexoMDs();
             JdbcRepository.dispose();
             final List<JSONObject> posts = (List<JSONObject>) mds.opt("posts");

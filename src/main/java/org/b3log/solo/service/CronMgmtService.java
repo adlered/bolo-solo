@@ -84,7 +84,7 @@ public class CronMgmtService {
      */
     public void start() {
         final JSONObject preference = optionQueryService.getPreference();
-        long delay = 10000;
+        long delay = 2000;
 
         SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
             try {

@@ -43,7 +43,6 @@
         "oId": "${oId}",
         "blogHost": "${blogHost}",
         "randomArticles1Label": "${randomArticles1Label}",
-        "externalRelevantArticles1Label": "${externalRelevantArticles1Label}"
     });
     $(document).ready(function () {
         page.load();

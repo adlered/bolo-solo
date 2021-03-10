@@ -92,7 +92,6 @@
     Label.windowSizeLabel = "${windowSizeLabel}"
     Label.randomArticlesDisplayCntLabel = "${randomArticlesDisplayCntLabel}"
     Label.relevantArticlesDisplayCntLabel = "${relevantArticlesDisplayCntLabel}"
-    Label.externalRelevantArticlesDisplayCntLabel = "${externalRelevantArticlesDisplayCntLabel}"
     Label.nameTooLongLabel = "${nameTooLongLabel}"
     Label.navLabel = "${navLabel}"
     Label.userLabel = "${userLabel}"

@@ -158,26 +158,8 @@
             <option value="vs">vs</option>
             <option value="xcode">xcode</option>
         </select>
-        <label for="maxArchive">${maxArchiveLabel}</label>
-        <input id="maxArchive" class="normalInput" type="text"/>
-        <label for="mostUsedTagDisplayCount">${indexTagDisplayCnt1Label}</label>
-        <input id="mostUsedTagDisplayCount" class="normalInput" type="text"/>
-        <label for="recentCommentDisplayCount">${indexRecentCommentDisplayCnt1Label}</label>
-        <input id="recentCommentDisplayCount" class="normalInput" type="text"/>
-        <label for="mostCommentArticleDisplayCount">${indexMostCommentArticleDisplayCnt1Label}</label>
-        <input id="mostCommentArticleDisplayCount" class="normalInput" type="text"/>
-        <label for="mostViewArticleDisplayCount">${indexMostViewArticleDisplayCnt1Label}</label>
-        <input id="mostViewArticleDisplayCount" class="normalInput" type="text"/>
         <label for="articleListDisplayCount">${pageSize1Label}</label>
         <input id="articleListDisplayCount" class="normalInput" type="text"/>
-        <label for="articleListPaginationWindowSize">${windowSize1Label}</label>
-        <input id="articleListPaginationWindowSize" class="normalInput" type="text"/>
-        <label for="randomArticlesDisplayCount">${randomArticlesDisplayCnt1Label}</label>
-        <input id="randomArticlesDisplayCount" class="normalInput" type="text"/>
-        <label for="relevantArticlesDisplayCount">${relevantArticlesDisplayCnt1Label}</label>
-        <input id="relevantArticlesDisplayCount" class="normalInput" type="text"/>
-        <label for="externalRelevantArticlesDisplayCount">${externalRelevantArticlesDisplayCnt1Label}</label>
-        <input id="externalRelevantArticlesDisplayCount" class="normalInput" type="text"/>
         <label for="feedOutputMode">${feedOutputModel1Label}</label>
         <select id="feedOutputMode">
             <option value="abstract">${abstractLabel}</option>
@@ -225,6 +207,28 @@
                 <input id="syncGitHub" type="checkbox" class="normalInput"/>
             </div>
         </label>
+        <br><br>
+        <details>
+            <summary>高级设置</summary>
+            <label for="maxArchive">${maxArchiveLabel}</label>
+            <input id="maxArchive" class="normalInput" type="text"/>
+            <label for="mostUsedTagDisplayCount">${indexTagDisplayCnt1Label}</label>
+            <input id="mostUsedTagDisplayCount" class="normalInput" type="text"/>
+            <label for="recentCommentDisplayCount">${indexRecentCommentDisplayCnt1Label}</label>
+            <input id="recentCommentDisplayCount" class="normalInput" type="text"/>
+            <label for="mostCommentArticleDisplayCount">${indexMostCommentArticleDisplayCnt1Label}</label>
+            <input id="mostCommentArticleDisplayCount" class="normalInput" type="text"/>
+            <label for="mostViewArticleDisplayCount">${indexMostViewArticleDisplayCnt1Label}</label>
+            <input id="mostViewArticleDisplayCount" class="normalInput" type="text"/>
+            <label for="articleListPaginationWindowSize">${windowSize1Label}</label>
+            <input id="articleListPaginationWindowSize" class="normalInput" type="text"/>
+            <label for="randomArticlesDisplayCount">${randomArticlesDisplayCnt1Label}</label>
+            <input id="randomArticlesDisplayCount" class="normalInput" type="text"/>
+            <label for="relevantArticlesDisplayCount">${relevantArticlesDisplayCnt1Label}</label>
+            <input id="relevantArticlesDisplayCount" class="normalInput" type="text"/>
+            <label for="externalRelevantArticlesDisplayCount">${externalRelevantArticlesDisplayCnt1Label}</label>
+            <input id="externalRelevantArticlesDisplayCount" class="normalInput" type="text"/>
+        </details>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>

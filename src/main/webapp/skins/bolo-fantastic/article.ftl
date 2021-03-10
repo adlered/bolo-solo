@@ -143,8 +143,6 @@
             <a id="back-to-top" title="返回顶部" href="javascript:"><i class="fas fa-chevron-up"></i></a>
             <#include "footer.ftl">
             <@comment_script oId=article.oId commentable=article.commentable>
-                page.tips.externalRelevantArticlesDisplayCount =
-                    "${externalRelevantArticlesDisplayCount}";
                 <#if 0 !=randomArticlesDisplayCount>
                     page.loadRandomArticles('<h3>${randomArticlesLabel}</h3>');
                 </#if>

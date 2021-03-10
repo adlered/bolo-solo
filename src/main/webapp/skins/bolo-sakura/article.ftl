@@ -88,13 +88,8 @@
 <#include 'side-mobile.ftl'>
 <#include 'footer.ftl'>
 <@comment_script oId=article.oId commentable=article.commentable>
-    page.tips.externalRelevantArticlesDisplayCount = "${externalRelevantArticlesDisplayCount}";
     <#if 0 != randomArticlesDisplayCount>
         page.loadRandomArticles('<h3>${randomArticlesLabel}</h3>');
-    </#if>
-    <#if 0 != externalRelevantArticlesDisplayCount>
-        page.loadExternalRelevantArticles("<#list article.articleTags?split(",") as articleTag>${articleTag}<#if articleTag_has_next>,</#if></#list>",
-        '<h3>${externalRelevantArticlesLabel}</h3>');
     </#if>
     <#if 0 != relevantArticlesDisplayCount>
         page.loadRelevantArticles('${article.oId}', '<h3>${relevantArticlesLabel}</h3>');

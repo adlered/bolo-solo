@@ -125,11 +125,6 @@ var Skin = {
     this._initArticleCommon()
 
     setTimeout(function () {
-      if ($('#externalRelevantArticlesWrap li').length === 0) {
-        $('#externalRelevantArticlesWrap').next().remove()
-        $('#externalRelevantArticlesWrap').remove()
-      }
-
       if ($('#relevantArticlesWrap li').length === 0) {
         $('#relevantArticlesWrap').prev().remove()
         $('#relevantArticlesWrap').remove()

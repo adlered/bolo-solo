@@ -60,8 +60,6 @@
             </div>
             </#if>
             <div class="recommendation__container">
-              <div class="item" id="externalRelevantArticles">
-              </div>
               <div class="item" id="randomArticles">
               </div>
               <div class="item" id="relevantArticles">
@@ -77,8 +75,6 @@
     <#include "footer.ftl">
     <@comment_script oId=article.oId commentable=article.commentable>
       Skin.initComment = function (articleOId, articleTags) {
-        page.tips.externalRelevantArticlesDisplayCount = "${externalRelevantArticlesDisplayCount}";
-        page.loadExternalRelevantArticles(articleTags, "<div class='header'><span>HACPAI POSTS</span></div>");
         page.loadRandomArticles("<div class='header'><span>RECOMMEND POSTS</span></div>");
         page.loadRelevantArticles(articleOId, '<div class="header"><span>RELEVANT POSTS</span></div>');
       }

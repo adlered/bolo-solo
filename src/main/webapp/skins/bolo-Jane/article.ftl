@@ -114,9 +114,6 @@
     <#if 0 != randomArticlesDisplayCount>
         <div id="randomArticles" class="article__near"></div>
     </#if>
-    <#if externalRelevantArticlesDisplayCount?? && 0 != externalRelevantArticlesDisplayCount>
-        <div id="externalRelevantArticles" class="article__near"></div>
-    </#if>
     <#if article?? && article.articleToC?? && article.articleToC?size &gt; 0>
         <#include "../../common-template/toc.ftl"/>
     </#if>
@@ -125,10 +122,6 @@
 <#include "footer.ftl">
 <#if pjax><!---- pjax {#pjax} start ----></#if>
 <@comment_script oId=article.oId commentable=article.commentable>
-page.tips.externalRelevantArticlesDisplayCount = "${externalRelevantArticlesDisplayCount}";
-<#if 0 != externalRelevantArticlesDisplayCount>
-    page.loadExternalRelevantArticles("<#list article.articleTags?split(",") as articleTag>${articleTag}<#if articleTag_has_next>,</#if></#list>");
-</#if>
 <#if 0 != randomArticlesDisplayCount>
     page.loadRandomArticles();
 </#if>

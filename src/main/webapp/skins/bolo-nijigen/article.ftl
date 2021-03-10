@@ -147,11 +147,6 @@
             </#if>
 
             <div class="fn__flex article__relevant">
-                <div class="fn__flex-1" id="externalRelevantArticlesWrap">
-                    <div class="module">
-                        <div id="externalRelevantArticles" class="module__list"></div>
-                    </div>
-                </div>
                 <div class="mobile__hidden">&nbsp; &nbsp; &nbsp; &nbsp; </div>
                 <div class="fn__flex-1" id="randomArticlesWrap">
                     <div class="module">
@@ -174,12 +169,8 @@
 <#include "footer.ftl">
 <#if pjax><!---- pjax {#pjax} start ----></#if>
 <@comment_script oId=article.oId commentable=article.commentable>
-    page.tips.externalRelevantArticlesDisplayCount = "${externalRelevantArticlesDisplayCount}";
     <#if 0 != randomArticlesDisplayCount>
     page.loadRandomArticles('<header class="module__header">${randomArticlesLabel}</header>');
-    </#if>
-    <#if 0 != externalRelevantArticlesDisplayCount>
-    page.loadExternalRelevantArticles("<#list article.articleTags?split(",") as articleTag>${articleTag}<#if articleTag_has_next>,</#if></#list>" , "<header class='module__header'>${externalRelevantArticlesLabel}</header>");
     </#if>
     <#if 0 != relevantArticlesDisplayCount>
     page.loadRelevantArticles('${article.oId}', '<header class="module__header">${relevantArticlesLabel}</header>');

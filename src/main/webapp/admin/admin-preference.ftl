@@ -462,34 +462,42 @@
             <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
+        <label for="adminActiveSentToMailbox">${adminActiveSentToMailboxLabel}</label>
+        <br>
+        <select id="adminActiveSentToMailbox">
+            <option value="on" selected="">${enableLabel}</option>
+            <option value="off">${disableLabel}</option>
+        </select>
+        <br><br>
+        <h3><i class="fa fa-hashtag"></i> ${mailRemindLabel}</h3>
+        <br>
+        <h4>${mailServerLabel}</h4>
         <label for="mailBox">${mailBoxLabel}</label>
         <select id="mailBox">
-            <option value="" selected>未设定</option>
-            <option value="QQ">QQ 邮箱</option>
-            <option value="QQ_ENT">QQ 企业版邮箱</option>
-            <option value="163">163 网易免费邮箱</option>
+            <option value="" selected>${unsetLabel}</option>
+            <option value="QQ">${qqMailboxLabel}</option>
+            <option value="QQ_ENT">${qqEntMailboxLabel}</option>
+            <option value="163">${neteaseMailboxLabel}</option>
         </select>
         <label for="mailUsername">${mailUsernameLabel}</label>
         <input id="mailUsername" type="text"/>
         <label for="mailPassword">${mailPasswordLabel}</label>
         <input id="mailPassword" type="text"/>
         <div>
-            设定你的邮件服务器，以正常向用户发送评论 / 通知提醒。<br>
-            目前支持：QQ 邮箱、QQ 企业版邮箱、163 网易免费邮箱<br>
-            请注意：<b>有些邮箱服务器可能设有独立密码，具体设定方法请查询后填写！</b>
+            ${mailboxDescriptionLabel}
         </div>
-        <h3>${CommentAndReplyLabel}</h3>
         <label for="replyRemind">${BloggerMailboxLabel}</label>
         <input id="replyRemind" type="text" />
         <div>
             ${BloggerMailboxDescribeLabel}
         </div>
-        <label for="adminActiveSentToMailbox">管理员的评论动态也发送至博主邮箱：</label>
+        <h3><i class="fa fa-hashtag"></i> ${serverJiangRemindLabel}</h3>
         <br>
-        <select id="adminActiveSentToMailbox">
-            <option value="on" selected="">${enableLabel}</option>
-            <option value="off">${disableLabel}</option>
-        </select>
+        <label for="sendKey">${sendKeyLabel}</label>
+        <input id="sendKey" type="text"/>
+        <div>
+            ${usageLabel}
+        </div>
         <br><br>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>

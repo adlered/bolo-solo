@@ -314,6 +314,7 @@ $.extend(Page.prototype, {
     },
     /*
      * @description 加载站外相关文章
+     * @deprecated
      * @param {String} tags 文章 tags
      * @param {String} headTitle 站外相关文章标题
      */

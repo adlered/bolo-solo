@@ -31,6 +31,7 @@ import org.b3log.latke.plugin.ViewLoadEventHandler;
 import org.b3log.latke.repository.Transaction;
 import org.b3log.latke.servlet.AbstractServletListener;
 import org.b3log.latke.servlet.DispatcherServlet;
+import org.b3log.latke.util.Locales;
 import org.b3log.latke.util.Requests;
 import org.b3log.latke.util.Stopwatchs;
 import org.b3log.latke.util.Strings;
@@ -55,6 +56,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSessionEvent;
+import java.util.Locale;
 
 /**
  * Solo Servlet listener.
@@ -173,6 +175,11 @@ public final class SoloServletListener extends AbstractServletListener {
                 KanBanNiangProcessor.downloadKBNResource();
             }
         }).start();
+
+        final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);
+        final JSONObject preference = optionQueryService.getPreference();
+        final String localeString = preference.getString(Option.ID_C_LOCALE_STRING);
+        Latkes.setLocale(new Locale(Locales.getLanguage(localeString), Locales.getCountry(localeString)));
     }
 
     @Override

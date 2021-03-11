@@ -92,12 +92,9 @@
                        title="${adminLabel}">
                         <i class="mdui-list-item-icon iconfont solo-spin"></i>
                     </a>
-                    <a href="javascript:location.href='${logoutURL}'" title="${logoutLabel}">
-                        <i class="mdui-list-item-icon iconfont solo-logout"></i>
-                    </a>
                 <#else>
                     <a href="${servePath}/start" title="${startToUseLabel}">
-                        <i class="mdui-list-item-icon iconfont solo-login"></i>
+                        <i class="mdui-list-item-icon iconfont solo-logout"></i>
                         <div class="mdui-list-item-content"> ${startToUseLabel}</div>
                     </a>
                 </#if>

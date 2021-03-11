@@ -320,10 +320,7 @@
                         $('#td3').show(); $('#tc3').show();
                         $('#td3').html('<b>管理员密码</b>');
                         $('#td4').show();
-                        $('#td4').html('' +
-                            '<p style="font-weight: bold; color: #cd3535">兼容性：支持 Picuang V2.4 及以上版本</p>' +
-                            '图床地址需带上 HTTP/HTTPS 协议地址，例：https://pic.stackoverflow.wiki<br>' +
-                            '图床支持匿名模式、仅管理员上传模式上传图片，如上传失败，请检查密码是否出错。')
+                        $('#td4').html('<p style="font-weight: bold; color: #cd3535">兼容性：支持 Picuang V2.4 及以上版本</p>图床地址需带上 HTTP/HTTPS 协议地址，例：https://pic.stackoverflow.wiki<br>图床支持匿名模式、仅管理员上传模式上传图片，如上传失败，请检查密码是否出错。');
                         break;
                     case 'qiniu':
                         $('#td1').show();
@@ -452,9 +449,7 @@
                 })
             }
         </script>
-        <div><b>请注意！如使用自定义图床中出现 "413 Request Entity Too Large" 等类似报错，请调整 Nginx / Tomcat 的数据包大小限制。</b>
-            <br>
-            配置图床期间出现疑问或问题，请在用户交流群中提问。</div>
+        <div><b>请注意！如使用自定义图床中出现 "413 Request Entity Too Large" 等类似报错，请调整 Nginx / Tomcat 的数据包大小限制。</b><br>配置图床期间出现疑问或问题，请在用户交流群中提问。</div>
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_mailAndRemind" class="fn__none form">
@@ -516,11 +511,7 @@
         <input id="b3logKey" type="text">
         <div>
             <div>
-                <b>请注意！此项设置需要重启服务端后生效。</b>
-                <br><br>
-                菠萝博客为您提供了一个公共账号，无需自行注册账号，即可直接使用链滴社区的图床服务；<br>
-                使用公共账号的图床需要将<b>自定义图床</b>修改为链滴，并将 "链滴用户名" 及 "B3log Key" 字段留空。
-                <br><br>
+                <b>请注意！此项设置需要重启服务端后生效。</b><br><br>菠萝博客为您提供了一个公共账号，无需自行注册账号，即可直接使用链滴社区的图床服务；<br>使用公共账号的图床需要将<b>自定义图床</b>修改为链滴，并将 "链滴用户名" 及 "B3log Key" 字段留空。<br><br>
             </div>
             <style>
                 .menu ul li {
@@ -528,25 +519,10 @@
                 }
             </style>
             <details class="menu">
-                <summary>设置以后，我可以做什么？</summary>
-                <ul>
-                    <li>
-                        1. 使用自定义图床中的链滴社区图床<br>
-                        2. 与链滴社区同步发送的文章<br>
-                        3. 同步你在链滴中的GitHub、QQ等链接（<b>也可以在工具-联系方式选项直接设置，无需配置 B3log Key。</b>如果要通过链滴同步：<a href="https://${hacpaiDomain}/settings" target="_blank">在这里</a>设置你的多种个人联系方式，然后手动通过高级功能中的选项同步）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>
-                        4. 使用自动备份全部文章至链滴社区功能（<a href="https://${hacpaiDomain}/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br>
-                        5. 链滴社区图床有防盗链功能，仅允许在博客内显示图片，限制较多：<b>推荐您使用其它自定义图床</b>。<br><br>
-                    </li>
-                </ul>
+                <summary>设置以后，我可以做什么？</summary><ul><li>1. 使用自定义图床中的链滴社区图床<br>2. 与链滴社区同步发送的文章<br>3. 同步你在链滴中的GitHub、QQ等链接（<b>也可以在工具-联系方式选项直接设置，无需配置 B3log Key。</b>如果要通过链滴同步：<a href="https://${hacpaiDomain}/settings" target="_blank">在这里</a>设置你的多种个人联系方式，然后手动通过高级功能中的选项同步）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>4. 使用自动备份全部文章至链滴社区功能（<a href="https://${hacpaiDomain}/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br>5. 链滴社区图床有防盗链功能，仅允许在博客内显示图片，限制较多：<b>推荐您使用其它自定义图床</b>。<br><br></li></ul>
             </details>
             <details class="menu">
-                <summary>如何取得 B3log Key？</summary>
-                <ul>
-                    <li>
-                        1. <a href="https://${hacpaiDomain}/register?r=adlered" target="_blank">在这里</a>注册一个链滴用户（在<a href="https://${hacpaiDomain}/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>
-                        2. <a href="https://${hacpaiDomain}/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key<br>
-                    </li>
-                </ul>
+                <summary>如何取得 B3log Key？</summary><ul><li>1. <a href="https://${hacpaiDomain}/register?r=adlered" target="_blank">在这里</a>注册一个链滴用户（在<a href="https://${hacpaiDomain}/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>2. <a href="https://${hacpaiDomain}/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key<br></li></ul>
             </details>
         </div>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
@@ -600,10 +576,7 @@
             <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
-        <h4>向访客展示我的 GitHub 贡献</h4>
-        <br>
-        <p>Bolo 可以为你自动生成一篇 “我在 GitHub 上的开源项目” 文章，记载了你在 GitHub 上公开仓库的贡献数据，并呈现给博客的访客。</p>
-        <p>请填写正确的 GitHub ID，例如您的 GitHub 资料地址是 https://github.com/adlered，则您的 GitHub ID 为 adlered。</p>
+        <h4>向访客展示我的 GitHub 贡献</h4><br><p>Bolo 可以为你自动生成一篇 “我在 GitHub 上的开源项目” 文章，记载了你在 GitHub 上公开仓库的贡献数据，并呈现给博客的访客。</p><p>请填写正确的 GitHub ID，例如您的 GitHub 资料地址是 https://github.com/adlered，则您的 GitHub ID 为 adlered。</p>
         <br>
         <label class="checkbox">
             <input id="enableAutoFlushGitHub" type="checkbox" class="normalInput"/>

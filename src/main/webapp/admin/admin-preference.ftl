@@ -269,20 +269,20 @@
     <div id="tabPreferencePanel_imageBed" class="fn__none form">
         <div class="fn__clear"></div>
         <div style="display: none">
-            元数据：<span id="sourceTC"></span>
+            ${srcDataLabel}<span id="sourceTC"></span>
         </div>
-        <label for="tcS">图床选择</label>
+        <label for="tcS">${selectPicBedLabel}</label>
         <select id="tcS" disabled>
             <option selected></option>
-            <option value="local">本地图床</option>
-            <option value="qiniu">七牛云</option>
-            <option value="aliyun">阿里云</option>
-            <option value="upyun">又拍云</option>
-            <option value="picuang">基于 Picuang 的自搭建图床</option>
-            <option value="hacpai">链滴图床</option>
+            <option value="local">${localPicBedLabel}</option>
+            <option value="qiniu">${qiNiuLabel}</option>
+            <option value="aliyun">${aliLabel}</option>
+            <option value="upyun">${upyunLabel}</option>
+            <option value="picuang">${picuangLabel}</option>
+            <option value="hacpai">${liandiPicBedLabel}</option>
         </select>
         <div class="fn__clear" id="changeCfgBtn">
-            <button onclick="unlock()" class="fn__left">允许修改图床配置</button>
+            <button onclick="unlock()" class="fn__left">${allowConfigPicBedLabel}</button>
         </div>
         <div id="td1" for="tc1" style="display:none"></div>
         <input id="tc1" type="text" style="display:none" />
@@ -301,7 +301,7 @@
         <div id="td8" for="tc8" style="display:none"></div>
         <input id="tc8" type="text" style="display:none" />
         <div class="fn__clear" id="tuChuangCfg" style="display: none">
-            <button onclick="save()" class="fn__left">保存图床配置</button>
+            <button onclick="save()" class="fn__left">${saveConfigPicBedLabel}</button>
         </div>
         <script>
             function loadRemind() {
@@ -310,71 +310,71 @@
                 switch (sel) {
                     case 'hacpai':
                         $('#td1').show();
-                        $('#td1').text('使用链滴默认图床，请在偏好设置中配置链滴的用户名和 B3log Key。');
+                        $('#td1').text('${picBed1Label}');
                         break;
                     case 'picuang':
                         $('#td1').show();
-                        $('#td1').html('Picuang 是 Bolo 博客作者开发的一款在自己服务器上搭建的公开图床，<a target="_blank" href="https://github.com/adlered/Picuang">项目地址</a>');
+                        $('#td1').html('${picBed2Label}');
                         $('#td2').show(); $('#tc2').show();
-                        $('#td2').html('<b>图床地址</b>');
+                        $('#td2').html('${picBed3Label}');
                         $('#td3').show(); $('#tc3').show();
-                        $('#td3').html('<b>管理员密码</b>');
+                        $('#td3').html('${picBed4Label}');
                         $('#td4').show();
-                        $('#td4').html('<p style="font-weight: bold; color: #cd3535">兼容性：支持 Picuang V2.4 及以上版本</p>图床地址需带上 HTTP/HTTPS 协议地址，例：https://pic.stackoverflow.wiki<br>图床支持匿名模式、仅管理员上传模式上传图片，如上传失败，请检查密码是否出错。');
+                        $('#td4').html('${picBed5Label}');
                         break;
                     case 'qiniu':
                         $('#td1').show();
-                        $('#td1').html('Bolo 支持七牛云图床。AK/SK 可以从密钥管理找到，请确保你的 Bucket 已经配置好域名。<a target="_blank" href="https://developer.qiniu.com/kodo/manual/1272/form-upload">七牛云开发文档</a>');
+                        $('#td1').html('${picBed6Label}}');
                         $('#td2').show(); $('#tc2').show();
                         $('#td2').html('<b>AccessKey</b>');
                         $('#td3').show(); $('#tc3').show();
                         $('#td3').html('<b>SecretKey</b>');
                         $('#td4').show(); $('#tc4').show();
-                        $('#td4').html('<b>Bucket 名称</b>');
+                        $('#td4').html('${picBed7Label}');
                         $('#td5').show(); $('#tc5').show();
-                        $('#td5').html('<b>Bucket 绑定的域名（不需要填写协议，正确示例：qiniu.stackoverflow.wiki）</b>');
+                        $('#td5').html('${picBed8Label}');
                         $('#td6').show(); $('#tc6').show();
-                        $('#td6').html('<b>协议（填写英文小写 http 或 https，以你的设定为准）</b>');
+                        $('#td6').html('${picBed9Label}');
                         break;
                     case 'aliyun':
                         $('#td1').show();
-                        $('#td1').html('Bolo 支持阿里云图床。AccessKey 信息可以从 AccessKey 管理中找到，必须将 Bucket ACL 的权限设定为 公读私写 或 公共读写。<a target="_blank" href="https://help.aliyun.com/document_detail/31817.html">阿里云开发文档</a>');
+                        $('#td1').html('${picBed10Label}');
                         $('#td2').show(); $('#tc2').show();
                         $('#td2').html('<b>AccessKeyID</b>');
                         $('#td3').show(); $('#tc3').show();
                         $('#td3').html('<b>AccessKeySecret</b>');
                         $('#td4').show(); $('#tc4').show();
-                        $('#td4').html('<b>EndPoint（地域节点）</b>');
+                        $('#td4').html('${picBed11Label}');
                         $('#td5').show(); $('#tc5').show();
-                        $('#td5').html('<b>Bucket 名称</b>');
+                        $('#td5').html('${picBed12Label}');
                         $('#td6').show(); $('#tc6').show();
-                        $('#td6').html('<b>Bucket 域名</b>');
+                        $('#td6').html('${picBed13Label}');
                         $('#td7').show(); $('#tc7').show();
-                        $('#td7').html('<b>协议（填写英文小写 http 或 https，以你的设定为准）</b>')
+                        $('#td7').html('${picBed14Label}')
                         $('#td8').show(); $('#tc8').show();
-                        $('#td8').html('<b>子目录（为空则保存至根目录，不需要在最前和最后输入斜杠，直接输入目录名即可，二级目录可以使用 "level1/level2" 类似格式，以此类推）</b>')
+                        $('#td8').html('${picBed26Label}')
                         break;
                     case 'upyun':
                         $('#td1').show();
-                        $('#td1').html('Bolo 支持又拍云图床。<a target="_blank" href="https://help.upyun.com/knowledge-base/rest_api/">又拍云开发文档</a>');
+                        $('#td1').html('${picBed15Label}}');
                         $('#td2').show(); $('#tc2').show();
-                        $('#td2').html('<b>空间名称（服务名称）</b>');
+                        $('#td2').html('${picBed16Label}');
                         $('#td3').show(); $('#tc3').show();
-                        $('#td3').html('<b>操作员名称</b>');
+                        $('#td3').html('${picBed17Label}');
                         $('#td4').show(); $('#tc4').show();
-                        $('#td4').html('<b>操作员密码</b>');
+                        $('#td4').html('${picBed18Label}');
                         $('#td5').show(); $('#tc5').show();
-                        $('#td5').html('<b>绑定域名</b>');
+                        $('#td5').html('${picBed19Label}');
                         $('#td6').show(); $('#tc6').show();
-                        $('#td6').html('<b>协议（填写英文小写 http 或 https，以你的设定为准）</b>');
+                        $('#td6').html('${picBed20Label}');
                         break;
                     case 'local':
                         $('#td1').show();
-                        $('#td1').html('本地图床适用于带宽较大的服务器（或设有CDN加速），如果你希望将上传的图片保存到服务器的指定目录，请使用本地图床功能。如需更换本地图床位置，请将原位置的所有图片直接移动到新的目录，更改本配置下的本地图床位置即可。');
+                        $('#td1').html('${picBed21Label}');
                         $('#td2').show(); $('#tc2').show();
-                        $('#td2').html('<b>图片存储目录（Windows例：D:/imageBed，Linux例：/home/adler/imageBed，如目录不存在将会尝试自动创建）</b>');
+                        $('#td2').html('${picBed22Label}}');
                         $('#td3').show();
-                        $('#td3').html('<button onclick="checkImageBedConfigAndAlert()">💿 测试本地图床配置是否可用</button>');
+                        $('#td3').html('${picBed23Label}');
                         break;
                 }
                 var stc = $('#sourceTC').text().split('<<>>');
@@ -420,7 +420,7 @@
                         $('#sourceTC').text('local<<>>' + $('#tc2').val());
                         break;
                 }
-                alert('配置已保存，图床设置将在重启服务端后生效。');
+                alert('${picBed24Label}');
                 admin.preference.update();
             }
 
@@ -449,7 +449,7 @@
                 })
             }
         </script>
-        <div><b>请注意！如使用自定义图床中出现 "413 Request Entity Too Large" 等类似报错，请调整 Nginx / Tomcat 的数据包大小限制。</b><br>配置图床期间出现疑问或问题，请在用户交流群中提问。</div>
+        <div>${picBed25Label}</div>
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_mailAndRemind" class="fn__none form">
@@ -503,7 +503,7 @@
             <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
-        <h4 style="color: #00a7e0">如果您不是 Solo 用户 或 链滴社区的成员，建议您忽略本选项卡。</h4>
+        <h4 style="color: #00a7e0">${liandi1Label}</h4>
         <br>
         <label for="hacpaiUser">${hacpaiUser1Label}</label>
         <input id="hacpaiUser" type="text"/>
@@ -511,7 +511,7 @@
         <input id="b3logKey" type="text">
         <div>
             <div>
-                <b>请注意！此项设置需要重启服务端后生效。</b><br><br>菠萝博客为您提供了一个公共账号，无需自行注册账号，即可直接使用链滴社区的图床服务；<br>使用公共账号的图床需要将<b>自定义图床</b>修改为链滴，并将 "链滴用户名" 及 "B3log Key" 字段留空。<br><br>
+                ${liandi2Label}
             </div>
             <style>
                 .menu ul li {
@@ -519,10 +519,10 @@
                 }
             </style>
             <details class="menu">
-                <summary>设置以后，我可以做什么？</summary><ul><li>1. 使用自定义图床中的链滴社区图床<br>2. 与链滴社区同步发送的文章<br>3. 同步你在链滴中的GitHub、QQ等链接（<b>也可以在工具-联系方式选项直接设置，无需配置 B3log Key。</b>如果要通过链滴同步：<a href="https://${hacpaiDomain}/settings" target="_blank">在这里</a>设置你的多种个人联系方式，然后手动通过高级功能中的选项同步）<a href="https://github.com/b3log/solo/issues/12719" target="_blank">功能详情</a><br>4. 使用自动备份全部文章至链滴社区功能（<a href="https://${hacpaiDomain}/settings/b3" target="_blank">在这里查看自动备份后的文件</a>）<br>5. 链滴社区图床有防盗链功能，仅允许在博客内显示图片，限制较多：<b>推荐您使用其它自定义图床</b>。<br><br></li></ul>
+                ${liandi3Label}
             </details>
             <details class="menu">
-                <summary>如何取得 B3log Key？</summary><ul><li>1. <a href="https://${hacpaiDomain}/register?r=adlered" target="_blank">在这里</a>注册一个链滴用户（在<a href="https://${hacpaiDomain}/settings/account" target="_blank">个人资料</a>中查看你的用户名）<br>2. <a href="https://${hacpaiDomain}/settings/b3" target="_blank">在这里</a>获得并设置你的B3log Key<br></li></ul>
+                ${liandi4Label}
             </details>
         </div>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
@@ -576,7 +576,7 @@
             <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         </div>
         <div class="fn__clear"></div>
-        <h4>向访客展示我的 GitHub 贡献</h4><br><p>Bolo 可以为你自动生成一篇 “我在 GitHub 上的开源项目” 文章，记载了你在 GitHub 上公开仓库的贡献数据，并呈现给博客的访客。</p><p>请填写正确的 GitHub ID，例如您的 GitHub 资料地址是 https://github.com/adlered，则您的 GitHub ID 为 adlered。</p>
+        ${myGitHub1Label}
         <br>
         <label class="checkbox">
             <input id="enableAutoFlushGitHub" type="checkbox" class="normalInput"/>
@@ -586,7 +586,7 @@
         <label for="myGitHubID">${myGitHubIDLabel}</label>
         <input id="myGitHubID" type="text"/>
         <br><br>
-        <p>自动刷新频次：每24小时一次；可通过高级功能手动刷新。</p>
+        <p>${myGitHub2Label}</p>
         <br><br>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>

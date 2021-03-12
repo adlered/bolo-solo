@@ -324,7 +324,7 @@
                         break;
                     case 'qiniu':
                         $('#td1').show();
-                        $('#td1').html('${picBed6Label}}');
+                        $('#td1').html('${picBed6Label}');
                         $('#td2').show(); $('#tc2').show();
                         $('#td2').html('<b>AccessKey</b>');
                         $('#td3').show(); $('#tc3').show();
@@ -356,7 +356,7 @@
                         break;
                     case 'upyun':
                         $('#td1').show();
-                        $('#td1').html('${picBed15Label}}');
+                        $('#td1').html('${picBed15Label}');
                         $('#td2').show(); $('#tc2').show();
                         $('#td2').html('${picBed16Label}');
                         $('#td3').show(); $('#tc3').show();
@@ -372,7 +372,7 @@
                         $('#td1').show();
                         $('#td1').html('${picBed21Label}');
                         $('#td2').show(); $('#tc2').show();
-                        $('#td2').html('${picBed22Label}}');
+                        $('#td2').html('${picBed22Label}');
                         $('#td3').show();
                         $('#td3').html('${picBed23Label}');
                         break;

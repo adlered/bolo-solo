@@ -21,7 +21,7 @@
     <ul>
         <li>
             <div id="tabUsite_edit">
-                <a class="tab-current" href="#tools/usite/edit">数据编辑</a>
+                <a class="tab-current" href="#tools/usite/edit">${usite11Label}</a>
             </div>
         </li>
     </ul>
@@ -38,19 +38,19 @@
             <button onclick="admin.usite.update()" class="fn__right">${updateLabel}</button>
         </div>
         <div class="fn__clear">
-            <label>联系方式将以图标的方式显示在你的博客主页中，立即生效。<br>每个皮肤支持显示的联系方式数量不等，部分较少见的联系方式可能不会显示。<br>如要通过设定的 链滴用户名 及 B3log Key 从链滴更新联系方式，请通过高级功能 - 立即从链滴获取联系方式 进行获取。</label>
+            ${usite1Label}
         </div>
         <table id="tfhover" class="tftable" border="1">
             <tr>
-                <th>平台</th>
-                <th>联系方式</th>
+                <th>${usite2Label}</th>
+                <th>${usite3Label}</th>
             </tr>
             <tr>
-                <td><b>新浪微博</b></td>
+                <td><b>${usite4Label}</b></td>
                 <td>https://www.weibo.com/ <input id="usiteWeiBo" type="text" style="width:200px"></td>
             </tr>
             <tr>
-                <td><b>QQ音乐</b></td>
+                <td><b>${usite5Label}</b></td>
                 <td>https://y.qq.com/portal/profile.html?uin= <input id="usiteQQMusic" type="text" style="width:200px"></td>
             </tr>
             <tr>
@@ -58,7 +58,7 @@
                 <td>https://stackoverflow.com/users/ <input id="usiteStackOverflow" type="text" style="width:200px"></td>
             </tr>
             <tr>
-                <td><b>优设网</b></td>
+                <td><b>${usite6Label}</b></td>
                 <td>https://dribbble.com/ <input id="usiteDribbble" type="text" style="width:200px"></td>
             </tr>
             <tr>
@@ -78,7 +78,7 @@
                 <td>QQ-Account <input id="usiteQQ" type="text" style="width:200px"></td>
             </tr>
             <tr>
-                <td><b>领英</b></td>
+                <td><b>${usite7Label}</b></td>
                 <td>https://www.linkedin.com/in/ <input id="usiteLinkedln" type="text" style="width:200px"></td>
             </tr>
             <tr>
@@ -94,15 +94,15 @@
                 <td>https://codepen.io/ <input id="usiteCodePen" type="text" style="width:200px"></td>
             </tr>
             <tr>
-                <td><b>网易云音乐</b></td>
+                <td><b>${usite8Label}</b></td>
                 <td>https://music.163.com/#/user/home?id= <input id="usiteWYMusic" type="text" style="width:200px"></td>
             </tr>
             <tr>
-                <td><b>微信</b></td>
+                <td><b>${usite9Label}</b></td>
                 <td>WeChat-Account <input id="usiteWeChat" type="text" style="width:200px"></td>
             </tr>
             <tr>
-                <td><b>知乎</b></td>
+                <td><b>${usite10Label}</b></td>
                 <td>https://www.zhihu.com/people/ <input id="usiteZhiHu" type="text" style="width:200px"></td>
             </tr>
             <tr>

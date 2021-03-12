@@ -18,9 +18,6 @@
 
 -->
 <div class="module-panel">
-    <div class="module-header">
-        更多独占主题正在开发中，请关注：<a href="https://github.com/adlered/bolo-solo" target="_blank">菠萝博客项目主页</a>
-    </div>
     <div class="module-body padding12"><div id="skinMain"></div></div>
 </div>
 ${plugins}

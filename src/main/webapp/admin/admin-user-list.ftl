@@ -30,8 +30,8 @@
     <input id="userURLUpdate" type="text"/>
     <label for="userAvatarUpdate">${userAvatar1Label}</label>
     <input id="userAvatarUpdate" type="text"/>
-    <label for="userB3KeyUpdate">密码：</label>
-    <input id="userB3KeyUpdate" type="password" placeholder="如不修改密码，请留空"/>
+    <label for="userB3KeyUpdate">${passwordLabel}</label>
+    <input id="userB3KeyUpdate" type="password" placeholder="${password1Label}"/>
     <br><br>
     <button onclick="admin.userList.update();" class="fn__right">${updateLabel}</button>
     <div class="fn__clear"></div>

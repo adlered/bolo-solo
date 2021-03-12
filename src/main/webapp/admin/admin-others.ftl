@@ -64,23 +64,7 @@
         <button class="fn__margin12" onclick="admin.others.exportHexo();">${exportHexoLabel}</button>
     </div>
     <div id="tabOthersPanel_move" class="fn__none">
-        <h4>一键将您博客上使用黑客派（链滴）图床中的图片转换至当前设定的图床</h4>
-        <br>
-        <p>如果您使用链滴图床作为 Bolo 的自定义图床（URL 为 ld246.com 或 hacpai.com），由于链滴图床的限制较多，可能会偶现无法打开的情况。</p>
-        <p>如果您希望获得更好的图床体验，请：</p><br>
-        <p><b>1.</b> 在偏好设定中将您的自定义图床修改为其它图床（例又拍云、阿里云或本地图床）</p>
-        <p><b>2.</b> 通过本功能一键将您旧文章中使用链滴图床的图片一键上传至您指定新图床的图片，并替换链接</p>
-        <p><b>3.</b> 享受数据掌握在自己手中的安全感</p><br>
-        <h4>使用前请注意</h4>
-        <p>由于链滴图床有访问频率限制，您的图片转换将在后台静默执行，您<b>可以关闭当前页面</b>，但请<b>不要停止 Bolo</b>并且<b>不要重复执行该功能</b></p>
-        <p>当您的转换任务在下方从 “工作中” 变更为 “空闲” 时，即转换成功</p>
-        <p>只有链滴图床的图片会被转换，其他图片不会产生更改。转换每张图片需要一分钟，您可以以此计算需要运行的时间。</p>
-        <p>点击开始按钮，然后去睡一觉吧。</p><br>
-        <h4 style="color: red">使用该功能前请先备份数据库和文章，由图片转换失败造成的后果需要您自行承担！</h4><br>
-        <span>当前状态：
-            <span id="status">获取中</span>
-        </span><br><br>
-        <button onclick="admin.others.pbstart();">开始转换</button>
+        ${others1Label}
     </div>
     <script>
         $(function () {
@@ -100,7 +84,7 @@
         <div class="fn__clear">
             <button onclick="admin.others.getLog()" class="fn__right">${RefreshLabel}</button>
         </div>
-        <span style="float: left">JVM 空闲内存：<span id="memFree" style="font-weight: bold"></span></span><span style="float: right"><span id="now"></span> 更新</span>
+        <span style="float: left">${others2Label} <span id="memFree" style="font-weight: bold"></span></span><span style="float: right"><span id="now"></span> ${others3Label}</span>
         <div class="fn__clear"></div>
         <table id="logList">
         </table>
@@ -109,9 +93,9 @@
         </div>
     </div>
     <div id="tabOthersPanel_import" class="fn__none">
-        <h3>从其它平台导入文章</h3>
+        <h3>${others4Label}</h3>
         <br>
-        <p><b>第一步，选择备份文件</b></p>
+        <p><b>${others5Label}</b></p>
         <br>
         <form id="fileUploadForm" enctype="multipart/form-data">
             <input name="file" type="file" name="fileUpload" id="backupUpload" accept=".xml,.zip,.dat" multiple="multiple">
@@ -120,7 +104,7 @@
         <script type="text/javascript">
             function uploadFile(name) {
                 if ($("#backupUpload").val() !== "") {
-                    $("#" + name).html("正在导入中，请不要进行其它操作！");
+                    $("#" + name).html("${others6Label}");
                     let formData = new FormData($("#fileUploadForm")[0]);
                     let options = {
                         url: "${staticServePath}/import/" + name,
@@ -139,7 +123,7 @@
                     };
                     $.ajax(options);
                 } else {
-                    alert("请先选择文件！");
+                    alert("${others7Label}");
                 }
             }
 
@@ -154,32 +138,23 @@
         </script>
 
         <br>
-        <p><b>第二步，选择备份文件的类型</b></p>
-        <br>
-        <button id="cnblogs">从博客园备份文件导入文章</button>
-        <p style="margin-top: 5px">可将从博客园备份的 xml 文件导入至菠萝博客，部分文章可能会由于长度原因跳过导入。</p>
-        <button id="markdown" style="margin-top: 10px">Markdown zip 导入文章</button>
-        <p style="margin-top: 5px">可将多篇 .md 文章打包成 zip 导入至菠萝博客，支持 Hexo/jekyll 格式文件；支持从<a href="#tools/others/data">数据导出</a>选项卡中导出的 Hexo 文件导入。</p>
-        <br>
-        <p><b>文章导入功能可能存在数据风险，请谨慎使用。</b></p>
+        ${others8Label}
     </div>
     <div id="tabOthersPanel_commentSync" class="fn__none form">
         <br>
-        你可以手动从链滴社区拉取文章中的评论到本地博客的某篇文章中。<br>
-        每条评论只能同步一次，如要将评论导入两次，请先删除第一次导入的评论。<br>
-        如果评论过多，可能需要较长时间，请不要多次点击同步按钮，稍安勿躁。<br>
+        ${others9Label}
         <br><br>
-        <b>1. 输入链滴文章号：</b><br>
+        <b>${others10Label}</b><br>
         https://${hacpaiDomain}/article/ <input id="remoteArticleID" type="text" style="width: 200px">
         <br>
-        <b>2.选择本地文章：</b>
+        <b>${others11Label}</b>
         <br>
         <select id="localArticleList">
         </select>
         <br><br>
-        <b>3. 填入您在链滴社区的 Cookie 中 "symphony" 选项的值</b>
+        <b>${others12Label}</b>
         <br>
-        请您打开<a href="https://ld246.com" target="_blank">链滴社区</a>并登录, 使用谷歌浏览器右键选择"检查元素", 在"Application"标签页选择"Cookies"-"https://ld246.com", 将右侧"symphony"的值填入.
+        ${others13Label}
         <br>
         <input id="symphony" type="text">
         <br><br>
@@ -212,7 +187,7 @@
                 });
             }
         </script>
-        <button onclick="commentSync()">开始同步</button>
+        <button onclick="commentSync()">${others14Label}</button>
     </div>
 </div>
 ${plugins}

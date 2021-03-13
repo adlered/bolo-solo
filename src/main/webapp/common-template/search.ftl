@@ -79,12 +79,6 @@
 
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
-                <li>
-                    <a class="nav-link" rel="tooltip" title="中国智造" data-placement="bottom" href="https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD/1122445" target="_blank">
-                        <img src="https://ftp.stackoverflow.wiki/bolo/start/img/flags/CN.png" />
-                        <p class="d-lg-none d-xl-none">中国智造</p>
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" rel="tooltip" title="开源驱动：菠萝博客" data-placement="bottom" href="https://github.com/adlered/bolo-solo" target="_blank">
                         <i class="fa fa-github"></i>

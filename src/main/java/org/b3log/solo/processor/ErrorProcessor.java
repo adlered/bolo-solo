@@ -19,6 +19,7 @@ package org.b3log.solo.processor;
 
 import org.apache.commons.lang.StringUtils;
 import org.b3log.latke.Keys;
+import org.b3log.latke.Latkes;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
@@ -87,7 +88,6 @@ public class ErrorProcessor {
      */
     @RequestProcessing(value = "/error/{statusCode}", method = {HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT, HttpMethod.DELETE})
     public void showErrorPage(final RequestContext context) {
-        final HttpServletRequest request = context.getRequest();
         final String statusCode = context.pathVar("statusCode");
         if (StringUtils.equals("GET", context.method())) {
             final String requestURI = context.requestURI();
@@ -97,7 +97,7 @@ public class ErrorProcessor {
             final AbstractFreeMarkerRenderer renderer = new SkinRenderer(context, "error/" + templateName);
             final Map<String, Object> dataModel = renderer.getDataModel();
             try {
-                final Map<String, String> langs = langPropsService.getAll(Locales.getLocale(request));
+                final Map<String, String> langs = langPropsService.getAll(Latkes.getLocale());
                 dataModel.putAll(langs);
                 final JSONObject preference = optionQueryService.getPreference();
                 dataModelService.fillCommon(context, dataModel, preference);

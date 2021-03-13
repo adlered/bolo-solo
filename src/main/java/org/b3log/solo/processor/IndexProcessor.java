@@ -178,8 +178,7 @@ public class IndexProcessor {
 
         final AbstractFreeMarkerRenderer renderer = new SkinRenderer(context, "common-template/start.ftl");
         final Map<String, Object> dataModel = renderer.getDataModel();
-        final HttpServletRequest request = context.getRequest();
-        final Map<String, String> langs = langPropsService.getAll(Locales.getLocale(request));
+        final Map<String, String> langs = langPropsService.getAll(Latkes.getLocale());
         dataModel.putAll(langs);
         // 登录失败提示
         final BeanManager beanManager = BeanManager.getInstance();
@@ -247,11 +246,10 @@ public class IndexProcessor {
      */
     @RequestProcessing(value = "/kill-browser", method = HttpMethod.GET)
     public void showKillBrowser(final RequestContext context) {
-        final HttpServletRequest request = context.getRequest();
         final AbstractFreeMarkerRenderer renderer = new SkinRenderer(context, "common-template/kill-browser.ftl");
         final Map<String, Object> dataModel = renderer.getDataModel();
         try {
-            final Map<String, String> langs = langPropsService.getAll(Locales.getLocale(request));
+            final Map<String, String> langs = langPropsService.getAll(Latkes.getLocale());
             dataModel.putAll(langs);
             final JSONObject preference = optionQueryService.getPreference();
             dataModelService.fillCommon(context, dataModel, preference);

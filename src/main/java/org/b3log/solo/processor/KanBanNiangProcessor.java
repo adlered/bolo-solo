@@ -78,7 +78,7 @@ public class KanBanNiangProcessor {
             final BeanManager beanManager = BeanManager.getInstance();
             final PluginRepository pluginRepository = beanManager.getReference(PluginRepository.class);
             final Transaction transaction = pluginRepository.beginTransaction();
-            enabled = pluginRepository.get("看板娘+_0.0.2").optString("status").equals("ENABLED");
+            enabled = pluginRepository.get("看板娘 ＋_0.0.2").optString("status").equals("ENABLED");
             transaction.commit();
         } catch (Exception e) {
         }

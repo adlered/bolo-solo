@@ -43,23 +43,23 @@
 
 [上手尝试所有皮肤，点我](https://doc.stackoverflow.wiki/web/#/7?page_id=88)
 
-<p align="center">全新主题，支持黑暗模式</p>
-
 <img src="/preview/p1.png"/>
 <img src="/preview/p2.png"/>
 <img src="/preview/p3.png"/>
 
-<p align="center">后台管理，酷炫统计表，完整黑暗模式支持</p>
+<p align="center">全新主题，支持黑暗模式</p>
 
 <img src="/preview/p4.png"/>
 
-<p align="center">搜索界面，一搜即达</p>
+<p align="center">后台管理，酷炫统计表，完整黑暗模式支持</p>
 
 <img src="/preview/p5.png"/>
 
-<p align="center">登录界面，定期自动更新主题美图</p>
+<p align="center">搜索界面，一搜即达</p>
 
 <img src="/preview/p6.png"/>
+
+<p align="center">登录界面，定期自动更新主题美图</p>
 
 ## 为什么选择 Bolo
 

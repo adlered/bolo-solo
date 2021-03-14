@@ -148,5 +148,16 @@
     <orderEntry type="library" name="Maven: org.zeroturnaround:zt-zip:1.14" level="project" />
     <orderEntry type="library" name="Maven: rome:rome:0.9" level="project" />
     <orderEntry type="library" name="Maven: jdom:jdom:1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.qcloud:cos_api:5.6.37" level="project" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.9" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.1" level="project" />
+    <orderEntry type="library" name="Maven: com.tencentcloudapi:tencentcloud-sdk-java-kms:3.1.213" level="project" />
+    <orderEntry type="library" name="Maven: com.tencentcloudapi:tencentcloud-sdk-java-common:3.1.213" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okhttp:logging-interceptor:2.7.5" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okhttp:okhttp:2.7.5" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk15on:1.64" level="project" />
   </component>
 </module>

@@ -23,6 +23,11 @@ import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.google.gson.Gson;
+import com.qcloud.cos.COSClient;
+import com.qcloud.cos.ClientConfig;
+import com.qcloud.cos.auth.BasicCOSCredentials;
+import com.qcloud.cos.auth.COSCredentials;
+import com.qcloud.cos.model.PutObjectResult;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
@@ -81,121 +86,140 @@ public class UploadUtil {
     public static String upload(String config, File file) throws Exception {
         String result = "";
         String type = config.split("<<>>")[0];
+        String localFilePath = file.getAbsolutePath();
         switch (type) {
             case "local":
-                String path = config.split("<<>>")[1];
-                File localImageBedDir = new File(path);
+                String localImagePath = config.split("<<>>")[1];
+                File localImageBedDir = new File(localImagePath);
                 if (!localImageBedDir.exists()) {
                     localImageBedDir.mkdirs();
                 }
 
                 // 组建目录
-                String date = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+                String localDate = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
                 String localFilename;
                 try {
-                    localFilename = date + file.getName().substring(file.getName().lastIndexOf("."));
+                    localFilename = localDate + file.getName().substring(file.getName().lastIndexOf("."));
                 } catch (Exception e) {
-                    localFilename = date;
+                    localFilename = localDate;
                 }
 
                 // 传入文件
-                File localNewFile = new File(path + "/" + localFilename);
+                File localNewFile = new File(localImagePath + "/" + localFilename);
                 FileUtils.copyFile(file, localNewFile);
                 result = Latkes.getServePath() + "/image/" + localFilename;
                 LOGGER.log(Level.INFO, "An image has been uploaded to local [path=" + localNewFile.getAbsolutePath() + "]");
                 break;
             case "picuang":
-                String site = config.split("<<>>")[1];
-                String password = config.split("<<>>")[2];
-                CloseableHttpClient httpClient = createSSLClientDefault();
+                String picuangSite = config.split("<<>>")[1];
+                String picuangPassword = config.split("<<>>")[2];
+                CloseableHttpClient picuangHttpClient = createSSLClientDefault();
                 try {
-                    HttpPost httpPost = new HttpPost(site + "/upload/auth?password=" + password);
+                    HttpPost httpPost = new HttpPost(picuangSite + "/upload/auth?password=" + picuangPassword);
                     FileBody bin = new FileBody(file);
                     StringBody comment = new StringBody("file", ContentType.TEXT_PLAIN);
                     HttpEntity reqEntity = MultipartEntityBuilder.create().addPart("file", bin).addPart("comment", comment).build();
                     httpPost.setEntity(reqEntity);
-                    CloseableHttpResponse response = httpClient.execute(httpPost);
-                    try {
+                    try (CloseableHttpResponse response = picuangHttpClient.execute(httpPost)) {
                         if (response.getStatusLine().getStatusCode() == 200) {
                             HttpEntity resEntity = response.getEntity();
                             String str = EntityUtils.toString(resEntity);
                             EntityUtils.consume(resEntity);
                             JSONObject jsonObject = new JSONObject(str);
-                            result = site + jsonObject.get("msg");
+                            result = picuangSite + jsonObject.get("msg");
                         } else {
                             throw new NullPointerException();
                         }
-                    } finally {
-                        response.close();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
                     try {
-                        httpClient.close();
+                        picuangHttpClient.close();
                     } catch (IOException IOE) {
                         IOE.printStackTrace();
                     }
                 }
                 break;
             case "qiniu":
-                Configuration cfg = new Configuration(Region.autoRegion());
-                UploadManager uploadManager = new UploadManager(cfg);
-                String accessKey = config.split("<<>>")[1];
-                String secretKey = config.split("<<>>")[2];
-                String bucket = config.split("<<>>")[3];
-                String domain = config.split("<<>>")[4];
-                String treaty = config.split("<<>>")[5];
-                String localFilePath = file.getAbsolutePath();
-                String key = null;
+                Configuration qiNiuConfig = new Configuration(Region.autoRegion());
+                UploadManager qiniuUploadManager = new UploadManager(qiNiuConfig);
+                String qiniuAccessKey = config.split("<<>>")[1];
+                String qiniuSecretKey = config.split("<<>>")[2];
+                String qiniuBucket = config.split("<<>>")[3];
+                String qiniuDomain = config.split("<<>>")[4];
+                String qiniuTreaty = config.split("<<>>")[5];
 
-                Auth auth = Auth.create(accessKey, secretKey);
-                String upToken = auth.uploadToken(bucket);
+                Auth qiniuAuth = Auth.create(qiniuAccessKey, qiniuSecretKey);
+                String qiniuUpToken = qiniuAuth.uploadToken(qiniuBucket);
                 try {
-                    Response response = uploadManager.put(localFilePath, key, upToken);
+                    Response response = qiniuUploadManager.put(localFilePath, null, qiniuUpToken);
                     DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-                    result = treaty + "://" + domain + "/" + putRet.key;
+                    result = qiniuTreaty + "://" + qiniuDomain + "/" + putRet.key;
                 } catch (QiniuException e) {
                     throw new NullPointerException();
                 }
                 break;
             case "aliyun":
-                String accessKeyID = config.split("<<>>")[1];
-                String accessKeySecret = config.split("<<>>")[2];
-                String endPoint = config.split("<<>>")[3];
-                String bucketName = config.split("<<>>")[4];
-                String bucketDomain = config.split("<<>>")[5];
-                String aliTreaty = config.split("<<>>")[6];
-                String filename;
+                String aliyunAccessKeyID = config.split("<<>>")[1];
+                String aliyunAccessKeySecret = config.split("<<>>")[2];
+                String aliyunEndPoint = config.split("<<>>")[3];
+                String aliyunBucketName = config.split("<<>>")[4];
+                String aliyunBucketDomain = config.split("<<>>")[5];
+                String aliyunTreaty = config.split("<<>>")[6];
+                String aliyunFilename;
                 try {
                     String subDir = config.split("<<>>")[7];
-                    filename = subDir + "/" + RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
+                    aliyunFilename = subDir + "/" + RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
                 } catch (Exception e) {
-                    filename = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
+                    aliyunFilename = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
                 }
-                OSS ossClient = new OSSClientBuilder().build(endPoint, accessKeyID, accessKeySecret);
-                PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, filename, file);
+                OSS aliyunOSSClient = new OSSClientBuilder().build(aliyunEndPoint, aliyunAccessKeyID, aliyunAccessKeySecret);
+                PutObjectRequest aliyunPutObjectRequest = new PutObjectRequest(aliyunBucketName, aliyunFilename, file);
                 try {
-                    ossClient.putObject(putObjectRequest);
-                    ossClient.shutdown();
-                    result = aliTreaty + "://" + bucketDomain + "/" + filename;
+                    aliyunOSSClient.putObject(aliyunPutObjectRequest);
+                    aliyunOSSClient.shutdown();
+                    result = aliyunTreaty + "://" + aliyunBucketDomain + "/" + aliyunFilename;
                 } catch (OSSException | ClientException e) {
                     throw new NullPointerException();
                 }
                 break;
             case "upyun":
-                String zoneName = config.split("<<>>")[1];
-                String name = config.split("<<>>")[2];
-                String pwd = config.split("<<>>")[3];
-                String upDomain = config.split("<<>>")[4];
-                String upTreaty = config.split("<<>>")[5];
-                String filenm = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
+                String upyunZoneName = config.split("<<>>")[1];
+                String upyunName = config.split("<<>>")[2];
+                String upyunPassword = config.split("<<>>")[3];
+                String upyunDomain = config.split("<<>>")[4];
+                String upyunTreaty = config.split("<<>>")[5];
+                String upyunFilename = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
 
-                RestManager manager = new RestManager(zoneName, name, pwd);
-                manager.setApiDomain(RestManager.ED_AUTO);
-                Map<String, String> params = new HashMap<String, String>();
-                manager.writeFile("/" + filenm, file, params);
-                result = upTreaty + "://" + upDomain + "/" + filenm;
+                RestManager upyunRestManager = new RestManager(upyunZoneName, upyunName, upyunPassword);
+                upyunRestManager.setApiDomain(RestManager.ED_AUTO);
+                Map<String, String> upyunParams = new HashMap<>();
+                upyunRestManager.writeFile("/" + upyunFilename, file, upyunParams);
+                result = upyunTreaty + "://" + upyunDomain + "/" + upyunFilename;
+                break;
+            case "tencent":
+                String tencentCosSecretId = config.split("<<>>")[1];
+                String tencentCosSecretKey = config.split("<<>>")[2];
+                String tencentCosRegion = config.split("<<>>")[3];
+                String tencentCosBucketName = config.split("<<>>")[4];
+                String tencentCosSubDir = config.split("<<>>")[5].replaceAll("^/|/$", "");
+                String tencentCosKey;
+                if (!tencentCosSubDir.isEmpty()) {
+                    tencentCosKey = tencentCosSubDir + "/" + RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
+                } else {
+                    tencentCosKey = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
+                }
+                String tencentCosUpTreaty = config.split("<<>>")[6];
+                String tencentCosDomain = config.split("<<>>")[7];
+
+                COSCredentials tencentCosCred = new BasicCOSCredentials(tencentCosSecretId, tencentCosSecretKey);
+                com.qcloud.cos.region.Region tencentRegion = new com.qcloud.cos.region.Region(tencentCosRegion);
+                ClientConfig tencentClientConfig = new ClientConfig(tencentRegion);
+                COSClient tencentCosClient = new COSClient(tencentCosCred, tencentClientConfig);
+                com.qcloud.cos.model.PutObjectRequest tencentPutObjectRequest = new com.qcloud.cos.model.PutObjectRequest(tencentCosBucketName, tencentCosKey, file);
+                PutObjectResult tencentPutObjectResult = tencentCosClient.putObject(tencentPutObjectRequest);
+                result = tencentCosUpTreaty + "://" + tencentCosDomain + "/" + tencentCosKey;
                 break;
         }
         file.delete();
@@ -205,24 +229,16 @@ public class UploadUtil {
     /**
      * 设置可访问https
      *
-     * @return
+     * @return null
      */
     public static CloseableHttpClient createSSLClientDefault() {
         try {
-            SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-                //信任所有
-                public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                    return true;
-                }
-            }).build();
+            //信任所有
+            SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, (chain, authType) -> true).build();
             SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 
             return HttpClients.custom().setSSLSocketFactory(sslsf).build();
-        } catch (KeyManagementException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (KeyStoreException e) {
+        } catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
             e.printStackTrace();
         }
         return HttpClients.createDefault();

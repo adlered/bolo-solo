@@ -307,6 +307,12 @@
             <artifactId>rome</artifactId>
             <version>0.9</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.qcloud</groupId>
+            <artifactId>cos_api</artifactId>
+            <version>5.6.37</version>
+        </dependency>
     </dependencies>
 
     <build>

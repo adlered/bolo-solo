@@ -21,6 +21,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.b3log.latke.Keys;
+import org.b3log.latke.Latkes;
 import org.b3log.latke.event.Event;
 import org.b3log.latke.event.EventManager;
 import org.b3log.latke.ioc.Inject;
@@ -242,6 +243,7 @@ public class ArticleMgmtService {
         }
 
         final StringBuilder contentBuilder = new StringBuilder();
+        contentBuilder.append("![GitHub Repo](" + Latkes.getStaticServePath() + "/images/github_repo.jpg)\n\n");
         for (int i = 0; i < gitHubRepos.length(); i++) {
             final JSONObject repo = gitHubRepos.optJSONObject(i);
             final String url = repo.optString("githubrepoHTMLURL");
@@ -288,7 +290,7 @@ public class ArticleMgmtService {
                 article.put(Article.ARTICLE_VIEW_PWD, "");
                 article.put(Article.ARTICLE_STATUS, Article.ARTICLE_STATUS_C_PUBLISHED);
                 article.put(Common.POST_TO_COMMUNITY, false);
-                article.put(Article.ARTICLE_COMMENTABLE, false);
+                article.put(Article.ARTICLE_COMMENTABLE, true);
 
                 final JSONObject addArticleReq = new JSONObject();
                 addArticleReq.put(Article.ARTICLE, article);

@@ -17,76 +17,107 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 -->
-<div id="filler"><script>
+<div id="filler">
+    <script type="text/javascript" src="${staticServePath}/js/bolo/sweetalert.min.js"></script>
+    <script>
+        function noBtnSwal(msg, timer) {
+            if (timer === 0) {
+                swal({
+                    text: msg,
+                    buttons: false
+                });
+            } else {
+                swal({
+                    text: msg,
+                    buttons: false,
+                    timer: timer
+                });
+            }
+        }
+    </script>
+    <script>
         function clearMailCache() {
-            $.get("prop/mail/clear", function (result) {
-                alert("清除成功！");
-            });
+            noBtnSwal("请稍候", 0);
+            $.ajax({
+                type: 'GET',
+                url: 'prop/mail/clear',
+                async: true,
+                success: function (res) {
+                    noBtnSwal("清除成功！", 1000);
+                },
+                error: function (e) {
+                    noBtnSwal("清除失败！", 1000);
+                }
+            })
         }
         function backup() {
+            noBtnSwal("请稍候", 0);
             $.ajax({
                 type: 'GET',
                 url: 'prop/backup/hacpai/do/upload',
-                async: false,
+                async: true,
                 success: function (res) {
-                    alert("备份成功！");
+                    noBtnSwal("备份成功！", 1000);
                 },
                 error: function (e) {
                     if (e.status === 404) {
-                        alert("抱歉，当前 Bolo 版本不支持该功能！小提示：重启服务端，等待 5 分钟后，Bolo 会自动备份文章到链滴（功能开启的情况下）。");
+                        noBtnSwal("抱歉，当前 Bolo 版本不支持该功能！小提示：重启服务端，等待 5 分钟后，Bolo 会自动备份文章到链滴（功能开启的情况下）。", 1000);
                     } else {
-                        alert("备份失败！请检查偏好设置，并确定链滴用户名和 B3log Key 设置正确。");
+                        noBtnSwal("备份失败！请检查偏好设置，并确定链滴用户名和 B3log Key 设置正确。", 1000);
                     }
                 }
             });
         }
         function backupToGithub() {
+            noBtnSwal("请稍候", 0);
             $.ajax({
                 type: 'GET',
                 url: 'prop/backup/github/do/upload',
-                async: false,
+                async: true,
                 success: function (res) {
-                    alert("备份成功！");
+                    noBtnSwal("备份成功！", 1000);
                 },
                 error: function (e) {
                     if (e.status === 404) {
-                        alert("抱歉，当前 Bolo 版本不支持该功能！小提示：重启服务端，等待 5 分钟后，Bolo 会自动备份文章到链滴（功能开启的情况下）。");
+                        noBtnSwal("抱歉，当前 Bolo 版本不支持该功能！小提示：重启服务端，等待 5 分钟后，Bolo 会自动备份文章到链滴（功能开启的情况下）。", 1000);
                     } else {
-                        alert("备份失败！请检查偏好设置，并确定链滴用户名和 B3log Key 设置正确。");
+                        noBtnSwal("备份失败！请检查偏好设置，并确定链滴用户名和 B3log Key 设置正确。", 1000);
                     }
                 }
             });
         }
         function refreshUsite() {
+            noBtnSwal("请稍候", 0);
             $.ajax({
                 type: 'GET',
                 url: 'admin/usite/refresh',
-                async: false,
+                async: true,
                 success: function (res) {
-                    alert("刷新成功！");
+                    noBtnSwal("刷新成功！", 1000);
                 },
                 error: function (e) {
                     if (e.status === 404) {
-                        alert("抱歉，当前 Bolo 版本不支持该功能！");
+                        noBtnSwal("抱歉，当前 Bolo 版本不支持该功能！", 1000);
                     } else {
-                        alert("获取失败！请检查 链滴用户名 及 B3log Key 是否正确！");
+                        noBtnSwal("获取失败！请检查 链滴用户名 及 B3log Key 是否正确！", 1000);
                     }
                 }
             });
         }
         function opensource() {
+            noBtnSwal("请稍候", 0);
             $.ajax({
                 type: 'GET',
                 url: 'sync/github/repo/do/get?githubId=' + $("#githubId").val(),
-                async: false,
+                async: true,
                 success: function (res) {
-                    alert("刷新成功！");
+                    noBtnSwal("刷新成功！", 1000);
                 },
                 error: function (e) {
                     if (e.status === 404) {
-                        alert("抱歉，当前 Bolo 版本不支持该功能！");
+                        noBtnSwal("抱歉，当前 Bolo 版本不支持该功能！", 1000);
                     } else {
-                        alert("更新失败！可能是由于API存在限制，请检查GitHub ID是否填写正确后重试。");
+                        noBtnSwal("更新失败！可能是由于API存在限制，请检查GitHub ID是否填写正确后重试。", 1000);
                     }
                 }
             });

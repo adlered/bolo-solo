@@ -175,7 +175,7 @@
                             输入你的GitHub ID，Bolo 将会自动将你的仓库列表生成为一个 “我在 GitHub 上的开源项目” 文章，生成一个导航，并展示在你的博客中。
                         </td>
                         <td style="padding-right: 20px;">
-                            <input id="githubId" placeholder="GitHub ID" style="margin-left: 15px;">
+                            <input id="githubId" placeholder="GitHub ID">
                             <button onclick="opensource()" style="float:right">更新页面</button>
                         </td>
                     </tr>

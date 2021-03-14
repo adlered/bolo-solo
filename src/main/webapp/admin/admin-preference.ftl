@@ -278,6 +278,7 @@
             <option value="qiniu">${qiNiuLabel}</option>
             <option value="aliyun">${aliLabel}</option>
             <option value="upyun">${upyunLabel}</option>
+            <option value="tencent">${tencentLabel}</option>
             <option value="picuang">${picuangLabel}</option>
             <option value="hacpai">${liandiPicBedLabel}</option>
         </select>
@@ -376,6 +377,22 @@
                         $('#td3').show();
                         $('#td3').html('${picBed23Label}');
                         break;
+                    case 'tencent':
+                        $('#td1').show();
+                        $('#td1').html('${picBed27Label}');
+                        $('#td2').show(); $('#tc2').show();
+                        $('#td2').html('${picBed28Label}');
+                        $('#td3').show(); $('#tc3').show();
+                        $('#td3').html('${picBed29Label}');
+                        $('#td4').show(); $('#tc4').show();
+                        $('#td4').html('${picBed30Label}');
+                        $('#td5').show(); $('#tc5').show();
+                        $('#td5').html('${picBed31Label}');
+                        $('#td6').show(); $('#tc6').show();
+                        $('#td6').html('${picBed32Label}');
+                        $('#td7').show(); $('#tc7').show();
+                        $('#td7').html('${picBed33Label}')
+                        break;
                 }
                 var stc = $('#sourceTC').text().split('<<>>');
                 for (var i = 1; i < stc.length; i++) {
@@ -418,6 +435,9 @@
                         break;
                     case 'local':
                         $('#sourceTC').text('local<<>>' + $('#tc2').val());
+                        break;
+                    case 'tencent':
+                        $('#sourceTC').text('tencent<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val() + '<<>>' + $('#tc7').val());
                         break;
                 }
                 alert('${picBed24Label}');

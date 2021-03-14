@@ -210,8 +210,7 @@ public class UploadUtil {
                 } else {
                     tencentCosKey = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
                 }
-                String tencentCosUpTreaty = config.split("<<>>")[6];
-                String tencentCosDomain = config.split("<<>>")[7];
+                String tencentCosDomain = config.split("<<>>")[6];
 
                 COSCredentials tencentCosCred = new BasicCOSCredentials(tencentCosSecretId, tencentCosSecretKey);
                 com.qcloud.cos.region.Region tencentRegion = new com.qcloud.cos.region.Region(tencentCosRegion);
@@ -219,7 +218,7 @@ public class UploadUtil {
                 COSClient tencentCosClient = new COSClient(tencentCosCred, tencentClientConfig);
                 com.qcloud.cos.model.PutObjectRequest tencentPutObjectRequest = new com.qcloud.cos.model.PutObjectRequest(tencentCosBucketName, tencentCosKey, file);
                 PutObjectResult tencentPutObjectResult = tencentCosClient.putObject(tencentPutObjectRequest);
-                result = tencentCosUpTreaty + "://" + tencentCosDomain + "/" + tencentCosKey;
+                result = tencentCosDomain + "/" + tencentCosKey;
                 break;
         }
         file.delete();

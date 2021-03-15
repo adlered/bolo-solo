@@ -269,7 +269,7 @@ public class ArticleMgmtService {
         final String content = contentBuilder.toString();
 
         try {
-            final String permalink = "/github";
+            final String permalink = Latkes.getStaticServePath() + "/github";
             JSONObject article = articleRepository.getByPermalink(permalink);
             if (null == article) {
                 try {

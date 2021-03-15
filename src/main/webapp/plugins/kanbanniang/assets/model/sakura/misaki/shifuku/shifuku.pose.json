@@ -1,0 +1,18 @@
+{
+	"type":"Live2D Pose",
+	"parts_visible":[
+		{
+			"group":[
+				{"id":"PARTS_01_CLOTHE_02_ARM_L_A"},
+				{"id":"PARTS_01_CLOTHE_02_ARM_L_C"}
+			]
+		},
+		{
+			"group":[
+				{"id":"PARTS_01_CLOTHE_02_ARM_R_A"},
+				{"id":"PARTS_01_CLOTHE_02_ARM_R_B"},
+				{"id":"PARTS_01_CLOTHE_02_ARM_R_C"}
+			]
+		}
+	]
+}

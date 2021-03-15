@@ -20,12 +20,10 @@ package org.b3log.solo.util;
 import jodd.http.HttpRequest;
 import jodd.http.HttpResponse;
 import org.apache.commons.lang.StringUtils;
-import org.b3log.latke.Keys;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
-import org.b3log.solo.bolo.Global;
-import org.b3log.solo.model.Common;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpServletResponse;
@@ -117,6 +115,10 @@ public final class GitHubs {
             }
 
             return sortedCompatibleResult;
+        } catch (JSONException e) {
+            LOGGER.log(Level.ERROR, "Gets GitHub repos failed because the request has been reached GitHub's limit, try again at later.");
+
+            return null;
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Gets GitHub repos failed", e);
 

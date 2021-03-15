@@ -223,7 +223,7 @@ public class ArticleMgmtService {
         }
 
         final JSONArray gitHubRepos = GitHubs.getGitHubRepos(githubId);
-        if (null == gitHubRepos || gitHubRepos.isEmpty()) {
+        if (null == gitHubRepos || gitHubRepos.length() == 0) {
             return;
         }
 

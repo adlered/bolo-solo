@@ -46,7 +46,7 @@
             background: linear-gradient(0deg, rgba(241, 135, 110, 0.75), rgba(41, 116, 178, 0.75));
         }
         a {
-            color: #e7e7e7;
+            color: #ffffff;
         }
     </style>
 </head>

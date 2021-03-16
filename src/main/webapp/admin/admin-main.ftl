@@ -174,7 +174,7 @@
 
     function showTips() {
         var config = {
-            content: "欢迎使用菠萝博客 " + boloVersion + "！本次更新主要内容：<br>1. 自动生成“我在 GitHub 上的开源项目”文章功能，快到<b>偏好设定-我的 GitHub</b>中试试看吧！<br>2. 支持了腾讯云 COS 的自定义图床；<br>3. 增加了<b>在线反馈系统</b>，随时进行提问吧！<br>" +
+            content: "欢迎使用菠萝博客 " + boloVersion + "！本次更新主要内容：<br>1. 自动生成“我在 GitHub 上的开源项目”文章功能，快到<b>偏好设定-我的 GitHub</b>中试试看吧！<br>2. 支持了腾讯云 COS 的自定义图床<br>" +
                 "<a href='javascript:neverShowTips()'>不再提醒</a>",
             type: "html",
             alignTo: ["right","top"],

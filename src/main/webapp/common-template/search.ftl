@@ -40,10 +40,13 @@
             background-attachment: fixed;
             background-size: cover;
             background: rgba(109, 150, 230, 0.8);
-            background: -webkit-linear-gradient(90deg, rgba(193, 53, 0, 0.47), rgba(41, 116, 178, 0.75));
-            background: -o-linear-gradient(90deg, rgba(193, 53, 0, 0.47), rgba(41, 116, 178, 0.75));
-            background: -moz-linear-gradient(90deg, rgba(193, 53, 0, 0.47), rgba(41, 116, 178, 0.75));
-            background: linear-gradient(0deg, rgba(193, 53, 0, 0.47), rgba(41, 116, 178, 0.75));
+            background: -webkit-linear-gradient(90deg, rgba(241, 135, 110, 0.75), rgba(41, 116, 178, 0.75));
+            background: -o-linear-gradient(90deg, rgba(241, 135, 110, 0.75), rgba(41, 116, 178, 0.75));
+            background: -moz-linear-gradient(90deg, rgba(241, 135, 110, 0.75), rgba(41, 116, 178, 0.75));
+            background: linear-gradient(0deg, rgba(241, 135, 110, 0.75), rgba(41, 116, 178, 0.75));
+        }
+        a {
+            color: #e7e7e7;
         }
     </style>
 </head>
@@ -51,21 +54,7 @@
 <body class="fixedBg sidebar-collapse">
 <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
     <div class="container">
-        <div class="dropdown button-dropdown">
-            <a href="javascript:void(0);" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-                <span class="button-bar"></span>
-                <span class="button-bar"></span>
-                <span class="button-bar"></span>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-header">菠萝博客</a>
-                <a class="dropdown-item" href="${servePath}">返回首页</a>
-            </div>
-        </div>
         <div class="navbar-translate">
-            <a class="navbar-brand" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
-                搜索文章
-            </a>
             <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-bar bar1"></span>
                 <span class="navbar-toggler-bar bar2"></span>
@@ -80,12 +69,6 @@
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="开源驱动：菠萝博客" data-placement="bottom" href="https://github.com/adlered/bolo-solo" target="_blank">
-                        <i class="fa fa-github"></i>
-                        <p class="d-lg-none d-xl-none">Bolo on GitHub</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" rel="tooltip" title="返回主页" data-placement="bottom" href="${staticServePath}/">
                         <i class="fa fa-home"></i>
                         <p class="d-lg-none d-xl-none">返回主页</p>
@@ -98,26 +81,32 @@
 <div class="text-center" style="margin-top: 150px; padding: 0px 24px 0px 24px;">
     <div>
         <#list articles as article>
-            <b><a style="color: white" href="${servePath}${article.articlePermalink}">
+            <span style="font-weight: bold"><a style="color: white; font-size: 18px" href="${servePath}${article.articlePermalink}">
                 ${article.articleTitle}
-            </a></b>
-            <br>
-            <#list article.articleTags?split(",") as articleTag>
-                <a style="color: white" href="${servePath}/tags/${articleTag?url('UTF-8')}">${articleTag}</a>&nbsp;&nbsp;
-            </#list>
-            <span style="color: white">
-            |&nbsp;
-            ${article.articleCreateDate?string("yyyy-MM-dd")}
-            &nbsp;
-            ${article.articleCommentCount} ${commentLabel}
-            &nbsp;
-            ${article.articleViewCount} ${viewLabel}
+            </a></span>
+            <div style="margin: 5px 50px; color: #eaeaea; font-size: 13px">&nbsp;&nbsp;
+                <#if article.articleAbstractText?length gt 230>
+                    ${article.articleAbstractText[0..230]} ......
+                <#else>
+                    ${article.articleAbstractText}
+                </#if>
+            </div>
+            <span style="color: #fafafa; font-size: 13px">
+                <#list article.articleTags?split(",") as articleTag>
+                    <a href="${servePath}/tags/${articleTag?url('UTF-8')}">${articleTag}</a>&nbsp;&nbsp;
+                </#list>
+                |&nbsp;
+                ${article.articleCreateDate?string("yyyy-MM-dd")}
+                &nbsp;
+                ${article.articleCommentCount} ${commentLabel}
+                &nbsp;
+                ${article.articleViewCount} ${viewLabel}
             </span>
             <br><br>
         </#list>
     </div>
     <#if 0 != articles?size>
-        <nav class="search__pagination">
+        <nav class="search__pagination" style="font-size: 16px; letter-spacing: 4px; color: #e0e0e0">
             <#if 1 != pagination.paginationPageNums?first>
                 <a href="${servePath}/search?keyword=${keyword}&p=${pagination.paginationCurrentPageNum - 1}">&laquo;</a>
                 <a href="${servePath}/search?keyword=${keyword}&p=1">1</a> <span class="page-number">...</span>
@@ -136,7 +125,7 @@
             </#if>
         </nav>
     <#else>
-        什么都没找到 :(
+        <p style="color: #FFFFFF">无搜索结果</p>
     </#if>
     <br><br><br><br>
 </div>

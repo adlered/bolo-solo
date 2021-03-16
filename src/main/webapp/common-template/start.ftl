@@ -37,39 +37,18 @@
 <body class="login-page sidebar-collapse">
 <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
     <div class="container">
-        <div class="dropdown button-dropdown">
-            <a href="javascript:void(0);" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-                <span class="button-bar"></span>
-                <span class="button-bar"></span>
-                <span class="button-bar"></span>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-header">菠萝博客</a>
-                <a class="dropdown-item" href="${servePath}">返回首页</a>
-            </div>
-        </div>
-        <div class="navbar-translate">
-            <a class="navbar-brand" href="javascript:void(0);" rel="tooltip" data-placement="bottom">
-                管理登录
-            </a>
-            <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse justify-content-end">
+        <div class="collapse navbar-collapse justify-content-start">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="开源驱动：菠萝博客" data-placement="bottom" href="https://github.com/adlered/bolo-solo" target="_blank">
-                        <i class="fa fa-github"></i>
-                        <p class="d-lg-none d-xl-none">Bolo on GitHub</p>
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" rel="tooltip" title="返回主页" data-placement="bottom" href="${staticServePath}/">
                         <i class="fa fa-home"></i>
                         <p class="d-lg-none d-xl-none">返回主页</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="开源驱动：菠萝博客" data-placement="bottom" href="https://github.com/adlered/bolo-solo" target="_blank">
+                        <i class="fa fa-github"></i>
+                        <p class="d-lg-none d-xl-none">Bolo on GitHub</p>
                     </a>
                 </li>
             </ul>

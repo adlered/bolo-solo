@@ -126,7 +126,7 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
                     put("article", article).
                     put("client", client);
             final HttpResponse response = HttpRequest.post("https://rhythm.b3log.org/api/article").bodyText(requestJSONObject.toString()).
-                    connectionTimeout(3000).timeout(7000).trustAllCerts(true).
+                    connectionTimeout(3000).timeout(7000).followRedirects(true).
                     contentTypeJson().header("User-Agent", Solos.USER_AGENT).send();
 
             LOGGER.log(Level.INFO, "Pushed an article [title={0}] to Rhy, response [{1}]", title, response.toString());

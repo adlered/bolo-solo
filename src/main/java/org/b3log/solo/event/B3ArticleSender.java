@@ -80,7 +80,6 @@ public class B3ArticleSender extends AbstractEventListener<JSONObject> {
             }
 
             if (!originalArticle.optBoolean(Common.POST_TO_COMMUNITY)) {
-                LOGGER.log(Level.INFO, "Article [title={0}] push flag [postToCommunity] is [false], ignored push to Rhy", title);
 
                 return;
             }

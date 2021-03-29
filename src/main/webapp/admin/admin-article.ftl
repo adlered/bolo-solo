@@ -90,7 +90,7 @@
                 ${allowCommentLabel}
             </label>
             &nbsp;
-            <span id="postToCommunityPanel">
+            <span id="postToCommunityPanel" style="display: none">
                 <label class="checkbox">
                     <input id="postToCommunity" type="checkbox" />
                     <a href="https://${hacpaiDomain}/article/1546941897596" target="_blank">${syncToCommunityLabel}</a>

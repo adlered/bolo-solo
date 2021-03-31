@@ -28,7 +28,6 @@
     <div class="module-panel">
         <div class="module-header">
             <h2>数据</h2>
-            <h6>Powered by Chart.js</h6>
         </div>
         <div class="module-body padding12">
             <div style="width: 33%; display: inline-table;">

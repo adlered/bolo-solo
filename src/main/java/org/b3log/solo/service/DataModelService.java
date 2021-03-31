@@ -49,8 +49,6 @@ import org.b3log.solo.util.Skins;
 import org.b3log.solo.util.Solos;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
 
 import java.io.StringWriter;
 import java.util.*;
@@ -721,11 +719,73 @@ public class DataModelService {
                 }
             }
 
-            if (archiveDates2.size() > 12) {
-                archiveDates2 = archiveDates2.subList(0, 12);
+            Collections.reverse(archiveDates2);
+            List<JSONObject> archiveDates3 = new ArrayList<>();
+            // 填补没有发文记录的月份
+            int lastYear = -1;
+            int lastMonth = -1;
+            for (final JSONObject archiveDate : archiveDates2) {
+                final long time = archiveDate.getLong(ArchiveDate.ARCHIVE_TIME);
+                final String dateString = DateFormatUtils.format(time, "yyyy/MM");
+                final String[] dateStrings = dateString.split("/");
+                final int year = Integer.parseInt(dateStrings[0]);
+                final int month = Integer.parseInt(dateStrings[1]);
+                if (lastYear == -1 && lastMonth == -1) {
+                    lastYear = year;
+                    lastMonth = month;
+                    archiveDates3.add(archiveDate);
+                    continue;
+                }
+                if (year == lastYear) {
+                    if (month - lastMonth > 1) {
+                        // 补全月份
+                        for (int i = lastMonth + 1; i < month; i++) {
+                            JSONObject addArchiveDate = new JSONObject();
+                            addArchiveDate.put(ArchiveDate.ARCHIVE_DATE_T_PUBLISHED_ARTICLE_COUNT, 0);
+                            addArchiveDate.put(ArchiveDate.ARCHIVE_DATE_YEAR, "" + year);
+                            String addMonth = String.valueOf(i).length() == 1 ? 0 + "" + i : String.valueOf(i);
+                            addArchiveDate.put(ArchiveDate.ARCHIVE_DATE_MONTH, addMonth);
+                            archiveDates3.add(addArchiveDate);
+                        }
+                    }
+                } else {
+                    // 跨年
+                    if (year - lastYear == 1) {
+                        // 相隔一年
+                        if (!(lastMonth == 12 && month == 1)) {
+                            // 空出了几个月份，先补去年的
+                            for (int i = lastMonth + 1; i <= 12; i++) {
+                                JSONObject addArchiveDate = new JSONObject();
+                                addArchiveDate.put(ArchiveDate.ARCHIVE_DATE_T_PUBLISHED_ARTICLE_COUNT, 0);
+                                addArchiveDate.put(ArchiveDate.ARCHIVE_DATE_YEAR, "" + lastYear);
+                                String addMonth = String.valueOf(i).length() == 1 ? 0 + "" + i : String.valueOf(i);
+                                addArchiveDate.put(ArchiveDate.ARCHIVE_DATE_MONTH, addMonth);
+                                archiveDates3.add(addArchiveDate);
+                            }
+                            // 再补今年的
+                            for (int i = 1; i < month; i++) {
+                                JSONObject addArchiveDate = new JSONObject();
+                                addArchiveDate.put(ArchiveDate.ARCHIVE_DATE_T_PUBLISHED_ARTICLE_COUNT, 0);
+                                addArchiveDate.put(ArchiveDate.ARCHIVE_DATE_YEAR, "" + year);
+                                String addMonth = String.valueOf(i).length() == 1 ? 0 + "" + i : String.valueOf(i);
+                                addArchiveDate.put(ArchiveDate.ARCHIVE_DATE_MONTH, addMonth);
+                                archiveDates3.add(addArchiveDate);
+                            }
+                        }
+                    }
+                }
+                archiveDates3.add(archiveDate);
+                lastYear = year;
+                lastMonth = month;
             }
 
-            dataModel.put("latestArchives", archiveDates2);
+            Collections.reverse(archiveDates3);
+
+            if (archiveDates3.size() > 20) {
+                archiveDates3 = archiveDates3.subList(0, 20);
+            }
+
+            dataModel.put("latestArchives", archiveDates3);
         } catch (Exception ignored) {
         }
 

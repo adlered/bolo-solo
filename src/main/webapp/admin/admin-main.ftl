@@ -178,7 +178,6 @@
         $.removeCookie(key);
         $.cookie(key, boloVersion, { expires: 222, path: '/' });
         $('.trips').remove();
-
     }
 
     function showTips() {

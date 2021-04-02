@@ -440,8 +440,8 @@
                         $('#sourceTC').text('tencent<<>>' + $('#tc2').val() + '<<>>' + $('#tc3').val() + '<<>>' + $('#tc4').val() + '<<>>' + $('#tc5').val() + '<<>>' + $('#tc6').val() + '<<>>' + $('#tc7').val());
                         break;
                 }
-                alert('${picBed24Label}');
                 admin.preference.update();
+                alert('${picBed24Label}');
             }
 
             function checkImageBedConfig() {
@@ -483,10 +483,9 @@
             <option value="on" selected="">${enableLabel}</option>
             <option value="off">${disableLabel}</option>
         </select>
-        <br><br>
-        <h3><i class="fa fa-hashtag"></i> ${mailRemindLabel}</h3>
+        <br><br><br>
+        <h3>${mailRemindLabel}</h3>
         <br>
-        <h4>${mailServerLabel}</h4>
         <label for="mailBox">${mailBoxLabel}</label>
         <select id="mailBox">
             <option value="" selected>${unsetLabel}</option>
@@ -506,14 +505,15 @@
         <div>
             ${BloggerMailboxDescribeLabel}
         </div>
-        <h3><i class="fa fa-hashtag"></i> ${serverJiangRemindLabel}</h3>
-        <br>
-        <a style="font-size: 15px; font-weight: bold; color: #ff6060; text-decoration: underline;" href="https://doc.stackoverflow.wiki/web/#/7?page_id=177" target="_blank">
-            ${usageLabel}
-        </a>
+        <br><br>
+        <h3>${serverJiangRemindLabel}</h3>
         <br>
         <label for="sendKey">${sendKeyLabel}</label>
         <input id="sendKey" type="text"/>
+        <br><br>
+        <a style="font-size: 14px; font-weight: bold; color: #86bf47;" href="https://doc.stackoverflow.wiki/web/#/7?page_id=177" target="_blank">
+            ${usageLabel}?
+        </a>
         <br><br>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>

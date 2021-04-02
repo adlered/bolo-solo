@@ -235,8 +235,9 @@ admin.preference = {
       return
     }
 
+    noBtnSwal("请稍候", 0);
     $('#tipMsg').text('')
-    $('#loadMsg').text(Label.loadingLabel)
+    $('#loadMsg').text('')
     var signs = [
       {
         'oId': 0,
@@ -335,7 +336,6 @@ admin.preference = {
           window.location.reload()
         }
 
-        $('#loadMsg').text('')
         window.location.reload()
       },
     })

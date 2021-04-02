@@ -28,23 +28,6 @@
             </a>
         </div>
         <div class="about__panel">
-            <script type="text/javascript" src="${staticServePath}/js/bolo/sweetalert.min.js"></script>
-            <script type="text/javascript">
-                function moveHelp() {
-                    swal({
-                        title: "",
-                        text: "菠萝博客支持从 Solo 的指定版本快速迁移。详情请参阅帮助文档。",
-                        icon: "success",
-                        buttons: ["好", "前往帮助文档"],
-                    })
-                    .then((value) => {
-                        if (null !== value) {
-                            window.open('https://doc.stackoverflow.wiki/web/#/7?page_id=83');
-                        }
-                    });
-                }
-            </script>
-
             <div class="about-margin fn__left">
                 您正在使用 菠萝博客 Bolo<br>
                 当前 Bolo 版本：${boloVersion}<br>

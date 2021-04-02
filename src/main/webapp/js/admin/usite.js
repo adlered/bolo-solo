@@ -86,6 +86,7 @@ admin.usite = {
    * @description 更新
    */
   update: function () {
+    noBtnSwal("请稍候", 0);
     for (var i in usiteJSON) {
       let value = $('#' + i).val();
       if (value === undefined) {
@@ -103,15 +104,9 @@ admin.usite = {
       data: newResult,
       success: function (data) {
         if (data.code === 200) {
-          $('#loadMsg').text('联系方式元数据更新成功！');
-          setTimeout(function () {
-            $('#loadMsg').text('');
-          }, 4000)
+          noBtnSwal('联系方式元数据更新成功！', 1000);
         } else {
-          $('#loadMsg').text('联系方式元数据更新失败！请检查元数据内容后重试。');
-          setTimeout(function () {
-            $('#loadMsg').text('');
-          }, 4000)
+          noBtnSwal('联系方式元数据更新失败！请检查元数据内容后重试。', 1000);
         }
       }
     });

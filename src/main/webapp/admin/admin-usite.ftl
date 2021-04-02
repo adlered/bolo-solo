@@ -28,9 +28,9 @@
 </div>
 <style type="text/css">
     table.tftable {font-size:12px;color: #545454;width:100%;border-width: 1px;border-color: #729ea5;border-collapse: collapse;}
-    table.tftable th {font-size:12px;background-color: #f8f8f8;border-width: 1px;padding: 8px;border-style: solid;border-color: rgba(118, 118, 118, 0.2);text-align:left;}
+    table.tftable th {font-size:14px;background-color: #fdfdfd;border-width: 1px;padding: 20px 0px 20px 20px;border-style: solid;border-color: #efefef;text-align:left;font-weight: bold}
     table.tftable tr {background-color:#ffffff;}
-    table.tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: rgba(118, 118, 118, 0.2);}
+    table.tftable td {font-size:12px;border-width: 1px;padding: 5px 0px 5px 20px;border-style: solid;border-color: #efefef;}
 </style>
 <div id="tabUsitePanel" class="sub-tabs-main usite">
     <div id="tabUsitePanel_edit" class="form">

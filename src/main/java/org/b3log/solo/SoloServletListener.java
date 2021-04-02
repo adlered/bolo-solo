@@ -50,6 +50,7 @@ import org.b3log.solo.service.*;
 import org.b3log.solo.util.Markdowns;
 import org.b3log.solo.util.Skins;
 import org.b3log.solo.util.Solos;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.servlet.ServletContextEvent;
@@ -166,10 +167,13 @@ public final class SoloServletListener extends AbstractServletListener {
         WAF.set();
         new Thread(KanBanNiangProcessor::downloadKBNResource).start();
 
-        final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);
-        final JSONObject preference = optionQueryService.getPreference();
-        final String localeString = preference.getString(Option.ID_C_LOCALE_STRING);
-        Latkes.setLocale(new Locale(Locales.getLanguage(localeString), Locales.getCountry(localeString)));
+        try {
+            final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);
+            final JSONObject preference = optionQueryService.getPreference();
+            final String localeString = preference.getString(Option.ID_C_LOCALE_STRING);
+            Latkes.setLocale(new Locale(Locales.getLanguage(localeString), Locales.getCountry(localeString)));
+        } catch (JSONException ignored) {
+        }
     }
 
     @Override

@@ -23,6 +23,7 @@ import org.b3log.latke.logging.Logger;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Stopwatchs;
 import org.b3log.solo.model.Option;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.concurrent.Executors;
@@ -104,7 +105,7 @@ public class CronMgmtService {
                 try {
                     enableAutoFlushGitHub = preference.getBoolean(Option.ID_C_ENABLE_AUTO_FLUSH_GITHUB);
                     myGitHubID = preference.getString(Option.ID_C_MY_GITHUB_ID);
-                } catch (NullPointerException e) {
+                } catch (NullPointerException | JSONException e) {
                     enableAutoFlushGitHub = false;
                     myGitHubID = "";
                 }

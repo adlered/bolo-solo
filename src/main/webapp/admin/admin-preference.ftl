@@ -149,7 +149,7 @@
         </label>
         <br><br>
         <details>
-            <summary>${advancedSettingsLabel}</summary>
+            <summary style="cursor: default">${advancedSettingsLabel}</summary>
             <label for="timeZoneId">${timeZoneId1Label}</label>
             <select id="timeZoneId">
                 ${timeZoneIdOptions}

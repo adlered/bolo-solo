@@ -30,7 +30,7 @@
             <h2>数据</h2>
         </div>
         <div class="module-body padding12">
-            <div style="width: 33%; display: inline-table;">
+            <div style="width: 32%; display: inline-table;">
                 <canvas id="articleCountChart"></canvas>
                 <script type="text/javascript">
                     Chart.defaults.global.animation.duration = 2000;
@@ -59,26 +59,7 @@
                 </script>
             </div>
 
-            <div style="width: 33%; display: inline-table;">
-                <canvas id="tagsTop5Chart"></canvas>
-                <script type="text/javascript">
-                    let options = {
-                        responsive: true,
-                        title: {
-                            display: true,
-                            text: '标签 Top5'
-                        }
-                    };
-                    let ctx = document.getElementById("tagsTop5Chart").getContext("2d");
-                    var tagsTop5Chart = new Chart(ctx, {
-                        type: 'doughnut',
-                        data: data2,
-                        options: options
-                    });
-                </script>
-            </div>
-
-            <div style="width: 33%; display: inline-table;">
+            <div style="width: 32%; display: inline-table;">
                 <canvas id="categoryCountChart"></canvas>
                 <script type="text/javascript">
                     function getRandomColor() { var letters = '0123456789ABCDEF'.split(''); var color = '#'; for (var i = 0; i < 6; i++ ) { color += letters[Math.floor(Math.random() * 16)]; } return color; }
@@ -131,6 +112,25 @@
                     });
                 </script>
             </div>
+
+            <div style="width: 32%; display: inline-table;">
+                <canvas id="tagsTop5Chart"></canvas>
+                <script type="text/javascript">
+                    let options = {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: '标签 Top5'
+                        }
+                    };
+                    let ctx = document.getElementById("tagsTop5Chart").getContext("2d");
+                    var tagsTop5Chart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: data2,
+                        options: options
+                    });
+                </script>
+            </div>
         </div>
     </div>
     <div class="module-panel">
@@ -139,8 +139,18 @@
         </div>
         <div class="module-body padding12">
             <div id="noticeList" style="background: none;">
-                <iframe id="broadcast" src="https://ftp.stackoverflow.wiki/bolo/notice.html" frameborder="no" border="0" scrolling="auto"></iframe>
+                <script>
+                    $("#noticeList").load("https://ftp.stackoverflow.wiki/bolo/boardcast.html");
+                </script>
             </div>
+        </div>
+    </div>
+    <div class="module-panel">
+        <div class="module-header">
+            <h2>近期日志</h2>
+        </div>
+        <div class="module-body padding12">
+            <div id="recentLogs"></div>
         </div>
     </div>
 </div>

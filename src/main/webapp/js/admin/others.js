@@ -24,7 +24,7 @@
  */
 
 /* others 相关操作 */
-var last = -1;
+var lastOthers = -1;
 admin.others = {
   /*
    * @description 初始化
@@ -34,7 +34,7 @@ admin.others = {
     $('#loadMsg').text('');
 
     admin.others.getLog();
-    setInterval(this.getLog, 5000);
+    setInterval(admin.others.getLog, 5000);
   },
 
   getLog: () => {
@@ -43,18 +43,18 @@ admin.others = {
       cache: false,
       timeout: 2000,
       success: function (result) {
-        var json = result.result;
+        let json = result.result;
         let free = (result.freeMemNow / (1024 * 1024)).toFixed(2) + ' MB';
         $('#memFree').html(free);
         $('#now').html(new Date().toLocaleTimeString());
-        for (var i = 0; i < json.length; i++) {
-          var r = json[i];
-          var rId = r.id;
-          if (rId > last) {
-            var rDate = r.date;
-            var rLevel = r.level;
-            var rSrc = r.name + ':' + r.lineNumber;
-            var msg = r.message;
+        for (let i = 0; i < json.length; i++) {
+          let r = json[i];
+          let rId = r.id;
+          if (rId > lastOthers) {
+            let rDate = r.date;
+            let rLevel = r.level;
+            let rSrc = r.name + ':' + r.lineNumber;
+            let msg = r.message;
             let buildStart = '<tbody class="table-oddRow"><tr class="table-hasExpend">';
             rDate = rDate.substring(0, 19);
             let build1 = '';
@@ -70,15 +70,15 @@ admin.others = {
             let build2 = '<td style="width: 135px; vertical-align: top"><span style="color: #4caf50; font-weight: bold">' + rDate + '</span></td>';
             let build3 = '<td style="vertical-align: top"><span style="word-wrap: break-word; white-space: normal; word-break: break-all"><span style="color: #4caf50; font-weight: bold">' + rSrc + '</span><br>' + msg + '</span></td>';
             let buildEnd = '</tr></tbody>';
-            var res = buildStart + build1 + build2 + build3 + buildEnd;
+            let res = buildStart + build1 + build2 + build3 + buildEnd;
             if (r.throwable !== undefined) {
               res += r.throwable.class + ': ' + r.throwable.message + '<br>';
-              for (var j = 0; j < r.throwable.stackTrace.length; j++) {
+              for (let j = 0; j < r.throwable.stackTrace.length; j++) {
                 res += r.throwable.stackTrace[j] + '<br>';
               }
             }
             $('#tabOthersPanel_log #logList').prepend(res);
-            last = rId;
+            lastOthers = rId;
           }
         }
       }

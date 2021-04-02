@@ -198,8 +198,10 @@
                     datasets: [{
                         label: '文章数量',
                         fill: false,
-                        backgroundColor: 'rgb(255,255,255)',
-                        borderColor: 'rgb(69,137,148)',
+                        backgroundColor: '#FFFFFF',
+                        borderColor: '#36A2EB',
+                        pointBackgroundColor: "#36A2EB",
+                        pointBorderColor: "#fff",
                         data: [
                             <#list latestArchives?reverse as archiveDate>
                                 ${archiveDate.archiveDatePublishedArticleCount},

@@ -172,17 +172,28 @@ public final class Solos {
         boolean status = Boolean.parseBoolean(Options.get(Option.ID_C_WELFARE_LUTE_SERVICE));
         // 使用公益Lute-Http服务(Bolo专享)
         final String LUTE_URL = "http://lute.stackoverflow.wiki:8249";
-        Markdowns.LUTE_ENGINE_URL = LUTE_URL;
-        Markdowns.LUTE_AVAILABLE = status;
+        boolean needTest = false;
+        String testErrorMsg = "";
         if (status) {
-            try {
+            Markdowns.LUTE_ENGINE_URL = LUTE_URL;
+            Markdowns.LUTE_AVAILABLE = status;
+            needTest = true;
+            testErrorMsg = "The connection to the public welfare Lute service failed. Lute rendering will be disabled and the built-in renderer will be used.";
+            
+        } else if(Markdowns.LUTE_AVAILABLE && !LUTE_URL.equals(Markdowns.LUTE_ENGINE_URL)) {
+        	needTest = true;
+        	testErrorMsg = "The connection to the private welfare Lute service failed. Lute rendering will be disabled and the built-in renderer will be used.";
+        } else {
+        	Markdowns.LUTE_AVAILABLE = status;
+            LOGGER.log(Level.INFO, "Welfare Lute Service has disabled.");
+        }
+        if (needTest) {
+        	try {
                 Markdowns.toHtmlByLute("#test");
             } catch (Exception exception) {
-                LOGGER.log(Level.INFO, "The connection to the public welfare Lute service failed. Lute rendering will be disabled and the built-in renderer will be used.");
+                LOGGER.log(Level.INFO, testErrorMsg);
                 Markdowns.LUTE_AVAILABLE = false;
             }
-        } else {
-            LOGGER.log(Level.INFO, "Welfare Lute Service has disabled.");
         }
     }
 

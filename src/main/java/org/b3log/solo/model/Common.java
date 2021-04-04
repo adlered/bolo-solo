@@ -358,6 +358,11 @@ public final class Common {
     public static final String GRAVATAR = "gravatar";
 
     /**
+     * Key of B3log functions status.
+     */
+    public static final String B3LOG_ENABLED = "b3logEnabled";
+
+    /**
      * Private constructor.
      */
     private Common() {

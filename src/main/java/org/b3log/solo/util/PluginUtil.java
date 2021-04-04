@@ -4,7 +4,7 @@ import org.b3log.latke.ioc.BeanManager;
 import org.b3log.solo.repository.PluginRepository;
 
 /**
- * Get Bolo Plugins status.
+ * Get Bolo Plugin status.
  */
 public class PluginUtil {
 

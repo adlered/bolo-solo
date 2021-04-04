@@ -19,11 +19,11 @@
 -->
 <#include "../common-template/label.ftl"/>
 <script type="text/javascript">
-    Label.editorMode = '${editorMode}'
-    Label.setMobileLabel = '${setMobileLabel}'
-    Label.pushSuccLabel = '${pushSuccLabel}'
-    Label.pushToHacpaiLabel = '${pushToHacpaiLabel}'
-    Label.uploadMsg = '${uploadMsg}'
+    Label.editorMode = "${editorMode}"
+    Label.setMobileLabel = "${setMobileLabel}"
+    Label.pushSuccLabel = "${pushSuccLabel}"
+    Label.pushToHacpaiLabel = "${pushToHacpaiLabel}"
+    Label.uploadMsg = "${uploadMsg}"
     Label.uploadToken = "${uploadToken}"
     Label.uploadURL = "${uploadURL}"
     Label.skinDirName = "${skinDirName}"
@@ -32,7 +32,7 @@
     Label.WINDOW_SIZE = "${articleListPaginationWindowSize}"
     Label.localeString = "${localeString}"
     Label.version = "${version}"
-    Label.reportIssueLabel = 'please report this issue on https://github.com/b3log/solo/issues/new'
+    Label.reportIssueLabel = "please report this issue on https://github.com/adlered/bolo-solo/issues/new"
     Label.noDataLabel = "${noDataLabel}"
     Label.linkDescriptionLabel = "${linkDescriptionLabel}"
     Label.addressInvalidLabel = "${addressInvalidLabel}"

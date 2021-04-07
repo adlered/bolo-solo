@@ -100,6 +100,5 @@
     Label.categoryTooLongLabel = "${categoryTooLongLabel}"
     Label.descriptionLabel = "${descriptionLabel}"
     Label.previewLabel = "${previewLabel}"
-    Label.b3logEnabled = "${b3logEnabled}"
     admin.init()
 </script>

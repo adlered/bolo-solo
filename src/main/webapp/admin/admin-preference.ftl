@@ -64,11 +64,13 @@
                 <a href="#tools/preference/myGitHub">${myGitHubLabel}</a>
             </div>
         </li>
-        <li>
-            <div id="tabPreference_b3logEcology">
-                <a href="#tools/preference/b3logEcology">${b3logEcologyLabel}</a>
-            </div>
-        </li>
+        <#if b3logEnabled>
+            <li>
+                <div id="tabPreference_b3logEcology">
+                    <a href="#tools/preference/b3logEcology">${b3logEcologyLabel}</a>
+                </div>
+            </li>
+        </#if>
     </ul>
 </div>
 <div id="tabPreferencePanel" class="sub-tabs-main">

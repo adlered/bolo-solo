@@ -179,8 +179,7 @@ public final class Solos {
             Markdowns.LUTE_AVAILABLE = status;
             needTest = true;
             testErrorMsg = "The connection to the public welfare Lute service failed. Lute rendering will be disabled and the built-in renderer will be used.";
-            
-        } else if(Markdowns.LUTE_AVAILABLE && !LUTE_URL.equals(Markdowns.LUTE_ENGINE_URL)) {
+        } else if (Markdowns.LUTE_AVAILABLE && !LUTE_URL.equals(Markdowns.LUTE_ENGINE_URL)) {
         	needTest = true;
         	testErrorMsg = "The connection to the private welfare Lute service failed. Lute rendering will be disabled and the built-in renderer will be used.";
         } else {

@@ -141,32 +141,36 @@
                         </td>
                     </tr>
                     </tbody>
-                    <tbody class="table-oddRow">
-                    <tr class="table-hasExpend">
-                        <td style="padding-left: 20px; padding-right: 20px;">
-                            手动上传公开文章备份至链滴
-                        </td>
-                        <td>
-                            手动将你的<b>公开</b>文章备份上传至链滴，并参与<a target="_blank" href="https://${hacpaiDomain}/top/solo">博客排行榜</a>排名。
-                        </td>
-                        <td style="padding-right: 20px;">
-                            <button onclick="backup()" style="float:right">确定备份</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tbody class="table-oddRow">
-                    <tr class="table-hasExpend">
-                        <td style="padding-left: 20px; padding-right: 20px;">
-                            立即从链滴获取联系方式
-                        </td>
-                        <td>
-                            你将从指定 链滴用户名 和 B3log Key 的链滴账户中获取你的社交媒体信息，本地自定义联系方式将被覆盖。
-                        </td>
-                        <td style="padding-right: 20px;">
-                            <button onclick="refreshUsite()" style="float:right">开始获取</button>
-                        </td>
-                    </tr>
-                    </tbody>
+                    <#if b3logEnabled>
+                        <tbody class="table-oddRow">
+                        <tr class="table-hasExpend">
+                            <td style="padding-left: 20px; padding-right: 20px;">
+                                手动上传公开文章备份至链滴
+                            </td>
+                            <td>
+                                手动将你的<b>公开</b>文章备份上传至链滴，并参与<a target="_blank" href="https://${hacpaiDomain}/top/solo">博客排行榜</a>排名。
+                            </td>
+                            <td style="padding-right: 20px;">
+                                <button onclick="backup()" style="float:right">确定备份</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </#if>
+                    <#if b3logEnabled>
+                        <tbody class="table-oddRow">
+                        <tr class="table-hasExpend">
+                            <td style="padding-left: 20px; padding-right: 20px;">
+                                立即从链滴获取联系方式
+                            </td>
+                            <td>
+                                你将从指定 链滴用户名 和 B3log Key 的链滴账户中获取你的社交媒体信息，本地自定义联系方式将被覆盖。
+                            </td>
+                            <td style="padding-right: 20px;">
+                                <button onclick="refreshUsite()" style="float:right">开始获取</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </#if>
                     <tbody class="table-oddRow">
                     <tr class="table-hasExpend">
                         <td style="padding-left: 20px; padding-right: 20px;">

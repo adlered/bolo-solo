@@ -39,16 +39,20 @@
                 <a href="#tools/others/tag">${clearDataLabel}</a>
             </div>
         </li>
-        <li>
-            <div id="tabOthers_commentSync">
-                <a href="#tools/others/commentSync">${syncLabel}</a>
-            </div>
-        </li>
-        <li>
-            <div id="tabOthers_move">
-                <a href="#tools/others/move">${picBedMigrationLabel}</a>
-            </div>
-        </li>
+        <#if b3logEnabled>
+            <li>
+                <div id="tabOthers_commentSync">
+                    <a href="#tools/others/commentSync">${syncLabel}</a>
+                </div>
+            </li>
+        </#if>
+        <#if b3logEnabled>
+            <li>
+                <div id="tabOthers_move">
+                    <a href="#tools/others/move">${picBedMigrationLabel}</a>
+                </div>
+            </li>
+        </#if>
     </ul>
 </div>
 <div id="tabOthersPanel" class="sub-tabs-main">

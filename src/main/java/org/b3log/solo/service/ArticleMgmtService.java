@@ -243,7 +243,7 @@ public class ArticleMgmtService {
         }
 
         final StringBuilder contentBuilder = new StringBuilder();
-        contentBuilder.append("![GitHub Repo](images/github_repo.jpg)\n\n");
+        contentBuilder.append("![GitHub Repo](/images/github_repo.jpg)\n\n");
         for (int i = 0; i < gitHubRepos.length(); i++) {
             final JSONObject repo = gitHubRepos.optJSONObject(i);
             final String url = repo.optString("githubrepoHTMLURL");
@@ -313,11 +313,11 @@ public class ArticleMgmtService {
                 page.put(Page.PAGE_TITLE, "我的开源");
                 page.put(Page.PAGE_OPEN_TARGET, "_self");
                 page.put(Page.PAGE_PERMALINK, permalink);
-                page.put(Page.PAGE_ICON, "images/github-icon.png");
+                page.put(Page.PAGE_ICON, "/images/github-icon.png");
                 pageRepository.add(page);
             } else {
                 page.put(Page.PAGE_OPEN_TARGET, "_self");
-                page.put(Page.PAGE_ICON, "images/github-icon.png");
+                page.put(Page.PAGE_ICON, "/images/github-icon.png");
                 pageRepository.update(page.optString(Keys.OBJECT_ID), page);
             }
             transaction.commit();

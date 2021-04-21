@@ -89,15 +89,17 @@
                 <input type="checkbox" id="articleCommentable" checked />
                 ${allowCommentLabel}
             </label>
-            <#if b3logEnabled>
             &nbsp;
+            <#if b3logEnabled>
             <span id="postToCommunityPanel">
+            <#else>
+            <span id="postToCommunityPanel" style="display: none">
+            </#if>
                 <label class="checkbox">
                     <input id="postToCommunity" type="checkbox" />
                     <a href="https://doc.stackoverflow.wiki/web/#/7?page_id=46" target="_blank">${syncToCommunityLabel}</a>
                 </label>
             </span>
-            </#if>
         </div>
         <div class="fn__clear"></div>
     </div>

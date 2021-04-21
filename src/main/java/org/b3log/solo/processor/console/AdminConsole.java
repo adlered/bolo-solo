@@ -163,6 +163,7 @@ public class AdminConsole {
             dataModel.put(Common.VERSION, SoloServletListener.VERSION);
             dataModel.put(Common.BOLO_VERSION, SoloServletListener.BOLO_VERSION);
             dataModel.put(Common.STATIC_RESOURCE_VERSION, Latkes.getStaticResourceVersion());
+            dataModel.put(Common.B3LOG_ENABLED, "" + PluginUtil.b3logPluginEnabled());
             dataModel.put(Common.YEAR, String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
             dataModel.put(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT, preference.getInt(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT));
             dataModel.put(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE, preference.getInt(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE));

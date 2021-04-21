@@ -89,13 +89,15 @@
                 <input type="checkbox" id="articleCommentable" checked />
                 ${allowCommentLabel}
             </label>
+            <#if b3logEnabled>
             &nbsp;
-            <span id="postToCommunityPanel" style="display: none">
+            <span id="postToCommunityPanel">
                 <label class="checkbox">
                     <input id="postToCommunity" type="checkbox" />
-                    <a href="https://${hacpaiDomain}/article/1546941897596" target="_blank">${syncToCommunityLabel}</a>
+                    <a href="https://doc.stackoverflow.wiki/web/#/7?page_id=46" target="_blank">${syncToCommunityLabel}</a>
                 </label>
             </span>
+            </#if>
         </div>
         <div class="fn__clear"></div>
     </div>

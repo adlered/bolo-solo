@@ -137,9 +137,11 @@ admin.articleList = {
             articles[i].oId + '\', \'article\', \'' +
             encodeURIComponent(articles[i].articleTitle) + '\')">' +
             Label.removeLabel + '</a>  \
-                                <a href=\'javascript:void(0)\' onclick="admin.articleList.popTop(this, \'' +
+                              <a href=\'javascript:void(0)\' onclick="admin.articleList.syncToHacpai(\'' +
+            articles[i].oId + '\')">' + Label.pushToHacpaiLabel + '</a>  \
+                              <a href=\'javascript:void(0)\' onclick="admin.articleList.popTop(this, \'' +
             articles[i].oId + '\')">' + topClass + '</a>  \
-                                <a href=\'javascript:void(0)\' onclick="admin.comment.open(\'' +
+                              <a href=\'javascript:void(0)\' onclick="admin.comment.open(\'' +
             articles[i].oId + '\', \'article\')">' + Label.commentLabel + '</a>'
         }
 

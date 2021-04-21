@@ -131,18 +131,32 @@ admin.articleList = {
           var topClass = articles[i].articlePutTop
             ? Label.cancelPutTopLabel
             : Label.putTopLabel
-          articleData[i].expendRow = '<a href=\'javascript:void(0)\' onclick="admin.article.get(\'' +
-            articles[i].oId + '\', true)">' + Label.updateLabel + '</a>  \
+
+          if (Label.b3logEnabled === "true") {
+            articleData[i].expendRow = '<a href=\'javascript:void(0)\' onclick="admin.article.get(\'' +
+                articles[i].oId + '\', true)">' + Label.updateLabel + '</a>  \
                                 <a href=\'javascript:void(0)\' onclick="admin.article.del(\'' +
-            articles[i].oId + '\', \'article\', \'' +
-            encodeURIComponent(articles[i].articleTitle) + '\')">' +
-            Label.removeLabel + '</a>  \
+                articles[i].oId + '\', \'article\', \'' +
+                encodeURIComponent(articles[i].articleTitle) + '\')">' +
+                Label.removeLabel + '</a>  \
                               <a href=\'javascript:void(0)\' onclick="admin.articleList.syncToHacpai(\'' +
-            articles[i].oId + '\')">' + Label.pushToHacpaiLabel + '</a>  \
+                articles[i].oId + '\')">' + Label.pushToHacpaiLabel + '</a>  \
                               <a href=\'javascript:void(0)\' onclick="admin.articleList.popTop(this, \'' +
-            articles[i].oId + '\')">' + topClass + '</a>  \
+                articles[i].oId + '\')">' + topClass + '</a>  \
                               <a href=\'javascript:void(0)\' onclick="admin.comment.open(\'' +
-            articles[i].oId + '\', \'article\')">' + Label.commentLabel + '</a>'
+                articles[i].oId + '\', \'article\')">' + Label.commentLabel + '</a>'
+          } else {
+            articleData[i].expendRow = '<a href=\'javascript:void(0)\' onclick="admin.article.get(\'' +
+                articles[i].oId + '\', true)">' + Label.updateLabel + '</a>  \
+                                <a href=\'javascript:void(0)\' onclick="admin.article.del(\'' +
+                articles[i].oId + '\', \'article\', \'' +
+                encodeURIComponent(articles[i].articleTitle) + '\')">' +
+                Label.removeLabel + '</a>  \
+                              <a href=\'javascript:void(0)\' onclick="admin.articleList.popTop(this, \'' +
+                articles[i].oId + '\')">' + topClass + '</a>  \
+                              <a href=\'javascript:void(0)\' onclick="admin.comment.open(\'' +
+                articles[i].oId + '\', \'article\')">' + Label.commentLabel + '</a>'
+          }
         }
 
         that.tablePagination.updateTablePagination(articleData, pageNum,

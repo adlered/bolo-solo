@@ -43,7 +43,6 @@ public class ServerJiangService {
                 form("desp", desp).
                 connectionTimeout(3000).
                 timeout(7000).
-                trustAllCerts(true).
                 header("User-Agent", Solos.USER_AGENT).
                 send();
         return response.statusCode() == 200;

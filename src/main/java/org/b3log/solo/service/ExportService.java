@@ -445,7 +445,7 @@ public class ExportService {
             stat.put("mobileSkin", optionQueryService.getOptionById(Option.ID_C_MOBILE_SKIN_DIR_NAME).optString(Option.OPTION_VALUE));
 
             final HttpResponse response = HttpRequest.post("https://" + Global.HACPAI_DOMAIN + "/github/repos").
-                    connectionTimeout(7000).timeout(60000).trustAllCerts(true).header("User-Agent", Solos.USER_AGENT).
+                    connectionTimeout(7000).timeout(60000).header("User-Agent", Solos.USER_AGENT).
                     form("userName", userName,
                             "userB3Key", userB3Key,
                             "clientName", "Solo",

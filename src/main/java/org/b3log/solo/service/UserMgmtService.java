@@ -127,7 +127,7 @@ public class UserMgmtService {
             final JSONObject requestJSON = new JSONObject().
                     put(User.USER_NAME, userName).
                     put(UserExt.USER_B3_KEY, userB3Key);
-            final HttpResponse res = HttpRequest.post("https://" + Global.HACPAI_DOMAIN + "/user/usite").trustAllCerts(true).
+            final HttpResponse res = HttpRequest.post("https://" + Global.HACPAI_DOMAIN + "/user/usite").
                     connectionTimeout(3000).timeout(7000).header("User-Agent", Solos.USER_AGENT).
                     body(requestJSON.toString()).send();
             if (200 != res.statusCode()) {

@@ -465,7 +465,7 @@ public class CommentProcessor {
         final JSONObject article = articleQueryService.getArticleById(String.valueOf(localaid));
         String fetchURL = "https://" + Global.HACPAI_DOMAIN + "/api/v2/article/" + remoteaid + "?p=" + page;
         // 从远程拉取评论列表
-        final HttpResponse res = HttpRequest.get(fetchURL).trustAllCerts(true).
+        final HttpResponse res = HttpRequest.get(fetchURL).
                 connectionTimeout(3000).timeout(7000).header("User-Agent", Solos.USER_AGENT).
                 cookies(new Cookie("symphony=" + symphony)).
                 send();

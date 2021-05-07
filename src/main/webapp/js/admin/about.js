@@ -86,7 +86,7 @@ admin.about = {
           if (version === finalVersion) {
             $('#updateCheck').html('🍍 <font style="color: #3caf36">你正在使用菠萝博客最新版！</font>');
           } else {
-            $('#updateCheck').html('<font style="color: #991a1a">菠萝博客 v' + finalVersion.replace('_', '.') + ' 已推出，赶快更新吧！</font>');
+            $('#updateCheck').html('<a href="https://github.com/adlered/bolo-solo/releases" target="_blank" style="color: #991a1a">菠萝博客 v' + finalVersion.replace('_', '.') + ' 已推出，赶快更新吧！</a>');
           }
           $("#tipMsg").text("");
           $("#loadMsg").text("");

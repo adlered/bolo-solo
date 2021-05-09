@@ -226,10 +226,10 @@ public class AdminConsole {
 
         // Bolo version
         dataModel.put(Common.BOLO_VERSION, SoloServletListener.BOLO_VERSION);
-
         // 链滴域名设定
         dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
         dataModel.put(Common.B3LOG_ENABLED, PluginUtil.b3logPluginEnabled());
+
         fireFreeMarkerActionEvent(templateName, dataModel);
     }
 

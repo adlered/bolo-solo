@@ -149,6 +149,7 @@
                 <input id="syncGitHub" type="checkbox" class="normalInput"/>
             </div>
         </label>
+        ${helpImprovePlan}
         <label>
             <div class="fn__flex-inline">
                 <a href="https://doc.stackoverflow.wiki/web/#/7?page_id=180" target="_blank">用户体验改进计划</a>:

@@ -270,6 +270,7 @@ public class AdminConsole {
         // 链滴域名设定
         dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
         dataModel.put(Common.B3LOG_ENABLED, PluginUtil.b3logPluginEnabled());
+
         fireFreeMarkerActionEvent(templateName, dataModel);
     }
 

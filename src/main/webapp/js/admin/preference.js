@@ -138,6 +138,7 @@ admin.preference = {
         'true' === preference.syncGitHub ? $('#syncGitHub').attr('checked', 'checked') : $('syncGitHub').removeAttr('checked')
         'true' === preference.pullGitHub ? $('#pullGitHub').attr('checked', 'checked') : $('pullGitHub').removeAttr('checked')
         'true' === preference.welfareLuteService ? $('#welfareLuteService').attr('checked', 'checked') : $('#welfareLuteService').removeAttr('checked')
+        'true' === preference.helpImprovePlan ? $('#helpImprovePlan').attr('checked', 'checked') : $('#helpImprovePlan').removeAttr('checked')
 
         $("input:radio[value='" + preference.editorMode + "']").attr('checked','true');
         admin.preference.editorMode = preference.editorMode
@@ -259,10 +260,9 @@ admin.preference = {
 
     var requestJSONObject = {
       'preference': {
-        'enableAutoFlushGitHub': $("#enableAutoFlushGitHub").
-        prop('checked'),
-        'welfareLuteService': $("#welfareLuteService").
-          prop('checked'),
+        'helpImprovePlan': $("#helpImprovePlan").prop('checked'),
+        'enableAutoFlushGitHub': $("#enableAutoFlushGitHub").prop('checked'),
+        'welfareLuteService': $("#welfareLuteService").prop('checked'),
         'sendKey': $("#sendKey").val(),
         'myGitHubID': $("#myGitHubID").val(),
         'adminActiveSentToMailbox': $("#adminActiveSentToMailbox").val(),
@@ -283,27 +283,22 @@ admin.preference = {
         'metaDescription': $('#metaDescription').val(),
         'blogTitle': $('#blogTitle').val(),
         'blogSubtitle': $('#blogSubtitle').val(),
-        'mostCommentArticleDisplayCount': $('#mostCommentArticleDisplayCount').
-          val(),
+        'mostCommentArticleDisplayCount': $('#mostCommentArticleDisplayCount').val(),
         'mostViewArticleDisplayCount': $('#mostViewArticleDisplayCount').val(),
         'recentCommentDisplayCount': $('#recentCommentDisplayCount').val(),
         'mostUsedTagDisplayCount': $('#mostUsedTagDisplayCount').val(),
         'articleListDisplayCount': $('#articleListDisplayCount').val(),
-        'articleListPaginationWindowSize': $(
-          '#articleListPaginationWindowSize').val(),
+        'articleListPaginationWindowSize': $('#articleListPaginationWindowSize').val(),
         'localeString': $('#localeString').val(),
         'timeZoneId': $('#timeZoneId').val(),
         'noticeBoard': $('#noticeBoard').val(),
         'footerContent': $('#footerContent').val(),
         'htmlHead': $('#htmlHead').val(),
-        'relevantArticlesDisplayCount': $('#relevantArticlesDisplayCount').
-          val(),
+        'relevantArticlesDisplayCount': $('#relevantArticlesDisplayCount').val(),
         'randomArticlesDisplayCount': $('#randomArticlesDisplayCount').val(),
-        'enableArticleUpdateHint': $('#enableArticleUpdateHint').
-          prop('checked'),
+        'enableArticleUpdateHint': $('#enableArticleUpdateHint').prop('checked'),
         'signs': signs,
-        'allowVisitDraftViaPermalink': $('#allowVisitDraftViaPermalink').
-          prop('checked'),
+        'allowVisitDraftViaPermalink': $('#allowVisitDraftViaPermalink').prop('checked'),
         'articleListStyle': $('#articleListDisplay').val(),
         'hljsTheme': $('#hljsTheme').val(),
         'feedOutputMode': $('#feedOutputMode').val(),

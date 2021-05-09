@@ -93,7 +93,8 @@ public class Options {
                 Option.ID_C_WELFARE_LUTE_SERVICE,
                 Option.ID_C_ENABLE_AUTO_FLUSH_GITHUB,
                 Option.ID_C_MY_GITHUB_ID,
-                Option.ID_C_SEND_KEY
+                Option.ID_C_SEND_KEY,
+                Option.ID_C_HELP_IMPROVE_PLAN
         );
         return optionList;
     }
@@ -157,7 +158,8 @@ public class Options {
                 new Object[]{Option.ID_C_WELFARE_LUTE_SERVICE, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_WELFARE_LUTE_SERVICE},
                 new Object[]{Option.ID_C_ENABLE_AUTO_FLUSH_GITHUB, Option.CATEGORY_C_PREFERENCE, "false"},
                 new Object[]{Option.ID_C_MY_GITHUB_ID, Option.CATEGORY_C_PREFERENCE, ""},
-                new Object[]{Option.ID_C_SEND_KEY, Option.CATEGORY_C_PREFERENCE, ""}
+                new Object[]{Option.ID_C_SEND_KEY, Option.CATEGORY_C_PREFERENCE, ""},
+                new Object[]{Option.ID_C_HELP_IMPROVE_PLAN, Option.CATEGORY_C_PREFERENCE, ""}
         );
         return optList;
     }

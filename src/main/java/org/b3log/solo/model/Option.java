@@ -410,6 +410,11 @@ public final class Option {
     public static final String ID_C_SEND_KEY = "sendKey";
 
     /**
+     * Key of Improve Helping Plan.
+     */
+    public static final String ID_C_HELP_IMPROVE_PLAN = "helpImprovePlan";
+
+    /**
      * Private constructor.
      */
     private Option() {

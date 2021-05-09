@@ -42,6 +42,7 @@ import org.b3log.latke.util.Execs;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.Global;
+import org.b3log.solo.improve.ImproveOptions;
 import org.b3log.solo.model.ArchiveDate;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
@@ -229,6 +230,8 @@ public class AdminConsole {
         // 链滴域名设定
         dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
         dataModel.put(Common.B3LOG_ENABLED, PluginUtil.b3logPluginEnabled());
+        // 用户体验改进计划
+        dataModel.put(Option.ID_C_HELP_IMPROVE_PLAN, ImproveOptions.doJoinHelpImprovePlan());
 
         fireFreeMarkerActionEvent(templateName, dataModel);
     }

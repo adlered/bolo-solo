@@ -9,14 +9,15 @@ public class ImproveOptions {
 
     /**
      * 查询用户是否加入了用户体验改进计划
-     * @return boolean 是否加入
+     * @return String
+     * 空白：还没设置过
+     * false/true：用户已设置
      */
-    public static boolean doJoinHelpImprovePlan() {
+    public static String doJoinHelpImprovePlan() {
         final BeanManager beanManager = BeanManager.getInstance();
         final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);
         final JSONObject preference = optionQueryService.getPreference();
-        final String helpImprovePlan = preference.getString(Option.ID_C_HELP_IMPROVE_PLAN);
 
-        return helpImprovePlan.equals("true");
+        return preference.getString(Option.ID_C_HELP_IMPROVE_PLAN);
     }
 }

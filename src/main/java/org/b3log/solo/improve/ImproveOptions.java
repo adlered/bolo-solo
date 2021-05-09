@@ -3,6 +3,7 @@ package org.b3log.solo.improve;
 import org.b3log.latke.ioc.BeanManager;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.service.OptionQueryService;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ImproveOptions {
@@ -18,6 +19,10 @@ public class ImproveOptions {
         final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);
         final JSONObject preference = optionQueryService.getPreference();
 
-        return preference.getString(Option.ID_C_HELP_IMPROVE_PLAN);
+        try {
+            return preference.getString(Option.ID_C_HELP_IMPROVE_PLAN);
+        } catch (JSONException e) {
+            return "";
+        }
     }
 }

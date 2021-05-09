@@ -28,7 +28,6 @@
     <div class="module-panel">
         <div class="module-header">
             <h2>数据</h2>
-            ${helpImprovePlan}
         </div>
         <div class="module-body padding12">
             <div style="width: 32%; display: inline-table;">

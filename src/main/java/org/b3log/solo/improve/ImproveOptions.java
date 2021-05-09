@@ -11,7 +11,7 @@ public class ImproveOptions {
      * 查询用户是否加入了用户体验改进计划
      * @return boolean 是否加入
      */
-    public static boolean joinHelpImprovePlan() {
+    public static boolean doJoinHelpImprovePlan() {
         final BeanManager beanManager = BeanManager.getInstance();
         final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);
         final JSONObject preference = optionQueryService.getPreference();

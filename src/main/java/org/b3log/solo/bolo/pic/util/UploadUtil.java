@@ -62,9 +62,8 @@ import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -191,12 +190,17 @@ public class UploadUtil {
                 String upyunDomain = config.split("<<>>")[4];
                 String upyunTreaty = config.split("<<>>")[5];
                 String upyunFilename = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
-
                 RestManager upyunRestManager = new RestManager(upyunZoneName, upyunName, upyunPassword);
                 upyunRestManager.setApiDomain(RestManager.ED_AUTO);
                 Map<String, String> upyunParams = new HashMap<>();
-                upyunRestManager.writeFile("/" + upyunFilename, file, upyunParams);
-                result = upyunTreaty + "://" + upyunDomain + "/" + upyunFilename;
+                // 获取当前日期 LocalDate.now().toString() 2021-05-26 [0]=2021 [1]=05 [2]=26
+                String nowDate[] = LocalDate.now().toString().split("-");
+                String dateDir = "/" + nowDate[0] + "/" + nowDate[1] + "-" + nowDate[2] + "/";
+                if (!upyunRestManager.mkDir(dateDir).isSuccessful()) {
+                    LOGGER.log(Level.INFO, "Directory creation failed [path=" + dateDir + "]");
+                }
+                upyunRestManager.writeFile(dateDir + upyunFilename, file, upyunParams);
+                result = upyunTreaty + "://" + upyunDomain + dateDir + upyunFilename;
                 break;
             case "tencent":
                 String tencentCosSecretId = config.split("<<>>")[1];

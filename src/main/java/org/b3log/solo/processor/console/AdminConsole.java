@@ -42,8 +42,8 @@ import org.b3log.latke.util.Execs;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.Global;
+import org.b3log.solo.improve.ImproveHelper;
 import org.b3log.solo.improve.ImproveOptions;
-import org.b3log.solo.model.ArchiveDate;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.model.UserExt;
@@ -136,6 +136,7 @@ public class AdminConsole {
      * @param context the specified context
      */
     public void showAdminIndex(final RequestContext context) {
+        ImproveHelper.uploadSiteStatistics(context);
         final String templateName = "admin-index.ftl";
         final AbstractFreeMarkerRenderer renderer = new ConsoleRenderer(context, templateName);
         final Map<String, String> langs = langPropsService.getAll(Latkes.getLocale());

@@ -34,10 +34,15 @@ public class ImproveHelper {
         JSONObject statisticsObject = new JSONObject();
         statisticsObject.put("category", "statistics");
 
-        HttpServletRequest request = context.getRequest();
         JSONObject statisticsDataObject = new JSONObject();
-        statisticsDataObject.put("test", "yes");
-        statisticsDataObject.put("alsoTest", 100);
+        HttpServletRequest request = context.getRequest();
+
+        /**
+         * 隐私信息说明
+         * ClientIP：访问者的IP地址，后两位做去敏处理
+         */
+        statisticsDataObject.put("ClientIP", request.getRemoteHost());
+
         statisticsObject.put("data", statisticsDataObject);
 
         CloseableHttpClient uploadSiteStatisticsHttpClient = createSSLClientDefault();

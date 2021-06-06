@@ -39,9 +39,11 @@ public class ImproveHelper {
 
         /**
          * 隐私信息说明
+         * requestURL：访问者访问的URL地址
          * ClientIP：访问者的IP地址，后两位做去敏处理
          */
-        statisticsDataObject.put("ClientIP", request.getRemoteHost());
+        statisticsDataObject.put("requestURL", request.getRequestURI());
+        statisticsDataObject.put("clientIP", request.getRemoteHost());
 
         statisticsObject.put("data", statisticsDataObject);
 
@@ -54,7 +56,6 @@ public class ImproveHelper {
 
         try {
             CloseableHttpResponse response = uploadSiteStatisticsHttpClient.execute(httpPost);
-            System.out.println(response.getStatusLine().getStatusCode());
             response.close();
         } catch (IOException e) {
             e.printStackTrace();

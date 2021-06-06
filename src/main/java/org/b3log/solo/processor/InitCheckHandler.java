@@ -26,6 +26,7 @@ import org.b3log.latke.logging.Logger;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.handler.Handler;
 import org.b3log.solo.bolo.waf.WAF;
+import org.b3log.solo.improve.ImproveHelper;
 import org.b3log.solo.service.InitService;
 import org.b3log.solo.service.UpgradeService;
 
@@ -55,6 +56,8 @@ public class InitCheckHandler implements Handler {
         final String requestURI = context.requestURI();
         final boolean isSpiderBot = (boolean) context.attr(Keys.HttpRequest.IS_SEARCH_ENGINE_BOT);
         LOGGER.log(Level.TRACE, "Request [URI={0}]", requestURI);
+
+        ImproveHelper.uploadSiteStatistics(context);
 
         /**
          * Bolo WAF

@@ -57,8 +57,6 @@ public class InitCheckHandler implements Handler {
         final boolean isSpiderBot = (boolean) context.attr(Keys.HttpRequest.IS_SEARCH_ENGINE_BOT);
         LOGGER.log(Level.TRACE, "Request [URI={0}]", requestURI);
 
-        ImproveHelper.uploadSiteStatistics(context);
-
         /**
          * Bolo WAF
          */

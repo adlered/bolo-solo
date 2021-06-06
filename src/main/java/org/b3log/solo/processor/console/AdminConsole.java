@@ -136,7 +136,6 @@ public class AdminConsole {
      * @param context the specified context
      */
     public void showAdminIndex(final RequestContext context) {
-        ImproveHelper.uploadSiteStatistics(context);
         final String templateName = "admin-index.ftl";
         final AbstractFreeMarkerRenderer renderer = new ConsoleRenderer(context, templateName);
         final Map<String, String> langs = langPropsService.getAll(Latkes.getLocale());

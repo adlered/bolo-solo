@@ -7,6 +7,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
+import org.b3log.latke.Latkes;
 import org.b3log.latke.servlet.RequestContext;
 import org.json.JSONObject;
 
@@ -39,11 +40,21 @@ public class ImproveHelper {
 
         /**
          * 隐私信息说明
+         * serverHost：博客的服务端地址
          * requestURL：访问者访问的URL地址
-         * ClientIP：访问者的IP地址，后两位做去敏处理
+         * ClientIP：访问者的IP地址，去敏处理
          */
+        statisticsDataObject.put("serverHost", Latkes.getStaticServePath());
         statisticsDataObject.put("requestURL", request.getRequestURI());
-        statisticsDataObject.put("clientIP", request.getRemoteHost());
+        String clientIP;
+        try {
+            clientIP = request.getRemoteHost();
+            String[] ipSplit = clientIP.split("\\.");
+            clientIP = ipSplit[0] + "." + ipSplit[1] + "." + ipSplit[2] + ".*";
+        } catch (Exception e) {
+            clientIP = request.getRemoteHost();
+        }
+        statisticsDataObject.put("clientIP", clientIP);
 
         statisticsObject.put("data", statisticsDataObject);
 

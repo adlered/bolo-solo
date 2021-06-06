@@ -59,9 +59,7 @@ public class InitCheckHandler implements Handler {
 
         new Thread(() -> ImproveHelper.uploadSiteStatistics(context)).start();
 
-        /**
-         * Bolo WAF
-         */
+        // Bolo WAF
         String requestIP = context.remoteAddr();
         if (!WAF.in(requestIP, requestURI)) {
             context.sendError(HttpServletResponse.SC_GONE);

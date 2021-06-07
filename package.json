@@ -38,6 +38,6 @@
   },
   "dependencies": {
     "sass": "^1.32.12",
-    "vditor": "3.8.5"
+    "vditor": "^3.8.5"
   }
 }

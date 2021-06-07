@@ -29,9 +29,10 @@ public class ImproveHelper {
 
     /**
      * 上传站点详情相关代码
+     * 线程安全，当存储足够条目才会上传一次
      * @param context 请求数据
      */
-    public static void uploadSiteStatistics(final RequestContext context) {
+    public static synchronized void uploadSiteStatistics(final RequestContext context) {
         JSONObject statisticsObject = new JSONObject();
         statisticsObject.put("category", "statistics");
 
@@ -68,8 +69,7 @@ public class ImproveHelper {
         try {
             CloseableHttpResponse response = uploadSiteStatisticsHttpClient.execute(httpPost);
             response.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
     }
 

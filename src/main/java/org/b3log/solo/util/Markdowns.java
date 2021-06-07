@@ -113,7 +113,7 @@ public final class Markdowns {
 
     public static boolean SHOW_CODE_BLOCK_LN = false;
     public static boolean FOOTNOTES = true;
-    public static boolean SHOW_TOC = false;
+    public static boolean SHOW_TOC = true;
     public static boolean AUTO_SPACE = false;
     public static boolean FIX_TERM_TYPO = false;
     public static boolean CHINESE_PUNCT = false;

@@ -98,7 +98,7 @@ public class UploadUtil {
                 String localDate = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
                 String localFilename;
                 try {
-                    localFilename = localDate + file.getName().substring(file.getName().lastIndexOf("."));
+                    localFilename = localDate + file.getName().substring(file.getName().lastIndexOf(".")).replace(" ", "_");
                 } catch (Exception e) {
                     localFilename = localDate;
                 }
@@ -169,9 +169,9 @@ public class UploadUtil {
                 String aliyunFilename;
                 try {
                     String subDir = config.split("<<>>")[7];
-                    aliyunFilename = subDir + "/" + RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
+                    aliyunFilename = subDir + "/" + RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName().replace(" ", "_");
                 } catch (Exception e) {
-                    aliyunFilename = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
+                    aliyunFilename = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName().replace(" ", "_");
                 }
                 OSS aliyunOSSClient = new OSSClientBuilder().build(aliyunEndPoint, aliyunAccessKeyID, aliyunAccessKeySecret);
                 PutObjectRequest aliyunPutObjectRequest = new PutObjectRequest(aliyunBucketName, aliyunFilename, file);
@@ -189,7 +189,7 @@ public class UploadUtil {
                 String upyunPassword = config.split("<<>>")[3];
                 String upyunDomain = config.split("<<>>")[4];
                 String upyunTreaty = config.split("<<>>")[5];
-                String upyunFilename = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
+                String upyunFilename = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName().replace(" ", "_");
                 RestManager upyunRestManager = new RestManager(upyunZoneName, upyunName, upyunPassword);
                 upyunRestManager.setApiDomain(RestManager.ED_AUTO);
                 Map<String, String> upyunParams = new HashMap<>();
@@ -210,9 +210,9 @@ public class UploadUtil {
                 String tencentCosSubDir = config.split("<<>>")[5].replaceAll("^/|/$", "");
                 String tencentCosKey;
                 if (!tencentCosSubDir.isEmpty()) {
-                    tencentCosKey = tencentCosSubDir + "/" + RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
+                    tencentCosKey = tencentCosSubDir + "/" + RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName().replace(" ", "_");
                 } else {
-                    tencentCosKey = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName();
+                    tencentCosKey = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName().replace(" ", "");
                 }
                 String tencentCosDomain = config.split("<<>>")[6];
 

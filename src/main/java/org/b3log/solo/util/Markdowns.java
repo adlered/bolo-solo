@@ -110,7 +110,16 @@ public final class Markdowns {
      * Whether Lute is available.
      */
     public static boolean LUTE_AVAILABLE = false;
+
     public static boolean SHOW_CODE_BLOCK_LN = false;
+    public static boolean FOOTNOTES = true;
+    public static boolean SHOW_TOC = false;
+    public static boolean AUTO_SPACE = false;
+    public static boolean FIX_TERM_TYPO = false;
+    public static boolean CHINESE_PUNCT = false;
+    public static boolean IMADAOM = false;
+    public static boolean PARAGRAPH_BEGINNING_SPACE = false;
+
     /**
      * Lute status
      */
@@ -289,12 +298,14 @@ public final class Markdowns {
         final URL url = new URL(LUTE_ENGINE_URL);
         final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestProperty("X-CodeSyntaxHighlightLineNum", String.valueOf(Markdowns.SHOW_CODE_BLOCK_LN));
-        conn.setRequestProperty("X-Footnotes", String.valueOf(false));
-        conn.setRequestProperty("X-ToC", String.valueOf(false));
-        conn.setRequestProperty("X-AutoSpace", String.valueOf(false));
-        conn.setRequestProperty("X-FixTermTypo", String.valueOf(false));
-        conn.setRequestProperty("X-ChinesePunct", String.valueOf(false));
-        conn.setRequestProperty("X-IMADAOM", String.valueOf(false));
+        conn.setRequestProperty("X-Footnotes", String.valueOf(Markdowns.FOOTNOTES));
+        conn.setRequestProperty("X-ToC", String.valueOf(Markdowns.SHOW_TOC));
+        conn.setRequestProperty("X-AutoSpace", String.valueOf(Markdowns.AUTO_SPACE));
+        conn.setRequestProperty("X-FixTermTypo", String.valueOf(Markdowns.FIX_TERM_TYPO));
+        conn.setRequestProperty("X-ChinesePunct", String.valueOf(Markdowns.CHINESE_PUNCT));
+        conn.setRequestProperty("X-IMADAOM", String.valueOf(Markdowns.IMADAOM));
+        conn.setRequestProperty("X-ParagraphBeginningSpace", String.valueOf(Markdowns.PARAGRAPH_BEGINNING_SPACE));
+        conn.setRequestProperty("X-HeadingID", "true");
         conn.setConnectTimeout(100);
         conn.setReadTimeout(3000);
         conn.setDoOutput(true);
@@ -309,7 +320,6 @@ public final class Markdowns {
         }
 
         conn.disconnect();
-
         return ret;
     }
 

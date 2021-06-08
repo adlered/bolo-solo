@@ -64,20 +64,24 @@ public class ImproveHelper implements Runnable {
           requestURL：访问者访问的URL地址
           ClientIP：访问者的IP地址，去敏处理
          */
-        statisticsDataObject.put("serverTime", System.currentTimeMillis());
-        statisticsDataObject.put("serverHost", Latkes.getStaticServePath());
-        statisticsDataObject.put("requestURL", request.getRequestURI());
-        String clientIP;
         try {
-            clientIP = request.getRemoteHost();
-            String[] ipSplit = clientIP.split("\\.");
-            clientIP = ipSplit[0] + "." + ipSplit[1] + "." + ipSplit[2] + ".*";
-        } catch (Exception e) {
-            clientIP = request.getRemoteHost();
+            statisticsDataObject.put("serverTime", System.currentTimeMillis());
+            statisticsDataObject.put("serverHost", Latkes.getStaticServePath());
+            statisticsDataObject.put("requestURL", request.getRequestURI());
+            String clientIP;
+            try {
+                clientIP = request.getRemoteHost();
+                String[] ipSplit = clientIP.split("\\.");
+                clientIP = ipSplit[0] + "." + ipSplit[1] + "." + ipSplit[2] + ".*";
+            } catch (Exception e) {
+                clientIP = request.getRemoteHost();
+            }
+            statisticsDataObject.put("clientIP", clientIP);
+            statisticsDataObject.put("userAgent", request.getHeader("User-Agent"));
+            statisticsDataObject.put("referer", request.getHeader("Referer"));
+        } catch (Exception ignored) {
+            return ;
         }
-        statisticsDataObject.put("clientIP", clientIP);
-        statisticsDataObject.put("userAgent", request.getHeader("User-Agent"));
-        statisticsDataObject.put("referer", request.getHeader("Referer"));
 
         statisticsObject.put("data", statisticsDataObject);
 

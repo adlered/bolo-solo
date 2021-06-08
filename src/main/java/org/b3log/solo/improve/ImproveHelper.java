@@ -92,7 +92,7 @@ public class ImproveHelper implements Runnable {
 
         CloseableHttpClient uploadSiteStatisticsHttpClient = createSSLClientDefault();
         HttpPost httpPost = new HttpPost(helperHost);
-        String params = statisticsObject.toString();
+        String params = compress(statisticsObject.toString());
         StringEntity httpEntity = new StringEntity(params, "utf-8");
         RequestConfig config = RequestConfig.custom().setConnectTimeout(2000).setConnectionRequestTimeout(1000).setSocketTimeout(2000).build();
         httpPost.setConfig(config);

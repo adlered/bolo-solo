@@ -141,7 +141,7 @@ public final class SoloServletListener extends AbstractServletListener {
         final PluginManager pluginManager = beanManager.getReference(PluginManager.class);
         pluginManager.load();
 
-        String header = "\n" +
+        String header = "" +
                 "████████████████████████████████████████████████████████████████████████\n" +
                 "█                                      █                               █\n" +
                 "█  ██████╗  ██████╗ ██╗      ██████╗   █                               █\n" +
@@ -151,13 +151,30 @@ public final class SoloServletListener extends AbstractServletListener {
                 "█  ██████╔╝╚██████╔╝███████╗╚██████╔╝  █  Current Version: " + BOLO_VERSION_EN + " █\n" +
                 "█  ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝   █                               █\n" +
                 "█                                      █                               █\n" +
+                "████✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩████\n" +
+                "█               THANK YOU FOR YOUR CONTRIBUTION TO BOLO !              █\n" +
+                "████✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩████\n" +
+                "█     adlered    (Author)         █    https://github.com/adlered      █\n" +
+                "█     expoli     (Contributor)    █    https://github.com/expoli       █\n" +
+                "█     zeekling   (Contributor)    █    https://github.com/zeekling     █\n" +
+                "█     csfwff     (Contributor)    █    https://github.com/csfwff       █\n" +
+                "█     teahouse   (Contributor)    █    https://github.com/teahouse15   █\n" +
                 "████████████████████████████████████████████████████████████████████████\n" +
                 " \n" +
                 "┌\n" +
                 "├　　HTTP Server Running On:　" + Latkes.getServePath() + "\n" +
                 "├　　JVM Memory:　" + (Runtime.getRuntime().maxMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024 + "MB / " + Runtime.getRuntime().maxMemory() / 1024 / 1024 + "MB\n" +
-                "└\n";
-        System.out.println(header);
+                "└";
+        System.out.println("");
+        String[] lines = header.split("\n");
+        for (String line : lines) {
+            System.out.println(line);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ignored) {
+            }
+        }
+        System.out.println("");
 
         Stopwatchs.end();
         LOGGER.log(Level.DEBUG, "Stopwatch: {0}{1}", Strings.LINE_SEPARATOR, Stopwatchs.getTimingStat());

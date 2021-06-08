@@ -39,28 +39,29 @@ import java.security.NoSuchAlgorithmException;
  * 感谢您参与「Bolo 用户体验改进计划」
  * 这里是用户体验改进计划的信息收集类
  */
-public class ImproveHelper {
+public class ImproveHelper implements Runnable {
 
     // 提交反馈服务器地址
-    private static String helperHost = "http://localhost:4399/Log";
+    private static final String helperHost = "http://report.stackoverflow.wiki:4399/Log";
+    private final RequestContext context;
 
-    /**
-     * 上传站点详情相关代码
-     * 线程安全，当存储足够条目才会上传一次
-     * @param context 请求数据
-     */
-    public static synchronized void uploadSiteStatistics(final RequestContext context) {
+    public ImproveHelper(RequestContext context) {
+        this.context = context;
+    }
+
+    @Override
+    public void run() {
         JSONObject statisticsObject = new JSONObject();
         statisticsObject.put("category", "statistics");
 
         JSONObject statisticsDataObject = new JSONObject();
         HttpServletRequest request = context.getRequest();
 
-        /**
-         * 隐私信息说明
-         * serverHost：博客的服务端地址
-         * requestURL：访问者访问的URL地址
-         * ClientIP：访问者的IP地址，去敏处理
+        /*
+          隐私信息说明
+          serverHost：博客的服务端地址
+          requestURL：访问者访问的URL地址
+          ClientIP：访问者的IP地址，去敏处理
          */
         statisticsDataObject.put("serverHost", Latkes.getStaticServePath());
         statisticsDataObject.put("requestURL", request.getRequestURI());

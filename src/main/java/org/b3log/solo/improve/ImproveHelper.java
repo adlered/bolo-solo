@@ -17,6 +17,7 @@
  */
 package org.b3log.solo.improve;
 
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
@@ -93,6 +94,8 @@ public class ImproveHelper implements Runnable {
         HttpPost httpPost = new HttpPost(helperHost);
         String params = statisticsObject.toString();
         StringEntity httpEntity = new StringEntity(params, "utf-8");
+        RequestConfig config = RequestConfig.custom().setConnectTimeout(2000).setConnectionRequestTimeout(1000).setSocketTimeout(2000).build();
+        httpPost.setConfig(config);
         httpPost.setHeader("Content-Type", "application/json");
         httpPost.setEntity(httpEntity);
 

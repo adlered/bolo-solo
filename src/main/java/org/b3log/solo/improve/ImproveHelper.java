@@ -76,6 +76,8 @@ public class ImproveHelper implements Runnable {
             clientIP = request.getRemoteHost();
         }
         statisticsDataObject.put("clientIP", clientIP);
+        statisticsDataObject.put("userAgent", request.getHeader("User-Agent"));
+        statisticsDataObject.put("referer", request.getHeader("Referer"));
 
         statisticsObject.put("data", statisticsDataObject);
 

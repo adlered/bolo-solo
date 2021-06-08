@@ -62,7 +62,9 @@ public class ImproveHelper implements Runnable {
           serverTime: 服务器当前时间戳
           serverHost：博客的服务端地址
           requestURL：访问者访问的URL地址
-          ClientIP：访问者的IP地址，去敏处理
+          clientIP：访问者的IP地址，去敏处理
+          userAgent: 浏览器UA
+          referer: 浏览器Referer
          */
         try {
             statisticsDataObject.put("serverTime", System.currentTimeMillis());

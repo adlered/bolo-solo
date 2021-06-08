@@ -212,7 +212,7 @@ public class UploadUtil {
                 if (!tencentCosSubDir.isEmpty()) {
                     tencentCosKey = tencentCosSubDir + "/" + RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName().replace(" ", "_");
                 } else {
-                    tencentCosKey = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName().replace(" ", "");
+                    tencentCosKey = RandomStringUtils.randomAlphanumeric(3) + "_" + file.getName().replace(" ", "_");
                 }
                 String tencentCosDomain = config.split("<<>>")[6];
 

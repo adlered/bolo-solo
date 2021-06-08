@@ -215,7 +215,7 @@ public class BlogProcessor {
                 outputStream.write(data);
                 outputStream.close();
             } catch (Exception e) {
-                LOGGER.log(Level.ERROR, "Unable to resolve favicon", e);
+                LOGGER.log(Level.ERROR, "Unable to resolve favicon");
 
                 context.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 

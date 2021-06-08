@@ -59,10 +59,12 @@ public class ImproveHelper implements Runnable {
 
         /*
           隐私信息说明
+          serverTime: 服务器当前时间戳
           serverHost：博客的服务端地址
           requestURL：访问者访问的URL地址
           ClientIP：访问者的IP地址，去敏处理
          */
+        statisticsDataObject.put("serverTime", System.currentTimeMillis());
         statisticsDataObject.put("serverHost", Latkes.getStaticServePath());
         statisticsDataObject.put("requestURL", request.getRequestURI());
         String clientIP;

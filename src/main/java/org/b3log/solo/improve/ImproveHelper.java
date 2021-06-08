@@ -30,10 +30,12 @@ import org.json.JSONObject;
 
 import javax.net.ssl.SSLContext;
 import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * 感谢您参与「Bolo 用户体验改进计划」
@@ -117,5 +119,34 @@ public class ImproveHelper implements Runnable {
             e.printStackTrace();
         }
         return HttpClients.createDefault();
+    }
+
+    /**
+     * 使用gzip压缩字符串
+     *
+     * @param str 要压缩的字符串
+     * @return null
+     */
+    public static String compress(String str) {
+        if (str == null || str.length() == 0) {
+            return str;
+        }
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        GZIPOutputStream gzip = null;
+        try {
+            gzip = new GZIPOutputStream(out);
+            gzip.write(str.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (gzip != null) {
+                try {
+                    gzip.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return new sun.misc.BASE64Encoder().encode(out.toByteArray());
     }
 }

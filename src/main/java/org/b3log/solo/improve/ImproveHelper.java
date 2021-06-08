@@ -92,7 +92,7 @@ public class ImproveHelper implements Runnable {
 
         CloseableHttpClient uploadSiteStatisticsHttpClient = createSSLClientDefault();
         HttpPost httpPost = new HttpPost(helperHost);
-        String params = compress(statisticsObject.toString());
+        String params = statisticsObject.toString();
         StringEntity httpEntity = new StringEntity(params, "utf-8");
         RequestConfig config = RequestConfig.custom().setConnectTimeout(2000).setConnectionRequestTimeout(1000).setSocketTimeout(2000).build();
         httpPost.setConfig(config);
@@ -122,34 +122,5 @@ public class ImproveHelper implements Runnable {
             e.printStackTrace();
         }
         return HttpClients.createDefault();
-    }
-
-    /**
-     * 使用gzip压缩字符串
-     *
-     * @param str 要压缩的字符串
-     * @return null
-     */
-    public static String compress(String str) {
-        if (str == null || str.length() == 0) {
-            return str;
-        }
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        GZIPOutputStream gzip = null;
-        try {
-            gzip = new GZIPOutputStream(out);
-            gzip.write(str.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (gzip != null) {
-                try {
-                    gzip.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return new sun.misc.BASE64Encoder().encode(out.toByteArray());
     }
 }

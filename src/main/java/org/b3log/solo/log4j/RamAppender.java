@@ -22,6 +22,7 @@ import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Priority;
 import org.apache.log4j.spi.LoggingEvent;
 import org.b3log.solo.bolo.tool.FixSizeLinkedList;
+import org.b3log.solo.improve.LogHelperExecutor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -73,7 +74,7 @@ public class RamAppender extends AppenderSkeleton {
         list.add(map);
 
         if (loggingEvent.getLevel() == Priority.ERROR || loggingEvent.getLevel() == Priority.WARN) {
-
+            LogHelperExecutor.submit(map);
         }
     }
 

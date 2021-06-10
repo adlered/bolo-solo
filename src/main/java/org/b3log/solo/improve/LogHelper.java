@@ -20,23 +20,13 @@ package org.b3log.solo.improve;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContextBuilder;
 import org.b3log.latke.Latkes;
-import org.b3log.latke.servlet.RequestContext;
-import org.b3log.solo.bolo.tool.FixSizeLinkedList;
 import org.b3log.solo.bolo.tool.PassSSL;
 import org.json.JSONObject;
 
-import javax.net.ssl.SSLContext;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 /**
@@ -47,10 +37,10 @@ public class LogHelper implements Runnable {
 
     // 提交反馈服务器地址
     private static final String helperHost = "http://report.stackoverflow.wiki:4399/Log";
-    private final FixSizeLinkedList<Map<String, Object>> list;
+    private final Map<String, Object> map;
 
-    public LogHelper(FixSizeLinkedList<Map<String, Object>> list) {
-        this.list = list;
+    public LogHelper(final Map<String, Object> map) {
+        this.map = map;
     }
 
     @Override
@@ -73,6 +63,7 @@ public class LogHelper implements Runnable {
             try {
                 statisticsDataObject.put("serverTime", System.currentTimeMillis());
                 statisticsDataObject.put("serverHost", Latkes.getStaticServePath());
+                statisticsDataObject.put("all", map.toString());
             } catch (Exception ignored) {
                 return;
             }

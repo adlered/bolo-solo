@@ -19,6 +19,7 @@ package org.b3log.solo.log4j;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.AppenderSkeleton;
+import org.apache.log4j.Priority;
 import org.apache.log4j.spi.LoggingEvent;
 import org.b3log.solo.bolo.tool.FixSizeLinkedList;
 
@@ -70,6 +71,10 @@ public class RamAppender extends AppenderSkeleton {
         }
 
         list.add(map);
+
+        if (loggingEvent.getLevel() == Priority.ERROR || loggingEvent.getLevel() == Priority.WARN) {
+
+        }
     }
 
     @Override

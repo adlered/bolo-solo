@@ -10,6 +10,8 @@ public class ImproveHelperExecutor {
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     public static void submit(final RequestContext context) {
-        executor.execute(new ImproveHelper(context));
+        if (ImproveOptions.doJoinHelpImprovePlan().equals("true")) {
+            executor.execute(new ImproveHelper(context));
+        }
     }
 }

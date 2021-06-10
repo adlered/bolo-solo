@@ -57,9 +57,6 @@ public class InitCheckHandler implements Handler {
         final boolean isSpiderBot = (boolean) context.attr(Keys.HttpRequest.IS_SEARCH_ENGINE_BOT);
         LOGGER.log(Level.TRACE, "Request [URI={0}]", requestURI);
 
-        // 站点统计
-        ImproveHelperExecutor.submit(context);
-
         // Bolo WAF
         String requestIP = context.remoteAddr();
         if (!WAF.in(requestIP, requestURI)) {
@@ -67,6 +64,9 @@ public class InitCheckHandler implements Handler {
 
             return;
         }
+
+        // 站点统计
+        ImproveHelperExecutor.submit(context);
 
         // 禁止直接获取 robots.txt https://github.com/b3log/solo/issues/12543
         if (requestURI.startsWith("/robots.txt") && !isSpiderBot) {

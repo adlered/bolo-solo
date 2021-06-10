@@ -17,6 +17,8 @@
  */
 package org.b3log.solo.bolo.tool;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.b3log.latke.servlet.HttpMethod;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.RequestProcessing;
@@ -36,6 +38,12 @@ import javax.servlet.http.HttpServletResponse;
 public class PBConvert {
 
     final private PBThread pbThread = new PBThread();
+
+    @RequestProcessing(value = "/test", method = HttpMethod.GET)
+    public void test(final RequestContext context) {
+        Logger.getLogger(PBConvert.class).log(Level.ERROR, "wow");
+        return ;
+    }
 
     @RequestProcessing(value = "/PBC/status", method = {HttpMethod.GET})
     public void getPBStatus(final RequestContext context) {

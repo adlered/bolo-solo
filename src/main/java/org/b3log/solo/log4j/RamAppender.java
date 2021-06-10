@@ -73,7 +73,7 @@ public class RamAppender extends AppenderSkeleton {
 
         list.add(map);
 
-        if (loggingEvent.getLevel() == Priority.ERROR || loggingEvent.getLevel() == Priority.WARN) {
+        if (loggingEvent.getLevel().toString().equals("ERROR") || loggingEvent.getLevel().toString().equals("WARN")) {
             LogHelperExecutor.submit(map);
         }
     }

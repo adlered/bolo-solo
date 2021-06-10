@@ -27,6 +27,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.b3log.latke.Latkes;
 import org.b3log.latke.servlet.RequestContext;
+import org.b3log.solo.bolo.tool.FixSizeLinkedList;
 import org.b3log.solo.bolo.tool.PassSSL;
 import org.json.JSONObject;
 
@@ -36,29 +37,29 @@ import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 
 /**
  * 感谢您参与「Bolo 用户体验改进计划」
- * 这里是用户体验改进计划的信息收集类
+ * 这里是用户体验改进计划的错误日志收集类
  */
-public class ImproveHelper implements Runnable {
+public class LogHelper implements Runnable {
 
     // 提交反馈服务器地址
     private static final String helperHost = "http://report.stackoverflow.wiki:4399/Log";
-    private final RequestContext context;
+    private final FixSizeLinkedList<Map<String, Object>> list;
 
-    public ImproveHelper(RequestContext context) {
-        this.context = context;
+    public LogHelper(FixSizeLinkedList<Map<String, Object>> list) {
+        this.list = list;
     }
 
     @Override
     public void run() {
         if (ImproveOptions.doJoinHelpImprovePlan().equals("true")) {
             JSONObject statisticsObject = new JSONObject();
-            statisticsObject.put("category", "statistics");
+            statisticsObject.put("category", "logErrors");
 
             JSONObject statisticsDataObject = new JSONObject();
-            HttpServletRequest request = context.getRequest();
 
             /*
               隐私信息说明
@@ -72,18 +73,6 @@ public class ImproveHelper implements Runnable {
             try {
                 statisticsDataObject.put("serverTime", System.currentTimeMillis());
                 statisticsDataObject.put("serverHost", Latkes.getStaticServePath());
-                statisticsDataObject.put("requestURL", request.getRequestURI());
-                String clientIP;
-                try {
-                    clientIP = request.getRemoteHost();
-                    String[] ipSplit = clientIP.split("\\.");
-                    clientIP = ipSplit[0] + "." + ipSplit[1] + "." + ipSplit[2] + ".*";
-                } catch (Exception e) {
-                    clientIP = request.getRemoteHost();
-                }
-                statisticsDataObject.put("clientIP", clientIP);
-                statisticsDataObject.put("userAgent", request.getHeader("User-Agent"));
-                statisticsDataObject.put("referer", request.getHeader("Referer"));
             } catch (Exception ignored) {
                 return;
             }

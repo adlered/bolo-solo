@@ -54,6 +54,7 @@ import org.apache.http.util.EntityUtils;
 import org.b3log.latke.Latkes;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
+import org.b3log.solo.bolo.tool.PassSSL;
 import org.json.JSONObject;
 
 import javax.net.ssl.SSLContext;
@@ -112,7 +113,7 @@ public class UploadUtil {
             case "picuang":
                 String picuangSite = config.split("<<>>")[1];
                 String picuangPassword = config.split("<<>>")[2];
-                CloseableHttpClient picuangHttpClient = createSSLClientDefault();
+                CloseableHttpClient picuangHttpClient = PassSSL.createSSLClientDefault();
                 try {
                     HttpPost httpPost = new HttpPost(picuangSite + "/upload/auth?password=" + picuangPassword);
                     FileBody bin = new FileBody(file);
@@ -227,23 +228,5 @@ public class UploadUtil {
         }
         file.delete();
         return result;
-    }
-
-    /**
-     * 设置可访问https
-     *
-     * @return null
-     */
-    public static CloseableHttpClient createSSLClientDefault() {
-        try {
-            //信任所有
-            SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, (chain, authType) -> true).build();
-            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-
-            return HttpClients.custom().setSSLSocketFactory(sslsf).build();
-        } catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
-            e.printStackTrace();
-        }
-        return HttpClients.createDefault();
     }
 }

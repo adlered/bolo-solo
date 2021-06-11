@@ -120,7 +120,7 @@ public final class GitHubs {
 
             return null;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets GitHub repos failed", e);
+            LOGGER.log(Level.ERROR, "Gets GitHub repos failed, please check your network connection to github.com");
 
             return null;
         }

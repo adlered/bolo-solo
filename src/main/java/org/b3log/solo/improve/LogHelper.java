@@ -69,7 +69,7 @@ public class LogHelper implements Runnable {
                 return;
             }
 
-            //statisticsObject.put("data", statisticsDataObject);
+            statisticsObject.put("data", statisticsDataObject);
 
             CloseableHttpClient uploadSiteStatisticsHttpClient = new PassSSL().createSSLClientDefault();
             HttpPost httpPost = new HttpPost(helperHost);

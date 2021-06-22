@@ -34,13 +34,16 @@ public class PassSSL {
      *
      * @return null
      */
-    public static CloseableHttpClient createSSLClientDefault() {
+    public CloseableHttpClient createSSLClientDefault() {
         try {
             //信任所有
             SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, (chain, authType) -> true).build();
             SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 
-            return HttpClients.custom().setSSLSocketFactory(sslsf).build();
+            return HttpClients
+                    .custom()
+                    .setSSLSocketFactory(sslsf)
+                    .build();
         } catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
             e.printStackTrace();
         }

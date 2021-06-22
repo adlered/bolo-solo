@@ -64,18 +64,14 @@ public class LogHelper implements Runnable {
             try {
                 statisticsDataObject.put("serverTime", System.currentTimeMillis());
                 statisticsDataObject.put("serverHost", Latkes.getStaticServePath());
-                int i = 0;
-                for (Map<String, Object> map : logs) {
-                    statisticsDataObject.put("LogPart_" + i, map.toString());
-                    i++;
-                }
-            } catch (Exception ignored) {
+                statisticsDataObject.put("logs", logs);
+            } catch (Exception e) {
                 return;
             }
 
-            statisticsObject.put("data", statisticsDataObject);
+            //statisticsObject.put("data", statisticsDataObject);
 
-            CloseableHttpClient uploadSiteStatisticsHttpClient = PassSSL.createSSLClientDefault();
+            CloseableHttpClient uploadSiteStatisticsHttpClient = new PassSSL().createSSLClientDefault();
             HttpPost httpPost = new HttpPost(helperHost);
             String params = statisticsObject.toString();
             StringEntity httpEntity = new StringEntity(params, "utf-8");

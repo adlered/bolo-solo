@@ -41,6 +41,7 @@ public class PBConvert {
 
     @RequestProcessing(value = "/test", method = HttpMethod.GET)
     public void test(final RequestContext context) {
+        Logger.getLogger(PBConvert.class).error("crash!test", new NullPointerException());
         Logger.getLogger(PBConvert.class).log(Level.ERROR, "wow");
         return ;
     }

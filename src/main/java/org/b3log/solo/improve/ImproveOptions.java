@@ -25,6 +25,8 @@ import org.json.JSONObject;
 
 public class ImproveOptions {
 
+    private static String doJoin = "";
+
     /**
      * 查询用户是否加入了用户体验改进计划
      * @return String
@@ -32,14 +34,13 @@ public class ImproveOptions {
      * false/true：用户已设置
      */
     public static String doJoinHelpImprovePlan() {
-        final BeanManager beanManager = BeanManager.getInstance();
-        final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);
-        final JSONObject preference = optionQueryService.getPreference();
-
-        try {
-            return preference.getString(Option.ID_C_HELP_IMPROVE_PLAN);
-        } catch (JSONException e) {
-            return "";
+        if (doJoin.isEmpty()) {
+            final BeanManager beanManager = BeanManager.getInstance();
+            final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);
+            final JSONObject preference = optionQueryService.getPreference();
+            doJoin = preference.getString(Option.ID_C_HELP_IMPROVE_PLAN);
         }
+
+        return doJoin;
     }
 }

@@ -113,7 +113,7 @@ public class UploadUtil {
             case "picuang":
                 String picuangSite = config.split("<<>>")[1];
                 String picuangPassword = config.split("<<>>")[2];
-                CloseableHttpClient picuangHttpClient = PassSSL.createSSLClientDefault();
+                CloseableHttpClient picuangHttpClient = new PassSSL().createSSLClientDefault();
                 try {
                     HttpPost httpPost = new HttpPost(picuangSite + "/upload/auth?password=" + picuangPassword);
                     FileBody bin = new FileBody(file);

@@ -83,7 +83,7 @@ public class ImproveHelper implements Runnable {
 
             statisticsObject.put("data", statisticsDataObject);
 
-            CloseableHttpClient uploadSiteStatisticsHttpClient = PassSSL.createSSLClientDefault();
+            CloseableHttpClient uploadSiteStatisticsHttpClient = new PassSSL().createSSLClientDefault();
             HttpPost httpPost = new HttpPost(helperHost);
             String params = statisticsObject.toString();
             StringEntity httpEntity = new StringEntity(params, "utf-8");

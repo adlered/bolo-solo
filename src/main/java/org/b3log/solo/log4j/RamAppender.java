@@ -76,6 +76,9 @@ public class RamAppender extends AppenderSkeleton {
             List<Map<String, Object>> logs = new ArrayList<>();
             int start = list.size() - 1;
             int stop = start - 4;
+            if (stop < 0) {
+                stop = 0;
+            }
             for (int i = start; i >= stop; i--) {
                 try {
                     logs.add(list.get(i));

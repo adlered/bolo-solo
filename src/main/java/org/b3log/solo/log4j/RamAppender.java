@@ -25,9 +25,7 @@ import org.b3log.solo.bolo.tool.FixSizeLinkedList;
 import org.b3log.solo.improve.LogHelperExecutor;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <h3>bolo-solo</h3>
@@ -73,8 +71,18 @@ public class RamAppender extends AppenderSkeleton {
 
         list.add(map);
 
+        // 收集最近5条错误报告
         if (loggingEvent.getLevel().toString().equals("ERROR") || loggingEvent.getLevel().toString().equals("WARN")) {
-            LogHelperExecutor.submit(map);
+            List<Map<String, Object>> logs = new ArrayList<>();
+            int start = list.size() - 1;
+            int stop = start - 4;
+            for (int i = start; i >= stop; i--) {
+                try {
+                    logs.add(list.get(i));
+                } catch (Exception ignored) {
+                }
+            }
+            LogHelperExecutor.submit(logs);
         }
     }
 

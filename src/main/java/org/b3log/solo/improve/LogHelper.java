@@ -27,6 +27,7 @@ import org.b3log.solo.bolo.tool.PassSSL;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,10 +38,10 @@ public class LogHelper implements Runnable {
 
     // 提交反馈服务器地址
     private static final String helperHost = "http://report.stackoverflow.wiki:4399/Log";
-    private final Map<String, Object> map;
+    private final List<Map<String, Object>> logs;
 
-    public LogHelper(final Map<String, Object> map) {
-        this.map = map;
+    public LogHelper(final List<Map<String, Object>> logs) {
+        this.logs = logs;
     }
 
     @Override
@@ -63,7 +64,11 @@ public class LogHelper implements Runnable {
             try {
                 statisticsDataObject.put("serverTime", System.currentTimeMillis());
                 statisticsDataObject.put("serverHost", Latkes.getStaticServePath());
-                statisticsDataObject.put("all", map.toString());
+                int i = 0;
+                for (Map<String, Object> map : logs) {
+                    statisticsDataObject.put("LogPart_" + i, map.toString());
+                    i++;
+                }
             } catch (Exception ignored) {
                 return;
             }

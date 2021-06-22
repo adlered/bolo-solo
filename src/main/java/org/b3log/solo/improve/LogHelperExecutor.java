@@ -17,11 +17,12 @@
  */
 package org.b3log.solo.improve;
 
+import java.util.List;
 import java.util.Map;
 
 public class LogHelperExecutor {
 
-    public static void submit(final Map<String, Object> map) {
-        SharedExecutorPool.executor.execute(new LogHelper(map));
+    public static void submit(final List<Map<String, Object>> logs) {
+        SharedExecutorPool.executor.execute(new LogHelper(logs));
     }
 }

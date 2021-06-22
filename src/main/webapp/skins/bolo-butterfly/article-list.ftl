@@ -129,7 +129,7 @@
                         </a>
                     </#if>
                     <#if usite.usiteWeChat !=''>
-                        <a class="social-icon" target="_blank" title="WeChat"
+                        <a class="social-icon" title="WeChat"
                            href="javascript:alert('我的微信号：${usite.usiteWeChat}')">
                             <i class="fab fa-weixin"></i>
                         </a>

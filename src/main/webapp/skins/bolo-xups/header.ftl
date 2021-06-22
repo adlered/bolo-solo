@@ -91,7 +91,7 @@
                             </a>
                         </#if>
                         <#if usite.usiteWeChat != ''>
-                            <a href="javascript:alert('微信号：${usite.usiteWeChat}')" target="_blank">
+                            <a href="javascript:alert('微信号：${usite.usiteWeChat}')">
                                 <b style="color: #a7ec6b">■</b>
                                 微信
                             </a>

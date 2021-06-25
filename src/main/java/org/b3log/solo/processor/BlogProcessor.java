@@ -33,6 +33,7 @@ import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.servlet.renderer.JsonRenderer;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.SslUtils;
+import org.b3log.solo.bolo.prop.FaviconCache;
 import org.b3log.solo.bolo.tool.EditIMG;
 import org.b3log.solo.bolo.tool.MediaFileUtil;
 import org.b3log.solo.model.Article;
@@ -50,6 +51,9 @@ import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -103,6 +107,11 @@ public class BlogProcessor {
      */
     private static String PWA_MANIFESTO_JSON;
 
+    /**
+     * The cache of favicon.
+     */
+    HashMap<String, FaviconCache> faviconCache = new HashMap<>();
+
     static {
         try (final InputStream tplStream = BlogProcessor.class.getResourceAsStream("/manifest.json.tpl")) {
             PWA_MANIFESTO_JSON = IOUtils.toString(tplStream, "UTF-8");
@@ -142,88 +151,106 @@ public class BlogProcessor {
     @RequestProcessing(value = "/favicon/{width}/{height}")
     public void getFavicon(final RequestContext context) {
         synchronized (this) {
-            final JSONObject preference = optionQueryService.getPreference();
-            if (null == preference) {
-                return;
-            }
-            String favicon = preference.optString(Option.ID_C_FAVICON_URL);
-            // 正则表达式
-            String regUrl = "^([hH][tT]{2}[pP]://|[hH][tT]{2}[pP][sS]://)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\\\\/])+$";
-            Pattern p = Pattern.compile(regUrl);
-            Matcher m = p.matcher(favicon);
-            if (!m.matches()) {
-                // 非http或https开头，默认匹配本地
-                favicon = Latkes.getServePath() + "/" + favicon;
-            }
-
-            File faviconFile = null;
-
-            // 下载 favicon
+            String resolution = context.pathVar("width") + "/" + context.pathVar("height");
             try {
-                // 分析文件类型
-                MediaFileUtil.MediaFileType mediaFileType = MediaFileUtil.getFileType(favicon);
-                if (mediaFileType == null) {
-                    // 后缀名无法分析文件类型时，默认返回png
-                    mediaFileType = new MediaFileUtil.MediaFileType(
-                            33,
-                            "image/png"
-                    );
+                if (faviconCache.containsKey(resolution)) {
+                    final HttpServletResponse response = context.getResponse();
+                    String contentType = faviconCache.get(resolution).getMediaFileType();
+                    response.setContentType(contentType);
+                    OutputStream outputStream = response.getOutputStream();
+                    outputStream.write(faviconCache.get(resolution).getData());
+                    outputStream.close();
+                } else {
+                    final JSONObject preference = optionQueryService.getPreference();
+                    if (null == preference) {
+                        return;
+                    }
+                    String favicon = preference.optString(Option.ID_C_FAVICON_URL);
+                    // 正则表达式
+                    String regUrl = "^([hH][tT]{2}[pP]://|[hH][tT]{2}[pP][sS]://)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\\\\/])+$";
+                    Pattern p = Pattern.compile(regUrl);
+                    Matcher m = p.matcher(favicon);
+                    if (!m.matches()) {
+                        // 非http或https开头，默认匹配本地
+                        favicon = Latkes.getServePath() + "/" + favicon;
+                    }
+
+                    File faviconFile = null;
+
+                    // 下载 favicon
+                    try {
+                        // 分析文件类型
+                        MediaFileUtil.MediaFileType mediaFileType = MediaFileUtil.getFileType(favicon);
+                        if (mediaFileType == null) {
+                            // 后缀名无法分析文件类型时，默认返回png
+                            mediaFileType = new MediaFileUtil.MediaFileType(
+                                    33,
+                                    "image/png"
+                            );
+                        }
+
+                        // 分析临时目录
+                        final ServletContext servletContext = SoloServletListener.getServletContext();
+                        final String assets = "/";
+                        String path = servletContext.getResource(assets).getPath();
+                        path = URLDecoder.decode(path);
+                        String sourceFilePath = path + "tmp_favicon";
+
+                        // 创建临时文件，并定义输出流
+                        faviconFile = new File(sourceFilePath);
+                        FileOutputStream fileOutputStream = new FileOutputStream(faviconFile);
+
+                        // 下载favicon
+                        URL url = new URL(favicon);
+                        SslUtils.ignoreSsl();
+                        URLConnection connection = url.openConnection();
+                        InputStream inputStream = connection.getInputStream();
+                        int length = 0;
+                        byte[] bytes = new byte[1024];
+                        while ((length = inputStream.read(bytes)) != -1) {
+                            // 将互联网图片通过输出流写入到临时文件tmp_favicon
+                            fileOutputStream.write(bytes, 0, length);
+                        }
+                        fileOutputStream.close();
+                        inputStream.close();
+
+                        // 获取图片宽高参数
+                        int width = Integer.parseInt(context.pathVar("width"));
+                        int height = Integer.parseInt(context.pathVar("height"));
+
+                        // 裁剪图片
+                        EditIMG.createThumbnail(faviconFile, faviconFile, width, height, MediaFileUtil.getSuffixByFileType(mediaFileType));
+
+                        // 将裁剪后的图片输出至浏览器
+                        final HttpServletResponse response = context.getResponse();
+                        FileInputStream fileInputStream = new FileInputStream(faviconFile);
+                        int fileSize = fileInputStream.available();
+                        byte[] data = new byte[fileSize];
+                        fileInputStream.read(data);
+                        fileInputStream.close();
+                        String contentType = mediaFileType.mimeType;
+                        response.setContentType(contentType);
+                        OutputStream outputStream = response.getOutputStream();
+                        outputStream.write(data);
+                        // 写缓存
+                        faviconCache.put(resolution, new FaviconCache(contentType, data));
+                        outputStream.close();
+                    } catch (Exception e) {
+                        LOGGER.log(Level.ERROR, "Unable to resolve favicon");
+                        context.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+
+                        return;
+                    } finally {
+                        if (faviconFile != null) {
+                            faviconFile.delete();
+                        }
+                    }
                 }
-
-                // 分析临时目录
-                final ServletContext servletContext = SoloServletListener.getServletContext();
-                final String assets = "/";
-                String path = servletContext.getResource(assets).getPath();
-                path = URLDecoder.decode(path);
-                String sourceFilePath = path + "tmp_favicon";
-
-                // 创建临时文件，并定义输出流
-                faviconFile = new File(sourceFilePath);
-                FileOutputStream fileOutputStream = new FileOutputStream(faviconFile);
-
-                // 下载favicon
-                URL url = new URL(favicon);
-                SslUtils.ignoreSsl();
-                URLConnection connection = url.openConnection();
-                InputStream inputStream = connection.getInputStream();
-                int length = 0;
-                byte[] bytes = new byte[1024];
-                while ((length = inputStream.read(bytes)) != -1) {
-                    // 将互联网图片通过输出流写入到临时文件tmp_favicon
-                    fileOutputStream.write(bytes, 0, length);
-                }
-                fileOutputStream.close();
-                inputStream.close();
-
-                // 获取图片宽高参数
-                int width = Integer.parseInt(context.pathVar("width"));
-                int height = Integer.parseInt(context.pathVar("height"));
-
-                // 裁剪图片
-                EditIMG.createThumbnail(faviconFile, faviconFile, width, height, MediaFileUtil.getSuffixByFileType(mediaFileType));
-                
-                // 将裁剪后的图片输出至浏览器
-                final HttpServletResponse response = context.getResponse();
-                FileInputStream fileInputStream = new FileInputStream(faviconFile);
-                int fileSize = fileInputStream.available();
-                byte[] data = new byte[fileSize];
-                fileInputStream.read(data);
-                fileInputStream.close();
-                String contentType = mediaFileType.mimeType;
-                response.setContentType(contentType);
-                OutputStream outputStream = response.getOutputStream();
-                outputStream.write(data);
-                outputStream.close();
             } catch (Exception e) {
                 LOGGER.log(Level.ERROR, "Unable to resolve favicon");
-
                 context.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
                 return;
-            } finally {
-                if (faviconFile != null) {
-                    faviconFile.delete();
-                }
             }
         }
     }

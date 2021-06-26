@@ -6166,3 +6166,7 @@ blockquote.pullquote.right {
   -ms-animation: none;
   animation: none;
 }
+
+video {
+  width: 100%;
+}

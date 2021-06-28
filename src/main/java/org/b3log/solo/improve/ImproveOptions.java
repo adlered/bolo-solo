@@ -34,13 +34,16 @@ public class ImproveOptions {
      * false/true：用户已设置
      */
     public static String doJoinHelpImprovePlan() {
-        if (doJoin.isEmpty()) {
-            final BeanManager beanManager = BeanManager.getInstance();
-            final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);
-            final JSONObject preference = optionQueryService.getPreference();
-            doJoin = preference.getString(Option.ID_C_HELP_IMPROVE_PLAN);
+        try {
+            if (doJoin.isEmpty()) {
+                final BeanManager beanManager = BeanManager.getInstance();
+                final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);
+                final JSONObject preference = optionQueryService.getPreference();
+                doJoin = preference.getString(Option.ID_C_HELP_IMPROVE_PLAN);
+            }
+        } catch (Exception e) {
+            return "";
         }
-
         return doJoin;
     }
 }

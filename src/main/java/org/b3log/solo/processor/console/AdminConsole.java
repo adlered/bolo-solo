@@ -56,6 +56,7 @@ import org.b3log.solo.service.UserQueryService;
 import org.b3log.solo.util.Markdowns;
 import org.b3log.solo.util.PluginUtil;
 import org.b3log.solo.util.Solos;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.servlet.ServletOutputStream;

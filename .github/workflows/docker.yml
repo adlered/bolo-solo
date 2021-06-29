@@ -51,7 +51,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Get latest code
-        run: git clone https://github.com/adlered/bolo-solo.git && mv bolo-solo/* .
+        run: mv bolo-solo/* .
       -
         name: Build and push
         uses: docker/build-push-action@v2

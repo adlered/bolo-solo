@@ -81,11 +81,11 @@ public final class SoloServletListener extends AbstractServletListener {
     public static final String STABLE_EN = "Stable";
     public static final String BETA_CN = "内测版";
     public static final String BETA_EN = "Beta";
-    public static final String BOLO_VERSION_SOURCE = "2.5";
-    public static final String BOLO_VERSION = "v" + BOLO_VERSION_SOURCE + " " + STABLE_CN;
-    public static final String BOLO_VERSION_EN = "v" + BOLO_VERSION_SOURCE + " " + STABLE_EN;
-    // public static final String BOLO_VERSION = "v" + BOLO_VERSION_SOURCE + " " + BETA_CN;
-    // public static final String BOLO_VERSION_EN = "v" + BOLO_VERSION_SOURCE + " " + BETA_EN;
+    public static final String BOLO_VERSION_SOURCE = "3.0";
+    // public static final String BOLO_VERSION = "v" + BOLO_VERSION_SOURCE + " " + STABLE_CN;
+    // public static final String BOLO_VERSION_EN = "v" + BOLO_VERSION_SOURCE + " " + STABLE_EN;
+    public static final String BOLO_VERSION = "v" + BOLO_VERSION_SOURCE + " " + BETA_CN;
+    public static final String BOLO_VERSION_EN = "v" + BOLO_VERSION_SOURCE + " " + BETA_EN;
     /**
      * Solo version.
      */

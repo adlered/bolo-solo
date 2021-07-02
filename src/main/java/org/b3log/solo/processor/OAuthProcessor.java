@@ -205,7 +205,7 @@ public class OAuthProcessor {
         } catch (Exception ignored) {
         }
         try {
-            statement.executeUpdate("INSERT INTO `" + tablePrefix + "user` ( `oId`, `userName`, `userURL`, `userRole`, `userAvatar`, `userB3Key`, `userGitHubId` ) VALUES ( 'default', '" + username + "', '" + Latkes.getServePath() + "', 'adminRole', 'https://pic.stackoverflow.wiki/uploadImages/117/136/73/84/2020/08/03/19/59/2c12286b-91a0-478e-ba47-edaa21f19476.png', '" + password + "', 'none' );");
+            statement.executeUpdate("INSERT INTO `" + tablePrefix + "user` ( `oId`, `userName`, `userURL`, `userRole`, `userAvatar`, `userB3Key`, `userGitHubId` ) VALUES ( 'default', '" + username + "', '" + Latkes.getServePath() + "', 'adminRole', 'https://pic.stackoverflow.wiki/uploadImages/117/136/73/84/2020/08/03/19/59/2c12286b-91a0-478e-ba47-edaa21f19476.png', '" + MD5Utils.stringToMD5Twice(password) + "', 'none' );");
         } catch (Exception ignored) {
         }
         statement.close();

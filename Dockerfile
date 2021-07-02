@@ -1,4 +1,4 @@
-FROM maven:3-jdk-8-alpine as MVN_BUILD
+FROM maven:3.8-jdk-8-openj9 as MVN_BUILD
 
 WORKDIR /opt/bolo/
 ADD . /tmp

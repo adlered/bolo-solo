@@ -123,14 +123,19 @@ public class OAuthProcessor {
         HttpServletResponse response = context.getResponse();
         HttpServletRequest request = context.getRequest();
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        password = MD5Utils.stringToMD5Twice(password);
+        String srcPassword = request.getParameter("password");
+        String password = MD5Utils.stringToMD5Twice(srcPassword);
         try {
             if (UpgradeService.boloFastMigration) {
                 // 快速迁移程序
                 final JSONObject preference = optionQueryService.getPreference();
                 final String currentVer = preference.getString(Option.ID_C_VERSION);
-                fastMigrate(currentVer, username, password, context);
+                int version = Integer.parseInt(currentVer.replaceAll("\\.", ""));
+                if (version < 432) {
+                    fastMigrate(currentVer, username, srcPassword, context);
+                } else {
+                    fastMigrate(currentVer, username, password, context);
+                }
                 context.sendRedirect(Latkes.getServePath() + "/");
             } else if (!initService.isInited()) {
                 LOGGER.log(Level.INFO, "Bolo initializing...");

@@ -35,7 +35,7 @@
     <orderEntry type="library" name="wtinychart" level="application" />
     <orderEntry type="library" name="chart.js" level="application" />
     <orderEntry type="library" name="font-awesome" level="application" />
-    <orderEntry type="library" name="Maven: org.b3log:latke-core:2.5.8" level="project" />
+    <orderEntry type="library" name="Maven: io.github.adlered:latke-servlet:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.28" level="project" />
     <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.29" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
@@ -52,6 +52,7 @@
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.18" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.b3log:latke-repository-mysql:2.5.8" level="project" />
+    <orderEntry type="library" name="Maven: org.b3log:latke-core:2.5.8" level="project" />
     <orderEntry type="library" name="Maven: org.b3log:latke-repository-h2:2.5.8" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.testng:testng:6.1.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:3.8.1" level="project" />

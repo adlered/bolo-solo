@@ -14,7 +14,7 @@
           <element id="module-output" name="bolo-solo" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: org.b3log:latke-core:2.5.8" />
+          <element id="library" level="project" name="Maven: io.github.adlered:latke-servlet:1.0.0" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.28" />
           <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.29" />
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.6" />
@@ -31,6 +31,7 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.18" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
           <element id="library" level="project" name="Maven: org.b3log:latke-repository-mysql:2.5.8" />
+          <element id="library" level="project" name="Maven: org.b3log:latke-core:2.5.8" />
           <element id="library" level="project" name="Maven: org.b3log:latke-repository-h2:2.5.8" />
           <element id="library" level="project" name="Maven: junit:junit:3.8.1" />
           <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.12.1" />

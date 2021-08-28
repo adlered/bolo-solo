@@ -86,6 +86,7 @@
 
     <properties>
         <org.b3log.latke.version>2.5.8</org.b3log.latke.version>
+        <io.github.adlered.latke-servlet.version>1.0.0</io.github.adlered.latke-servlet.version>
 
         <slf4j.version>1.7.28</slf4j.version>
         <jsoup.version>1.12.1</jsoup.version>
@@ -115,9 +116,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.b3log</groupId>
-            <artifactId>latke-core</artifactId>
-            <version>${org.b3log.latke.version}</version>
+            <groupId>io.github.adlered</groupId>
+            <artifactId>latke-servlet</artifactId>
+            <version>${io.github.adlered.latke-servlet.version}</version>
         </dependency>
 
         <dependency>
@@ -454,31 +455,5 @@
 
         <finalName>bolo</finalName>
     </build>
-
-    <profiles>
-        <profile>
-            <id>ci</id>
-        </profile>
-
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>aliyun</id>
-                    <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-                </repository>
-            </repositories>
-
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>aliyun</id>
-                    <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-                </pluginRepository>
-            </pluginRepositories>
-        </profile>
-    </profiles>
 
 </project>

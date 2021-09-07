@@ -79,7 +79,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
           tags: |
-            ${{ steps.prep.outputs.image }}:amd64-${{ steps.prep.outputs.VERSION }}
+            ${{ steps.prep.outputs.image }}:amd64-${{ steps.date.outputs.today }}
             ${{ steps.prep.outputs.image }}:amd64-${{ steps.prep.outputs.tag }}
             ${{ steps.prep.outputs.image }}:latest
 
@@ -145,7 +145,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
           tags: |
-            ${{ steps.prep.outputs.image }}:arm64-${{ steps.prep.outputs.VERSION }}
+            ${{ steps.prep.outputs.image }}:arm64-${{ steps.date.outputs.today }}
             ${{ steps.prep.outputs.image }}:arm64-${{ steps.prep.outputs.tag }}
             ${{ steps.prep.outputs.image }}:arm64-latest
 

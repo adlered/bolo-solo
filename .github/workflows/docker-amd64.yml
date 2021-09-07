@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Bolo-Build
+name: Bolo-Build-Amd64
 
 # Controls when the action will run. 
 on:
@@ -24,7 +24,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  buildx:
+  build:
     runs-on: ubuntu-latest
     steps:
       -
@@ -34,6 +34,13 @@ jobs:
         name: Get current date
         id: date
         run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
+      - name: Prepare
+        id: prep
+        run: |
+          TAG=$(echo $GITHUB_REF | cut -d / -f 3)
+          IMAGE="tangcuyu/bolo-solo"
+          echo ::set-output name=image::${IMAGE}
+          echo ::set-output name=tag::${TAG}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -66,10 +73,16 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: ${{ github.event_name != 'pull_request' }}
           cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
           tags: |
-            tangcuyu/bolo-solo:latest
-            tangcuyu/bolo-solo:${{ steps.date.outputs.today }}
+            ${{ steps.prep.outputs.image }}:amd64-${{ steps.date.outputs.today }}
+            ${{ steps.prep.outputs.image }}:amd64-${{ steps.prep.outputs.tag }}
+            ${{ steps.prep.outputs.image }}:amd64-latest
+
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache

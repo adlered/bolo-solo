@@ -41,6 +41,7 @@ jobs:
           IMAGE="tangcuyu/bolo-solo"
           echo ::set-output name=image::${IMAGE}
           echo ::set-output name=tag::${TAG}
+          echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -78,9 +79,9 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
           tags: |
-            ${{ steps.prep.outputs.image }}:amd64-${{ steps.date.outputs.today }}
+            ${{ steps.prep.outputs.image }}:amd64-${{ steps.prep.outputs.VERSION }}
             ${{ steps.prep.outputs.image }}:amd64-${{ steps.prep.outputs.tag }}
-            ${{ steps.prep.outputs.image }}:amd64-latest
+            ${{ steps.prep.outputs.image }}:latest
 
       - name: Move cache
         run: |
@@ -106,6 +107,7 @@ jobs:
           IMAGE="tangcuyu/bolo-solo"
           echo ::set-output name=image::${IMAGE}
           echo ::set-output name=tag::${TAG}
+          echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -143,7 +145,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
           tags: |
-            ${{ steps.prep.outputs.image }}:arm64-${{ steps.date.outputs.today }}
+            ${{ steps.prep.outputs.image }}:arm64-${{ steps.prep.outputs.VERSION }}
             ${{ steps.prep.outputs.image }}:arm64-${{ steps.prep.outputs.tag }}
             ${{ steps.prep.outputs.image }}:arm64-latest
 

@@ -1,6 +1,37 @@
 # Project exclude paths
-/node_modules/
-/target/
+node_modules/
+
+# java
+*.class
+
+
+# eclipse ignore
 .classpath
 .project
 .settings
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.txt
+*.iws
+target/
+out/
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+
+# vim ignore
+*.swp
+
+

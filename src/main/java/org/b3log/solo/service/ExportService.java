@@ -42,6 +42,7 @@ import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.Global;
 import org.b3log.solo.model.*;
 import org.b3log.solo.repository.*;
+import org.b3log.solo.util.FileUtil;
 import org.b3log.solo.util.GitHubs;
 import org.b3log.solo.util.Solos;
 import org.json.JSONArray;
@@ -316,10 +317,19 @@ public class ExportService {
 
             final String readme = genSoloBlogReadme(clientTitle, clientSubtitle, preference.optString(Option.ID_C_FAVICON_URL), loginName + "/" + repoName);
             JdbcRepository.dispose();
+            LOGGER.info("begin get README.md");
+            String tmpFilePath = "/tmp/bolo-blog-readme.md";
+            String oldReadme  = FileUtil.readFile(tmpFilePath);
+
+            if (oldReadme != null && oldReadme.equals(readme)) {
+                LOGGER.info("not need update readme.");
+                return ;
+            }
             ok = GitHubs.updateFile(pat, loginName, repoName, "README.md", readme.getBytes(StandardCharsets.UTF_8));
             if (ok) {
                 ok = GitHubs.updateFile(pat, loginName, repoName, "backup.zip", zipData);
             }
+            FileUtil.saveDataToFile(tmpFilePath, readme);
             if (ok) {
                 LOGGER.log(Level.INFO, "Exported public articles to your repo [bolo-blog]");
             }

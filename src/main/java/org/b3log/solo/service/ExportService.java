@@ -316,10 +316,20 @@ public class ExportService {
 
             final String readme = genSoloBlogReadme(clientTitle, clientSubtitle, preference.optString(Option.ID_C_FAVICON_URL), loginName + "/" + repoName);
             JdbcRepository.dispose();
+            LOGGER.info("begin get README.md");
+            String tmpFilePath = "/tmp/bolo-blog-readme.md";
+            File file = FileUtils.getFile(tmpFilePath);
+            String oldReadme  = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+
+            if (oldReadme != null && oldReadme.equals(readme)) {
+                LOGGER.info("not need update readme.");
+                return ;
+            }
             ok = GitHubs.updateFile(pat, loginName, repoName, "README.md", readme.getBytes(StandardCharsets.UTF_8));
             if (ok) {
                 ok = GitHubs.updateFile(pat, loginName, repoName, "backup.zip", zipData);
             }
+            FileUtils.write(file, readme, StandardCharsets.UTF_8);
             if (ok) {
                 LOGGER.log(Level.INFO, "Exported public articles to your repo [bolo-blog]");
             }

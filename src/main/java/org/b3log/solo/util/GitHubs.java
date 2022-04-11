@@ -79,6 +79,10 @@ public final class GitHubs {
                 JSONObject resultObject = result.optJSONObject(i);
                 JSONObject compatibleObject = new JSONObject();
 
+                if (resultObject.getBoolean("fork")) {
+                    continue;
+                }
+
                 compatibleObject.put("githubrepoId", resultObject.optString("id"));
                 compatibleObject.put("githubrepoStatus", 0);
                 compatibleObject.put("oId", "" + System.currentTimeMillis());

@@ -243,7 +243,13 @@ public class ArticleMgmtService {
         }
 
         final StringBuilder contentBuilder = new StringBuilder();
-        contentBuilder.append("![GitHub Repo](" + Latkes.getServePath() + "/images/github_repo.jpg)\n\n");
+        String stats = "\n![Github Stats](https://github-readme-stats.vercel.app/api?username={username}&show_icons=true) \n\n";
+        stats = stats.replace("{username}", githubId);
+        contentBuilder.append("![GitHub Repo](/images/github_repo.jpg)\n\n");
+        contentBuilder.append("## Github Stats\n").append(stats);
+        contentBuilder.append("## 所有开源项目\n");
+        contentBuilder.append("| 仓库 |  项目简介 | Stars | fork | 编程语言 |\n");
+        contentBuilder.append("| ---- | ---- | ---- | ---- | ---- |\n");
         for (int i = 0; i < gitHubRepos.length(); i++) {
             final JSONObject repo = gitHubRepos.optJSONObject(i);
             final String url = repo.optString("githubrepoHTMLURL");
@@ -253,18 +259,11 @@ public class ArticleMgmtService {
             final String forks = repo.optString("githubrepoForksCount");
             final String lang = repo.optString("githubrepoLanguage");
             final String hp = repo.optString("githubrepoHomepage");
-
-            String stat = "<span style=\"font-size: 12px;\">[⭐️`{stars}`]({url}/stargazers \"收藏数\")&nbsp;&nbsp;[🖖`{forks}`]({url}/network/members \"分叉数\")";
-            stat = stat.replace("{stars}", stars).replace("{url}", url).replace("{forks}", forks);
-            if (StringUtils.isNotBlank(hp)) {
-                stat += "&nbsp;&nbsp;[\uD83C\uDFE0`{hp}`]({hp} \"项目主页\")";
-                stat = stat.replace("{hp}", hp);
-            }
-            stat += "</span>";
-            contentBuilder.append("### " + (i + 1) + ". [" + name + "](" + url + ") <kbd title=\"主要编程语言\">" + lang + "</kbd> " + stat + "\n\n" + desc + "\n\n");
-            if (i < gitHubRepos.length() - 1) {
-                contentBuilder.append("\n\n---\n\n");
-            }
+            contentBuilder.append("| [").append(name).append("](").append(url).append(") | ")
+                .append(desc).append(" | ")
+                .append(stars).append(" | ")
+                .append(forks).append(" | ")
+                .append(lang).append("|\n");
         }
         final String content = contentBuilder.toString();
 

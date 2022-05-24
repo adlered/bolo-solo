@@ -40,7 +40,7 @@
         <head>
             <@head title="${article.articleTitle} - ${blogTitle}"
                 description="${article.articleAbstract?html}">
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.5/css/bulma.min.css" />
+                <link rel="stylesheet" href="https://unpkg.com/bulma@0.7.5/css/bulma.min.css" />
                 <link rel="stylesheet" href="https://ftp.stackoverflow.wiki/bolo/fantastic/css/all.min.css">
                 <link rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}" />
                 <link rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/style.css?${staticResourceVersion}" />
@@ -134,9 +134,9 @@
                                         </article>
                                     </div>
                                 </div>
-                         
+
                             </div>
-                        </div>   
+                        </div>
                     </div>
                 </section>
             </div>

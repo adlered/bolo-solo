@@ -116,7 +116,7 @@
         <script type="text/javascript">if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
                 alert('朋友，IE浏览器未适配哦~（QQ、360浏览器请关闭 IE 模式访问~）');
             }</script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+        <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css"/>
         <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
     </@head>

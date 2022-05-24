@@ -22,9 +22,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap">
 <link media="all" href="${staticServePath}/skins/${skinDirName}/css/main.css?${staticResourceVersion}"
       rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script>
-<script src="https://cdn.jsdelivr.net/npm/typed.js"></script>
+<script src="https://unpkg.com/instant.page@5.1.0/instantpage.js" type="module" defer></script>
+<script src="https://unpkg.com/vanilla-lazyload/dist/lazyload.iife.min.js" async></script>
+<script src="https://unpkg.com/typed.js"></script>
 <script src="${staticServePath}/skins/${skinDirName}/js/GlobalConfig.js"></script>
 <script src="${staticServePath}/skins/${skinDirName}/js/utils.js"></script>
 <script src="${staticServePath}/skins/${skinDirName}/js/activate-power-mode.js"></script>

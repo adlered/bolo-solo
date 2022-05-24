@@ -32,7 +32,7 @@
 
 <head>
     <@head title="${archiveLabel} - ${blogTitle}">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.5/css/bulma.min.css"/>
+        <link rel="stylesheet" href="https://unpkg.com/bulma@0.7.5/css/bulma.min.css"/>
         <link rel="stylesheet" href="https://ftp.stackoverflow.wiki/bolo/fantastic/css/all.min.css">
         <link rel="stylesheet"
               href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}"/>

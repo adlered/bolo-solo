@@ -33,11 +33,11 @@
     "gulp-autoprefixer": "^7.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-rename": "^1.4.0",
-    "gulp-sass": "^4.0.2",
+    "gulp-sass": "^5.1.0",
     "gulp-terser": "^1.2.0"
   },
   "dependencies": {
-    "sass": "^1.32.12",
+    "sass": "^1.51.0",
     "vditor": "^3.8.5"
   }
 }

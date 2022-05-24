@@ -240,7 +240,7 @@
             </div>
         </div>
         <script src="${staticServePath}/js/lib/compress/admin-lib.min.js"></script>
-        <script src="https://unpkg.com/vditor@3.8.5/dist/index.min.js"></script>
+        <script src="https://file.fishpi.cn/vditor/3.8.13/dist/index.min.js"></script>
         <script src="${staticServePath}/js/common.js"></script>
         <#if "" == miniPostfix>
         <script src="${staticServePath}/js/admin/admin.js"></script>

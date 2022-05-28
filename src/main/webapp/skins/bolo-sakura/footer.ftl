@@ -30,7 +30,7 @@
     <div class="search_close">
     </div>
 </form>
-<script type='text/javascript' src='https://cdn.jsdelivr.net/gh/moezx/cdn@3.7.5/js/lib.min.js?ver=3.1.5'></script>
+<script type='text/javascript' src='https://ftp.stackoverflow.wiki/bolo/moezx/cdn/js/lib.min.js?ver=3.1.5'></script>
 <script type='text/javascript'>var Poi = {
         "movies": {
             "url": "https:\/\/cdn.jsdelivr.net\/gh\/moezx\/cdn@3.1.3\/",

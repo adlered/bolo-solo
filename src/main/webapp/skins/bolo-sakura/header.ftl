@@ -108,7 +108,7 @@
                 this.NProgressON = false;
                 this.site_name = "${blogTitle}";
             };;
-            mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.7.5/css/lib.min.css";
+            mashiro_option.jsdelivr_css_src = "https://ftp.stackoverflow.wiki/bolo/moezx/cdn/css/lib.min.css";
             mashiro_option.head_notice = "on";
             /*End of Initial Variables*/
             console.info("%c Bolo %c", "background:#24272A; color:#ffffff", "", "https://github.com/adlered/bolo-solo");
@@ -117,7 +117,7 @@
                 alert('朋友，IE浏览器未适配哦~（QQ、360浏览器请关闭 IE 模式访问~）');
             }</script>
         <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css"/>
-        <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
+        <link rel="stylesheet" href="https://ftp.stackoverflow.wiki/bolo/fancybox/dist/jquery.fancybox.min.css"/>
+        <script src="https://ftp.stackoverflow.wiki/bolo/fancybox/dist/jquery.fancybox.min.js"></script>
     </@head>
 </head>

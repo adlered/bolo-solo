@@ -177,7 +177,7 @@ public class KanBanNiangProcessor {
                 renderer.setJSONObject(index);
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Returns a random KanBanNiang model failed.");
+            LOGGER.log(Level.ERROR, "Returns a random KanBanNiang model failed.", e);
         }
     }
 

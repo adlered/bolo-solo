@@ -267,7 +267,7 @@
         <#else>
         <script src="${staticServePath}/js/admin/admin.min.js?${staticResourceVersion}"></script>
         </#if>
-        <script src="https://unpkg.com/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <script src="${staticServePath}/js/lib/Chart.min.js"></script>
         <script type="text/javascript" src="${staticServePath}/js/bolo/sweetalert.min.js"></script>
         <script>
             function noBtnSwal(msg, timer) {

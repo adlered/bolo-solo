@@ -1,7 +1,7 @@
 {
 	"model": "model/KantaiCollection/murakumo/model.moc",
 	"textures": [
-		"https://cdn.jsdelivr.net/npm/kanbanniang/model/KantaiCollection/murakumo/textures.1024/00.png"
+		"https://ftp.stackoverflow.wiki/bolo/kanbanniang/assets/kanbanniang/model/KantaiCollection/murakumo/textures.1024/00.png"
 	],
 	"physics": "model/KantaiCollection/murakumo/physics.json",
 	"layout": {

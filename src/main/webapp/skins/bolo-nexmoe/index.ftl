@@ -23,7 +23,7 @@
 <head>
     <@head title="${blogTitle}">
         <link rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}"/>
-        <link rel="stylesheet" href="${staticServePath}/js/lib/bulma.min.css">
+        <link rel="stylesheet" href="${staticServePath}/js/lib/mdui.min.css">
         <link rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/font-icon.css?${staticResourceVersion}">
     </@head>
 </head>
@@ -38,7 +38,7 @@
     <div class="nexmoe-primary">
         <main id="pjax" class="fn__flex-1">
             <#if pjax><!---- pjax {#pjax} start ----></#if>
-                <#include "article-list.ftl">
+            <#include "article-list.ftl">
             <#if pjax><!---- pjax {#pjax} end ----></#if>
         </main>
 

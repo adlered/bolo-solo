@@ -23,7 +23,7 @@
 <head>
     <@head title="${tagLabel} - ${blogTitle}">
         <link rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}"/>
-        <link rel="stylesheet" href="${staticServePath}/js/lib/bulma.min.css">
+        <link rel="stylesheet" href="${staticServePath}/js/lib/mdui.min.css">
         <link rel="stylesheet"
               href="${staticServePath}/skins/${skinDirName}/css/font-icon.css?${staticResourceVersion}">
     </@head>

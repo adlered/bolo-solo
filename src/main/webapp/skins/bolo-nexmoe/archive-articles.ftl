@@ -23,7 +23,7 @@
 <head>
     <@head title="${archiveDate.archiveDateYear} ${yearLabel} ${archiveDate.archiveDateMonth} ${monthLabel} ${archiveLabel} - ${blogTitle}">
         <link rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/base.css?${staticResourceVersion}"/>
-        <link rel="stylesheet" href="${staticServePath}/js/lib/bulma.min.css">
+        <link rel="stylesheet" href="${staticServePath}/js/lib/mdui.min.css">
         <link rel="stylesheet" href="${staticServePath}/skins/${skinDirName}/css/font-icon.css?${staticResourceVersion}">
     </@head>
 </head>

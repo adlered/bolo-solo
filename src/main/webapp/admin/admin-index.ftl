@@ -23,7 +23,7 @@
     <head>
         <@head title="${adminConsoleLabel} - ${blogTitle}">
             <link type="text/css" rel="stylesheet" href="${staticServePath}/scss/admin.css?${staticResourceVersion}" />
-            <link type="text/css" rel="stylesheet" href="https://unpkg.com/chart.js@2.9.3/dist/Chart.min.css" />
+            <link type="text/css" rel="stylesheet" href="${staticServePath}/js/lib/Chart.min.css" />
             <meta name="robots" content="fn__none" />
             <link href="https://ftp.stackoverflow.wiki/bolo/start/css/font-awesome.min.css" rel="stylesheet">
         </@head>

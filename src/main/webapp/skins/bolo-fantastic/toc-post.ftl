@@ -20,8 +20,7 @@
 <div>
     <div id="toc"></div>
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="${staticServePath}/js/lib/jquery/jquery.min.js"></script>
 <script>
     // initToc()
     // function initToc() {

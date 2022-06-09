@@ -17,7 +17,7 @@
     <artifactId>bolo</artifactId>
     <packaging>war</packaging>
     <name>Bolo</name>
-    <version>v2.5-stable</version>
+    <version>v2.6-stable</version>
     <description>
         本地化、稳定精致的 Java 博客系统 - 菠萝博客。
     </description>

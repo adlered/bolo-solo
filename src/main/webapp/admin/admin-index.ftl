@@ -23,7 +23,7 @@
     <head>
         <@head title="${adminConsoleLabel} - ${blogTitle}">
             <link type="text/css" rel="stylesheet" href="${staticServePath}/scss/admin.css?${staticResourceVersion}" />
-            <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.css" />
+            <link type="text/css" rel="stylesheet" href="${staticServePath}/js/lib/Chart.min.css" />
             <meta name="robots" content="fn__none" />
             <link href="https://ftp.stackoverflow.wiki/bolo/start/css/font-awesome.min.css" rel="stylesheet">
         </@head>
@@ -240,7 +240,7 @@
             </div>
         </div>
         <script src="${staticServePath}/js/lib/compress/admin-lib.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vditor@3.8.5/dist/index.min.js"></script>
+        <script src="https://file.fishpi.cn/vditor/3.8.13/dist/index.min.js"></script>
         <script src="${staticServePath}/js/common.js"></script>
         <#if "" == miniPostfix>
         <script src="${staticServePath}/js/admin/admin.js"></script>
@@ -267,7 +267,7 @@
         <#else>
         <script src="${staticServePath}/js/admin/admin.min.js?${staticResourceVersion}"></script>
         </#if>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <script src="${staticServePath}/js/lib/Chart.min.js"></script>
         <script type="text/javascript" src="${staticServePath}/js/bolo/sweetalert.min.js"></script>
         <script>
             function noBtnSwal(msg, timer) {

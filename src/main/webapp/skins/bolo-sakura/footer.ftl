@@ -30,10 +30,10 @@
     <div class="search_close">
     </div>
 </form>
-<script type='text/javascript' src='https://cdn.jsdelivr.net/gh/moezx/cdn@3.7.5/js/lib.min.js?ver=3.1.5'></script>
+<script type='text/javascript' src='https://ftp.stackoverflow.wiki/bolo/moezx/cdn/js/lib.min.js?ver=3.1.5'></script>
 <script type='text/javascript'>var Poi = {
         "movies": {
-            "url": "https:\/\/cdn.jsdelivr.net\/gh\/moezx\/cdn@3.1.3\/",
+            "url": "https:\/\/ftp.stackoverflow.wiki\/bolo\/moezx\/cdn\/",
             "name": "The Pet Girl of Sakurasou",
             "live": "close"
         },
@@ -43,7 +43,7 @@
         "order": "desc",
         "formpostion": "bottom"
     };</script>
-<script type='text/javascript' src='https://cdn.jsdelivr.net/github-cards/latest/widget.js?ver=3.1.5'></script>
+<script type='text/javascript' src='https://ftp.stackoverflow.wiki/bolo/github-cards/widget.js?ver=3.1.5'></script>
 <div class="changeSkin-gear no-select">
     <div class="keys">
         <span id="open-skinMenu"> 主题 | Theme &nbsp;<i

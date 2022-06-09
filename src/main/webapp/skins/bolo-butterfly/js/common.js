@@ -8002,7 +8002,7 @@
         loadVditor: function(e) {
             o.a.ajax({
                 method: "GET",
-                url: "https://cdn.jsdelivr.net/npm/vditor@3.8.5/dist/index.min.js",
+                url: "https://file.fishpi.cn/vditor/3.8.13/dist/index.min.js",
                 dataType: "script",
                 cache: !0,
                 success: function() {

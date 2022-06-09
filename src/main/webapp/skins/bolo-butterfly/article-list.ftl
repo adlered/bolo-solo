@@ -22,7 +22,7 @@
             <article class="recent-post-item" itemscope="" itemtype="http://schema.org/BlogPosting">
                     <div class="post_cover">
                         <a href="${servePath}${article.articlePermalink}" title="${article.articleTitle}">
-                            <img referrerpolicy="origin" class="post_bg" data-src="${article.articleImg1URL}" onerror="this.onerror=null;this.src='${staticServePath}/skins/${skinDirName}/images/404.jpg'" alt="Hello World">
+                            <img class="post_bg" src="${article.articleImg1URL}">
                         </a>
                     </div>
                     <div class="recent-post-info">

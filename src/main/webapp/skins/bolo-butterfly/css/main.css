@@ -3955,6 +3955,7 @@ _:future,
 #article-container ol,
 #article-container ul {
   margin-top: 0.4rem;
+  padding-left: 2em;
 }
 #article-container ol p,
 #article-container ul p {

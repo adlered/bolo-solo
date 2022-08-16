@@ -48,10 +48,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -317,22 +314,36 @@ public class ExportService {
             final String readme = genSoloBlogReadme(clientTitle, clientSubtitle, preference.optString(Option.ID_C_FAVICON_URL), loginName + "/" + repoName);
             JdbcRepository.dispose();
             LOGGER.info("begin get README.md");
-            String tmpFilePath = "/tmp/bolo-blog-readme.md";
+            String tmpFilePath = tmpDir + File.separator + "bolo-blog-readme.md";
             File file = FileUtils.getFile(tmpFilePath);
-            String oldReadme  = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
 
-            if (oldReadme != null && oldReadme.equals(readme)) {
-                LOGGER.info("not need update readme.");
-                return ;
+            // 第一次运行的判断条件
+            boolean firstTimeRun = false;
+            String oldReadme = null;
+
+            // 比对更新，但是第一次启动的时候并没有readme文件，尤其是 docker 环境中，没有上次的原始文件的情况更多
+            try {
+                oldReadme  = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+            } catch (IOException e){
+                firstTimeRun = true;
             }
+
+            if (!firstTimeRun) {
+                if (oldReadme != null && oldReadme.equals(readme)) {
+                    LOGGER.info("not need update readme.");
+                    return;
+                }
+            }
+            // 更新缓存文件
+            FileUtils.write(file, readme, StandardCharsets.UTF_8);
             ok = GitHubs.updateFile(pat, loginName, repoName, "README.md", readme.getBytes(StandardCharsets.UTF_8));
             if (ok) {
                 ok = GitHubs.updateFile(pat, loginName, repoName, "backup.zip", zipData);
             }
-            FileUtils.write(file, readme, StandardCharsets.UTF_8);
             if (ok) {
                 LOGGER.log(Level.INFO, "Exported public articles to your repo [bolo-blog]");
             }
+
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Exports public articles to your repo failed: " + e.getMessage());
         }

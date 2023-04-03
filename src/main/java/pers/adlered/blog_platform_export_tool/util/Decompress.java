@@ -39,12 +39,12 @@ public class Decompress {
 
     public void run() {
         List<String> unzipFiles = analyze();
-        for (String i : unzipFiles) {
-            String filename = path + "/" + i;
-            String[] splitFilename = i.split("\\.");
-            i = splitFilename[splitFilename.length - 1];
+        for (String file : unzipFiles) {
+            String filename = path + "/" + file;
+            String[] splitFilename = file.split("\\.");
+            file = splitFilename[splitFilename.length - 1];
             System.out.println("Unpacking " + filename);
-            if ("zip".equals(i)) {
+            if ("zip".equals(file)) {
                 ZipUtil.unpack(new File(filename), new File(path));
             }
         }

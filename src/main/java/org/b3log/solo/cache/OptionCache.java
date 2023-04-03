@@ -19,12 +19,19 @@ package org.b3log.solo.cache;
 
 import org.b3log.latke.Keys;
 import org.b3log.latke.ioc.Singleton;
+import org.b3log.latke.repository.FilterOperator;
+import org.b3log.latke.repository.PropertyFilter;
+import org.b3log.latke.repository.Query;
+import org.b3log.latke.repository.RepositoryException;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.util.Solos;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static org.eclipse.jetty.util.LazyList.getList;
 
 /**
  * Option cache.
@@ -130,5 +137,44 @@ public class OptionCache {
     public void clear() {
         cache.clear();
         categoryCache.clear();
+    }
+
+    /**
+     * Gets options with the specified category.
+     * <p>
+     * All options with the specified category will be merged into one json object as the return value.
+     * </p>
+     *
+     * @param category the specified category
+     * @return all options with the specified category, for example,
+     * <pre>
+     * {
+     *     "${optionId}": "${optionValue}",
+     *     ....
+     * }
+     * </pre>, returns {@code null} if not found
+     * @throws RepositoryException repository exception
+     */
+    public JSONObject getOptions(final String category) throws RepositoryException {
+        final JSONObject cached = getCategory(category);
+        if (null != cached) {
+            return cached;
+        }
+
+        final JSONObject ret = new JSONObject();
+        try {
+            final List<JSONObject> options = getList(new Query().setFilter(new PropertyFilter(Option.OPTION_CATEGORY, FilterOperator.EQUAL, category)));
+            if (0 == options.size()) {
+                return null;
+            }
+
+            options.stream().forEach(option -> ret.put(option.optString(Keys.OBJECT_ID), option.opt(Option.OPTION_VALUE)));
+
+            putCategory(category, ret);
+
+            return ret;
+        } catch (final Exception e) {
+            throw new RepositoryException(e);
+        }
     }
 }

@@ -333,8 +333,8 @@ public final class Entry {
         stringBuilder.append(END_ID_ELEMENT);
 
         stringBuilder.append(START_UPDATED_ELEMENT);
-        stringBuilder.append(DateFormatUtils.format(// using ISO-8601 instead of RFC-3339
-                updated, DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.getPattern(), TimeZone.getTimeZone(Feed.TIME_ZONE_ID)));
+        //stringBuilder.append(DateFormatUtils.format(// using ISO-8601 instead of RFC-3339
+        //        updated, DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.getPattern(), TimeZone.getTimeZone(Feed.TIME_ZONE_ID)));
         stringBuilder.append(END_UPDATED_ELEMENT);
 
         stringBuilder.append(START_SUMMARY_ELEMENT);

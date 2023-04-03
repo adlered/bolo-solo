@@ -89,41 +89,5 @@ public class OptionRepository extends AbstractRepository {
         optionCache.putOption(option);
     }
 
-    /**
-     * Gets options with the specified category.
-     * <p>
-     * All options with the specified category will be merged into one json object as the return value.
-     * </p>
-     *
-     * @param category the specified category
-     * @return all options with the specified category, for example,
-     * <pre>
-     * {
-     *     "${optionId}": "${optionValue}",
-     *     ....
-     * }
-     * </pre>, returns {@code null} if not found
-     * @throws RepositoryException repository exception
-     */
-    public JSONObject getOptions(final String category) throws RepositoryException {
-        final JSONObject cached = optionCache.getCategory(category);
-        if (null != cached) {
-            return cached;
-        }
 
-        final JSONObject ret = new JSONObject();
-        try {
-            final List<JSONObject> options = getList(new Query().setFilter(new PropertyFilter(Option.OPTION_CATEGORY, FilterOperator.EQUAL, category)));
-            if (0 == options.size()) {
-                return null;
-            }
-
-            options.stream().forEach(option -> ret.put(option.optString(Keys.OBJECT_ID), option.opt(Option.OPTION_VALUE)));
-            optionCache.putCategory(category, ret);
-
-            return ret;
-        } catch (final Exception e) {
-            throw new RepositoryException(e);
-        }
-    }
 }

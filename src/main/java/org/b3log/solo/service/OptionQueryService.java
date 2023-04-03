@@ -22,6 +22,7 @@ import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.service.annotation.Service;
+import org.b3log.solo.cache.OptionCache;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.OptionRepository;
 import org.json.JSONObject;
@@ -46,6 +47,9 @@ public class OptionQueryService {
      */
     @Inject
     private OptionRepository optionRepository;
+
+    @Inject
+    private OptionCache optionCache;
 
     /**
      * Gets the skin.
@@ -124,8 +128,9 @@ public class OptionQueryService {
      * </pre>, returns {@code null} if not found
      */
     public JSONObject getOptions(final String category) {
+
         try {
-            return optionRepository.getOptions(category);
+            return optionCache.getOptions(category);
         } catch (final Exception e) {
             return null;
         }

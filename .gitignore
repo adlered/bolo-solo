@@ -4,3 +4,6 @@
 .classpath
 .project
 .settings
+/bin/
+*.iml
+.idea

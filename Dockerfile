@@ -1,8 +1,8 @@
-FROM docker.io/library/maven:3.8.5-openjdk-8-slim as MVN_BUILD
+FROM maven:3-jdk-8-alpine as MVN_BUILD
 
 WORKDIR /opt/bolo/
 ADD . /tmp
-RUN cd /tmp && mvn package -DskipTests -Pci && mv target/bolo/* /opt/bolo/ \
+RUN cd /tmp && mvn package -DskipTests --settings settings.xml && mv target/bolo/* /opt/bolo/ \
     && cp -f /tmp/src/main/resources/docker/* /opt/bolo/WEB-INF/classes/
 
 FROM openjdk:8-alpine

@@ -229,7 +229,8 @@ public class FeedProcessor {
                 ? article.getString(Article.ARTICLE_CONTENT)
                 : article.optString(Article.ARTICLE_ABSTRACT);
         description = EmojiParser.parseToAliases(description);
-        description = Markdowns.toHTML(description);
+        String articleId = article.optString(Keys.OBJECT_ID);
+        description = Markdowns.toHTML(description, "description_" + articleId);
         ret.setDescription(description);
         final long pubDate = article.getLong(Article.ARTICLE_UPDATED);
         ret.setPubDate(new Date(pubDate));

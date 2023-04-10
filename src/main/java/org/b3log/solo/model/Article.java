@@ -18,8 +18,10 @@
 package org.b3log.solo.model;
 
 import org.apache.commons.lang.StringUtils;
+import org.b3log.latke.Keys;
 import org.b3log.solo.util.Images;
 import org.b3log.solo.util.Markdowns;
+import org.b3log.solo.util.RedisCacheUtils;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
@@ -240,6 +242,15 @@ public final class Article {
      * @param content the specified content
      * @return the abstract plain text
      */
+    public static String getAbstractText(final String content, String articleId) {
+        final String ret = Jsoup.clean(Markdowns.toHTML(content, "abstractContent_" + articleId), Whitelist.none());
+        if (ret.length() > ARTICLE_ABSTRACT_LENGTH) {
+            return ret.substring(0, ARTICLE_ABSTRACT_LENGTH) + "....";
+        }
+
+        return ret;
+    }
+
     public static String getAbstractText(final String content) {
         final String ret = Jsoup.clean(Markdowns.toHTML(content), Whitelist.none());
         if (ret.length() > ARTICLE_ABSTRACT_LENGTH) {
@@ -264,7 +275,13 @@ public final class Article {
 
             content = article.optString(Article.ARTICLE_CONTENT);
         }
+        String articleId = article.getString(Keys.OBJECT_ID);
+        return getAbstractText(content, articleId);
+    }
 
-        return getAbstractText(content);
+    public static void cleanCache(String articleId) {
+        RedisCacheUtils.cleanCache("content_" + articleId,
+                "abstractContent_" + articleId,
+                "description_" + articleId);
     }
 }

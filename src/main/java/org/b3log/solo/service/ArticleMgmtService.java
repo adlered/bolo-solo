@@ -514,6 +514,7 @@ public class ArticleMgmtService {
             }
 
             transaction.commit();
+            Article.cleanCache(articleId);
         } catch (final ServiceException e) {
             if (transaction.isActive()) {
                 transaction.rollback();

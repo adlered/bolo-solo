@@ -186,7 +186,7 @@ public class CommentQueryService {
                 comment.put(Common.COMMENT_TITLE, title);
 
                 String commentContent = comment.optString(Comment.COMMENT_CONTENT);
-                commentContent = Markdowns.toHTML(commentContent);
+                commentContent = Markdowns.toHTML(commentContent, "common_" + title + "_" + article.getString(Keys.OBJECT_ID));
                 commentContent = Markdowns.clean(commentContent);
                 comment.put(Comment.COMMENT_CONTENT, commentContent);
 
@@ -231,6 +231,7 @@ public class CommentQueryService {
                 comment.put(Comment.COMMENT_TIME, comment.optLong(Comment.COMMENT_CREATED));
                 comment.put(Comment.COMMENT_T_DATE, new Date(comment.optLong(Comment.COMMENT_CREATED)));
                 comment.put("commentDate2", new Date(comment.optLong(Comment.COMMENT_CREATED))); // 1.9.0 向后兼容
+                String commentName = comment.getString(Comment.COMMENT_NAME);
                 comment.put(Comment.COMMENT_NAME, comment.getString(Comment.COMMENT_NAME));
                 String url = comment.getString(Comment.COMMENT_URL);
                 if (StringUtils.contains(url, "<")) { // legacy issue https://github.com/b3log/solo/issues/12091
@@ -245,11 +246,10 @@ public class CommentQueryService {
                 }
 
                 String commentContent = comment.optString(Comment.COMMENT_CONTENT);
-                commentContent = Markdowns.toHTML(commentContent);
+                commentContent = Markdowns.toHTML(commentContent, "common_" + commentName + "_" + onId);
                 commentContent = Markdowns.clean(commentContent);
                 comment.put(Comment.COMMENT_CONTENT, commentContent);
 
-                String commentName = comment.optString(Comment.COMMENT_NAME);
                 commentName = Jsoup.clean(commentName, Whitelist.none());
                 comment.put(Comment.COMMENT_NAME, commentName);
 

@@ -157,6 +157,16 @@ public final class Markdowns {
         return Jsoup.clean(html, Latkes.getServePath(), whitelist, outputSettings);
     }
 
+    public static String toHTML(final String markdownText, String cacheKey) {
+        String cache = RedisCacheUtils.getCache(cacheKey);
+        if (!StringUtils.isEmpty(cache)) {
+            return cache;
+        }
+        cache = toHTML(markdownText);
+        RedisCacheUtils.cacheValue(cacheKey, cache);
+        return cache;
+    }
+
     /**
      * Converts the specified markdown text to HTML.
      *

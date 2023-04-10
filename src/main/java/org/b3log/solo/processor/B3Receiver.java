@@ -183,7 +183,7 @@ public class B3Receiver {
                         put(Article.ARTICLE_TAGS_REF, symArticle.optString("tags"));
                 article.put(Article.ARTICLE_AUTHOR_ID, articleAuthor.getString(Keys.OBJECT_ID));
                 final String articleContent = article.optString(Article.ARTICLE_CONTENT);
-                article.put(Article.ARTICLE_ABSTRACT, Article.getAbstractText(articleContent));
+                article.put(Article.ARTICLE_ABSTRACT, Article.getAbstractText(articleContent, articleId));
                 article.put(Article.ARTICLE_STATUS, Article.ARTICLE_STATUS_C_PUBLISHED);
                 article.put(Common.POST_TO_COMMUNITY, false); // Do not send to rhythm
                 article.put(Article.ARTICLE_COMMENTABLE, true);
@@ -198,7 +198,7 @@ public class B3Receiver {
             }
 
             final String articleContent = symArticle.optString("content");
-            oldArticle.put(Article.ARTICLE_ABSTRACT, Article.getAbstractText(articleContent));
+            oldArticle.put(Article.ARTICLE_ABSTRACT, Article.getAbstractText(articleContent, articleId));
             oldArticle.put(Article.ARTICLE_CONTENT, articleContent);
             oldArticle.put(Article.ARTICLE_TITLE, symArticle.optString("title"));
             oldArticle.put(Article.ARTICLE_TAGS_REF, symArticle.optString("tags"));

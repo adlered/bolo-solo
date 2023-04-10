@@ -543,10 +543,12 @@ public class DataModelService {
             final List<JSONObject> recentComments = commentRepository.getRecentComments(recentCommentDisplayCnt);
             for (final JSONObject comment : recentComments) {
                 String commentContent = comment.optString(Comment.COMMENT_CONTENT);
-                commentContent = Markdowns.toHTML(commentContent);
+                String commentName =  comment.getString(Comment.COMMENT_NAME);
+                commentContent = Markdowns.toHTML(commentContent, "comment_" + commentName +
+                        "_" + comment.getString(Comment.COMMENT_ON_ID));
                 commentContent = Markdowns.clean(commentContent);
                 comment.put(Comment.COMMENT_CONTENT, commentContent);
-                comment.put(Comment.COMMENT_NAME, comment.getString(Comment.COMMENT_NAME));
+                comment.put(Comment.COMMENT_NAME, commentName);
                 comment.put(Comment.COMMENT_URL, comment.getString(Comment.COMMENT_URL));
                 comment.put(Common.IS_REPLY, false);
                 comment.put(Comment.COMMENT_T_DATE, new Date(comment.optLong(Comment.COMMENT_CREATED)));

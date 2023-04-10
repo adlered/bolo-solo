@@ -953,7 +953,7 @@ public class ArticleQueryService {
                 // Markdown to HTML for content and abstract
                 Stopwatchs.start("Get Article Content [Markdown]");
                 String content = article.optString(Article.ARTICLE_CONTENT);
-                content = Markdowns.toHTML(content);
+                content = Markdowns.toHTML(content, "content_" + articleId);
                 article.put(Article.ARTICLE_CONTENT, content);
                 Stopwatchs.end();
             }
@@ -983,16 +983,17 @@ public class ArticleQueryService {
      * @param article the specified article
      */
     public void markdown(final JSONObject article) {
-        Stopwatchs.start("Markdown Article [id=" + article.optString(Keys.OBJECT_ID) + "]");
+        final String articleId = article.optString(Keys.OBJECT_ID);
+        Stopwatchs.start("Markdown Article [id=" + articleId + "]");
 
         String content = article.optString(Article.ARTICLE_CONTENT);
-        content = Markdowns.toHTML(content);
+        content = Markdowns.toHTML(content, "content_" + articleId);
         article.put(Article.ARTICLE_CONTENT, content);
 
         String abstractContent = article.optString(Article.ARTICLE_ABSTRACT);
         if (StringUtils.isNotBlank(abstractContent)) {
             Stopwatchs.start("Abstract");
-            abstractContent = Markdowns.toHTML(abstractContent);
+            abstractContent = Markdowns.toHTML(abstractContent, "abstractContent_" + articleId);
             article.put(Article.ARTICLE_ABSTRACT, abstractContent);
             Stopwatchs.end();
         }

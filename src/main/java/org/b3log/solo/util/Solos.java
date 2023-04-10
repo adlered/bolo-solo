@@ -107,15 +107,23 @@ public final class Solos {
     private static String uploadMsg = "";
 
     static {
+        ResourceBundle solo = getResourceBundle();
+        FAVICON_API = solo.getString("faviconAPI");
+        initMarkDown(solo);
+        RedisCacheUtils.initRedis(solo);
+    }
+
+    private static ResourceBundle getResourceBundle() {
         ResourceBundle solo;
         try {
             solo = ResourceBundle.getBundle("solo");
         } catch (final MissingResourceException e) {
             solo = ResourceBundle.getBundle("b3log"); // 2.8.0 向后兼容
         }
+        return solo;
+    }
 
-        FAVICON_API = solo.getString("faviconAPI");
-
+    private static void initMarkDown(ResourceBundle solo) {
         if (!Markdowns.LUTE_AVAILABLE) {
             try {
                 Markdowns.LUTE_ENGINE_URL = solo.getString("luteHttp");
@@ -163,12 +171,6 @@ public final class Solos {
     }
 
     public static void enableWelfareLuteService() {
-        ResourceBundle solo;
-        try {
-            solo = ResourceBundle.getBundle("solo");
-        } catch (final MissingResourceException e) {
-            solo = ResourceBundle.getBundle("b3log"); // 2.8.0 向后兼容
-        }
         boolean status = Boolean.parseBoolean(Options.get(Option.ID_C_WELFARE_LUTE_SERVICE));
         // 使用公益Lute-Http服务(Bolo专享)
         final String LUTE_URL = "http://lute.stackoverflow.wiki:8249";

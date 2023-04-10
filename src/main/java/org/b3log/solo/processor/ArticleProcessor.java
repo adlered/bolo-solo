@@ -176,13 +176,6 @@ public class ArticleProcessor {
             return;
         }
 
-        /* if (!Solos.isLoggedIn(context)) {
-            result.put(Keys.CODE, -1);
-            result.put(Keys.MSG, langPropsService.get("getFailLabel"));
-
-            return;
-        } */
-
         try {
             final String html = Markdowns.toHTML(markdownText);
             result.put(Common.DATA, html);

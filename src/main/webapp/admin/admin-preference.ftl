@@ -488,9 +488,6 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_mailAndRemind" class="fn__none form">
-        <div class="fn__clear">
-            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
-        </div>
         <div class="fn__clear"></div>
         <label for="adminActiveSentToMailbox">${adminActiveSentToMailboxLabel}</label>
         <br>
@@ -534,9 +531,6 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_b3logEcology" class="fn__none form">
-        <div class="fn__clear">
-            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
-        </div>
         <div class="fn__clear"></div>
         <h4 style="color: #00a7e0">${liandi1Label}</h4>
         <br>
@@ -564,9 +558,6 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_fishpiEcology" class="fn__none form">
-        <div class="fn__clear">
-            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
-        </div>
         <div class="fn__clear"></div>
         <h4 style="color: #00a7e0">${fishpi1Label}</h4>
         <br>
@@ -589,9 +580,6 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_interactive" class="fn__none form">
-        <div class="fn__clear">
-            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
-        </div>
         <div class="fn__clear"></div>
         <label>${nonInteractiveLabel}</label>
         <br>
@@ -606,9 +594,6 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_security" class="fn__none form">
-        <div class="fn__clear">
-            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
-        </div>
         <div class="fn__clear"></div>
         <label>${securityPowerLabel}</label>
         <br>
@@ -632,9 +617,6 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_myGitHub" class="fn__none form">
-        <div class="fn__clear">
-            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
-        </div>
         <div class="fn__clear"></div>
         ${myGitHub1Label}
         <br>

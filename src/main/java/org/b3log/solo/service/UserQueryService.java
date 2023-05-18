@@ -270,4 +270,18 @@ public class UserQueryService {
 
         return b3pass;
     }
+
+    public String getFishKey() {
+        String b3pass = "";
+        try {
+            b3pass = optionRepository.get(Option.ID_C_FISH_KEY).optString(Option.OPTION_VALUE);
+        } catch (Exception e) {
+            b3pass = Option.DefaultPreference.DEFAULT_B3LOG_PASSWORD;
+        }
+        if (b3pass.isEmpty()) {
+            b3pass = Option.DefaultPreference.DEFAULT_B3LOG_PASSWORD;
+        }
+
+        return b3pass;
+    }
 }

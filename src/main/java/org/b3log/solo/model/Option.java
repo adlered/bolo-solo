@@ -320,6 +320,11 @@ public final class Option {
     public static final String ID_C_HACPAI_USER = "hacpaiUser";
 
     /**
+     * Key of FishPi key.
+     */
+    public static final String ID_C_FISH_KEY = "fishKey";
+
+    /**
      * Key of B3log key.
      */
     public static final String ID_C_B3LOG_KEY = "b3logKey";

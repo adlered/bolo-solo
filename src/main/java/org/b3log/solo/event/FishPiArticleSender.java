@@ -33,9 +33,9 @@ import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
-import org.b3log.solo.service.ArticleQueryService;
 import org.b3log.solo.service.OptionQueryService;
 import org.b3log.solo.service.UserQueryService;
+import org.b3log.solo.util.PluginUtil;
 import org.b3log.solo.util.Solos;
 import org.json.JSONObject;
 
@@ -54,7 +54,7 @@ public class FishPiArticleSender extends AbstractEventListener<JSONObject> {
     private static final Logger LOGGER = Logger.getLogger(FishPiArticleSender.class);
 
     /**
-     * Pushes the specified article data to B3log Rhythm.
+     * Pushes the specified article data to FishPi Rhythm.
      *
      * @param data the specified article data
      */
@@ -66,22 +66,23 @@ public class FishPiArticleSender extends AbstractEventListener<JSONObject> {
                 return;
             }
 
+            if (!PluginUtil.fishpiPluginEnabled()) {
+                return;
+            }
+
             final String title = originalArticle.getString(Article.ARTICLE_TITLE);
             if (Article.ARTICLE_STATUS_C_PUBLISHED != originalArticle.optInt(Article.ARTICLE_STATUS)) {
                 LOGGER.log(Level.INFO, "Ignored push a draft [title={0}] to fishpi", title);
-
                 return;
             }
 
             if (StringUtils.isNotBlank(originalArticle.optString(Article.ARTICLE_VIEW_PWD))) {
                 LOGGER.log(Level.INFO, "Article [title={0}] is a password article, ignored push to fishpi", title);
-
                 return;
             }
 
             final BeanManager beanManager = BeanManager.getInstance();
             final OptionQueryService optionQueryService = beanManager.getReference(OptionQueryService.class);
-            final ArticleQueryService articleQueryService = beanManager.getReference(ArticleQueryService.class);
             final JSONObject preference = optionQueryService.getPreference();
 
             final JSONObject article = new JSONObject().
@@ -93,7 +94,7 @@ public class FishPiArticleSender extends AbstractEventListener<JSONObject> {
 
             UserQueryService userQueryService = beanManager.getReference(UserQueryService.class);
             String userName = userQueryService.getB3username();
-            String userB3Key = userQueryService.getB3password();
+            String userB3Key = userQueryService.getFishKey();
 
             if (Option.DefaultPreference.DEFAULT_B3LOG_USERNAME.equals(userName)) {
                 LOGGER.log(Level.INFO, "Article [title={0}] Is using the B3log default account, skipped push to Rhy", title);
@@ -115,9 +116,9 @@ public class FishPiArticleSender extends AbstractEventListener<JSONObject> {
                     connectionTimeout(3000).timeout(7000).followRedirects(true).
                     contentTypeJson().header("User-Agent", Solos.USER_AGENT).send();
 
-            LOGGER.log(Level.INFO, "Pushed an article [title={0}] to Rhy, response [{1}]", title, response.toString());
+            LOGGER.log(Level.INFO, "Pushed an article [title={0}] to FishPi, response [{1}]", title, response.toString());
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Pushes an article to Rhy failed: " + e.getMessage());
+            LOGGER.log(Level.ERROR, "Pushes an article to FishPi failed: " + e.getMessage());
         }
     }
 

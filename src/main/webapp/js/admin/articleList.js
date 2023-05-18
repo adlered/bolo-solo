@@ -132,7 +132,7 @@ admin.articleList = {
             ? Label.cancelPutTopLabel
             : Label.putTopLabel
 
-          if (Label.b3logEnabled === "true") {
+          if (Label.b3logEnabled === "true" || Label.fishpiEnabled === "true") {
             articleData[i].expendRow = '<a href=\'javascript:void(0)\' onclick="admin.article.get(\'' +
                 articles[i].oId + '\', true)">' + Label.updateLabel + '</a>  \
                                 <a href=\'javascript:void(0)\' onclick="admin.article.del(\'' +

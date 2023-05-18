@@ -1,0 +1,71 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"model/sakura/nanami/ryoufuku/ryoufuku.moc",
+	"textures":[
+		"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/sakura/nanami/ryoufuku/ryoufuku.1024/L2DNNM_R_00.png",
+		"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/sakura/nanami/ryoufuku/ryoufuku.1024/L2DNNM_R_01.png",
+		"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/sakura/nanami/ryoufuku/ryoufuku.1024/L2DNNM_R_02.png",
+		"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/sakura/nanami/ryoufuku/ryoufuku.1024/L2DNNM_R_03.png"
+	],
+	"hit_areas_custom": {
+        "head_x": [-0.35, 0.6],
+        "head_y": [0.19, -0.2],
+        "body_x": [-0.3, -0.25],
+        "body_y": [0.3, -0.9]
+    },
+	"motions":{
+		"idle":[
+			{
+				"file":"model/sakura/nanami/ryoufuku/ryoufuku.motions/motion1.mtn"
+			},
+			{
+				"file":"model/sakura/nanami/ryoufuku/ryoufuku.motions/motion8.mtn"
+			},
+			{
+				"file":"model/sakura/nanami/ryoufuku/ryoufuku.motions/motion10.mtn"
+			},
+			{
+				"file":"model/sakura/nanami/ryoufuku/ryoufuku.motions/motion11.mtn"
+			},
+			{
+				"file":"model/sakura/nanami/ryoufuku/ryoufuku.motions/motion12.mtn"
+			},
+			{
+				"file":"model/sakura/nanami/ryoufuku/ryoufuku.motions/motion13.mtn"
+			},
+			{
+				"file":"model/sakura/nanami/ryoufuku/ryoufuku.motions/motion2.mtn"
+			},
+			{
+				"file":"model/sakura/nanami/ryoufuku/ryoufuku.motions/motion3.mtn"
+			},
+			{
+				"file":"model/sakura/nanami/ryoufuku/ryoufuku.motions/motion4.mtn"
+			},
+			{
+				"file":"model/sakura/nanami/ryoufuku/ryoufuku.motions/motion5.mtn"
+			},
+			{
+				"file":"model/sakura/nanami/ryoufuku/ryoufuku.motions/motion6.mtn"
+			},
+			{
+				"file":"model/sakura/nanami/ryoufuku/ryoufuku.motions/motion7.mtn"
+			},
+			{
+				"file":"model/sakura/nanami/ryoufuku/ryoufuku.motions/motion9.mtn"
+			}
+		]
+	},
+	"expressions":[
+		{"name":"f01.exp.json","file":"model/sakura/nanami/expressions/f01.exp.json"},
+		{"name":"f02.exp.json","file":"model/sakura/nanami/expressions/f02.exp.json"},
+		{"name":"f03.exp.json","file":"model/sakura/nanami/expressions/f03.exp.json"},
+		{"name":"f04.exp.json","file":"model/sakura/nanami/expressions/f04.exp.json"},
+		{"name":"f05.exp.json","file":"model/sakura/nanami/expressions/f05.exp.json"},
+		{"name":"f06.exp.json","file":"model/sakura/nanami/expressions/f06.exp.json"},
+		{"name":"f07.exp.json","file":"model/sakura/nanami/expressions/f07.exp.json"},
+		{"name":"f08.exp.json","file":"model/sakura/nanami/expressions/f08.exp.json"}
+	],
+	"physics":"model/sakura/nanami/physics.json",
+	"pose":"model/sakura/nanami/ryoufuku/ryoufuku.pose.json"
+}

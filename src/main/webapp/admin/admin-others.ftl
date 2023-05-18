@@ -46,6 +46,13 @@
                 </div>
             </li>
         </#if>
+        <#if fishpiEnabled>
+            <li>
+                <div id="tabOthers_commentSync">
+                    <a href="#tools/others/commentSync">${syncLabel}</a>
+                </div>
+            </li>
+        </#if>
         <#if b3logEnabled>
             <li>
                 <div id="tabOthers_move">

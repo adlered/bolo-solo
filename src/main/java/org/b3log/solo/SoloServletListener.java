@@ -159,6 +159,7 @@ public final class SoloServletListener extends AbstractServletListener {
                 "█     zeekling   (Contributor)    █    https://github.com/zeekling     █\n" +
                 "█     csfwff     (Contributor)    █    https://github.com/csfwff       █\n" +
                 "█     teahouse   (Contributor)    █    https://github.com/teahouse15   █\n" +
+                "█     Gakkiyomi  (Contributor)    █    https://github.com/gakkiyomi   █\n" +
                 "████████████████████████████████████████████████████████████████████████\n" +
                 " \n" +
                 "┌\n" +

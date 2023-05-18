@@ -71,6 +71,13 @@
                 </div>
             </li>
         </#if>
+        <#if fishpiEnabled>
+            <li>
+                <div id="tabPreference_fishpiEcology">
+                    <a href="#tools/preference/fishpiEcology">${fishpiEcologyLabel}</a>
+                </div>
+            </li>
+        </#if>
     </ul>
 </div>
 <div id="tabPreferencePanel" class="sub-tabs-main">
@@ -551,6 +558,31 @@
             </details>
             <details class="menu">
                 ${liandi4Label}
+            </details>
+        </div>
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
+    </div>
+    <div id="tabPreferencePanel_fishpiEcology" class="fn__none form">
+        <div class="fn__clear">
+            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        </div>
+        <div class="fn__clear"></div>
+        <h4 style="color: #00a7e0">${fishpi1Label}</h4>
+        <br>
+        <label for="fishpiKey">API KEY</label>
+        <input id="fishpiKey" type="text">
+        <div>
+            <div>
+                ${fishpi2Label}
+            </div>
+            <style>
+                .menu ul li {
+                    list-style-type: none;
+                }
+            </style>
+            <details class="menu">
+                ${fishpi3Label}
             </details>
         </div>
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>

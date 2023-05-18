@@ -1,0 +1,17 @@
+{
+	"type":"Live2D Pose",
+	"parts_visible":[
+		{
+			"group":[
+				{"id":"PARTS_01_sihuku_02_ARM_R_A"},
+				{"id":"PARTS_01_sihuku_02_ARM_R_B"}
+			]
+		},
+		{
+			"group":[
+				{"id":"PARTS_01_sihuku_02_ARM_L_A"},
+				{"id":"PARTS_01_sihuku_02_ARM_L_B"}
+			]
+		}
+	]
+}

@@ -1,0 +1,88 @@
+{
+	"type": "Live2D Model Setting",
+	"name": "Violet",
+	"model": "model/Violet/Violet.moc",
+	"textures": [
+		"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/Violet/Violet.1024/texture_00.png"
+	],
+    "layout":
+	{
+		"width":1.9564,
+		"center_x":-0.0967,
+		"center_y":-0.3463
+	},
+	"motions": {
+		"idle": [{
+				"file": "model/Violet/motions/idle01.mtn",
+				"fade_in": 0,
+				"fade_out": 0
+			},
+			{
+				"file": "model/Violet/motions/idle02.mtn",
+				"fade_in": 0,
+				"fade_out": 0
+			},
+			{
+				"file": "model/Violet/motions/idle03.mtn",
+				"fade_in": 0,
+				"fade_out": 0
+			},
+			{
+				"file": "model/Violet/motions/idle04.mtn",
+				"fade_in": 0,
+				"fade_out": 0
+			}
+		],
+		"start": [{
+			"file": "model/Violet/motions/start.mtn",
+			"text": "",
+			"fade_in": 0,
+			"fade_out": 0
+		}],
+		"tap_body": [{
+			"file": "model/Violet/motions/tap_face.mtn",
+			"text": "",
+			"fade_in": 0,
+			"fade_out": 0
+		},{
+			"file": "model/Violet/motions/tap_body.mtn",
+			"text": "",
+			"fade_in": 0,
+			"fade_out": 0
+		},{
+			"file": "model/Violet/motions/tap_Lhand.mtn",
+			"text": "",
+			"fade_in": 0,
+			"fade_out": 0
+		},{
+			"file": "model/Violet/motions/tap_Rhand.mtn",
+			"text": "",
+			"fade_in": 0,
+			"fade_out": 0
+		},{
+			"file": "model/Violet/motions/tap_qunzi.mtn",
+			"text": "",
+			"fade_in": 0,
+			"fade_out": 0
+		}],
+		"new_msg": [{
+			"file": "model/Violet/motions/tap_Lhand.mtn",
+			"text": "",
+			"fade_in": 0,
+			"fade_out": 0
+		}]
+	},
+
+	"hit_areas_custom":{
+		"head_x": [-2, 2],
+		"head_y": [-2, 2],
+		"body_x": [-0.6, 0.6],
+		"body_y": [0.0, -0.9]
+	},
+	"loop_params": [{
+		"id": "PARAM_HBPL",
+		"duration": 8000,
+		"type": 0,
+		"weight": 1.0
+	}]
+}

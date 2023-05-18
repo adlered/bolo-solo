@@ -1,0 +1,105 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"model/umaru/umaru.moc",
+	"textures":[
+		"https://ftp.stackoverflow.wiki/bolo/kanbanniang/model/umaru/umaru2048/texture_00.png"
+	],
+	"physics":"model/umaru/physics.json",
+	"layout":
+	{
+		"width":1.0376,
+		"center_x":-0.0507,
+		"center_y":0.019
+	},
+
+	"hit_areas_custom":{
+		"head_x": [-2, 2],
+		"head_y": [-2, 2],
+		"body_x": [-0.6, 0.6],
+		"body_y": [0.0, -0.9]
+	},
+
+	"motions":
+	{
+		"idle":
+		[
+			{ "file":"model/umaru/mtn/umaru_idle.mtn" ,"fade_in":1000, "fade_out":1000, "expressions":"F00" }
+		],
+        "start":
+		[
+			{ "file":"model/umaru/mtn/rita_Live2D_003.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_026.mtn", "expressions":"F00" },
+            { "file":"model/umaru/mtn/rita_Live2D_001.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_002.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_003.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_004.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_005.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_006.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_007.mtn", "fade_in":500, "fade_out":1000},
+			{ "file":"model/umaru/mtn/rita_Live2D_008.mtn", "fade_in":500, "fade_out":1000},
+			{ "file":"model/umaru/mtn/rita_Live2D_009.mtn", "fade_in":500, "fade_out":1000},
+			{ "file":"model/umaru/mtn/rita_Live2D_010.mtn", "expressions":"F00" }
+
+		],
+		"tap_body":
+		[
+			{ "file":"model/umaru/mtn/rita_Live2D_027.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_028.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_029.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_030.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_031.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_032.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_033.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_034.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_034.mtn", "expressions":"F00" },
+            { "file":"model/umaru/mtn/rita_Live2D_021.mtn" },
+			{ "file":"model/umaru/mtn/rita_Live2D_022.mtn" },
+			{ "file":"model/umaru/mtn/rita_Live2D_023.mtn" },
+			{ "file":"model/umaru/mtn/rita_Live2D_024.mtn" },
+			{ "file":"model/umaru/mtn/rita_Live2D_025.mtn" },
+            { "file":"model/umaru/mtn/rita_Live2D_026.mtn", "expressions":"F00" }
+		,
+			{ "file":"model/umaru/mtn/rita_Live2D_011.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_012.mtn", "fade_in":500, "fade_out":1000},
+			{ "file":"model/umaru/mtn/rita_Live2D_013.mtn", "fade_in":500, "fade_out":500},
+			{ "file":"model/umaru/mtn/rita_Live2D_014.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_015.mtn" },
+			{ "file":"model/umaru/mtn/rita_Live2D_016.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_017.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_018.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_019.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_020.mtn", "fade_in":500, "fade_out":1000}
+		],
+		"shake":
+		[
+			{ "file":"model/umaru/mtn/rita_Live2D_021.mtn" },
+			{ "file":"model/umaru/mtn/rita_Live2D_022.mtn" },
+			{ "file":"model/umaru/mtn/rita_Live2D_023.mtn" },
+			{ "file":"model/umaru/mtn/rita_Live2D_024.mtn" },
+			{ "file":"model/umaru/mtn/rita_Live2D_025.mtn" },
+            { "file":"model/umaru/mtn/rita_Live2D_026.mtn", "expressions":"F00" }
+		],
+        "random":
+		[
+			{ "file":"model/umaru/mtn/rita_Live2D_027.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_028.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_029.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_030.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_031.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_032.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_033.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_034.mtn", "expressions":"F00" },
+			{ "file":"model/umaru/mtn/rita_Live2D_034.mtn", "expressions":"F00" },
+            { "file":"model/umaru/mtn/rita_Live2D_021.mtn" },
+			{ "file":"model/umaru/mtn/rita_Live2D_022.mtn" },
+			{ "file":"model/umaru/mtn/rita_Live2D_023.mtn" },
+			{ "file":"model/umaru/mtn/rita_Live2D_024.mtn" },
+			{ "file":"model/umaru/mtn/rita_Live2D_025.mtn" },
+            { "file":"model/umaru/mtn/rita_Live2D_026.mtn", "expressions":"F00" }
+		],
+		"new_msg":
+		[
+			{ "file":"model/umaru/mtn/rita_Live2D_033.mtn", "expressions":"F00" }
+		]
+	}
+}

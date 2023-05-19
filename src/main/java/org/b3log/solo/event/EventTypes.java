@@ -37,6 +37,11 @@ public final class EventTypes {
     public static final String UPDATE_ARTICLE = "Update Article";
 
     /**
+     * Indicates a delete article event.
+     */
+    public static final String DELETE_ARTICLE = "Delete Article";
+
+    /**
      * Indicates a before render article event.
      */
     public static final String BEFORE_RENDER_ARTICLE = "Before Render Article";

@@ -661,6 +661,7 @@ public class ArticleMgmtService {
             articleRepository.remove(articleId);
             commentRepository.removeComments(articleId);
             transaction.commit();
+            eventManager.fireEventAsynchronously(new Event<>(EventTypes.DELETE_ARTICLE, articleId));
         } catch (final Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();

@@ -171,21 +171,6 @@
                         </tr>
                         </tbody>
                     </#if>
-                    <#if fishpiEnabled>
-                        <tbody class="table-oddRow">
-                        <tr class="table-hasExpend">
-                            <td style="padding-left: 20px; padding-right: 20px;">
-                                手动上传公开文章备份至摸鱼派
-                            </td>
-                            <td>
-                                手动将你的<b>公开</b>文章备份上传至摸鱼派。
-                            </td>
-                            <td style="padding-right: 20px;">
-                                <button onclick="backup()" style="float:right">确定备份</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </#if>
                     <tbody class="table-oddRow">
                     <tr class="table-hasExpend">
                         <td style="padding-left: 20px; padding-right: 20px;">

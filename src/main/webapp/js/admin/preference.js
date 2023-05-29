@@ -99,6 +99,7 @@ admin.preference = {
         $('#tcS').val(sltd)
         $('#hacpaiUser').val(preference.hacpaiUser)
         $('#b3logKey').val(preference.b3logKey)
+        $('#fishpiKey').val(preference.fishKey)
         $('#mailBox').val(preference.mailBox)
         $('#mailUsername').val(preference.mailUsername)
         $('#mailPassword').val(preference.mailPassword)
@@ -276,6 +277,7 @@ admin.preference = {
         'tuChuangConfig': $('#sourceTC').text(),
         'hacpaiUser': $('#hacpaiUser').val(),
         'b3logKey': $('#b3logKey').val(),
+        'fishKey': $('#fishpiKey').val(),
         'mailBox': $('#mailBox').val(),
         'mailUsername': $('#mailUsername').val(),
         'mailPassword': $('#mailPassword').val(),

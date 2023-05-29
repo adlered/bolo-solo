@@ -83,6 +83,7 @@ public class Options {
                 Option.ID_C_KANBANNIANG_SELECTOR,
                 Option.ID_C_EDITOR_MODE,
                 Option.ID_C_B3LOG_KEY,
+                Option.ID_C_FISH_KEY,
                 Option.ID_C_HACPAI_USER,
                 Option.ID_C_SPAM,
                 Option.ID_C_INTERACTIVE,
@@ -142,6 +143,7 @@ public class Options {
                 // Bolo 字段
                 new Object[]{Option.ID_C_HACPAI_USER, Option.CATEGORY_C_PREFERENCE, ""},
                 new Object[]{Option.ID_C_B3LOG_KEY, Option.CATEGORY_C_PREFERENCE, ""},
+                new Object[]{Option.ID_C_FISH_KEY, Option.CATEGORY_C_PREFERENCE, ""},
                 new Object[]{Option.ID_C_MAX_ARCHIVE, Option.CATEGORY_C_PREFERENCE, Option.DefaultPreference.DEFAULT_MAX_ARCHIVE},
                 new Object[]{Option.ID_C_MAIL_BOX, Option.CATEGORY_C_PREFERENCE, ""},
                 new Object[]{Option.ID_C_MAIL_USERNAME, Option.CATEGORY_C_PREFERENCE, ""},

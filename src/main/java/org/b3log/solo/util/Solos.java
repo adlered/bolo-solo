@@ -72,6 +72,11 @@ public final class Solos {
      * Solo User-Agent.
      */
     public static final String USER_AGENT = "Solo/" + SoloServletListener.VERSION + "; +https://github.com/b3log/solo";
+
+    /**
+     * Bolo User-Agent.
+     */
+    public static final String BOLO_USER_AGENT = "Bolo/" + SoloServletListener.BOLO_VERSION_SOURCE + "; +https://github.com/adlered/bolo-solo";
     /**
      * Cookie name.
      */

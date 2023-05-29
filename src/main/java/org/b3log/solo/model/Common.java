@@ -363,6 +363,11 @@ public final class Common {
     public static final String B3LOG_ENABLED = "b3logEnabled";
 
     /**
+     * Key of FishPi functions status.
+     */
+    public static final String FISHPI_ENABLED = "fishpiEnabled";
+
+    /**
      * Private constructor.
      */
     private Common() {

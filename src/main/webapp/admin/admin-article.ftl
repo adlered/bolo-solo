@@ -90,7 +90,7 @@
                 ${allowCommentLabel}
             </label>
             &nbsp;
-            <#if b3logEnabled>
+            <#if b3logEnabled || fishpiEnabled>
             <span id="postToCommunityPanel">
             <#else>
             <span id="postToCommunityPanel" style="display: none">

@@ -35,4 +35,12 @@ public class PluginUtil {
             return false;
         }
     }
+
+    public static boolean fishpiPluginEnabled() {
+        try {
+            return pluginRepository.get("摸鱼派支持插件_0.0.1").optString("status").equals("ENABLED");
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

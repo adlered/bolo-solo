@@ -34,9 +34,11 @@ import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Ids;
 import org.b3log.solo.event.B3ArticleSender;
 import org.b3log.solo.event.EventTypes;
+import org.b3log.solo.event.FishPiArticleSender;
 import org.b3log.solo.model.*;
 import org.b3log.solo.repository.*;
 import org.b3log.solo.util.GitHubs;
+import org.b3log.solo.util.PluginUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -341,7 +343,15 @@ public class ArticleMgmtService {
             article.put(Common.POST_TO_COMMUNITY, true);
 
             final JSONObject data = new JSONObject().put(ARTICLE, article);
-            B3ArticleSender.pushArticleToRhy(data);
+            new Thread(() -> {
+                if (PluginUtil.b3logPluginEnabled()) {
+                    B3ArticleSender.pushArticleToRhy(data);
+                }
+                if (PluginUtil.fishpiPluginEnabled()) {
+                    FishPiArticleSender.pushArticleToFishPi(data);
+                }
+            }).start();
+
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Pushes an article [id=" + articleId + "] to community failed", e);
         }
@@ -651,6 +661,7 @@ public class ArticleMgmtService {
             articleRepository.remove(articleId);
             commentRepository.removeComments(articleId);
             transaction.commit();
+            eventManager.fireEventAsynchronously(new Event<>(EventTypes.DELETE_ARTICLE, articleId));
         } catch (final Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();

@@ -71,6 +71,13 @@
                 </div>
             </li>
         </#if>
+        <#if fishpiEnabled>
+            <li>
+                <div id="tabPreference_fishpiEcology">
+                    <a href="#tools/preference/fishpiEcology">${fishpiEcologyLabel}</a>
+                </div>
+            </li>
+        </#if>
     </ul>
 </div>
 <div id="tabPreferencePanel" class="sub-tabs-main">
@@ -481,9 +488,6 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_mailAndRemind" class="fn__none form">
-        <div class="fn__clear">
-            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
-        </div>
         <div class="fn__clear"></div>
         <label for="adminActiveSentToMailbox">${adminActiveSentToMailboxLabel}</label>
         <br>
@@ -527,9 +531,6 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_b3logEcology" class="fn__none form">
-        <div class="fn__clear">
-            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
-        </div>
         <div class="fn__clear"></div>
         <h4 style="color: #00a7e0">${liandi1Label}</h4>
         <br>
@@ -556,10 +557,29 @@
         <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
         <div class="fn__clear"></div>
     </div>
-    <div id="tabPreferencePanel_interactive" class="fn__none form">
-        <div class="fn__clear">
-            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+    <div id="tabPreferencePanel_fishpiEcology" class="fn__none form">
+        <div class="fn__clear"></div>
+        <h4 style="color: #00a7e0">${fishpi1Label}</h4>
+        <br>
+        <label for="fishpiKey">API KEY</label>
+        <input id="fishpiKey" type="text">
+        <div>
+            <div>
+                ${fishpi2Label}
+            </div>
+            <style>
+                .menu ul li {
+                    list-style-type: none;
+                }
+            </style>
+            <details class="menu">
+                ${fishpi3Label}
+            </details>
         </div>
+        <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
+        <div class="fn__clear"></div>
+    </div>
+    <div id="tabPreferencePanel_interactive" class="fn__none form">
         <div class="fn__clear"></div>
         <label>${nonInteractiveLabel}</label>
         <br>
@@ -574,9 +594,6 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_security" class="fn__none form">
-        <div class="fn__clear">
-            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
-        </div>
         <div class="fn__clear"></div>
         <label>${securityPowerLabel}</label>
         <br>
@@ -600,9 +617,6 @@
         <div class="fn__clear"></div>
     </div>
     <div id="tabPreferencePanel_myGitHub" class="fn__none form">
-        <div class="fn__clear">
-            <button class="fn__right" onclick="admin.preference.update()">${updateLabel}</button>
-        </div>
         <div class="fn__clear"></div>
         ${myGitHub1Label}
         <br>

@@ -166,6 +166,7 @@ public class AdminConsole {
             dataModel.put(Common.BOLO_VERSION, SoloServletListener.BOLO_VERSION);
             dataModel.put(Common.STATIC_RESOURCE_VERSION, Latkes.getStaticResourceVersion());
             dataModel.put(Common.B3LOG_ENABLED, "" + PluginUtil.b3logPluginEnabled());
+            dataModel.put(Common.FISHPI_ENABLED, "" + PluginUtil.fishpiPluginEnabled());
             dataModel.put(Common.YEAR, String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
             dataModel.put(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT, preference.getInt(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT));
             dataModel.put(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE, preference.getInt(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE));
@@ -231,7 +232,7 @@ public class AdminConsole {
         // 链滴域名设定
         dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
         dataModel.put(Common.B3LOG_ENABLED, PluginUtil.b3logPluginEnabled());
-
+        dataModel.put(Common.FISHPI_ENABLED, PluginUtil.fishpiPluginEnabled());
         fireFreeMarkerActionEvent(templateName, dataModel);
     }
 
@@ -271,6 +272,7 @@ public class AdminConsole {
         // 链滴域名设定
         dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
         dataModel.put(Common.B3LOG_ENABLED, PluginUtil.b3logPluginEnabled());
+        dataModel.put(Common.FISHPI_ENABLED, PluginUtil.fishpiPluginEnabled());
         // 用户体验改进计划
         dataModel.put(Option.ID_C_HELP_IMPROVE_PLAN, ImproveOptions.doJoinHelpImprovePlan());
 

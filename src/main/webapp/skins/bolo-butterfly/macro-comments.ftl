@@ -19,7 +19,8 @@
 -->
 <#macro comments commentList article count>
     <#if article.commentable>
-        <style type="text/css">.v[data-class=v] {
+        <style type="text/css">
+            .v[data-class=v] {
                 font-size: 16px;
                 text-align: left
             }
@@ -370,12 +371,31 @@
                 width: 100%
             }
 
+            .v[data-class=v] .vcards .vcard .vat .vicon svg{
+                width: .8rem !important;
+                height: .8rem !important;
+            }
             .v[data-class=v] .vcards .vcard {
-                padding-top: 1.25em;
-                position: relative;
-                display: block
+                padding: 10px 20px 20px 20px;
+                border-radius: 10px;
+                margin-top: 1rem;
+                display: flex;
+                flex-direction: row;
+                word-break: break-all;
             }
 
+            .v[data-class=v] .vcards .vcard .vavatar {
+                margin-right: 1rem;
+                flex-shrink: 0;
+                height: 2.5rem;
+                width: 2.5rem;
+                overflow: hidden;
+                text-align: center;
+                border-radius: 5px;
+            }
+            .v[data-class=v] .vcards .vcard .vavatar .vimg{
+                height: 2.5rem;
+            }
             .v[data-class=v] .vcards .vcard:after {
                 content: "";
                 clear: both;
@@ -400,13 +420,17 @@
             }
 
             .v[data-class=v] .vcards .vcard .vhead {
-                line-height: 1.5;
-                margin-top: 0
+                flex: 1;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                margin-bottom: 10px;
             }
 
             .v[data-class=v] .vcards .vcard .vhead .vnick {
                 position: relative;
-                font-size: .875em;
+                color: #ef794f!important;
+                font-size: 1em;
                 font-weight: 500;
                 margin-right: .4em;
                 cursor: pointer;
@@ -439,16 +463,20 @@
             .v[data-class=v] .vcards .vcard .vhead .vnick:hover {
                 color: #d7191a
             }
-
+            .v[data-class=v] .vcards .vcard .ivcon{
+                background: #f7f9fe;
+                padding: 10px 16px 0 16px;
+                border-radius: 12px;
+            }
             .v[data-class=v] .vcards .vcard .vh {
-                overflow: hidden;
-                padding-bottom: .5em;
-                border-bottom: 1px dashed #f5f5f5
+                flex: 1;
+                width: 0;
             }
 
             .v[data-class=v] .vcards .vcard .vh .vtime {
                 font-size: .75em;
-                margin-right: .875em
+                margin-right: .875em;
+                margin-left: 5px;
             }
 
             .v[data-class=v] .vcards .vcard .vh .vmeta {
@@ -457,12 +485,21 @@
             }
 
             .v[data-class=v] .vcards .vcard .vh .vmeta .vat {
-                font-size: .8125em;
-                color: #ef2f11;
-                cursor: pointer;
-                float: right
+                display: flex;
+                align-items: center;
+                margin-left: 0.5rem;
+                color: #409eff;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
             }
 
+            .v[data-class=v] .vcards .vcard .vh .vmeta .vat .vicon{
+                display: inline-block;
+                height: 0.8em;
+                width: 0.8em;
+                line-height: 0;
+            }
             .v[data-class=v] .vcards .vcard:last-child .vh {
                 border-bottom: none
             }
@@ -473,8 +510,8 @@
                 font-size: .875em;
                 line-height: 2;
                 position: relative;
-                margin-bottom: .75em;
-                padding-top: .625em
+                padding-top: .625em;
+                padding-bottom: .625em;
             }
 
             .v[data-class=v] .vcards .vcard .vcontent.expand {
@@ -482,7 +519,9 @@
                 max-height: 8em;
                 overflow: hidden
             }
-
+            .v[data-class=v] .vcards .vcard .vctext{
+                font-size: 0.875em;
+            }
             .v[data-class=v] .vcards .vcard .vcontent.expand:before {
                 display: block;
                 content: "";
@@ -634,7 +673,7 @@
                 }
 
                 .v[data-class=v] .vsys, .v[data-class=v] .vtime {
-                    color: #929298
+                    color: #929298;
                 }
 
                 .v[data-class=v] code, .v[data-class=v] pre, .v[data-class=v] pre code {
@@ -676,6 +715,7 @@
                 .v[data-class=v] .vcards .vcard .vcontent.expand:after {
                     background: rgba(0, 0, 0, .7)
                 }
+
             }</style>
         <div class="commentFont" id="commentIcon" style="margin: 0 auto; text-align: center; padding-bottom: 20px">
             <img src="https://ftp.stackoverflow.wiki/bolo/background/butterfly/comment.png">
@@ -683,30 +723,30 @@
         </div>
 
         <div class="wrapper view-article">
-            <div class="Valine v" data-class="v">
-                <div class="vpanel">
-                    <div class="vwrap">
-                        <div class="vheader item3">
-                            <input placeholder="你的昵称" id="boloUser" class="vnick vinput" type="text">
-                            <input placeholder="你的个人主页URL（选填）" id="boloSite" class="vmail vinput" type="text">
-                        </div>
-                        <div class="vedit">
-                            <textarea placeholder="${postCommentsLabel} ..." class="veditor vinput" id="comment" rows="5" tabindex="4"></textarea>
-                        </div>
-                        <script type="text/javascript" src="${staticServePath}/js/bolo/sweetalert.min.js"></script>
-                        <div class="vrow">
-                            <div class="vcol vcol-30"><a alt="Markdown is supported"
-                                                         href="https://guides.github.com/features/mastering-markdown/"
-                                                         class="vicon" target="_blank">
-                                    <svg class="markdown" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                                         aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                              d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path>
-                                    </svg>
-                                </a></div>
-                        </div>
-                    </div>
+        <div class="Valine v" data-class="v">
+        <div class="vpanel">
+            <div class="vwrap">
+                <div class="vheader item3">
+                    <input placeholder="你的昵称" id="boloUser" class="vnick vinput" type="text">
+                    <input placeholder="你的个人主页URL（选填）" id="boloSite" class="vmail vinput" type="text">
                 </div>
+                <div class="vedit">
+                    <textarea placeholder="${postCommentsLabel} ..." class="veditor vinput" id="comment" rows="5" tabindex="4"></textarea>
+                </div>
+                <script type="text/javascript" src="${staticServePath}/js/bolo/sweetalert.min.js"></script>
+                <div class="vrow">
+                    <div class="vcol vcol-30"><a alt="Markdown is supported"
+                                                 href="https://guides.github.com/features/mastering-markdown/"
+                                                 class="vicon" target="_blank">
+                            <svg class="markdown" viewBox="0 0 16 16" version="1.1" width="16" height="16"
+                                 aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                      d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path>
+                            </svg>
+                        </a></div>
+                </div>
+            </div>
+        </div>
     </#if>
 
     <div class="vcount" style="display: block; padding: 25px 0px 20px 0px;"><span class="vnum">${count}</span> 评论</div>

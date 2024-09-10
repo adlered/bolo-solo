@@ -985,7 +985,7 @@ public class ArticleMgmtService {
             return;
         }
 
-        final long created = article.optLong(Keys.OBJECT_ID);
+        final long created = article.optLong(ARTICLE_CREATED);
         final String createDateString = DateFormatUtils.format(created, "yyyy/MM");
         JSONObject archiveDate = archiveDateRepository.getByArchiveDate(createDateString);
         if (null == archiveDate) {

@@ -17,12 +17,23 @@
  */
 package org.b3log.solo.util;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
+import org.b3log.solo.bolo.pic.util.UploadUtil;
+import org.b3log.solo.bolo.prop.Options;
+import org.b3log.solo.model.Option;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -92,24 +103,62 @@ public final class Images {
         return imageURL + "?imageView2/1/w/" + width + "/h/" + height + "/interlace/1/q/100";
     }
 
+    public static File compressImage(File inputFile, float quality) throws IOException {
+        BufferedImage image = ImageIO.read(inputFile);
+        File compressedFile = new File(inputFile.getParent(), "compressed_" + inputFile.getName());
+
+        ImageWriter jpgWriter = ImageIO.getImageWritersByFormatName("jpg").next();
+        ImageOutputStream ios = ImageIO.createImageOutputStream(compressedFile);
+        jpgWriter.setOutput(ios);
+
+        ImageWriteParam param = jpgWriter.getDefaultWriteParam();
+        if (param.canWriteCompressed()) {
+            param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+            param.setCompressionQuality(quality);
+        }
+        jpgWriter.write(null, new javax.imageio.IIOImage(image, null, null), param);
+        ios.close();
+        jpgWriter.dispose();
+
+        LOGGER.log(Level.INFO, "Temp Image " + inputFile.getName() + " Delete [" + inputFile.delete() + "]");
+        return compressedFile;
+    }
+
+
     /**
      * Gets an image URL randomly. Sees https://github.com/b3log/bing for more details.
      *
      * @return an image URL
      */
     public static String randImage() {
+        // 修改
         try {
             final long min = DateUtils.parseDate("20171104", new String[]{"yyyyMMdd"}).getTime();
             final long max = System.currentTimeMillis();
             final long delta = max - min;
             final long time = ThreadLocalRandom.current().nextLong(0, delta) + min;
 
-            return COMMUNITY_FILE_URL + "/bing/" + DateFormatUtils.format(time, "yyyyMMdd") + ".jpg";
+            String imageName = DateFormatUtils.format(time, "yyyyMMdd") + ".jpg";
+            String B3logImageURL = COMMUNITY_FILE_URL + "/bing/" + imageName;
+            String config = Options.get(Option.ID_C_TUCHUANG_CONFIG);
+            String value = Options.get(Option.ID_C_THUMB_COMPRESS);
+
+            if (!config.equals("hacpai") && !config.isEmpty()) {
+                File file = new File("temp/tmp_" + imageName);
+                // FileNotFoundException
+                FileUtils.copyURLToFile(new URL(B3logImageURL), file);
+                return UploadUtil.upload(config, compressImage(file, Float.parseFloat(value)));
+            }
+            return B3logImageURL;
+
+        } catch (final FileNotFoundException e) {
+            LOGGER.log(Level.ERROR, "Remote image resource lost", e);
+            return COMMUNITY_FILE_URL + "/bing/20171104.jpg";
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Generates random image URL failed", e);
-
             return COMMUNITY_FILE_URL + "/bing/20171104.jpg";
         }
+
     }
 
     /**

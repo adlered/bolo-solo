@@ -219,6 +219,17 @@ public final class Option {
     public static final String ID_C_ARTICLE_LIST_STYLE = "articleListStyle";
 
     /**
+     * Article Image Upload Compress.
+     */
+    public static final String ID_C_IMAGE_UPLOAD_COMPRESS = "imageUploadCompress";
+
+    /**
+     * Article Thumb Compress.
+     */
+    public static final String ID_C_THUMB_COMPRESS = "thumbCompress";
+
+
+    /**
      * Key of article/page comment-able.
      */
     public static final String ID_C_COMMENTABLE = "commentable";
@@ -611,6 +622,12 @@ public final class Option {
          * Default max archive.
          */
         public static final String DEFAULT_MAX_ARCHIVE = "-1";
+
+
+        public static final String DEFAULT_IMAGE_UPLOAD_COMPRESS = "10";
+
+
+        public static final String DEFAULT_THUMB_COMPRESS = "10";
 
         /**
          * Default B3log username.

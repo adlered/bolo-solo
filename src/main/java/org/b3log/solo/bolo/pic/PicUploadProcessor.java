@@ -30,6 +30,7 @@ import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.pic.util.UploadUtil;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.OptionRepository;
+import org.b3log.solo.util.Images;
 import org.b3log.solo.util.Solos;
 
 import javax.servlet.ServletContext;
@@ -97,6 +98,12 @@ public class PicUploadProcessor {
                     } catch (Exception e) {
                         config = "hacpai";
                     }
+                    String value;
+                    try {
+                        value = optionRepository.get(Option.ID_C_IMAGE_UPLOAD_COMPRESS).optString(Option.OPTION_VALUE);
+                    } catch (Exception e) {
+                        value = "10";
+                    }
                     final ServletContext servletContext = SoloServletListener.getServletContext();
                     final String assets = "/";
                     String path = servletContext.getResource(assets).getPath();
@@ -106,7 +113,8 @@ public class PicUploadProcessor {
                     item.write(file);
                     item.delete();
                     try {
-                        String url = UploadUtil.upload(config, file);
+
+                        String url = UploadUtil.upload(config, Images.compressImage(file, Float.parseFloat(value)));
                         if (url.isEmpty()) {
                             url = "接口调用错误，请检查偏好设置-自定义图床配置，清除浏览器缓存并重启服务端。";
                         }

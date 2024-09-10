@@ -108,24 +108,24 @@ admin.preference = {
         $('#blogTitle').val(preference.blogTitle)
         $('#blogSubtitle').val(preference.blogSubtitle)
         $('#mostCommentArticleDisplayCount').
-          val(preference.mostCommentArticleDisplayCount)
+        val(preference.mostCommentArticleDisplayCount)
         $('#mostViewArticleDisplayCount').
-          val(preference.mostViewArticleDisplayCount)
+        val(preference.mostViewArticleDisplayCount)
         $('#recentCommentDisplayCount').
-          val(preference.recentCommentDisplayCount)
+        val(preference.recentCommentDisplayCount)
         $('#mostUsedTagDisplayCount').val(preference.mostUsedTagDisplayCount)
         $('#articleListDisplayCount').val(preference.articleListDisplayCount)
         $('#articleListPaginationWindowSize').
-          val(preference.articleListPaginationWindowSize)
+        val(preference.articleListPaginationWindowSize)
         $('#localeString').val(preference.localeString)
         $('#timeZoneId').val(preference.timeZoneId)
         $('#noticeBoard').val(preference.noticeBoard)
         $('#footerContent').val(preference.footerContent)
         $('#htmlHead').val(preference.htmlHead)
         $('#relevantArticlesDisplayCount').
-          val(preference.relevantArticlesDisplayCount)
+        val(preference.relevantArticlesDisplayCount)
         $('#randomArticlesDisplayCount').
-          val(preference.randomArticlesDisplayCount)
+        val(preference.randomArticlesDisplayCount)
         $('#customVars').val(preference.customVars)
         $('#githubPAT').val(preference.githubPAT)
         $('#maxArchive').val(preference.maxArchive)
@@ -156,6 +156,8 @@ admin.preference = {
         $('#hljsTheme').val(preference.hljsTheme)
         $('#feedOutputMode').val(preference.feedOutputMode)
         $('#feedOutputCnt').val(preference.feedOutputCnt)
+        $('#imageUploadCompress').val(preference.imageUploadCompress)
+        $('#thumbCompress').val(preference.thumbCompress)
         $('#faviconURL').val(preference.faviconURL)
 
         $('#loadMsg').text('')
@@ -168,54 +170,54 @@ admin.preference = {
   validate: function () {
     if (!/^\d+$/.test($('#mostUsedTagDisplayCount').val())) {
       $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
+      text('[' + Label.paramSettingsLabel + ' - ' +
           Label.indexTagDisplayCntLabel + '] ' +
           Label.nonNegativeIntegerOnlyLabel)
       $('#mostUsedTagDisplayCount').focus()
       return false
     } else if (!/^\d+$/.test($('#recentCommentDisplayCount').val())) {
       $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
+      text('[' + Label.paramSettingsLabel + ' - ' +
           Label.indexRecentCommentDisplayCntLabel + '] ' +
           Label.nonNegativeIntegerOnlyLabel)
       $('#recentCommentDisplayCount').focus()
       return false
     } else if (!/^\d+$/.test($('#mostCommentArticleDisplayCount').val())) {
       $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
+      text('[' + Label.paramSettingsLabel + ' - ' +
           Label.indexMostCommentArticleDisplayCntLabel + '] ' +
           Label.nonNegativeIntegerOnlyLabel)
       $('#mostCommentArticleDisplayCount').focus()
       return false
     } else if (!/^\d+$/.test($('#mostViewArticleDisplayCount').val())) {
       $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
+      text('[' + Label.paramSettingsLabel + ' - ' +
           Label.indexMostViewArticleDisplayCntLabel + '] ' +
           Label.nonNegativeIntegerOnlyLabel)
       $('#mostViewArticleDisplayCount').focus()
       return false
     } else if (!/^\d+$/.test($('#articleListDisplayCount').val())) {
       $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' + Label.pageSizeLabel +
+      text('[' + Label.paramSettingsLabel + ' - ' + Label.pageSizeLabel +
           '] ' + Label.nonNegativeIntegerOnlyLabel)
       $('#articleListDisplayCount').focus()
       return false
     } else if (!/^\d+$/.test($('#articleListPaginationWindowSize').val())) {
       $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' + Label.windowSizeLabel +
+      text('[' + Label.paramSettingsLabel + ' - ' + Label.windowSizeLabel +
           '] ' + Label.nonNegativeIntegerOnlyLabel)
       $('#articleListPaginationWindowSize').focus()
       return false
     } else if (!/^\d+$/.test($('#randomArticlesDisplayCount').val())) {
       $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
+      text('[' + Label.paramSettingsLabel + ' - ' +
           Label.randomArticlesDisplayCntLabel + '] ' +
           Label.nonNegativeIntegerOnlyLabel)
       $('#randomArticlesDisplayCount').focus()
       return false
     } else if (!/^\d+$/.test($('#relevantArticlesDisplayCount').val())) {
       $('#tipMsg').
-        text('[' + Label.paramSettingsLabel + ' - ' +
+      text('[' + Label.paramSettingsLabel + ' - ' +
           Label.relevantArticlesDisplayCntLabel + '] ' +
           Label.nonNegativeIntegerOnlyLabel)
       $('#relevantArticlesDisplayCount').focus()
@@ -305,6 +307,8 @@ admin.preference = {
         'hljsTheme': $('#hljsTheme').val(),
         'feedOutputMode': $('#feedOutputMode').val(),
         'feedOutputCnt': $('#feedOutputCnt').val(),
+        'imageUploadCompress': $('#imageUploadCompress').val(),
+        'thumbCompress': $('#thumbCompress').val(),
         'faviconURL': $('#faviconURL').val(),
         'syncGitHub': $('#syncGitHub').prop('checked'),
         'showCodeBlockLn': $('#showCodeBlockLn').prop('checked'),
@@ -340,7 +344,7 @@ admin.preference = {
 }
 
 /*
- * 注册到 admin 进行管理 
+ * 注册到 admin 进行管理
  */
 admin.register['preference'] = {
   'obj': admin.preference,

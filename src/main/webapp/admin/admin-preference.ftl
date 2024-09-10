@@ -239,6 +239,10 @@
             </select>
             <label for="feedOutputCnt">${feedOutputCnt1Label}</label>
             <input id="feedOutputCnt" class="normalInput" type="text"/>
+            <label for="imageUploadCompress">${imageUploadCompressLabel}</label>
+            <input id="imageUploadCompress" class="normalInput" type="text"/>
+            <label for="thumbCompress">${thumbCompressLabel}</label>
+            <input id="thumbCompress" class="normalInput" type="text"/>
             <label for="customVars">${customVars1Label}</label>
             <input id="customVars" class="normalInput" type="text"/>
         </details>

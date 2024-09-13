@@ -191,9 +191,11 @@
             <script type="text/javascript">
                 var data1 = {
                     labels: [
-                        <#list latestArchives?reverse as archiveDate>
-                            "${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}",
-                        </#list>
+                        <#if latestArchives?exists && (latestArchives?size > 0)>
+                            <#list latestArchives?reverse as archiveDate>
+                                "${archiveDate.archiveDateYear}/${archiveDate.archiveDateMonth}",
+                            </#list>
+                        </#if>
                     ],
                     datasets: [{
                         label: '文章数量',
@@ -203,9 +205,11 @@
                         pointBackgroundColor: "#36A2EB",
                         pointBorderColor: "#fff",
                         data: [
-                            <#list latestArchives?reverse as archiveDate>
-                                ${archiveDate.archiveDatePublishedArticleCount},
-                            </#list>
+                            <#if latestArchives?exists && (latestArchives?size > 0)>
+                                <#list latestArchives?reverse as archiveDate>
+                                    ${archiveDate.archiveDatePublishedArticleCount},
+                                </#list>
+                            </#if>
                         ],
                     }]
                 };
@@ -214,9 +218,11 @@
                     datasets: [
                         {
                             data: [
-                                <#list tagsTop5 as tag>
-                                    ${tag.tagPublishedRefCount},
-                                </#list>
+                                <#if tagsTop5?exists && (tagsTop5?size > 0)>
+                                    <#list tagsTop5 as tag>
+                                        ${tag.tagPublishedRefCount},
+                                    </#list>
+                                </#if>
                             ],
                             backgroundColor: [
                                 'rgb(254,67,101)',
@@ -229,9 +235,11 @@
                     ],
 
                     labels: [
-                        <#list tagsTop5 as tag>
-                            "${tag.tagTitle}",
-                        </#list>
+                        <#if tagsTop5?exists && (tagsTop5?size > 0)>
+                            <#list tagsTop5 as tag>
+                                "${tag.tagTitle}",
+                            </#list>
+                        </#if>
                     ]
                 };
             </script>

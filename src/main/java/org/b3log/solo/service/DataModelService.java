@@ -227,7 +227,7 @@ public class DataModelService {
             setArticlesExProperties(context, articles, preference);
 
             final List<Integer> pageNums = Paginator.paginate(currentPageNum, pageSize, pageCount, windowSize);
-            if (0 != pageNums.size()) {
+            if (!pageNums.isEmpty()) {
                 dataModel.put(Pagination.PAGINATION_FIRST_PAGE_NUM, pageNums.get(0));
                 dataModel.put(Pagination.PAGINATION_LAST_PAGE_NUM, pageNums.get(pageNums.size() - 1));
             }
@@ -784,7 +784,6 @@ public class DataModelService {
             if (archiveDates3.size() > 20) {
                 archiveDates3 = archiveDates3.subList(0, 20);
             }
-
             dataModel.put("latestArchives", archiveDates3);
         } catch (Exception ignored) {
         }

@@ -88,9 +88,9 @@
 
                         labels: [
                             <#list categories as category>
-                            <#if category.categoryPublishedArticleCount != 0>
-                            "${category.categoryTitle}",
-                            </#if>
+                                <#if category.categoryPublishedArticleCount != 0>
+                                    "${category.categoryTitle}",
+                                </#if>
                             </#list>
                         ]
                     };

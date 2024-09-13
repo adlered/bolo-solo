@@ -117,34 +117,36 @@
 
 
         <div class="card card-transparent">
+<#--        没有文章时500    -->
+            <#if paginationCurrentPageNum?has_content && paginationFirstPageNum?has_content>
+                <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+                    <#if paginationCurrentPageNum !=paginationFirstPageNum>
 
-            <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-                <#if paginationCurrentPageNum !=paginationFirstPageNum>
-
-                    <div class="pagination-previous">
-                        <a class="is-flex-grow has-text-black-ter"
-                            href="${servePath}${path}?p=${paginationPreviousPageNum}">上一页</a>
-                    </div>
-                </#if>
-                <#if paginationCurrentPageNum !=paginationLastPageNum>
-                    <div class="pagination-next">
-                        <a class="is-flex-grow has-text-black-ter"
-                            href="${servePath}${path}?p=${paginationNextPageNum}">下一页</a>
-                    </div>
-                </#if>
+                        <div class="pagination-previous">
+                            <a class="is-flex-grow has-text-black-ter"
+                                href="${servePath}${path}?p=${paginationPreviousPageNum}">上一页</a>
+                        </div>
+                    </#if>
+                    <#if paginationCurrentPageNum !=paginationLastPageNum>
+                        <div class="pagination-next">
+                            <a class="is-flex-grow has-text-black-ter"
+                                href="${servePath}${path}?p=${paginationNextPageNum}">下一页</a>
+                        </div>
+                    </#if>
 
 
-                <ul class="pagination-list is-hidden-mobile">
-                    <#list paginationPageNums as paginationPageNum>
-                        <#if paginationPageNum==paginationCurrentPageNum>
-                            <li><span class="pagination-link is-current">${paginationPageNum}</span></li>
-                            <#else>
-                                <li><a class="pagination-link"
-                                        href="${servePath}${path}?p=${paginationPageNum}">${paginationPageNum}</a></li>
-                        </#if>
-                    </#list>
-                </ul>
+                    <ul class="pagination-list is-hidden-mobile">
+                        <#list paginationPageNums as paginationPageNum>
+                            <#if paginationPageNum==paginationCurrentPageNum>
+                                <li><span class="pagination-link is-current">${paginationPageNum}</span></li>
+                                <#else>
+                                    <li><a class="pagination-link"
+                                            href="${servePath}${path}?p=${paginationPageNum}">${paginationPageNum}</a></li>
+                            </#if>
+                        </#list>
+                    </ul>
 
-            </nav>
+                </nav>
+            </#if>
         </div>
     </div>

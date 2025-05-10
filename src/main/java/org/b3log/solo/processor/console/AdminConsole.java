@@ -17,7 +17,21 @@
  */
 package org.b3log.solo.processor.console;
 
-import jodd.io.ZipUtil;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TimeZone;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
@@ -33,16 +47,12 @@ import org.b3log.latke.model.Plugin;
 import org.b3log.latke.model.User;
 import org.b3log.latke.plugin.ViewLoadEventData;
 import org.b3log.latke.repository.RepositoryException;
-import org.b3log.latke.repository.jdbc.util.Connections;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.servlet.annotation.Before;
 import org.b3log.latke.servlet.renderer.AbstractFreeMarkerRenderer;
-import org.b3log.latke.util.Execs;
-import org.b3log.latke.util.Strings;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.Global;
-import org.b3log.solo.improve.ImproveHelper;
 import org.b3log.solo.improve.ImproveOptions;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
@@ -56,16 +66,9 @@ import org.b3log.solo.service.UserQueryService;
 import org.b3log.solo.util.Markdowns;
 import org.b3log.solo.util.PluginUtil;
 import org.b3log.solo.util.Solos;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.*;
+import jodd.io.ZipUtil;
 
 /**
  * Admin console render processing.
@@ -168,8 +171,10 @@ public class AdminConsole {
             dataModel.put(Common.B3LOG_ENABLED, "" + PluginUtil.b3logPluginEnabled());
             dataModel.put(Common.FISHPI_ENABLED, "" + PluginUtil.fishpiPluginEnabled());
             dataModel.put(Common.YEAR, String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
-            dataModel.put(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT, preference.getInt(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT));
-            dataModel.put(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE, preference.getInt(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE));
+            dataModel.put(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT,
+                    preference.getInt(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT));
+            dataModel.put(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE,
+                    preference.getInt(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE));
             final JSONObject skin = optionQueryService.getSkin();
             dataModel.put(Option.CATEGORY_C_SKIN, skin.optString(Option.ID_C_SKIN_DIR_NAME));
             Keys.fillRuntime(dataModel);
@@ -204,7 +209,8 @@ public class AdminConsole {
      */
     public void showAdminFunctions(final RequestContext context) {
         final String requestURI = context.requestURI();
-        final String templateName = StringUtils.substringBetween(requestURI, Latkes.getContextPath() + '/', ".") + ".ftl";
+        final String templateName = StringUtils.substringBetween(requestURI, Latkes.getContextPath() + '/', ".")
+                + ".ftl";
         final AbstractFreeMarkerRenderer renderer = new ConsoleRenderer(context, templateName);
 
         final Locale locale = Latkes.getLocale();
@@ -353,7 +359,7 @@ public class AdminConsole {
             }
 
             try (final FileInputStream inputStream = new FileInputStream(ZipUtil.zip(localFile));
-                 final ServletOutputStream outputStream = response.getOutputStream()) {
+                    final ServletOutputStream outputStream = response.getOutputStream()) {
                 final byte[] zipData = IOUtils.toByteArray(inputStream);
                 response.setContentType("application/zip");
                 final String fileName = "solo-json-" + date + ".zip";

@@ -17,11 +17,11 @@
  */
 package org.b3log.solo.service;
 
+import java.util.Date;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.b3log.latke.Keys;
-import org.b3log.latke.Latkes;
-import org.b3log.latke.event.Event;
 import org.b3log.latke.event.EventManager;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
@@ -35,17 +35,17 @@ import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Ids;
 import org.b3log.latke.util.Strings;
-import org.b3log.solo.bolo.tool.MD5Utils;
-import org.b3log.solo.event.EventTypes;
-import org.b3log.solo.model.*;
+import org.b3log.solo.model.Article;
+import org.b3log.solo.model.Comment;
+import org.b3log.solo.model.Common;
+import org.b3log.solo.model.Option;
+import org.b3log.solo.model.UserExt;
 import org.b3log.solo.repository.ArticleRepository;
 import org.b3log.solo.repository.CommentRepository;
 import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.util.Markdowns;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Date;
 
 /**
  * Comment management service.
@@ -144,12 +144,14 @@ public class CommentMgmtService {
      *                          "commentURL": "",
      *                          "commentContent": "",
      *                          }
-     * @return check result, for example, <pre>
+     * @return check result, for example,
+     * 
+     *         <pre>
      * {
      *     "sc": boolean,
      *     "msg": "" // Exists if "sc" equals to false
      * }
-     * </pre>
+     *         </pre>
      */
     public JSONObject checkAddCommentRequest(final JSONObject requestJSONObject) {
         final JSONObject ret = new JSONObject();
@@ -202,7 +204,8 @@ public class CommentMgmtService {
 
             String commentContent = requestJSONObject.optString(Comment.COMMENT_CONTENT);
 
-            if (MAX_COMMENT_CONTENT_LENGTH < commentContent.length() || MIN_COMMENT_CONTENT_LENGTH > commentContent.length()) {
+            if (MAX_COMMENT_CONTENT_LENGTH < commentContent.length()
+                    || MIN_COMMENT_CONTENT_LENGTH > commentContent.length()) {
                 LOGGER.log(Level.WARN, "Comment content length is invalid[{0}]", commentContent.length());
                 ret.put(Keys.MSG, langPropsService.get("commentContentCannotEmptyLabel"));
 
@@ -234,7 +237,9 @@ public class CommentMgmtService {
      *                          "commentContent": "",
      *                          "commentOriginalCommentId": "" // optional
      *                          }
-     * @return add result, for example,      <pre>
+     * @return add result, for example,
+     * 
+     *         <pre>
      * {
      *     "oId": "", // generated comment id
      *     "commentDate": "", // format: yyyy-MM-dd HH:mm:ss
@@ -250,7 +255,8 @@ public class CommentMgmtService {
      *     "commentable": boolean,
      *     "permalink": "" // article.articlePermalink
      * }
-     * </pre>
+     *         </pre>
+     * 
      * @throws ServiceException service exception
      */
     public JSONObject addArticleComment(final JSONObject requestJSONObject) throws ServiceException {
@@ -274,14 +280,17 @@ public class CommentMgmtService {
             comment.put(Comment.COMMENT_NAME, commentName);
             comment.put(Comment.COMMENT_URL, commentURL);
             comment.put(Comment.COMMENT_CONTENT, commentContent);
-            comment.put(Comment.COMMENT_ORIGINAL_COMMENT_ID, requestJSONObject.optString(Comment.COMMENT_ORIGINAL_COMMENT_ID));
-            comment.put(Comment.COMMENT_ORIGINAL_COMMENT_NAME, requestJSONObject.optString(Comment.COMMENT_ORIGINAL_COMMENT_NAME));
+            comment.put(Comment.COMMENT_ORIGINAL_COMMENT_ID,
+                    requestJSONObject.optString(Comment.COMMENT_ORIGINAL_COMMENT_ID));
+            comment.put(Comment.COMMENT_ORIGINAL_COMMENT_NAME,
+                    requestJSONObject.optString(Comment.COMMENT_ORIGINAL_COMMENT_NAME));
             final JSONObject preference = optionQueryService.getPreference();
             final Date date = new Date();
             comment.put(Comment.COMMENT_CREATED, date.getTime());
             ret.put(Comment.COMMENT_T_DATE, DateFormatUtils.format(date, "yyyy-MM-dd HH:mm:ss"));
             ret.put("commentDate2", date);
-            ret.put(Common.COMMENTABLE, preference.getBoolean(Option.ID_C_COMMENTABLE) && article.getBoolean(Article.ARTICLE_COMMENTABLE));
+            ret.put(Common.COMMENTABLE,
+                    preference.getBoolean(Option.ID_C_COMMENTABLE) && article.getBoolean(Article.ARTICLE_COMMENTABLE));
             ret.put(Common.PERMALINK, article.getString(Article.ARTICLE_PERMALINK));
             ret.put(Comment.COMMENT_NAME, commentName);
             String cmtContent = Markdowns.toHTML(commentContent);
@@ -313,7 +322,8 @@ public class CommentMgmtService {
                 newUser.put(User.USER_NAME, commentName);
                 newUser.put(User.USER_URL, commentURL);
                 newUser.put(User.USER_ROLE, Role.VISITOR_ROLE);
-                newUser.put(UserExt.USER_AVATAR, "https://pic.stackoverflow.wiki/uploadImages/114/246/231/87/2020/06/06/02/26/65e10ea4-41e0-4da8-82fa-a00da2770ce2.png");
+                newUser.put(UserExt.USER_AVATAR,
+                        "https://pic.stackoverflow.wiki/uploadImages/114/246/231/87/2020/06/06/02/26/65e10ea4-41e0-4da8-82fa-a00da2770ce2.png");
                 newUser.put(UserExt.USER_B3_KEY, "0a45c98b7f065e77accc819d08882200");
                 newUser.put(UserExt.USER_GITHUB_ID, "000000");
                 userRepository.add(newUser);
@@ -369,6 +379,16 @@ public class CommentMgmtService {
         }
     }
 
+    public void removeArticleAllComment(final String articleId) throws ServiceException {
+        try {
+            commentRepository.removeComments(articleId);
+            setArticleCommentCount(articleId, 0);
+        } catch (final Exception e) {
+            LOGGER.log(Level.ERROR, "Removes a comment of an article failed", e);
+            throw new ServiceException(e);
+        }
+    }
+
     /**
      * Article comment count -1 for an article specified by the given article id.
      *
@@ -381,6 +401,14 @@ public class CommentMgmtService {
         final JSONObject newArticle = new JSONObject(article, JSONObject.getNames(article));
         final int commentCnt = article.getInt(Article.ARTICLE_COMMENT_COUNT);
         newArticle.put(Article.ARTICLE_COMMENT_COUNT, commentCnt - 1);
+        articleRepository.update(articleId, newArticle, Article.ARTICLE_COMMENT_COUNT);
+    }
+
+    private void setArticleCommentCount(final String articleId, final int cnt)
+            throws JSONException, RepositoryException {
+        final JSONObject article = articleRepository.get(articleId);
+        final JSONObject newArticle = new JSONObject(article, JSONObject.getNames(article));
+        newArticle.put(Article.ARTICLE_COMMENT_COUNT, cnt);
         articleRepository.update(articleId, newArticle, Article.ARTICLE_COMMENT_COUNT);
     }
 

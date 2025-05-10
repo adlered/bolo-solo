@@ -48,7 +48,7 @@ admin.article = {
     $('#tipMsg').text('')
     $.ajax({
       url: Label.servePath + '/console/article/' +
-          admin.article.status.id,
+        admin.article.status.id,
       type: 'GET',
       cache: false,
       success: function (result, textStatus) {
@@ -94,7 +94,7 @@ admin.article = {
         })
 
         // Article create date
-        function getNowFormatDate(date) {
+        function getNowFormatDate (date) {
           var y = date.getFullYear();
           var m = date.getMonth() + 1;
           m = m < 10 ? ('0' + m) : m;
@@ -144,12 +144,12 @@ admin.article = {
 
           if (document.querySelectorAll('tr').length === 2) {
             const refreshPage = Math.max(
-                (admin[fromId + 'List'].tablePagination.currentPage - 1), 1)
+              (admin[fromId + 'List'].tablePagination.currentPage - 1), 1)
             admin[fromId + 'List'].getList(refreshPage)
             admin.setHashByPage(refreshPage)
           } else {
             admin[fromId + 'List'].getList(
-                admin[fromId + 'List'].tablePagination.currentPage)
+              admin[fromId + 'List'].tablePagination.currentPage)
           }
         },
       })
@@ -179,8 +179,8 @@ admin.article = {
       if ($('#articleThumbnail').prop('checked')) {
         var bgImage = $('.thumbnail__img').css('background-image')
         articleContent = '![](' + bgImage.substring(5, bgImage.length - 2).
-            replace('w/768', 'w/960').
-            replace('h/432', 'h/540') +
+          replace('w/768', 'w/960').
+          replace('h/432', 'h/540') +
           ')\n\n' + articleContent
       }
 
@@ -204,7 +204,7 @@ admin.article = {
         requestJSONObject.article.articleCreated = created;
       }
 
-        $.ajax({
+      $.ajax({
         url: Label.servePath + '/console/article/',
         type: 'POST',
         cache: false,
@@ -255,8 +255,8 @@ admin.article = {
       if ($('#articleThumbnail').prop('checked')) {
         var bgImage = $('.thumbnail__img').css('background-image')
         articleContent = '![](' + bgImage.substring(5, bgImage.length - 2).
-            replace('w/768', 'w/960').
-            replace('h/432', 'h/540') +
+          replace('w/768', 'w/960').
+          replace('h/432', 'h/540') +
           ') \n\n' + articleContent
       }
       var requestJSONObject = {
@@ -307,6 +307,28 @@ admin.article = {
         },
       })
     }
+  },
+  /**
+ * @description 同步评论
+ * @param {Boolean} articleLink 摸鱼派文章链接
+ */
+  syncComment: function (localaid, remoteaid) {
+    $.ajax({
+      url: Label.servePath + '/article/fishpi/commentSync/' + localaid + '/' + remoteaid,
+      type: 'GET',
+      cache: false,
+      success: function (result, textStatus) {
+        $('#tipMsg').text(result.msg)
+        if (!result.sc) {
+          return
+        }
+      },
+      complete: function (jqXHR, textStatus) {
+        that._removeDisabled()
+        $('#loadMsg').text('')
+        admin.inited();
+      },
+    })
   },
   /**
    * @description 发布文章页面设置文章按钮、发布到社区等状态的显示
@@ -434,6 +456,12 @@ admin.article = {
       },
     })
 
+    // sync fishpi comment
+    $('#syncComment').click(function () {
+      if (admin.article.status.id) {
+        admin.article.syncComment(admin.article.status.id, $('#fishpi_article').val())
+      }
+    })
     // submit action
     $('#submitArticle').click(function () {
       if (admin.article.status.id) {
@@ -450,7 +478,7 @@ admin.article = {
         admin.article.add(1)
       }
     })
-    
+
     $('#cancelDo').click(function () {
       history.go(-1);
     })
@@ -476,7 +504,7 @@ admin.article = {
 
     // 监听编辑器黑暗模式
     darkmode = false;
-    setInterval(function() {
+    setInterval(function () {
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         if (!darkmode) {
           console.log("Dark Mode.");
@@ -538,7 +566,7 @@ admin.article = {
       that._addDisabled()
       $.ajax({
         url: Label.servePath + '/console/article/unpublish/' +
-            admin.article.status.id,
+          admin.article.status.id,
         type: 'PUT',
         cache: false,
         success: function (result, textStatus) {

@@ -591,6 +591,8 @@ public class CommentProcessor {
         } catch (Exception e) {
             return -1;
         }
+        final HashMap<String, String> idNameMapping = new HashMap<>();
+
         for (Object o : rslt) {
             try {
                 JSONObject object = (JSONObject) o;
@@ -600,10 +602,13 @@ public class CommentProcessor {
                 String avatar = object.optString("commentAuthorThumbnailURL");
                 String comment = object.optString("commentContent");
                 String author = object.optString("commentAuthorName");
+                String commentOriginalCommentId = object.optString(Comment.COMMENT_ORIGINAL_COMMENT_ID);
                 String id = object.optString("oId");
+                idNameMapping.put(id, author);
                 final JSONObject commentObject = new JSONObject();
-                commentObject.put(Comment.COMMENT_ORIGINAL_COMMENT_ID, "");
-                commentObject.put(Comment.COMMENT_ORIGINAL_COMMENT_NAME, "");
+                commentObject.put(Comment.COMMENT_ORIGINAL_COMMENT_ID, commentOriginalCommentId);
+                commentObject.put(Comment.COMMENT_ORIGINAL_COMMENT_NAME,
+                        idNameMapping.getOrDefault(commentOriginalCommentId, ""));
                 commentObject.put(Comment.COMMENT_NAME, author);
                 commentObject.put(Comment.COMMENT_URL, link);
                 commentObject.put(Comment.COMMENT_CONTENT, comment);

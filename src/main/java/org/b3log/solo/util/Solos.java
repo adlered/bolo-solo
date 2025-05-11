@@ -17,8 +17,16 @@
  */
 package org.b3log.solo.util;
 
-import jodd.http.HttpRequest;
-import jodd.http.HttpResponse;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.b3log.latke.Keys;
@@ -46,14 +54,8 @@ import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.service.UserQueryService;
 import org.json.JSONObject;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import jodd.http.HttpRequest;
+import jodd.http.HttpResponse;
 
 /**
  * Solo utilities.
@@ -76,7 +78,8 @@ public final class Solos {
     /**
      * Bolo User-Agent.
      */
-    public static final String BOLO_USER_AGENT = "Bolo/" + SoloServletListener.BOLO_VERSION_SOURCE + "; +https://github.com/adlered/bolo-solo";
+    public static final String BOLO_USER_AGENT = "Bolo/" + SoloServletListener.BOLO_VERSION_SOURCE
+            + "; +https://github.com/adlered/bolo-solo";
     /**
      * Cookie name.
      */
@@ -161,6 +164,7 @@ public final class Solos {
      */
     @Inject
     private OptionRepository optionRepository;
+
     /**
      * Private constructor.
      */
@@ -185,14 +189,14 @@ public final class Solos {
             needTest = true;
             testErrorMsg = "The connection to the public welfare Lute service failed. Lute rendering will be disabled and the built-in renderer will be used.";
         } else if (Markdowns.LUTE_AVAILABLE && !LUTE_URL.equals(Markdowns.LUTE_ENGINE_URL)) {
-        	needTest = true;
-        	testErrorMsg = "The connection to the private welfare Lute service failed. Lute rendering will be disabled and the built-in renderer will be used.";
+            needTest = true;
+            testErrorMsg = "The connection to the private welfare Lute service failed. Lute rendering will be disabled and the built-in renderer will be used.";
         } else {
-        	Markdowns.LUTE_AVAILABLE = status;
+            Markdowns.LUTE_AVAILABLE = status;
             LOGGER.log(Level.INFO, "Welfare Lute Service has disabled.");
         }
         if (needTest) {
-        	try {
+            try {
                 Markdowns.toHtmlByLute("#test");
             } catch (Exception exception) {
                 LOGGER.log(Level.INFO, testErrorMsg);
@@ -239,22 +243,20 @@ public final class Solos {
 
             final long now = System.currentTimeMillis();
             if (3600000 >= now - uploadTokenTime) {
-                return new JSONObject().
-                        put(Common.UPLOAD_TOKEN, uploadToken).
-                        put(Common.UPLOAD_URL, uploadURL).
-                        put(Common.UPLOAD_MSG, uploadMsg);
+                return new JSONObject().put(Common.UPLOAD_TOKEN, uploadToken).put(Common.UPLOAD_URL, uploadURL)
+                        .put(Common.UPLOAD_MSG, uploadMsg);
             }
 
             if (15000 >= now - uploadTokenCheckTime) {
-                return new JSONObject().
-                        put(Common.UPLOAD_TOKEN, uploadToken).
-                        put(Common.UPLOAD_URL, uploadURL).
-                        put(Common.UPLOAD_MSG, uploadMsg);
+                return new JSONObject().put(Common.UPLOAD_TOKEN, uploadToken).put(Common.UPLOAD_URL, uploadURL)
+                        .put(Common.UPLOAD_MSG, uploadMsg);
             }
 
-            final JSONObject requestJSON = new JSONObject().put(User.USER_NAME, userName).put(UserExt.USER_B3_KEY, userB3Key);
-            final HttpResponse res = HttpRequest.post("https://" + Global.HACPAI_DOMAIN + "/apis/upload/token").
-                    body(requestJSON.toString()).connectionTimeout(3000).timeout(7000).header("User-Agent", Solos.USER_AGENT).send();
+            final JSONObject requestJSON = new JSONObject().put(User.USER_NAME, userName).put(UserExt.USER_B3_KEY,
+                    userB3Key);
+            final HttpResponse res = HttpRequest.post("https://" + Global.HACPAI_DOMAIN + "/apis/upload/token")
+                    .body(requestJSON.toString()).connectionTimeout(3000).timeout(7000)
+                    .header("User-Agent", Solos.USER_AGENT).send();
             uploadTokenCheckTime = now;
             if (HttpServletResponse.SC_OK != res.statusCode()) {
                 return null;
@@ -293,11 +295,10 @@ public final class Solos {
             }
             uploadMsg = "";
 
-            return new JSONObject().
-                    put(Common.UPLOAD_TOKEN, uploadToken).
-                    put(Common.UPLOAD_URL, uploadURL).
-                    put(Common.UPLOAD_MSG, uploadMsg);
+            return new JSONObject().put(Common.UPLOAD_TOKEN, uploadToken).put(Common.UPLOAD_URL, uploadURL)
+                    .put(Common.UPLOAD_MSG, uploadMsg);
         } catch (final Exception e) {
+            LOGGER.log(Level.ERROR, e.getMessage());
             LOGGER.log(Level.ERROR, "Gets Hacpai upload token failed, Wrong Hacpai Username / B3log key.");
 
             return null;
@@ -311,16 +312,15 @@ public final class Solos {
      * @return sanitized file name
      */
     public static String sanitizeFilename(final String unsanitized) {
-        return unsanitized.
-                replaceAll("[^(a-zA-Z0-9\\u4e00-\\u9fa5\\.)]", "").
-                replaceAll("[\\?\\\\/:|<>\\*\\[\\]\\(\\)\\$%\\{\\}@~]", "").
-                replaceAll("\\s", "");
+        return unsanitized.replaceAll("[^(a-zA-Z0-9\\u4e00-\\u9fa5\\.)]", "")
+                .replaceAll("[\\?\\\\/:|<>\\*\\[\\]\\(\\)\\$%\\{\\}@~]", "").replaceAll("\\s", "");
     }
 
     /**
      * Adds noindex header for Google. https://github.com/b3log/solo/issues/12631
      * <p>
-     * 使用“noindex”阻止搜索引擎将您的网页编入索引 https://support.google.com/webmasters/answer/93710?hl=zh-Hans
+     * 使用“noindex”阻止搜索引擎将您的网页编入索引
+     * https://support.google.com/webmasters/answer/93710?hl=zh-Hans
      * </p>
      *
      * @param context the specified context
@@ -431,7 +431,8 @@ public final class Solos {
      * (including default user and administrator lists in <i>users</i>).
      *
      * @param context the specified request context
-     * @return {@code true} if the current request is made by logged in user, returns {@code false} otherwise
+     * @return {@code true} if the current request is made by logged in user,
+     *         returns {@code false} otherwise
      */
     public static boolean isLoggedIn(final RequestContext context) {
         return null != Solos.getCurrentUser(context.getRequest(), context.getResponse());
@@ -442,7 +443,7 @@ public final class Solos {
      *
      * @param context the specified request context
      * @return {@code true} if the current request is made by logged in
-     * administrator, returns {@code false} otherwise
+     *         administrator, returns {@code false} otherwise
      */
     public static boolean isAdminLoggedIn(final RequestContext context) {
         final JSONObject user = getCurrentUser(context.getRequest(), context.getResponse());
@@ -454,11 +455,12 @@ public final class Solos {
     }
 
     /**
-     * Checks whether the current request is made by logged in administrator or an author.
+     * Checks whether the current request is made by logged in administrator or an
+     * author.
      *
      * @param context the specified request context
      * @return {@code true} if the current request is made by logged in
-     * administrator, author, returns {@code false} otherwise
+     *         administrator, author, returns {@code false} otherwise
      */
     public static boolean isAdminOrAuthorLoggedIn(final RequestContext context) {
         final JSONObject user = getCurrentUser(context.getRequest(), context.getResponse());
@@ -471,9 +473,11 @@ public final class Solos {
     }
 
     /**
-     * Checks whether need password to view the specified article with the specified request.
+     * Checks whether need password to view the specified article with the specified
+     * request.
      * <p>
-     * Checks session, if not represents, checks article property {@link Article#ARTICLE_VIEW_PWD view password}.
+     * Checks session, if not represents, checks article property
+     * {@link Article#ARTICLE_VIEW_PWD view password}.
      * </p>
      * <p>
      * The blogger itself dose not need view password never.
@@ -567,13 +571,14 @@ public final class Solos {
      *
      * @param path the specified path, "/{page}/{pageSize}/{windowSize}"
      * @return pagination request json object, for example,
-     * <pre>
+     * 
+     *         <pre>
      * {
      *     "paginationCurrentPageNum": int,
      *     "paginationPageSize": int,
      *     "paginationWindowSize": int
      * }
-     * </pre>
+     *         </pre>
      */
     public static JSONObject buildPaginationRequest(final String path) {
         final Integer currentPageNum = getCurrentPageNum(path);
@@ -592,7 +597,8 @@ public final class Solos {
      * Gets the request page number from the specified path.
      *
      * @param path the specified path
-     * @return page number, returns {@code 1} if the specified request URI can not convert to an number
+     * @return page number, returns {@code 1} if the specified request URI can not
+     *         convert to an number
      */
     private static int getCurrentPageNum(final String path) {
         if (StringUtils.isBlank(path) || path.equals("/")) {
@@ -610,7 +616,8 @@ public final class Solos {
      * Gets the request page size from the specified path.
      *
      * @param path the specified path
-     * @return page number, returns {@value #DEFAULT_PAGE_SIZE} if the specified request URI can not convert to an number
+     * @return page number, returns {@value #DEFAULT_PAGE_SIZE} if the specified
+     *         request URI can not convert to an number
      */
     private static int getPageSize(final String path) {
         if (StringUtils.isBlank(path)) {
@@ -632,7 +639,8 @@ public final class Solos {
      * Gets the request window size from the specified path.
      *
      * @param path the specified path
-     * @return page number, returns {@value #DEFAULT_WINDOW_SIZE} if the specified request URI can not convert to an number
+     * @return page number, returns {@value #DEFAULT_WINDOW_SIZE} if the specified
+     *         request URI can not convert to an number
      */
     private static int getWindowSize(final String path) {
         if (StringUtils.isBlank(path)) {

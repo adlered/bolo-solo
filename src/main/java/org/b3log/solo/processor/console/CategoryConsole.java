@@ -17,6 +17,10 @@
  */
 package org.b3log.solo.processor.console;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.b3log.latke.Keys;
@@ -40,12 +44,6 @@ import org.b3log.solo.service.TagQueryService;
 import org.b3log.solo.util.Solos;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Category console request processing.
@@ -92,6 +90,7 @@ public class CategoryConsole {
      * Changes a category order by the specified category id and direction.
      * <p>
      * Request json:
+     * 
      * <pre>
      * {
      *     "oId": "",
@@ -101,6 +100,7 @@ public class CategoryConsole {
      * </p>
      * <p>
      * Renders the response with a json object, for example,
+     * 
      * <pre>
      * {
      *     "sc": boolean,
@@ -139,6 +139,7 @@ public class CategoryConsole {
      * Gets a category by the specified request.
      * <p>
      * Renders the response with a json object, for example,
+     * 
      * <pre>
      * {
      *     "sc": boolean,
@@ -196,6 +197,7 @@ public class CategoryConsole {
      * Removes a category by the specified request.
      * <p>
      * Renders the response with a json object, for example,
+     * 
      * <pre>
      * {
      *     "sc": boolean,
@@ -230,6 +232,7 @@ public class CategoryConsole {
      * Updates a category by the specified request.
      * <p>
      * Request json:
+     * 
      * <pre>
      * {
      *     "oId": "",
@@ -242,6 +245,7 @@ public class CategoryConsole {
      * </p>
      * <p>
      * Renders the response with a json object, for example,
+     * 
      * <pre>
      * {
      *     "sc": boolean,
@@ -319,6 +323,7 @@ public class CategoryConsole {
      * Adds a category with the specified request.
      * <p>
      * Request json:
+     * 
      * <pre>
      * {
      *     "categoryTitle": "",
@@ -330,6 +335,7 @@ public class CategoryConsole {
      * </p>
      * <p>
      * Renders the response with a json object, for example,
+     * 
      * <pre>
      * {
      *     "sc": boolean,
@@ -405,11 +411,13 @@ public class CategoryConsole {
     /**
      * Gets categories by the specified request json object.
      * <p>
-     * The request URI contains the pagination arguments. For example, the request URI is /console/categories/1/10/20, means
+     * The request URI contains the pagination arguments. For example, the request
+     * URI is /console/categories/1/10/20, means
      * the current page is 1, the page size is 10, and the window size is 20.
      * </p>
      * <p>
      * Renders the response with a json object, for example,
+     * 
      * <pre>
      * {
      *     "pagination": {

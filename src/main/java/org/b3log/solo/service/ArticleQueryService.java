@@ -17,6 +17,15 @@
  */
 package org.b3log.solo.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.commons.lang.StringUtils;
 import org.b3log.latke.Keys;
 import org.b3log.latke.ioc.Inject;
@@ -25,7 +34,14 @@ import org.b3log.latke.logging.Logger;
 import org.b3log.latke.model.Pagination;
 import org.b3log.latke.model.Role;
 import org.b3log.latke.model.User;
-import org.b3log.latke.repository.*;
+import org.b3log.latke.repository.CompositeFilter;
+import org.b3log.latke.repository.CompositeFilterOperator;
+import org.b3log.latke.repository.Filter;
+import org.b3log.latke.repository.FilterOperator;
+import org.b3log.latke.repository.PropertyFilter;
+import org.b3log.latke.repository.Query;
+import org.b3log.latke.repository.RepositoryException;
+import org.b3log.latke.repository.SortDirection;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.service.annotation.Service;
@@ -33,16 +49,22 @@ import org.b3log.latke.servlet.RequestContext;
 import org.b3log.latke.util.CollectionUtils;
 import org.b3log.latke.util.Paginator;
 import org.b3log.latke.util.Stopwatchs;
-import org.b3log.solo.model.*;
-import org.b3log.solo.repository.*;
+import org.b3log.solo.model.Article;
+import org.b3log.solo.model.Common;
+import org.b3log.solo.model.Option;
+import org.b3log.solo.model.Sign;
+import org.b3log.solo.model.Tag;
+import org.b3log.solo.repository.ArchiveDateArticleRepository;
+import org.b3log.solo.repository.ArticleRepository;
+import org.b3log.solo.repository.CategoryTagRepository;
+import org.b3log.solo.repository.TagArticleRepository;
+import org.b3log.solo.repository.TagRepository;
+import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.util.Markdowns;
 import org.b3log.solo.util.Solos;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
 
 /**
  * Article query service.
@@ -147,12 +169,16 @@ public class ArticleQueryService {
 
         try {
             final Query query = new Query().setFilter(
-                    CompositeFilterOperator.and(new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL, Article.ARTICLE_STATUS_C_PUBLISHED),
+                    CompositeFilterOperator.and(
+                            new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL,
+                                    Article.ARTICLE_STATUS_C_PUBLISHED),
                             CompositeFilterOperator.or(
                                     new PropertyFilter(Article.ARTICLE_TITLE, FilterOperator.LIKE, "%" + keyword + "%"),
-                                    new PropertyFilter(Article.ARTICLE_TAGS_REF, FilterOperator.LIKE, "%" + keyword + "%"),
-                                    new PropertyFilter(Article.ARTICLE_CONTENT, FilterOperator.LIKE, "%" + keyword + "%")))).
-                    addSort(Article.ARTICLE_UPDATED, SortDirection.DESCENDING).setPage(currentPageNum, pageSize);
+                                    new PropertyFilter(Article.ARTICLE_TAGS_REF, FilterOperator.LIKE,
+                                            "%" + keyword + "%"),
+                                    new PropertyFilter(Article.ARTICLE_CONTENT, FilterOperator.LIKE,
+                                            "%" + keyword + "%"))))
+                    .addSort(Article.ARTICLE_UPDATED, SortDirection.DESCENDING).setPage(currentPageNum, pageSize);
 
             final JSONObject result = articleRepository.get(query);
 
@@ -181,7 +207,8 @@ public class ArticleQueryService {
      * @return result
      * @throws ServiceException service exception
      */
-    public JSONObject getCategoryArticles(final String categoryId, final int currentPageNum, final int pageSize) throws ServiceException {
+    public JSONObject getCategoryArticles(final String categoryId, final int currentPageNum, final int pageSize)
+            throws ServiceException {
         final JSONObject ret = new JSONObject();
         ret.put(Keys.RESULTS, (Object) Collections.emptyList());
 
@@ -192,7 +219,8 @@ public class ArticleQueryService {
 
         try {
             // 重点！找标签
-            final JSONArray categoryTags = categoryTagRepository.getByCategoryId(categoryId, 1, Integer.MAX_VALUE).optJSONArray(Keys.RESULTS);
+            final JSONArray categoryTags = categoryTagRepository.getByCategoryId(categoryId, 1, Integer.MAX_VALUE)
+                    .optJSONArray(Keys.RESULTS);
             if (categoryTags.length() <= 0) {
                 return ret;
             }
@@ -204,35 +232,49 @@ public class ArticleQueryService {
                 tagIds.add(categoryTags.optJSONObject(i).optString(Tag.TAG + "_" + Keys.OBJECT_ID));
             }
 
-            /* final StringBuilder queryCount = new StringBuilder("SELECT count(DISTINCT(article.oId)) as `C` FROM ");
-            final StringBuilder queryList = new StringBuilder("SELECT DISTINCT(article.oId) as `C` FROM ");
-            final StringBuilder queryStr = new StringBuilder(articleRepository.getName() + " AS article,").
-                    append(tagArticleRepository.getName() + " AS tag_article").
-                    append(" WHERE article.oId=tag_article.article_oId ").
-                    append(" AND article.").append(Article.ARTICLE_STATUS).append("=?").
-                    append(" AND ").append("tag_article.tag_oId").append(" IN (");
-            for (int i = 0; i < tagIds.size(); i++) {
-                queryStr.append(" ").append(tagIds.get(i));
-                if (i < (tagIds.size() - 1)) {
-                    queryStr.append(",");
-                }
-            }
-            queryStr.append(") ORDER BY `C` DESC"); */
+            /*
+             * final StringBuilder queryCount = new
+             * StringBuilder("SELECT count(DISTINCT(article.oId)) as `C` FROM ");
+             * final StringBuilder queryList = new
+             * StringBuilder("SELECT DISTINCT(article.oId) as `C` FROM ");
+             * final StringBuilder queryStr = new StringBuilder(articleRepository.getName()
+             * + " AS article,").
+             * append(tagArticleRepository.getName() + " AS tag_article").
+             * append(" WHERE article.oId=tag_article.article_oId ").
+             * append(" AND article.").append(Article.ARTICLE_STATUS).append("=?").
+             * append(" AND ").append("tag_article.tag_oId").append(" IN (");
+             * for (int i = 0; i < tagIds.size(); i++) {
+             * queryStr.append(" ").append(tagIds.get(i));
+             * if (i < (tagIds.size() - 1)) {
+             * queryStr.append(",");
+             * }
+             * }
+             * queryStr.append(") ORDER BY `C` DESC");
+             */
 
             // !!! 文章总数
-            /* final List<JSONObject> tagArticlesCountResult = articleRepository.
-                    select(queryCount.append(queryStr.toString()).toString(), Article.ARTICLE_STATUS_C_PUBLISHED); */
+            /*
+             * final List<JSONObject> tagArticlesCountResult = articleRepository.
+             * select(queryCount.append(queryStr.toString()).toString(),
+             * Article.ARTICLE_STATUS_C_PUBLISHED);
+             */
             // Bolo
             final List<JSONObject> tagArticlesCountResult = new ArrayList<>();
             tagArticlesCountResult.add(new JSONObject().put("C", tagIds.size()));
             // 页数限制
-            /* queryStr.append(" LIMIT ").append((currentPageNum - 1) * pageSize).append(",").append(pageSize); */
+            /*
+             * queryStr.append(" LIMIT ").append((currentPageNum - 1) *
+             * pageSize).append(",").append(pageSize);
+             */
             // !!! 执行语句 获取标签对应文章号输出数组
-            /* final List<JSONObject> tagArticles = articleRepository.
-                    select(queryList.append(queryStr.toString()).toString(), Article.ARTICLE_STATUS_C_PUBLISHED); */
-            // Bolo                                    // Page 1   2   3
-            int offset = ((currentPageNum - 1) * pageSize); // 0   15  30
-            int pause = ((offset + pageSize) - 1); //          14  29  44
+            /*
+             * final List<JSONObject> tagArticles = articleRepository.
+             * select(queryList.append(queryStr.toString()).toString(),
+             * Article.ARTICLE_STATUS_C_PUBLISHED);
+             */
+            // Bolo // Page 1 2 3
+            int offset = ((currentPageNum - 1) * pageSize); // 0 15 30
+            int pause = ((offset + pageSize) - 1); // 14 29 44
             final List<JSONObject> tagArticles = new ArrayList<>();
             for (int i = offset; i <= pause; i++) {
                 if (i >= tagIds.size()) {
@@ -262,8 +304,8 @@ public class ArticleQueryService {
             final List<Filter> filters = new ArrayList<>();
             filters.add(new PropertyFilter(Keys.OBJECT_ID, FilterOperator.IN, articleIds));
             filters.add(new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL, 0));
-            final Query query = new Query().setFilter(new CompositeFilter(CompositeFilterOperator.AND, filters)).
-                    setPageCount(1).addSort(Keys.OBJECT_ID, SortDirection.DESCENDING);
+            final Query query = new Query().setFilter(new CompositeFilter(CompositeFilterOperator.AND, filters))
+                    .setPageCount(1).addSort(Keys.OBJECT_ID, SortDirection.DESCENDING);
             final List<JSONObject> articles = new ArrayList<>();
             final JSONArray articleArray = articleRepository.get(query).optJSONArray(Keys.RESULTS);
             for (int i = 0; i < articleArray.length(); i++) {
@@ -288,7 +330,8 @@ public class ArticleQueryService {
      *
      * @param articleId the given article id
      * @param user      the specified user
-     * @return {@code true} if the current user can access the article, {@code false} otherwise
+     * @return {@code true} if the current user can access the article,
+     *         {@code false} otherwise
      * @throws ServiceException service exception
      */
     public boolean canAccessArticle(final String articleId, final JSONObject user) throws ServiceException {
@@ -339,11 +382,13 @@ public class ArticleQueryService {
     /**
      * Gets the specified article's author.
      * <p>
-     * The specified article has a property {@value Article#ARTICLE_AUTHOR_ID}, this method will use this property to
+     * The specified article has a property {@value Article#ARTICLE_AUTHOR_ID}, this
+     * method will use this property to
      * get a user from users.
      * </p>
      * <p>
-     * If can't find the specified article's author (i.e. the author has been removed by administrator), returns
+     * If can't find the specified article's author (i.e. the author has been
+     * removed by administrator), returns
      * administrator.
      * </p>
      *
@@ -377,7 +422,8 @@ public class ArticleQueryService {
      *
      * @param signId     the specified article id
      * @param preference the specified preference
-     * @return article sign, returns the default sign (which oId is "1") if not found
+     * @return article sign, returns the default sign (which oId is "1") if not
+     *         found
      * @throws JSONException json exception
      */
     public JSONObject getSign(final String signId, final JSONObject preference) throws JSONException {
@@ -418,7 +464,8 @@ public class ArticleQueryService {
      * Gets the recent articles with the specified fetch size.
      *
      * @param fetchSize the specified fetch size
-     * @return a list of json object, its size less or equal to the specified fetch size
+     * @return a list of json object, its size less or equal to the specified fetch
+     *         size
      */
     public List<JSONObject> getRecentArticles(final int fetchSize) {
         try {
@@ -433,11 +480,14 @@ public class ArticleQueryService {
     /**
      * Gets an article by the specified article id.
      * <p>
-     * <b>Note</b>: The article content and abstract is raw (no editor type processing).
+     * <b>Note</b>: The article content and abstract is raw (no editor type
+     * processing).
      * </p>
      *
      * @param articleId the specified article id
-     * @return for example,      <pre>
+     * @return for example,
+     * 
+     *         <pre>
      * {
      *     "article": {
      *         "oId": "",
@@ -458,7 +508,9 @@ public class ArticleQueryService {
      *         }, ....]
      *     }
      * }
-     * </pre>, returns {@code null} if not found
+     *         </pre>
+     * 
+     *         , returns {@code null} if not found
      * @throws ServiceException service exception
      */
     public JSONObject getArticle(final String articleId) throws ServiceException {
@@ -517,7 +569,9 @@ public class ArticleQueryService {
      *                          "excludes": ["", ....], // Optional
      *                          "enableArticleUpdateHint": bool // Optional
      *                          see {@link Pagination} for more details
-     * @return for example,      <pre>
+     * @return for example,
+     * 
+     *         <pre>
      * {
      *     "pagination": {
      *         "paginationPageCount": 100,
@@ -536,7 +590,9 @@ public class ArticleQueryService {
      *         .... // Specified by the "excludes"
      *      }, ....]
      * }
-     * </pre>, order by article update date and sticky(put top).
+     *         </pre>
+     * 
+     *         , order by article update date and sticky(put top).
      * @see Pagination
      */
     public JSONObject getArticles(final JSONObject requestJSONObject) {
@@ -546,10 +602,11 @@ public class ArticleQueryService {
             final int currentPageNum = requestJSONObject.getInt(Pagination.PAGINATION_CURRENT_PAGE_NUM);
             final int pageSize = requestJSONObject.getInt(Pagination.PAGINATION_PAGE_SIZE);
             final int windowSize = requestJSONObject.getInt(Pagination.PAGINATION_WINDOW_SIZE);
-            final int articleStatus = requestJSONObject.optInt(Article.ARTICLE_STATUS, Article.ARTICLE_STATUS_C_PUBLISHED);
+            final int articleStatus = requestJSONObject.optInt(Article.ARTICLE_STATUS,
+                    Article.ARTICLE_STATUS_C_PUBLISHED);
 
-            final Query query = new Query().setPage(currentPageNum, pageSize).
-                    addSort(Article.ARTICLE_PUT_TOP, SortDirection.DESCENDING);
+            final Query query = new Query().setPage(currentPageNum, pageSize).addSort(Article.ARTICLE_PUT_TOP,
+                    SortDirection.DESCENDING);
             if (requestJSONObject.optBoolean(Option.ID_C_ENABLE_ARTICLE_UPDATE_HINT)) {
                 query.addSort(Article.ARTICLE_UPDATED, SortDirection.DESCENDING);
             } else {
@@ -564,8 +621,8 @@ public class ArticleQueryService {
                         CompositeFilterOperator.or(
                                 new PropertyFilter(Article.ARTICLE_TITLE, FilterOperator.LIKE, "%" + keyword + "%"),
                                 new PropertyFilter(Article.ARTICLE_TAGS_REF, FilterOperator.LIKE, "%" + keyword + "%"),
-                                new PropertyFilter(Article.ARTICLE_CONTENT, FilterOperator.LIKE, "%" + keyword + "%"))
-                ));
+                                new PropertyFilter(Article.ARTICLE_CONTENT, FilterOperator.LIKE,
+                                        "%" + keyword + "%"))));
             }
 
             final JSONObject result = articleRepository.get(query);
@@ -596,7 +653,8 @@ public class ArticleQueryService {
                     String categoryOId = cateS.optString("category_oId");
                     cateS = categoryQueryService.getCategory(categoryOId);
                     article.put("articleCategory", cateS.opt("categoryTitle"));
-                } catch (JSONException | NullPointerException e) {}
+                } catch (JSONException | NullPointerException e) {
+                }
                 // Remove unused properties
                 for (int j = 0; j < excludes.length(); j++) {
                     article.remove(excludes.optString(j));
@@ -614,7 +672,8 @@ public class ArticleQueryService {
     }
 
     /**
-     * Gets a list of published articles with the specified tag id, current page number and page size.
+     * Gets a list of published articles with the specified tag id, current page
+     * number and page size.
      *
      * @param tagId          the specified tag id
      * @param currentPageNum the specified current page number
@@ -622,7 +681,8 @@ public class ArticleQueryService {
      * @return result, returns {@code null} if not found
      * @throws ServiceException service exception
      */
-    public JSONObject getArticlesByTag(final String tagId, final int currentPageNum, final int pageSize) throws ServiceException {
+    public JSONObject getArticlesByTag(final String tagId, final int currentPageNum, final int pageSize)
+            throws ServiceException {
         try {
             JSONObject result = tagArticleRepository.getByTagId(tagId, currentPageNum, pageSize);
             if (null == result) {
@@ -645,9 +705,9 @@ public class ArticleQueryService {
 
             final Query query = new Query().setFilter(CompositeFilterOperator.and(
                     new PropertyFilter(Keys.OBJECT_ID, FilterOperator.IN, articleIds),
-                    new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL, Article.ARTICLE_STATUS_C_PUBLISHED))).
-                    setPageCount(1).
-                    addSort(Keys.OBJECT_ID, SortDirection.DESCENDING);
+                    new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL,
+                            Article.ARTICLE_STATUS_C_PUBLISHED)))
+                    .setPageCount(1).addSort(Keys.OBJECT_ID, SortDirection.DESCENDING);
             final List<JSONObject> articles = articleRepository.getList(query);
             for (final JSONObject article : articles) {
                 article.put(Article.ARTICLE_CREATE_TIME, article.getLong(Article.ARTICLE_CREATED));
@@ -667,7 +727,8 @@ public class ArticleQueryService {
     }
 
     /**
-     * Gets a list of published articles with the specified archive date id, current page number and page size.
+     * Gets a list of published articles with the specified archive date id, current
+     * page number and page size.
      *
      * @param archiveDateId  the specified archive date id
      * @param currentPageNum the specified current page number
@@ -677,7 +738,8 @@ public class ArticleQueryService {
      */
     private static Map<String, Object> pairs = new HashMap<>();
 
-    public List<JSONObject> getArticlesByArchiveDate(final String archiveDateId, final int currentPageNum, final int pageSize) throws ServiceException {
+    public List<JSONObject> getArticlesByArchiveDate(final String archiveDateId, final int currentPageNum,
+            final int pageSize) throws ServiceException {
         try {
             final List<JSONObject> ret = new ArrayList<>();
             final String query = "SELECT\n" +
@@ -693,7 +755,8 @@ public class ArticleQueryService {
                     "\ta.oId DESC\n" +
                     "LIMIT ?,\n" +
                     " ?";
-            final List<JSONObject> articles = articleRepository.select(query, archiveDateId, (currentPageNum - 1) * pageSize, pageSize);
+            final List<JSONObject> articles = articleRepository.select(query, archiveDateId,
+                    (currentPageNum - 1) * pageSize, pageSize);
             for (final JSONObject article : articles) {
                 article.put(Article.ARTICLE_CREATE_TIME, article.getLong(Article.ARTICLE_CREATED));
                 article.put(Article.ARTICLE_T_CREATE_DATE, new Date(article.getLong(Article.ARTICLE_CREATED)));
@@ -732,11 +795,13 @@ public class ArticleQueryService {
     /**
      * Gets a list of articles randomly with the specified fetch size.
      * <p>
-     * <b>Note</b>: The article content and abstract is raw (no editor type processing).
+     * <b>Note</b>: The article content and abstract is raw (no editor type
+     * processing).
      * </p>
      *
      * @param fetchSize the specified fetch size
-     * @return a list of json objects, its size less or equal to the specified fetch size
+     * @return a list of json objects, its size less or equal to the specified fetch
+     *         size
      * @throws ServiceException service exception
      */
     public List<JSONObject> getArticlesRandomly(final int fetchSize) throws ServiceException {
@@ -754,7 +819,8 @@ public class ArticleQueryService {
     /**
      * Gets the relevant published articles of the specified article.
      * <p>
-     * <b>Note</b>: The article content and abstract is raw (no editor type processing).
+     * <b>Note</b>: The article content and abstract is raw (no editor type
+     * processing).
      * </p>
      *
      * @param article    the specified article
@@ -777,11 +843,13 @@ public class ArticleQueryService {
                 final JSONObject result = tagArticleRepository.getByTagId(tagId, 1, displayCnt);
                 final JSONArray tagArticleRelations = result.getJSONArray(Keys.RESULTS);
 
-                final int relationSize = displayCnt < tagArticleRelations.length() ? displayCnt : tagArticleRelations.length();
+                final int relationSize = displayCnt < tagArticleRelations.length() ? displayCnt
+                        : tagArticleRelations.length();
 
                 for (int j = 0; j < relationSize; j++) {
                     final JSONObject tagArticleRelation = tagArticleRelations.getJSONObject(j);
-                    final String relatedArticleId = tagArticleRelation.getString(Article.ARTICLE + "_" + Keys.OBJECT_ID);
+                    final String relatedArticleId = tagArticleRelation
+                            .getString(Article.ARTICLE + "_" + Keys.OBJECT_ID);
 
                     if (articleId.equals(relatedArticleId)) {
                         continue;
@@ -830,17 +898,22 @@ public class ArticleQueryService {
     /**
      * Gets the next article(by create date) by the specified article id.
      * <p>
-     * <b>Note</b>: The article content and abstract is raw (no editor type processing).
+     * <b>Note</b>: The article content and abstract is raw (no editor type
+     * processing).
      * </p>
      *
      * @param articleId the specified article id
-     * @return the previous article,      <pre>
+     * @return the previous article,
+     * 
+     *         <pre>
      * {
      *     "articleTitle": "",
      *     "articlePermalink": "",
      *     "articleAbstract": ""
      * }
-     * </pre> returns {@code null} if not found
+     *         </pre>
+     * 
+     *         returns {@code null} if not found
      * @throws ServiceException service exception
      */
     public JSONObject getNextArticle(final String articleId) throws ServiceException {
@@ -855,17 +928,22 @@ public class ArticleQueryService {
     /**
      * Gets the previous article(by create date) by the specified article id.
      * <p>
-     * <b>Note</b>: The article content and abstract is raw (no editor type processing).
+     * <b>Note</b>: The article content and abstract is raw (no editor type
+     * processing).
      * </p>
      *
      * @param articleId the specified article id
-     * @return the previous article,      <pre>
+     * @return the previous article,
+     * 
+     *         <pre>
      * {
      *     "articleTitle": "",
      *     "articlePermalink": "",
      *     "articleAbstract": ""
      * }
-     * </pre> returns {@code null} if not found
+     *         </pre>
+     * 
+     *         returns {@code null} if not found
      * @throws ServiceException service exception
      */
     public JSONObject getPreviousArticle(final String articleId) throws ServiceException {
@@ -880,7 +958,8 @@ public class ArticleQueryService {
     /**
      * Gets an article by the specified article id.
      * <p>
-     * <b>Note</b>: The article content and abstract is raw (no editor type processing).
+     * <b>Note</b>: The article content and abstract is raw (no editor type
+     * processing).
      * </p>
      *
      * @param articleId the specified article id
@@ -897,7 +976,8 @@ public class ArticleQueryService {
     }
 
     /**
-     * Gets <em>published</em> articles by the specified author id, current page number and page size.
+     * Gets <em>published</em> articles by the specified author id, current page
+     * number and page size.
      *
      * @param authorId       the specified author id
      * @param currentPageNum the specified current page number
@@ -905,7 +985,8 @@ public class ArticleQueryService {
      * @return result
      * @throws ServiceException service exception
      */
-    public JSONObject getArticlesByAuthorId(final String authorId, final int currentPageNum, final int pageSize) throws ServiceException {
+    public JSONObject getArticlesByAuthorId(final String authorId, final int currentPageNum, final int pageSize)
+            throws ServiceException {
         try {
             final JSONObject ret = articleRepository.getByAuthorId(authorId, currentPageNum, pageSize);
             final JSONArray articles = ret.getJSONArray(Keys.RESULTS);
@@ -918,7 +999,8 @@ public class ArticleQueryService {
 
             return ret;
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Gets articles by author id failed [authorId=" + authorId + ", currentPageNum=" + currentPageNum + ", pageSize=" + pageSize + "]", e);
+            LOGGER.log(Level.ERROR, "Gets articles by author id failed [authorId=" + authorId + ", currentPageNum="
+                    + currentPageNum + ", pageSize=" + pageSize + "]", e);
 
             throw new ServiceException(e);
         }
@@ -967,7 +1049,8 @@ public class ArticleQueryService {
     }
 
     /**
-     * Converts the content and abstract for each of the specified articles to HTML if that is saved by Markdown editor.
+     * Converts the content and abstract for each of the specified articles to HTML
+     * if that is saved by Markdown editor.
      *
      * @param articles the specified articles
      */
@@ -978,7 +1061,8 @@ public class ArticleQueryService {
     }
 
     /**
-     * Converts the content and abstract for the specified article to HTML if it is saved by Markdown editor.
+     * Converts the content and abstract for the specified article to HTML if it is
+     * saved by Markdown editor.
      *
      * @param article the specified article
      */
@@ -1010,7 +1094,8 @@ public class ArticleQueryService {
      * </ul>
      * </p>
      * <p>
-     * The batch version of method {@link #removeUnusedProperties(org.json.JSONObject)}.
+     * The batch version of method
+     * {@link #removeUnusedProperties(org.json.JSONObject)}.
      * </p>
      *
      * @param articles the specified articles

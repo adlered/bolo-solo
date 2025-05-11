@@ -17,7 +17,10 @@
  */
 package org.b3log.solo.service;
 
-import org.apache.commons.codec.digest.DigestUtils;
+import java.sql.Connection;
+import java.text.ParseException;
+import java.util.List;
+
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.b3log.latke.Keys;
@@ -36,22 +39,26 @@ import org.b3log.latke.repository.jdbc.util.JdbcRepositories.CreateTableResult;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Ids;
-import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.prop.Options;
-import org.b3log.solo.bolo.tool.MD5Utils;
-import org.b3log.solo.model.*;
-import org.b3log.solo.model.Option.DefaultPreference;
-import org.b3log.solo.repository.*;
+import org.b3log.solo.model.ArchiveDate;
+import org.b3log.solo.model.Article;
+import org.b3log.solo.model.Comment;
+import org.b3log.solo.model.Option;
+import org.b3log.solo.model.Tag;
+import org.b3log.solo.model.UserExt;
+import org.b3log.solo.repository.ArchiveDateArticleRepository;
+import org.b3log.solo.repository.ArchiveDateRepository;
+import org.b3log.solo.repository.ArticleRepository;
+import org.b3log.solo.repository.CommentRepository;
+import org.b3log.solo.repository.LinkRepository;
+import org.b3log.solo.repository.OptionRepository;
+import org.b3log.solo.repository.TagArticleRepository;
+import org.b3log.solo.repository.TagRepository;
+import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.util.Images;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.sql.Connection;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Solo initialization service.
@@ -188,12 +195,15 @@ public class InitService {
                 return;
             }
         } catch (final Exception e) {
-            LOGGER.log(Level.ERROR, "Check tables failed, please make sure database existed and database configuration [jdbc.*] in local.props is correct [msg=" + e.getMessage() + "]");
+            LOGGER.log(Level.ERROR,
+                    "Check tables failed, please make sure database existed and database configuration [jdbc.*] in local.props is correct [msg="
+                            + e.getMessage() + "]");
 
             System.exit(-1);
         }
 
-        LOGGER.info("It's your first time setup Bolo, initialize tables in database [" + Latkes.getRuntimeDatabase() + "]");
+        LOGGER.info(
+                "It's your first time setup Bolo, initialize tables in database [" + Latkes.getRuntimeDatabase() + "]");
 
         if (Latkes.RuntimeDatabase.H2 == Latkes.getRuntimeDatabase()) {
             String dataDir = Latkes.getLocalProperty("jdbc.URL");
@@ -248,7 +258,8 @@ public class InitService {
     }
 
     /**
-     * Publishes the first article "Hello World" and the first comment with the specified locale.
+     * Publishes the first article "Hello World" and the first comment with the
+     * specified locale.
      *
      * @throws Exception exception
      */
@@ -256,7 +267,10 @@ public class InitService {
         final JSONObject article = new JSONObject();
 
         article.put(Article.ARTICLE_TITLE, langPropsService.get("helloWorld.title"));
-        final String content = "![](" + Images.imageSize(Images.randImage(), Article.ARTICLE_THUMB_IMG_WIDTH, Article.ARTICLE_THUMB_IMG_HEIGHT) + ") \n\n" +
+        final String content = "![]("
+                + Images.imageSize(Images.randImage(), Article.ARTICLE_THUMB_IMG_WIDTH,
+                        Article.ARTICLE_THUMB_IMG_HEIGHT)
+                + ") \n\n" +
                 langPropsService.get("helloWorld.content");
 
         article.put(Article.ARTICLE_ABSTRACT_TEXT, Article.getAbstractText(content));
@@ -289,7 +303,8 @@ public class InitService {
         comment.put(Comment.COMMENT_CONTENT, langPropsService.get("helloWorld.comment.content"));
         comment.put(Comment.COMMENT_ORIGINAL_COMMENT_ID, "");
         comment.put(Comment.COMMENT_ORIGINAL_COMMENT_NAME, "");
-        comment.put(Comment.COMMENT_THUMBNAIL_URL, "https://avatars1.githubusercontent.com/u/6754458?s=400&u=a8d4a1321a2f140d66a7c229ecd510c5560f1148&v=4");
+        comment.put(Comment.COMMENT_THUMBNAIL_URL,
+                "https://avatars1.githubusercontent.com/u/6754458?s=400&u=a8d4a1321a2f140d66a7c229ecd510c5560f1148&v=4");
         comment.put(Comment.COMMENT_CREATED, now);
         comment.put(Comment.COMMENT_ON_ID, articleId);
         final String commentId = Ids.genTimeMillisId();
@@ -368,7 +383,8 @@ public class InitService {
         final JSONObject archiveDate = new JSONObject();
 
         try {
-            archiveDate.put(ArchiveDate.ARCHIVE_TIME, DateUtils.parseDate(createDateString, new String[]{"yyyy/MM"}).getTime());
+            archiveDate.put(ArchiveDate.ARCHIVE_TIME,
+                    DateUtils.parseDate(createDateString, new String[] { "yyyy/MM" }).getTime());
             archiveDateRepository.add(archiveDate);
         } catch (final ParseException e) {
             LOGGER.log(Level.ERROR, e.getMessage(), e);
@@ -376,7 +392,8 @@ public class InitService {
         }
 
         final JSONObject archiveDateArticleRelation = new JSONObject();
-        archiveDateArticleRelation.put(ArchiveDate.ARCHIVE_DATE + "_" + Keys.OBJECT_ID, archiveDate.optString(Keys.OBJECT_ID));
+        archiveDateArticleRelation.put(ArchiveDate.ARCHIVE_DATE + "_" + Keys.OBJECT_ID,
+                archiveDate.optString(Keys.OBJECT_ID));
         archiveDateArticleRelation.put(Article.ARTICLE + "_" + Keys.OBJECT_ID, article.optString(Keys.OBJECT_ID));
         archiveDateArticleRepository.add(archiveDateArticleRelation);
     }
@@ -413,7 +430,8 @@ public class InitService {
             final String tagTitle = tagTitle1.trim();
             final JSONObject tag = new JSONObject();
 
-            LOGGER.log(Level.TRACE, "Found a new tag[title={0}] in article[title={1}]", tagTitle, article.optString(Article.ARTICLE_TITLE));
+            LOGGER.log(Level.TRACE, "Found a new tag[title={0}] in article[title={1}]", tagTitle,
+                    article.optString(Article.ARTICLE_TITLE));
             tag.put(Tag.TAG_TITLE, tagTitle);
             final String tagId = tagRepository.add(tag);
             tag.put(Keys.OBJECT_ID, tagId);
@@ -424,7 +442,8 @@ public class InitService {
     }
 
     /**
-     * Initializes administrator with the specified request json object, and then logins it.
+     * Initializes administrator with the specified request json object, and then
+     * logins it.
      *
      * @param requestJSONObject the specified request json object, for example,
      *                          {

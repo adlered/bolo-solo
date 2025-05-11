@@ -17,34 +17,33 @@
  */
 package org.b3log.solo.event;
 
-import jodd.http.HttpRequest;
-import jodd.http.HttpResponse;
-import jodd.http.HttpStatus;
 import org.apache.commons.lang.StringUtils;
 import org.b3log.latke.Keys;
-import org.b3log.latke.Latkes;
 import org.b3log.latke.event.AbstractEventListener;
 import org.b3log.latke.event.Event;
 import org.b3log.latke.ioc.BeanManager;
 import org.b3log.latke.ioc.Singleton;
 import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
-import org.b3log.latke.util.Strings;
-import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.service.OptionMgmtService;
-import org.b3log.solo.service.OptionQueryService;
 import org.b3log.solo.service.UserQueryService;
 import org.b3log.solo.util.PluginUtil;
 import org.b3log.solo.util.Solos;
 import org.json.JSONObject;
 
+import jodd.http.HttpRequest;
+import jodd.http.HttpResponse;
+import jodd.http.HttpStatus;
+
 /**
- * This listener is responsible for sending article to fishpi community base Rhythm. Sees <a href="https://fishpi.cn"></a> for more details.
+ * This listener is responsible for sending article to fishpi community base
+ * Rhythm. Sees <a href="https://fishpi.cn"></a> for more details.
  *
- * @author <a href="https://github.com/gakkiyomi">Gakkiyomi (Bolo Contributor)</a>
+ * @author <a href="https://github.com/gakkiyomi">Gakkiyomi (Bolo
+ *         Contributor)</a>
  * @since 0.0.1
  */
 @Singleton
@@ -89,25 +88,23 @@ public class FishPiArticleSender extends AbstractEventListener<JSONObject> {
             String userName = userQueryService.getB3username();
             String fishKey = userQueryService.getFishKey();
 
-            final JSONObject article = new JSONObject().
-                    put("id", originalArticle.getString(Keys.OBJECT_ID)).
-                    put("articleTitle", originalArticle.getString(Article.ARTICLE_TITLE)).
-                    put("articleTags", originalArticle.getString(Article.ARTICLE_TAGS_REF)).
-                    put("articleType", 0).
-                    put("isGoodArticle","yes").
-                    put("articleCommentable",true).
-                    put("articleNotifyFollowers", false).
-                    put("articleRewardPoint", "").
-                    put("articleContent", originalArticle.getString(Article.ARTICLE_CONTENT));
+            final JSONObject article = new JSONObject().put("id", originalArticle.getString(Keys.OBJECT_ID))
+                    .put("articleTitle", originalArticle.getString(Article.ARTICLE_TITLE))
+                    .put("articleTags", originalArticle.getString(Article.ARTICLE_TAGS_REF)).put("articleType", 0)
+                    .put("isGoodArticle", "yes").put("articleCommentable", true).put("articleNotifyFollowers", false)
+                    .put("articleRewardPoint", "")
+                    .put("articleContent", originalArticle.getString(Article.ARTICLE_CONTENT));
 
             if (Option.DefaultPreference.DEFAULT_B3LOG_USERNAME.equals(userName)) {
-                LOGGER.log(Level.INFO, "Article [title={0}] Is using the B3log default account, skipped push to Rhy", title);
+                LOGGER.log(Level.INFO, "Article [title={0}] Is using the B3log default account, skipped push to Rhy",
+                        title);
                 return;
             }
 
-            final HttpResponse response = HttpRequest.post(String.format("https://fishpi.cn/article?apiKey=%s", fishKey)).bodyText(article.toString()).
-                    connectionTimeout(3000).timeout(7000).followRedirects(true).
-                    contentTypeJson().header("User-Agent", Solos.BOLO_USER_AGENT).send();
+            final HttpResponse response = HttpRequest
+                    .post(String.format("https://fishpi.cn/article?apiKey=%s", fishKey)).bodyText(article.toString())
+                    .connectionTimeout(3000).timeout(7000).followRedirects(true).contentTypeJson()
+                    .header("User-Agent", Solos.BOLO_USER_AGENT).send();
 
             if (response.statusCode() != HttpStatus.HTTP_OK) {
                 LOGGER.log(Level.ERROR, "Pushes an article to FishPi failed: " + response.bodyText());
@@ -123,7 +120,8 @@ public class FishPiArticleSender extends AbstractEventListener<JSONObject> {
                 option.put(Option.OPTION_VALUE, articleId);
                 optionMgmtService.addOrUpdateOption(option);
             }
-            LOGGER.log(Level.INFO, "Pushed an article [title={0}] to FishPi, response [{1}]", title, response.toString());
+            LOGGER.log(Level.INFO, "Pushed an article [title={0}] to FishPi, response [{1}]", title,
+                    response.toString());
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Pushes an article to FishPi failed: " + e.getMessage());
         }

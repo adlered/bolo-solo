@@ -172,7 +172,7 @@ $.extend(Admin.prototype, {
                     // 页面包含子 tab，需根据 hash 定位到相应的 tab
                     if (subTab) {
                         $('#tab' + tab.substring(0, 1).toUpperCase() + tab.substring(1)).
-                        tabs('setCurrent', subTab)
+                            tabs('setCurrent', subTab)
                     }
 
                     // 根据 hash 调用现有的插件函数
@@ -191,7 +191,7 @@ $.extend(Admin.prototype, {
                 // 页面包含子 tab，需根据 hash 定位到相应的 tab
                 if (subTab) {
                     $('#tab' + tab.substring(0, 1).toUpperCase() + tab.substring(1)).
-                    tabs('setCurrent', subTab)
+                        tabs('setCurrent', subTab)
                 }
 
                 // 根据 hash 调用现有的插件函数
@@ -246,11 +246,11 @@ $.extend(Admin.prototype, {
         subNav.slideToggle('normal', function () {
             if (this.style.display !== 'none') {
                 $(it).
-                find('.icon-chevron-down')[0].className = 'icon-chevron-up fn__right'
+                    find('.icon-chevron-down')[0].className = 'icon-chevron-up fn__right'
                 $(it).addClass('tab-current')
             } else {
                 $(it).
-                find('.icon-chevron-up')[0].className = 'icon-chevron-down fn__right'
+                    find('.icon-chevron-up')[0].className = 'icon-chevron-down fn__right'
                 $(it).removeClass('tab-current')
             }
 

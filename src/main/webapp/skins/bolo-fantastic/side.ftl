@@ -75,6 +75,12 @@ box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);">
             </nav>
             <div class="level is-mobile">
                 <#if usite??>
+                    <#if usite.usiteResume !=''>
+                        <a class="level-item button is-marginless" target="_blank" title="个人简历"
+                           href="${usite.usiteResume}">
+                            <i class="fa fa-id-card"></i>
+                        </a>
+                    </#if>
                     <#if usite.usiteQQ !=''>
                         <a class="level-item button is-marginless" target="_blank" title="QQ"
                            href="tencent://message/?uin=${usite.usiteQQ}">

@@ -23,7 +23,31 @@ import org.b3log.latke.logging.Logger;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.model.Option;
-import org.b3log.solo.upgrade.*;
+import org.b3log.solo.upgrade.V299_300;
+import org.b3log.solo.upgrade.V300_310;
+import org.b3log.solo.upgrade.V310_320;
+import org.b3log.solo.upgrade.V320_330;
+import org.b3log.solo.upgrade.V330_340;
+import org.b3log.solo.upgrade.V340_350;
+import org.b3log.solo.upgrade.V350_360;
+import org.b3log.solo.upgrade.V360_361;
+import org.b3log.solo.upgrade.V361_362;
+import org.b3log.solo.upgrade.V362_363;
+import org.b3log.solo.upgrade.V363_364;
+import org.b3log.solo.upgrade.V364_365;
+import org.b3log.solo.upgrade.V365_366;
+import org.b3log.solo.upgrade.V366_367;
+import org.b3log.solo.upgrade.V367_368;
+import org.b3log.solo.upgrade.V368_370;
+import org.b3log.solo.upgrade.V370_380;
+import org.b3log.solo.upgrade.V380_390;
+import org.b3log.solo.upgrade.V390_400;
+import org.b3log.solo.upgrade.V400_410;
+import org.b3log.solo.upgrade.V410_420;
+import org.b3log.solo.upgrade.V420_430;
+import org.b3log.solo.upgrade.V430_431;
+import org.b3log.solo.upgrade.V431_432;
+import org.b3log.solo.upgrade.V432_433;
 import org.json.JSONObject;
 
 /**
@@ -75,7 +99,6 @@ public class UpgradeService {
                     LOGGER.info("Not a bolo skin has set, enabling Bolo Fast Migration.");
                 }
             }
-
 
             final String currentVer = preference.getString(Option.ID_C_VERSION); // 数据库中的版本
             if (SoloServletListener.VERSION.equals(currentVer)) {
@@ -134,6 +157,8 @@ public class UpgradeService {
                         V430_431.perform();
                     case "4.3.1":
                         V431_432.perform();
+                    case "4.3.2":
+                        V432_433.perform();
                         break;
                     default:
                         LOGGER.log(Level.INFO, "Version " + currentVer + " loaded in compatibility mode.");

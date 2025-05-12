@@ -122,6 +122,12 @@
                 </div>
                 <#if usite??>
                 <div class="card-info-social-icons is-center">
+                    <#if usite.usiteResume !=''>
+                        <a class="social-icon" target="_blank" title="个人简历"
+                           href="${usite.usiteResume}">
+                            <i class="fa fa-id-card"></i>
+                        </a>
+                    </#if>
                     <#if usite.usiteQQ !=''>
                         <a class="social-icon" target="_blank" title="QQ"
                            href="tencent://message/?uin=${usite.usiteQQ}">

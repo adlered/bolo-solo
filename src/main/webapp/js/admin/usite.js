@@ -42,30 +42,31 @@ admin.usite = {
       success: function (data) {
         if (data.msg === '') {
           usiteJSON = $.parseJSON('' +
-              '\n' +
-              '{\n' +
-              '    "usiteUserId": "",\n' +
-              '    "usiteWeiBo": "",\n' +
-              '    "usiteQQMusic": "",\n' +
-              '    "usiteStackOverflow": "",\n' +
-              '    "usiteDribbble": "",\n' +
-              '    "usiteGitHub": "",\n' +
-              '    "usiteMedium": "",\n' +
-              '    "usiteTwitter": "",\n' +
-              '    "usiteQQ": "",\n' +
-              '    "usiteLinkedIn": "",\n' +
-              '    "usiteSteam": "",\n' +
-              '    "oId": "",\n' +
-              '    "usiteInstagram": "",\n' +
-              '    "usiteCodePen": "",\n' +
-              '    "usiteWYMusic": "",\n' +
-              '    "usiteWeChat": "",\n' +
-              '    "usiteZhiHu": "",\n' +
-              '    "usiteBehance": "",\n' +
-              '    "usiteTelegram": "",\n' +
-              '    "usiteFacebook": ""\n' +
-              '}\n' +
-              '\n');
+            '\n' +
+            '{\n' +
+            '    "usiteUserId": "",\n' +
+            '    "usiteResume": "",\n' +
+            '    "usiteWeiBo": "",\n' +
+            '    "usiteQQMusic": "",\n' +
+            '    "usiteStackOverflow": "",\n' +
+            '    "usiteDribbble": "",\n' +
+            '    "usiteGitHub": "",\n' +
+            '    "usiteMedium": "",\n' +
+            '    "usiteTwitter": "",\n' +
+            '    "usiteQQ": "",\n' +
+            '    "usiteLinkedIn": "",\n' +
+            '    "usiteSteam": "",\n' +
+            '    "oId": "",\n' +
+            '    "usiteInstagram": "",\n' +
+            '    "usiteCodePen": "",\n' +
+            '    "usiteWYMusic": "",\n' +
+            '    "usiteWeChat": "",\n' +
+            '    "usiteZhiHu": "",\n' +
+            '    "usiteBehance": "",\n' +
+            '    "usiteTelegram": "",\n' +
+            '    "usiteFacebook": ""\n' +
+            '}\n' +
+            '\n');
         } else {
           usiteJSON = $.parseJSON(data.msg);
         }

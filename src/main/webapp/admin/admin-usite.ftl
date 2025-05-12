@@ -46,6 +46,10 @@
                 <th>${usite3Label}</th>
             </tr>
             <tr>
+                <td><b>${usite12Label}</b></td>
+                <td><input id="usiteResume" type="text" style="width:300px"></td>
+            </tr>
+            <tr>
                 <td><b>${usite4Label}</b></td>
                 <td>https://www.weibo.com/ <input id="usiteWeiBo" type="text" style="width:200px"></td>
             </tr>

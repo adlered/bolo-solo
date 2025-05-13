@@ -23,6 +23,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -63,6 +65,7 @@ import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.service.ArticleMgmtService;
 import org.b3log.solo.service.ArticleQueryService;
 import org.b3log.solo.service.CommentMgmtService;
+import org.b3log.solo.service.CommentQueryService;
 import org.b3log.solo.service.OptionQueryService;
 import org.b3log.solo.service.UserMgmtService;
 import org.b3log.solo.service.UserQueryService;
@@ -142,6 +145,12 @@ public class CommentProcessor {
      */
     @Inject
     private CommentRepository commentRepository;
+
+    /**
+     * Comment service.
+     */
+    @Inject
+    private CommentQueryService commentQueryService;
 
     /**
      * Article management service.
@@ -489,7 +498,6 @@ public class CommentProcessor {
         long localaid = Long.parseLong(context.pathVar("localaid"));
         long remoteaid = Long.parseLong(context.pathVar("remoteaid"));
         try {
-            commentMgmtService.removeArticleAllComment(String.valueOf(localaid));
             System.out.println("===> PAGE 1 <===");
             int pageCount = syncCommentFromFishPI(
                     localaid,
@@ -498,6 +506,9 @@ public class CommentProcessor {
                     context);
             if (pageCount == -1) {
                 context.renderJSON().renderMsg("评论同步失败，无法连接到摸鱼派服务器或 apiKey 错误。");
+                return;
+            } else if (pageCount == 0) {
+                context.renderJSON().renderMsg("远端文章评论为空");
                 return;
             } else if (pageCount > 1) {
                 for (int i = 2; i <= pageCount; i++) {
@@ -588,22 +599,28 @@ public class CommentProcessor {
         JSONArray rslt;
         try {
             rslt = result.optJSONObject("data").optJSONObject("article").optJSONArray("articleComments");
-        } catch (Exception e) {
-            return -1;
-        }
-        final HashMap<String, String> idNameMapping = new HashMap<>();
-
-        for (Object o : rslt) {
-            try {
+            if (null == rslt || rslt.isEmpty()) {
+                return 0;
+            }
+            final HashMap<String, String> idNameMapping = new HashMap<>();
+            Map<String, JSONObject> commpentMaps = commentQueryService.getComments(articleId).stream()
+                    .collect(Collectors.toMap(obj -> obj.optString("oId"), Function.identity()));
+            for (Object o : rslt) {
                 JSONObject object = (JSONObject) o;
-                System.out.println("Import content: " + object.opt("commentContent"));
+                String commentContent = object.optString("commentContent");
+
+                String id = object.optString("oId");
+                if (commpentMaps.containsKey(id)) {
+                    System.out.println("Import content skip: " + commentContent);
+                    continue;
+                }
+                System.out.println("Import content: " + commentContent);
                 String link = String.format("https://%s/member/%s", Global.FISH_PI_DOMAIN,
                         object.optString("commentAuthorName"));
                 String avatar = object.optString("commentAuthorThumbnailURL");
                 String comment = object.optString("commentContent");
                 String author = object.optString("commentAuthorName");
                 String commentOriginalCommentId = object.optString(Comment.COMMENT_ORIGINAL_COMMENT_ID);
-                String id = object.optString("oId");
                 idNameMapping.put(id, author);
                 final JSONObject commentObject = new JSONObject();
                 commentObject.put(Comment.COMMENT_ORIGINAL_COMMENT_ID, commentOriginalCommentId);
@@ -619,14 +636,14 @@ public class CommentProcessor {
                 final long date = article.optLong(Article.ARTICLE_CREATED);
                 commentObject.put(Comment.COMMENT_SHARP_URL, "/articles/" + DateFormatUtils.format(date, "yyyy/MM/dd")
                         + "/" + article.optString(Keys.OBJECT_ID) + ".html#" + Long.parseLong(id));
-                try {
-                    commentRepository.add(commentObject);
-                    articleMgmtService.incArticleCommentCount(articleId);
-                } catch (RepositoryException ignored) {
-                }
-            } catch (Exception ignored) {
+                commentRepository.add(commentObject);
+                articleMgmtService.incArticleCommentCount(articleId);
             }
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return -1;
         }
+
         return Integer
                 .parseInt(result.optJSONObject("data").optJSONObject("pagination").optString("paginationPageCount"));
     }

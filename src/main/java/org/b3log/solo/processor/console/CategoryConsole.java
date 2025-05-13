@@ -267,6 +267,8 @@ public class CategoryConsole {
 
             final String categoryId = requestJSON.optString(Keys.OBJECT_ID);
             final String title = requestJSON.optString(Category.CATEGORY_TITLE, "Category");
+            String uri = requestJSON.optString(Category.CATEGORY_URI);
+            final JSONObject targetCategory = categoryQueryService.getCategory(categoryId);
             JSONObject mayExist = categoryQueryService.getByTitle(title);
             if (null != mayExist && !mayExist.optString(Keys.OBJECT_ID).equals(categoryId)) {
                 final JSONObject jsonObject = new JSONObject().put(Keys.STATUS_CODE, false);
@@ -275,38 +277,38 @@ public class CategoryConsole {
 
                 return;
             }
-
-            String uri = requestJSON.optString(Category.CATEGORY_URI, title);
+            boolean urlUpdateFlag = false;
             if (StringUtils.isBlank(uri)) {
                 uri = title;
+                urlUpdateFlag = true;
+            } else {
+                if (!targetCategory.optString(Category.CATEGORY_URI).equals(uri)) {
+                    urlUpdateFlag = true;
+                }
             }
-            uri = URLs.encode(uri);
-            mayExist = categoryQueryService.getByURI(uri);
-            if (null != mayExist && !mayExist.optString(Keys.OBJECT_ID).equals(categoryId)) {
-                final JSONObject jsonObject = new JSONObject().put(Keys.STATUS_CODE, false);
-                renderer.setJSONObject(jsonObject);
-                jsonObject.put(Keys.MSG, langPropsService.get("duplicatedCategoryURILabel"));
-
-                return;
+            if (urlUpdateFlag) {
+                uri = URLs.encode(uri);
+                mayExist = categoryQueryService.getByURI(uri);
+                if (null != mayExist && !mayExist.optString(Keys.OBJECT_ID).equals(categoryId)) {
+                    final JSONObject jsonObject = new JSONObject().put(Keys.STATUS_CODE, false);
+                    renderer.setJSONObject(jsonObject);
+                    jsonObject.put(Keys.MSG, langPropsService.get("duplicatedCategoryURILabel"));
+                    return;
+                }
+                if (255 <= StringUtils.length(uri)) {
+                    final JSONObject jsonObject = new JSONObject().put(Keys.STATUS_CODE, false);
+                    renderer.setJSONObject(jsonObject);
+                    jsonObject.put(Keys.MSG, langPropsService.get("categoryURITooLongLabel"));
+                    return;
+                }
             }
-            if (255 <= StringUtils.length(uri)) {
-                final JSONObject jsonObject = new JSONObject().put(Keys.STATUS_CODE, false);
-                renderer.setJSONObject(jsonObject);
-                jsonObject.put(Keys.MSG, langPropsService.get("categoryURITooLongLabel"));
-
-                return;
-            }
-
             final String desc = requestJSON.optString(Category.CATEGORY_DESCRIPTION);
 
             final JSONObject category = new JSONObject();
             category.put(Category.CATEGORY_TITLE, title);
             category.put(Category.CATEGORY_URI, uri);
             category.put(Category.CATEGORY_DESCRIPTION, desc);
-
             categoryMgmtService.updateCategory(categoryId, category);
-            categoryMgmtService.removeCategoryTags(categoryId); // remove old relations
-
             ret.put(Keys.OBJECT_ID, categoryId);
             ret.put(Keys.MSG, langPropsService.get("updateSuccLabel"));
             ret.put(Keys.STATUS_CODE, true);

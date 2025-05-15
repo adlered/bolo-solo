@@ -596,7 +596,7 @@ public class ExportService {
     // @see https://github.com/xingwanying/xingwanying/blob/main/README.md
     private String genMeRepoReadme(List<JSONObject> recentArticles, final String username) throws RepositoryException {
         if (null != recentArticles && recentArticles.size() >= 5) {
-            recentArticles = recentArticles.subList(0, 5);
+            recentArticles = recentArticles.subList(0, 4);
         }
         String readme = "\n" + //
                 "\n" + //

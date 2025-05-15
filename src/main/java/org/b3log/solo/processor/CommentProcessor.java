@@ -599,7 +599,7 @@ public class CommentProcessor {
         JSONArray rslt;
         try {
             rslt = result.optJSONObject("data").optJSONObject("article").optJSONArray("articleComments");
-            if (null == rslt || rslt.isEmpty()) {
+            if (null == rslt || 0 == rslt.length()) {
                 return 0;
             }
             final HashMap<String, String> idNameMapping = new HashMap<>();

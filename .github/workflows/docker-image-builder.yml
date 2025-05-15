@@ -3,6 +3,10 @@
 name: Bolo-Build-Amd64
 
 on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
   release:
     types:
       - published
@@ -65,7 +69,6 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
           tags: |
-            ${{ steps.prep.outputs.image }}:${{ github.event.release.tag_name }}
             ${{ steps.prep.outputs.image }}:latest
 
       - name: Move cache

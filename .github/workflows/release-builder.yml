@@ -3,10 +3,6 @@
 name: Bolo-Build-Amd64
 
 on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
   release:
     types:
       - published
@@ -33,11 +29,8 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          TAG=$(echo $GITHUB_REF | cut -d / -f 3)
           IMAGE="tangcuyu/bolo-solo"
           echo ::set-output name=image::${IMAGE}
-          echo ::set-output name=tag::${TAG}
-          echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
         with:
@@ -65,10 +58,11 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64/v8
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
           tags: |
+            ${{ steps.prep.outputs.image }}:${{ github.event.release.tag_name }}
             ${{ steps.prep.outputs.image }}:latest
 
       - name: Move cache

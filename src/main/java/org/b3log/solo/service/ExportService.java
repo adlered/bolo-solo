@@ -17,9 +17,25 @@
  */
 package org.b3log.solo.service;
 
-import jodd.http.HttpRequest;
-import jodd.http.HttpResponse;
-import jodd.io.ZipUtil;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -32,7 +48,13 @@ import org.b3log.latke.logging.Level;
 import org.b3log.latke.logging.Logger;
 import org.b3log.latke.model.Plugin;
 import org.b3log.latke.model.User;
-import org.b3log.latke.repository.*;
+import org.b3log.latke.repository.Filter;
+import org.b3log.latke.repository.FilterOperator;
+import org.b3log.latke.repository.PropertyFilter;
+import org.b3log.latke.repository.Query;
+import org.b3log.latke.repository.Repository;
+import org.b3log.latke.repository.RepositoryException;
+import org.b3log.latke.repository.SortDirection;
 import org.b3log.latke.repository.jdbc.JdbcRepository;
 import org.b3log.latke.repository.jdbc.util.Connections;
 import org.b3log.latke.service.annotation.Service;
@@ -40,21 +62,36 @@ import org.b3log.latke.util.Execs;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.Global;
-import org.b3log.solo.model.*;
-import org.b3log.solo.repository.*;
+import org.b3log.solo.model.ArchiveDate;
+import org.b3log.solo.model.Article;
+import org.b3log.solo.model.Category;
+import org.b3log.solo.model.Comment;
+import org.b3log.solo.model.Link;
+import org.b3log.solo.model.Option;
+import org.b3log.solo.model.Page;
+import org.b3log.solo.model.Tag;
+import org.b3log.solo.repository.ArchiveDateArticleRepository;
+import org.b3log.solo.repository.ArchiveDateRepository;
+import org.b3log.solo.repository.ArticleRepository;
+import org.b3log.solo.repository.CategoryRepository;
+import org.b3log.solo.repository.CategoryTagRepository;
+import org.b3log.solo.repository.CommentRepository;
+import org.b3log.solo.repository.LinkRepository;
+import org.b3log.solo.repository.OptionRepository;
+import org.b3log.solo.repository.PageRepository;
+import org.b3log.solo.repository.PluginRepository;
+import org.b3log.solo.repository.TagArticleRepository;
+import org.b3log.solo.repository.TagRepository;
+import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.util.GitHubs;
 import org.b3log.solo.util.Solos;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.*;
-import java.util.stream.Collectors;
+import jodd.http.HttpRequest;
+import jodd.http.HttpResponse;
+import jodd.io.ZipUtil;
 
 /**
  * Export service.
@@ -208,7 +245,7 @@ public class ExportService {
             }
         } else if (Latkes.RuntimeDatabase.H2 == runtimeDatabase) {
             try (final Connection connection = Connections.getConnection();
-                 final Statement statement = connection.createStatement()) {
+                    final Statement statement = connection.createStatement()) {
                 final StringBuilder sqlBuilder = new StringBuilder();
                 final ResultSet resultSet = statement.executeQuery("SCRIPT");
                 while (resultSet.next()) {
@@ -260,20 +297,51 @@ public class ExportService {
     }
 
     /**
-     * Exports public articles to GitHub repo "solo-blog". 同步 GitHub solo-blog 仓库功能 https://github.com/88250/solo/issues/125
+     * Exports public articles to GitHub repo "bolo-blog and user index repo".
+     * 
      */
-    public void exportGitHub() {
+    public void exportGitHub(final boolean enableAutoFlushGitHubProfile) {
+        final JSONObject preference = optionQueryService.getPreference();
+        if (null == preference) {
+            return;
+        }
+        String pat = preference.optString(Option.ID_C_GITHUB_PAT);
+        if (StringUtils.isBlank(pat)) {
+            return;
+        }
+        final JSONObject gitHubUser = GitHubs.getGitHubUser(pat);
+        if (null == gitHubUser) {
+            return;
+        }
+        final Filter published = new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL,
+                Article.ARTICLE_STATUS_C_PUBLISHED);
+        List<JSONObject> recentArticles;
         try {
-            final JSONObject preference = optionQueryService.getPreference();
-            if (null == preference) {
-                return;
-            }
+            recentArticles = articleRepository.getList(new Query().setFilter(published)
+                    .select(Keys.OBJECT_ID, Article.ARTICLE_TITLE, Article.ARTICLE_PERMALINK)
+                    .addSort(Article.ARTICLE_CREATED, SortDirection.DESCENDING).setPage(1, 20));
+        } catch (RepositoryException e) {
+            LOGGER.error(String.format("export blog article error: %s", e.getMessage()));
+            return;
+        }
+        if (null == recentArticles || recentArticles.size() == 0) {
+            return;
+        }
+        exportGitHubBlog(recentArticles, preference, gitHubUser);
+        if (enableAutoFlushGitHubProfile)
+            exportGitHubProfile(recentArticles, preference, gitHubUser);
+    }
 
+    /**
+     * Exports public articles to GitHub repo "solo-blog". 同步 GitHub solo-blog 仓库功能
+     * https://github.com/88250/solo/issues/125
+     * 
+     */
+    private void exportGitHubBlog(final List<JSONObject> recentArticles, final JSONObject preference,
+            final JSONObject gitHubUser) {
+        ;
+        try {
             String pat = preference.optString(Option.ID_C_GITHUB_PAT);
-            if (StringUtils.isBlank(pat)) {
-                return;
-            }
-
             final JSONObject mds = exportHexoMDs();
             JdbcRepository.dispose();
             final List<JSONObject> posts = (List<JSONObject>) mds.opt("posts");
@@ -298,55 +366,83 @@ public class ExportService {
             final String clientTitle = preference.optString(Option.ID_C_BLOG_TITLE);
             final String clientSubtitle = preference.optString(Option.ID_C_BLOG_SUBTITLE);
 
-            final JSONObject gitHubUser = GitHubs.getGitHubUser(pat);
-            if (null == gitHubUser) {
-                return;
-            }
-
             final String loginName = gitHubUser.optString("login");
             final String repoName = "bolo-blog";
 
-            boolean ok = GitHubs.createOrUpdateGitHubRepo(pat, loginName, repoName, "✍️ " + clientTitle + " - " + clientSubtitle, Latkes.getServePath());
+            boolean ok = GitHubs.createOrUpdateGitHubRepo(pat, loginName, repoName,
+                    "✍️ " + clientTitle + " - " + clientSubtitle, Latkes.getServePath());
             if (!ok) {
                 return;
             }
-
-            final String readme = genSoloBlogReadme(clientTitle, clientSubtitle, preference.optString(Option.ID_C_FAVICON_URL), loginName + "/" + repoName);
-            JdbcRepository.dispose();
-            LOGGER.info("begin get README.md");
-            String tmpFilePath = tmpDir + File.separator + "bolo-blog-readme.md";
-            File file = FileUtils.getFile(tmpFilePath);
-
-            // 第一次运行的判断条件
-            boolean firstTimeRun = false;
-            String oldReadme = null;
-
-            // 比对更新，但是第一次启动的时候并没有readme文件，尤其是 docker 环境中，没有上次的原始文件的情况更多
-            try {
-                oldReadme  = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
-            } catch (IOException e){
-                firstTimeRun = true;
-            }
-
-            if (!firstTimeRun) {
-                if (oldReadme != null && oldReadme.equals(readme)) {
-                    LOGGER.info("not need update readme.");
-                    return;
-                }
-            }
-            // 更新缓存文件
-            FileUtils.write(file, readme, StandardCharsets.UTF_8);
-            ok = GitHubs.updateFile(pat, loginName, repoName, "README.md", readme.getBytes(StandardCharsets.UTF_8));
+            final String readme = genSoloBlogReadme(recentArticles, clientTitle, clientSubtitle,
+                    preference.optString(Option.ID_C_FAVICON_URL), loginName + "/" + repoName);
+            ok = diffUploadReadme(pat, repoName, loginName, readme, "bolo-blog-readme.md");
             if (ok) {
                 ok = GitHubs.updateFile(pat, loginName, repoName, "backup.zip", zipData);
-            }
-            if (ok) {
-                LOGGER.log(Level.INFO, "Exported public articles to your repo [bolo-blog]");
             }
 
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Exports public articles to your repo failed: " + e.getMessage());
         }
+    }
+
+    /**
+     * Exports public articles to github index repo.
+     */
+    private void exportGitHubProfile(final List<JSONObject> recentArticles, final JSONObject preference,
+            final JSONObject gitHubUser) {
+        try {
+            String pat = preference.optString(Option.ID_C_GITHUB_PAT);
+            final String loginName = gitHubUser.optString("login");
+            final String clientTitle = preference.optString(Option.ID_C_BLOG_TITLE);
+            final String clientSubtitle = preference.optString(Option.ID_C_BLOG_SUBTITLE);
+            boolean ok = GitHubs.createOrUpdateGitHubRepo(pat, loginName, loginName,
+                    "✍️ " + clientTitle + " - " + clientSubtitle, Latkes.getServePath());
+            if (!ok) {
+                return;
+            }
+
+            final String readme = genMeRepoReadme(recentArticles, loginName);
+            diffUploadReadme(pat, loginName, loginName, readme, "profile-readme.md");
+            JdbcRepository.dispose();
+        } catch (final Exception e) {
+            LOGGER.log(Level.ERROR, "Exports public articles to your repo failed: " + e.getMessage());
+        }
+    }
+
+    private boolean diffUploadReadme(final String pat, final String repoName, final String loginName,
+            final String readme,
+            final String cacheName) throws IOException {
+        final String tmpDir = System.getProperty("java.io.tmpdir");
+        LOGGER.info(String.format("begin get %s README.md:", repoName));
+        String tmpFilePath = tmpDir + File.separator + cacheName;
+        File file = FileUtils.getFile(tmpFilePath);
+
+        // 第一次运行的判断条件
+        boolean firstTimeRun = false;
+        String oldReadme = null;
+
+        // 比对更新，但是第一次启动的时候并没有readme文件，尤其是 docker 环境中，没有上次的原始文件的情况更多
+        try {
+            oldReadme = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            firstTimeRun = true;
+        }
+
+        if (!firstTimeRun) {
+            if (oldReadme != null && oldReadme.equals(readme)) {
+                LOGGER.info(String.format("not need update %s readme.", repoName));
+                return true;
+            }
+        }
+        // 更新缓存文件
+        FileUtils.write(file, readme, StandardCharsets.UTF_8);
+        boolean ok = GitHubs.updateFile(pat, loginName, repoName, "README.md",
+                readme.getBytes(StandardCharsets.UTF_8));
+        if (ok) {
+            LOGGER.log(Level.INFO, String.format("Exported public articles to your repo [%s]", repoName));
+        }
+        return ok;
     }
 
     /**
@@ -395,7 +491,8 @@ public class ExportService {
             String userName = userQueryService.getB3username();
             String userB3Key = userQueryService.getB3password();
             if (Option.DefaultPreference.DEFAULT_B3LOG_USERNAME.equals(userName)) {
-                LOGGER.log(Level.INFO, "Backup public articles to HacPai skipped because using the default B3 account.");
+                LOGGER.log(Level.INFO,
+                        "Backup public articles to HacPai skipped because using the default B3 account.");
 
                 return;
             }
@@ -404,10 +501,13 @@ public class ExportService {
             final String clientSubtitle = preference.optString(Option.ID_C_BLOG_SUBTITLE);
 
             final Set<String> articleIds = new HashSet<>();
-            final Filter published = new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL, Article.ARTICLE_STATUS_C_PUBLISHED);
+            final Filter published = new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL,
+                    Article.ARTICLE_STATUS_C_PUBLISHED);
 
             final StringBuilder bodyBuilder = new StringBuilder("### 最新\n");
-            final List<JSONObject> recentArticles = articleRepository.getList(new Query().setFilter(published).select(Keys.OBJECT_ID, Article.ARTICLE_TITLE, Article.ARTICLE_PERMALINK).addSort(Article.ARTICLE_CREATED, SortDirection.DESCENDING).setPage(1, 20));
+            final List<JSONObject> recentArticles = articleRepository.getList(new Query().setFilter(published)
+                    .select(Keys.OBJECT_ID, Article.ARTICLE_TITLE, Article.ARTICLE_PERMALINK)
+                    .addSort(Article.ARTICLE_CREATED, SortDirection.DESCENDING).setPage(1, 20));
             for (final JSONObject article : recentArticles) {
                 final String title = article.optString(Article.ARTICLE_TITLE);
                 final String link = Latkes.getServePath() + article.optString(Article.ARTICLE_PERMALINK);
@@ -417,7 +517,9 @@ public class ExportService {
             bodyBuilder.append("\n\n");
 
             final StringBuilder mostViewBuilder = new StringBuilder();
-            final List<JSONObject> mostViewArticles = articleRepository.getList(new Query().setFilter(published).select(Keys.OBJECT_ID, Article.ARTICLE_TITLE, Article.ARTICLE_PERMALINK).addSort(Article.ARTICLE_VIEW_COUNT, SortDirection.DESCENDING).setPage(1, 40));
+            final List<JSONObject> mostViewArticles = articleRepository.getList(new Query().setFilter(published)
+                    .select(Keys.OBJECT_ID, Article.ARTICLE_TITLE, Article.ARTICLE_PERMALINK)
+                    .addSort(Article.ARTICLE_VIEW_COUNT, SortDirection.DESCENDING).setPage(1, 40));
             int count = 0;
             for (final JSONObject article : mostViewArticles) {
                 final String articleId = article.optString(Keys.OBJECT_ID);
@@ -437,7 +539,9 @@ public class ExportService {
             }
 
             final StringBuilder mostCmtBuilder = new StringBuilder();
-            final List<JSONObject> mostCmtArticles = articleRepository.getList(new Query().setFilter(published).select(Keys.OBJECT_ID, Article.ARTICLE_TITLE, Article.ARTICLE_PERMALINK).addSort(Article.ARTICLE_COMMENT_COUNT, SortDirection.DESCENDING).setPage(1, 60));
+            final List<JSONObject> mostCmtArticles = articleRepository.getList(new Query().setFilter(published)
+                    .select(Keys.OBJECT_ID, Article.ARTICLE_TITLE, Article.ARTICLE_PERMALINK)
+                    .addSort(Article.ARTICLE_COMMENT_COUNT, SortDirection.DESCENDING).setPage(1, 60));
             count = 0;
             for (final JSONObject article : mostCmtArticles) {
                 final String articleId = article.optString(Keys.OBJECT_ID);
@@ -462,12 +566,14 @@ public class ExportService {
             stat.put("articleCount", statistic.getLong(Option.ID_T_STATISTIC_PUBLISHED_ARTICLE_COUNT));
             stat.put("commentCount", statistic.getLong(Option.ID_T_STATISTIC_PUBLISHED_BLOG_COMMENT_COUNT));
             stat.put("tagCount", tagQueryService.getTagCount());
-            stat.put("skin", optionQueryService.getOptionById(Option.ID_C_SKIN_DIR_NAME).optString(Option.OPTION_VALUE));
-            stat.put("mobileSkin", optionQueryService.getOptionById(Option.ID_C_MOBILE_SKIN_DIR_NAME).optString(Option.OPTION_VALUE));
+            stat.put("skin",
+                    optionQueryService.getOptionById(Option.ID_C_SKIN_DIR_NAME).optString(Option.OPTION_VALUE));
+            stat.put("mobileSkin",
+                    optionQueryService.getOptionById(Option.ID_C_MOBILE_SKIN_DIR_NAME).optString(Option.OPTION_VALUE));
 
-            final HttpResponse response = HttpRequest.post("https://" + Global.HACPAI_DOMAIN + "/github/repos").
-                    connectionTimeout(7000).timeout(60000).header("User-Agent", Solos.USER_AGENT).
-                    form("userName", userName,
+            final HttpResponse response = HttpRequest.post("https://" + Global.HACPAI_DOMAIN + "/github/repos")
+                    .connectionTimeout(7000).timeout(60000).header("User-Agent", Solos.USER_AGENT)
+                    .form("userName", userName,
                             "userB3Key", userB3Key,
                             "clientName", "Solo",
                             "clientVersion", SoloServletListener.VERSION,
@@ -477,7 +583,8 @@ public class ExportService {
                             "clientSubtitle", clientSubtitle,
                             "clientBody", bodyBuilder.toString(),
                             "stat", stat.toString(),
-                            "file", zipData).send();
+                            "file", zipData)
+                    .send();
             response.close();
             response.charset("UTF-8");
             LOGGER.info("Backup public articles to HacPai completed: " + response.bodyText());
@@ -486,41 +593,70 @@ public class ExportService {
         }
     }
 
-    private String genSoloBlogReadme(final String blogTitle, final String blogSubTitle, final String favicon, final String repoFullName) throws RepositoryException {
-        final Set<String> articleIds = new HashSet<>();
-        final Filter published = new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL, Article.ARTICLE_STATUS_C_PUBLISHED);
-        final StringBuilder bodyBuilder = new StringBuilder("### 最新\n");
-        final List<JSONObject> recentArticles = articleRepository.getList(new Query().setFilter(published).select(Keys.OBJECT_ID, Article.ARTICLE_TITLE, Article.ARTICLE_PERMALINK).addSort(Article.ARTICLE_CREATED, SortDirection.DESCENDING).setPage(1, 20));
-        for (final JSONObject article : recentArticles) {
+    // Thanks to this lady
+    // @see https://github.com/xingwanying/xingwanying/blob/main/README.md
+    private String genMeRepoReadme(List<JSONObject> recentArticles, final String username) throws RepositoryException {
+        if (null != recentArticles && recentArticles.size() >= 5) {
+            recentArticles = recentArticles.subList(0, 4);
+        }
+        String readme = "\n" + //
+                "\n" + //
+                "<img align=\"left\" src=\"https://user-images.githubusercontent.com/65187002/144930161-2f783401-8d27-4fdf-a2f7-cc0ba32f1f1f.gif\" width=\"30%\" style=\"display:inline;\"><img align=\"right\" src=\"https://user-images.githubusercontent.com/65187002/144930161-2f783401-8d27-4fdf-a2f7-cc0ba32f1f1f.gif\" width=\"30%\" style=\"display:inline;\">\n"
+                + //
+                "<br>\n" + //
+                "<p align=\"center\">\n" + //
+                "    <h1 align=\"center\">🌟&emsp;${name}&emsp;🌟</h1>\n" + //
+                "</p>\n" + //
+                "\n" + //
+                "\n" + //
+                "\n" + //
+                "${body}" + //
+                "  ";
+        final StringBuilder ret = recentArticles(recentArticles);
+        readme = readme.replace("${name}", username)
+                .replace("${body}", ret.toString());
+        return readme;
+    }
+
+    private StringBuilder recentArticles(final List<JSONObject> articles) throws RepositoryException {
+        final StringBuilder ret = new StringBuilder("### Latest Blog Posts:\n");
+        for (final JSONObject article : articles) {
             final String title = article.optString(Article.ARTICLE_TITLE);
             final String link = Latkes.getServePath() + article.optString(Article.ARTICLE_PERMALINK);
-            bodyBuilder.append("\n* [").append(title).append("](").append(link).append(")");
-            articleIds.add(article.optString(Keys.OBJECT_ID));
+            ret.append("\n* [").append(title).append("](").append(link).append(")");
         }
-        bodyBuilder.append("\n\n");
+        ret.append("\n* [").append("More").append("](").append(Latkes.getServePath()).append(")");
+        ret.append("\n\n");
+        return ret;
+    }
 
+    private String genSoloBlogReadme(final List<JSONObject> recentArticles, final String blogTitle,
+            final String blogSubTitle, final String favicon,
+            final String repoFullName) throws RepositoryException {
+        final StringBuilder bodyBuilder = recentArticles(recentArticles);
         String ret = "<p align=\"center\"><img alt=\"${title}\" src=\"${favicon}\"></p><h2 align=\"center\">\n" +
                 "${title}\n" +
                 "</h2>\n" +
                 "\n" +
                 "<h4 align=\"center\">${subtitle}</h4>\n" +
                 "<p align=\"center\">" +
-                "<a title=\"${title}\" target=\"_blank\" href=\"https://github.com/${repoFullName}\"><img src=\"https://img.shields.io/github/last-commit/${repoFullName}.svg?style=flat-square&color=FF9900\"></a>\n" +
-                "<a title=\"GitHub repo size in bytes\" target=\"_blank\" href=\"https://github.com/${repoFullName}\"><img src=\"https://img.shields.io/github/repo-size/${repoFullName}.svg?style=flat-square\"></a>\n" +
-                "<a title=\"Bolo Version\" target=\"_blank\" href=\"https://github.com/adlered/bolo-solo\"><img src=\"https://img.shields.io/badge/bolo-${soloVer}-f1e05a.svg?style=flat-square&color=blueviolet\"></a>\n" +
-                "<a title=\"Hits\" target=\"_blank\" href=\"https://github.com/88250/hits\"><img src=\"https://hits.b3log.org/${repoFullName}.svg\"></a>" +
+                "<a title=\"${title}\" target=\"_blank\" href=\"https://github.com/${repoFullName}\"><img src=\"https://img.shields.io/github/last-commit/${repoFullName}.svg?style=flat-square&color=FF9900\"></a>\n"
+                +
+                "<a title=\"GitHub repo size in bytes\" target=\"_blank\" href=\"https://github.com/${repoFullName}\"><img src=\"https://img.shields.io/github/repo-size/${repoFullName}.svg?style=flat-square\"></a>\n"
+                +
+                "<a title=\"Bolo Version\" target=\"_blank\" href=\"https://github.com/adlered/bolo-solo\"><img src=\"https://img.shields.io/badge/bolo-${soloVer}-f1e05a.svg?style=flat-square&color=blueviolet\"></a>\n"
+                +
+                "<a title=\"Hits\" target=\"_blank\" href=\"https://github.com/88250/hits\"><img src=\"https://hits.b3log.org/${repoFullName}.svg\"></a>"
+                +
                 "</p>\n" +
                 "\n" +
                 "${body}\n\n" +
                 "---\n" +
                 "\n" +
-                "本仓库通过 [Bolo](https://github.com/adlered/bolo-solo) 自动进行同步更新 ❤️ ";
-        ret = ret.replace("${title}", blogTitle).
-                replace("${subtitle}", blogSubTitle).
-                replace("${favicon}", favicon).
-                replace("${repoFullName}", repoFullName).
-                replace("${soloVer}", SoloServletListener.BOLO_VERSION).
-                replace("${body}", bodyBuilder.toString());
+                "本仓库通过 [Bolo](https://github.com/bolo-blog/bolo-solo) 自动进行同步更新 ❤️ ";
+        ret = ret.replace("${title}", blogTitle).replace("${subtitle}", blogSubTitle).replace("${favicon}", favicon)
+                .replace("${repoFullName}", repoFullName).replace("${soloVer}", SoloServletListener.BOLO_VERSION)
+                .replace("${body}", bodyBuilder.toString());
         return ret;
     }
 
@@ -533,7 +669,8 @@ public class ExportService {
     public void exportHexoMd(final List<JSONObject> articles, final String dirPath) {
         articles.forEach(article -> {
             final String filename = Solos.sanitizeFilename(article.optString("title")) + ".md";
-            final String text = article.optString("front") + "---" + Strings.LINE_SEPARATOR + article.optString("content");
+            final String text = article.optString("front") + "---" + Strings.LINE_SEPARATOR
+                    + article.optString("content");
 
             try {
                 final String date = DateFormatUtils.format(article.optLong("created"), "yyyyMM");
@@ -549,7 +686,9 @@ public class ExportService {
     /**
      * Exports as Hexo markdown format.
      *
-     * @return posts, password posts and drafts, <pre>
+     * @return posts, password posts and drafts,
+     * 
+     *         <pre>
      * {
      *     "posts": [
      *         {
@@ -562,7 +701,7 @@ public class ExportService {
      *     "passwords": [], // format is same as post
      *     "drafts": [] // format is same as post
      * }
-     * </pre>
+     *         </pre>
      */
     public JSONObject exportHexoMDs() {
         final JSONObject ret = new JSONObject();
@@ -581,8 +720,10 @@ public class ExportService {
             front.put("title", title);
             final String date = DateFormatUtils.format(article.optLong(Article.ARTICLE_CREATED), "yyyy-MM-dd HH:mm:ss");
             front.put("date", date);
-            front.put("updated", DateFormatUtils.format(article.optLong(Article.ARTICLE_UPDATED), "yyyy-MM-dd HH:mm:ss"));
-            final List<String> tags = Arrays.stream(article.optString(Article.ARTICLE_TAGS_REF).split(",")).filter(StringUtils::isNotBlank).map(String::trim).collect(Collectors.toList());
+            front.put("updated",
+                    DateFormatUtils.format(article.optLong(Article.ARTICLE_UPDATED), "yyyy-MM-dd HH:mm:ss"));
+            final List<String> tags = Arrays.stream(article.optString(Article.ARTICLE_TAGS_REF).split(","))
+                    .filter(StringUtils::isNotBlank).map(String::trim).collect(Collectors.toList());
             if (tags.isEmpty()) {
                 tags.add("Solo");
             }

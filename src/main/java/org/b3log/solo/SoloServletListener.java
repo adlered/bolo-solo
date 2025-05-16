@@ -104,7 +104,7 @@ public final class SoloServletListener extends AbstractServletListener {
     public static final String STABLE_EN = "Stable";
     public static final String BETA_CN = "内测版";
     public static final String BETA_EN = "Beta";
-    public static final String BOLO_VERSION_SOURCE = "2.6";
+    public static final String BOLO_VERSION_SOURCE = "2.6.1";
     public static final String BOLO_VERSION = "v" + BOLO_VERSION_SOURCE + " " + STABLE_CN;
     public static final String BOLO_VERSION_EN = "v" + BOLO_VERSION_SOURCE + " " + STABLE_EN;
     // public static final String BOLO_VERSION = "v" + BOLO_VERSION_SOURCE + " " +
@@ -173,7 +173,7 @@ public final class SoloServletListener extends AbstractServletListener {
                 "█  ██╔══██╗██╔═══██╗██║     ██╔═══██╗  █  Welcome to Bolo :)           █\n" +
                 "█  ██████╔╝██║   ██║██║     ██║   ██║  █                               █\n" +
                 "█  ██╔══██╗██║   ██║██║     ██║   ██║  █  github.com/adlered/bolo-solo █\n" +
-                "█  ██████╔╝╚██████╔╝███████╗╚██████╔╝  █  Current Version: " + BOLO_VERSION_EN + " █\n" +
+                "█  ██████╔╝╚██████╔╝███████╗╚██████╔╝  █  CurrentVersion: " + BOLO_VERSION_EN + "█\n" +
                 "█  ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝   █                               █\n" +
                 "█                                      █                               █\n" +
                 "████✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩████\n" +

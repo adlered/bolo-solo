@@ -17,15 +17,15 @@
     <artifactId>bolo</artifactId>
     <packaging>war</packaging>
     <name>Bolo</name>
-    <version>v2.6-stable</version>
+    <version>v2.6.1-stable</version>
     <description>
         本地化、稳定精致的 Java 博客系统 - 菠萝博客。
     </description>
     <inceptionYear>2019</inceptionYear>
 
     <organization>
-        <name>adlered</name>
-        <url>https://github.com/adlered</url>
+        <name>bolo-blog</name>
+        <url>https://github.com/bolo-blog</url>
     </organization>
 
     <licenses>
@@ -73,15 +73,24 @@
                 <role>Commiter</role>
             </roles>
         </developer>
+        <developer>
+            <id>gakkiyomi@gakkiyomi.blog</id>
+            <name>Gakkiyomi Fang</name>
+            <email>gakkiyomi@gmail.com</email>
+            <url>https://gakkiyomi.blog</url>
+            <roles>
+                <role>Commiter</role>
+            </roles>
+        </developer>
     </developers>
 
     <issueManagement>
         <system>GitHub Issues</system>
-        <url>https://github.com/adlered/bolo-solo/issues</url>
+        <url>https://github.com/bolo-blog/bolo-solo/issues</url>
     </issueManagement>
 
     <scm>
-        <url>https://github.com/adlered/bolo-solo</url>
+        <url>https://github.com/bolo-blog/bolo-solo</url>
     </scm>
 
     <properties>

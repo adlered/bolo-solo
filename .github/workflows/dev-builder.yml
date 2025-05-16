@@ -20,6 +20,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   bolo-buildx:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && startsWith(github.head_ref, 'dev/'))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

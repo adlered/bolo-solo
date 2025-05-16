@@ -43,16 +43,10 @@ jobs:
       - name: Prepare tag
         id: prep
         run: |
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-              BRANCH="${{ github.head_ref }}"
-            else
-              BRANCH="${GITHUB_REF##*/}"
-            fi
-          BRANCH=$(echo "$BRANCH" | sed 's/\//-/g')
           DATE=${{ steps.date.outputs.today }}
           VERSION=${{ steps.version.outputs.new_version }}
           IMAGE="tangcuyu/bolo-solo"
-          TAG="dev-${BRANCH}-${VERSION}-${DATE}"
+          TAG="${VERSION}.dev${DATE}"
           echo "image=${IMAGE}" >> "$GITHUB_OUTPUT"
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
 

@@ -7,9 +7,6 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
-  release:
-    types:
-      - published
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
@@ -29,15 +26,28 @@ jobs:
         uses: actions/checkout@v2
       - name: Get current date
         id: date
-        run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
-      - name: Prepare
+        run: echo "today=$(date +'%Y%m%d%H%M%S')" >> "$GITHUB_OUTPUT"
+
+      - name: Get current version
+        id: version
+        run: |
+          version=$(xmllint --xpath "/*[local-name()='project']/*[local-name()='version']/text()" pom.xml)
+          IFS='.' read -r major minor patch <<< "$version"
+          patch=$((patch + 1))
+          new_version="${major}.${minor}.${patch}"
+          echo "new_version=$new_version" >> "$GITHUB_OUTPUT"
+
+      - name: Prepare tag
         id: prep
         run: |
-          TAG=$(echo $GITHUB_REF | cut -d / -f 3)
+          BRANCH=$(echo "${GITHUB_REF##*/}" | sed 's/\//-/g')
+          DATE=${{ steps.date.outputs.today }}
+          VERSION=${{ steps.version.outputs.new_version }}
           IMAGE="tangcuyu/bolo-solo"
-          echo ::set-output name=image::${IMAGE}
-          echo ::set-output name=tag::${TAG}
-          echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+          TAG="dev-${BRANCH}-${VERSION}-${DATE}"
+          echo "image=${IMAGE}" >> "$GITHUB_OUTPUT"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
         with:
@@ -65,11 +75,11 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64/v8
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
           tags: |
-            ${{ steps.prep.outputs.image }}:latest
+            ${{ steps.prep.outputs.image }}:${{ steps.prep.outputs.tag }}
 
       - name: Move cache
         run: |

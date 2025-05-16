@@ -628,6 +628,13 @@
             <input id="enableAutoFlushGitHub" type="checkbox" class="normalInput"/>
             <span>&nbsp;${autoFlushGitHubLabel}</span>
         </label>
+        <div class="fn__clear"></div>
+        ${myGitHubProfileLabel}
+        <br>
+        <label class="checkbox">
+            <input id="enableAutoFlushGitHubProfile" type="checkbox" class="normalInput"/>
+            <span>&nbsp;${autoFlushGitHubProfileLabel}</span>
+        </label>
         <br>
         <label for="myGitHubID">${myGitHubIDLabel}</label>
         <input id="myGitHubID" type="text"/>

@@ -300,7 +300,7 @@ public class ExportService {
      * Exports public articles to GitHub repo "bolo-blog and user index repo".
      * 
      */
-    public void exportGitHub() {
+    public void exportGitHub(final boolean enableAutoFlushGitHubProfile) {
         final JSONObject preference = optionQueryService.getPreference();
         if (null == preference) {
             return;
@@ -328,7 +328,8 @@ public class ExportService {
             return;
         }
         exportGitHubBlog(recentArticles, preference, gitHubUser);
-        exportGitHubProfile(recentArticles, preference, gitHubUser);
+        if (enableAutoFlushGitHubProfile)
+            exportGitHubProfile(recentArticles, preference, gitHubUser);
     }
 
     /**
@@ -413,7 +414,7 @@ public class ExportService {
             final String readme,
             final String cacheName) throws IOException {
         final String tmpDir = System.getProperty("java.io.tmpdir");
-        LOGGER.info("begin get README.md");
+        LOGGER.info(String.format("begin get %s README.md:", repoName));
         String tmpFilePath = tmpDir + File.separator + cacheName;
         File file = FileUtils.getFile(tmpFilePath);
 
@@ -430,7 +431,7 @@ public class ExportService {
 
         if (!firstTimeRun) {
             if (oldReadme != null && oldReadme.equals(readme)) {
-                LOGGER.info("not need update readme.");
+                LOGGER.info(String.format("not need update %s readme.", repoName));
                 return true;
             }
         }

@@ -41,6 +41,7 @@ import org.b3log.latke.util.Ids;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.tool.DeleteFolder;
 import org.b3log.solo.model.Article;
+import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.service.ArticleMgmtService;
 import org.b3log.solo.service.ExportService;
@@ -136,8 +137,15 @@ public class BackupService {
         }
 
         try {
-            exportService.exportGitHub();
-
+            boolean enableAutoFlushGitHubProfile;
+            try {
+                enableAutoFlushGitHubProfile = optionQueryService
+                        .getOptionById(Option.ID_C_ENABLE_AUTO_FLUSH_BLOG_TO_GITHUB_PROFILE)
+                        .optBoolean(Option.OPTION_VALUE);
+            } catch (Exception e) {
+                enableAutoFlushGitHubProfile = false;
+            }
+            exportService.exportGitHub(enableAutoFlushGitHubProfile);
             context.renderJSON().renderCode(200);
             context.renderJSON().renderMsg("Exported backup to GitHub manual successfully.");
 

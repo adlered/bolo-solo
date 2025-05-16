@@ -50,11 +50,11 @@ admin.preference = {
           url: Label.servePath + '/plugins/kanbanniang/assets/list',
           type: 'GET',
           async: false,
-          success: function(res) {
+          success: function (res) {
             var kanbanniangList = res.msg.split(';');
             for (var i = 0; i < kanbanniangList.length; i++) {
               $('#kanbanniangSelector').append(
-                  '<option value="' + kanbanniangList[i] + '">' + kanbanniangList[i] + '</option>'
+                '<option value="' + kanbanniangList[i] + '">' + kanbanniangList[i] + '</option>'
               );
             }
           }
@@ -84,7 +84,7 @@ admin.preference = {
           $("#interactiveSwitch").val(preference.interactive)
         }
 
-        if(preference.adminActiveSentToMailbox === "" || preference.adminActiveSentToMailbox === undefined) {
+        if (preference.adminActiveSentToMailbox === "" || preference.adminActiveSentToMailbox === undefined) {
           $("#adminActiveSentToMailbox").val("on")
         } else {
           $("#adminActiveSentToMailbox").val(preference.adminActiveSentToMailbox)
@@ -108,30 +108,31 @@ admin.preference = {
         $('#blogTitle').val(preference.blogTitle)
         $('#blogSubtitle').val(preference.blogSubtitle)
         $('#mostCommentArticleDisplayCount').
-        val(preference.mostCommentArticleDisplayCount)
+          val(preference.mostCommentArticleDisplayCount)
         $('#mostViewArticleDisplayCount').
-        val(preference.mostViewArticleDisplayCount)
+          val(preference.mostViewArticleDisplayCount)
         $('#recentCommentDisplayCount').
-        val(preference.recentCommentDisplayCount)
+          val(preference.recentCommentDisplayCount)
         $('#mostUsedTagDisplayCount').val(preference.mostUsedTagDisplayCount)
         $('#articleListDisplayCount').val(preference.articleListDisplayCount)
         $('#articleListPaginationWindowSize').
-        val(preference.articleListPaginationWindowSize)
+          val(preference.articleListPaginationWindowSize)
         $('#localeString').val(preference.localeString)
         $('#timeZoneId').val(preference.timeZoneId)
         $('#noticeBoard').val(preference.noticeBoard)
         $('#footerContent').val(preference.footerContent)
         $('#htmlHead').val(preference.htmlHead)
         $('#relevantArticlesDisplayCount').
-        val(preference.relevantArticlesDisplayCount)
+          val(preference.relevantArticlesDisplayCount)
         $('#randomArticlesDisplayCount').
-        val(preference.randomArticlesDisplayCount)
+          val(preference.randomArticlesDisplayCount)
         $('#customVars').val(preference.customVars)
         $('#githubPAT').val(preference.githubPAT)
         $('#maxArchive').val(preference.maxArchive)
         $('#myGitHubID').val(preference.myGitHubID)
 
         'true' === preference.enableAutoFlushGitHub ? $('#enableAutoFlushGitHub').attr('checked', 'checked') : $('#enableAutoFlushGitHub').removeAttr('checked')
+        'true' === preference.enableAutoFlushGitHubProfile ? $('#enableAutoFlushGitHubProfile').attr('checked', 'checked') : $('#enableAutoFlushGitHubProfile').removeAttr('checked')
         'true' === preference.showCodeBlockLn ? $('#showCodeBlockLn').attr('checked', 'checked') : $('#showCodeBlockLn').removeAttr('checked')
         'true' === preference.enableArticleUpdateHint ? $('#enableArticleUpdateHint').attr('checked', 'checked') : $('#enableArticleUpdateHint').removeAttr('checked')
         'true' === preference.allowVisitDraftViaPermalink ? $('#allowVisitDraftViaPermalink').attr('checked', 'checked') : $('allowVisitDraftViaPermalink').removeAttr('checked')
@@ -141,7 +142,7 @@ admin.preference = {
         'true' === preference.welfareLuteService ? $('#welfareLuteService').attr('checked', 'checked') : $('#welfareLuteService').removeAttr('checked')
         'true' === preference.helpImprovePlan ? $('#helpImprovePlan').attr('checked', 'checked') : $('#helpImprovePlan').removeAttr('checked')
 
-        $("input:radio[value='" + preference.editorMode + "']").attr('checked','true');
+        $("input:radio[value='" + preference.editorMode + "']").attr('checked', 'true');
         admin.preference.editorMode = preference.editorMode
 
         admin.preference.locale = preference.localeString
@@ -170,61 +171,61 @@ admin.preference = {
   validate: function () {
     if (!/^\d+$/.test($('#mostUsedTagDisplayCount').val())) {
       $('#tipMsg').
-      text('[' + Label.paramSettingsLabel + ' - ' +
+        text('[' + Label.paramSettingsLabel + ' - ' +
           Label.indexTagDisplayCntLabel + '] ' +
           Label.nonNegativeIntegerOnlyLabel)
       $('#mostUsedTagDisplayCount').focus()
       return false
     } else if (!/^\d+$/.test($('#recentCommentDisplayCount').val())) {
       $('#tipMsg').
-      text('[' + Label.paramSettingsLabel + ' - ' +
+        text('[' + Label.paramSettingsLabel + ' - ' +
           Label.indexRecentCommentDisplayCntLabel + '] ' +
           Label.nonNegativeIntegerOnlyLabel)
       $('#recentCommentDisplayCount').focus()
       return false
     } else if (!/^\d+$/.test($('#mostCommentArticleDisplayCount').val())) {
       $('#tipMsg').
-      text('[' + Label.paramSettingsLabel + ' - ' +
+        text('[' + Label.paramSettingsLabel + ' - ' +
           Label.indexMostCommentArticleDisplayCntLabel + '] ' +
           Label.nonNegativeIntegerOnlyLabel)
       $('#mostCommentArticleDisplayCount').focus()
       return false
     } else if (!/^\d+$/.test($('#mostViewArticleDisplayCount').val())) {
       $('#tipMsg').
-      text('[' + Label.paramSettingsLabel + ' - ' +
+        text('[' + Label.paramSettingsLabel + ' - ' +
           Label.indexMostViewArticleDisplayCntLabel + '] ' +
           Label.nonNegativeIntegerOnlyLabel)
       $('#mostViewArticleDisplayCount').focus()
       return false
     } else if (!/^\d+$/.test($('#articleListDisplayCount').val())) {
       $('#tipMsg').
-      text('[' + Label.paramSettingsLabel + ' - ' + Label.pageSizeLabel +
+        text('[' + Label.paramSettingsLabel + ' - ' + Label.pageSizeLabel +
           '] ' + Label.nonNegativeIntegerOnlyLabel)
       $('#articleListDisplayCount').focus()
       return false
     } else if (!/^\d+$/.test($('#articleListPaginationWindowSize').val())) {
       $('#tipMsg').
-      text('[' + Label.paramSettingsLabel + ' - ' + Label.windowSizeLabel +
+        text('[' + Label.paramSettingsLabel + ' - ' + Label.windowSizeLabel +
           '] ' + Label.nonNegativeIntegerOnlyLabel)
       $('#articleListPaginationWindowSize').focus()
       return false
     } else if (!/^\d+$/.test($('#randomArticlesDisplayCount').val())) {
       $('#tipMsg').
-      text('[' + Label.paramSettingsLabel + ' - ' +
+        text('[' + Label.paramSettingsLabel + ' - ' +
           Label.randomArticlesDisplayCntLabel + '] ' +
           Label.nonNegativeIntegerOnlyLabel)
       $('#randomArticlesDisplayCount').focus()
       return false
     } else if (!/^\d+$/.test($('#relevantArticlesDisplayCount').val())) {
       $('#tipMsg').
-      text('[' + Label.paramSettingsLabel + ' - ' +
+        text('[' + Label.paramSettingsLabel + ' - ' +
           Label.relevantArticlesDisplayCntLabel + '] ' +
           Label.nonNegativeIntegerOnlyLabel)
       $('#relevantArticlesDisplayCount').focus()
       return false
     } else if (
-        (!/^\d+$/.test($('#wafCurrentLimitTimes').val())) || $('#wafCurrentLimitTimes').val() < 2 || $('#wafCurrentLimitTimes').val() > 2147483647 ||
-        (!/^\d+$/.test($('#wafCurrentLimitSecond').val())) || $('#wafCurrentLimitSecond').val() < 2 || $('#wafCurrentLimitSecond').val() > 2147483647
+      (!/^\d+$/.test($('#wafCurrentLimitTimes').val())) || $('#wafCurrentLimitTimes').val() < 2 || $('#wafCurrentLimitTimes').val() > 2147483647 ||
+      (!/^\d+$/.test($('#wafCurrentLimitSecond').val())) || $('#wafCurrentLimitSecond').val() < 2 || $('#wafCurrentLimitSecond').val() > 2147483647
     ) {
       $('#tipMsg').text('访问频率次数与时间必须在 2-2147483647 之间!')
       return false
@@ -265,6 +266,7 @@ admin.preference = {
       'preference': {
         'helpImprovePlan': $("#helpImprovePlan").prop('checked'),
         'enableAutoFlushGitHub': $("#enableAutoFlushGitHub").prop('checked'),
+        'enableAutoFlushGitHubProfile': $("#enableAutoFlushGitHubProfile").prop('checked'),
         'welfareLuteService': $("#welfareLuteService").prop('checked'),
         'sendKey': $("#sendKey").val(),
         'myGitHubID': $("#myGitHubID").val(),
@@ -311,6 +313,7 @@ admin.preference = {
         'thumbCompress': $('#thumbCompress').val(),
         'faviconURL': $('#faviconURL').val(),
         'syncGitHub': $('#syncGitHub').prop('checked'),
+        'syncGitHubProfile': $('#syncGitHubProfile').prop('checked'),
         'showCodeBlockLn': $('#showCodeBlockLn').prop('checked'),
         'pullGitHub': $('#pullGitHub').prop('checked'),
         'commentable': $('#commentable').prop('checked'),

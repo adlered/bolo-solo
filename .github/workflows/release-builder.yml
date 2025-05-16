@@ -29,11 +29,8 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          TAG=$(echo $GITHUB_REF | cut -d / -f 3)
           IMAGE="tangcuyu/bolo-solo"
           echo ::set-output name=image::${IMAGE}
-          echo ::set-output name=tag::${TAG}
-          echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
         with:

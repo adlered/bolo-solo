@@ -54,16 +54,17 @@ public final class Option {
     // oId constants
 
     /**
-     * Key of code block line num show flag. 支持代码块行号显示 https://github.com/88250/solo/issues/4
+     * Key of code block line num show flag. 支持代码块行号显示
+     * https://github.com/88250/solo/issues/4
      */
     public static final String ID_C_SHOW_CODE_BLOCK_LN = "showCodeBlockLn";
 
     /**
      * Key of editor mode. 支持配置编辑器模式 https://github.com/88250/solo/issues/95
      * <ul>
-     *     <li>wysiwyg：所见即所得</li>
-     *     <li>ir：即时渲染</li>
-     *     <li>sv：分屏预览</li>
+     * <li>wysiwyg：所见即所得</li>
+     * <li>ir：即时渲染</li>
+     * <li>sv：分屏预览</li>
      * </ul>
      * 模式细节介绍详见 <a href="https://github.com/Vanessa219/vditor">Vditor</a> 编辑器文档。
      */
@@ -75,12 +76,14 @@ public final class Option {
     public static final String ID_C_HLJS_THEME = "hljsTheme";
 
     /**
-     * Key of enable backup public articles to HacPai. 备份公开文章到社区 https://ld246.com/article/1557238327458
+     * Key of enable backup public articles to HacPai. 备份公开文章到社区
+     * https://ld246.com/article/1557238327458
      */
     public static final String ID_C_SYNC_GITHUB = "syncGitHub";
 
     /**
-     * Key of enable sync (pull) GitHub. 拉取并展示仓库 https://ld246.com/article/1557238327458
+     * Key of enable sync (pull) GitHub. 拉取并展示仓库
+     * https://ld246.com/article/1557238327458
      * https://github.com/b3log/solo/issues/12825
      */
     public static final String ID_C_PULL_GITHUB = "pullGitHub";
@@ -227,7 +230,6 @@ public final class Option {
      * Article Thumb Compress.
      */
     public static final String ID_C_THUMB_COMPRESS = "thumbCompress";
-
 
     /**
      * Key of article/page comment-able.
@@ -414,6 +416,11 @@ public final class Option {
      * Key of enable auto flush github.
      */
     public static final String ID_C_ENABLE_AUTO_FLUSH_GITHUB = "enableAutoFlushGitHub";
+
+    /**
+     * Key of enable auto flush blog to github profile repo.
+     */
+    public static final String ID_C_ENABLE_AUTO_FLUSH_BLOG_TO_GITHUB_PROFILE = "enableAutoFlushGitHubProfile";
 
     /**
      * Key of my github id.
@@ -623,9 +630,7 @@ public final class Option {
          */
         public static final String DEFAULT_MAX_ARCHIVE = "-1";
 
-
         public static final String DEFAULT_IMAGE_UPLOAD_COMPRESS = "10";
-
 
         public static final String DEFAULT_THUMB_COMPRESS = "10";
 

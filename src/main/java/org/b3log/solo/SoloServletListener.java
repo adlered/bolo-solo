@@ -173,7 +173,7 @@ public final class SoloServletListener extends AbstractServletListener {
                 "█  ██╔══██╗██╔═══██╗██║     ██╔═══██╗  █  Welcome to Bolo :)           █\n" +
                 "█  ██████╔╝██║   ██║██║     ██║   ██║  █                               █\n" +
                 "█  ██╔══██╗██║   ██║██║     ██║   ██║  █  github.com/adlered/bolo-solo █\n" +
-                "█  ██████╔╝╚██████╔╝███████╗╚██████╔╝  █  Current Version: " + BOLO_VERSION_EN + " █\n" +
+                "█  ██████╔╝╚██████╔╝███████╗╚██████╔╝  █  CurrentVersion: " + BOLO_VERSION_EN + "█\n" +
                 "█  ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝   █                               █\n" +
                 "█                                      █                               █\n" +
                 "████✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩✩████\n" +

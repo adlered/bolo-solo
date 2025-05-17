@@ -23,6 +23,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Create release branch
+        run: |
+          chmod +x ./release_branch.sh
+          ./release_branch.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Get current date
         id: date
         run: echo "::set-output name=today::$(date +'%Y-%m-%d')"

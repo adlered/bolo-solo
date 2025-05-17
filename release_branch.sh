@@ -27,6 +27,7 @@ git pull origin master
 git checkout -b "$branch_name"
 
 # 显式推送分支，避免与 tag 名冲突
-git push origin "refs/heads/$branch_name:refs/heads/$branch_name"
+git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "refs/heads/$branch_name:refs/heads/$branch_name"
+
 
 echo "✅ 分支 $branch_name 已创建并推送成功！"

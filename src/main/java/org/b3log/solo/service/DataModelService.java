@@ -17,7 +17,18 @@
  */
 package org.b3log.solo.service;
 
-import freemarker.template.Template;
+import static org.b3log.solo.model.Article.ARTICLE_CONTENT;
+
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.b3log.latke.Keys;
@@ -33,27 +44,51 @@ import org.b3log.latke.model.Plugin;
 import org.b3log.latke.model.Role;
 import org.b3log.latke.model.User;
 import org.b3log.latke.plugin.ViewLoadEventData;
-import org.b3log.latke.repository.*;
+import org.b3log.latke.repository.FilterOperator;
+import org.b3log.latke.repository.PropertyFilter;
+import org.b3log.latke.repository.Query;
+import org.b3log.latke.repository.RepositoryException;
+import org.b3log.latke.repository.SortDirection;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.servlet.RequestContext;
-import org.b3log.latke.util.*;
+import org.b3log.latke.util.CollectionUtils;
+import org.b3log.latke.util.Dates;
+import org.b3log.latke.util.Locales;
+import org.b3log.latke.util.Paginator;
+import org.b3log.latke.util.Stopwatchs;
+import org.b3log.latke.util.Templates;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.Global;
 import org.b3log.solo.bolo.prop.Options;
-import org.b3log.solo.model.*;
-import org.b3log.solo.repository.*;
+import org.b3log.solo.model.ArchiveDate;
+import org.b3log.solo.model.Article;
+import org.b3log.solo.model.Category;
+import org.b3log.solo.model.Comment;
+import org.b3log.solo.model.Common;
+import org.b3log.solo.model.Link;
+import org.b3log.solo.model.Option;
+import org.b3log.solo.model.Tag;
+import org.b3log.solo.model.UserExt;
+import org.b3log.solo.repository.ArchiveDateRepository;
+import org.b3log.solo.repository.ArticleRepository;
+import org.b3log.solo.repository.CategoryRepository;
+import org.b3log.solo.repository.CategoryTagRepository;
+import org.b3log.solo.repository.CommentRepository;
+import org.b3log.solo.repository.LinkRepository;
+import org.b3log.solo.repository.OptionRepository;
+import org.b3log.solo.repository.PageRepository;
+import org.b3log.solo.repository.TagArticleRepository;
+import org.b3log.solo.repository.TagRepository;
+import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.util.Markdowns;
 import org.b3log.solo.util.Skins;
 import org.b3log.solo.util.Solos;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.StringWriter;
-import java.util.*;
-
-import static org.b3log.solo.model.Article.ARTICLE_CONTENT;
+import freemarker.template.Template;
 
 /**
  * Data model service.
@@ -180,7 +215,7 @@ public class DataModelService {
     private UserMgmtService userMgmtService;
 
     @Inject
-    private CategoryQueryService  categoryQueryService;
+    private CategoryQueryService categoryQueryService;
 
     /**
      * Fills articles in index.ftl.
@@ -191,7 +226,8 @@ public class DataModelService {
      * @param preference     the specified preference
      * @throws ServiceException service exception
      */
-    public void fillIndexArticles(final RequestContext context, final Map<String, Object> dataModel, final int currentPageNum, final JSONObject preference)
+    public void fillIndexArticles(final RequestContext context, final Map<String, Object> dataModel,
+            final int currentPageNum, final JSONObject preference)
             throws ServiceException {
         Stopwatchs.start("Fill Index Articles");
 
@@ -199,31 +235,32 @@ public class DataModelService {
             final int pageSize = preference.getInt(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT);
             final int windowSize = preference.getInt(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE);
 
-            final Query query = new Query().setPage(currentPageNum, pageSize).
-                    setFilter(new PropertyFilter(Article.ARTICLE_STATUS, FilterOperator.EQUAL, Article.ARTICLE_STATUS_C_PUBLISHED));
+            final Query query = new Query().setPage(currentPageNum, pageSize).setFilter(new PropertyFilter(
+                    Article.ARTICLE_STATUS, FilterOperator.EQUAL, Article.ARTICLE_STATUS_C_PUBLISHED));
 
             final Template template = Skins.getSkinTemplate(context, "index.ftl");
             boolean isArticles1 = false;
             if (null == template) {
                 LOGGER.debug("The skin dose not contain [index.ftl] template");
             } else // See https://github.com/b3log/solo/issues/179 for more details
-                if (Templates.hasExpression(template, "<#list articles1 as article>")) {
-                    isArticles1 = true;
+            if (Templates.hasExpression(template, "<#list articles1 as article>")) {
+                isArticles1 = true;
+                query.addSort(Article.ARTICLE_CREATED, SortDirection.DESCENDING);
+                LOGGER.trace("Query ${articles1} in index.ftl");
+            } else { // <#list articles as article>
+                query.addSort(Article.ARTICLE_PUT_TOP, SortDirection.DESCENDING);
+                if (preference.getBoolean(Option.ID_C_ENABLE_ARTICLE_UPDATE_HINT)) {
+                    query.addSort(Article.ARTICLE_UPDATED, SortDirection.DESCENDING);
+                } else {
                     query.addSort(Article.ARTICLE_CREATED, SortDirection.DESCENDING);
-                    LOGGER.trace("Query ${articles1} in index.ftl");
-                } else { // <#list articles as article>
-                    query.addSort(Article.ARTICLE_PUT_TOP, SortDirection.DESCENDING);
-                    if (preference.getBoolean(Option.ID_C_ENABLE_ARTICLE_UPDATE_HINT)) {
-                        query.addSort(Article.ARTICLE_UPDATED, SortDirection.DESCENDING);
-                    } else {
-                        query.addSort(Article.ARTICLE_CREATED, SortDirection.DESCENDING);
-                    }
                 }
+            }
 
             final JSONObject articlesResult = articleRepository.get(query);
             List<JSONObject> articles = CollectionUtils.jsonArrayToList(articlesResult.optJSONArray(Keys.RESULTS));
 
-            final int pageCount = articlesResult.optJSONObject(Pagination.PAGINATION).optInt(Pagination.PAGINATION_PAGE_COUNT);
+            final int pageCount = articlesResult.optJSONObject(Pagination.PAGINATION)
+                    .optInt(Pagination.PAGINATION_PAGE_COUNT);
             setArticlesExProperties(context, articles, preference);
 
             final List<Integer> pageNums = Paginator.paginate(currentPageNum, pageSize, pageCount, windowSize);
@@ -325,7 +362,8 @@ public class DataModelService {
      * @param preference the specified preference
      * @throws ServiceException service exception
      */
-    public void fillMostUsedCategories(final Map<String, Object> dataModel, final JSONObject preference) throws ServiceException {
+    public void fillMostUsedCategories(final Map<String, Object> dataModel, final JSONObject preference)
+            throws ServiceException {
         Stopwatchs.start("Fill Most Used Categories");
 
         try {
@@ -349,7 +387,8 @@ public class DataModelService {
      * @param preference the specified preference
      * @throws ServiceException service exception
      */
-    public void fillMostUsedTags(final Map<String, Object> dataModel, final JSONObject preference) throws ServiceException {
+    public void fillMostUsedTags(final Map<String, Object> dataModel, final JSONObject preference)
+            throws ServiceException {
         Stopwatchs.start("Fill Most Used Tags");
 
         try {
@@ -373,7 +412,8 @@ public class DataModelService {
      * @param preference the specified preference
      * @throws ServiceException service exception
      */
-    public void fillArchiveDates(final Map<String, Object> dataModel, final JSONObject preference) throws ServiceException {
+    public void fillArchiveDates(final Map<String, Object> dataModel, final JSONObject preference)
+            throws ServiceException {
         Stopwatchs.start("Fill Archive Dates");
 
         try {
@@ -416,7 +456,8 @@ public class DataModelService {
                         final String dateString = DateFormatUtils.format(time, "yyyy/MM");
 
                         final JSONObject last = archiveDates2.get(archiveDates2.size() - 1);
-                        final String lastDateString = DateFormatUtils.format(last.getLong(ArchiveDate.ARCHIVE_TIME), "yyyy/MM");
+                        final String lastDateString = DateFormatUtils.format(last.getLong(ArchiveDate.ARCHIVE_TIME),
+                                "yyyy/MM");
 
                         if (!dateString.equals(lastDateString)) {
                             archiveDates2.add(archiveDate);
@@ -464,12 +505,14 @@ public class DataModelService {
      * @param preference the specified preference
      * @throws ServiceException service exception
      */
-    public void fillMostViewCountArticles(final Map<String, Object> dataModel, final JSONObject preference) throws ServiceException {
+    public void fillMostViewCountArticles(final Map<String, Object> dataModel, final JSONObject preference)
+            throws ServiceException {
         Stopwatchs.start("Fill Most View Articles");
         try {
             LOGGER.debug("Filling the most view count articles....");
             final int mostCommentArticleDisplayCnt = preference.getInt(Option.ID_C_MOST_VIEW_ARTICLE_DISPLAY_CNT);
-            final List<JSONObject> mostViewCountArticles = articleRepository.getMostViewCountArticles(mostCommentArticleDisplayCnt);
+            final List<JSONObject> mostViewCountArticles = articleRepository
+                    .getMostViewCountArticles(mostCommentArticleDisplayCnt);
 
             dataModel.put(Common.MOST_VIEW_COUNT_ARTICLES, mostViewCountArticles);
 
@@ -488,13 +531,15 @@ public class DataModelService {
      * @param preference the specified preference
      * @throws ServiceException service exception
      */
-    public void fillMostCommentArticles(final Map<String, Object> dataModel, final JSONObject preference) throws ServiceException {
+    public void fillMostCommentArticles(final Map<String, Object> dataModel, final JSONObject preference)
+            throws ServiceException {
         Stopwatchs.start("Fill Most CMMTs Articles");
 
         try {
             LOGGER.debug("Filling most comment articles....");
             final int mostCommentArticleDisplayCnt = preference.getInt(Option.ID_C_MOST_COMMENT_ARTICLE_DISPLAY_CNT);
-            final List<JSONObject> mostCommentArticles = articleRepository.getMostCommentArticles(mostCommentArticleDisplayCnt);
+            final List<JSONObject> mostCommentArticles = articleRepository
+                    .getMostCommentArticles(mostCommentArticleDisplayCnt);
 
             dataModel.put(Common.MOST_COMMENT_ARTICLES, mostCommentArticles);
         } catch (final Exception e) {
@@ -512,7 +557,8 @@ public class DataModelService {
      * @param preference the specified preference
      * @throws ServiceException service exception
      */
-    public void fillRecentArticles(final Map<String, Object> dataModel, final JSONObject preference) throws ServiceException {
+    public void fillRecentArticles(final Map<String, Object> dataModel, final JSONObject preference)
+            throws ServiceException {
         Stopwatchs.start("Fill Recent Articles");
 
         try {
@@ -535,7 +581,8 @@ public class DataModelService {
      * @param preference the specified preference
      * @throws ServiceException service exception
      */
-    public void fillRecentComments(final Map<String, Object> dataModel, final JSONObject preference) throws ServiceException {
+    public void fillRecentComments(final Map<String, Object> dataModel, final JSONObject preference)
+            throws ServiceException {
         Stopwatchs.start("Fill Recent Comments");
         try {
             LOGGER.debug("Filling recent comments....");
@@ -564,7 +611,8 @@ public class DataModelService {
     }
 
     /**
-     * Fills favicon URL. 可配置 favicon 图标路径 https://github.com/b3log/solo/issues/12706
+     * Fills favicon URL. 可配置 favicon 图标路径
+     * https://github.com/b3log/solo/issues/12706
      *
      * @param dataModel  the specified data model
      * @param preference the specified preference
@@ -603,7 +651,8 @@ public class DataModelService {
      * @param preference the specified preference
      * @throws ServiceException service exception
      */
-    public void fillCommon(final RequestContext context, final Map<String, Object> dataModel, final JSONObject preference) throws ServiceException {
+    public void fillCommon(final RequestContext context, final Map<String, Object> dataModel,
+            final JSONObject preference) throws ServiceException {
         fillSide(context, dataModel, preference);
         fillBlogHeader(context, dataModel, preference);
         fillBlogFooter(context, dataModel, preference);
@@ -639,15 +688,17 @@ public class DataModelService {
 
         // 链滴域名设定
         dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
+        dataModel.put("fishpiDomain", Global.FISH_PI_DOMAIN);
     }
 
     /**
      * Fill Admin-Index Charts.
      *
-     * @param context    the specified HTTP servlet request context
-     * @param dataModel  the specified data model
+     * @param context   the specified HTTP servlet request context
+     * @param dataModel the specified data model
      */
-    public void fillCharts(final RequestContext context, final Map<String, Object> dataModel, final JSONObject preference) {
+    public void fillCharts(final RequestContext context, final Map<String, Object> dataModel,
+            final JSONObject preference) {
         // 每月文章数量统计
         try {
             List<JSONObject> archiveDates = archiveDateRepository.getArchiveDates();
@@ -688,7 +739,8 @@ public class DataModelService {
                         final String dateString = DateFormatUtils.format(time, "yyyy/MM");
 
                         final JSONObject last = archiveDates2.get(archiveDates2.size() - 1);
-                        final String lastDateString = DateFormatUtils.format(last.getLong(ArchiveDate.ARCHIVE_TIME), "yyyy/MM");
+                        final String lastDateString = DateFormatUtils.format(last.getLong(ArchiveDate.ARCHIVE_TIME),
+                                "yyyy/MM");
 
                         if (!dateString.equals(lastDateString)) {
                             archiveDates2.add(archiveDate);
@@ -793,7 +845,8 @@ public class DataModelService {
         // tagTitle 标签名称
         try {
             List<JSONObject> tags = tagQueryService.getTags();
-            Collections.sort(tags, Comparator.comparingInt(o -> Integer.parseInt(o.optString(Tag.TAG_T_PUBLISHED_REFERENCE_COUNT))));
+            Collections.sort(tags,
+                    Comparator.comparingInt(o -> Integer.parseInt(o.optString(Tag.TAG_T_PUBLISHED_REFERENCE_COUNT))));
             Collections.reverse(tags);
             if (tags.size() > 5) {
                 tags = tags.subList(0, 5);
@@ -811,7 +864,8 @@ public class DataModelService {
      * @param preference the specified preference
      * @throws ServiceException service exception
      */
-    private void fillBlogFooter(final RequestContext context, final Map<String, Object> dataModel, final JSONObject preference)
+    private void fillBlogFooter(final RequestContext context, final Map<String, Object> dataModel,
+            final JSONObject preference)
             throws ServiceException {
         Stopwatchs.start("Fill Footer");
         try {
@@ -866,7 +920,8 @@ public class DataModelService {
      * @param preference the specified preference
      * @throws ServiceException service exception
      */
-    private void fillBlogHeader(final RequestContext context, final Map<String, Object> dataModel, final JSONObject preference)
+    private void fillBlogHeader(final RequestContext context, final Map<String, Object> dataModel,
+            final JSONObject preference)
             throws ServiceException {
         Stopwatchs.start("Fill Header");
         try {
@@ -876,8 +931,10 @@ public class DataModelService {
             dataModel.put(Common.LOGOUT_URL, userQueryService.getLogoutURL());
             dataModel.put(Common.ONLINE_VISITOR_CNT, StatisticQueryService.getOnlineVisitorCount());
             dataModel.put(Common.TOP_BAR, topBarHTML);
-            dataModel.put(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT, preference.getInt(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT));
-            dataModel.put(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE, preference.getInt(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE));
+            dataModel.put(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT,
+                    preference.getInt(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT));
+            dataModel.put(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE,
+                    preference.getInt(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE));
             dataModel.put(Option.ID_C_LOCALE_STRING, preference.getString(Option.ID_C_LOCALE_STRING));
             dataModel.put(Option.ID_C_BLOG_TITLE, preference.getString(Option.ID_C_BLOG_TITLE));
             dataModel.put(Option.ID_C_BLOG_SUBTITLE, preference.getString(Option.ID_C_BLOG_SUBTITLE));
@@ -893,12 +950,14 @@ public class DataModelService {
             }
             dataModel.put(Option.ID_C_META_DESCRIPTION, metaDescription);
             dataModel.put(Common.YEAR, String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
-            dataModel.put(Common.IS_LOGGED_IN, null != Solos.getCurrentUser(context.getRequest(), context.getResponse()));
+            dataModel.put(Common.IS_LOGGED_IN,
+                    null != Solos.getCurrentUser(context.getRequest(), context.getResponse()));
             dataModel.put(Common.FAVICON_API, Solos.FAVICON_API);
             final String noticeBoard = preference.getString(Option.ID_C_NOTICE_BOARD);
             dataModel.put(Option.ID_C_NOTICE_BOARD, noticeBoard);
             // 皮肤不显示访客用户 https://github.com/b3log/solo/issues/12752
-            final Query query = new Query().setPageCount(1).setFilter(new PropertyFilter(User.USER_ROLE, FilterOperator.NOT_EQUAL, Role.VISITOR_ROLE));
+            final Query query = new Query().setPageCount(1)
+                    .setFilter(new PropertyFilter(User.USER_ROLE, FilterOperator.NOT_EQUAL, Role.VISITOR_ROLE));
             final List<JSONObject> userList = userRepository.getList(query);
             dataModel.put(User.USERS, userList);
             final JSONObject admin = userRepository.getAdmin();
@@ -929,6 +988,7 @@ public class DataModelService {
             }
             // 链滴域名设定
             dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
+            dataModel.put("fishpiDomain", Global.FISH_PI_DOMAIN);
             final String skinDirName = (String) context.attr(Keys.TEMAPLTE_DIR_NAME);
             dataModel.put(Option.ID_C_SKIN_DIR_NAME, skinDirName);
             Keys.fillRuntime(dataModel);
@@ -975,7 +1035,8 @@ public class DataModelService {
      * @param preference the specified preference
      * @throws ServiceException service exception
      */
-    private void fillSide(final RequestContext context, final Map<String, Object> dataModel, final JSONObject preference)
+    private void fillSide(final RequestContext context, final Map<String, Object> dataModel,
+            final JSONObject preference)
             throws ServiceException {
         Stopwatchs.start("Fill Side");
         try {
@@ -1029,7 +1090,7 @@ public class DataModelService {
      * @throws ServiceException service exception
      */
     public void fillUserTemplate(final RequestContext context, final Template template,
-                                 final Map<String, Object> dataModel, final JSONObject preference) throws ServiceException {
+            final Map<String, Object> dataModel, final JSONObject preference) throws ServiceException {
         Stopwatchs.start("Fill User Template[name=" + template.getName() + "]");
         try {
             LOGGER.log(Level.DEBUG, "Filling user template[name{0}]", template.getName());
@@ -1111,9 +1172,11 @@ public class DataModelService {
     }
 
     /**
-     * Sets some extra properties into the specified article with the specified preference, performs content and abstract editor processing.
+     * Sets some extra properties into the specified article with the specified
+     * preference, performs content and abstract editor processing.
      * <p>
      * Article ext properties:
+     * 
      * <pre>
      * {
      *     ....,
@@ -1131,7 +1194,8 @@ public class DataModelService {
      * @throws ServiceException service exception
      * @see #setArticlesExProperties(RequestContext, List, JSONObject)
      */
-    private void setArticleExProperties(final RequestContext context, final JSONObject article, final JSONObject preference) throws ServiceException {
+    private void setArticleExProperties(final RequestContext context, final JSONObject article,
+            final JSONObject preference) throws ServiceException {
         try {
             final JSONObject author = articleQueryService.getAuthor(article);
             final String authorName = author.getString(User.USER_NAME);
@@ -1215,8 +1279,9 @@ public class DataModelService {
             }
 
             final String tagId = tag.optString(Keys.OBJECT_ID);
-            final Query query = new Query().setFilter(new PropertyFilter(Tag.TAG + "_" + Keys.OBJECT_ID, FilterOperator.EQUAL, tagId)).
-                    setPage(1, 1).setPageCount(1);
+            final Query query = new Query()
+                    .setFilter(new PropertyFilter(Tag.TAG + "_" + Keys.OBJECT_ID, FilterOperator.EQUAL, tagId))
+                    .setPage(1, 1).setPageCount(1);
             final JSONObject tagCategory = categoryTagRepository.getFirst(query);
             if (null == tagCategory) {
                 return null;
@@ -1233,12 +1298,15 @@ public class DataModelService {
     }
 
     /**
-     * Sets some extra properties into the specified article with the specified preference.
+     * Sets some extra properties into the specified article with the specified
+     * preference.
      * <p>
-     * The batch version of method {@linkplain #setArticleExProperties(RequestContext, JSONObject, JSONObject)}.
+     * The batch version of method
+     * {@linkplain #setArticleExProperties(RequestContext, JSONObject, JSONObject)}.
      * </p>
      * <p>
      * Article ext properties:
+     * 
      * <pre>
      * {
      *     ....,
@@ -1254,7 +1322,8 @@ public class DataModelService {
      * @param preference the specified preference
      * @throws ServiceException service exception
      */
-    public void setArticlesExProperties(final RequestContext context, final List<JSONObject> articles, final JSONObject preference)
+    public void setArticlesExProperties(final RequestContext context, final List<JSONObject> articles,
+            final JSONObject preference)
             throws ServiceException {
         for (final JSONObject article : articles) {
             setArticleExProperties(context, article, preference);
@@ -1262,11 +1331,13 @@ public class DataModelService {
     }
 
     /**
-     * Processes the abstract of the specified article with the specified preference.
+     * Processes the abstract of the specified article with the specified
+     * preference.
      * <ul>
      * <li>If the abstract is {@code null}, sets it with ""</li>
      * <li>If user configured preference "titleOnly", sets the abstract with ""</li>
-     * <li>If user configured preference "titleAndContent", sets the abstract with the content of the article</li>
+     * <li>If user configured preference "titleAndContent", sets the abstract with
+     * the content of the article</li>
      * </ul>
      *
      * @param preference the specified preference

@@ -39,7 +39,7 @@
                 <a href="#tools/others/tag">${clearDataLabel}</a>
             </div>
         </li>
-        <#if b3logEnabled>
+        <#if b3logEnabled || fishpiEnabled>
             <li>
                 <div id="tabOthers_commentSync">
                     <a href="#tools/others/commentSync">${syncLabel}</a>
@@ -145,23 +145,6 @@
         ${others8Label}
     </div>
     <div id="tabOthersPanel_commentSync" class="fn__none form">
-        <br>
-        ${others9Label}
-        <br><br>
-        <b>${others10Label}</b><br>
-        https://${hacpaiDomain}/article/ <input id="remoteArticleID" type="text" style="width: 200px">
-        <br>
-        <b>${others11Label}</b>
-        <br>
-        <select id="localArticleList">
-        </select>
-        <br><br>
-        <b>${others12Label}</b>
-        <br>
-        ${others13Label}
-        <br>
-        <input id="symphony" type="text">
-        <br><br>
         <script type="text/javascript">
             $.ajax({
                 url: Label.servePath + '/article/commentSync/getList',
@@ -172,11 +155,16 @@
                     for(i = 0; i < data.length; i++) {
                         let oId = data[i].oId;
                         let title = data[i].title;
+                        <#if b3logEnabled>
                         $("#localArticleList").append("<option value=\"" +  oId + "\">" + title + "</option>");
+                        </#if>
+                        <#if fishpiEnabled>
+                        $("#localArticleList2").append("<option value=\"" +  oId + "\">" + title + "</option>");
+                         </#if>
                     }
                 }
             });
-
+            <#if b3logEnabled>
             function commentSync() {
                 let locale = $("#localArticleList").val();
                 let remote = $("#remoteArticleID").val();
@@ -190,8 +178,58 @@
                     }
                 });
             }
+            </#if>
+            <#if fishpiEnabled>
+            function commentFishpiSync() {
+                let locale = $("#localArticleList2").val();
+                let remote = $("#remoteArticleID2").val();
+                $.ajax({
+                    url: Label.servePath + '/article/fishpi/commentSync/' + locale + '/' + remote,
+                    type: 'GET',
+                    async: false,
+                    success: function(res) {
+                        alert(res.msg);
+                    }
+                });
+            }
+            </#if>
         </script>
-        <button onclick="commentSync()">${others14Label}</button>
+        <#if b3logEnabled>
+            <br>
+            ${others9Label}
+            <br>
+            <b>${others10Label}</b><br>
+            https://${hacpaiDomain}/article/ <input id="remoteArticleID" type="text" style="width: 200px">
+            <br>
+            <b>${others11Label}</b>
+            <br>
+            <select id="localArticleList">
+            </select>
+            <br><br>
+            <b>${others12Label}</b>
+            <br>
+            ${others13Label}
+            <br>
+            <input id="symphony" type="text">
+            <br><br>
+            <button onclick="commentSync()">${others14Label}</button>
+        </#if>
+        <#if fishpiEnabled>
+            <br><br>
+            <br>
+            ${others91Label}
+            <br>
+            <b>${others10Label}</b><br>
+            https://${fishpiDomain}/article/ <input id="remoteArticleID2" type="text" style="width: 200px">
+            <br>
+            <b>${others11Label}</b>
+            <br>
+            <select id="localArticleList2">
+            </select>
+            <br><br>
+        <button onclick="commentFishpiSync()">${others14Label}</button>    
+        </#if>
+        
     </div>
 </div>
 ${plugins}

@@ -76,15 +76,6 @@
             <input id="viewPwd" type="text" style="width: 156px" />
         </div>
     </div>
-    <div class="fn__flex">
-        <div class="fn__flex fn__flex-1" style="align-items: center">
-            <label for="permalink" class="permalink__label" style="margin-bottom: 0">摸鱼派帖子ID:</label>
-            <input id="fishpi_article" class="fn__flex-1" type="text" style="margin: 0 12px 0 6px;" />
-        </div>
-        <div class="fn__right viewpwd__panel">
-            <button id="syncComment" style="width: 156px">同步评论</button>
-        </div>
-    </div>
     <div>
         <span class="signs">
             <label>${sign1Label}</label>

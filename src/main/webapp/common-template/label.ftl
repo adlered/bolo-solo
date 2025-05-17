@@ -27,6 +27,7 @@
         version: "${version}",
         showCodeBlockLn: ${showCodeBlockLn},
         hacpaiDomain: "${hacpaiDomain}",
+        fishpiDomain: "${fishpiDomain}",
     }
     Util.init()
 </script>

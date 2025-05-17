@@ -309,28 +309,6 @@ admin.article = {
     }
   },
   /**
- * @description 同步评论
- * @param {Boolean} articleLink 摸鱼派文章链接
- */
-  syncComment: function (localaid, remoteaid) {
-    $.ajax({
-      url: Label.servePath + '/article/fishpi/commentSync/' + localaid + '/' + remoteaid,
-      type: 'GET',
-      cache: false,
-      success: function (result, textStatus) {
-        $('#tipMsg').text(result.msg)
-        if (!result.sc) {
-          return
-        }
-      },
-      complete: function (jqXHR, textStatus) {
-        that._removeDisabled()
-        $('#loadMsg').text('')
-        admin.inited();
-      },
-    })
-  },
-  /**
    * @description 发布文章页面设置文章按钮、发布到社区等状态的显示
    */
   setStatus: function () {
@@ -454,13 +432,6 @@ admin.article = {
 
         $('#loadMsg').text('')
       },
-    })
-
-    // sync fishpi comment
-    $('#syncComment').click(function () {
-      if (admin.article.status.id) {
-        admin.article.syncComment(admin.article.status.id, $('#fishpi_article').val())
-      }
     })
     // submit action
     $('#submitArticle').click(function () {

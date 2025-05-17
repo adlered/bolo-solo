@@ -237,6 +237,7 @@ public class AdminConsole {
         dataModel.put(Common.BOLO_VERSION, SoloServletListener.BOLO_VERSION);
         // 链滴域名设定
         dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
+        dataModel.put("fishpiDomain", Global.FISH_PI_DOMAIN);
         dataModel.put(Common.B3LOG_ENABLED, PluginUtil.b3logPluginEnabled());
         dataModel.put(Common.FISHPI_ENABLED, PluginUtil.fishpiPluginEnabled());
         fireFreeMarkerActionEvent(templateName, dataModel);
@@ -277,6 +278,8 @@ public class AdminConsole {
 
         // 链滴域名设定
         dataModel.put("hacpaiDomain", Global.HACPAI_DOMAIN);
+        // 摸鱼派域名设定
+        dataModel.put("fishpiDomain", Global.FISH_PI_DOMAIN);
         dataModel.put(Common.B3LOG_ENABLED, PluginUtil.b3logPluginEnabled());
         dataModel.put(Common.FISHPI_ENABLED, PluginUtil.fishpiPluginEnabled());
         // 用户体验改进计划

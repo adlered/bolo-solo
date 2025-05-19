@@ -40,6 +40,7 @@ import org.b3log.latke.servlet.annotation.RequestProcessor;
 import org.b3log.latke.util.Ids;
 import org.b3log.solo.SoloServletListener;
 import org.b3log.solo.bolo.tool.DeleteFolder;
+import org.b3log.solo.bolo.tool.ZipFilterUtils;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.repository.UserRepository;
@@ -50,7 +51,6 @@ import org.b3log.solo.service.InitService;
 import org.b3log.solo.service.OptionQueryService;
 import org.b3log.solo.util.Solos;
 import org.json.JSONObject;
-import org.zeroturnaround.zip.ZipUtil;
 
 import pers.adlered.blog_platform_export_tool.module.TranslateResult;
 
@@ -284,7 +284,7 @@ public class BackupService {
                 File file = new File(markdownsPath + name);
                 item.write(file);
                 item.delete();
-                ZipUtil.unpack(new File(markdownsPath + name), new File(markdownsPath));
+                ZipFilterUtils.unpackFilteredZip(new File(markdownsPath + name), new File(markdownsPath), null);
                 file.delete();
             }
             result = importService.importMarkdownsSync();

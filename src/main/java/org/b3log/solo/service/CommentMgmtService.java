@@ -484,7 +484,7 @@ public class CommentMgmtService {
             }
             LOGGER.log(Level.INFO, "Sync comment from fishpi success");
             transaction.commit();
-        } catch (final Exception e) {
+        } catch (final Throwable e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }

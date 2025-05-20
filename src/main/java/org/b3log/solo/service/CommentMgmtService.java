@@ -19,6 +19,7 @@ package org.b3log.solo.service;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -455,8 +456,12 @@ public class CommentMgmtService {
                 transaction.commit();
                 return;
             }
-
-            final Map<String, Object> fishPiArticleRefMap = fishPiArticleRef.toMap();
+            final Map<String, Object> fishPiArticleRefMap = new HashMap<>();
+            Iterator<String> keys = fishPiArticleRef.keys();
+            while (keys.hasNext()) {
+                String key = keys.next();
+                fishPiArticleRefMap.put(key, fishPiArticleRef.get(key));
+            }
             for (Map.Entry<String, Object> entry : fishPiArticleRefMap.entrySet()) {
                 final String localaid = entry.getKey().split("_")[1];
                 final String remoteaid = (String) entry.getValue();

@@ -444,36 +444,40 @@ public class CommentMgmtService {
         comment.put(Comment.COMMENT_THUMBNAIL_URL, avatarURL);
     }
 
-    public void syncAllArticleCommentFromFishPI() throws ServiceException {
+    public void syncAllArticleCommentFromFishPI() {
         final Transaction transaction = commentRepository.beginTransaction();
         try {
             LOGGER.log(Level.INFO, "Sync comment from fishpi start");
             // sync article comment with fishpi use option fishpiArticleRef
             final JSONObject fishPiArticleRef = optionQueryService.getOptions("fishPiArticleRef");
-            if (fishPiArticleRef != null) {
-                final Map<String, Object> fishPiArticleRefMap = fishPiArticleRef.toMap();
-                for (Map.Entry<String, Object> entry : fishPiArticleRefMap.entrySet()) {
-                    final String localaid = entry.getKey().split("_")[1];
-                    final String remoteaid = (String) entry.getValue();
-                    if (localaid != null && remoteaid != null) {
-                        LOGGER.log(Level.INFO, String.format("===> Article: %s , PAGE 1 <===", localaid));
-                        int pageCount = syncCommentFromFishPI(
-                                Long.parseLong(localaid),
-                                Long.parseLong(remoteaid),
-                                1);
-                        if (pageCount == -1) {
-                            LOGGER.log(Level.ERROR, "评论同步失败，无法连接到摸鱼派服务器或 apiKey 错误。");
-                        } else if (pageCount == 0) {
-                            LOGGER.log(Level.ERROR, "远端文章评论为空");
-                        } else if (pageCount > 1) {
-                            for (int i = 2; i <= pageCount; i++) {
-                                LOGGER.log(Level.INFO,
-                                        String.format("===> Article: %s , PAGE %s <===", localaid, i));
-                                syncCommentFromFishPI(
-                                        Long.parseLong(localaid),
-                                        Long.parseLong(remoteaid),
-                                        i);
-                            }
+            if (fishPiArticleRef == null) {
+                LOGGER.log(Level.WARN, "fishPiArticleRef is null, sync aborted.");
+                transaction.commit();
+                return;
+            }
+
+            final Map<String, Object> fishPiArticleRefMap = fishPiArticleRef.toMap();
+            for (Map.Entry<String, Object> entry : fishPiArticleRefMap.entrySet()) {
+                final String localaid = entry.getKey().split("_")[1];
+                final String remoteaid = (String) entry.getValue();
+                if (localaid != null && remoteaid != null) {
+                    LOGGER.log(Level.INFO, String.format("===> Article: %s , PAGE 1 <===", localaid));
+                    int pageCount = syncCommentFromFishPI(
+                            Long.parseLong(localaid),
+                            Long.parseLong(remoteaid),
+                            1);
+                    if (pageCount == -1) {
+                        LOGGER.log(Level.ERROR, "评论同步失败，无法连接到摸鱼派服务器或 apiKey 错误。");
+                    } else if (pageCount == 0) {
+                        LOGGER.log(Level.ERROR, "远端文章评论为空");
+                    } else if (pageCount > 1) {
+                        for (int i = 2; i <= pageCount; i++) {
+                            LOGGER.log(Level.INFO,
+                                    String.format("===> Article: %s , PAGE %s <===", localaid, i));
+                            syncCommentFromFishPI(
+                                    Long.parseLong(localaid),
+                                    Long.parseLong(remoteaid),
+                                    i);
                         }
                     }
                 }

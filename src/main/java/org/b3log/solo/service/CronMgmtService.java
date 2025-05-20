@@ -136,7 +136,7 @@ public class CronMgmtService {
         SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
             try {
                 commentMgmtService.syncAllArticleCommentFromFishPI();
-            } catch (final Exception e) {
+            } catch (final Throwable e) {
                 LOGGER.log(Level.ERROR, "Executes cron failed", e);
             } finally {
                 Stopwatchs.release();

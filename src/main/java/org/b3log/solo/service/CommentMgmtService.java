@@ -18,6 +18,10 @@
 package org.b3log.solo.service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
@@ -35,6 +39,7 @@ import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Ids;
 import org.b3log.latke.util.Strings;
+import org.b3log.solo.bolo.Global;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Comment;
 import org.b3log.solo.model.Common;
@@ -44,8 +49,13 @@ import org.b3log.solo.repository.ArticleRepository;
 import org.b3log.solo.repository.CommentRepository;
 import org.b3log.solo.repository.UserRepository;
 import org.b3log.solo.util.Markdowns;
+import org.b3log.solo.util.Solos;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import jodd.http.HttpRequest;
+import jodd.http.HttpResponse;
 
 /**
  * Comment management service.
@@ -93,6 +103,15 @@ public class CommentMgmtService {
      */
     @Inject
     private ArticleMgmtService articleMgmtService;
+
+    @Inject
+    private ArticleQueryService articleQueryService;
+
+    @Inject
+    private UserQueryService userQueryService;
+
+    @Inject
+    private CommentQueryService commentQueryService;
 
     /**
      * Comment repository.
@@ -423,5 +442,117 @@ public class CommentMgmtService {
         final JSONObject commenter = userRepository.getByUserName(commenterName);
         final String avatarURL = commenter.optString(UserExt.USER_AVATAR);
         comment.put(Comment.COMMENT_THUMBNAIL_URL, avatarURL);
+    }
+
+    public void syncAllArticleCommentFromFishPI() throws ServiceException {
+        final Transaction transaction = commentRepository.beginTransaction();
+        try {
+            LOGGER.log(Level.INFO, "Sync comment from fishpi start");
+            // sync article comment with fishpi use option fishpiArticleRef
+            final JSONObject fishPiArticleRef = optionQueryService.getOptions("fishPiArticleRef");
+            if (fishPiArticleRef != null) {
+                fishPiArticleRef.toMap()
+                        .forEach((k, v) -> {
+                            final String localaid = k.split("_")[1];
+                            final String remoteaid = (String) v;
+                            if (localaid != null && remoteaid != null) {
+                                LOGGER.log(Level.INFO, String.format("===> Article: %s , PAGE 1 <===", localaid));
+                                int pageCount = syncCommentFromFishPI(
+                                        Long.parseLong(localaid),
+                                        Long.parseLong(remoteaid),
+                                        1);
+                                if (pageCount == -1) {
+                                    LOGGER.log(Level.ERROR, "评论同步失败，无法连接到摸鱼派服务器或 apiKey 错误。");
+                                } else if (pageCount == 0) {
+                                    LOGGER.log(Level.ERROR, "远端文章评论为空");
+                                } else if (pageCount > 1) {
+                                    for (int i = 2; i <= pageCount; i++) {
+                                        LOGGER.log(Level.INFO,
+                                                String.format("===> Article: %s , PAGE %s <===", localaid, i));
+                                        syncCommentFromFishPI(
+                                                Long.parseLong(localaid),
+                                                Long.parseLong(remoteaid),
+                                                i);
+                                    }
+                                }
+                            }
+                        });
+            }
+            LOGGER.log(Level.INFO, "Sync comment from fishpi success");
+            transaction.commit();
+        } catch (final Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            LOGGER.log(Level.ERROR, "Sync comment from fishpi failed", e);
+        }
+    }
+
+    public int syncCommentFromFishPI(long localaid, long remoteaid, int page) {
+        // 获取本地文章信息
+        final String articleId = String.valueOf(localaid);
+        final JSONObject article = articleQueryService.getArticleById(articleId);
+        String fetchURL = "https://" + Global.FISH_PI_DOMAIN + "/api/article/" + remoteaid;
+        // 从远程拉取评论列表
+        final Map<String, String> query = new HashMap<>();
+        query.put("p", Integer.toString(page));
+        query.put("apiKey", userQueryService.getFishKey());
+        final HttpResponse res = HttpRequest.get(fetchURL).query(query).connectionTimeout(3000).timeout(7000)
+                .header("User-Agent", Solos.USER_AGENT).send();
+        if (200 != res.statusCode()) {
+            return -1;
+        }
+        res.charset("UTF-8");
+        final JSONObject result = new JSONObject(res.bodyText());
+        JSONArray rslt;
+        try {
+            rslt = result.optJSONObject("data").optJSONObject("article").optJSONArray("articleComments");
+            if (null == rslt || 0 == rslt.length()) {
+                return 0;
+            }
+            final HashMap<String, String> idNameMapping = new HashMap<>();
+            Map<String, JSONObject> commpentMaps = commentQueryService.getComments(articleId).stream()
+                    .collect(Collectors.toMap(obj -> obj.optString("oId"), Function.identity()));
+            for (Object o : rslt) {
+                JSONObject object = (JSONObject) o;
+                String commentContent = object.optString("commentContent");
+
+                String id = object.optString("oId");
+                if (commpentMaps.containsKey(id)) {
+                    System.out.println("Import content skip: " + commentContent);
+                    continue;
+                }
+                System.out.println("Import content: " + commentContent);
+                String link = String.format("https://%s/member/%s", Global.FISH_PI_DOMAIN,
+                        object.optString("commentAuthorName"));
+                String avatar = object.optString("commentAuthorThumbnailURL");
+                String comment = object.optString("commentContent");
+                String author = object.optString("commentAuthorName");
+                String commentOriginalCommentId = object.optString(Comment.COMMENT_ORIGINAL_COMMENT_ID);
+                idNameMapping.put(id, author);
+                final JSONObject commentObject = new JSONObject();
+                commentObject.put(Comment.COMMENT_ORIGINAL_COMMENT_ID, commentOriginalCommentId);
+                commentObject.put(Comment.COMMENT_ORIGINAL_COMMENT_NAME,
+                        idNameMapping.getOrDefault(commentOriginalCommentId, ""));
+                commentObject.put(Comment.COMMENT_NAME, author);
+                commentObject.put(Comment.COMMENT_URL, link);
+                commentObject.put(Comment.COMMENT_CONTENT, comment);
+                commentObject.put(Comment.COMMENT_CREATED, Long.parseLong(id));
+                commentObject.put(Comment.COMMENT_THUMBNAIL_URL, avatar);
+                commentObject.put(Comment.COMMENT_ON_ID, localaid);
+                commentObject.put(Keys.OBJECT_ID, id);
+                final long date = article.optLong(Article.ARTICLE_CREATED);
+                commentObject.put(Comment.COMMENT_SHARP_URL, "/articles/" + DateFormatUtils.format(date, "yyyy/MM/dd")
+                        + "/" + article.optString(Keys.OBJECT_ID) + ".html#" + Long.parseLong(id));
+                commentRepository.add(commentObject);
+                articleMgmtService.incArticleCommentCount(articleId);
+            }
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return -1;
+        }
+
+        return Integer
+                .parseInt(result.optJSONObject("data").optJSONObject("pagination").optString("paginationPageCount"));
     }
 }

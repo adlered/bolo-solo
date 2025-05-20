@@ -80,6 +80,9 @@ public class CronMgmtService {
     @Inject
     private UserMgmtService userMgmtService;
 
+    @Inject
+    private CommentMgmtService commentMgmtService;
+
     /**
      * Start all cron tasks.
      */
@@ -122,6 +125,17 @@ public class CronMgmtService {
                     enableAutoFlushGitHubProfile = false;
                 }
                 exportService.exportGitHub(enableAutoFlushGitHubProfile);
+            } catch (final Exception e) {
+                LOGGER.log(Level.ERROR, "Executes cron failed", e);
+            } finally {
+                Stopwatchs.release();
+            }
+        }, delay, 1000 * 60 * 60 * 24, TimeUnit.MILLISECONDS);
+        delay += 2000;
+
+        SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
+            try {
+                commentMgmtService.syncAllArticleCommentFromFishPI();
             } catch (final Exception e) {
                 LOGGER.log(Level.ERROR, "Executes cron failed", e);
             } finally {

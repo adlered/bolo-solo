@@ -135,6 +135,10 @@ public class CronMgmtService {
 
         SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
             try {
+                final String fishKey = userQueryService.getFishKey();
+                if (fishKey == null || "".equals(fishKey)) {
+                    return;
+                }
                 commentMgmtService.syncAllArticleCommentFromFishPI();
             } catch (final Throwable e) {
                 LOGGER.log(Level.ERROR, "Executes cron failed", e);

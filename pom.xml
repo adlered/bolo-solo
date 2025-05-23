@@ -426,8 +426,8 @@
                     </mapping>
                     <useDefaultMapping>true</useDefaultMapping>
                     <properties>
-                        <year>2020</year>
-                        <devTeam>https://github.com/adlered</devTeam>
+                        <year>2020-present</year>
+                        <devTeam>https://github.com/bolo-blog</devTeam>
                     </properties>
                     <encoding>UTF-8</encoding>
                 </configuration>

@@ -21,80 +21,143 @@
  * @author <a href="http://vanessa.b3log.org">Liyuan Li</a>
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
+ * @author <a href="https://github.com/gakkiyomi">gakkiyomi (Bolo Commiter)</a>
  */
 
 /* about 相关操作 */
 admin.about = {
-  init: function () {
-    // 版本检查
+  init: async function () {
+    const rawVersion = version.split(" ")[0].substr(1);
+    const current = parseVersion(rawVersion);
+    let latest = [...current];
+    const checked = new Set();
+
     if (version.split(" ")[1] === "内测版") {
       $('#updateCheck').html('🍍 <font style="color: #3caf36">您正在使用菠萝博客内测版本，感谢您对开源的贡献！</font>');
-    } else {
-      version = version.split(" ")[0];
-      version = version.substr(1);
-      version = version.replace('.', "_");
-      var filename = 'bolo_v' + version + '_stable.zip';
-      var url = 'https://ftp.stackoverflow.wiki/bolo/releases/' + filename;
-      console.info('当前版本校验中：' + url);
-      var finalVersion = version;
-      // 当前版本校验
-      $.ajax({
-        url: url,
-        type: 'head',
-        error: function () {
-          $('#updateCheck').html('<font style="color: #e94c89">版本更新检查失败，网络错误或该版本为内测版本。</font>');
-          $('#loadMsg').text('');
-        },
-        success: function () {
-          console.info('当前版本在数据库中存在！查询新版本...');
-          var index = version.indexOf('_');
-          var sVersion = String(version.replace('_', ''));
-          console.info('版本分隔符位置：' + index + '; 版本序列号：' + sVersion);
-          // 记录字符串长度，灵活修改分隔符位置
-          var len = sVersion.length;
-          var hasNext = true;
-          // 遍历生成
-          while (hasNext) {
-            sVersion = String(Number(sVersion) + 1);
-            var newLen = sVersion.length;
-            if (len !== newLen) {
-              index++;
-            }
-            len = newLen;
-            console.info('裸版本号：' + sVersion);
-            var head = sVersion.substr(0, index);
-            var foot = sVersion.substr(index);
-            var rollback = head + '_' + foot;
-            console.info('查询号：' + rollback);
-            filename = 'bolo_v' + rollback + '_stable.zip';
-            url = 'https://ftp.stackoverflow.wiki/bolo/releases/' + filename;
-            console.info('查询版本仓库：' + url);
-            $.ajax({
-              url: url,
-              type: 'head',
-              async: false,
-              error: function () {
-                console.info('版本 v' + rollback.replace('_', '.') + ' 不存在，停止遍历');
-                hasNext = false;
-              },
-              success: function () {
-                finalVersion = rollback;
-                console.info('版本 v' + rollback.replace('_', '.') + ' 存在，继续查询下一个...');
-              }
-            });
-          }
-          if (version === finalVersion) {
-            $('#updateCheck').html('🍍 <font style="color: #3caf36">你正在使用菠萝博客最新版！</font>');
-          } else {
-            $('#updateCheck').html('<a href="https://github.com/adlered/bolo-solo/releases" target="_blank" style="color: #991a1a">菠萝博客 v' + finalVersion.replace('_', '.') + ' 已推出，赶快更新吧！</a>');
-          }
-          $("#tipMsg").text("");
-          $("#loadMsg").text("");
-        }
-      })
+      return;
     }
-  },
+
+    function parseVersion (v) {
+      return v.split('.').map(n => parseInt(n, 10));
+    }
+
+    function versionToStr (v) {
+      return 'v' + v.join('.');
+    }
+
+    function versionToFilename (v) {
+      return 'bolo_v' + v.join('_') + '_stable.zip';
+    }
+
+    function checkExists (v) {
+      if (checked.has(versionToStr(v))) return Promise.resolve(false);
+      checked.add(versionToStr(v));
+      const url = 'https://ftp.stackoverflow.wiki/bolo/releases/' + versionToFilename(v);
+      return new Promise(resolve => {
+        $.ajax({
+          url: url,
+          type: 'HEAD',
+          success: () => resolve(true),
+          error: () => resolve(false),
+        });
+      });
+    }
+
+    function compareVersions (a, b) {
+      const maxLen = Math.max(a.length, b.length);
+      for (let i = 0; i < maxLen; i++) {
+        const ai = a[i] || 0, bi = b[i] || 0;
+        if (ai !== bi) return ai - bi;
+      }
+      return 0;
+    }
+
+    // 限制版本号最多3位
+    function nextVersions (v) {
+      const results = [];
+      const len = v.length;
+
+      for (let i = 0; i < len; i++) {
+        let next = v.slice();
+        next[i]++;
+        for (let j = i + 1; j < len; j++) next[j] = 0;
+        if (next.length <= 3) results.push(next);
+      }
+
+      if (len < 3) {
+        let extended = v.slice();
+        extended.push(0);
+        for (let i = 0; i < extended.length; i++) {
+          let next = extended.slice();
+          next[i]++;
+          for (let j = i + 1; j < extended.length; j++) next[j] = 0;
+          if (next.length <= 3) results.push(next);
+        }
+      }
+
+      return results;
+    }
+
+    async function findLatest () {
+      const queue = [current];
+
+      while (queue.length > 0) {
+        const ver = queue.shift();
+
+        const candidates = nextVersions(ver);
+        for (const candidate of candidates) {
+          const exists = await checkExists(candidate);
+          if (exists && compareVersions(candidate, latest) > 0) {
+            latest = candidate;
+            queue.push(candidate);
+          }
+        }
+      }
+    }
+
+    const currentExists = await checkExists(current);
+    if (!currentExists) {
+      $('#updateCheck').html('<font style="color: #e94c89">版本更新检查失败，网络错误或该版本为内测版本。</font>');
+      return;
+    }
+
+    console.info('开始检测新版本...');
+    await findLatest();
+
+    if (compareVersions(current, latest) === 0) {
+      $('#updateCheck').html('🍍 <font style="color: #3caf36">你正在使用菠萝博客最新版！</font>');
+    } else {
+      $('#updateCheck').html(
+        `<a href="https://github.com/adlered/bolo-solo/releases" target="_blank" style="color: #991a1a">菠萝博客 ${versionToStr(latest)} 已推出，赶快更新吧！</a>`
+      );
+    }
+
+    $("#tipMsg").text("");
+    $("#loadMsg").text("");
+  }
 }
+
+
+
+admin.register['about'] = {
+  'obj': admin.about,
+  'init': admin.about.init,
+  'refresh': function () {
+    admin.clearTip();
+  }
+};
+
+
+admin.register['about'] = {
+  'obj': admin.about,
+  'init': admin.about.init,
+  'refresh': function () {
+    admin.clearTip();
+  }
+};
+
+
+
 
 /*
  * 注册到 admin 进行管理 
@@ -104,5 +167,5 @@ admin.register['about'] = {
   'init': admin.about.init,
   'refresh': function () {
     admin.clearTip()
-  },
+  }
 }

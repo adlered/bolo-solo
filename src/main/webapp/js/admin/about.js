@@ -138,27 +138,6 @@ admin.about = {
 }
 
 
-
-admin.register['about'] = {
-  'obj': admin.about,
-  'init': admin.about.init,
-  'refresh': function () {
-    admin.clearTip();
-  }
-};
-
-
-admin.register['about'] = {
-  'obj': admin.about,
-  'init': admin.about.init,
-  'refresh': function () {
-    admin.clearTip();
-  }
-};
-
-
-
-
 /*
  * 注册到 admin 进行管理 
  */
@@ -168,4 +147,4 @@ admin.register['about'] = {
   'refresh': function () {
     admin.clearTip()
   }
-}
+};

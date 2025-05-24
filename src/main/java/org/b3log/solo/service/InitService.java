@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang.time.DateUtils;
@@ -195,7 +196,7 @@ public class InitService {
         final String tablePrefix = Latkes.getLocalProperty("jdbc.tablePrefix") + "_";
         final List<String> tableNames = modelNames.stream()
                 .map(modelName -> tablePrefix + modelName)
-                .toList();
+                .collect(Collectors.toList());
         final Transaction transaction = userRepository.beginTransaction();
         try {
             final List<CreateTableResult> ret = new ArrayList<>();

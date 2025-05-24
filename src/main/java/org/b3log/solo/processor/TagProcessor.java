@@ -17,6 +17,12 @@
  */
 package org.b3log.solo.processor;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.b3log.latke.Keys;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
@@ -34,14 +40,14 @@ import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.model.Tag;
-import org.b3log.solo.service.*;
+import org.b3log.solo.service.ArticleQueryService;
+import org.b3log.solo.service.DataModelService;
+import org.b3log.solo.service.OptionQueryService;
+import org.b3log.solo.service.StatisticMgmtService;
+import org.b3log.solo.service.TagQueryService;
+import org.b3log.solo.service.UserQueryService;
 import org.b3log.solo.util.Skins;
 import org.json.JSONObject;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Tag processor.
@@ -127,7 +133,8 @@ public class TagProcessor {
             final String tagId = tag.getString(Keys.OBJECT_ID);
 
             final JSONObject preference = optionQueryService.getPreference();
-            Skins.fillLangs(preference.optString(Option.ID_C_LOCALE_STRING), (String) context.attr(Keys.TEMAPLTE_DIR_NAME), dataModel);
+            Skins.fillLangs(preference.optString(Option.ID_C_LOCALE_STRING),
+                    (String) context.attr(Keys.TEMAPLTE_DIR_NAME), dataModel);
 
             final int pageSize = preference.getInt(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT);
             final int windowSize = preference.getInt(Option.ID_C_ARTICLE_LIST_PAGINATION_WINDOW_SIZE);
@@ -139,9 +146,11 @@ public class TagProcessor {
             }
 
             final List<JSONObject> articles = (List<JSONObject>) tagArticleResult.opt(Keys.RESULTS);
+            articles.forEach(article -> article.put("isRss", false));
             dataModelService.setArticlesExProperties(context, articles, preference);
 
-            final int pageCount = tagArticleResult.optJSONObject(Pagination.PAGINATION).optInt(Pagination.PAGINATION_PAGE_COUNT);
+            final int pageCount = tagArticleResult.optJSONObject(Pagination.PAGINATION)
+                    .optInt(Pagination.PAGINATION_PAGE_COUNT);
             final List<Integer> pageNums = Paginator.paginate(currentPageNum, pageSize, pageCount, windowSize);
             fillPagination(dataModel, pageCount, currentPageNum, articles, pageNums);
             dataModel.put(Common.PATH, "/tags/" + URLs.encode(tagTitle));
@@ -168,9 +177,9 @@ public class TagProcessor {
      * @param pageNums       the specified page numbers
      */
     private void fillPagination(final Map<String, Object> dataModel,
-                                final int pageCount, final int currentPageNum,
-                                final List<JSONObject> articles,
-                                final List<Integer> pageNums) {
+            final int pageCount, final int currentPageNum,
+            final List<JSONObject> articles,
+            final List<Integer> pageNums) {
         final String previousPageNum = Integer.toString(currentPageNum > 1 ? currentPageNum - 1 : 0);
 
         dataModel.put(Pagination.PAGINATION_PREVIOUS_PAGE_NUM, "0".equals(previousPageNum) ? "" : previousPageNum);

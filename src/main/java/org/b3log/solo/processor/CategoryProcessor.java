@@ -17,6 +17,12 @@
  */
 package org.b3log.solo.processor;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.b3log.latke.Keys;
 import org.b3log.latke.ioc.Inject;
 import org.b3log.latke.logging.Level;
@@ -37,15 +43,15 @@ import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Category;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
-import org.b3log.solo.service.*;
+import org.b3log.solo.service.ArticleQueryService;
+import org.b3log.solo.service.CategoryQueryService;
+import org.b3log.solo.service.DataModelService;
+import org.b3log.solo.service.OptionQueryService;
+import org.b3log.solo.service.StatisticMgmtService;
+import org.b3log.solo.service.UserQueryService;
 import org.b3log.solo.util.Skins;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Category processor.
@@ -117,7 +123,8 @@ public class CategoryProcessor {
         final String categoryURI = context.pathVar("categoryURI");
         final int currentPageNum = Paginator.getPage(request);
 
-        Stopwatchs.start("Get Category-Articles Paged [categoryURI=" + categoryURI + ", pageNum=" + currentPageNum + ']');
+        Stopwatchs
+                .start("Get Category-Articles Paged [categoryURI=" + categoryURI + ", pageNum=" + currentPageNum + ']');
         try {
             final JSONObject category = categoryQueryService.getByURI(categoryURI);
             if (null == category) {
@@ -130,10 +137,12 @@ public class CategoryProcessor {
             final String categoryId = category.optString(Keys.OBJECT_ID);
             final JSONObject preference = optionQueryService.getPreference();
             final int pageSize = preference.getInt(Option.ID_C_ARTICLE_LIST_DISPLAY_COUNT);
-            final JSONObject articlesResult = articleQueryService.getCategoryArticles(categoryId, currentPageNum, pageSize);
+            final JSONObject articlesResult = articleQueryService.getCategoryArticles(categoryId, currentPageNum,
+                    pageSize);
             final List<JSONObject> articles = (List<JSONObject>) articlesResult.opt(Keys.RESULTS);
             dataModelService.setArticlesExProperties(context, articles, preference);
-            final int pageCount = articlesResult.optJSONObject(Pagination.PAGINATION).optInt(Pagination.PAGINATION_PAGE_COUNT);
+            final int pageCount = articlesResult.optJSONObject(Pagination.PAGINATION)
+                    .optInt(Pagination.PAGINATION_PAGE_COUNT);
 
             final JSONObject result = new JSONObject();
             final JSONObject pagination = new JSONObject();
@@ -189,17 +198,19 @@ public class CategoryProcessor {
             // 关键方法！
             final JSONObject result = articleQueryService.getCategoryArticles(categoryId, currentPageNum, pageSize);
             final List<JSONObject> articles = (List<JSONObject>) result.opt(Keys.RESULTS);
-
+            articles.forEach(article -> article.put("isRss", false));
             final int pageCount = result.optJSONObject(Pagination.PAGINATION).optInt(Pagination.PAGINATION_PAGE_COUNT);
             // if (0 == pageCount) {
-                // context.sendError(HttpServletResponse.SC_NOT_FOUND);
-                // return;
+            // context.sendError(HttpServletResponse.SC_NOT_FOUND);
+            // return;
             // }
 
-            Skins.fillLangs(preference.optString(Option.ID_C_LOCALE_STRING), (String) context.attr(Keys.TEMAPLTE_DIR_NAME), dataModel);
+            Skins.fillLangs(preference.optString(Option.ID_C_LOCALE_STRING),
+                    (String) context.attr(Keys.TEMAPLTE_DIR_NAME), dataModel);
             dataModelService.setArticlesExProperties(context, articles, preference);
 
-            final List<Integer> pageNums = (List) result.optJSONObject(Pagination.PAGINATION).opt(Pagination.PAGINATION_PAGE_NUMS);
+            final List<Integer> pageNums = (List) result.optJSONObject(Pagination.PAGINATION)
+                    .opt(Pagination.PAGINATION_PAGE_NUMS);
             fillPagination(dataModel, pageCount, currentPageNum, articles, pageNums, categoryURI);
             dataModel.put(Common.PATH, "/category/" + URLs.encode(categoryURI));
 
@@ -225,10 +236,10 @@ public class CategoryProcessor {
      * @param pageNums       the specified page numbers
      */
     private void fillPagination(final Map<String, Object> dataModel,
-                                final int pageCount, final int currentPageNum,
-                                final List<JSONObject> articles,
-                                final List<Integer> pageNums,
-                                final String categoryURI) {
+            final int pageCount, final int currentPageNum,
+            final List<JSONObject> articles,
+            final List<Integer> pageNums,
+            final String categoryURI) {
         final String previousPageNum = Integer.toString(currentPageNum > 1 ? currentPageNum - 1 : 0);
 
         dataModel.put(Pagination.PAGINATION_PREVIOUS_PAGE_NUM, "0".equals(previousPageNum) ? "" : previousPageNum);

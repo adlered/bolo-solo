@@ -55,6 +55,7 @@ import org.b3log.latke.util.Locales;
 import org.b3log.latke.util.Paginator;
 import org.b3log.latke.util.Stopwatchs;
 import org.b3log.solo.SoloServletListener;
+import org.b3log.solo.cache.FollowArticleCache;
 import org.b3log.solo.event.EventTypes;
 import org.b3log.solo.model.ArchiveDate;
 import org.b3log.solo.model.Article;
@@ -65,7 +66,6 @@ import org.b3log.solo.model.Tag;
 import org.b3log.solo.model.UserExt;
 import org.b3log.solo.processor.console.ConsoleRenderer;
 import org.b3log.solo.repository.CategoryTagRepository;
-import org.b3log.solo.rss.RssParser;
 import org.b3log.solo.service.ArchiveDateQueryService;
 import org.b3log.solo.service.ArticleMgmtService;
 import org.b3log.solo.service.ArticleQueryService;
@@ -152,6 +152,9 @@ public class ArticleProcessor {
      */
     @Inject
     private ArticleMgmtService articleMgmtService;
+
+    @Inject
+    private FollowArticleCache followArticleCache;
 
     /**
      * Statistic management service.
@@ -758,21 +761,32 @@ public class ArticleProcessor {
      *
      * @param context the specified context
      */
-    @RequestProcessing(value = "/rss/article/{feed}", method = HttpMethod.GET)
+    @RequestProcessing(value = "/follow/{followName}/article/{articleTitle}", method = HttpMethod.GET)
     public void showRssArticle(final RequestContext context) {
         // See PermalinkHandler#dispatchToArticleProcessor()
-        final String feed = (String) context.pathVar("feed");
-        if (null == feed || "".equals(feed)) {
+        final String followName = (String) context.pathVar("followName");
+        final String articleTitle = (String) context.pathVar("articleTitle");
+        if ((null == followName || "".equals(followName))
+                || null == articleTitle || "".equals(articleTitle)) {
             context.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
-        LOGGER.log(Level.DEBUG, "Rss Article Feed [id={0}]", feed);
+        LOGGER.log(Level.DEBUG, "Rss Article Feed [author=[{0}], id={1}]", followName, articleTitle);
 
         final AbstractFreeMarkerRenderer renderer = new SkinRenderer(context, "article.ftl");
 
         try {
-            JSONObject article = new RssParser("https://diygod.cc/feed").parse2Article().get(0);
+            final Map<String, JSONObject> cache = followArticleCache.getFollowArticles(followName);
+            if (null == cache) {
+                context.sendError(HttpServletResponse.SC_NOT_FOUND);
+                return;
+            }
+            final JSONObject article = cache.get(articleTitle);
+            if (null == article) {
+                context.sendError(HttpServletResponse.SC_NOT_FOUND);
+                return;
+            }
             article.put(Article.ARTICLE_T_CREATE_DATE, new Date(article.optLong(Article.ARTICLE_CREATED)));
             article.put(Article.ARTICLE_T_UPDATE_DATE, new Date(article.optLong(Article.ARTICLE_UPDATED)));
             article.put(Article.ARTICLE_IMG1_URL, Article.getArticleImg1URL(article));

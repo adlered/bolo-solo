@@ -18,6 +18,8 @@
 package org.b3log.solo.service;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.b3log.latke.Keys;
 import org.b3log.latke.ioc.Inject;
@@ -30,8 +32,11 @@ import org.b3log.latke.repository.Transaction;
 import org.b3log.latke.service.ServiceException;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Paginator;
+import org.b3log.solo.cache.FollowArticleCache;
+import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Follow;
 import org.b3log.solo.repository.FollowRepository;
+import org.b3log.solo.rss.RssParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -54,6 +59,9 @@ public class FollowService {
      */
     @Inject
     private FollowRepository followRepository;
+
+    @Inject
+    private FollowArticleCache articleCache;
 
     /**
      * Gets follows by the specified request json object.
@@ -301,6 +309,29 @@ public class FollowService {
 
             LOGGER.log(Level.ERROR, "Adds a follow failed", e);
             throw new ServiceException(e);
+        }
+    }
+
+    public void syncFollowArticles() {
+        try {
+            final List<JSONObject> res = followRepository.getList(new Query());
+            if (null == res || res.isEmpty()) {
+                LOGGER.log(Level.WARN, "No follows to sync articles");
+                return;
+            }
+            res.forEach(follow -> {
+                final String followName = follow.optString(Follow.FOLLOW_TITLE);
+                final String followAddress = follow.optString(Follow.FOLLOW_ADDRESS);
+                // Syncs articles for the follow
+                final List<JSONObject> articles = new RssParser(followAddress).parse2Article();
+                LOGGER.log(Level.INFO, "Syncs follow articles, followName={0}, articleCount={1}",
+                        new Object[] { followName, articles.size() });
+                articleCache.putArticles(followName, articles.stream()
+                        .collect(Collectors.toMap(article -> article.optString(Article.ARTICLE_TITLE),
+                                Function.identity())));
+            });
+        } catch (final Throwable e) {
+            LOGGER.log(Level.ERROR, "Syncs follow articles failed", e);
         }
     }
 }

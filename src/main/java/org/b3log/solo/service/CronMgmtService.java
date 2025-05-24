@@ -83,6 +83,9 @@ public class CronMgmtService {
     @Inject
     private CommentMgmtService commentMgmtService;
 
+    @Inject
+    private FollowService followService;
+
     /**
      * Start all cron tasks.
      */
@@ -140,6 +143,17 @@ public class CronMgmtService {
                     return;
                 }
                 commentMgmtService.syncAllArticleCommentFromFishPI();
+            } catch (final Throwable e) {
+                LOGGER.log(Level.ERROR, "Executes cron failed", e);
+            } finally {
+                Stopwatchs.release();
+            }
+        }, delay, 1000 * 60 * 60 * 24, TimeUnit.MILLISECONDS);
+        delay += 2000;
+
+        SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
+            try {
+                followService.syncFollowArticles();
             } catch (final Throwable e) {
                 LOGGER.log(Level.ERROR, "Executes cron failed", e);
             } finally {

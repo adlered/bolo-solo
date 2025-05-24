@@ -266,7 +266,7 @@ public class DataModelService {
 
             final JSONObject articlesResult = articleRepository.get(query);
             List<JSONObject> articles = CollectionUtils.jsonArrayToList(articlesResult.optJSONArray(Keys.RESULTS));
-
+            articles.forEach(article -> article.put("isRss", false));
             final int pageCount = articlesResult.optJSONObject(Pagination.PAGINATION)
                     .optInt(Pagination.PAGINATION_PAGE_COUNT);
             setArticlesExProperties(context, articles, preference);

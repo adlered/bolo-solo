@@ -79,6 +79,7 @@ public class RssParser {
                 }
                 article.put(Article.ARTICLE_PERMALINK,
                         String.format("/follow/%s/article/%s", this.userName, entry.getTitle()));
+                article.put("isRss", false);
                 if (null == entry.getContents() || entry.getContents().isEmpty()) {
                     article.put(Article.ARTICLE_CONTENT, entry.getDescription().getValue());
                     article.put(Article.ARTICLE_ABSTRACT,

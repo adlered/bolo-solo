@@ -248,13 +248,13 @@
         },
         {
           "name": "followTitle",
-          "description": "链接标题",
+          "description": "标题",
           "type": "String",
           "length": 255
         },
         {
           "name": "followIcon",
-          "description": "图标链接地址",
+          "description": "图标地址",
           "type": "String",
           "length": 255
         }

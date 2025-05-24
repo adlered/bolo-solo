@@ -20,11 +20,14 @@ package org.b3log.solo.processor;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -756,6 +759,68 @@ public class ArticleProcessor {
         }
     }
 
+    @RequestProcessing(value = "/follow/articles/{followName}", method = HttpMethod.GET)
+    public void showFollowUserArticles(final RequestContext context) {
+        final String followName = (String) context.pathVar("followName");
+        final HttpServletRequest request = context.getRequest();
+        final HttpServletResponse response = context.getResponse();
+        if (null == followName || "".equals(followName)) {
+            context.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+        try {
+            final JSONObject preference = optionQueryService.getPreference();
+            String specifiedSkin = Skins.getSkinDirName(context);
+            if (StringUtils.isBlank(specifiedSkin)) {
+                final JSONObject skinOpt = optionQueryService.getSkin();
+                specifiedSkin = Solos.isMobile(request) ? skinOpt.optString(Option.ID_C_MOBILE_SKIN_DIR_NAME)
+                        : skinOpt.optString(Option.ID_C_SKIN_DIR_NAME);
+            }
+            request.setAttribute(Keys.TEMAPLTE_DIR_NAME, specifiedSkin);
+            final AbstractFreeMarkerRenderer renderer = new SkinRenderer(context, "index.ftl");
+            final Map<String, Object> dataModel = renderer.getDataModel();
+
+            Cookie cookie;
+            if (!Solos.isMobile(request)) {
+                cookie = new Cookie(Common.COOKIE_NAME_SKIN, specifiedSkin);
+            } else {
+                cookie = new Cookie(Common.COOKIE_NAME_MOBILE_SKIN, specifiedSkin);
+            }
+            cookie.setMaxAge(60 * 60); // 1 hour
+            cookie.setPath("/");
+            response.addCookie(cookie);
+
+            Skins.fillLangs(preference.optString(Option.ID_C_LOCALE_STRING),
+                    (String) context.attr(Keys.TEMAPLTE_DIR_NAME), dataModel);
+            final List<JSONObject> articles = followArticleCache.getFollowArticles(followName).values().stream()
+                    .sorted(Comparator
+                            .comparingLong(o -> {
+                                JSONObject article = (JSONObject) o;
+                                return article.optLong(Article.ARTICLE_CREATED);
+                            }).reversed())
+                    .collect(Collectors.toList());
+            dataModel.put(Article.ARTICLES, articles);
+            dataModelService.fillCommon(context, dataModel, preference);
+            dataModelService.fillFaviconURL(dataModel, preference);
+            dataModelService.fillUsite(dataModel);
+            dataModel.put("paginationPageCount", 0);
+            if (null != articles && !articles.isEmpty()) {
+                final JSONObject article = articles.get(0);
+                dataModel.put(Option.ID_C_BLOG_TITLE, article.getString(Option.ID_C_BLOG_TITLE));
+                dataModel.put(Option.ID_C_BLOG_SUBTITLE, article.getString(Option.ID_C_BLOG_SUBTITLE));
+                ((JSONObject) dataModel.get(Common.ADMIN_USER)).put("userAvatar",
+                        article.getString(Common.AUTHOR_THUMBNAIL_URL));
+            }
+
+            dataModel.put(Common.PATH, "");
+            statisticMgmtService.incBlogViewCount(context, response);
+        } catch (final Exception e) {
+            LOGGER.log(Level.ERROR, e.getMessage(), e);
+
+            context.sendError(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+
     /**
      * Shows an article with the specified context.
      *
@@ -787,9 +852,6 @@ public class ArticleProcessor {
                 context.sendError(HttpServletResponse.SC_NOT_FOUND);
                 return;
             }
-            article.put(Article.ARTICLE_T_CREATE_DATE, new Date(article.optLong(Article.ARTICLE_CREATED)));
-            article.put(Article.ARTICLE_T_UPDATE_DATE, new Date(article.optLong(Article.ARTICLE_UPDATED)));
-            article.put(Article.ARTICLE_IMG1_URL, Article.getArticleImg1URL(article));
             dataModelService.fillCategory(article);
             final Map<String, Object> dataModel = renderer.getDataModel();
             final JSONObject preference = optionQueryService.getPreference();

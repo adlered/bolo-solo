@@ -44,7 +44,7 @@
                                 <div class="flink-list-item"
                                      style="--primary-color:linear-gradient( 135deg, #FFF886 10%, #F072B6 100%);
                      border-width:1px;border-style:solid;">
-                                    <a href="${follow.followAddress}" title="${follow.followTitle}" target="_blank">
+                                    <a href="${servePath}/follow/articles/${follow.followTitle}" title="${follow.followTitle}" target="_blank">
                                         <img class="rauto"
                                              data-lazy-src="https://blog.lete114.top/img/Lete.png"
                                              onerror="null"

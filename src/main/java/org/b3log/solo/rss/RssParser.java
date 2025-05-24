@@ -21,12 +21,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.b3log.latke.Keys;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Common;
 import org.b3log.solo.model.Option;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
@@ -35,9 +38,13 @@ import com.rometools.rome.io.XmlReader;
 
 public class RssParser {
     private String rssUrl;
+    private String userIcon;
+    private String userName;
 
-    public RssParser(String rssUrl) {
+    public RssParser(String rssUrl, String userIcon, String userName) {
         this.rssUrl = rssUrl;
+        this.userIcon = userIcon;
+        this.userName = userName;
     }
 
     private RssParser() {
@@ -59,15 +66,34 @@ public class RssParser {
                 article.put(Article.ARTICLE_PUT_TOP, false);
                 article.put(Option.ID_C_COMMENTABLE, false);
                 article.put(Common.ARTICLE_SIGN, new JSONObject().put("signHTML", ""));
-                article.put(Article.ARTICLE_ABSTRACT, entry.getDescription().getValue());
-                article.put(Article.ARTICLE_ABSTRACT_TEXT, entry.getDescription().getValue());
                 article.put(Article.ARTICLE_TAGS_REF, entry.getCategories().stream()
                         .map(category -> category.getName())
                         .reduce((a, b) -> a + "," + b).orElse(""));
                 article.put(Common.HAS_UPDATED, false);
-                article.put(Common.AUTHOR_THUMBNAIL_URL, feed.getImage().getUrl());
-                article.put(Article.ARTICLE_PERMALINK, String.format("/follow/diygod/article/%s", entry.getTitle()));
-                article.put(Article.ARTICLE_CONTENT, entry.getContents().get(0).getValue());
+                if (Objects.nonNull(feed.getImage())) {
+                    article.put(Common.AUTHOR_THUMBNAIL_URL, feed.getImage().getUrl());
+                    article.put(Article.ARTICLE_IMG1_URL, feed.getImage().getUrl());
+                } else {
+                    article.put(Common.AUTHOR_THUMBNAIL_URL, this.userIcon);
+                    article.put(Article.ARTICLE_IMG1_URL, this.userIcon);
+                }
+                article.put(Article.ARTICLE_PERMALINK,
+                        String.format("/follow/%s/article/%s", this.userName, entry.getTitle()));
+                if (null == entry.getContents() || entry.getContents().isEmpty()) {
+                    article.put(Article.ARTICLE_CONTENT, entry.getDescription().getValue());
+                    article.put(Article.ARTICLE_ABSTRACT,
+                            Article.getAbstractText(entry.getDescription().getValue()));
+                    article.put(Article.ARTICLE_ABSTRACT_TEXT, article.getString(Article.ARTICLE_ABSTRACT));
+                    if (!isRichContent(entry.getDescription().getValue())) {
+                        article.put("isRss", true);
+                        article.put(Article.ARTICLE_PERMALINK, entry.getLink());
+                    }
+                } else {
+                    // Use the first content if available
+                    article.put(Article.ARTICLE_CONTENT, entry.getContents().get(0).getValue());
+                    article.put(Article.ARTICLE_ABSTRACT, entry.getDescription().getValue());
+                    article.put(Article.ARTICLE_ABSTRACT_TEXT, entry.getDescription().getValue());
+                }
                 article.put(Article.ARTICLE_CREATED, entry.getPublishedDate().getTime());
                 article.put(Article.ARTICLE_UPDATED, article.getLong(Article.ARTICLE_CREATED));
                 article.put(Article.ARTICLE_VIEW_PWD, "");
@@ -78,12 +104,32 @@ public class RssParser {
                 article.put(Article.ARTICLE_COMMENT_COUNT, 0);
                 article.put(Article.ARTICLE_T_CREATE_DATE, new Date(article.optLong(Article.ARTICLE_CREATED)));
                 article.put(Article.ARTICLE_T_UPDATE_DATE, new Date(article.optLong(Article.ARTICLE_UPDATED)));
-                article.put(Article.ARTICLE_IMG1_URL, feed.getImage().getUrl());
+
                 articles.add(article);
             }
         } catch (Exception e) {
             System.out.println("Error parsing RSS feed: " + e.getMessage());
         }
         return articles;
+    }
+
+    /**
+     * 判断是否是“富内容”，即内容是否像是正文而不是摘要
+     */
+    public static boolean isRichContent(String html) {
+        if (html == null || html.trim().isEmpty()) {
+            return false;
+        }
+
+        Document doc = Jsoup.parse(html);
+        String text = doc.text();
+        int textLength = text.length();
+
+        boolean hasLongText = textLength > 200;
+        boolean hasParagraphs = doc.select("p").size() >= 3;
+        boolean hasImages = doc.select("img").size() > 1;
+        boolean hasHeaders = doc.select("h1,h2,h3").size() > 0;
+
+        return hasLongText && (hasParagraphs || hasImages || hasHeaders);
     }
 }

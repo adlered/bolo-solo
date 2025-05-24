@@ -322,8 +322,9 @@ public class FollowService {
             res.forEach(follow -> {
                 final String followName = follow.optString(Follow.FOLLOW_TITLE);
                 final String followAddress = follow.optString(Follow.FOLLOW_ADDRESS);
+                final String followIcon = follow.optString(Follow.FOLLOW_ICON);
                 // Syncs articles for the follow
-                final List<JSONObject> articles = new RssParser(followAddress).parse2Article();
+                final List<JSONObject> articles = new RssParser(followAddress, followIcon, followName).parse2Article();
                 LOGGER.log(Level.INFO, "Syncs follow articles, followName={0}, articleCount={1}",
                         new Object[] { followName, articles.size() });
                 articleCache.putArticles(followName, articles.stream()

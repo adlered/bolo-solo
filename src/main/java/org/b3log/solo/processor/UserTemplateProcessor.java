@@ -58,7 +58,8 @@ import freemarker.template.Template;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @since 0.4.5
+ * @author <a href="https://github.com/adlered">gakkiyomi (Bolo Commiter)</a>
+ * @since 0.4.6
  */
 @RequestProcessor
 public class UserTemplateProcessor {

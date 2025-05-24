@@ -72,6 +72,12 @@
                         </a>
                     </div>
                     <div class="menus_item">
+                        <a class="site-page" href="${servePath}/follows.html">
+                            <i class="fa-fw fas fa-link"></i>
+                            <span> 我的关注</span>
+                        </a>
+                    </div>
+                    <div class="menus_item">
                         <a class="site-page">
                             <span class="footer__heart">❤️更多</span>
                             <i class="fas fa-chevron-down menus-expand"></i>

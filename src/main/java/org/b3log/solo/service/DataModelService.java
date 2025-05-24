@@ -67,6 +67,7 @@ import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Category;
 import org.b3log.solo.model.Comment;
 import org.b3log.solo.model.Common;
+import org.b3log.solo.model.Follow;
 import org.b3log.solo.model.Link;
 import org.b3log.solo.model.Option;
 import org.b3log.solo.model.Tag;
@@ -76,6 +77,7 @@ import org.b3log.solo.repository.ArticleRepository;
 import org.b3log.solo.repository.CategoryRepository;
 import org.b3log.solo.repository.CategoryTagRepository;
 import org.b3log.solo.repository.CommentRepository;
+import org.b3log.solo.repository.FollowRepository;
 import org.b3log.solo.repository.LinkRepository;
 import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.repository.PageRepository;
@@ -153,6 +155,12 @@ public class DataModelService {
      */
     @Inject
     private LinkRepository linkRepository;
+
+    /**
+     * Follow repository.
+     */
+    @Inject
+    private FollowRepository followRepository;
 
     /**
      * Page repository.
@@ -303,6 +311,32 @@ public class DataModelService {
             dataModel.put(Link.LINKS, links);
         } catch (final RepositoryException e) {
             LOGGER.log(Level.ERROR, "Fills links failed", e);
+
+            throw new ServiceException(e);
+        } finally {
+            Stopwatchs.end();
+        }
+        Stopwatchs.end();
+    }
+
+    /**
+     * Fills Follows.
+     *
+     * @param dataModel data model
+     * @throws ServiceException service exception
+     */
+    public void fillFollows(final Map<String, Object> dataModel) throws ServiceException {
+        Stopwatchs.start("Fill Follows");
+        try {
+            final Map<String, SortDirection> sorts = new HashMap<>();
+
+            sorts.put(Follow.FOLLOW_ORDER, SortDirection.ASCENDING);
+            final Query query = new Query().addSort(Follow.FOLLOW_ORDER, SortDirection.ASCENDING).setPageCount(1);
+            final List<JSONObject> follows = followRepository.getList(query);
+
+            dataModel.put(Follow.FOLLOWS, follows);
+        } catch (final RepositoryException e) {
+            LOGGER.log(Level.ERROR, "Fills follows failed", e);
 
             throw new ServiceException(e);
         } finally {
@@ -1097,6 +1131,10 @@ public class DataModelService {
 
             if (Templates.hasExpression(template, "<#list links as link>")) {
                 fillLinks(dataModel);
+            }
+
+            if (Templates.hasExpression(template, "<#list follows as follow>")) {
+                fillFollows(dataModel);
             }
 
             if (Templates.hasExpression(template, "<#list tags as tag>")) {

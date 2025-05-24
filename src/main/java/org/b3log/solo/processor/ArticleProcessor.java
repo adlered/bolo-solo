@@ -839,7 +839,7 @@ public class ArticleProcessor {
 
         LOGGER.log(Level.DEBUG, "Rss Article Feed [author=[{0}], id={1}]", followName, articleTitle);
 
-        final AbstractFreeMarkerRenderer renderer = new SkinRenderer(context, "article.ftl");
+        final AbstractFreeMarkerRenderer renderer = new SkinRenderer(context, "rss-article.ftl");
 
         try {
             final Map<String, JSONObject> cache = followArticleCache.getFollowArticles(followName);

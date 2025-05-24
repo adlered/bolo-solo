@@ -55,10 +55,14 @@ public class RssParser {
         final List<JSONObject> articles = new ArrayList<>();
         try (XmlReader reader = new XmlReader(new URL(this.rssUrl).openStream())) {
             SyndFeed feed = input.build(reader);
+            String feedDesc = feed.getDescription();
+            if (feedDesc == null || feedDesc.isEmpty()) {
+                feedDesc = feed.getTitle();
+            }
             for (SyndEntry entry : feed.getEntries()) {
                 final JSONObject article = new JSONObject();
                 article.put(Option.ID_C_BLOG_TITLE, feed.getTitle());
-                article.put(Option.ID_C_BLOG_SUBTITLE, feed.getDescription());
+                article.put(Option.ID_C_BLOG_SUBTITLE, feedDesc);
                 article.put(Article.ARTICLE_AUTHOR_ID, entry.getAuthor());
                 article.put(Keys.OBJECT_ID, entry.getAuthor());
                 article.put(Common.AUTHOR_NAME, entry.getAuthor());
@@ -92,10 +96,23 @@ public class RssParser {
                 } else {
                     // Use the first content if available
                     article.put(Article.ARTICLE_CONTENT, entry.getContents().get(0).getValue());
-                    article.put(Article.ARTICLE_ABSTRACT, entry.getDescription().getValue());
-                    article.put(Article.ARTICLE_ABSTRACT_TEXT, entry.getDescription().getValue());
+                    if (entry.getDescription() == null || entry.getDescription().getValue() == null) {
+                        article.put(Article.ARTICLE_ABSTRACT,
+                                Article.getAbstractText(article.getString(Article.ARTICLE_CONTENT)));
+                        article.put(Article.ARTICLE_ABSTRACT_TEXT, article.getString(Article.ARTICLE_ABSTRACT));
+                    } else {
+                        article.put(Article.ARTICLE_ABSTRACT, entry.getDescription().getValue());
+                        article.put(Article.ARTICLE_ABSTRACT_TEXT, entry.getDescription().getValue());
+                    }
+
                 }
-                article.put(Article.ARTICLE_CREATED, entry.getPublishedDate().getTime());
+                Date time;
+                if (null == entry.getPublishedDate()) {
+                    time = entry.getUpdatedDate();
+                } else {
+                    time = entry.getPublishedDate();
+                }
+                article.put(Article.ARTICLE_CREATED, time.getTime());
                 article.put(Article.ARTICLE_UPDATED, article.getLong(Article.ARTICLE_CREATED));
                 article.put(Article.ARTICLE_VIEW_PWD, "");
                 article.put(Article.ARTICLE_STATUS, Article.ARTICLE_STATUS_C_PUBLISHED);

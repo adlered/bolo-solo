@@ -230,7 +230,7 @@
           "length": 19
         },
         {
-          "name": "rssAddress",
+          "name": "followAddress",
           "description": "订阅地址",
           "type": "String",
           "length": 255

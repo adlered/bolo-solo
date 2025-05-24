@@ -195,7 +195,7 @@ public class FollowService {
         final Transaction transaction = followRepository.beginTransaction();
 
         try {
-            final JSONObject follow = requestJSONObject.getJSONObject(Follow.FOLLOW_ORDER);
+            final JSONObject follow = requestJSONObject.getJSONObject(Follow.FOLLOW);
             final String followId = follow.getString(Keys.OBJECT_ID);
             final JSONObject oldfollow = followRepository.get(followId);
 

@@ -126,6 +126,11 @@
                                 </div>
                             </li>
                             <li>
+                                <div id="tabs_follow-list">
+                                    <a href="#tools/follow-list">${followManagementLabel}</a>
+                                </div>
+                            </li>
+                            <li>
                                 <div id="tabs_user-list">
                                     <a href="#tools/user-list">${userManageLabel}</a>
                                 </div>
@@ -172,6 +177,7 @@
                 <div id="tabsPanel_article-list" class="fn__none"></div>
                 <div id="tabsPanel_draft-list" class="fn__none"></div>
                 <div id="tabsPanel_link-list" class="fn__none"></div>
+                <div id="tabsPanel_follow-list" class="fn__none"></div>
                 <div id="tabsPanel_preference" class="fn__none"></div>
                 <div id="tabsPanel_theme-list" class="fn__none"></div>
                 <div id="tabsPanel_category-list" class="fn__none"></div>
@@ -261,6 +267,7 @@
         <script src="${staticServePath}/js/admin/pageList.js"></script>
         <script src="${staticServePath}/js/admin/others.js"></script>
         <script src="${staticServePath}/js/admin/linkList.js"></script>
+        <script src="${staticServePath}/js/admin/followList.js"></script>
         <script src="${staticServePath}/js/admin/preference.js"></script>
         <script src="${staticServePath}/js/admin/pluginList.js"></script>
         <script src="${staticServePath}/js/admin/userList.js"></script>

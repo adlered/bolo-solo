@@ -83,13 +83,10 @@
                     </section>
                 </div>
             </div>
-            <#if article??>
-                <#assign toc = (article.articleToC)![]>
-                <#if toc?is_sequence && (toc?size > 0)>
-                    <div class="post__toc">
-                        <#include "../../common-template/toc.ftl"/>
-                    </div>
-                </#if>
+            <#if article?? && article.articleToC?? && article.articleToC?size &gt; 0>
+                <div class="post__toc">
+                    <#include "../../common-template/toc.ftl"/>
+                </div>
             </#if>
 
             <div class="article__bottom">

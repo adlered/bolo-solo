@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.b3log.latke.Keys;
 import org.b3log.solo.model.Article;
@@ -31,6 +32,7 @@ import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import com.rometools.rome.feed.synd.SyndEnclosure;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
@@ -110,17 +112,17 @@ public class RssParser {
                     time = entry.getPublishedDate();
                 }
                 // 设置文章封面
-                entry.getEnclosures().stream()
+                Optional<SyndEnclosure> optionalEnclosure = entry.getEnclosures().stream()
                         .filter(enclosure -> enclosure.getType().startsWith("image/"))
-                        .findFirst()
-                        .ifPresentOrElse(enclosure -> article.put(Article.ARTICLE_IMG1_URL, enclosure.getUrl()), () -> {
-                            // 如果没有设置封面，则使用内容中的第一张图片,还没有则使用用户头像
-                            final String contentFirstImageUrl = Article.getArticleImg1URLWithoutSetSize(article);
-                            final String articleCoverUrl = contentFirstImageUrl == null ? this.userIcon
-                                    : contentFirstImageUrl;
-
-                            article.put(Article.ARTICLE_IMG1_URL, articleCoverUrl);
-                        });
+                        .findFirst();
+                if (optionalEnclosure.isPresent()) {
+                    article.put(Article.ARTICLE_IMG1_URL, optionalEnclosure.get().getUrl());
+                } else {
+                    // 如果没有设置封面，则使用内容中的第一张图片, 还没有则使用用户头像
+                    final String contentFirstImageUrl = Article.getArticleImg1URLWithoutSetSize(article);
+                    final String articleCoverUrl = contentFirstImageUrl == null ? this.userIcon : contentFirstImageUrl;
+                    article.put(Article.ARTICLE_IMG1_URL, articleCoverUrl);
+                }
                 article.put(Article.ARTICLE_CREATED, time.getTime());
                 article.put(Article.ARTICLE_UPDATED, article.getLong(Article.ARTICLE_CREATED));
                 article.put(Article.ARTICLE_VIEW_PWD, "");

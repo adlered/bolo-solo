@@ -676,6 +676,7 @@ public class ArticleProcessor {
 
             final List<JSONObject> articles = CollectionUtils
                     .jsonArrayToList(articlesResult.optJSONArray(Keys.RESULTS));
+            articles.forEach(article -> article.put("isRss", false));
             dataModelService.setArticlesExProperties(context, articles, preference);
             final int pageCount = articlesResult.optJSONObject(Pagination.PAGINATION)
                     .optInt(Pagination.PAGINATION_PAGE_COUNT);
@@ -739,7 +740,7 @@ public class ArticleProcessor {
 
                 return;
             }
-
+            articles.forEach(article -> article.put("isRss", false));
             dataModelService.setArticlesExProperties(context, articles, preference);
 
             final Map<String, Object> dataModel = renderer.getDataModel();

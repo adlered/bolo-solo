@@ -808,8 +808,9 @@ public class ArticleProcessor {
                 final JSONObject article = articles.get(0);
                 dataModel.put(Option.ID_C_BLOG_TITLE, article.getString(Option.ID_C_BLOG_TITLE));
                 dataModel.put(Option.ID_C_BLOG_SUBTITLE, article.getString(Option.ID_C_BLOG_SUBTITLE));
-                ((JSONObject) dataModel.get(Common.ADMIN_USER)).put("userAvatar",
-                        article.getString(Common.AUTHOR_THUMBNAIL_URL));
+                JSONObject admin = new JSONObject(dataModel.get(Common.ADMIN_USER).toString());
+                admin.put("userAvatar", article.getString(Common.AUTHOR_THUMBNAIL_URL));
+                dataModel.put(Common.ADMIN_USER, admin);
             }
 
             dataModel.put(Common.PATH, "");

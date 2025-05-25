@@ -1,6 +1,6 @@
 /*
  * Bolo - A stable and beautiful blogging system based in Solo.
- * Copyright (c) 2020, https://github.com/adlered
+ * Copyright (c) 2020-present, https://github.com/bolo-blog
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -48,6 +48,7 @@ import org.b3log.solo.upgrade.V420_430;
 import org.b3log.solo.upgrade.V430_431;
 import org.b3log.solo.upgrade.V431_432;
 import org.b3log.solo.upgrade.V432_433;
+import org.b3log.solo.upgrade.V433_434;
 import org.json.JSONObject;
 
 /**
@@ -55,7 +56,8 @@ import org.json.JSONObject;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @since 1.2.0
+ * @author <a href="https://github.com/gakkiyomi">adlered (Bolo Commiter)</a>
+ * @since 1.2.1
  */
 @Service
 public class UpgradeService {
@@ -159,6 +161,8 @@ public class UpgradeService {
                         V431_432.perform();
                     case "4.3.2":
                         V432_433.perform();
+                    case "4.3.3":
+                        V433_434.perform();
                         break;
                     default:
                         LOGGER.log(Level.INFO, "Version " + currentVer + " loaded in compatibility mode.");
@@ -167,7 +171,7 @@ public class UpgradeService {
             }
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Upgrade failed, please contact the Bolo developers or reports this "
-                    + "issue: https://github.com/adlered/bolo-solo/issues/new", e);
+                    + "issue: https://github.com/bolo-blog/bolo-solo/issues/new", e);
             System.exit(-1);
         }
     }

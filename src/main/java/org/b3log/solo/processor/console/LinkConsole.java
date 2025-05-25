@@ -1,6 +1,6 @@
 /*
  * Bolo - A stable and beautiful blogging system based in Solo.
- * Copyright (c) 2020, https://github.com/adlered
+ * Copyright (c) 2020-present, https://github.com/bolo-blog
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -74,6 +74,7 @@ public class LinkConsole {
      * Removes a link by the specified request.
      * <p>
      * Renders the response with a json object, for example,
+     * 
      * <pre>
      * {
      *     "sc": boolean,
@@ -108,6 +109,7 @@ public class LinkConsole {
      * Updates a link by the specified request.
      * <p>
      * Request json:
+     * 
      * <pre>
      * {
      *     "link": {
@@ -121,6 +123,7 @@ public class LinkConsole {
      * </p>
      * <p>
      * Renders the response with a json object, for example,
+     * 
      * <pre>
      * {
      *     "sc": boolean,
@@ -156,6 +159,7 @@ public class LinkConsole {
      * Changes a link order by the specified link id and direction.
      * <p>
      * Request json:
+     * 
      * <pre>
      * {
      *     "oId": "",
@@ -165,6 +169,7 @@ public class LinkConsole {
      * </p>
      * <p>
      * Renders the response with a json object, for example,
+     * 
      * <pre>
      * {
      *     "sc": boolean,
@@ -202,6 +207,7 @@ public class LinkConsole {
     /**
      * Adds a link with the specified request.
      * <p>
+     * 
      * <pre>
      * {
      *     "link": {
@@ -214,6 +220,7 @@ public class LinkConsole {
      * </p>
      * <p>
      * Renders the response with a json object, for example,
+     * 
      * <pre>
      * {
      *     "sc": boolean,
@@ -256,6 +263,7 @@ public class LinkConsole {
      * </p>
      * <p>
      * Renders the response with a json object, for example,
+     * 
      * <pre>
      * {
      *     "sc": boolean,
@@ -307,6 +315,7 @@ public class LinkConsole {
      * Gets the file with the specified request.
      * <p>
      * Renders the response with a json object, for example,
+     * 
      * <pre>
      * {
      *     "sc": boolean,

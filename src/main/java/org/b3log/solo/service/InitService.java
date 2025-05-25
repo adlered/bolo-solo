@@ -1,6 +1,6 @@
 /*
  * Bolo - A stable and beautiful blogging system based in Solo.
- * Copyright (c) 2020, https://github.com/adlered
+ * Copyright (c) 2020-present, https://github.com/bolo-blog
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,8 +18,11 @@
 package org.b3log.solo.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang.time.DateUtils;
@@ -33,9 +36,11 @@ import org.b3log.latke.model.User;
 import org.b3log.latke.plugin.PluginManager;
 import org.b3log.latke.repository.RepositoryException;
 import org.b3log.latke.repository.Transaction;
+import org.b3log.latke.repository.jdbc.JdbcFactory;
 import org.b3log.latke.repository.jdbc.util.Connections;
 import org.b3log.latke.repository.jdbc.util.JdbcRepositories;
 import org.b3log.latke.repository.jdbc.util.JdbcRepositories.CreateTableResult;
+import org.b3log.latke.repository.jdbc.util.RepositoryDefinition;
 import org.b3log.latke.service.LangPropsService;
 import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Ids;
@@ -181,6 +186,52 @@ public class InitService {
             System.exit(-1);
             return false;
         }
+    }
+
+    public void initSpecificTables(final List<String> modelNames) {
+        if (null == modelNames || modelNames.isEmpty()) {
+            LOGGER.log(Level.WARN, "No table to create: " + modelNames);
+            return;
+        }
+        final String tablePrefix = Latkes.getLocalProperty("jdbc.tablePrefix") + "_";
+        final List<String> tableNames = modelNames.stream()
+                .map(modelName -> tablePrefix + modelName)
+                .collect(Collectors.toList());
+        final Transaction transaction = userRepository.beginTransaction();
+        try {
+            final List<CreateTableResult> ret = new ArrayList<>();
+            final List<RepositoryDefinition> repositoryDefs = JdbcRepositories.getRepositoryDefinitions();
+            boolean isSuccess = false;
+            for (final RepositoryDefinition repositoryDef : repositoryDefs) {
+                if (!tableNames.contains(repositoryDef.getName())) {
+                    continue;
+                }
+                try {
+                    isSuccess = JdbcFactory.getInstance().createTable(repositoryDef);
+                } catch (final SQLException e) {
+                    LOGGER.log(Level.ERROR, "Creates table [" + repositoryDef.getName() + "] error", e);
+                }
+                ret.add(new CreateTableResult(repositoryDef.getName(), isSuccess));
+            }
+            if (ret.isEmpty()) {
+                LOGGER.log(Level.WARN, "No table to create: " + tableNames);
+                return;
+            }
+            for (final CreateTableResult createTableResult : ret) {
+                LOGGER.log(Level.INFO, "Creates table result [tableName={0}, isSuccess={1}]",
+                        createTableResult.getName(), createTableResult.isSuccess());
+            }
+            transaction.commit();
+        } catch (final Exception e) {
+            LOGGER.log(Level.ERROR,
+                    "Init tables failed, please make sure database existed and database configuration [jdbc.*] in local.props is correct [msg="
+                            + e.getMessage() + "]");
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            System.exit(-1);
+        }
+
     }
 
     /**

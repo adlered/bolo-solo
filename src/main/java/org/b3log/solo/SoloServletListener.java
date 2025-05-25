@@ -1,6 +1,6 @@
 /*
  * Bolo - A stable and beautiful blogging system based in Solo.
- * Copyright (c) 2020, https://github.com/adlered
+ * Copyright (c) 2020-present, https://github.com/bolo-blog
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -56,6 +56,7 @@ import org.b3log.solo.processor.console.AdminConsole;
 import org.b3log.solo.processor.console.ArticleConsole;
 import org.b3log.solo.processor.console.CategoryConsole;
 import org.b3log.solo.processor.console.CommentConsole;
+import org.b3log.solo.processor.console.FollowConsole;
 import org.b3log.solo.processor.console.LinkConsole;
 import org.b3log.solo.processor.console.OtherConsole;
 import org.b3log.solo.processor.console.PageConsole;
@@ -114,7 +115,7 @@ public final class SoloServletListener extends AbstractServletListener {
     /**
      * Solo version.
      */
-    public static String VERSION = "4.3.3";
+    public static String VERSION = "4.3.4";
 
     /**
      * Bean manager.
@@ -421,6 +422,7 @@ public final class SoloServletListener extends AbstractServletListener {
                 "/admin-article-list.do",
                 "/admin-comment-list.do",
                 "/admin-link-list.do",
+                "/admin-follow-list.do",
                 "/admin-page-list.do",
                 "/admin-others.do",
                 "/admin-draft-list.do",
@@ -469,6 +471,14 @@ public final class SoloServletListener extends AbstractServletListener {
         DispatcherServlet.post("/console/link/", linkConsole::addLink);
         DispatcherServlet.get("/console/links/{page}/{pageSize}/{windowSize}", linkConsole::getLinks);
         DispatcherServlet.get("/console/link/{id}", linkConsole::getLink);
+
+        final FollowConsole followConsole = beanManager.getReference(FollowConsole.class);
+        DispatcherServlet.delete("/console/follow/{id}", followConsole::removeFollow);
+        DispatcherServlet.put("/console/follow/", followConsole::updateFollow);
+        DispatcherServlet.put("/console/follow/order/", followConsole::changeOrder);
+        DispatcherServlet.post("/console/follow/", followConsole::addFollow);
+        DispatcherServlet.get("/console/follows/{page}/{pageSize}/{windowSize}", followConsole::getFollows);
+        DispatcherServlet.get("/console/follow/{id}", followConsole::getFollow);
 
         final PageConsole pageConsole = beanManager.getReference(PageConsole.class);
         DispatcherServlet.put("/console/page/", pageConsole::updatePage);

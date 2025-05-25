@@ -35,14 +35,14 @@ const del = require('del')
 
 function sassSkinProcess () {
   return gulp.src('./src/main/webapp/skins/*/css/*.scss').
-  pipe(sass({
-    outputStyle: 'compressed',
-    includePaths: ['node_modules'],
-  }).on('error', sass.logError)).
-  pipe(autoprefixer({
-    cascade: false,
-  })).
-  pipe(gulp.dest('./src/main/webapp/skins/'))
+    pipe(sass({
+      outputStyle: 'compressed',
+      includePaths: ['node_modules'],
+    }).on('error', sass.logError)).
+    pipe(autoprefixer({
+      cascade: false,
+    })).
+    pipe(gulp.dest('./src/main/webapp/skins/'))
 }
 
 function sassWatch () {
@@ -52,14 +52,14 @@ function sassWatch () {
 
 function sassCommonProcess () {
   return gulp.src('./src/main/webapp/scss/*.scss').
-  pipe(sass({
-    outputStyle: 'compressed',
-    includePaths: ['node_modules'],
-  }).on('error', sass.logError)).
-  pipe(autoprefixer({
-    cascade: false,
-  })).
-  pipe(gulp.dest('./src/main/webapp/scss/'))
+    pipe(sass({
+      outputStyle: 'compressed',
+      includePaths: ['node_modules'],
+    }).on('error', sass.logError)).
+    pipe(autoprefixer({
+      cascade: false,
+    })).
+    pipe(gulp.dest('./src/main/webapp/scss/'))
 }
 
 gulp.task('watch', gulp.series(sassWatch))
@@ -67,13 +67,13 @@ gulp.task('watch', gulp.series(sassWatch))
 function minJS () {
   // minify js
   return gulp.src('./src/main/webapp/js/*.js').
-  pipe(rename({suffix: '.min'})).
-  pipe(terser({
-    output: {
-      ascii_only: true,
-    },
-  })).
-  pipe(gulp.dest('./src/main/webapp/js/'))
+    pipe(rename({ suffix: '.min' })).
+    pipe(terser({
+      output: {
+        ascii_only: true,
+      },
+    })).
+    pipe(gulp.dest('./src/main/webapp/js/'))
 }
 
 function miniAdmin () {
@@ -89,6 +89,7 @@ function miniAdmin () {
     './src/main/webapp/js/admin/pageList.js',
     './src/main/webapp/js/admin/others.js',
     './src/main/webapp/js/admin/linkList.js',
+    './src/main/webapp/js/admin/followList.js',
     './src/main/webapp/js/admin/preference.js',
     './src/main/webapp/js/admin/themeList.js',
     './src/main/webapp/js/admin/pluginList.js',
@@ -101,13 +102,13 @@ function miniAdmin () {
     './src/main/webapp/js/admin/toolBox.js',
     './src/main/webapp/js/admin/usite.js']
   return gulp.src(jsJqueryUpload).
-  pipe(terser({
-    output: {
-      ascii_only: true,
-    },
-  })).
-  pipe(concat('admin.min.js')).
-  pipe(gulp.dest('./src/main/webapp/js/admin'))
+    pipe(terser({
+      output: {
+        ascii_only: true,
+      },
+    })).
+    pipe(concat('admin.min.js')).
+    pipe(gulp.dest('./src/main/webapp/js/admin'))
 
 }
 
@@ -117,16 +118,16 @@ function miniAdminLibs () {
     './src/main/webapp/js/lib/jquery/jquery.min.js',
     './src/main/webapp/js/lib/jquery/jquery.bowknot.min.js',
     './src/main/webapp/js/lib/jquery/jquery.showtips.js',
-    './src/main/webapp/js/lib/jquery/jquery.cookie.min.js' ]
+    './src/main/webapp/js/lib/jquery/jquery.cookie.min.js']
   return gulp.src(jsJqueryUpload).
-  pipe(terser({
-    output: {
-      ascii_only: true,
-    },
-  })).
-  // https://github.com/b3log/solo/issues/12522
-  pipe(concat('admin-lib.min.js')).
-  pipe(gulp.dest('./src/main/webapp/js/lib/compress/'))
+    pipe(terser({
+      output: {
+        ascii_only: true,
+      },
+    })).
+    // https://github.com/b3log/solo/issues/12522
+    pipe(concat('admin-lib.min.js')).
+    pipe(gulp.dest('./src/main/webapp/js/lib/compress/'))
 
 }
 
@@ -137,25 +138,25 @@ function miniPjax () {
     './src/main/webapp/js/lib/jquery/jquery.pjax.js',
     './src/main/webapp/js/lib/nprogress/nprogress.js']
   return gulp.src(jsPjax).
-  pipe(terser({
-    output: {
-      ascii_only: true,
-    },
-  })).
-  pipe(concat('pjax.min.js')).
-  pipe(gulp.dest('./src/main/webapp/js/lib/compress/'))
+    pipe(terser({
+      output: {
+        ascii_only: true,
+      },
+    })).
+    pipe(concat('pjax.min.js')).
+    pipe(gulp.dest('./src/main/webapp/js/lib/compress/'))
 }
 
 function minSkinJS () {
   // minify js
   return gulp.src('./src/main/webapp/skins/*/js/*.js').
-  pipe(rename({suffix: '.min'})).
-  pipe(terser({
-    output: {
-      ascii_only: true,
-    },
-  })).
-  pipe(gulp.dest('./src/main/webapp/skins/'))
+    pipe(rename({ suffix: '.min' })).
+    pipe(terser({
+      output: {
+        ascii_only: true,
+      },
+    })).
+    pipe(gulp.dest('./src/main/webapp/skins/'))
 }
 
 function cleanProcess () {
@@ -165,6 +166,6 @@ function cleanProcess () {
 }
 
 gulp.task('default',
-    gulp.series(cleanProcess, sassSkinProcess, sassCommonProcess,
-        gulp.parallel(minSkinJS, minJS),
-        gulp.parallel(miniPjax, miniAdmin, miniAdminLibs)))
+  gulp.series(cleanProcess, sassSkinProcess, sassCommonProcess,
+    gulp.parallel(minSkinJS, minJS),
+    gulp.parallel(miniPjax, miniAdmin, miniAdminLibs)))

@@ -128,7 +128,11 @@
             <artifactId>latke-core</artifactId>
             <version>${org.b3log.latke.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.rometools</groupId>
+            <artifactId>rome</artifactId>
+            <version>2.1.0</version>
+        </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -422,8 +426,8 @@
                     </mapping>
                     <useDefaultMapping>true</useDefaultMapping>
                     <properties>
-                        <year>2020</year>
-                        <devTeam>https://github.com/adlered</devTeam>
+                        <year>2020-present</year>
+                        <devTeam>https://github.com/bolo-blog</devTeam>
                     </properties>
                     <encoding>UTF-8</encoding>
                 </configuration>

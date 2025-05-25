@@ -1,6 +1,6 @@
 /*
  * Bolo - A stable and beautiful blogging system based in Solo.
- * Copyright (c) 2020, https://github.com/adlered
+ * Copyright (c) 2020-present, https://github.com/bolo-blog
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -58,7 +58,8 @@ import freemarker.template.Template;
  *
  * @author <a href="http://88250.b3log.org">Liang Ding (Solo Author)</a>
  * @author <a href="https://github.com/adlered">adlered (Bolo Author)</a>
- * @since 0.4.5
+ * @author <a href="https://github.com/adlered">gakkiyomi (Bolo Commiter)</a>
+ * @since 0.4.6
  */
 @RequestProcessor
 public class UserTemplateProcessor {

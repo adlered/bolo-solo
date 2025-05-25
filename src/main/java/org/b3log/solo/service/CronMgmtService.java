@@ -1,6 +1,6 @@
 /*
  * Bolo - A stable and beautiful blogging system based in Solo.
- * Copyright (c) 2020, https://github.com/adlered
+ * Copyright (c) 2020-present, https://github.com/bolo-blog
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -83,6 +83,9 @@ public class CronMgmtService {
     @Inject
     private CommentMgmtService commentMgmtService;
 
+    @Inject
+    private FollowService followService;
+
     /**
      * Start all cron tasks.
      */
@@ -135,7 +138,22 @@ public class CronMgmtService {
 
         SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
             try {
+                final String fishKey = userQueryService.getFishKey();
+                if (fishKey == null || "".equals(fishKey)) {
+                    return;
+                }
                 commentMgmtService.syncAllArticleCommentFromFishPI();
+            } catch (final Throwable e) {
+                LOGGER.log(Level.ERROR, "Executes cron failed", e);
+            } finally {
+                Stopwatchs.release();
+            }
+        }, delay, 1000 * 60 * 60 * 24, TimeUnit.MILLISECONDS);
+        delay += 2000;
+
+        SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> {
+            try {
+                followService.syncFollowArticles();
             } catch (final Throwable e) {
                 LOGGER.log(Level.ERROR, "Executes cron failed", e);
             } finally {

@@ -220,6 +220,47 @@
       ]
     },
     {
+      "name": "follow",
+      "description": "关注表",
+      "keys": [
+        {
+          "name": "oId",
+          "description": "主键",
+          "type": "String",
+          "length": 19
+        },
+        {
+          "name": "followAddress",
+          "description": "订阅地址",
+          "type": "String",
+          "length": 255
+        },
+        {
+          "name": "followDescription",
+          "description": "订阅描述",
+          "type": "String",
+          "length": 255
+        },
+        {
+          "name": "followOrder",
+          "description": "展现的排序",
+          "type": "int"
+        },
+        {
+          "name": "followTitle",
+          "description": "标题",
+          "type": "String",
+          "length": 255
+        },
+        {
+          "name": "followIcon",
+          "description": "图标地址",
+          "type": "String",
+          "length": 255
+        }
+      ]
+    },
+    {
       "name": "page",
       "description": "自定义页面表",
       "keys": [

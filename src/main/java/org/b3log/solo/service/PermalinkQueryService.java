@@ -1,6 +1,6 @@
 /*
  * Bolo - A stable and beautiful blogging system based in Solo.
- * Copyright (c) 2020, https://github.com/adlered
+ * Copyright (c) 2020-present, https://github.com/bolo-blog
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -17,6 +17,9 @@
  */
 package org.b3log.solo.service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.commons.lang.StringUtils;
 import org.b3log.latke.Latkes;
 import org.b3log.latke.ioc.Inject;
@@ -27,9 +30,6 @@ import org.b3log.latke.service.annotation.Service;
 import org.b3log.latke.util.Strings;
 import org.b3log.solo.repository.ArticleRepository;
 import org.b3log.solo.repository.PageRepository;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Permalink query service.
@@ -61,17 +61,22 @@ public class PermalinkQueryService {
     /**
      * Reserved permalinks.
      */
-    public static final String[] RESERVED_LINKS = new String[]{
-            "/", "/article", "/tags.html", "/tags", "/page", "/atom.xml", "/rss.xml", "/articles/random", "/captcha", "/kill-browser",
-            "/article/comments", "/add-article-from-symphony-comment.do", "/page/comments", "/get-article-content", "/sitemap.xml",
+    public static final String[] RESERVED_LINKS = new String[] {
+            "/", "/article", "/tags.html", "/tags", "/page", "/atom.xml", "/rss.xml", "/articles/random", "/captcha",
+            "/kill-browser",
+            "/article/comments", "/add-article-from-symphony-comment.do", "/page/comments", "/get-article-content",
+            "/sitemap.xml",
             "/logout", "/get-article-content", "/admin-index.do", "/admin-article.do", "/admin-article-list.do",
-            "/admin-link-list.do", "/admin-preference.do", "/admin-file-list.do", "/admin-page-list.do", "/admin-others.do",
-            "/admin-draft-list.do", "/admin-user-list.do", "/admin-plugin-list.do", "/admin-main.do", "/admin-about.do", "/admin-label",
+            "/admin-link-list.do", "/admin-follow-list.do", "/admin-preference.do", "/admin-file-list.do",
+            "/admin-page-list.do", "/admin-others.do",
+            "/admin-draft-list.do", "/admin-user-list.do", "/admin-plugin-list.do", "/admin-main.do", "/admin-about.do",
+            "/admin-label",
             "/admin-about.do", "/start"
     };
 
     /**
-     * Checks whether the specified article permalink matches the system generated format pattern ("/articles/yyyy/MM/dd/${articleId}.html").
+     * Checks whether the specified article permalink matches the system generated
+     * format pattern ("/articles/yyyy/MM/dd/${articleId}.html").
      *
      * @param permalink the specified permalink
      * @return {@code true} if matches, returns {@code false} otherwise
@@ -84,8 +89,10 @@ public class PermalinkQueryService {
     }
 
     /**
-     * Checks whether the specified permalink is a {@link #invalidArticlePermalinkFormat(java.lang.String) invalid article
-     * permalink format} and {@link #invalidPagePermalinkFormat(java.lang.String) invalid page permalink format}.
+     * Checks whether the specified permalink is a
+     * {@link #invalidArticlePermalinkFormat(java.lang.String) invalid article
+     * permalink format} and {@link #invalidPagePermalinkFormat(java.lang.String)
+     * invalid page permalink format}.
      *
      * @param permalink the specified permalink
      * @return {@code true} if invalid, returns {@code false} otherwise
@@ -164,12 +171,14 @@ public class PermalinkQueryService {
     /**
      * Determines whether the specified request URI is a reserved link.
      * <p>
-     * A URI starts with one of {@link PermalinkQueryService#RESERVED_LINKS reserved links}
+     * A URI starts with one of {@link PermalinkQueryService#RESERVED_LINKS reserved
+     * links}
      * will be treated as reserved link.
      * </p>
      *
      * @param requestURI the specified request URI
-     * @return {@code true} if it is a reserved link, returns {@code false} otherwise
+     * @return {@code true} if it is a reserved link, returns {@code false}
+     *         otherwise
      */
     private static boolean isReservedLink(final String requestURI) {
         for (int i = 0; i < RESERVED_LINKS.length; i++) {
@@ -195,7 +204,8 @@ public class PermalinkQueryService {
             return isReservedLink(permalink) || null != articleRepository.getByPermalink(permalink)
                     || null != pageRepository.getByPermalink(permalink) || permalink.endsWith(".ftl");
         } catch (final RepositoryException e) {
-            LOGGER.log(Level.ERROR, "Determines whether the permalink[" + permalink + "] exists failed, returns true", e);
+            LOGGER.log(Level.ERROR, "Determines whether the permalink[" + permalink + "] exists failed, returns true",
+                    e);
 
             return true;
         }

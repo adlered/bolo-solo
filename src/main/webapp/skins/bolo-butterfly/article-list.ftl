@@ -1,7 +1,7 @@
 <#--
 
     Bolo - A stable and beautiful blogging system based in Solo.
-    Copyright (c) 2020, https://github.com/adlered
+    Copyright (c) 2020-present, https://github.com/bolo-blog
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -21,12 +21,14 @@
         <#list articles as article>
             <article class="recent-post-item" itemscope="" itemtype="http://schema.org/BlogPosting">
                     <div class="post_cover">
-                        <a href="${servePath}${article.articlePermalink}" title="${article.articleTitle}">
-                            <img class="post_bg" src="${article.articleImg1URL}">
-                        </a>
+                    <#assign isRss = (article.isRss!false)?c == "true">
+                    <a href="${isRss?then(article.articlePermalink, servePath + article.articlePermalink)}"
+                    title="${article.articleTitle}">
+                        <img class="post_bg" src="${article.articleImg1URL}">
+                    </a>
                     </div>
                     <div class="recent-post-info">
-                        <a class="article-title" href="${servePath}${article.articlePermalink}" title="${article.articleTitle}">${article.articleTitle}</a>
+                        <a class="article-title" href="${isRss?then(article.articlePermalink, servePath + article.articlePermalink)}" title="${article.articleTitle}">${article.articleTitle}</a>
                         <div class="article-meta-wrap">
                             <time class="post-meta__date" title="">
                                 <i class="far fa-calendar-alt"></i>

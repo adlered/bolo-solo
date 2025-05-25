@@ -1,6 +1,6 @@
 /*
  * Bolo - A stable and beautiful blogging system based in Solo.
- * Copyright (c) 2020, https://github.com/adlered
+ * Copyright (c) 2020-present, https://github.com/bolo-blog
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,6 +16,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 package org.b3log.solo.processor;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -38,24 +53,13 @@ import org.b3log.solo.bolo.tool.EditIMG;
 import org.b3log.solo.bolo.tool.MediaFileUtil;
 import org.b3log.solo.model.Article;
 import org.b3log.solo.model.Option;
-import org.b3log.solo.service.*;
+import org.b3log.solo.service.ArticleQueryService;
+import org.b3log.solo.service.OptionQueryService;
+import org.b3log.solo.service.StatisticQueryService;
+import org.b3log.solo.service.TagQueryService;
+import org.b3log.solo.service.UserQueryService;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLDecoder;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Blog processor.
@@ -185,8 +189,7 @@ public class BlogProcessor {
                             // 后缀名无法分析文件类型时，默认返回png
                             mediaFileType = new MediaFileUtil.MediaFileType(
                                     33,
-                                    "image/png"
-                            );
+                                    "image/png");
                         }
 
                         // 分析临时目录
@@ -219,7 +222,8 @@ public class BlogProcessor {
                         int height = Integer.parseInt(context.pathVar("height"));
 
                         // 裁剪图片
-                        EditIMG.createThumbnail(faviconFile, faviconFile, width, height, MediaFileUtil.getSuffixByFileType(mediaFileType));
+                        EditIMG.createThumbnail(faviconFile, faviconFile, width, height,
+                                MediaFileUtil.getSuffixByFileType(mediaFileType));
 
                         // 将裁剪后的图片输出至浏览器
                         final HttpServletResponse response = context.getResponse();
@@ -298,6 +302,7 @@ public class BlogProcessor {
     /**
      * Gets tags of all articles.
      * <p>
+     * 
      * <pre>
      * {
      *     "data": [

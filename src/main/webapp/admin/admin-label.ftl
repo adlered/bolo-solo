@@ -1,7 +1,7 @@
 <#--
 
     Bolo - A stable and beautiful blogging system based in Solo.
-    Copyright (c) 2020, https://github.com/adlered
+    Copyright (c) 2020-present, https://github.com/bolo-blog
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -35,6 +35,7 @@
     Label.reportIssueLabel = "please report this issue on https://github.com/adlered/bolo-solo/issues/new"
     Label.noDataLabel = "${noDataLabel}"
     Label.linkDescriptionLabel = "${linkDescriptionLabel}"
+    Label.linkDescription1Label = "${linkDescription1Label}"
     Label.addressInvalidLabel = "${addressInvalidLabel}"
     Label.selectLabel = "${selectLabel}"
     Label.outOfDateLabel = "${outOfDateLabel}"
@@ -59,6 +60,7 @@
     Label.titleEmptyLabel = "${titleEmptyLabel}"
     Label.contentEmptyLabel = "${contentEmptyLabel}"
     Label.linkTitleLabel = "${linkTitleLabel}"
+    Label.linkTitle1Label = "${linkTitle1Label}"
     Label.urlLabel = "${urlLabel}"
     Label.addressEmptyLabel = "${addressEmptyLabel}"
     Label.pluginNameLabel = "${pluginNameLabel}"

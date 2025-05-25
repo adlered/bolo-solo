@@ -1,6 +1,6 @@
 /*
  * Bolo - A stable and beautiful blogging system based in Solo.
- * Copyright (c) 2020, https://github.com/adlered
+ * Copyright (c) 2020-present, https://github.com/bolo-blog
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,6 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 package org.b3log.solo.service;
+
+import java.util.List;
 
 import org.b3log.latke.Keys;
 import org.b3log.latke.Latkes;
@@ -38,8 +40,6 @@ import org.b3log.solo.repository.OptionRepository;
 import org.b3log.solo.repository.UserRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.List;
 
 /**
  * User query service.
@@ -82,7 +82,8 @@ public class UserQueryService {
      */
     public JSONObject getUserByGitHubId(final String githubId) {
         try {
-            return userRepository.getFirst(new Query().setFilter(new PropertyFilter(UserExt.USER_GITHUB_ID, FilterOperator.EQUAL, githubId)));
+            return userRepository.getFirst(
+                    new Query().setFilter(new PropertyFilter(UserExt.USER_GITHUB_ID, FilterOperator.EQUAL, githubId)));
         } catch (final Exception e) {
             LOGGER.log(Level.ERROR, "Gets a user by GitHub id [" + githubId + "] failed", e);
 
@@ -128,7 +129,8 @@ public class UserQueryService {
      *                          "paginationPageSize": 20,
      *                          "paginationWindowSize": 10
      * @return for example,
-     * <pre>
+     * 
+     *         <pre>
      * {
      *     "pagination": {
      *         "paginationPageCount": 100,
@@ -140,7 +142,8 @@ public class UserQueryService {
      *         "roleName": ""
      *      }, ....]
      * }
-     * </pre>
+     *         </pre>
+     * 
      * @throws ServiceException service exception
      * @see Pagination
      */
@@ -178,14 +181,17 @@ public class UserQueryService {
      *
      * @param userId the specified user id
      * @return for example,
-     * <pre>
+     * 
+     *         <pre>
      * {
      *     "user": {
      *         "oId": "",
      *         "userName": ""
      *     }
      * }
-     * </pre>, returns {@code null} if not found
+     *         </pre>
+     * 
+     *         , returns {@code null} if not found
      */
     public JSONObject getUser(final String userId) {
         final JSONObject ret = new JSONObject();
@@ -272,16 +278,11 @@ public class UserQueryService {
     }
 
     public String getFishKey() {
-        String b3pass = "";
+        String fishKey = "";
         try {
-            b3pass = optionRepository.get(Option.ID_C_FISH_KEY).optString(Option.OPTION_VALUE);
+            fishKey = optionRepository.get(Option.ID_C_FISH_KEY).optString(Option.OPTION_VALUE);
         } catch (Exception e) {
-            b3pass = Option.DefaultPreference.DEFAULT_B3LOG_PASSWORD;
         }
-        if (b3pass.isEmpty()) {
-            b3pass = Option.DefaultPreference.DEFAULT_B3LOG_PASSWORD;
-        }
-
-        return b3pass;
+        return fishKey;
     }
 }

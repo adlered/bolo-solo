@@ -1,6 +1,6 @@
 /*
  * Bolo - A stable and beautiful blogging system based in Solo.
- * Copyright (c) 2020, https://github.com/adlered
+ * Copyright (c) 2020-present, https://github.com/bolo-blog
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -230,6 +230,37 @@ public final class Article {
         }
 
         ret = Images.imageSize(ret, ARTICLE_THUMB_IMG_WIDTH, ARTICLE_THUMB_IMG_HEIGHT);
+
+        return ret;
+    }
+
+    /**
+     * Gets the first image URL of the specified article without setting size.
+     *
+     * @param article the specified article
+     * @return the first image URL, returns {@code ""} if not found
+     */
+    public static String getArticleImg1URLWithoutSetSize(final JSONObject article) {
+        final String summary = article.optString(Article.ARTICLE_ABSTRACT);
+        String content = article.optString(Article.ARTICLE_CONTENT);
+        content = summary + "\n\n" + content;
+        final String html = content;
+        final String[] imgs = StringUtils.substringsBetween(html, "<img", ">");
+        if (null == imgs || 0 == imgs.length) {
+            return Images.imageSize(Images.randImage(), ARTICLE_THUMB_IMG_WIDTH, ARTICLE_THUMB_IMG_HEIGHT);
+        }
+
+        String ret = null;
+        for (final String img : imgs) {
+            ret = StringUtils.substringBetween(img, "src=\"", "\"");
+            if (!StringUtils.containsIgnoreCase(ret, ".ico")) {
+                break;
+            }
+        }
+
+        if (StringUtils.isBlank(ret)) {
+            return Images.imageSize(Images.randImage(), ARTICLE_THUMB_IMG_WIDTH, ARTICLE_THUMB_IMG_HEIGHT);
+        }
 
         return ret;
     }

@@ -76,10 +76,8 @@ public class RssParser {
                 article.put(Common.HAS_UPDATED, false);
                 if (Objects.nonNull(feed.getImage())) {
                     article.put(Common.AUTHOR_THUMBNAIL_URL, feed.getImage().getUrl());
-                    article.put(Article.ARTICLE_IMG1_URL, feed.getImage().getUrl());
                 } else {
                     article.put(Common.AUTHOR_THUMBNAIL_URL, this.userIcon);
-                    article.put(Article.ARTICLE_IMG1_URL, this.userIcon);
                 }
                 article.put(Article.ARTICLE_PERMALINK,
                         String.format("/follow/%s/article/%s", this.userName, entry.getTitle()));
@@ -101,10 +99,9 @@ public class RssParser {
                                 Article.getAbstractText(article.getString(Article.ARTICLE_CONTENT)));
                         article.put(Article.ARTICLE_ABSTRACT_TEXT, article.getString(Article.ARTICLE_ABSTRACT));
                     } else {
-                        article.put(Article.ARTICLE_ABSTRACT, entry.getDescription().getValue());
-                        article.put(Article.ARTICLE_ABSTRACT_TEXT, entry.getDescription().getValue());
+                        article.put(Article.ARTICLE_ABSTRACT, Article.getAbstractText(article));
+                        article.put(Article.ARTICLE_ABSTRACT_TEXT, article.getString(Article.ARTICLE_ABSTRACT));
                     }
-
                 }
                 Date time;
                 if (null == entry.getPublishedDate()) {
@@ -112,6 +109,18 @@ public class RssParser {
                 } else {
                     time = entry.getPublishedDate();
                 }
+                // 设置文章封面
+                entry.getEnclosures().stream()
+                        .filter(enclosure -> enclosure.getType().startsWith("image/"))
+                        .findFirst()
+                        .ifPresentOrElse(enclosure -> article.put(Article.ARTICLE_IMG1_URL, enclosure.getUrl()), () -> {
+                            // 如果没有设置封面，则使用内容中的第一张图片,还没有则使用用户头像
+                            final String contentFirstImageUrl = Article.getArticleImg1URLWithoutSetSize(article);
+                            final String articleCoverUrl = contentFirstImageUrl == null ? this.userIcon
+                                    : contentFirstImageUrl;
+
+                            article.put(Article.ARTICLE_IMG1_URL, articleCoverUrl);
+                        });
                 article.put(Article.ARTICLE_CREATED, time.getTime());
                 article.put(Article.ARTICLE_UPDATED, article.getLong(Article.ARTICLE_CREATED));
                 article.put(Article.ARTICLE_VIEW_PWD, "");
